@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad de Vocabulario del Baño</title>
+    <!-- Incluye Tailwind CSS para un diseño moderno y responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e0f2fe; /* Fondo azul claro */
+            color: #1a202c; /* Texto gris oscuro */
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .input-group span {
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+        .input-group input {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            flex-grow: 1;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #3182ce;
+        }
+        .button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: white;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .button-primary {
+            background-color: #4299e1;
+        }
+        .button-primary:hover {
+            background-color: #3182ce;
+        }
+        .button-success {
+            background-color: #48bb78;
+        }
+        .button-success:hover {
+            background-color: #38a169;
+        }
+        .word-card {
+            background-color: #f7fafc;
+            color: #2d3748;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .word-card:hover {
+            background-color: #ebf8ff;
+            border-color: #a0aec0;
+        }
+        .selected {
+            background-color: #90cdf4;
+            color: #2d3748;
+            border-color: #4299e1;
+        }
+        .correct {
+            background-color: #c6f6d5;
+            color: #276749;
+            border-color: #68d391;
+            pointer-events: none; /* Deshabilita clics en elementos correctos */
+        }
+        .incorrect {
+            background-color: #fed7d7;
+            color: #8c1e1e;
+            border-color: #f56565;
+        }
+        .star-icon {
+            flex-shrink: 0;
+        }
+        /* Estilos de las imágenes ajustados para que no sean tan grandes */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Centra las imágenes verticalmente */
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            max-height: 400px; /* Limita la altura del contenedor */
+            overflow-y: auto; /* Permite desplazamiento si el contenido es demasiado grande */
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 350px; /* Reducción de la altura máxima para que quepan más */
+            width: auto;
+            border-radius: 0.5rem;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease-in-out;
+        }
+        .modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease-in-out;
+        }
+        .modal-overlay.show .modal-content {
+            transform: translateY(0);
+        }
+        .modal-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+        .modal-message {
+            font-size: 1.25rem;
+            color: #374151;
+            margin-bottom: 1.5rem;
+        }
+        .modal-close-btn {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .modal-close-btn:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div id="main-container" class="container max-w-2xl w-full text-center space-y-6">
+        <h1 class="text-3xl font-bold text-blue-700 mb-4">Objetos del Baño</h1>
+
+        <!-- Menú Principal -->
+        <div id="menu-screen" class="space-y-4">
+            <button id="btn-vocabulario" class="w-full button button-primary">Vocabulario</button>
+            <button id="btn-emparejar" class="w-full button button-primary">Emparejar</button>
+        </div>
+
+        <!-- Sección de Vocabulario -->
+        <div id="vocabulario-screen" class="hidden flex-col items-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Nombra los Objetos</h2>
+            <div class="image-container">
+                <!-- Se poblará con las imágenes por JavaScript -->
+            </div>
+            <p id="vocab-prompt" class="text-xl text-gray-700 mb-4"></p>
+            <div id="input-container" class="space-y-4 w-full text-left"></div>
+            <p id="vocab-message" class="text-lg font-bold min-h-6 mt-4"></p>
+            <button id="btn-check-vocab" class="button button-success hidden">Comprobar</button>
+            <button id="btn-next-vocab" class="button button-primary hidden">Siguiente</button>
+            <button id="btn-show-test" class="button button-primary hidden">Empezar el Test</button>
+        </div>
+
+        <!-- Sección de Emparejar -->
+        <div id="emparejar-screen" class="hidden flex-col items-center">
+            <div id="emparejar-game-container" class="bg-white p-6 sm:p-8 rounded-xl shadow-lg max-w-4xl w-full border border-blue-200">
+                <h1 id="main-title" class="text-2xl sm:text-3xl font-bold text-center text-blue-800 mb-6">
+                    Empareja las Palabras
+                </h1>
+                <p class="text-center text-gray-700 mb-8">
+                    Presiona una palabra en español y luego su traducción en inglés.
+                </p>
+                <div class="flex flex-col md:flex-row gap-6 md:gap-10 justify-center">
+                    <div class="flex-1 bg-blue-50 p-4 rounded-lg border border-blue-200 shadow-inner">
+                        <h2 class="text-xl font-semibold text-blue-700 mb-4 text-center">Español</h2>
+                        <div id="spanish-words" class="space-y-3"></div>
+                    </div>
+                    <div class="flex-1 bg-indigo-50 p-4 rounded-lg border border-indigo-200 shadow-inner">
+                        <h2 class="text-xl font-semibold text-indigo-700 mb-4 text-center">Inglés</h2>
+                        <div id="english-words" class="space-y-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="btn-home" class="hidden mt-8 py-2 px-6 bg-gray-300 text-gray-700 font-semibold rounded-xl hover:bg-gray-400 transition-colors shadow-lg">Inicio</button>
+    </div>
+
+    <!-- Modal para notificaciones -->
+    <div id="completion-modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modal-title" class="modal-title">¡Felicidades!</h3>
+            <p id="modal-message" class="modal-message"></p>
+            <button id="modal-close-btn" class="modal-close-btn">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        const vocabularioData = [
+            {
+                imageVocab: 'actividad/imagen1.png',
+                imageTest: 'actividad/imagen1test.png',
+                answers: ['Espejo', 'Lavamanos', 'Toalla', 'Cesta'],
+                prompt: 'Escribe el nombre de los objetos numerados:'
+            },
+            {
+                imageVocab: 'actividad/imagen2.png',
+                imageTest: 'actividad/imagen2test.png',
+                answers: ['Cortina de baño', 'Espejo', 'Toalla', 'Lavamanos', 'Inodoro', 'Papel higiénico'],
+                prompt: 'Escribe el nombre de los objetos numerados:'
+            },
+            {
+                imageVocab: ['actividad/imagen3.png', 'actividad/imagen4.png', 'actividad/imagen5.png'],
+                imageTest: 'actividad/imagen345test.png',
+                answers: ['Champú', 'Jabón', 'Crema dental', 'Cepillo de dientes'],
+                prompt: 'Escribe el nombre de los objetos numerados:'
+            }
+        ];
+
+        const emparejarData = [
+            { es: 'espejo', en: 'mirror' },
+            { es: 'lavamanos', en: 'sink' },
+            { es: 'toalla', en: 'towel' },
+            { es: 'cesta', en: 'basket' },
+            { es: 'cortina de baño', en: 'shower curtain' },
+            { es: 'papel higiénico', en: 'toilet paper' },
+            { es: 'inodoro', en: 'toilet' },
+            { es: 'champú', en: 'shampoo' },
+            { es: 'jabón', en: 'soap' },
+            { es: 'crema dental', en: 'toothpaste' },
+            { es: 'cepillo de dientes', en: 'toothbrush' }
+        ];
+
+        // Obtener elementos del DOM
+        const menuScreen = document.getElementById('menu-screen');
+        const vocabularioScreen = document.getElementById('vocabulario-screen');
+        const emparejarScreen = document.getElementById('emparejar-screen');
+        const btnVocabulario = document.getElementById('btn-vocabulario');
+        const btnEmparejar = document.getElementById('btn-emparejar');
+        const btnHome = document.getElementById('btn-home');
+        const imageContainer = document.querySelector('#vocabulario-screen .image-container');
+        const vocabPrompt = document.getElementById('vocab-prompt');
+        const inputContainer = document.getElementById('input-container');
+        const vocabMessage = document.getElementById('vocab-message');
+        const btnCheckVocab = document.getElementById('btn-check-vocab');
+        const btnNextVocab = document.getElementById('btn-next-vocab');
+        const btnShowTest = document.getElementById('btn-show-test');
+
+        const spanishContainer = document.getElementById('spanish-words');
+        const englishContainer = document.getElementById('english-words');
+        const completionModalOverlay = document.getElementById('completion-modal-overlay');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        
+        // Variables de estado
+        let currentVocabIndex = 0;
+        let emparejarPart = 1;
+        let selectedSpanish = null;
+        let selectedEnglish = null;
+        let matchedPairs = new Map();
+
+        // Event Listeners para los botones
+        btnVocabulario.addEventListener('click', () => {
+            showScreen('vocabulario');
+            startVocabulario();
+        });
+
+        btnEmparejar.addEventListener('click', () => {
+            showScreen('emparejar');
+            startEmparejar();
+        });
+
+        btnHome.addEventListener('click', () => {
+            showScreen('menu');
+        });
+
+        btnShowTest.addEventListener('click', () => {
+            const data = vocabularioData[currentVocabIndex];
+            imageContainer.innerHTML = `<img src="${data.imageTest}" alt="Objetos del baño numerados" class="w-full object-contain shadow-md rounded-lg">`;
+            vocabPrompt.textContent = data.prompt;
+            createVocabInputs(data.answers.length);
+            btnShowTest.classList.add('hidden');
+            btnCheckVocab.classList.remove('hidden');
+        });
+
+        btnCheckVocab.addEventListener('click', checkVocabAnswer);
+
+        btnNextVocab.addEventListener('click', () => {
+            currentVocabIndex++;
+            if (currentVocabIndex < vocabularioData.length) {
+                startVocabulario();
+            } else {
+                vocabularioScreen.innerHTML = `<h2 class="text-2xl font-bold text-gray-800">¡Actividad de vocabulario completada!</h2>`;
+                btnNextVocab.classList.add('hidden');
+                btnHome.classList.remove('hidden');
+            }
+        });
+
+        modalCloseBtn.addEventListener('click', () => {
+            completionModalOverlay.classList.remove('show');
+            if (emparejarPart === 1) {
+                emparejarPart = 2;
+                startEmparejar();
+            } else {
+                showScreen('menu');
+                emparejarPart = 1;
+            }
+        });
+
+        // Funciones principales
+        function showScreen(screen) {
+            menuScreen.classList.add('hidden');
+            vocabularioScreen.classList.add('hidden');
+            emparejarScreen.classList.add('hidden');
+            btnHome.classList.remove('hidden');
+
+            switch (screen) {
+                case 'menu':
+                    menuScreen.classList.remove('hidden');
+                    btnHome.classList.add('hidden');
+                    break;
+                case 'vocabulario':
+                    vocabularioScreen.classList.remove('hidden');
+                    break;
+                case 'emparejar':
+                    emparejarScreen.classList.remove('hidden');
+                    break;
+            }
+        }
+
+        function startVocabulario() {
+            const data = vocabularioData[currentVocabIndex];
+            imageContainer.innerHTML = '';
+            vocabMessage.textContent = '';
+            inputContainer.innerHTML = '';
+            btnCheckVocab.classList.add('hidden');
+            btnNextVocab.classList.add('hidden');
+            btnShowTest.classList.remove('hidden');
+
+            if (Array.isArray(data.imageVocab)) {
+                // Si es un array de imágenes, las mostramos todas
+                data.imageVocab.forEach(src => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = 'Objeto del baño con nombre';
+                    img.className = 'w-full object-contain shadow-md rounded-lg';
+                    imageContainer.appendChild(img);
+                });
+            } else {
+                // Si es una sola imagen, la mostramos
+                imageContainer.innerHTML = `<img src="${data.imageVocab}" alt="Objetos del baño con nombres" class="w-full object-contain shadow-md rounded-lg">`;
+            }
+            vocabPrompt.textContent = 'Observa los objetos del baño con sus nombres.';
+        }
+
+        function createVocabInputs(num) {
+            inputContainer.innerHTML = '';
+            for (let i = 1; i <= num; i++) {
+                const group = document.createElement('div');
+                group.className = 'input-group';
+                group.innerHTML = `
+                    <span class="text-xl">${i}.</span>
+                    <input type="text" id="input-${i}" class="text-gray-800" placeholder="Escribe el nombre aquí">
+                `;
+                inputContainer.appendChild(group);
+            }
+        }
+
+        function checkVocabAnswer() {
+            const data = vocabularioData[currentVocabIndex];
+            const correctAnswers = data.answers.map(ans => ans.toLowerCase().trim());
+            let allCorrect = true;
+
+            for (let i = 1; i <= correctAnswers.length; i++) {
+                const input = document.getElementById(`input-${i}`);
+                input.disabled = true;
+                const userGuess = input.value.toLowerCase().trim();
+
+                if (userGuess === correctAnswers[i - 1]) {
+                    input.classList.add('border-green-500', 'bg-green-100');
+                } else {
+                    input.classList.add('border-red-500', 'bg-red-100');
+                    input.value = `${input.value} (Correcto: ${data.answers[i - 1]})`;
+                    allCorrect = false;
+                }
+            }
+
+            if (allCorrect) {
+                vocabMessage.textContent = '¡Felicidades, todo es correcto!';
+                vocabMessage.classList.add('text-green-600');
+            } else {
+                vocabMessage.textContent = 'Hay algunos errores. Intenta de nuevo.';
+                vocabMessage.classList.remove('text-green-600');
+            }
+
+            btnCheckVocab.classList.add('hidden');
+            btnNextVocab.classList.remove('hidden');
+        }
+
+        function startEmparejar() {
+            selectedSpanish = null;
+            selectedEnglish = null;
+            matchedPairs.clear();
+            spanishContainer.innerHTML = '';
+            englishContainer.innerHTML = '';
+
+            const wordsToUse = emparejarPart === 1
+                ? emparejarData.slice(0, 6)
+                : emparejarData.slice(6); // Usamos las 5 palabras restantes
+
+            renderWords(wordsToUse);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createStarSVG() {
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.classList.add('w-5', 'h-5', 'text-yellow-500', 'star-icon', 'hidden');
+            svg.setAttribute('fill', 'currentColor');
+            svg.setAttribute('viewBox', '0 0 20 20');
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute('d', 'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.381-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z');
+            svg.appendChild(path);
+            return svg;
+        }
+
+        function renderWords(words) {
+            const shuffledSpanishWords = shuffleArray([...words]);
+            const shuffledEnglishWords = shuffleArray([...words]);
+
+            shuffledSpanishWords.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('word-card');
+                card.textContent = item.es;
+                card.dataset.spanish = item.es;
+                card.dataset.english = item.en;
+                card.addEventListener('click', selectSpanish);
+                const star = createStarSVG();
+                card.appendChild(star);
+                spanishContainer.appendChild(card);
+            });
+
+            shuffledEnglishWords.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('word-card');
+                card.textContent = item.en;
+                card.dataset.english = item.en;
+                card.dataset.spanishMatch = item.es;
+                card.addEventListener('click', selectEnglish);
+                const star = createStarSVG();
+                card.appendChild(star);
+                englishContainer.appendChild(card);
+            });
+        }
+
+        function selectSpanish(event) {
+            if (event.target.classList.contains('correct')) return;
+            if (selectedSpanish) {
+                selectedSpanish.classList.remove('selected');
+            }
+            selectedSpanish = event.target;
+            selectedSpanish.classList.add('selected');
+            checkMatch();
+        }
+
+        function selectEnglish(event) {
+            if (event.target.classList.contains('correct')) return;
+            if (selectedEnglish) {
+                selectedEnglish.classList.remove('selected');
+            }
+            selectedEnglish = event.target;
+            selectedEnglish.classList.add('selected');
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if (selectedSpanish && selectedEnglish) {
+                const spanishText = selectedSpanish.dataset.spanish;
+                const englishText = selectedEnglish.dataset.english;
+                
+                const correctPair = emparejarData.find(w => w.es === spanishText && w.en === englishText);
+
+                if (correctPair) {
+                    selectedSpanish.classList.add('correct');
+                    selectedEnglish.classList.add('correct');
+                    selectedSpanish.querySelector('.star-icon').classList.remove('hidden');
+                    selectedEnglish.querySelector('.star-icon').classList.remove('hidden');
+                    matchedPairs.set(spanishText, englishText);
+                    
+                    selectedSpanish.classList.remove('selected');
+                    selectedEnglish.classList.remove('selected');
+                    selectedSpanish = null;
+                    selectedEnglish = null;
+
+                    const wordsToUse = emparejarPart === 1
+                        ? emparejarData.slice(0, 6)
+                        : emparejarData.slice(6);
+                    if (matchedPairs.size === wordsToUse.length) {
+                        showCompletionModal();
+                    }
+                } else {
+                    selectedSpanish.classList.add('incorrect');
+                    selectedEnglish.classList.add('incorrect');
+                    setTimeout(() => {
+                        selectedSpanish.classList.remove('selected', 'incorrect');
+                        selectedEnglish.classList.remove('selected', 'incorrect');
+                        selectedSpanish = null;
+                        selectedEnglish = null;
+                    }, 1000);
+                }
+            }
+        }
+
+        function showCompletionModal() {
+            const completionMessage = emparejarPart === 1
+                ? '¡Has completado la primera parte! Presiona "Cerrar" para continuar con la siguiente.'
+                : '¡Has completado toda la actividad de emparejamiento!';
+            
+            modalTitle.textContent = emparejarPart === 1 ? '¡Parte 1 Completada!' : '¡Felicidades!';
+            modalMessage.textContent = completionMessage;
+            completionModalOverlay.classList.add('show');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad de Vocabulario en Español</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+        }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease-in-out;
+        }
+        .modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease-in-out;
+        }
+        .modal-overlay.show .modal-content {
+            transform: translateY(0);
+        }
+        .modal-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+        .modal-message {
+            font-size: 1.25rem;
+            color: #374151;
+            margin-bottom: 1.5rem;
+        }
+        .modal-close-btn {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .modal-close-btn:hover {
+            background-color: #2563eb;
+        }
+
+        /* Emparejar-specific styles */
+        .word-card {
+            background-color: #f9fafb;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .word-card:hover {
+            background-color: #e5e7eb;
+            border-color: #9ca3af;
+        }
+        .selected {
+            background-color: #60a5fa;
+            color: white;
+            border-color: #3b82f6;
+        }
+        .correct {
+            background-color: #86efac;
+            color: #166534;
+            border-color: #4ade80;
+            pointer-events: none;
+        }
+        .incorrect {
+            background-color: #fca5a5;
+            color: #991b1b;
+            border-color: #ef4444;
+        }
+        .star-icon {
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div id="main-container" class="bg-white rounded-2xl shadow-xl max-w-2xl w-full p-8 md:p-10 flex flex-col items-center text-center space-y-6">
+        <h1 class="text-3xl font-bold text-indigo-600 mb-4">Objetos de la Casa</h1>
+        
+        <!-- Main Menu -->
+        <div id="menu-screen" class="space-y-4 w-full">
+            <button id="btn-vocabulario" class="w-full py-3 bg-indigo-500 text-white font-semibold rounded-xl hover:bg-indigo-600 transition-colors shadow-lg">Vocabulario</button>
+            <button id="btn-emparejar" class="w-full py-3 bg-purple-500 text-white font-semibold rounded-xl hover:bg-purple-600 transition-colors shadow-lg">Emparejar</button>
+        </div>
+
+        <!-- Vocabulario Section -->
+        <div id="vocabulario-screen" class="hidden w-full flex flex-col items-center space-y-6">
+            <img id="vocab-image" src="" alt="Imagen del vocabulario" class="w-full max-h-72 object-contain rounded-xl shadow-md">
+            <p id="vocab-sentence" class="text-xl font-medium text-gray-700"></p>
+            <div id="vocab-options" class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full"></div>
+            <p id="vocab-message" class="text-lg font-bold min-h-6"></p>
+            <button id="btn-check-vocab" class="hidden mt-4 py-2 px-6 bg-blue-500 text-white font-semibold rounded-xl hover:bg-blue-600 transition-colors shadow-lg">Comprobar</button>
+            <button id="btn-next-vocab" class="hidden mt-4 py-2 px-6 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors shadow-lg">Siguiente</button>
+        </div>
+
+        <!-- Emparejar Section -->
+        <div id="emparejar-screen" class="hidden w-full flex flex-col items-center">
+            <!-- Student Name Input Container -->
+            <div class="student-name-input-container">
+                <label for="student-name" class="text-gray-700">Nombre del estudiante:</label>
+                <input type="text" id="student-name" class="student-name-input" placeholder="Escribe tu nombre">
+            </div>
+
+            <div id="emparejar-game-container" class="bg-white p-6 sm:p-8 rounded-xl shadow-lg max-w-4xl w-full border border-blue-200 mt-10">
+                <h1 id="main-title" class="text-2xl sm:text-3xl font-bold text-center text-blue-800 mb-6">
+                    Empareja las Palabras
+                </h1>
+                <p class="text-center text-gray-700 mb-8">
+                    Presiona una palabra en español y luego su traducción en inglés.
+                </p>
+
+                <!-- Word Columns (Spanish and English) -->
+                <div class="flex flex-col md:flex-row gap-6 md:gap-10 justify-center">
+                    <div class="flex-1 bg-blue-50 p-4 rounded-lg border border-blue-200 shadow-inner">
+                        <h2 class="text-xl font-semibold text-blue-700 mb-4 text-center">Español</h2>
+                        <div id="spanish-words" class="space-y-3"></div>
+                    </div>
+                    <div class="flex-1 bg-indigo-50 p-4 rounded-lg border border-indigo-200 shadow-inner">
+                        <h2 class="text-xl font-semibold text-indigo-700 mb-4 text-center">Inglés</h2>
+                        <div id="english-words" class="space-y-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home Button for all screens -->
+        <button id="btn-home" class="hidden mt-8 py-2 px-6 bg-gray-300 text-gray-700 font-semibold rounded-xl hover:bg-gray-400 transition-colors shadow-lg">Inicio</button>
+    </div>
+
+    <!-- Completion Modal Overlay -->
+    <div id="completion-modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modal-title" class="modal-title">¡Felicidades!</h3>
+            <p id="modal-student-name" class="text-xl text-gray-700 mb-2"></p>
+            <p id="modal-message" class="modal-message"></p>
+            <button id="modal-close-btn" class="modal-close-btn">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        // Data for the 'Vocabulario' activity
+        const vocabularioData = [
+            {
+                image: 'https://www.65ymas.com/uploads/s1/36/99/47/bigstock-peaceful-older-woman-sitting-o-345762391.jpeg',
+                sentence: 'ella está sentada en <span id="blank1" class="font-bold text-indigo-500">_________</span>.',
+                options: ['la silla', 'el piso', 'el sofá'],
+                correct: 'el sofá'
+            },
+            {
+                image: 'https://static.vecteezy.com/system/resources/previews/015/360/867/non_2x/woman-and-man-lying-down-on-bed-with-their-children-interior-and-design-of-beautiful-modern-bedroom-at-daytime-photo.jpg',
+                sentence: 'ellos están acostados en <span id="blank1" class="font-bold text-indigo-500">___________</span>.',
+                options: ['la alfombra', 'la cama', 'el suelo'],
+                correct: 'la cama'
+            },
+            {
+                image: 'https://tse3.mm.bing.net/th/id/OIP.-o9DE_0Nw-s_Dd9i-MGEXAAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
+                sentence: 'hay cuatro <span id="blank1" class="font-bold text-indigo-500">_________</span> y una <span id="blank2" class="font-bold text-indigo-500">_________</span>.',
+                options: ['sofás', 'sillas', 'mesa', 'cojines'],
+                correct: ['sillas', 'mesa'],
+                isTwoBlanks: true
+            },
+            {
+                image: 'https://i.pinimg.com/originals/e5/e7/eb/e5e7eb2ca200f946db6e71625705c1a9.jpg',
+                sentence: '<span id="blank1" class="font-bold text-indigo-500">_________</span> es de madera.',
+                options: ['El cojín', 'la caja', 'el armario'],
+                correct: 'el armario'
+            },
+            {
+                image: 'https://kitchenzone.sk/wp-content/uploads/2020/12/SBSes208496-1-595x773.jpg',
+                sentence: 'la puerta de <span id="blank1" class="font-bold text-indigo-500">_____________</span> está abierta.',
+                options: ['El horno', 'la nevera', 'la estufa'],
+                correct: 'la nevera'
+            },
+            {
+                image: 'https://tse2.mm.bing.net/th/id/OIP.iNUx01zHkH-AWP1CZ1IagAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
+                sentence: 'hay un pollo en <span id="blank1" class="font-bold text-indigo-500">__________</span>.',
+                options: ['El refrigerador', 'el microondas', 'el horno'],
+                correct: 'el horno'
+            },
+            {
+                image: 'https://th.bing.com/th/id/R.b3ff5d5381f415c11bdfc8f6dc10ed6b?rik=isu17FT0g9jk%2fA&riu=http%3a%2f%2fsalpimenta.com.ar%2fwp-content%2fuploads%2f2018%2f08%2fcocinar-al-microondas.jpg&ehk=8tkS7aYzogMyjYmqbriHCMT6htWH%2baHJUmPRNB1Q7PE%3d&risl=&pid=ImgRaw&r=0',
+                sentence: 'nosotros calentamos la comida en <span id="blank1" class="font-bold text-indigo-500">____________</span>.',
+                options: ['el microondas', 'la estufa', 'la sartén'],
+                correct: 'el microondas'
+            },
+            {
+                image: 'https://d3fvqmu2193zmz.cloudfront.net/items_2/uid_commerces.1/uid_items_2.FDC9QPAF95X8/1500x1500/65305C48DEAC5-Licuadora--1-5-L-600w.webp',
+                sentence: 'En <span id="blank1" class="font-bold text-indigo-500">_________</span> preparamos batidos deliciosos.',
+                options: ['La estufa', 'la licuadora', 'la nevera'],
+                correct: 'la licuadora'
+            },
+            {
+                image: 'https://thumbs.dreamstime.com/b/cuchara-con-la-sopa-de-pollo-hecha-en-casa-fresca-fondo-borroso-el-primer-140613224.jpg',
+                sentence: 'necesito <span id="blank1" class="font-bold text-indigo-500">_____________</span> para la sopa.',
+                options: ['una cuchara', 'un plato', 'un vaso'],
+                correct: 'una cuchara'
+            },
+            {
+                image: 'https://tse2.mm.bing.net/th/id/OIP.mpUYZVlxcEfY749lo8IMhAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
+                sentence: 'ella pica la cebolla con <span id="blank1" class="font-bold text-indigo-500">____________</span>.',
+                options: ['El plato', 'el cuchillo', 'el tenedor'],
+                correct: 'el cuchillo'
+            },
+            {
+                image: 'https://thumbs.dreamstime.com/b/tenedor-con-pasta-sabrosa-aislada-en-blanco-aislado-283129972.jpg',
+                sentence: 'para comer pasta lo mejor es usar <span id="blank1" class="font-bold text-indigo-500">__________</span>.',
+                options: ['un tenedor', 'un cuchillo', 'una cuchara'],
+                correct: 'un tenedor'
+            },
+            {
+                image: 'https://www.prensalibre.com/wp-content/uploads/2020/10/Cuidado_con_el_jugo_669107341.jpeg?quality=82',
+                sentence: 'beber <span id="blank1" class="font-bold text-indigo-500">_________</span> de jugo de naranja es saludable.',
+                options: ['una taza', 'un plato', 'un vaso'],
+                correct: 'un vaso'
+            },
+            {
+                image: 'https://http2.mlstatic.com/juego-cubiertos-cubiertos-D_NQ_NP_20811-MLM20198878479_112014-F.jpg',
+                sentence: 'mesero, por favor, necesito <span id="blank1" class="font-bold text-indigo-500">___________</span>.',
+                options: ['un vaso', 'un plato', 'un juego de cubiertos'],
+                correct: 'un juego de cubiertos'
+            },
+            {
+                image: 'https://editorialtelevisa.brightspotcdn.com/dims4/default/3c2a30b/2147483647/strip/true/crop/1194x672+3+0/resize/1000x563!/quality/90/?url=https:%2F%2Fk2-prod-editorial-televisa.s3.amazonaws.com%2Fbrightspot%2F8a%2F6d%2F1ec95c044f9890e752a0abe8903d%2Follas-de-cocina.jpg',
+                sentence: '<span id="blank1" class="font-bold text-indigo-500">__________</span> está caliente',
+                options: ['la cuchara', 'la taza', 'la olla'],
+                correct: 'la olla'
+            },
+            {
+                image: 'https://img.freepik.com/foto-gratis/cocinar-panqueques-sarten_88340-1441.jpg?size=626&ext=jpg',
+                sentence: 'yo preparo las panquecas en <span id="blank1" class="font-bold text-indigo-500">_____________</span>',
+                options: ['la olla', 'el sartén', 'el plato'],
+                correct: 'el sartén'
+            },
+            {
+                image: 'https://img.freepik.com/foto-gratis/manzana-plato_127746-75.jpg?size=626&ext=jpg',
+                sentence: 'hay una manzana sobre <span id="blank1" class="font-bold text-indigo-500">___________</span>.',
+                options: ['la olla', 'el plato', 'el sartén'],
+                correct: 'el plato'
+            }
+        ];
+
+        // Data for the 'Emparejar' activity
+        const emparejarData = [
+            { es: 'el sofá', en: 'the sofa' },
+            { es: 'la cama', en: 'the bed' },
+            { es: 'la silla', en: 'the chair' },
+            { es: 'la mesa', en: 'the table' },
+            { es: 'el armario', en: 'the closet' },
+            { es: 'la nevera', en: 'the refrigerator' },
+            { es: 'el horno', en: 'the oven' },
+            { es: 'el microondas', en: 'the microwave' },
+            { es: 'la licuadora', en: 'the blender' },
+            { es: 'la cuchara', en: 'the spoon' },
+            { es: 'el cuchillo', en: 'the knife' },
+            { es: 'el tenedor', en: 'the fork' },
+            { es: 'el vaso', en: 'the glass' },
+            { es: 'la olla', en: 'the pot' },
+            { es: 'el sartén', en: 'the frying pan' },
+            { es: 'el juego de cubiertos', en: 'the cutlery set' },
+            { es: 'el plato', en: 'the plate' },
+        ];
+        
+        // --- DOM Elements ---
+        const mainContainer = document.getElementById('main-container');
+        const menuScreen = document.getElementById('menu-screen');
+        const vocabularioScreen = document.getElementById('vocabulario-screen');
+        const emparejarScreen = document.getElementById('emparejar-screen');
+        const btnVocabulario = document.getElementById('btn-vocabulario');
+        const btnEmparejar = document.getElementById('btn-emparejar');
+        const btnHome = document.getElementById('btn-home');
+
+        // Vocabulario elements
+        const vocabImage = document.getElementById('vocab-image');
+        const vocabSentence = document.getElementById('vocab-sentence');
+        const vocabOptions = document.getElementById('vocab-options');
+        const vocabMessage = document.getElementById('vocab-message');
+        const btnCheckVocab = document.getElementById('btn-check-vocab');
+        const btnNextVocab = document.getElementById('btn-next-vocab');
+
+        // Emparejar elements
+        const studentNameInput = document.getElementById('student-name');
+        const spanishContainer = document.getElementById('spanish-words');
+        const englishContainer = document.getElementById('english-words');
+        const completionModalOverlay = document.getElementById('completion-modal-overlay');
+        const modalTitle = document.getElementById('modal-title');
+        const modalStudentName = document.getElementById('modal-student-name');
+        const modalMessage = document.getElementById('modal-message');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+
+        // --- State Variables ---
+        let currentVocabIndex = 0;
+        let vocabScore = 0;
+        let selectedBlanks = [];
+        let vocabOptionsDisabled = false;
+
+        let selectedSpanish = null;
+        let selectedEnglish = null;
+        let matchedPairs = new Map();
+        let currentPartWords = [];
+        let emparejarPart = 1;
+
+        // --- Event Listeners ---
+        btnVocabulario.addEventListener('click', () => {
+            showScreen('vocabulario');
+            startVocabulario();
+        });
+
+        btnEmparejar.addEventListener('click', () => {
+            showScreen('emparejar');
+            startEmparejar();
+        });
+
+        btnHome.addEventListener('click', () => {
+            showScreen('menu');
+        });
+
+        btnCheckVocab.addEventListener('click', checkVocabAnswer);
+
+        btnNextVocab.addEventListener('click', () => {
+            currentVocabIndex++;
+            if (currentVocabIndex < vocabularioData.length) {
+                displayVocabularioQuestion();
+            } else {
+                displayVocabularioResults();
+            }
+        });
+
+        modalCloseBtn.addEventListener('click', () => {
+            completionModalOverlay.classList.remove('show');
+            if (emparejarPart === 1) {
+                emparejarPart = 2;
+                startEmparejar();
+            } else {
+                showScreen('menu');
+                emparejarPart = 1;
+            }
+        });
+
+        // --- Screen Management ---
+        function showScreen(screen) {
+            menuScreen.classList.add('hidden');
+            vocabularioScreen.classList.add('hidden');
+            emparejarScreen.classList.add('hidden');
+            btnHome.classList.remove('hidden');
+
+            switch (screen) {
+                case 'menu':
+                    menuScreen.classList.remove('hidden');
+                    btnHome.classList.add('hidden');
+                    break;
+                case 'vocabulario':
+                    vocabularioScreen.classList.remove('hidden');
+                    break;
+                case 'emparejar':
+                    emparejarScreen.classList.remove('hidden');
+                    break;
+            }
+        }
+
+        // --- Vocabulario Logic ---
+        function startVocabulario() {
+            currentVocabIndex = 0;
+            vocabScore = 0;
+            displayVocabularioQuestion();
+        }
+
+        function displayVocabularioQuestion() {
+            const data = vocabularioData[currentVocabIndex];
+            vocabImage.src = data.image;
+            vocabSentence.innerHTML = data.sentence;
+            vocabOptions.innerHTML = '';
+            vocabMessage.textContent = '';
+            btnCheckVocab.classList.add('hidden');
+            btnNextVocab.classList.add('hidden');
+            selectedBlanks = [];
+            vocabOptionsDisabled = false;
+            
+            data.options.forEach(option => {
+                const button = createOptionButton(option);
+                button.addEventListener('click', () => selectVocabOption(option, data));
+                vocabOptions.appendChild(button);
+            });
+        }
+
+        function createOptionButton(text) {
+            const button = document.createElement('button');
+            button.textContent = text;
+            button.className = 'py-2 px-4 bg-gray-200 rounded-lg text-gray-800 font-medium hover:bg-gray-300 transition-colors cursor-pointer';
+            return button;
+        }
+
+        function selectVocabOption(option, data) {
+            if (vocabOptionsDisabled) return;
+
+            if (data.isTwoBlanks) {
+                if (selectedBlanks.length < 2) {
+                    const blank = document.getElementById(`blank${selectedBlanks.length + 1}`);
+                    if (blank) {
+                        blank.textContent = option;
+                        selectedBlanks.push(option);
+                    }
+                    if (selectedBlanks.length === 2) {
+                        btnCheckVocab.classList.remove('hidden');
+                    }
+                }
+            } else {
+                const blank = document.getElementById('blank1');
+                if (blank) {
+                    blank.textContent = option;
+                    selectedBlanks.push(option);
+                    btnCheckVocab.classList.remove('hidden');
+                }
+            }
+        }
+
+        function checkVocabAnswer() {
+            vocabOptionsDisabled = true;
+            disableAllVocabOptions();
+
+            const data = vocabularioData[currentVocabIndex];
+            const correctAnswers = Array.isArray(data.correct) ? data.correct : [data.correct];
+
+            const isCorrect = selectedBlanks.length === correctAnswers.length &&
+                              selectedBlanks.every((val, index) => val === correctAnswers[index]);
+            
+            if (isCorrect) {
+                vocabMessage.textContent = '¡Correcto!';
+                vocabMessage.classList.add('text-green-600');
+                vocabScore++;
+            } else {
+                const correctText = correctAnswers.join(' y ');
+                vocabMessage.textContent = `¡Incorrecto! La respuesta correcta es "${correctText}".`;
+                vocabMessage.classList.add('text-red-600');
+            }
+            btnCheckVocab.classList.add('hidden');
+            btnNextVocab.classList.remove('hidden');
+        }
+
+        function disableAllVocabOptions() {
+            Array.from(vocabOptions.children).forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add('cursor-not-allowed', 'opacity-50');
+            });
+        }
+        
+        function displayVocabularioResults() {
+            vocabularioScreen.innerHTML = `
+                <h2 class="text-2xl font-bold text-gray-800">Fin del juego</h2>
+                <p class="text-xl font-medium">Has acertado ${vocabScore} de ${vocabularioData.length} preguntas.</p>
+                <button id="btn-restart-vocab" class="mt-4 py-2 px-6 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors shadow-lg">Reiniciar</button>
+            `;
+            document.getElementById('btn-restart-vocab').addEventListener('click', startVocabulario);
+        }
+
+        // --- Emparejar Logic ---
+        function startEmparejar() {
+            selectedSpanish = null;
+            selectedEnglish = null;
+            matchedPairs.clear();
+            spanishContainer.innerHTML = '';
+            englishContainer.innerHTML = '';
+
+            const start = emparejarPart === 1 ? 0 : 8;
+            const end = emparejarPart === 1 ? 8 : emparejarData.length;
+            currentPartWords = emparejarData.slice(start, end);
+
+            renderWords();
+        }
+
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Function to create a star SVG element
+        function createStarSVG() {
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.classList.add('w-5', 'h-5', 'text-yellow-500', 'star-icon', 'hidden');
+            svg.setAttribute('fill', 'currentColor');
+            svg.setAttribute('viewBox', '0 0 20 20');
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute('d', 'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.381-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z');
+            svg.appendChild(path);
+            return svg;
+        }
+
+        function renderWords() {
+            const shuffledSpanishWords = shuffleArray([...currentPartWords]);
+            const shuffledEnglishWords = shuffleArray([...currentPartWords]);
+
+            shuffledSpanishWords.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('word-card');
+                card.textContent = item.es;
+                card.dataset.spanish = item.es;
+                card.dataset.english = item.en;
+                card.addEventListener('click', selectSpanish);
+                const star = createStarSVG();
+                card.appendChild(star);
+                spanishContainer.appendChild(card);
+            });
+
+            shuffledEnglishWords.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('word-card');
+                card.textContent = item.en;
+                card.dataset.english = item.en;
+                card.dataset.spanishMatch = item.es;
+                card.addEventListener('click', selectEnglish);
+                const star = createStarSVG();
+                card.appendChild(star);
+                englishContainer.appendChild(card);
+            });
+        }
+
+        function selectSpanish(event) {
+            if (event.target.classList.contains('correct')) return;
+            if (selectedSpanish) {
+                selectedSpanish.classList.remove('selected');
+            }
+            selectedSpanish = event.target;
+            selectedSpanish.classList.add('selected');
+            checkMatch();
+        }
+
+        function selectEnglish(event) {
+            if (event.target.classList.contains('correct')) return;
+            if (selectedEnglish) {
+                selectedEnglish.classList.remove('selected');
+            }
+            selectedEnglish = event.target;
+            selectedEnglish.classList.add('selected');
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if (selectedSpanish && selectedEnglish) {
+                const spanishText = selectedSpanish.dataset.spanish;
+                const englishText = selectedEnglish.dataset.english;
+                
+                const correctPair = currentPartWords.find(w => w.es === spanishText && w.en === englishText);
+
+                if (correctPair) {
+                    selectedSpanish.classList.add('correct');
+                    selectedEnglish.classList.add('correct');
+                    selectedSpanish.querySelector('.star-icon').classList.remove('hidden');
+                    selectedEnglish.querySelector('.star-icon').classList.remove('hidden');
+                    matchedPairs.set(spanishText, englishText);
+                    
+                    selectedSpanish.classList.remove('selected');
+                    selectedEnglish.classList.remove('selected');
+                    selectedSpanish = null;
+                    selectedEnglish = null;
+
+                    if (matchedPairs.size === currentPartWords.length) {
+                        showCompletionModal();
+                    }
+                } else {
+                    selectedSpanish.classList.add('incorrect');
+                    selectedEnglish.classList.add('incorrect');
+                    setTimeout(() => {
+                        selectedSpanish.classList.remove('selected', 'incorrect');
+                        selectedEnglish.classList.remove('selected', 'incorrect');
+                        selectedSpanish = null;
+                        selectedEnglish = null;
+                    }, 1000);
+                }
+            }
+        }
+
+        function showCompletionModal() {
+            const studentName = studentNameInput.value.trim();
+            const studentNameDisplay = studentName ? `¡Bien hecho, ${studentName}!` : '¡Felicidades!';
+            const completionMessage = emparejarPart === 1
+                ? '¡Has completado la primera parte! Presiona "Cerrar" para continuar con la siguiente.'
+                : '¡Has completado toda la actividad de emparejamiento!';
+            
+            modalTitle.textContent = emparejarPart === 1 ? '¡Parte 1 Completada!' : '¡Felicidades!';
+            modalStudentName.textContent = studentNameDisplay;
+            modalMessage.textContent = completionMessage;
+            completionModalOverlay.classList.add('show');
+        }
+    </script>
+</body>
+</html>
