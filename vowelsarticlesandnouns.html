@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección de Español: Pronunciación y Artículos</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de la fuente Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Carga de Tone.js para feedback de audio -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+        }
+        .vowel-button {
+            transition: all 0.1s ease;
+        }
+        .vowel-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .correct-feedback {
+            color: #10b981; /* Tailwind green-500 */
+            font-weight: 600;
+        }
+        .incorrect-feedback {
+            color: #ef4444; /* Tailwind red-500 */
+            font-weight: 600;
+        }
+        /* Custom list style for grammar section */
+        .grammar-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        .grammar-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4f46e5; /* Indigo color */
+            font-weight: bold;
+        }
+        /* Style for separating vocabulary groups visually */
+        .vocab-group {
+            border-bottom: 1px solid #e5e7eb; /* Light gray separator line */
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .vocab-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl">
+        
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-indigo-700">Lección de Español: Fundamentos</h1>
+            <p class="text-lg text-gray-600 mt-2">Pronunciación de Vocales, Artículos y Vocabulario</p>
+            <div id="message-box" class="mt-4 p-3 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 hidden rounded-md" role="alert"></div>
+        </header>
+
+        <!-- Vowel Pronunciation Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-indigo-200 pb-2 mb-4">Pronunciation of Vowels / Pronunciación de Vocales</h2>
+            <p class="text-gray-700 mb-4">Pronouncing words in Spanish is simpler than it is in English because when you look at a letter in Spanish, with very rare exceptions you know exactly how to pronounce the sound of that letter. Each of the five vowels—<b>a, e, i, o, u</b>—makes just one sound in Spanish, a short sound that stays the same from beginning to end.</p>
+            
+            <div class="grid grid-cols-5 gap-4 text-center mt-6">
+                <!-- Vowel Buttons -->
+                <button onclick="speakVowel('a', 'papá', 'dad')" class="vowel-button bg-red-100 text-red-700 p-4 rounded-lg font-bold text-xl shadow-md hover:bg-red-200">
+                    A (papá - dad)
+                </button>
+                <button onclick="speakVowel('e', 'mesa', 'table')" class="vowel-button bg-green-100 text-green-700 p-4 rounded-lg font-bold text-xl shadow-md hover:bg-green-200">
+                    E (mesa - table)
+                </button>
+                <button onclick="speakVowel('i', 'sí', 'yes')" class="vowel-button bg-blue-100 text-blue-700 p-4 rounded-lg font-bold text-xl shadow-md hover:bg-blue-200">
+                    I (sí - yes)
+                </button>
+                <button onclick="speakVowel('o', 'oro', 'gold')" class="vowel-button bg-yellow-100 text-yellow-700 p-4 rounded-lg font-bold text-xl shadow-md hover:bg-yellow-200">
+                    O (oro - gold)
+                </button>
+                <button onclick="speakVowel('u', 'luna', 'moon')" class="vowel-button bg-purple-100 text-purple-700 p-4 rounded-lg font-bold text-xl shadow-md hover:bg-purple-200">
+                    U (luna - moon)
+                </button>
+            </div>
+            <p class="text-sm text-gray-500 mt-4 text-center">Click on each vowel to hear the vowel, the Spanish word, and its English reference, in that order.</p>
+        </section>
+
+        <!-- New Vocabulary Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-indigo-200 pb-2 mb-4">Vocabulario nuevo / New Vocabulary</h2>
+            
+            <!-- Structural Vocabulary List Grouping (No visible h3 titles or separators) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3 text-gray-700">
+                
+                <!-- 1. Artículos Definidos / Definite Articles -->
+                <div class="vocab-group col-span-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3">
+                    <p><b>el</b> – the [masculine, singular]</p>
+                    <p><b>los</b> – the [masculine, plural]</p>
+                    <p><b>la</b> – the [feminine, singular]</p>
+                    <p><b>las</b> – the [feminine, plural]</p>
+                </div>
+                
+                <!-- 2. Sustantivos Comunes / Common Nouns -->
+                <div class="vocab-group col-span-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3">
+                    <p><b>el libro</b> – book</p>
+                    <p><b>la mano</b> – hand</p>
+                    <p><b>la silla</b> – chair</p>
+                    <p><b>el mapa</b> – map</p>
+                    <p><b>la mesa</b> – table</p>
+                    <p><b>el problema</b> – problem</p>
+                    <p><b>la casa</b> – house</p>
+                    <p><b>el sistema</b> – system</p>
+                    <p><b>la clase</b> – class</p>
+                    <p><b>el día</b> – day</p>
+                    <p><b>el reloj</b> – watch, clock</p>
+                    <p><b>el cuaderno</b> – notebook, workbook</p>
+                    <p><b>el lápiz</b> – pencil</p>
+                    <p><b>el agua</b> – water [feminine]</p>
+                    <p><b>la pared</b> – wall</p>
+                    <p><b>la letra</b> – letter</p>
+                    <p><b>la música</b> – music</p>
+                    <p><b>el hotel</b> – hotel</p>
+                    <p><b>el televisor</b> – television set</p>
+                    <p><b>la familia</b> – family</p>
+                    <p><b>el papel</b> – paper</p>
+                </div>
+
+                <!-- 3. Adjetivos / Adjectives -->
+                <div class="vocab-group col-span-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3">
+                    <p><b>interesante</b> – interesting</p>
+                    <p><b>clásico</b> – classical</p>
+                    <p><b>popular</b> – popular</p>
+                    <p><b>central</b> – central</p>
+                    <p><b>inteligente</b> – intelligent</p>
+                </div>
+
+                <!-- 4. Sufijos y Terminaciones / Suffixes and Endings -->
+                <div class="vocab-group col-span-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3">
+                    <p><b>la educación</b> – education</p>
+                    <p><b>la libertad</b> – liberty, freedom</p>
+                    <p><b>la nación</b> – nation</p>
+                    <p><b>la posibilidad</b> – possibility</p>
+                    <p><b>la lección</b> – lesson</p>
+                    <p><b>la actitud</b> – attitude</p>
+                    <p><b>la universidad</b> – university</p>
+                    <p><b>la virtud</b> – virtue</p>
+                </div>
+                
+                <!-- 5. Personas y Profesiones / People and Professions -->
+                <div class="vocab-group col-span-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3">
+                    <p><b>el pianista</b> – male pianist</p>
+                    <p><b>el señor</b> – Mr., man</p>
+                    <p><b>la pianista</b> – female pianist</p>
+                    <p><b>la señora</b> – Mrs., woman</p>
+                    <p><b>el dentista</b> – male dentist</p>
+                    <p><b>la señorita</b> – Miss, young woman</p>
+                    <p><b>la dentista</b> – female dentist</p>
+                    <p><b>el profesor</b> – male professor</p>
+                    <p><b>el futbolista</b> – male soccer player</p>
+                    <p><b>la profesora</b> – female professor</p>
+                    <p><b>la futbolista</b> – female soccer player</p>
+                    <p><b>el doctor</b> – male doctor</p>
+                    <p><b>el chico</b> – boy</p>
+                    <p><b>la doctora</b> – female doctor</p>
+                    <p><b>la chica</b> – girl</p>
+                    <p><b>llamar</b> – to call</p>
+                </div>
+                
+                <!-- 6. Preposiciones y Direcciones / Prepositions and Directions -->
+                <div class="vocab-group col-span-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3 border-b-0">
+                    <p><b>en</b> – in</p>
+                    <p><b>hay</b> – there is, there are</p>
+                    <p><b>de</b> – of, from</p>
+                    <p><b>el norte</b> – north</p>
+                    <p><b>el oeste</b> – west</p>
+                    <p><b>el sur</b> – south</p>
+                    <p><b>el este</b> – east</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Grammar Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-indigo-200 pb-2 mb-4">Sustantivos y Artículos Definidos (Nouns and Definite Articles)</h2>
+            <div class="space-y-6 text-gray-700">
+
+                <!-- 1. Noun Gender/Number -->
+                <div class="p-4 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold text-indigo-700 mb-2">Nouns: Gender and Number</h3>
+                    <p class="mb-3">All nouns in Spanish have a <b>gender</b>, meaning that they are either <b>masculine</b> or <b>feminine</b>. Most nouns that end in <b>-o</b> are masculine, while most that end in <b>-a</b> are feminine. Beyond gender, nouns also have a <b>number</b>, meaning that they are either <b>singular</b> or <b>plural</b>.</p>
+                </div>
+
+                <!-- 2. Definite Articles -->
+                <div class="p-4 bg-indigo-50 rounded-lg shadow-sm border-l-4 border-indigo-400">
+                    <h3 class="text-xl font-semibold text-indigo-800 mb-2">Definite Articles</h3>
+                    <p class="mb-3">While “the” is the only definite article in English, in Spanish there are four forms of the definite article:</p>
+                    <ul class="list-disc list-inside ml-4 mb-3">
+                        <li><b>el</b> (masculine singular)</li>
+                        <li><b>la</b> (feminine singular)</li>
+                        <li><b>los</b> (masculine plural)</li>
+                        <li><b>las</b> (feminine plural)</li>
+                    </ul>
+                    <p class="mb-3 italic">Examples: <b>el libro</b> [the book]; <b>la mesa</b> [the table]; <b>los cuadernos</b> [the notebooks]; <b>las señoras</b> [the women].</p>
+                    <div class="p-2 mt-3 bg-white rounded-md border border-indigo-200">
+                        <p class="font-semibold text-gray-800">Contraction Rule:</p>
+                        <p>When the preposition <b>de</b> [of] is followed by the definite article <b>el</b>, <b>de + el</b> contracts to <b>del</b>.</p>
+                        <p class="mt-1 italic">So, El cuaderno <b>del</b> curso is “The workbook of the course,” or “The course’s workbook.”</p>
+                    </div>
+                </div>
+
+                <!-- 3. Knowing the Gender -->
+                <div>
+                    <h3 class="text-xl font-semibold text-indigo-700 mb-2">Knowing the Gender of a Noun</h3>
+                    <p class="mb-3">Although nouns ending in <b>-o</b> or <b>-a</b> follow general rules, many do not. For that reason, you should always learn a new noun with its accompanying definite article. As you learn, for example, that “the hotel” is <b>el hotel</b>, you are reinforcing that <b>hotel</b> is a masculine noun.</p>
+
+                    <h4 class="font-semibold mt-4 mb-2 text-gray-800">Gender Pointers (Sufijos y Terminaciones):</h4>
+                    <ul class="grammar-list ml-4">
+                        <li><strong>Feminine Suffixes:</strong> Words ending in <b>-ión</b>, <b>-ad</b>, and <b>-tud</b> are almost always feminine (e.g., <b>la lección</b>, <b>la posibilidad</b>, <b>la virtud</b>).</li>
+                        <li><strong>Masculine Endings:</strong> Nouns ending in <b>-r</b> and <b>-l</b> are also usually masculine (e.g., <b>el televisor</b>, <b>el hotel</b>).</li>
+                    </ul>
+
+                    <h4 class="font-semibold mt-4 mb-2 text-gray-800">Confusing Endings and Irregular Nouns:</h4>
+                    <ul class="grammar-list ml-4">
+                        <li>Words ending in <b>-ista</b> can be either masculine or feminine (e.g., <b>el futbolista</b>, <b>la futbolista</b>).</li>
+                        <li>Spanish words ending in <b>-ma</b> (e.g., <b>el sistema</b>, <b>el problema</b>) often look feminine but are actually masculine.</li>
+                        <li>Specific irregular words: <b>el día</b> and <b>el mapa</b> (masculine), and <b>la mano</b> (feminine).</li>
+                    </ul>
+                </div>
+                
+                <!-- 4. Uses of Articles -->
+                <div>
+                    <h3 class="text-xl font-semibold text-indigo-700 mb-2">Definite Articles: Specific Uses</h3>
+                    <p class="mb-2">Definite articles have a variety of uses in Spanish:</p>
+                    <ul class="grammar-list ml-4 space-y-3">
+                        <li><strong>Specific Reference:</strong> As in English, they can refer to something specific.
+                            <br><span class="italic">Example: “The class is interesting” is <b>La clase es interesante</b>.</span>
+                        </li>
+                        <li><strong>General Sense (Unlike English):</strong> They are also used when talking about a noun in a general sense.
+                            <br><span class="italic">Example: “Freedom is important,” is <b>La libertad es importante</b>.</span>
+                        </li>
+                        <li><strong>With Titles:</strong> Definite articles are needed when speaking or writing <b>about</b> people with titles (such as <b>señor</b>, <b>profesor</b>, <b>doctora</b>).
+                            <br><span class="italic">Example: “Professor Ana Cano is popular,” is <b>La profesora Ana Cano</b> es popular.</span>
+                            <br><span class="font-bold text-red-600">Note:</span> No definite article is needed when talking <b>directly</b> to a person with a title, so “Hello, Professor Cano” is <b>Hola, Profesora Cano</b>.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 5. Making Nouns Plural -->
+                <div class="p-4 bg-teal-50 rounded-lg shadow-sm border-l-4 border-teal-400">
+                    <h3 class="text-xl font-semibold text-teal-800 mb-2">Making Nouns Plural</h3>
+                    <p class="mb-3">The three rules for making a noun plural in Spanish are as follows.</p>
+                    <ul class="grammar-list ml-4">
+                        <li>1. If a noun ends in a vowel, add <b>-s</b>: la silla [chair] las sillas.</li>
+                        <li>2. If a noun ends in a consonant other than z, add <b>-es</b>: el papel [paper] los papeles.</li>
+                        <li>3. If a noun ends in a <b>z</b>, change the <b>z</b> to <b>c</b> and add <b>-es</b>: el lápiz [pencil] los lápices.</li>
+                    </ul>
+                </div>
+                
+                <!-- 6. The Stressed 'A' Sound Rule (Eufonía) -->
+                <div class="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-md">
+                    <h4 class="font-semibold text-yellow-800">The Stressed 'A' Sound Rule (Eufonía)</h4>
+                    <p>Feminine nouns beginning with the sound <b>-a</b> in a <b>stressed syllable</b> use <b>el</b> rather than <b>la</b> as their definite article (e.g., <b>el agua</b> [water]).</p>
+                    <p class="text-sm mt-1 italic">This is done to avoid the two 'a' sounds running together. Feminine nouns beginning with an <b>unstressed 'a' sound</b> keep the usual definite article of <b>la</b> (e.g., <b>la actitud</b>).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activities Section -->
+        <section class="pt-8 border-t-4 border-indigo-400">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-6">Activities / Actividades</h2>
+
+            <!-- Activity A: Definite Article (Fill-in-the-Blank) -->
+            <div id="activity-a" class="bg-gray-50 p-6 rounded-lg shadow-inner mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">A. Add the appropriate definite article to each noun:</h3>
+                <form onsubmit="checkActivityA(event)" class="space-y-3">
+                    <div class="flex items-center space-x-2"><input type="text" id="a1" data-answer="la" class="article-input w-16 p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" maxlength="3"><span>universidad</span><span id="a1-feedback" class="text-sm"></span></div>
+                    <div class="flex items-center space-x-2"><input type="text" id="a2" data-answer="los" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>libros</span><span id="a2-feedback" class="text-sm"></span></div>
+                    <div class="flex items-center space-x-2"><input type="text" id="a3" data-answer="el" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>día</span><span id="a3-feedback" class="text-sm"></span></div>
+                    <div class="flex items-center space-x-2"><input type="text" id="a4" data-answer="los" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>lápices</span><span id="a4-feedback" class="text-sm"></span></div>
+                    <div class="flex items-center space-x-2"><input type="text" id="a5" data-answer="el" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>sistema</span><span id="a5-feedback" class="text-sm"></span></div>
+                    <div class="flex items-center space-x-2"><input type="text" id="a6" data-answer="los" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>cuadernos</span><span id="a6-feedback" class="text-sm"></span></div>
+                    <div class="flex items-center space-x-2"><input type="text" id="a7" data-answer="los" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>mapas</span><span id="a7-feedback" class="text-sm"></span></div>
+                    <div class="flex items-center space-x-2"><input type="text" id="a8" data-answer="la" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>educación</span><span id="a8-feedback" class="text-sm"></span></div>
+                    <div class="flex items-center space-x-2"><input type="text" id="a9" data-answer="la" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>actitud</span><span id="a9-feedback" class="text-sm"></span></div>
+                    <button type="submit" class="mt-4 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150">Check Answers (A)</button>
+                    <button type="button" onclick="clearInputs('a')" class="mt-4 px-4 py-2 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition duration-150">Clear</button>
+                </form>
+            </div>
+
+            <!-- Activity B: Definite Article (Unpacking) -->
+            <div id="activity-b" class="bg-gray-50 p-6 rounded-lg shadow-inner mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">B. Add the appropriate definite article to each noun:</h3>
+                <form onsubmit="checkActivityB(event)" class="space-y-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                        <div class="flex items-center space-x-2"><input type="text" id="b1" data-answer="el" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>televisor</span><span id="b1-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><input type="text" id="b6" data-answer="la" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>alfombra [rug]</span><span id="b6-feedback" class="text-sm"></span></div>
+                        
+                        <div class="flex items-center space-x-2"><input type="text" id="b2" data-answer="las" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>mesas</span><span id="b2-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><input type="text" id="b7" data-answer="los" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>cuadernos</span><span id="b7-feedback" class="text-sm"></span></div>
+                        
+                        <div class="flex items-center space-x-2"><input type="text" id="b3" data-answer="las" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>lámparas [lamps]</span><span id="b3-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><input type="text" id="b8" data-answer="los" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>mapas</span><span id="b8-feedback" class="text-sm"></span></div>
+                        
+                        <div class="flex items-center space-x-2"><input type="text" id="b4" data-answer="los" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>papeles</span><span id="b4-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><input type="text" id="b9" data-answer="los" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>libros</span><span id="b9-feedback" class="text-sm"></span></div>
+                        
+                        <div class="flex items-center space-x-2"><input type="text" id="b5" data-answer="la" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>computadora [computer]</span><span id="b5-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><input type="text" id="b10" data-answer="las" class="article-input w-16 p-2 border border-gray-300 rounded-md" maxlength="3"><span>mesas</span><span id="b10-feedback" class="text-sm"></span></div>
+                    </div>
+                    
+                    <button type="submit" class="mt-4 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150">Check Answers (B)</button>
+                    <button type="button" onclick="clearInputs('b')" class="mt-4 px-4 py-2 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition duration-150">Clear</button>
+                </form>
+            </div>
+
+            <!-- Activity C: Pluralization -->
+            <div id="activity-c" class="bg-gray-50 p-6 rounded-lg shadow-inner mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">C. Make the following nouns plural (include the article):</h3>
+                <form onsubmit="checkActivityC(event)" class="space-y-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                        <div class="flex items-center space-x-2"><span>1. el cuaderno &rarr;</span><input type="text" id="c1" data-answer="los cuadernos" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c1-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><span>7. la cama &rarr;</span><input type="text" id="c7" data-answer="las camas" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c7-feedback" class="text-sm"></span></div>
+                        
+                        <div class="flex items-center space-x-2"><span>2. la lámpara &rarr;</span><input type="text" id="c2" data-answer="las lámparas" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c2-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><span>8. el reloj &rarr;</span><input type="text" id="c8" data-answer="los relojes" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c8-feedback" class="text-sm"></span></div>
+                        
+                        <div class="flex items-center space-x-2"><span>3. el televisor &rarr;</span><input type="text" id="c3" data-answer="los televisores" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c3-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><span>9. la bicicleta &rarr;</span><input type="text" id="c9" data-answer="las bicicletas" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c9-feedback" class="text-sm"></span></div>
+                        
+                        <div class="flex items-center space-x-2"><span>4. el zapato &rarr;</span><input type="text" id="c4" data-answer="los zapatos" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c4-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><span>10. el perfume &rarr;</span><input type="text" id="c10" data-answer="los perfumes" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c10-feedback" class="text-sm"></span></div>
+                        
+                        <div class="flex items-center space-x-2"><span>5. el mapa &rarr;</span><input type="text" id="c5" data-answer="los mapas" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c5-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><span>11. el papel &rarr;</span><input type="text" id="c11" data-answer="los papeles" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c11-feedback" class="text-sm"></span></div>
+
+                        <div class="flex items-center space-x-2"><span>6. la alfombra &rarr;</span><input type="text" id="c6" data-answer="las alfombras" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c6-feedback" class="text-sm"></span></div>
+                        <div class="flex items-center space-x-2"><span>12. el lápiz &rarr;</span><input type="text" id="c12" data-answer="los lápices" class="article-input w-40 p-2 border border-gray-300 rounded-md"><span id="c12-feedback" class="text-sm"></span></div>
+                    </div>
+                    
+                    <button type="submit" class="mt-4 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150">Check Answers (C)</button>
+                    <button type="button" onclick="clearInputs('c')" class="mt-4 px-4 py-2 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition duration-150">Clear</button>
+                </form>
+            </div>
+
+            <!-- Activity D: Multiple Choice -->
+            <div id="activity-d" class="bg-gray-50 p-6 rounded-lg shadow-inner mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">D. Choose the correct answer:</h3>
+                <form onsubmit="checkActivityD(event)" class="space-y-4">
+                    
+                    <!-- Question 1 -->
+                    <div class="p-3 bg-white rounded-md shadow-sm border border-gray-200">
+                        <p>1. What is the plural of "reloj"?</p>
+                        <div class="mt-2 space-y-1">
+                            <label class="block"><input type="radio" name="d1" value="a" class="mr-2">a) relojes</label>
+                            <label class="block"><input type="radio" name="d1" value="b" class="mr-2">b) relojs</label>
+                            <label class="block"><input type="radio" name="d1" value="c" class="mr-2">c) relojeces</label>
+                        </div>
+                        <span id="d1-feedback" class="text-sm mt-1 block"></span>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="p-3 bg-white rounded-md shadow-sm border border-gray-200">
+                        <p>2. What is the singular of "televisores"?</p>
+                        <div class="mt-2 space-y-1">
+                            <label class="block"><input type="radio" name="d2" value="a" class="mr-2">a) televiso</label>
+                            <label class="block"><input type="radio" name="d2" value="b" class="mr-2">b) televisor</label>
+                            <label class="block"><input type="radio" name="d2" value="c" class="mr-2">c) televisore</label>
+                        </div>
+                        <span id="d2-feedback" class="text-sm mt-1 block"></span>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="p-3 bg-white rounded-md shadow-sm border border-gray-200">
+                        <p>3. What is the plural of "hotel"?</p>
+                        <div class="mt-2 space-y-1">
+                            <label class="block"><input type="radio" name="d3" value="a" class="mr-2">a) hotel</label>
+                            <label class="block"><input type="radio" name="d3" value="b" class="mr-2">b) hoteles</label>
+                            <label class="block"><input type="radio" name="d3" value="c" class="mr-2">c) hotels</label>
+                        </div>
+                        <span id="d3-feedback" class="text-sm mt-1 block"></span>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                    <div class="p-3 bg-white rounded-md shadow-sm border border-gray-200">
+                        <p>4. What is the singular of "doctoras"?</p>
+                        <div class="mt-2 space-y-1">
+                            <label class="block"><input type="radio" name="d4" value="a" class="mr-2">a) doctor</label>
+                            <label class="block"><input type="radio" name="d4" value="b" class="mr-2">b) doctoras</label>
+                            <label class="block"><input type="radio" name="d4" value="c" class="mr-2">c) doctora</label>
+                        </div>
+                        <span id="d4-feedback" class="text-sm mt-1 block"></span>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                    <div class="p-3 bg-white rounded-md shadow-sm border border-gray-200">
+                        <p>5. What is the definite article for "sistema"?</p>
+                        <div class="mt-2 space-y-1">
+                            <label class="block"><input type="radio" name="d5" value="a" class="mr-2">a) la</label>
+                            <label class="block"><input type="radio" name="d5" value="b" class="mr-2">b) las</label>
+                            <label class="block"><input type="radio" name="d5" value="c" class="mr-2">c) el</label>
+                        </div>
+                        <span id="d5-feedback" class="text-sm mt-1 block"></span>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="p-3 bg-white rounded-md shadow-sm border border-gray-200">
+                        <p>6. What is the definite article for "mano"?</p>
+                        <div class="mt-2 space-y-1">
+                            <label class="block"><input type="radio" name="d6" value="a" class="mr-2">a) el</label>
+                            <label class="block"><input type="radio" name="d6" value="b" class="mr-2">b) la</label>
+                            <label class="block"><input type="radio" name="d6" value="c" class="mr-2">c) los</label>
+                        </div>
+                        <span id="d6-feedback" class="text-sm mt-1 block"></span>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="p-3 bg-white rounded-md shadow-sm border border-gray-200">
+                        <p>7. What is the definite article for "problemas"?</p>
+                        <div class="mt-2 space-y-1">
+                            <label class="block"><input type="radio" name="d7" value="a" class="mr-2">a) los</label>
+                            <label class="block"><input type="radio" name="d7" value="b" class="mr-2">b) las</label>
+                            <label class="block"><input type="radio" name="d7" value="c" class="mr-2">c) el</label>
+                        </div>
+                        <span id="d7-feedback" class="text-sm mt-1 block"></span>
+                    </div>
+
+                    <!-- Question 8 -->
+                    <div class="p-3 bg-white rounded-md shadow-sm border border-gray-200">
+                        <p>8. What is the definite article for "dentistas"?</p>
+                        <div class="mt-2 space-y-1">
+                            <label class="block"><input type="radio" name="d8" value="a" class="mr-2">a) los</label>
+                            <label class="block"><input type="radio" name="d8" value="b" class="mr-2">b) las</label>
+                            <label class="block"><input type="radio" name="d8" value="c" class="mr-2">c) la</label>
+                        </div>
+                        <span id="d8-feedback" class="text-sm mt-1 block"></span>
+                    </div>
+
+                    <!-- Question 9 -->
+                    <div class="p-3 bg-white rounded-md shadow-sm border border-gray-200">
+                        <p>9. What is the definite article for "futbolistas"?</p>
+                        <div class="mt-2 space-y-1">
+                            <label class="block"><input type="radio" name="d9" value="a" class="mr-2">a) los</label>
+                            <label class="block"><input type="radio" name="d9" value="b" class="mr-2">b) las</label>
+                            <label class="block"><input type="radio" name="d9" value="c" class="mr-2">c) la</label>
+                        </div>
+                        <span id="d9-feedback" class="text-sm mt-1 block"></span>
+                    </div>
+
+                    <!-- Question 10 -->
+                    <div class="p-3 bg-white rounded-md shadow-sm border border-gray-200">
+                        <p>10. What is the definite article for "papel"?</p>
+                        <div class="mt-2 space-y-1">
+                            <label class="block"><input type="radio" name="d10" value="a" class="mr-2">a) la</label>
+                            <label class="block"><input type="radio" name="d10" value="b" class="mr-2">b) el</label>
+                            <label class="block"><input type="radio" name="d10" value="c" class="mr-2">c) las</label>
+                        </div>
+                        <span id="d10-feedback" class="text-sm mt-1 block"></span>
+                    </div>
+                    
+                    <button type="submit" class="mt-4 px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150">Check Answers (D)</button>
+                </form>
+            </div>
+
+            <!-- Copyright and Link (Added in a later step, manually include it here for the requested state) -->
+            <div class="text-center mt-12 pt-4 border-t border-gray-200">
+                <p class="text-sm text-gray-500">© 2025 Spanish Lessons with María C. All rights reserved.</p>
+                <a href="https://preply.com/en/tutor/5105409?utm_source=friend&utm_medium=ref&utm_campaign=stu_plg_plg_all_0_mul_xx_multiplesub_share-tutor-tutoring_1&utm_content=OTQ2NTAwNQ==" 
+                   target="_blank" 
+                   class="inline-block mt-2 px-4 py-2 bg-pink-500 text-white font-semibold rounded-lg shadow-md hover:bg-pink-600 transition duration-150">
+                    Find your Spanish class here
+                </a>
+            </div>
+
+        </section>
+    </div>
+
+    <script>
+        // --- Tone.js Setup for Audio Feedback ---
+        let synth;
+        let isToneInitialized = false;
+
+        function initializeTone() {
+            if (!isToneInitialized) {
+                // A simple synth for positive/negative feedback
+                synth = new Tone.PolySynth(Tone.AMSynth).toDestination();
+                isToneInitialized = true;
+                console.log("Tone.js initialized.");
+            }
+        }
+
+        // Positive sound (a quick arpeggio)
+        function playSuccess() {
+            initializeTone();
+            if (synth) {
+                synth.triggerAttackRelease(["C5", "E5", "G5"], "8n");
+            }
+        }
+
+        // Negative sound (a dissonant chord)
+        function playFailure() {
+            initializeTone();
+            if (synth) {
+                synth.triggerAttackRelease(["C4", "C#4"], "8n");
+            }
+        }
+        
+        // --- Speech Synthesis for Vowels (Function remains the same, only the calls were updated) ---
+        /**
+         * Plays three sounds in sequence: Vowel (ES), Spanish Word (ES), English Word (EN).
+         * @param {string} vowel - The Spanish vowel letter (e.g., 'a').
+         * @param {string} spanishWord - The Spanish example word (e.g., 'papá').
+         * @param {string} englishWord - The English comparison word (e.g., 'dad').
+         */
+        function speakVowel(vowel, spanishWord, englishWord) {
+            // Stop any ongoing speech
+            speechSynthesis.cancel();
+            
+            // 1. Vowel sound (Spanish voice)
+            const utterance1 = new SpeechSynthesisUtterance(vowel);
+            utterance1.lang = 'es-ES';
+            utterance1.rate = 0.8; // Slightly slower for clarity
+
+            // 2. Spanish Example (Spanish voice)
+            const utterance2 = new SpeechSynthesisUtterance(spanishWord);
+            utterance2.lang = 'es-ES';
+            utterance2.rate = 0.9;
+
+            // 3. English Comparison (English voice)
+            const utterance3 = new SpeechSynthesisUtterance(englishWord);
+            utterance3.lang = 'en-US';
+            utterance3.rate = 0.9;
+
+            // Chain the utterances using the 'onend' event
+            utterance1.onend = () => {
+                speechSynthesis.speak(utterance2);
+            };
+
+            utterance2.onend = () => {
+                speechSynthesis.speak(utterance3);
+            };
+
+            // Start the sequence
+            speechSynthesis.speak(utterance1);
+        }
+
+        // Event listener to initialize Tone.js on first user interaction
+        document.body.addEventListener('click', initializeTone, { once: true });
+
+
+        // --- Utility Functions for Activities ---
+
+        /**
+         * Checks the input fields for a given activity (a, b, or c)
+         * @param {string} activityPrefix - 'a', 'b', or 'c'
+         * @param {Event} event - The form submission event
+         */
+        function checkFillInTheBlank(activityPrefix, event) {
+            event.preventDefault();
+            const inputs = document.querySelectorAll(`#activity-${activityPrefix} input[type="text"]`);
+            let allCorrect = true;
+
+            inputs.forEach(input => {
+                const id = input.id;
+                const feedbackId = `${id}-feedback`;
+                // Normalize answer: remove spaces, convert to lowercase.
+                const expected = input.getAttribute('data-answer').toLowerCase().replace(/\s/g, ''); 
+                const actual = input.value.toLowerCase().replace(/\s/g, '');
+                const feedbackElement = document.getElementById(feedbackId);
+
+                feedbackElement.classList.remove('correct-feedback', 'incorrect-feedback');
+                feedbackElement.textContent = ''; // Clear previous feedback
+
+                if (actual === expected) {
+                    feedbackElement.textContent = 'Correct!';
+                    feedbackElement.classList.add('correct-feedback');
+                } else if (actual === '') {
+                    feedbackElement.textContent = 'Missing answer.';
+                    feedbackElement.classList.add('incorrect-feedback');
+                    allCorrect = false;
+                } else {
+                    // Display the correct answer clearly for C (Pluralization)
+                    let feedbackText = 'Incorrect.';
+                    if (activityPrefix === 'c') {
+                        // For activity C, show the corrected full phrase
+                         feedbackText = `Incorrect. The correct answer is: ${input.getAttribute('data-answer')}`;
+                    }
+                    feedbackElement.textContent = feedbackText;
+                    feedbackElement.classList.add('incorrect-feedback');
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                playSuccess();
+                showMessage(`Excellent! You completed Activity ${activityPrefix.toUpperCase()} correctly.`, 'success');
+            } else {
+                playFailure();
+                showMessage('Please check the answers marked in red.', 'error');
+            }
+        }
+
+        function checkActivityA(event) {
+            checkFillInTheBlank('a', event);
+        }
+
+        function checkActivityB(event) {
+            checkFillInTheBlank('b', event);
+        }
+
+        function checkActivityC(event) {
+            checkFillInTheBlank('c', event);
+        }
+
+        function clearInputs(activityPrefix) {
+            const inputs = document.querySelectorAll(`#activity-${activityPrefix} input[type="text"]`);
+            inputs.forEach(input => {
+                input.value = '';
+                const feedbackId = `${input.id}-feedback`;
+                const feedbackElement = document.getElementById(feedbackId);
+                if (feedbackElement) {
+                    feedbackElement.textContent = '';
+                    feedbackElement.classList.remove('correct-feedback', 'incorrect-feedback');
+                }
+            });
+            hideMessage();
+        }
+
+        function checkActivityD(event) {
+            event.preventDefault();
+            const correctAnswers = {
+                d1: 'a', // relojes
+                d2: 'b', // televisor
+                d3: 'b', // hoteles
+                d4: 'c', // doctora
+                d5: 'c', // el (el sistema)
+                d6: 'b', // la (la mano)
+                d7: 'a', // los (los problemas)
+                d8: 'a', // los (general plural for dentistas)
+                d9: 'a', // los (general plural for futbolistas)
+                d10: 'b' // el (el papel)
+            };
+            
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const name = `d${i}`;
+                const feedbackId = `${name}-feedback`;
+                const feedbackElement = document.getElementById(feedbackId);
+                const selected = document.querySelector(`input[name="${name}"]:checked`);
+                
+                feedbackElement.classList.remove('correct-feedback', 'incorrect-feedback');
+                feedbackElement.textContent = '';
+
+                if (selected) {
+                    const isCorrect = selected.value === correctAnswers[name];
+                    
+                    // Special case for d8 and d9 where 'las' (option b) is also technically possible as the article
+                    // For d8 and d9, both 'a' (los) and 'b' (las) are accepted since the noun 'dentistas' and 'futbolistas'
+                    // can be masculine or feminine plural. Option 'c' (la) is singular feminine, so it is incorrect.
+                    let answerIsCorrect = isCorrect;
+                    if ((name === 'd8' || name === 'd9') && selected.value === 'b') {
+                         answerIsCorrect = true; // Accept 'las' for these dual-gender plurals too
+                    }
+
+                    if (answerIsCorrect) {
+                        feedbackElement.textContent = 'Correct!';
+                        score++;
+                    } else {
+                        feedbackElement.textContent = 'Incorrect.';
+                    }
+                    feedbackElement.classList.add(answerIsCorrect ? 'correct-feedback' : 'incorrect-feedback');
+
+                } else {
+                    feedbackElement.textContent = 'Select an option.';
+                    feedbackElement.classList.add('incorrect-feedback');
+                }
+            }
+
+            const percentage = (score / totalQuestions) * 100;
+
+            if (score === totalQuestions) {
+                playSuccess();
+                showMessage(`Congratulations! You got ${score} out of ${totalQuestions} (${percentage.toFixed(0)}%). Perfect!`, 'success');
+            } else {
+                playFailure();
+                showMessage(`Result: You got ${score} out of ${totalQuestions} (${percentage.toFixed(0)}%). Please check the incorrect answers.`, 'error');
+            }
+        }
+
+        function showMessage(text, type) {
+            const box = document.getElementById('message-box');
+            box.textContent = text;
+            box.classList.remove('hidden', 'bg-yellow-100', 'border-yellow-500', 'text-yellow-800', 'bg-green-100', 'border-green-500', 'text-green-800', 'bg-red-100', 'border-red-500', 'text-red-800');
+            box.classList.add('block');
+
+            if (type === 'success') {
+                box.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+            } else if (type === 'error') {
+                box.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+            } else {
+                box.classList.add('bg-yellow-100', 'border-yellow-500', 'text-yellow-800');
+            }
+
+            // Scroll to message box
+            box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function hideMessage() {
+             const box = document.getElementById('message-box');
+             box.classList.add('hidden');
+        }
+
+    </script>
+</body>
+</html>
