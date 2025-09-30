@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lección de Español: Verbo Ser y Vocabulario</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración personalizada de Tailwind para incluir el color #FF79AC -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-pink': '#FF79AC', // El color solicitado: FF79AC (255, 121, 172)
+                        'accent-dark': '#C64F83', // Un tono más oscuro del rosa para hover
+                        'accent-light': '#FFE8F2', // Un rosa muy claro para fondos de acierto
+                        'neutral-text': '#4b5563', // Gris oscuro para contraste
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7; /* Fondo muy claro y neutro */
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #FBCFE8; /* Borde rosa muy claro */
+        }
+        .accent-header {
+            color: #FF79AC; /* Color rosa principal para acento */
+            border-bottom: 2px solid #FBCFE8;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .activity-text {
+            white-space: pre-wrap; /* Para respetar los saltos de línea y espacios dobles del contenido */
+        }
+        /* Estilo para los elementos de vocabulario */
+        .vocab-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 4px 0;
+            flex-wrap: nowrap; 
+        }
+        .vocab-spanish {
+            font-weight: 600;
+            color: #1a1a1a;
+            white-space: nowrap; 
+            margin-right: 0.5rem;
+            flex-shrink: 0; 
+        }
+        .vocab-english {
+            color: #C64F83; /* Color rosa oscuro para el significado */
+            flex-grow: 1;
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+
+        /* Estilos para los inputs interactivos */
+        .fill-in-input {
+            border: none;
+            border-bottom: 2px solid #3B82F6; /* Azul para campos vacíos/neutrales */
+            background-color: transparent;
+            text-align: center;
+            padding: 2px 4px;
+            transition: border-color 0.3s, background-color 0.3s;
+            display: inline-block;
+            min-width: 80px;
+            margin-left: 4px;
+            margin-right: 4px;
+            color: #1F2937;
+        }
+
+        /* Foco */
+        .fill-in-input:focus {
+            outline: none;
+            border-bottom: 2px solid #FF79AC; /* Rosa en el foco */
+        }
+
+        /* Corrección - Correcto (Nuevo color rosa) */
+        .fill-in-input.correct {
+            border-bottom: 3px solid #C64F83; /* Rosa oscuro intenso */
+            background-color: #FFE8F2; /* Rosa muy claro */
+        }
+
+        /* Corrección - Incorrecto (Se mantiene el rojo por estándar de error) */
+        .fill-in-input.incorrect {
+            border-bottom: 3px solid #EF4444; /* Rojo intenso */
+            background-color: #FEF2F2; /* Rojo muy claro */
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-6xl mx-auto space-y-8">
+        <!-- Título Principal -->
+        <header class="text-center py-6 card">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-primary-pink">
+                Vocabulary, Verb Ser, and Adjectives
+            </h1>
+            <p class="mt-2 text-gray-500">Essential Spanish Grammar</p>
+        </header>
+
+        <!-- Vocabulario Nuevo -->
+        <section id="vocabulario" class="card p-6">
+            <h2 class="text-2xl font-bold accent-header">Vocabulario nuevo / New Vocabulary</h2>
+            
+            <!-- Contenido de Vocabulario -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 text-sm sm:text-base">
+                
+                <!-- Grupo 1: Verbos y Comandos -->
+                <div class="md:col-span-2 lg:col-span-3 pb-2 mb-2 border-b border-dashed border-gray-200">
+                    <div class="vocab-item">
+                        <span class="vocab-spanish">ser</span> 
+                        <span class="vocab-english">– to be</span>
+                    </div>
+                    <div class="vocab-item">
+                        <span class="vocab-spanish">¡Hablen!</span> 
+                        <span class="vocab-english">– Speak! [plural command]</span>
+                    </div>
+                    <div class="vocab-item">
+                        <span class="vocab-spanish">¡No esperen!</span> 
+                        <span class="vocab-english">– Don’t wait! [plural command]</span>
+                    </div>
+                </div>
+
+                <!-- Grupo 2: Adjetivos de Personalidad (3 por línea) -->
+                <div class="lg:col-span-3">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-2">
+                        <div class="vocab-item"><span class="vocab-spanish">alto</span> <span class="vocab-english">– tall</span></div>
+                        <div class="vocab-item"><span class="vocab-spanish">simpático</span> <span class="vocab-english">– nice</span></div>
+                        <div class="vocab-item"><span class="vocab-spanish">antipático</span> <span class="vocab-english">– unfriendly</span></div>
+                        <div class="vocab-item"><span class="vocab-spanish">guapo</span> <span class="vocab-english">– good-looking</span></div>
+                        <div class="vocab-item"><span class="vocab-spanish">bonito</span> <span class="vocab-english">– pretty</span></div>
+                        <div class="vocab-item"><span class="vocab-spanish">feo</span> <span class="vocab-english">– ugly</span></div>
+                        <div class="vocab-item"><span class="vocab-spanish">joven</span> <span class="vocab-english">– young</span></div>
+                        <div class="vocab-item"><span class="vocab-spanish">viejo</span> <span class="vocab-english">– old</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grupo 4: Adjetivos de Tamaño, Calidad y Falsos Cognados (2 por línea) -->
+            <div class="mt-8 pt-4 border-t border-dashed border-gray-200">
+                <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm sm:text-base">
+                    <div class="vocab-item"><span class="vocab-spanish">largo</span> <span class="vocab-english">– long</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">corto</span> <span class="vocab-english">– short in length</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">grande</span> <span class="vocab-english">– big</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">pequeño</span> <span class="vocab-english">– small</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">avergonzado</span> <span class="vocab-english">– embarrassed</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">embarazada</span> <span class="vocab-english">– pregnant</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">elegante</span> <span class="vocab-english">– elegant</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">excelente</span> <span class="vocab-english">– excellent</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">fantástico</span> <span class="vocab-english">– fantastic</span></div>
+                </div>
+            </div>
+            
+            <!-- Sustantivos: Conceptos y Lugares (2 por línea) -->
+            <div class="mt-8 pt-4 border-t border-dashed border-gray-200">
+                <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm sm:text-base">
+                    <div class="vocab-item"><span class="vocab-spanish">el accidente</span> <span class="vocab-english">– accident</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">la cuestión</span> <span class="vocab-english">– question, issue</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">la pregunta</span> <span class="vocab-english">– question</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">el taxi</span> <span class="vocab-english">– taxi</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">el teléfono</span> <span class="vocab-english">– telephone</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">el colegio</span> <span class="vocab-english">– high school</span></div>
+                </div>
+            </div>
+            
+            <!-- Vocabulario de Personas y Relaciones (2 por línea) -->
+            <div class="mt-8 pt-4 border-t border-dashed border-gray-200">
+                <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm sm:text-base">
+                    <div class="vocab-item"><span class="vocab-spanish">la persona</span> <span class="vocab-english">– person</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">la gente</span> <span class="vocab-english">– people</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">el vecino</span> <span class="vocab-english">– male neighbor</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">la vecina</span> <span class="vocab-english">– female neighbor</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">el hombre</span> <span class="vocab-english">– man</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">la mujer</span> <span class="vocab-english">– woman</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">el amigo</span> <span class="vocab-english">– male friend</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">la amiga</span> <span class="vocab-english">– female friend</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">el novio</span> <span class="vocab-english">– boyfriend</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">la novia</span> <span class="vocab-english">– girlfriend</span></div>
+                </div>
+            </div>
+
+
+            <!-- Grupo 7: Adjetivos Cognados y Otros (2 por línea) -->
+            <div class="mt-8 pt-4 border-t border-dashed border-gray-200">
+                <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm sm:text-base">
+                    <div class="vocab-item"><span class="vocab-spanish">accidental</span> <span class="vocab-english">– accidental</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">usual</span> <span class="vocab-english">– usual</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">normal</span> <span class="vocab-english">– normal</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">optimista</span> <span class="vocab-english">– optimistic</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">pesimista</span> <span class="vocab-english">– pessimistic</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">activo</span> <span class="vocab-english">– active</span></div>
+                    <div class="vocab-item"><span class="vocab-spanish">responsable</span> <span class="vocab-english">– responsible</span></div>
+                </div>
+            </div>
+
+
+             <!-- Grupo 8: Conjunciones y Adverbios (Se mantiene en 4 por línea para mayor densidad) -->
+            <div class="mt-4 pt-4 border-t border-dashed border-gray-200 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-2 text-sm sm:text-base">
+                <div class="vocab-item"><span class="vocab-spanish">y</span> <span class="vocab-english">– and</span></div>
+                <div class="vocab-item"><span class="vocab-spanish">sí</span> <span class="vocab-english">– yes</span></div>
+                <div class="vocab-item"><span class="vocab-spanish">o</span> <span class="vocab-english">– or</span></div>
+                <div class="vocab-item"><span class="vocab-spanish">no</span> <span class="vocab-english">– no, not</span></div>
+                <div class="vocab-item"><span class="vocab-spanish">pero</span> <span class="vocab-english">– but</span></div>
+                <div class="vocab-item"><span class="vocab-spanish">ahora</span> <span class="vocab-english">– now</span></div>
+            </div>
+        </section>
+
+        <!-- Bloques de Gramática: -->
+        <div class="space-y-6">
+            <!-- 1. The Verb ser -->
+            <section id="verb-ser" class="card p-6">
+                <h2 class="text-xl font-bold accent-header">The Verb ser</h2>
+                <div class="text-gray-700 text-sm space-y-3 leading-relaxed">
+                    <p>The infinitive form, which is the verb form found in the dictionary, of all Spanish verbs ends in -ar, -er, or -ir. <b>Ser</b>, the infinitive form meaning “to be,” has the following six forms in the present tense: <b>soy, eres, es, somos, sois, son</b>.</p>
+                    <p>Conjugating a verb means giving its proper verb forms for different subjects in a given tense. <b>Ser</b> is conjugated with the subject pronouns in the present tense as follows.</p>
+                    <p class="pl-2 border-l-4 border-primary-pink text-primary-pink">
+                        <b>Ser</b> with singular subject pronouns: <b>yo soy; tú eres; usted, él, or ella es</b>
+                    </p>
+                    <p class="pl-2 border-l-4 border-primary-pink text-primary-pink">
+                        <b>Ser</b> with plural subject pronouns: <b>nosotros or nosotras somos; vosotros or vosotras sois; ustedes, ellos, or ellas son</b>
+                    </p>
+                    <p>Any singular subject that is not <b>yo</b> or <b>tú</b> uses the verb form <b>es</b> (e.g., <i>La clase es importante</i>).</p>
+                    <p>Any plural subject that is not <b>nosotros, nosotras, vosotros, or vosotras</b> uses the verb form <b>son</b> (e.g., <i>Los amigos son optimistas</i>).</p>
+                    <p class="mt-4 font-semibold text-primary-pink">Uses of Ser:</p>
+                    <p><b>Ser</b> is used 1) to identify a person or thing (<i>Ella es Claudia</i>); 2) to talk about one’s profession (<i>Son doctores</i>), origin, or nationality (<i>Roberto es de Chile</i>); or 3) to describe inherent characteristics of someone or something (<i>Carla es inteligente; El hotel es elegante.</i>).</p>
+                </div>
+            </section>
+
+            <!-- 2. Cognates -->
+            <section id="cognados" class="card p-6">
+                <h2 class="text-xl font-bold accent-header">Cognates</h2>
+                <div class="text-gray-700 text-sm space-y-3 leading-relaxed">
+                    <p>Spanish and English share many <b>cognates</b>, which are words that are the same or similar in two languages. Sometimes Spanish cognates are spelled the same as the word in English: <i>normal, hotel, usual</i>. Other Spanish cognates are spelled similar to, but not the same as, the word in English: <i>activo, responsable, excelente</i>. Your comprehension of Spanish will improve if you listen for cognates when conversing and look for them when reading.</p>
+                    <p class="text-red-600 font-medium">Beware of False Cognates!</p>
+                    <p>Occasionally, a Spanish word will look like an English word but mean something else. These words are called <b>false cognates</b>. Examples include <b>largo</b> (which looks like “large” but means “long”) and <b>colegio</b> (which looks like “college” but means “high school”). False cognates, however, are relatively rare compared to the vast number of cognates shared by English and Spanish.</p>
+                </div>
+            </section>
+
+            <!-- 3. Adjectives -->
+            <section id="adjetivos" class="card p-6">
+                <h2 class="text-xl font-bold accent-header">Adjectives</h2>
+                <div class="text-gray-700 text-sm space-y-3 leading-relaxed">
+                    <p>Adjectives in Spanish must agree in number and gender with the noun being modified. So, if the subject is masculine singular, the adjective must also be masculine singular, and if the subject is feminine plural, the adjective must also be feminine plural.</p>
+                    <ul class="list-disc list-inside space-y-2 mt-4 ml-4">
+                        <li>Adjectives ending in <b>-o</b> have four forms. For example, <b>viejo</b>, meaning “old,” has the following four forms: <i>viejo</i> (masculine singular); <i>vieja</i> (feminine singular); <i>viejos</i> (masculine plural); <i>viejas</i> (feminine plural).</li>
+                        <li>Adjectives ending in <b>-e</b> have two forms, as can be seen in <b>responsable</b> (masculine and feminine singular) and <b>responsables</b> (masculine and feminine plural).</li>
+                        <li>Adjectives ending in <b>-ista</b> have two forms, as can be seen in <b>pesimista</b> (masculine and feminine singular) and <b>pesimistas</b> (masculine and feminine plural).</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- Actividades -->
+        <section id="actividades" class="card p-6">
+            <h2 class="text-2xl font-bold accent-header mb-4">Actividades</h2>
+
+            <!-- Visualización de Puntuación -->
+            <!-- Score display uses blue for information, keeping it distinct from the pink accent -->
+            <div id="scoreDisplay" class="mb-4 p-3 bg-blue-100 text-blue-800 border border-blue-300 rounded-lg hidden">
+                <p class="font-bold">Puntuación: <span id="scoreValue">0</span> / <span id="totalQuestions">0</span></p>
+            </div>
+
+            <!-- Actividad A -->
+            <div class="mb-6 pb-4 border-b border-dashed border-gray-100">
+                <h3 class="text-lg font-semibold text-primary-pink">A) Alejandra está hablando sobre su familia con su vecina Cecilia. / Alejandra is talking about her family with her neighbor Cecilia.</h3>
+                <p class="text-gray-700 mb-3 text-sm italic">Agrega la conjugación correcta del verbo <b>ser</b>. / Add the correct conjugation of the verb <b>ser</b>.</p>
+                <ol class="list-decimal list-inside space-y-2 activity-text ml-4 text-sm sm:text-base">
+                    <li>Carlos <input type="text" id="A-1" class="fill-in-input w-24" placeholder="verbo"> mi esposo [my husband].</li>
+                    <li>Pablo <input type="text" id="A-2" class="fill-in-input w-24" placeholder="verbo"> mi hijo [son].</li>
+                    <li>Marisol <input type="text" id="A-3" class="fill-in-input w-24" placeholder="verbo"> mi hija [daughter].</li>
+                    <li>Pablo y Marisol <input type="text" id="A-4" class="fill-in-input w-24" placeholder="verbo"> mis hijos [children].</li>
+                    <li>Yo <input type="text" id="A-5" class="fill-in-input w-24" placeholder="verbo"> la esposa [wife] de Carlos.</li>
+                    <li>Yo <input type="text" id="A-6" class="fill-in-input w-24" placeholder="verbo"> la madre [mother] de Pablo y Marisol.</li>
+                    <li>Nosotros <input type="text" id="A-7" class="fill-in-input w-24" placeholder="verbo"> la familia González Fallas.</li>
+                    <li>Carlos <input type="text" id="A-8" class="fill-in-input w-24" placeholder="verbo"> el padre [father] de Pablo y Marisol.</li>
+                    <li>¿De dónde <input type="text" id="A-9" class="fill-in-input w-24" placeholder="verbo"> usted y Luis?</li>
+                </ol>
+            </div>
+
+            <!-- Actividad B -->
+            <div class="mb-6 pb-4 border-b border-dashed border-gray-100">
+                <h3 class="text-lg font-semibold text-primary-pink">B) La familia González Fallas continúa conociendo a los miembros de su nuevo vecindario en Villa Celeste. / The González Fallas family continues to meet the members of their new neighborhood in Villa Celeste.</h3>
+                <p class="text-gray-700 mb-3 text-sm italic">Completa el diálogo entre Alejandra, Luisa, Pablo y Marisol usando el verbo <b>ser</b> y palabras para saludarse y presentarse. / Complete the dialogue between Alejandra, Luisa, Pablo, and Marisol using the verb <b>ser</b> and words to greet others and introduce oneself.</p>
+                <div class="activity-text ml-4 text-sm sm:text-base space-y-1">
+                    <p>Alejandra: ¡Hola! Me 1) <input type="text" id="B-1" class="fill-in-input w-32" placeholder="conjugación"> Alejandra.</p>
+                    <p>Luisa: Mucho 2) <input type="text" id="B-2" class="fill-in-input w-32" placeholder="saludo">. 3)<input type="text" id="B-3" class="fill-in-input w-40" placeholder="presentación"> Luisa.</p>
+                    <p>Alejandra: Le 4) <input type="text" id="B-4" class="fill-in-input w-32" placeholder="verbo"> a Pablo. Él 5)<input type="text" id="B-5" class="fill-in-input w-32" placeholder="verbo"> mi hijo.</p>
+                    <p>Luisa: ¡Encantada! Mi nombre 6)<input type="text" id="B-6" class="fill-in-input w-32" placeholder="verbo"> Luisa.</p>
+                    <p>Pablo: 7)<input type="text" id="B-7" class="fill-in-input w-40" placeholder="saludo">. Ella 8)<input type="text" id="B-8" class="fill-in-input w-32" placeholder="verbo"> mi hermana Marisol.</p>
+                    <p>Marisol: ¿Qué tal?</p>
+                    <p>Luisa: 9) ¡<input type="text" id="B-9" class="fill-in-input w-32" placeholder="adverbio"> bien, gracias!</p>
+                    <p>Luisa: Le 10) <input type="text" id="B-10" class="fill-in-input w-40" placeholder="verbo"> mi hija Elena. Ella 11) <input type="text" id="B-11" class="fill-in-input w-32" placeholder="verbo"> estudiante de la universidad.</p>
+                    <p>Marisol: 12) ¡<input type="text" id="B-12" class="fill-in-input w-32" placeholder="saludo"> gusto!</p>
+                    <p>Elena: Igualmente. Erica y Felipe 13) <input type="text" id="B-13" class="fill-in-input w-32" placeholder="verbo"> mis hermanos.</p>
+                </div>
+            </div>
+
+            <!-- Actividad C -->
+            <div class="mb-6 pb-4 border-b border-dashed border-gray-100">
+                <h3 class="text-lg font-semibold text-primary-pink">C) Elena está hablando con Marisol. / Elena is talking with Marisol.</h3>
+                <p class="text-gray-700 mb-3 text-sm italic">¿Qué pronombres personales necesita Elena para hablar de…? / What subject pronouns does Elena need to talk about…?</p>
+                <ol class="list-decimal list-inside grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 activity-text ml-4 text-sm sm:text-base">
+                    <li>Mis amigos y yo <input type="text" id="C-1" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Mis vecinas <input type="text" id="C-2" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>El ex-novio [ex-boyfriend] de Elena <input type="text" id="C-3" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Los ex-novios de Marisol y de Elena <input type="text" id="C-4" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Una amiga de Elena <input type="text" id="C-5" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Elena y su familia <input type="text" id="C-6" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Los amigos de Pablo <input type="text" id="C-7" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Las amigas de Elena <input type="text" id="C-8" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Elena <input type="text" id="C-9" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Pablo <input type="text" id="C-10" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Los hermanos [siblings] de Elena (Erica y Felipe) y Elena <input type="text" id="C-11" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>La hermana [sister] de Elena y Elena <input type="text" id="C-12" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Marisol <input type="text" id="C-13" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                    <li>Marisol y su familia <input type="text" id="C-14" class="fill-in-input w-24" placeholder="pronombre">.</li>
+                </ol>
+            </div>
+
+            <!-- Actividad D (Única Actividad de Adjetivos y Ser) -->
+            <div class="mb-6 pb-4 border-b border-dashed border-gray-100">
+                <h3 class="text-lg font-semibold text-primary-pink">D) Luisa está hablando con su esposo Esteban sobre los nuevos vecinos.</h3>
+                <p class="text-gray-700 mb-3 text-sm italic">Completa las frases usando la forma correcta de los adjetivos y el verbo <b>ser</b> si es necesario. / Complete the sentences using the correct form of the adjectives and the verb <b>ser</b> if it’s necessary.</p>
+                <div class="text-sm font-semibold text-gray-600 mb-3 mt-1 grid grid-cols-3">
+                    <span>activo(a)</span>
+                    <span>fantástico(a)</span>
+                    <span>alto(a)</span>
+                    <span>guapo(a)</span>
+                    <span>simpático(a)</span>
+                    <span>inteligente</span>
+                    <span>excelente</span>
+                    <span>responsable</span>
+                    <span>simpático (a)</span>
+                </div>
+                <div class="activity-text ml-4 text-sm sm:text-base space-y-2">
+                    <p>Luisa: Alejandra es una buena persona. 1) <input type="text" id="D-1" class="fill-in-input w-24" placeholder="Ser"> una mujer muy 2) <input type="text" id="D-2" class="fill-in-input w-32" placeholder="Adjetivo">.</p>
+                    <p>Esteban: Carlos y Pablo 3) <input type="text" id="D-3" class="fill-in-input w-24" placeholder="Ser"> 4) <input type="text" id="D-4" class="fill-in-input w-32" placeholder="Adjetivo"> también [also].</p>
+                    <p>Luisa: Carlos, Alejandra, Pablo y Marisol 5) <input type="text" id="D-5" class="fill-in-input w-24" placeholder="Ser"> la familia González Fallas.</p>
+                    <p>Esteban: Pablo juega tres deportes [plays three sports]. Él 6) <input type="text" id="D-6" class="fill-in-input w-24" placeholder="Ser"> un chico 7) <input type="text" id="D-7" class="fill-in-input w-32" placeholder="Adjetivo">.</p>
+                    <p>Luisa: Y Pablo está en la escuela secundaria [is in high school]. Sus notas [His grades] 8) <input type="text" id="D-8" class="fill-in-input w-24" placeholder="Ser"> 9) <input type="text" id="D-9" class="fill-in-input w-32" placeholder="Adjetivo">. Él 10) <input type="text" id="D-10" class="fill-in-input w-24" placeholder="Ser"> 11) <input type="text" id="D-11" class="fill-in-input w-32" placeholder="Adjetivo">.</p>
+                    <p>Esteban: Elena y Marisol también tienen [have] notas 12) <input type="text" id="D-12" class="fill-in-input w-32" placeholder="Adjetivo">. Ellas 13) <input type="text" id="D-13" class="fill-in-input w-24" placeholder="Ser"> muy 14) <input type="text" id="D-14" class="fill-in-input w-32" placeholder="Adjetivo">.</p>
+                </div>
+            </div>
+
+            <!-- Botones de Interacción -->
+            <div class="text-center mt-6 flex justify-center space-x-4">
+                <!-- Botón de Corrección con color de acción (Rojo) -->
+                <button id="checkAnswersBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                    Check Answers
+                </button>
+                <!-- Botón de Mostrar Respuestas con el color principal (Pink) -->
+                <button id="toggleAnswers" class="bg-primary-pink hover:bg-accent-dark text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md">
+                    Show Solutions
+                </button>
+            </div>
+
+            <!-- Respuestas (Acentos en Pink) -->
+            <section id="answerKey" class="card p-6 mt-8 hidden bg-pink-50 border-primary-pink">
+                <h2 class="text-xl font-bold text-primary-pink mb-4 border-b border-primary-pink pb-2">To Correct These Activities</h2>
+                <p class="text-xs text-primary-pink italic mb-4">Multiple choice options are separated by the slash symbol (/).</p>
+
+                <!-- Respuestas A -->
+                <div class="mb-4">
+                    <h3 class="font-bold text-neutral-text">A) Answers for the Verb "Ser":</h3>
+                    <div class="grid grid-cols-2 gap-x-6 text-sm">
+                        <p>1. <span class="font-mono text-primary-pink">es</span></p>
+                        <p>6. <span class="font-mono text-primary-pink">soy</span></p>
+                        <p>2. <span class="font-mono text-primary-pink">es</span></p>
+                        <p>7. <span class="font-mono text-primary-pink">somos</span></p>
+                        <p>3. <span class="font-mono text-primary-pink">es</span></p>
+                        <p>8. <span class="font-mono text-primary-pink">es</span></p>
+                        <p>4. <span class="font-mono text-primary-pink">son</span></p>
+                        <p>9. <span class="font-mono text-primary-pink">son</span></p>
+                        <p>5. <span class="font-mono text-primary-pink">soy</span></p>
+                    </div>
+                </div>
+
+                <!-- Respuestas B -->
+                <div class="mb-4">
+                    <h3 class="font-bold text-neutral-text">B) Dialogue Answers:</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-sm">
+                        <p>1. <span class="font-mono text-primary-pink">llamo</span></p>
+                        <p>8. <span class="font-mono text-primary-pink">es</span></p>
+                        <p>2. <span class="font-mono text-primary-pink">gusto</span></p>
+                        <p>9. <span class="font-mono text-primary-pink">Muy</span></p>
+                        <p>3. <span class="font-mono text-primary-pink">Me llamo / Soy / Mi nombre es</span></p>
+                        <p>10. <span class="font-mono text-primary-pink">presento a</span></p>
+                        <p>4. <span class="font-mono text-primary-pink">presento</span></p>
+                        <p>11. <span class="font-mono text-primary-pink">es</span></p>
+                        <p>5. <span class="font-mono text-primary-pink">es</span></p>
+                        <p>12. <span class="font-mono text-primary-pink">Mucho</span></p>
+                        <p>6. <span class="font-mono text-primary-pink">es</span></p>
+                        <p>13. <span class="font-mono text-primary-pink">son</span></p>
+                        <p>7. <span class="font-mono text-primary-pink">Mucho gusto. / Encantado. / Es un placer.</span></p>
+                    </div>
+                </div>
+
+                <!-- Respuestas C: Personal Pronoun Answers (Ordenado numéricamente) -->
+                <div class="mb-4">
+                    <h3 class="font-bold text-neutral-text">C) Personal Pronoun Answers:</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 text-sm">
+                        <p>1. <span class="font-mono text-primary-pink">nosotros</span></p>
+                        <p>2. <span class="font-mono text-primary-pink">ellas</span></p>
+                        <p>3. <span class="font-mono text-primary-pink">él</span></p>
+                        <p>4. <span class="font-mono text-primary-pink">ellos</span></p>
+                        <p>5. <span class="font-mono text-primary-pink">ella</span></p>
+                        <p>6. <span class="font-mono text-primary-pink">nosotros</span></p>
+                        <p>7. <span class="font-mono text-primary-pink">ellos</span></p>
+                        <p>8. <span class="font-mono text-primary-pink">ellas</span></p>
+                        <p>9. <span class="font-mono text-primary-pink">yo</span></p>
+                        <p>10. <span class="font-mono text-primary-pink">él</span></p>
+                        <p>11. <span class="font-mono text-primary-pink">nosotros</span></p>
+                        <p>12. <span class="font-mono text-primary-pink">nosotras</span></p>
+                        <p>13. <span class="font-mono text-primary-pink">usted / tú</span></p>
+                        <p>14. <span class="font-mono text-primary-pink">ustedes / vosotros</span></p>
+                    </div>
+                </div>
+
+                <!-- Respuestas D: Answers for Adjectives and the Verb "Ser" (Ordenado numéricamente) -->
+                <div>
+                    <h3 class="font-bold text-neutral-text">D) Answers for Adjectives and the Verb "Ser":</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-2 gap-x-6 text-sm">
+                        <p>1. <span class="font-mono text-primary-pink">Es</span></p>
+                        <p>2. <span class="font-mono text-primary-pink">simpática / fantástica</span></p>
+                        <p>3. <span class="font-mono text-primary-pink">son</span></p>
+                        <p>4. <span class="font-mono text-primary-pink">simpáticos / fantásticos</span></p>
+                        <p>5. <span class="font-mono text-primary-pink">son</span></p>
+                        <p>6. <span class="font-mono text-primary-pink">es</span></p>
+                        <p>7. <span class="font-mono text-primary-pink">activo</span></p>
+                        <p>8. <span class="font-mono text-primary-pink">son</span></p>
+                        <p>9. <span class="font-mono text-primary-pink">fantásticas / excelentes</span></p>
+                        <p>10. <span class="font-mono text-primary-pink">es</span></p>
+                        <p>11. <span class="font-mono text-primary-pink">inteligente</span></p>
+                        <p>12. <span class="font-mono text-primary-pink">fantásticas / excelentes</span></p>
+                        <p>13. <span class="font-mono text-primary-pink">son</span></p>
+                        <p>14. <span class="font-mono text-primary-pink">inteligentes / responsables</span></p>
+                    </div>
+                </div>
+
+            </section>
+        </section>
+
+    </div>
+
+    <script>
+        // Objeto que contiene las respuestas correctas para la corrección automática.
+        const correctAnswers = {
+            // Activity A: Ser
+            'A-1': ['es'], 'A-2': ['es'], 'A-3': ['es'], 'A-4': ['son'], 'A-5': ['soy'], 'A-6': ['soy'], 'A-7': ['somos'], 'A-8': ['es'], 'A-9': ['son'],
+            // Activity B: Diálogo
+            'B-1': ['llamo'], 'B-2': ['gusto'], 'B-3': ['me llamo', 'soy', 'mi nombre es'], 'B-4': ['presento'], 'B-5': ['es'], 'B-6': ['es'],
+            'B-7': ['mucho gusto', 'encantado', 'es un placer'],
+            'B-8': ['es'], 'B-9': ['muy'], 'B-10': ['presento a'], 'B-11': ['es'], 'B-12': ['mucho'], 'B-13': ['son'],
+            // Activity C: Pronombres Personales
+            'C-1': ['nosotros'], 'C-2': ['ellas'], 'C-3': ['él'], 'C-4': ['ellos'], 'C-5': ['ella'], 'C-6': ['nosotros'], 'C-7': ['ellos'], 'C-8': ['ellas'], 'C-9': ['yo'], 'C-10': ['él'], 'C-11': ['nosotros'], 'C-12': ['nosotras'],
+            'C-13': ['usted', 'tú'], 'C-14': ['ustedes', 'vosotros'], 
+            // Activity D: Adjetivos y Ser
+            'D-1': ['es'], 
+            'D-2': ['simpática', 'fantástica'], 
+            'D-3': ['son'], 
+            'D-4': ['simpáticos', 'fantásticos'], 
+            'D-5': ['son'], 
+            'D-6': ['es'], 
+            'D-7': ['activo'], 
+            'D-8': ['son'], 
+            'D-9': ['fantásticas', 'excelentes'], 
+            'D-10': ['es'], 
+            'D-11': ['inteligente'], 
+            'D-12': ['fantásticas', 'excelentes'], 
+            'D-13': ['son'], 
+            'D-14': ['inteligentes', 'responsables'], 
+        };
+
+        // Lista de todos los IDs de entrada
+        const inputIds = Object.keys(correctAnswers);
+        
+        // Asigna el número total de preguntas al display de la puntuación
+        document.getElementById('totalQuestions').textContent = inputIds.length;
+
+
+        /**
+         * Normaliza la cadena de texto eliminando espacios extra y convirtiendo a minúsculas.
+         * @param {string} text 
+         * @returns {string} Texto normalizado.
+         */
+        function normalize(text) {
+            if (!text) return '';
+            // Elimina espacios extra y convierte a minúsculas
+            return text.toLowerCase().trim().replace(/[\s\W]+/g, ' ').trim();
+        }
+
+        /**
+         * Revisa las respuestas del usuario y proporciona feedback visual.
+         */
+        function checkAnswers() {
+            let score = 0;
+            const scoreDisplay = document.getElementById('scoreDisplay');
+
+            inputIds.forEach(id => {
+                const inputElement = document.getElementById(id);
+                if (inputElement) {
+                    const userInput = normalize(inputElement.value);
+                    const correctOptions = correctAnswers[id].map(normalize);
+                    
+                    // Limpia clases anteriores
+                    inputElement.classList.remove('correct', 'incorrect');
+
+                    if (userInput === '') {
+                        // Si está vacío, no se marca como incorrecto, solo se mantiene el estilo base
+                        inputElement.classList.remove('border-red-500', 'border-primary-pink');
+                    } else if (correctOptions.includes(userInput)) {
+                        inputElement.classList.add('correct'); // Usa CSS personalizado para el color de acierto (pink)
+                        score++;
+                    } else {
+                        inputElement.classList.add('incorrect'); // Usa CSS personalizado para el color de error (rojo)
+                    }
+                }
+            });
+
+            // Muestra la puntuación
+            document.getElementById('scoreValue').textContent = score;
+            scoreDisplay.classList.remove('hidden');
+            scoreDisplay.classList.add('bg-blue-100'); // Mantiene el azul para el box de info/puntuación
+        }
+
+        /**
+         * Alterna la visibilidad de la sección de soluciones manuales.
+         */
+        function toggleManualAnswers() {
+            const answerKey = document.getElementById('answerKey');
+            const button = document.getElementById('toggleAnswers');
+            
+            if (answerKey.classList.contains('hidden')) {
+                answerKey.classList.remove('hidden');
+                button.textContent = 'Hide Solutions'; // Texto en inglés
+                button.classList.remove('bg-primary-pink');
+                button.classList.add('bg-gray-500', 'hover:bg-gray-600');
+            } else {
+                answerKey.classList.add('hidden');
+                button.textContent = 'Show Solutions'; // Texto en inglés
+                button.classList.add('bg-primary-pink');
+                button.classList.remove('bg-gray-500', 'hover:bg-gray-600');
+            }
+        }
+
+        // Asigna la función de corrección al botón principal
+        document.getElementById('checkAnswersBtn').addEventListener('click', checkAnswers);
+
+        // Asigna la función de mostrar/ocultar al botón de soluciones
+        document.getElementById('toggleAnswers').addEventListener('click', toggleManualAnswers);
+    </script>
+</body>
+</html>

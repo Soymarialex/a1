@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Género: Sustantivos Español-Inglés</title>
+    <!-- Carga de Tailwind CSS para un diseño limpio y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Definición de la paleta de colores personalizada */
+        :root {
+            --primary-pink: #FF79AC; /* El nuevo color principal */
+            --primary-pink-dark: #e55c91; /* Un poco más oscuro para hover */
+            --light-bg: #ffeaf3; /* Fondo muy claro basado en el rosa */
+            --accent-yellow: #fcd34d; /* Mantenemos el amarillo para los tooltips/advertencias */
+            --text-dark: #1f2937;
+        }
+
+        /* Tipografía y estilos base */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg); /* Usamos el fondo claro */
+        }
+        
+        /* Estilo para los sustantivos interactivos (tooltip) */
+        .noun {
+            position: relative;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-pink); 
+            border-bottom: 2px dashed #f9a8d4; /* pink-300 */
+            transition: all 0.2s ease;
+            display: inline-flex;
+            margin-right: 4px;
+        }
+        .noun:hover {
+            color: var(--primary-pink-dark);
+            border-bottom: 2px solid var(--primary-pink);
+        }
+        
+        /* Estilo para el tooltip de traducción */
+        .tooltip {
+            visibility: hidden;
+            background-color: var(--accent-yellow); 
+            color: var(--text-dark); 
+            text-align: center;
+            border-radius: 6px;
+            padding: 4px 8px;
+            position: absolute;
+            z-index: 10;
+            bottom: 100%; 
+            left: 50%;
+            transform: translateX(-50%) translateY(-5px); 
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            font-size: 0.875rem; 
+            font-weight: normal;
+            pointer-events: none; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .noun:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        /* Estilos específicos para los botones del juego de emparejamiento */
+        .match-button {
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Colores específicos para los botones de emparejamiento usando la nueva paleta */
+        .match-button.es {
+            background-color: var(--primary-pink);
+        }
+        .match-button.es:hover {
+            background-color: var(--primary-pink-dark);
+        }
+        .match-button.en {
+            background-color: #4f46e5; /* Color secundario para contraste (Indigo) */
+        }
+        .match-button.en:hover {
+            background-color: #4338ca;
+        }
+
+
+        /* Estilos de layout para el juego */
+        .match-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .match-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        /* Estilos para el ejercicio de artículo */
+        .article-exercise {
+            background-color: var(--light-bg); /* Fondo de sección */
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #fecdd3; /* pink-200 */
+        }
+
+        .article-noun-box {
+            background-color: #ffffff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-button {
+            transition: background-color 0.2s ease;
+            user-select: none;
+            cursor: pointer;
+            background-color: var(--primary-pink); /* Usamos el nuevo color */
+        }
+        .article-button:hover:not(:disabled) {
+            background-color: var(--primary-pink-dark);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'accent': '#fcd34d', 
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="p-6 md:p-12">
+
+    <!-- Datos de Traducción (Mapa clave-valor) -->
+    <script>
+        const translations = {
+            "el libro": "the book",
+            "la mesa": "the table",
+            "el teléfono": "the telephone",
+            "la silla": "the chair",
+            "el cuaderno": "the notebook",
+            "el vaso": "the glass",
+            "el museo": "the museum",
+            "la mano": "the hand",
+            "la foto": "the photo",
+            "la fotografía": "the photography",
+            "la moto": "the motorbike",
+            "la motocicleta": "the motorcycle",
+            "la radio": "the radio",
+            "la casa": "the house",
+            "la guitarra": "the guitar",
+            "la rosa": "the rose",
+            "el día": "the day",
+            "el idioma": "the language",
+            "el mapa": "the map",
+            "el programa": "the program",
+            "el problema": "the problem",
+            "el sofá": "the sofa",
+            "el restaurante": "the restaurant",
+            "el coche": "the car",
+            "el cine": "the cinema",
+            "el hotel": "the hotel",
+            "el lápiz": "the pencil",
+            "el pan": "the bread",
+            "el color": "the color",
+            "el lunes": "Monday",
+            "el martes": "Tuesday",
+            "el paraguas": "the umbrella",
+            "el cumpleaños": "the birthday",
+            "la clase": "the class",
+            "la noche": "the night",
+            "la leche": "the milk",
+            "la sal": "the salt",
+            "la flor": "the flower",
+            "la luz": "the light",
+            "la canción": "the song",
+            "la habitación": "the room",
+            "la televisión": "the television",
+            "la ciudad": "the city",
+            "la universidad": "the university",
+            "la libertad": "the freedom",
+            "el león": "the lion",
+            "la leona": "the lioness",
+        };
+
+        // Función para envolver los sustantivos con la estructura interactiva (tooltips)
+        function wrapNouns(text) {
+            let result = text;
+            const nounKeys = Object.keys(translations);
+            nounKeys.sort((a, b) => b.length - a.length);
+
+            const escapedNouns = nounKeys.map(key => key.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('|');
+            const regex = new RegExp(`(${escapedNouns})`, 'gi');
+
+            result = result.replace(regex, (match, p1) => {
+                const key = p1.toLowerCase();
+                const translation = translations[key];
+                
+                if (translation) {
+                    return `<span class="noun">${match}<span class="tooltip">${translation}</span></span>`;
+                }
+                return match;
+            });
+            
+            return result;
+        }
+
+        // --- Lógica del Juego de Emparejamiento ---
+        
+        // Vocabulario solicitado para el ejercicio
+        const gameVocabulary = [
+            { es: "la mesa", en: "the table", gender: "f" },
+            { es: "la silla", en: "the chair", gender: "f" },
+            { es: "el vaso", en: "the glass", gender: "m" },
+            { es: "el museo", en: "the museum", gender: "m" },
+            { es: "la mano", en: "the hand", gender: "f" },
+            { es: "el coche", en: "the car", gender: "m" },
+            { es: "el pan", en: "the bread", gender: "m" },
+            { es: "el lunes", en: "Monday", gender: "m" },
+            { es: "el martes", en: "Tuesday", gender: "m" }, 
+            { es: "el paraguas", en: "the umbrella", gender: "m" },
+            { es: "el cumpleaños", en: "the birthday", gender: "m" },
+            { es: "la leche", en: "the milk", gender: "f" },
+            { es: "la sal", en: "the salt", gender: "f" },
+            { es: "la flor", en: "the flower", gender: "f" },
+            { es: "la luz", en: "the light", gender: "f" },
+            { es: "la canción", en: "the song", gender: "f" },
+            { es: "la habitación", en: "the room", gender: "f" },
+            { es: "la ciudad", en: "the city", gender: "f" },
+        ];
+        
+        const pluralNouns = {
+            "la mesa": "mesas",
+            "la silla": "sillas",
+            "el vaso": "vasos",
+            "el museo": "museos",
+            "la mano": "manos",
+            "el coche": "coches",
+            "el pan": "panes",
+            "el lunes": "lunes", // No cambia
+            "el martes": "martes", // No cambia
+            "el paraguas": "paraguas", // No cambia
+            "el cumpleaños": "cumpleaños", // No cambia
+            "la leche": "leches",
+            "la sal": "sales",
+            "la flor": "flores",
+            "la luz": "luces",
+            "la canción": "canciones",
+            "la habitación": "habitaciones",
+            "la ciudad": "ciudades"
+        };
+
+        let selectedEs = null;
+        let selectedEn = null;
+        let matchingLock = false; 
+        
+        // Contadores para saber cuándo se completa cada parte
+        let matchesPart1 = 0;
+        let matchesPart2 = 0;
+        
+        // Número total de elementos a emparejar por parte
+        const totalMatches = 9;
+
+        /**
+         * Mezcla un array utilizando el algoritmo Fisher-Yates.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /**
+         * Renderiza el juego de emparejamiento.
+         */
+        function renderMatchingGame(words, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            // Separar español e inglés
+            const spanishWords = shuffleArray(words.map(w => ({ word: w.es, type: 'es', match: w.en })));
+            const englishWords = shuffleArray(words.map(w => ({ word: w.en, type: 'en', match: w.es })));
+
+            let html = `
+                <div class="match-container">
+                    <!-- Lista de Sustantivos en Español -->
+                    <div class="match-list" id="${containerId}-es-list">
+                        ${spanishWords.map(w => `
+                            <button 
+                                id="${containerId}-es-${w.word.replace(/\s/g, '_')}"
+                                data-word="${w.word}" 
+                                data-match="${w.match}" 
+                                data-type="es"
+                                data-container="${containerId}"
+                                onclick="handleMatchClick(this)"
+                                class="match-button es py-2 px-4 rounded-lg text-lg font-medium text-white shadow-md transition-all duration-200"
+                            >
+                                ${w.word}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <!-- Lista de Traducciones en Inglés -->
+                    <div class="match-list" id="${containerId}-en-list">
+                        ${englishWords.map(w => `
+                            <button 
+                                id="${containerId}-en-${w.word.replace(/\s/g, '_')}"
+                                data-word="${w.word}" 
+                                data-match="${w.match}" 
+                                data-type="en"
+                                data-container="${containerId}"
+                                onclick="handleMatchClick(this)"
+                                class="match-button en py-2 px-4 rounded-lg text-lg font-medium text-white shadow-md transition-all duration-200"
+                            >
+                                ${w.word}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        /**
+         * Maneja el clic en un botón del juego de emparejamiento.
+         */
+        function handleMatchClick(element) {
+            if (matchingLock || element.disabled) return;
+
+            const type = element.getAttribute('data-type');
+            const containerId = element.getAttribute('data-container');
+            const isEs = type === 'es';
+            const ringColor = isEs ? 'ring-pink-300' : 'ring-indigo-300';
+            
+            // Limpiar la selección previa del mismo tipo
+            let prevElement = null;
+            if (isEs && selectedEs) {
+                prevElement = selectedEs;
+                selectedEs.classList.remove('ring-4', 'ring-offset-2', 'ring-pink-300');
+                selectedEs = null;
+            } else if (!isEs && selectedEn) {
+                prevElement = selectedEn;
+                selectedEn.classList.remove('ring-4', 'ring-offset-2', 'ring-indigo-300');
+                selectedEn = null;
+            }
+
+            // Si se hace doble clic en el mismo botón, se deselecciona y se sale
+            if (element === prevElement) {
+                return;
+            }
+
+            // Seleccionar el nuevo botón
+            if (isEs) {
+                selectedEs = element;
+                element.classList.add('ring-4', ringColor, 'ring-offset-2');
+            } else {
+                selectedEn = element;
+                element.classList.add('ring-4', ringColor, 'ring-offset-2');
+            }
+
+            // Comprobar si hay una pareja completa
+            if (selectedEs && selectedEn) {
+                const esMatch = selectedEs.getAttribute('data-match');
+                const enWord = selectedEn.getAttribute('data-word');
+
+                const isMatch = esMatch === enWord;
+
+                if (isMatch) {
+                    // Correcto (Verde)
+                    selectedEs.classList.remove('ring-4', 'ring-pink-300', 'ring-offset-2', 'es');
+                    selectedEn.classList.remove('ring-4', 'ring-indigo-300', 'ring-offset-2', 'en');
+                    
+                    selectedEs.classList.add('bg-green-100', 'text-green-800', 'shadow-inner');
+                    selectedEn.classList.add('bg-green-100', 'text-green-800', 'shadow-inner');
+
+                    selectedEs.disabled = true;
+                    selectedEn.disabled = true;
+                    
+                    // Contar el acierto
+                    if (containerId === 'matching-game-part1') {
+                        matchesPart1++;
+                    } else if (containerId === 'matching-game-part2') {
+                        matchesPart2++;
+                    }
+
+                    // Reiniciar para la siguiente pareja
+                    selectedEs = null;
+                    selectedEn = null;
+
+                } else {
+                    // Incorrecto (Rojo temporal)
+                    matchingLock = true;
+                    
+                    selectedEs.classList.remove('ring-4', 'ring-pink-300', 'ring-offset-2', 'es');
+                    selectedEn.classList.remove('ring-4', 'ring-indigo-300', 'ring-offset-2', 'en');
+                    
+                    selectedEs.classList.add('bg-red-100', 'text-red-800');
+                    selectedEn.classList.add('bg-red-100', 'text-red-800');
+
+                    const esToReset = selectedEs;
+                    const enToReset = selectedEn;
+
+                    setTimeout(() => {
+                        // Volver a la normalidad después de 800ms
+                        esToReset.classList.remove('bg-red-100', 'text-red-800');
+                        enToReset.classList.remove('bg-red-100', 'text-red-800');
+                        
+                        esToReset.classList.add('es');
+                        enToReset.classList.add('en');
+                        
+                        // Si no se han seleccionado otros, quitar el anillo
+                        if (selectedEs !== esToReset) esToReset.classList.remove('ring-4', 'ring-pink-300', 'ring-offset-2');
+                        if (selectedEn !== enToReset) enToReset.classList.remove('ring-4', 'ring-indigo-300', 'ring-offset-2');
+
+                        selectedEs = null;
+                        selectedEn = null;
+                        matchingLock = false;
+                    }, 800);
+                }
+            }
+        }
+
+        // --- Lógica del Ejercicio de Artículos ---
+
+        /**
+         * Obtiene el sustantivo base a partir de un ID de botón.
+         */
+        function getSingularNoun(id) {
+            const nounPart = id.split('_').slice(2).join(' ').replace(/_plural/, '');
+            const original = gameVocabulary.find(w => w.es.includes(nounPart) || w.es.replace(/el |la /, '') === nounPart);
+            return original ? original.es : null;
+        }
+
+        /**
+         * Maneja el clic en un botón de artículo (los/las).
+         */
+        function handleArticleClick(element) {
+            if (element.disabled) return;
+
+            const selectedArticle = element.getAttribute('data-article'); 
+            const singularNoun = element.getAttribute('data-noun'); 
+            const nounBox = document.getElementById(`box_${singularNoun.replace(/\s/g, '_')}`);
+            const correctGender = gameVocabulary.find(w => w.es === singularNoun)?.gender;
+            
+            // El artículo correcto en plural (Masculino: los, Femenino: las)
+            const correctAnswer = correctGender === 'm' ? 'los' : 'las';
+            
+            if (selectedArticle === correctAnswer) {
+                // Correcto (Verde)
+                nounBox.classList.remove('bg-white');
+                nounBox.classList.add('bg-green-100', 'text-green-800', 'shadow-inner');
+                
+                // Deshabilitar botones de la caja
+                Array.from(nounBox.querySelectorAll('.article-button')).forEach(btn => {
+                    btn.disabled = true;
+                    btn.classList.remove('article-button'); /* Quitamos el estilo base para no interferir */
+                    
+                    if (btn.getAttribute('data-article') === correctAnswer) {
+                        // El botón correcto se pone verde
+                        btn.classList.add('bg-green-600', 'text-white');
+                    } else {
+                        // El botón incorrecto se pone gris
+                        btn.classList.add('bg-gray-300', 'text-gray-500');
+                    }
+                });
+
+            } else {
+                // Incorrecto (Rojo temporal)
+                element.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                element.classList.add('bg-red-100', 'text-red-800');
+                element.style.backgroundColor = 'red'; // Para asegurar el color rojo temporal
+                element.style.color = 'white';
+
+                setTimeout(() => {
+                    // Volver a la normalidad
+                    element.classList.remove('bg-red-100', 'text-red-800');
+                    element.style.backgroundColor = 'var(--primary-pink)';
+                    element.style.color = 'white';
+                }, 800);
+            }
+        }
+
+        /**
+         * Renderiza el ejercicio de artículo.
+         */
+        function renderArticleExercise(words, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const shuffledWords = shuffleArray([...words]);
+
+            let html = `
+                <div class="article-exercise mt-4">
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">Exercise: Select the correct article for the plural noun (LOS / LAS)</h4>
+                    <div class="space-y-3">
+                    ${shuffledWords.map(w => {
+                        const singularNoun = w.es; 
+                        const nounBase = pluralNouns[singularNoun]; 
+                        const boxId = `box_${singularNoun.replace(/\s/g, '_')}`;
+                        
+                        return `
+                            <div id="${boxId}" class="article-noun-box bg-white">
+                                <span class="text-xl font-semibold text-gray-700">${nounBase}</span>
+                                <div class="flex space-x-2">
+                                    <button
+                                        data-article="los"
+                                        data-noun="${singularNoun}"
+                                        onclick="handleArticleClick(this)"
+                                        class="article-button py-1 px-3 rounded-md text-sm font-bold text-white transition-all duration-200"
+                                    >
+                                        LOS
+                                    </button>
+                                    <button
+                                        data-article="las"
+                                        data-noun="${singularNoun}"
+                                        onclick="handleArticleClick(this)"
+                                        class="article-button py-1 px-3 rounded-md text-sm font-bold text-white transition-all duration-200"
+                                    >
+                                        LAS
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+
+        // Esta función se llama después de que el DOM esté completamente cargado.
+        document.addEventListener('DOMContentLoaded', () => {
+            const contentContainer = document.getElementById('content-container');
+            if (contentContainer) {
+                // 1. Inicializar el Tooltip (Función anterior)
+                let contentHTML = contentContainer.innerHTML;
+                contentContainer.innerHTML = wrapNouns(contentHTML);
+
+                // 2. Inicializar el Juego de Emparejamiento y Artículos
+                const part1Words = gameVocabulary.slice(0, 9);
+                const part2Words = gameVocabulary.slice(9, 18);
+                
+                renderMatchingGame(part1Words, 'matching-game-part1');
+                renderArticleExercise(part1Words, 'article-exercise-1'); 
+                
+                renderMatchingGame(part2Words, 'matching-game-part2');
+                renderArticleExercise(part2Words, 'article-exercise-2'); 
+            }
+        });
+    </script>
+
+    <!-- Contenedor Principal (Centrado) -->
+    <div class="max-w-4xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-2xl">
+        
+        <header class="text-center mb-10">
+            <!-- Títulos traducidos al inglés -->
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-2">The Gender in Spanish (Masculine / Feminine)</h1>
+            <p class="text-xl text-gray-500">Rules and Exceptions</p>
+        </header>
+
+        <!-- Contenedor de Contenido para procesamiento JS (Tooltip) -->
+        <div id="content-container" class="space-y-6 text-lg text-gray-700 leading-relaxed">
+            
+            <p class="text-2xl font-bold" style="color: var(--primary-pink);">el libro, la mesa</p>
+            <p class="text-xl font-semibold text-gray-800">Masculine, feminine</p>
+
+            <p style="color: var(--primary-pink);" class="font-medium">
+                <span class="font-extrabold">El libro, el teléfono</span> are masculine nouns.
+            </p>
+            <p style="color: var(--primary-pink-dark);" class="font-medium">
+                <span class="font-extrabold">La mesa, la silla</span> are feminine nouns.
+            </p>
+
+            <hr class="my-8 border-gray-300">
+
+            <!-- Reglas y Excepciones -->
+            
+            <p>
+                <span class="font-bold text-gray-900">*</span> In Spanish, common nouns are either masculine or feminine.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-6 mb-3 text-gray-800">Nouns ending in <span style="color: var(--primary-pink);">-o</span> = masculine:</h2>
+            <ul class="list-disc list-inside ml-4">
+                <li>el libro, el cuaderno, el teléfono, el vaso, el museo</li>
+            </ul>
+
+            <div class="p-3 bg-yellow-100 rounded-lg border-l-4 border-yellow-500 mt-4">
+                <span class="font-bold text-red-700">BUT:</span> la mano, la foto (la fotografía), la moto (la motocicleta), la radio
+            </div>
+
+            <h2 class="text-2xl font-semibold mt-6 mb-3 text-gray-800">Nouns ending in <span style="color: var(--primary-pink-dark);">-a</span> = feminine:</h2>
+            <ul class="list-disc list-inside ml-4">
+                <li>la casa, la silla, la mesa, la guitarra, la rosa</li>
+            </ul>
+
+            <div class="p-3 bg-yellow-100 rounded-lg border-l-4 border-yellow-500 mt-4">
+                <span class="font-bold text-red-700">BUT:</span> el día, el idioma, el mapa, el programa, el problema, el sofá
+            </div>
+            
+            <h2 class="text-2xl font-semibold mt-6 mb-3 text-gray-800">Nouns ending in <span style="color: var(--primary-pink);">-e</span> or with a consonant = masculine or feminine:</h2>
+
+            <p class="font-bold" style="color: var(--primary-pink);">Masculine:</p>
+            <ul class="list-disc list-inside ml-4">
+                <li>el restaurante, el coche, el cine, el hotel, el lápiz, el pan, el color</li>
+                <li>Days of the week: el lunes, el martes</li>
+                <li>Compound nouns: el paraguas, el cumpleaños</li>
+            </ul>
+            
+            <p class="font-bold mt-4" style="color: var(--primary-pink-dark);">Feminine:</p>
+            <ul class="list-disc list-inside ml-4">
+                <li>la clase, la noche, la leche, la sal, la flor, la luz</li>
+                <li>Nouns ending in <span class="font-bold">-ción</span>, <span class="font-bold">-sión:</span> la canción, la habitación, la televisión</li>
+                <li>Nouns ending in <span class="font-bold">-dad</span>, <span class="font-bold">-tad:</span> la ciudad, la universidad, la libertad</li>
+            </ul>
+            
+            <p class="italic text-sm text-gray-500 mt-6">
+                If in doubt, look it up in a dictionary.
+            </p>
+
+        </div>
+
+        <hr class="my-10 border-gray-300">
+
+        <!-- Sección de Ejercicios de Emparejamiento -->
+        <section class="mt-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Exercise: Match the Spanish Noun to its English Translation (Part 1)</h2>
+
+            <!-- Parte 1 - Emparejamiento -->
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Part 1 - Matching</h3>
+            <div id="matching-game-part1" class="mb-6">
+                <!-- El juego se renderiza aquí por JS -->
+                <p class="text-center text-gray-500">Loading exercise...</p>
+            </div>
+
+            <!-- Parte 1 - Artículos (Ahora visible desde el inicio) -->
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2 mt-10">Part 1 - Plural Article Practice</h3>
+            <div id="article-exercise-1" class="mb-10">
+                <!-- El ejercicio de artículo se renderiza aquí por JS -->
+            </div>
+
+            <hr class="my-10 border-gray-300">
+
+            <!-- Parte 2 - Emparejamiento -->
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Exercise: Match the Spanish Noun to its English Translation (Part 2)</h2>
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Part 2 - Matching</h3>
+            <div id="matching-game-part2" class="mb-6">
+                <!-- El juego se renderiza aquí por JS -->
+                <p class="text-center text-gray-500">Loading exercise...</p>
+            </div>
+
+            <!-- Parte 2 - Artículos (Ahora visible desde el inicio) -->
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2 mt-10">Part 2 - Plural Article Practice</h3>
+            <div id="article-exercise-2">
+                <!-- El ejercicio de artículo se renderiza aquí por JS -->
+            </div>
+
+        </section>
+        
+    </div>
+</body>
+</html>

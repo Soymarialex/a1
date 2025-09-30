@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Plural Classifier</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configuración de fuente y estilos base */
+        :root {
+            /* Nuevo color principal para un aspecto más vibrante */
+            --color-pink-main: #FF79AC; 
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Gray 100 */
+        }
+        /* Estilos para las zonas de arrastre - AUMENTO DE ALTURA MÍNIMA */
+        .drop-target {
+            min-height: 350px; /* Increased height */
+            transition: all 0.3s ease-in-out;
+            border: 3px dashed #d1d5db; /* Gray 300 */
+            background-color: #ffffff;
+        }
+        /* Estilo de hover al arrastrar sobre un objetivo */
+        .drop-target-hover {
+            border-color: #FF79AC; /* Usamos el color rosa */
+            background-color: #ffe4ee; /* Rosa muy claro */
+        }
+        /* Estilos para los sustantivos arrastrables */
+        .draggable-noun {
+            cursor: grab;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        .draggable-noun:active {
+            cursor: grabbing;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Título e Instrucciones en Inglés -->
+        <header class="mb-8 p-6 bg-white shadow-xl rounded-xl">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-4">
+                Spanish Pluralization Rules
+            </h1>
+            <p class="text-lg text-gray-600">
+                Drag each singular noun to the correct column according to its rule of plural formation.
+            </p>
+        </header>
+
+        <main class="flex flex-col lg:flex-row gap-8">
+            <!-- 1. Lista de Sustantivos (Draggables) -->
+            <section class="lg:w-1/4 p-6 bg-white shadow-xl rounded-xl">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 border-b pb-2">Singular Nouns</h2>
+                <div id="noun-list" class="grid grid-cols-2 lg:grid-cols-1 gap-3">
+                    <!-- Noun buttons will be inserted here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- 2. Zonas de Arrastre (Drop Targets) -->
+            <section class="lg:w-3/4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Columna -s (Usando tonos de rosa claro) -->
+                    <div id="target-s" data-rule="s"
+                          class="drop-target p-4 rounded-xl border-4 border-[#FF79AC] bg-[#ffe4ee] hover:shadow-lg">
+                        <h3 class="text-xl font-bold mb-3 text-[#FF79AC] uppercase tracking-wider border-b-2 border-[#ffc0d9] pb-1">
+                            Plural Ends in <span class="text-2xl">-S</span>
+                        </h3>
+                        <p class="text-sm text-gray-700 mb-4">Rule: If the noun ends in a vowel (a, e, i, o, u).</p>
+                        <div id="column-s" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Columna -es (Usando un tono de morado/índigo para contraste) -->
+                    <div id="target-es" data-rule="es"
+                          class="drop-target p-4 rounded-xl border-4 border-indigo-500 bg-indigo-50 hover:shadow-lg">
+                        <h3 class="text-xl font-bold mb-3 text-indigo-700 uppercase tracking-wider border-b-2 border-indigo-300 pb-1">
+                            Plural Ends in <span class="text-2xl">-ES</span>
+                        </h3>
+                        <p class="text-sm text-gray-700 mb-4">Rule: If it ends in a consonant (other than 'z').</p>
+                        <div id="column-es" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Columna -ces (Usando un tono de verde/teal para otro contraste) -->
+                    <div id="target-ces" data-rule="ces"
+                          class="drop-target p-4 rounded-xl border-4 border-teal-500 bg-teal-50 hover:shadow-lg">
+                        <h3 class="text-xl font-bold mb-3 text-teal-700 uppercase tracking-wider border-b-2 border-teal-300 pb-1">
+                            Plural Ends in <span class="text-2xl">-CES</span>
+                        </h3>
+                        <p class="text-sm text-gray-700 mb-4">Rule: If the noun ends in 'z' (changes z &rarr; c + es).</p>
+                        <div id="column-ces" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- 3. Área de Traducciones (Three-Column Layout) -->
+                <div class="mt-8 p-6 bg-gray-700 text-white rounded-xl shadow-xl">
+                    <h2 class="text-2xl font-bold mb-4 flex items-center text-[#FF79AC]">
+                        <svg class="w-6 h-6 mr-2 text-[#FF79AC]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        English Translations
+                    </h2>
+                    <!-- ADJUSTED to grid-cols-3 (Singular, Plural, English) -->
+                    <div class="grid grid-cols-3 font-bold text-lg border-b pb-2 mb-2 border-gray-500 text-[#FF79AC]">
+                        <span>Singular</span>
+                        <span>Plural</span>
+                        <span class="text-right">English</span>
+                    </div>
+                    <div id="translations-output" class="text-lg space-y-2">
+                        <!-- Translations will appear here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Objeto de datos con los sustantivos, su regla de pluralización correcta y traducción
+        const NOUNS_DATA = [
+            // Palabras que terminan en vocal (Rule: s)
+            { name: "Computadora", rule: "s", translation: "Computer" },
+            { name: "Lámpara", rule: "s", translation: "Lamp" },
+            { name: "Alfombra", rule: "s", translation: "Rug / Carpet" },
+            { name: "Profesora", rule: "s", translation: "Teacher (f)" },
+            { name: "Perfume", rule: "s", translation: "Perfume" },
+            { name: "Zapato", rule: "s", translation: "Shoe" },
+            { name: "Cuaderno", rule: "s", translation: "Notebook" },
+
+            // Palabras que terminan en consonante, no 'z' (Rule: es)
+            { name: "Doctor", rule: "es", translation: "Doctor" },
+            { name: "Reloj", rule: "es", translation: "Clock" },
+            { name: "Papel", rule: "es", translation: "Paper" },
+            { name: "Señor", rule: "es", translation: "Sir / Mr." },
+            { name: "Pared", rule: "es", translation: "Wall" },
+            { name: "Pan", rule: "es", translation: "Bread" },
+            { name: "Jardín", rule: "es", translation: "Garden" },
+
+            // Palabras que terminan en 'z' (Rule: ces)
+            { name: "Luz", rule: "ces", translation: "Light" },
+            { name: "Lápiz", rule: "ces", translation: "Pencil" },
+            { name: "Voz", rule: "ces", translation: "Voice" },
+            { name: "Pez", rule: "ces", translation: "Fish" },
+            { name: "Arroz", rule: "ces", translation: "Rice" },
+            { name: "Actriz", rule: "ces", translation: "Actress" },
+            { name: "Feliz", rule: "ces", translation: "Happy (Adj.)" }
+        ];
+
+        // Global variables for touch drag simulation
+        let currentDragElement = null;
+
+        // Helper function to find the element underneath the touch point
+        function getDropTargetAt(x, y) {
+            if (currentDragElement) currentDragElement.style.display = 'none';
+            const element = document.elementFromPoint(x, y);
+            if (currentDragElement) currentDragElement.style.display = 'block';
+
+            return element ? element.closest('.drop-target') : null;
+        }
+
+        // Unified logic for handling successful or failed drops (called by mouse 'drop' and touch 'touchend')
+        function handleDropLogic(nounButton, targetElement) {
+            // This logic is shared between mouse drag and touch drag
+            nounButton.classList.remove('opacity-50', 'scale-95');
+
+            const correctRule = nounButton.getAttribute('data-rule');
+            const targetRule = targetElement ? targetElement.getAttribute('data-rule') : null;
+
+            if (targetElement && correctRule === targetRule) {
+                // Correct:
+                nounButton.classList.remove('bg-white', 'text-gray-800', 'hover:bg-gray-100', 'border-gray-300', 'bg-red-200', 'text-red-800', 'border-red-400');
+                nounButton.classList.add('bg-lime-200', 'text-lime-800', 'border-lime-400'); // Light Green for correct
+                
+                // Disable drag events (mouse and touch)
+                nounButton.setAttribute('draggable', 'false');
+                nounButton.removeEventListener('dragstart', dragStart);
+                nounButton.removeEventListener('touchstart', touchStart);
+                nounButton.removeEventListener('touchmove', touchMove);
+                nounButton.removeEventListener('touchend', touchEnd);
+
+
+                // Move button to the column
+                targetElement.querySelector(`#column-${targetRule}`).appendChild(nounButton);
+
+                // Display translation, singular, and plural
+                displayTranslation(nounButton.getAttribute('data-noun'));
+
+            } else {
+                // Incorrect (or dropped outside a target):
+                nounButton.classList.remove('bg-white', 'text-gray-800', 'hover:bg-gray-100', 'border-gray-300', 'bg-lime-200', 'text-lime-800', 'border-lime-400');
+                nounButton.classList.add('bg-red-200', 'text-red-800', 'border-red-400'); // Light Red for incorrect
+                setTimeout(() => {
+                    if (nounButton.getAttribute('draggable') === 'true') {
+                        nounButton.classList.remove('bg-red-200', 'text-red-800', 'border-red-400');
+                        nounButton.classList.add('bg-white', 'text-gray-800', 'hover:bg-gray-100', 'border-gray-300');
+                    }
+                }, 800);
+            }
+        }
+
+        // --- MOUSE Drag and Drop Handlers (PC) ---
+        function dragStart(event) {
+            event.dataTransfer.setData('text/plain', event.target.id);
+            setTimeout(() => {
+                event.target.classList.add('opacity-50', 'scale-95');
+            }, 0);
+        }
+
+        function dragOver(event) {
+            event.preventDefault();
+            const target = event.target.closest('.drop-target');
+            document.querySelectorAll('.drop-target').forEach(t => t.classList.remove('drop-target-hover'));
+            if (target) {
+                target.classList.add('drop-target-hover');
+            }
+        }
+
+        function dragLeave(event) {
+            if (event.target.closest('.drop-target')) {
+                event.target.closest('.drop-target').classList.remove('drop-target-hover');
+            }
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            document.querySelectorAll('.drop-target').forEach(t => t.classList.remove('drop-target-hover'));
+
+            const nounId = event.dataTransfer.getData('text/plain');
+            const nounButton = document.getElementById(nounId);
+            const targetElement = event.target.closest('.drop-target');
+            
+            if (nounButton) {
+                handleDropLogic(nounButton, targetElement);
+            }
+        }
+
+        // --- TOUCH Drag and Drop Handlers (Mobile) ---
+
+        function touchStart(event) {
+            if (event.touches.length !== 1) return;
+            event.preventDefault(); // Prevent scrolling
+
+            const nounButton = event.target;
+            // Only start drag if the button is still draggable
+            if (nounButton.getAttribute('draggable') === 'false') return;
+
+            currentDragElement = nounButton;
+            
+            const rect = nounButton.getBoundingClientRect();
+            const touch = event.touches[0];
+
+            // Set temporary fixed position for dragging effect
+            nounButton.style.position = 'fixed';
+            nounButton.style.zIndex = '1000';
+            nounButton.style.width = `${rect.width}px`;
+            nounButton.style.height = `${rect.height}px`;
+            nounButton.style.left = `${rect.left}px`;
+            nounButton.style.top = `${rect.top}px`;
+            nounButton.classList.add('opacity-80', 'scale-105', 'shadow-2xl');
+
+            // Store the touch offset relative to the element's center
+            nounButton.touchOffsetX = touch.clientX - rect.left - rect.width / 2;
+            nounButton.touchOffsetY = touch.clientY - rect.top - rect.height / 2;
+        }
+
+        function touchMove(event) {
+            if (!currentDragElement || event.touches.length !== 1) return;
+            event.preventDefault();
+
+            const touch = event.touches[0];
+
+            // Update position
+            currentDragElement.style.left = `${touch.clientX - currentDragElement.touchOffsetX}px`;
+            currentDragElement.style.top = `${touch.clientY - currentDragElement.touchOffsetY}px`;
+
+            // Visual feedback for drop target
+            document.querySelectorAll('.drop-target').forEach(t => t.classList.remove('drop-target-hover'));
+            const target = getDropTargetAt(touch.clientX, touch.clientY);
+            if (target) {
+                target.classList.add('drop-target-hover');
+            }
+        }
+
+        function touchEnd(event) {
+            if (!currentDragElement) return;
+
+            const touch = event.changedTouches[0];
+            const dropTarget = getDropTargetAt(touch.clientX, touch.clientY);
+            const droppedElement = currentDragElement;
+
+            // Restore styles
+            droppedElement.classList.remove('opacity-80', 'scale-105', 'shadow-2xl');
+            droppedElement.style.position = '';
+            droppedElement.style.zIndex = '';
+            droppedElement.style.width = '';
+            droppedElement.style.height = '';
+            droppedElement.style.left = '';
+            droppedElement.style.top = '';
+
+            // Reset global variable
+            currentDragElement = null;
+
+            // Remove hover effect from all targets
+            document.querySelectorAll('.drop-target').forEach(t => t.classList.remove('drop-target-hover'));
+
+            // Execute unified drop logic
+            handleDropLogic(droppedElement, dropTarget);
+        }
+        
+        // Function to shuffle an array (Fisher-Yates) to randomize the noun list order
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Función para obtener la forma plural de un sustantivo
+        function getPlural(noun, rule) {
+            if (rule === 's') {
+                // Simple addition of 's'.
+                return noun + 's';
+            } else if (rule === 'es') {
+                // Rule applies to nouns ending in consonants
+                return noun + 'es';
+            } else if (rule === 'ces') {
+                // Change z to c and add es.
+                return noun.slice(0, -1) + 'ces';
+            }
+            return noun; // Fallback
+        }
+
+        // Función para inicializar la lista de sustantivos
+        function initializeNouns() {
+            const nounListContainer = document.getElementById('noun-list');
+            nounListContainer.innerHTML = '';
+
+            // SHUFFLE the array before displaying the buttons to ensure random order
+            shuffleArray(NOUNS_DATA);
+            
+            NOUNS_DATA.forEach((noun, index) => {
+                const button = document.createElement('button');
+                // The noun.name is already capitalized in NOUNS_DATA
+                button.textContent = noun.name; 
+                button.id = `noun-${index}-${noun.name.replace(/\s/g, '-')}`; // Unique ID for the button
+                button.setAttribute('data-noun', noun.name);
+                button.setAttribute('data-rule', noun.rule);
+                button.setAttribute('draggable', 'true');
+                button.className = 'draggable-noun px-4 py-2 text-lg font-semibold bg-white text-gray-800 rounded-lg shadow-md border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#FF79AC] focus:ring-opacity-50';
+
+                // Add mouse drag listeners
+                button.addEventListener('dragstart', dragStart);
+
+                // Add touch drag listeners (for mobile)
+                button.addEventListener('touchstart', touchStart);
+                button.addEventListener('touchmove', touchMove);
+                button.addEventListener('touchend', touchEnd);
+
+                nounListContainer.appendChild(button);
+            });
+        }
+
+        // Función para mostrar la traducción en el nuevo formato de 3 columnas
+        function displayTranslation(nounName) {
+            const translationsContainer = document.getElementById('translations-output');
+            const nounData = NOUNS_DATA.find(n => n.name === nounName);
+
+            // Check if translation already exists
+            if (document.getElementById(`translation-${nounName}`)) {
+                return;
+            }
+
+            if (nounData) {
+                const singular = nounData.name;
+                // Note: getPlural function is called here
+                const plural = getPlural(singular, nounData.rule);
+                const translation = nounData.translation;
+
+                const translationDiv = document.createElement('div');
+                translationDiv.id = `translation-${nounName}`;
+                // Now using grid-cols-3 (3 columns: Singular, Plural, English)
+                translationDiv.className = 'grid grid-cols-3 items-center p-2 rounded-lg bg-gray-600 shadow-md';
+                
+                translationDiv.innerHTML = `
+                    <span class="font-semibold text-[#FF79AC]">${singular}</span>
+                    <span class="font-medium text-white">${plural}</span>
+                    <span class="font-light text-gray-200 text-right">${translation}</span>
+                `;
+                translationsContainer.appendChild(translationDiv);
+            }
+        }
+
+        // Inicialización de la aplicación
+        window.onload = function() {
+            initializeNouns();
+
+            // Configure event listeners for drop targets (for both mouse and touch)
+            const dropTargets = document.querySelectorAll('.drop-target');
+            dropTargets.forEach(target => {
+                // Mouse listeners (PC)
+                target.addEventListener('dragover', dragOver);
+                target.addEventListener('dragleave', dragLeave);
+                target.addEventListener('drop', drop);
+            });
+        };
+    </script>
+
+</body>
+</html>

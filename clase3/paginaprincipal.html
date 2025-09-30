@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal de Actividades de Gramática</title>
+    <!-- Carga de Tailwind CSS para un diseño moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuración de color personalizado para los botones
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Color base solicitado: #FF79AC
+                        'custom-pink': '#FF79AC', 
+                        // Color ligeramente más oscuro para hover/focus (sombra)
+                        'custom-pink-dark': '#E66898', 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Configuración de fuente Inter para un aspecto limpio */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb; /* Fondo muy claro */
+        }
+        /* Estilo base para el botón */
+        .activity-button {
+            transition: all 0.3s ease;
+        }
+        /* Efecto al pasar el ratón (hover) */
+        .activity-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Contenedor Principal Centrado -->
+    <div class="w-full max-w-4xl bg-white shadow-2xl rounded-xl p-8 md:p-12">
+        
+        <!-- Título Principal (En inglés y color negro/gris muy oscuro) -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-2">
+                Welcome to your Spanish Class!
+            </h1>
+            <p class="text-xl text-gray-700 font-medium">
+                Select an activity to start practicing.
+            </p>
+        </header>
+
+        <!-- Contenedor de Botones (Grid Responsivo) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Botón 1: Artículos y Sustantivos -->
+            <a href="articulosysustantivos.html" 
+               class="activity-button block p-6 bg-custom-pink text-white rounded-xl shadow-lg hover:bg-custom-pink-dark focus:outline-none focus:ring-4 focus:ring-custom-pink/50 transform active:scale-95">
+                <div class="flex flex-col items-center">
+                    <span class="text-3xl font-bold mb-1">Articles and Nouns</span>
+                    <span class="text-sm opacity-90">Artículos y Sustantivos</span>
+                </div>
+            </a>
+
+            <!-- Botón 2: Plural -->
+            <a href="plural.html" 
+               class="activity-button block p-6 bg-custom-pink text-white rounded-xl shadow-lg hover:bg-custom-pink-dark focus:outline-none focus:ring-4 focus:ring-custom-pink/50 transform active:scale-95">
+                <div class="flex flex-col items-center">
+                    <span class="text-3xl font-bold mb-1">Plural</span>
+                    <span class="text-sm opacity-90">Formación del Plural</span>
+                </div>
+            </a>
+
+            <!-- Botón 3: El Género -->
+            <a href="elgenero.html" 
+               class="activity-button block p-6 bg-custom-pink text-white rounded-xl shadow-lg hover:bg-custom-pink-dark focus:outline-none focus:ring-4 focus:ring-custom-pink/50 transform active:scale-95">
+                <div class="flex flex-col items-center">
+                    <span class="text-3xl font-bold mb-1">The Gender</span>
+                    <span class="text-sm opacity-90">El Género Gramatical</span>
+                </div>
+            </a>
+
+            <!-- Botón 4: Verbo Ser y Adjetivos -->
+            <a href="verboseryadjetivos.html" 
+               class="activity-button block p-6 bg-custom-pink text-white rounded-xl shadow-lg hover:bg-custom-pink-dark focus:outline-none focus:ring-4 focus:ring-custom-pink/50 transform active:scale-95">
+                <div class="flex flex-col items-center">
+                    <span class="text-3xl font-bold mb-1">Verb Ser and Adjectives</span>
+                    <span class="text-sm opacity-90">Verbo Ser y Adjetivos</span>
+                </div>
+            </a>
+            
+        </div>
+        <!-- Fin del Contenedor de Botones -->
+    </div>
+    <!-- Fin del Contenedor Principal -->
+
+</body>
+</html>
