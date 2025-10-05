@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Lessons with María C.</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Uso de una fuente similar a "Platform Medium" (usaremos Inter como base y la ajustaremos) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Script para configurar los colores personalizados de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC', /* Rosa Flamenco (Color base) */
+                        'soft-pink': '#F7A9C9', /* Rosa suave para hover, menos vibrante que el fucsia */
+                        'eerie-black': '#121118', /* Negro Misterioso */
+                    },
+                    fontFamily: {
+                        // Usamos Inter-ExtraBold para simular el peso de 'Platform Medium' para los títulos grandes
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilo específico para simular el diseño de la foto */
+        body {
+            background-color: white; /* Fondo de la página: blanco */
+            min-height: 100vh;
+        }
+        .text-shadow {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .btn-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-sans text-eerie-black flex flex-col items-center justify-between">
+
+    <!-- Contenedor Principal (Simula el padding y centrado general del diseño) -->
+    <main class="w-full max-w-4xl p-6 md:p-12 lg:p-16 flex flex-col items-center">
+        
+        <!-- Sección de Título y Subtítulo -->
+        <header class="text-center mb-10 md:mb-12 w-full">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-eerie-black mb-2 text-shadow" style="letter-spacing: -0.05em;">
+                Welcome to your Spanish Class!
+            </h1>
+            <p class="text-lg md:text-xl font-medium text-gray-700">
+                Select an activity to start practicing.
+            </p>
+        </header>
+
+        <!-- Contenedor de Botones (Grid 2x1 y 1x1 centrado) -->
+        <section class="w-full max-w-2xl flex flex-col gap-6">
+
+            <!-- Fila 1: Botones principales (Grid 2 columnas) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+                <!-- Botón 1: Regular -ar Verbs -->
+                <a href="vocabulary.html" id="btn-vocabulary" class="
+                    flex flex-col items-start justify-center p-6 md:p-8 rounded-xl
+                    bg-flamingo-pink hover:bg-soft-pink transition duration-300 transform hover:scale-[1.01]
+                    text-white btn-shadow h-36 md:h-40 cursor-pointer
+                ">
+                    <span class="text-xl md:text-2xl font-extrabold leading-tight tracking-tight">
+                        Regular -ar Verbs in the Present
+                    </span>
+                    <span class="text-sm mt-1 font-light opacity-80">
+                        Gramática / Grammar
+                    </span>
+                </a>
+
+                <!-- Botón 2: Actividades / Activities -->
+                <a href="activities.html" id="btn-activities" class="
+                    flex flex-col items-start justify-center p-6 md:p-8 rounded-xl
+                    bg-flamingo-pink hover:bg-soft-pink transition duration-300 transform hover:scale-[1.01]
+                    text-white btn-shadow h-36 md:h-40 cursor-pointer
+                ">
+                    <span class="text-xl md:text-2xl font-extrabold leading-tight tracking-tight">
+                        Actividades / Activities
+                    </span>
+                    <span class="text-sm mt-1 font-light opacity-80">
+                        Práctica / Practice
+                    </span>
+                </a>
+            </div>
+
+            <!-- Fila 2: Nuevo Botón Centrado (1 columna) -->
+            <div class="w-full">
+                 <a href="matching.html" id="btn-matching-game" class="
+                    flex flex-col items-center justify-center p-6 md:p-8 rounded-xl
+                    bg-flamingo-pink hover:bg-soft-pink transition duration-300 transform hover:scale-[1.01]
+                    text-white btn-shadow h-36 md:h-40 cursor-pointer
+                ">
+                    <span class="text-xl md:text-2xl font-extrabold leading-tight tracking-tight">
+                        Matching Game
+                    </span>
+                    <span class="text-base mt-1 font-light opacity-80">
+                        test your memory
+                    </span>
+                </a>
+            </div>
+            
+        </section>
+
+    </main>
+    
+    <!-- Sección de Pie de Página (Footer) -->
+    <footer class="w-full text-center p-6 md:p-8 flex flex-col items-center border-t border-gray-100">
+        
+        <!-- Texto de Copyright -->
+        <p class="text-sm text-gray-500 mb-4">
+            © 2025 Spanish Lessons with María C. All rights reserved.
+        </p>
+
+        <!-- Botón de Enlace al Tutor -->
+        <a href="https://preply.com/en/tutor/5105409?utm_source=friend&utm_medium=ref&utm_campaign=stu_plg_plg_all_0_mul_xx_multiplesub_share-tutor-tutoring_1&utm_content=OTQ2NTAwNQ=="
+           target="_blank"
+           rel="noopener noreferrer"
+           class="
+                py-3 px-6 rounded-lg bg-flamingo-pink hover:bg-soft-pink transition duration-300 transform hover:scale-[1.02]
+                text-white text-base font-semibold uppercase tracking-wider btn-shadow
+           ">
+            Find your Spanish class here.
+        </a>
+    </footer>
+
+</body>
+</html>

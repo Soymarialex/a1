@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching - Vocabulario</title>
+    <!-- Carga de Tailwind CSS para un diseño responsivo y estético -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuente Inter, utilizada para simular la claridad de "Platform Medium" -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Definición de colores y fuentes personalizados */
+        :root {
+            --color-flamingo-pink: #FF79AC;
+            --color-eerie-black: #121118;
+            --color-light-green: #A7F3D0; /* Verde claro */
+            --color-light-red: #FECACA; /* Rojo claro */
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            color: var(--color-eerie-black);
+        }
+
+        .matching-button {
+            /* Estilo base de los botones: Rosa Flamenco */
+            background-color: var(--color-flamingo-pink);
+            color: white;
+            padding: 0.75rem 1.25rem; /* Botones más pequeños */
+            margin: 0.5rem;
+            border-radius: 0.75rem; /* Esquinas redondeadas */
+            font-weight: 600; /* Semi-bold para simular "Medium" */
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            user-select: none;
+            line-height: 1.25;
+            min-height: 3rem; 
+            font-size: 0.95rem; 
+        }
+
+        .matching-button:hover:not(.matched):not(.selected) {
+            opacity: 0.85;
+        }
+
+        .selected {
+            background-color: var(--color-eerie-black) !important;
+            box-shadow: 0 0 0 3px var(--color-flamingo-pink) inset;
+        }
+
+        .matched {
+            /* Correcto: Verde claro */
+            background-color: var(--color-light-green) !important;
+            color: var(--color-eerie-black) !important;
+            pointer-events: none; /* Deshabilita el click una vez emparejado */
+            box-shadow: none;
+        }
+
+        .mismatch {
+            /* Incorrecto: Rojo claro */
+            background-color: var(--color-light-red) !important;
+            color: var(--color-eerie-black) !important;
+            box-shadow: none;
+        }
+
+        /* Contenedor de sección para distribución de dos columnas (y responsividad) */
+        .section-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Dos columnas por defecto */
+            gap: 0.5rem;
+            padding: 1rem 0;
+            border-bottom: 2px solid #f0f0f0; /* Separador sutil entre secciones */
+        }
+
+        @media (max-width: 640px) {
+            /* En móvil, muestra una sola columna para mejor usabilidad */
+            .section-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 sm:p-8 bg-white text-[var(--color-eerie-black)]">
+
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-center mb-10 mt-4 tracking-tight" style="color: var(--color-flamingo-pink);">
+            Matching
+        </h1>
+
+        <!-- Contenedor principal de secciones donde se renderizarán los botones -->
+        <div id="game-container" class="space-y-8 pb-16">
+            <!-- Las secciones de botones se generarán aquí -->
+        </div>
+
+        <!-- Mensaje de felicitación (Modal simple) -->
+        <div id="message-box" class="fixed inset-x-0 bottom-0 p-4 transition-all duration-500 ease-in-out opacity-0 translate-y-full text-center text-lg font-bold bg-white border-t-4 border-[var(--color-flamingo-pink)] shadow-[0_-5px_15px_rgba(0,0,0,0.1)] rounded-t-xl" style="color: var(--color-eerie-black);">
+            ¡Felicidades! Has completado todos los emparejamientos.
+        </div>
+    </div>
+
+    <script>
+        // Definición de todo el vocabulario estructurado por sección (36 pares en 6 secciones)
+        const initialWords = [
+            // Sección 1: Verbos (8 items) - Mantenidos
+            { es: 'hablar', en: 'to speak, to talk', section: 1 },
+            { es: 'bailar', en: 'to dance', section: 1 },
+            { es: 'tomar', en: 'to take, to drink', section: 1 },
+            { es: 'ayudar', en: 'to help', section: 1 },
+            { es: 'comprar', en: 'to buy', section: 1 },
+            { es: 'preparar', en: 'to prepare', section: 1 },
+            { es: 'escuchar', en: 'to hear', section: 1 },
+            { es: 'viajar', en: 'to travel', section: 1 }, 
+
+            // Sección 2: Verbos (8 items) - Mantenidos
+            { es: 'trabajar', en: 'to work', section: 2 },
+            { es: 'llegar', en: 'to arrive', section: 2 },
+            { es: 'estudiar', en: 'to study', section: 2 },
+            { es: 'cantar', en: 'to sing', section: 2 },
+            { es: 'cocinar', en: 'to cook', section: 2 },
+            { es: 'indicar', en: 'to indicate', section: 2 },
+            { es: 'ordenar', en: 'to order', section: 2 },
+            { es: 'dedicar', en: 'to dedicate', section: 2 },
+
+            // Sección 3: Adjetivos/Quant. 1 (5 items) - Nuevo
+            { es: 'fuerte', en: 'strong', section: 3 },
+            { es: 'egoísta', en: 'selfish', section: 3 },
+            { es: 'trabajador', en: 'hard-working', section: 3 },
+            { es: 'hablador', en: 'talkative', section: 3 },
+            { es: 'ideal', en: 'ideal', section: 3 },
+
+            // Sección 4: Adjetivos/Quant. 2 (5 items) - Nuevo
+            { es: 'tímido', en: 'timid', section: 4 },
+            { es: 'terrible', en: 'terrible', section: 4 },
+            { es: 'fenomenal', en: 'phenomenal', section: 4 },
+            { es: 'paciente', en: 'patient', section: 4 },
+            { es: 'impaciente', en: 'impatient', section: 4 },
+
+            // Sección 5: Adjetivos/Quant. 3 (5 items) - Nuevo
+            { es: 'contento', en: 'happy', section: 5 },
+            { es: 'famoso', en: 'famous', section: 5 },
+            { es: 'formal', en: 'formal', section: 5 },
+            { es: 'informal', en: 'informal', section: 5 },
+            { es: 'bueno', en: 'good', section: 5 },
+
+            // Sección 6: Adjetivos/Quant. 4 (5 items) - Nuevo
+            { es: 'malo', en: 'bad', section: 6 },
+            { es: 'mucho', en: 'a lot', section: 6 },
+            { es: 'muchos', en: 'many', section: 6 },
+            { es: 'poco', en: 'little', section: 6 },
+            { es: 'pocos', en: 'few', section: 6 },
+            
+            /* Nota: Los pares 'grande' y 'pequeño' fueron eliminados para asegurar
+               que las últimas cuatro secciones tuvieran exactamente 5 pares cada una (20 en total). */
+        ];
+
+        // Estado global del juego
+        let selectedButton = null;
+        let isLocked = false;
+        let matchedCount = 0;
+        const totalMatches = initialWords.length; // Ahora 36
+        
+        const gameContainer = document.getElementById('game-container');
+        const messageBox = document.getElementById('message-box');
+
+        /**
+         * Función de utilidad para mezclar un array (Algoritmo de Fisher-Yates)
+         * @param {Array} array El array a mezclar
+         */
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /**
+         * Inicializa y renderiza el juego, separando las palabras por sección.
+         */
+        function initializeGame() {
+            // Limpiar el contenedor del juego por si se está reiniciando
+            gameContainer.innerHTML = ''; 
+            matchedCount = 0;
+            selectedButton = null;
+            messageBox.classList.add('opacity-0', 'translate-y-full'); // Ocultar mensaje de finalización
+
+            // Agrupar palabras por sección
+            const sections = initialWords.reduce((acc, word) => {
+                if (!acc[word.section]) {
+                    acc[word.section] = [];
+                }
+                acc[word.section].push(word);
+                return acc;
+            }, {});
+
+            // Renderizar cada sección
+            for (const sectionId in sections) {
+                const words = sections[sectionId];
+                
+                // Crear listas separadas para español e inglés dentro de la sección
+                let spanishWords = words.map(w => ({ text: w.es, id: w.es, lang: 'es' }));
+                let englishWords = words.map(w => ({ text: w.en, id: w.es, lang: 'en' }));
+                
+                // Mezclar ambas listas
+                spanishWords = shuffle(spanishWords);
+                englishWords = shuffle(englishWords);
+
+                // Crear el contenedor de la sección
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'section-container last:border-b-0'; // Quitar borde de la última sección
+
+                // Crear las columnas para español e inglés
+                const spanishColumn = document.createElement('div');
+                spanishColumn.className = 'flex flex-col items-stretch';
+                
+                const englishColumn = document.createElement('div');
+                englishColumn.className = 'flex flex-col items-stretch';
+
+                // Llenar las columnas
+                spanishWords.forEach(word => {
+                    spanishColumn.appendChild(createButton(word));
+                });
+
+                englishWords.forEach(word => {
+                    englishColumn.appendChild(createButton(word));
+                });
+                
+                // Añadir las columnas a la sección
+                sectionDiv.appendChild(spanishColumn);
+                sectionDiv.appendChild(englishColumn);
+                gameContainer.appendChild(sectionDiv);
+            }
+        }
+
+        /**
+         * Crea un elemento de botón.
+         * @param {Object} word Objeto de palabra con text, id (para emparejar) y lang (idioma).
+         */
+        function createButton(word) {
+            const button = document.createElement('button');
+            button.textContent = word.text;
+            button.className = 'matching-button';
+            button.dataset.id = word.id;      // ID para el emparejamiento (la palabra en español)
+            button.dataset.lang = word.lang;  // 'es' o 'en'
+            button.addEventListener('click', handleButtonClick);
+            return button;
+        }
+
+        /**
+         * Lógica al hacer clic en un botón.
+         * @param {Event} event Evento de clic.
+         */
+        function handleButtonClick(event) {
+            if (isLocked) return; // Ignora clics mientras la lógica de error está activa
+
+            const clickedButton = event.target;
+
+            // 1. Si no hay botón seleccionado (primera selección)
+            if (!selectedButton) {
+                selectedButton = clickedButton;
+                selectedButton.classList.add('selected');
+                return;
+            }
+
+            // 2. Si se hace clic en el mismo botón
+            if (selectedButton === clickedButton) {
+                selectedButton.classList.remove('selected');
+                selectedButton = null;
+                return;
+            }
+
+            // 3. Evitar emparejar dos palabras del mismo idioma
+            if (selectedButton.dataset.lang === clickedButton.dataset.lang) {
+                // Deselecciona el primero y selecciona el nuevo
+                selectedButton.classList.remove('selected');
+                selectedButton = clickedButton;
+                selectedButton.classList.add('selected');
+                return;
+            }
+            
+            // 4. Se seleccionan dos botones de diferente idioma: ¡A verificar!
+            isLocked = true;
+            selectedButton.classList.remove('selected');
+
+            // Comprobar si los IDs de emparejamiento son iguales
+            if (selectedButton.dataset.id === clickedButton.dataset.id) {
+                // ¡Acierto!
+                
+                // Estilo a verde claro
+                selectedButton.classList.add('matched');
+                clickedButton.classList.add('matched');
+
+                // Limpiar estado
+                selectedButton = null;
+                isLocked = false;
+                
+                matchedCount++;
+
+                // Comprobar si el juego ha terminado
+                if (matchedCount === totalMatches) {
+                    showCompletionMessage();
+                }
+
+            } else {
+                // ¡Error!
+                
+                // Estilo a rojo claro
+                selectedButton.classList.add('mismatch');
+                clickedButton.classList.add('mismatch');
+
+                // Revertir el error después de un breve tiempo para mostrar el feedback
+                setTimeout(() => {
+                    selectedButton.classList.remove('mismatch');
+                    clickedButton.classList.remove('mismatch');
+                    selectedButton = null;
+                    isLocked = false;
+                }, 750); // 750 ms para feedback visual
+            }
+        }
+
+        /**
+         * Muestra el mensaje de felicitación al completar el juego.
+         */
+        function showCompletionMessage() {
+            messageBox.classList.remove('opacity-0', 'translate-y-full');
+            messageBox.classList.add('opacity-100', 'translate-y-0');
+        }
+
+        // Exponer la función de reinicio para un futuro botón (si se solicita)
+        window.restartGame = initializeGame;
+
+        // Iniciar el juego al cargar la ventana
+        window.onload = initializeGame;
+    </script>
+</body>
+</html>

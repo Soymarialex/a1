@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular -ar Verbs in the Present</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de Google Font (Poppins para simular Platform Medium) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilo personalizado para el espaciado de los bloques de vocabulario */
+        .vocab-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            line-height: 1.6;
+        }
+        /* Estilo para los grupos de vocabulario que usan grid */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0; /* No gap between groups */
+        }
+        @media (min-width: 768px) {
+            .vocab-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        /* Estilo para la tabla de conjugación */
+        .conjugation-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            padding: 1rem 0;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body class="bg-white text-eerie-black p-4 md:p-8 font-sans">
+
+    <!-- Encabezado Principal -->
+    <header class="mb-10 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-eerie-black">Regular <span class="text-flamingo-pink">-ar</span> Verbs in the Present</h1>
+    </header>
+
+    <!-- Sección I: Vocabulario Nuevo -->
+    <section class="max-w-4xl mx-auto mb-12 p-6 bg-white rounded-xl shadow-lg border border-gray-100">
+        <h2 class="text-2xl md:text-3xl font-medium text-flamingo-pink mb-6 pb-2 border-b-2 border-flamingo-pink">I. Vocabulario nuevo / New Vocabulary</h2>
+
+        <div class="space-y-6">
+            <!-- Bloque 1: Nacionalidades -->
+            <div class="vocab-grid">
+                <div class="pr-4">
+                    <div class="vocab-item"><b>cubano</b> – Cuban</div>
+                    <div class="vocab-item"><b>dominicano</b> – Dominican</div>
+                    <div class="vocab-item"><b>puertorriqueño</b> – Puerto Rican</div>
+                    <div class="vocab-item"><b>norteamericano</b> – (North) American</div>
+                    <div class="vocab-item"><b>mexicano</b> – Mexican</div>
+                    <div class="vocab-item"><b>guatemalteco</b> – Guatemalan</div>
+                    <div class="vocab-item"><b>salvadoreño</b> – Salvadoran</div>
+                    <div class="vocab-item"><b>hondureño</b> – Honduran</div>
+                    <div class="vocab-item"><b>nicaragüense</b> – Nicaraguan</div>
+                    <div class="vocab-item"><b>costarricense</b> – Costa Rican</div>
+                    <div class="vocab-item"><b>panameño</b> – Panamanian</div>
+                </div>
+                <div class="pl-4">
+                    <div class="vocab-item"><b>venezolano</b> – Venezuelan</div>
+                    <div class="vocab-item"><b>colombiano</b> – Colombian</div>
+                    <div class="vocab-item"><b>ecuatoriano</b> – Ecuadorian</div>
+                    <div class="vocab-item"><b>peruano</b> – Peruvian</div>
+                    <div class="vocab-item"><b>boliviano</b> – Bolivian</div>
+                    <div class="vocab-item"><b>chileno</b> – Chilean</div>
+                    <div class="vocab-item"><b>paraguayo</b> – Paraguayan</div>
+                    <div class="vocab-item"><b>argentino</b> – Argentine</div>
+                    <div class="vocab-item"><b>uruguayo</b> – Uruguayan</div>
+                    <div class="vocab-item"><b>español</b> – Spaniard</div>
+                    <div class="vocab-item"><b>ecuatoguineano</b> – Equatorial Guinean</div>
+                </div>
+            </div>
+
+            <div class="h-4"></div> <!-- Separador visual -->
+
+            <!-- Bloque 2: Sustantivos (1 línea) -->
+            <div class="vocab-grid">
+                <div class="pr-4">
+                    <div class="vocab-item"><b>el café</b> – coffee</div>
+                </div>
+                <div class="pl-4">
+                    <div class="vocab-item"><b>el trabajador</b> – worker</div>
+                </div>
+            </div>
+
+            <div class="h-4"></div> <!-- Separador visual -->
+
+            <!-- Bloque 3: Verbos -ar -->
+            <div class="vocab-grid">
+                <div class="pr-4">
+                    <div class="vocab-item"><b>hablar</b> – to speak, to talk</div>
+                    <div class="vocab-item"><b>bailar</b> – to dance</div>
+                    <div class="vocab-item"><b>tomar</b> – to take, to drink</div>
+                    <div class="vocab-item"><b>ayudar</b> – to help</div>
+                    <div class="vocab-item"><b>comprar</b> – to buy</div>
+                    <div class="vocab-item"><b>preparar</b> – to prepare</div>
+                    <div class="vocab-item"><b>escuchar</b> – to hear</div>
+                    <div class="vocab-item"><b>viajar</b> – to travel</div>
+                </div>
+                <div class="pl-4">
+                    <div class="vocab-item"><b>trabajar</b> – to work</div>
+                    <div class="vocab-item"><b>llegar</b> – to arrive</div>
+                    <div class="vocab-item"><b>estudiar</b> – to study</div>
+                    <div class="vocab-item"><b>cantar</b> – to sing</div>
+                    <div class="vocab-item"><b>cocinar</b> – to cook</div>
+                    <div class="vocab-item"><b>indicar</b> – to indicate</div>
+                    <div class="vocab-item"><b>ordenar</b> – to order</div>
+                    <div class="vocab-item"><b>dedicar</b> – to dedicate</div>
+                </div>
+            </div>
+
+            <div class="h-4"></div> <!-- Separador visual -->
+
+            <!-- Bloque 4: Adjetivos y otros -->
+            <div class="vocab-grid">
+                <div class="pr-4">
+                    <div class="vocab-item"><b>fuerte</b> – strong</div>
+                    <div class="vocab-item"><b>egoísta</b> – selfish</div>
+                    <div class="vocab-item"><b>trabajador</b> – hard-working</div>
+                    <div class="vocab-item"><b>hablador</b> – talkative</div>
+                    <div class="vocab-item"><b>ideal</b> – ideal</div>
+                    <div class="vocab-item"><b>tímido</b> – timid</div>
+                    <div class="vocab-item"><b>terrible</b> – terrible</div>
+                    <div class="vocab-item"><b>fenomenal</b> – phenomenal</div>
+                    <div class="vocab-item"><b>paciente</b> – patient</div>
+                    <div class="vocab-item"><b>impaciente</b> – impatient</div>
+                </div>
+                <div class="pl-4">
+                    <div class="vocab-item"><b>contento</b> – happy</div>
+                    <div class="vocab-item"><b>famoso</b> – famous</div>
+                    <div class="vocab-item"><b>formal</b> – formal</div>
+                    <div class="vocab-item"><b>informal</b> – informal</div>
+                    <div class="vocab-item"><b>bueno</b> – good</div>
+                    <div class="vocab-item"><b>malo</b> – bad</div>
+                    <div class="vocab-item"><b>mucho</b> – a lot</div>
+                    <div class="vocab-item"><b>muchos</b> – many</div>
+                    <div class="vocab-item"><b>poco</b> – little</div>
+                    <div class="vocab-item"><b>pocos</b> – few</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Sección II: Repaso general -->
+    <section class="max-w-4xl mx-auto mb-12 p-6 bg-white rounded-xl shadow-lg border border-gray-100">
+        <h2 class="text-2xl md:text-3xl font-medium text-flamingo-pink mb-6 pb-2 border-b-2 border-flamingo-pink">II. Repaso general / General Review</h2>
+
+        <!-- A. Conjugating Verbs in Spanish -->
+        <div class="mb-6">
+            <h3 class="text-xl font-bold mb-2">A. Conjugating Verbs in Spanish</h3>
+            <p class="text-gray-700">As you learned in an earlier lesson, the infinitive form of a verb is the form that appears in the dictionary and is a nonconjugated verb form. All Spanish verbs have infinitive forms ending either in <b>-ar</b>, <b>-er</b>, or <b>-ir</b>, so the three kinds of verbs in Spanish are <b>-ar</b> verbs, <b>-er</b> verbs, and <b>-ir</b> verbs.</p>
+            <p class="text-gray-700 mt-3">The infinitive form of the verb has two parts: the stem of the word (which is everything before the ending) and the ending itself (which is either <b>-ar</b>, <b>-er</b>, or <b>-ir</b>). For example, the stem of <b>viajar</b> (“to travel”) is <b>viaj-</b>, and the verb’s ending is <b>-ar</b>. Once you’ve identified the stem of a verb, you conjugate the verb by adding the appropriate ending to the stem for the given subject.</p>
+        </div>
+
+        <!-- B. Conjugating Regular -ar Verbs in the Present -->
+        <div class="mb-6">
+            <h3 class="text-xl font-bold mb-2">B. Conjugating Regular -ar Verbs in the Present</h3>
+            <p class="text-gray-700">The present tense endings for regular <b>-ar</b> verbs are <b>-o</b>, <b>-as</b>, <b>-a</b>, <b>-amos</b>, <b>-áis</b>, and <b>-an</b>. The following is an example of a regular <b>-ar</b> verb conjugated in the present tense.</p>
+            
+            <p class="text-lg font-bold mt-4 mb-2 text-flamingo-pink">ayudar [to help]</p>
+            
+            <!-- Tabla de Conjugación -->
+            <div class="conjugation-table bg-flamingo-pink/10 p-4 rounded-lg">
+                <div class="text-eerie-black"><b>Yo ayudo</b></div>
+                <div class="text-eerie-black"><b>nosotros, nosotras ayudamos</b></div>
+                <div class="text-eerie-black"><b>tú ayudas</b></div>
+                <div class="text-eerie-black"><b>vosotros, vosotras ayudáis</b></div>
+                <div class="text-eerie-black"><b>él, ella, usted ayuda</b></div>
+                <div class="text-eerie-black"><b>ellos, ellas, ustedes ayudan</b></div>
+            </div>
+
+            <p class="text-gray-700 mt-4">The verb form <b>ayudamos</b>, for example, can mean “We help,” “We do help,” “We are helping,” or even—in certain contexts—“We are going to help.”</p>
+        </div>
+
+        <!-- C. When to Use Subject Pronouns before Verbs -->
+        <div class="mb-6">
+            <h3 class="text-xl font-bold mb-2">C. When to Use Subject Pronouns before Verbs</h3>
+            <p class="text-gray-700">Because the ending of a verb indicates the verb’s subject, most often Spanish speakers do not include a subject pronoun before the verb. There are, however, two common cases in which subject pronouns are used. They are often used before verbs in the third-person singular and plural because there can be many possible subjects for these verb forms.</p>
+            <p class="text-gray-700 mt-3"><b>Trabaja mucho</b>, for example, could mean “You work a lot” (with the subject being <b>usted</b>), or it could be “He works a lot,” or “She works a lot.” To clarify, then, it’s common to include a subject with a third-person form of the verb and say, for example, <b>Usted estudia mucho</b>.</p>
+            <p class="text-gray-700 mt-3">Another time to use a subject pronoun is to emphasize the subject. If, for example, people around you are saying that they don’t sing much, and you actually do, it would be appropriate to say <b>Yo canto mucho</b>, emphasizing “I do sing a lot.”</p>
+        </div>
+
+        <!-- D. More Agreement of Adjectives with Nouns -->
+        <div class="mb-6">
+            <h3 class="text-xl font-bold mb-2">D. More Agreement of Adjectives with Nouns</h3>
+            <p class="text-gray-700">Adjectives ending in <b>-dor</b> in the masculine singular have four forms, as can be seen with the adjective meaning “talkative”: <b>hablador</b>, <b>habladora</b>, <b>habladores</b>, <b>habladoras</b>. Any adjective of nationality that ends in a consonant also has four forms, as seen in the adjective meaning “French”: <b>francés</b>, <b>francesa</b>, <b>franceses</b>, <b>francesas</b>. Except for adjectives ending in <b>-o</b>, <b>-dor</b>, and ones ending in consonants that express nationality, almost all other adjectives in Spanish have two forms (e.g., <b>fenomenal</b>, <b>fenomenales</b>; <b>terrible</b>, <b>terribles</b>).</p>
+        </div>
+
+        <!-- E. Placement of Adjectives -->
+        <div class="mb-6">
+            <h3 class="text-xl font-bold mb-2">E. Placement of Adjectives</h3>
+            <p class="text-gray-700">Adjectives in Spanish almost always follow the noun modified (e.g., <b>las doctoras ideales</b>). To modify a noun with two adjectives, put the adjectives after the noun and put <b>y</b> (“and”) between them (e.g., <b>el pianista famoso y egoísta</b>).</p>
+            <p class="text-gray-700 mt-3"><b>Bueno</b> and <b>malo</b> can go before or after the modified noun. Before masculine nouns, both of these adjectives drop the <b>-o</b> (e.g., <b>el buen hombre</b>; <b>el mal día</b>). Adjectives of quantity precede the modified noun (e.g., <b>muchos estudiantes</b>; <b>poca agua</b>).</p>
+        </div>
+
+        <!-- F. Pronunciation of Consonants -->
+        <div class="mb-6">
+            <h3 class="text-xl font-bold mb-2">F. Pronunciation of Consonants</h3>
+            <p class="text-gray-700">The double-<b>r</b> sound requires that you roll your <b>r</b>, creating a sound that does not exist in English. The sound is required when a word has the letter combination <b>rr</b>, when a word starts with <b>r</b>, and after the letters <b>l</b>, <b>n</b>, and <b>s</b> (e.g., <b>carro</b>, <b>Raúl</b>, <b>alrededor</b>, <b>Enrique</b>, <b>Israel</b>). You make the sound corresponding with <b>rr</b> by having your tongue vibrate up against the center of the roof of your mouth.</p>
+            <p class="text-gray-700 mt-3">At the start of a word or after the letters <b>n</b> and <b>l</b>, you pronounce <b>d</b> as you would in English. After a vowel, the sound of the <b>d</b> should be like the <b>th</b> sound of the English word “this.” When saying the name <b>David</b>, for example, you should pronounce the first <b>d</b> similar to the <b>d</b> sound made in English and the second <b>d</b> similar to the <b>th</b> of “this.” There are variations by country, but in many places, both <b>y</b> and <b>ll</b> are pronounced similar to the way <b>y</b> is pronounced in English.</p>
+        </div>
+
+    </section>
+    
+    <footer class="text-center text-sm text-gray-500 mt-8 pb-4">
+        Lección de Gramática: Verbos Regulares -ar en Presente
+    </footer>
+
+</body>
+</html>
