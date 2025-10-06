@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to your Spanish Class!</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de color y fuente (simulando Platform Medium con Inter Semibold) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Color primario: Flamingo Pink (#FF79AC)
+                        'flamingo-pink': '#FF79AC',
+                        // Color secundario/texto: Eerie Black (#121118)
+                        'eerie-black': '#121118',
+                    },
+                    fontFamily: {
+                        // Uso de 'Inter' por defecto, que cumple con el estándar moderno.
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Aplicando la fuente Inter por defecto y asegurando que el fondo sea blanco */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white; /* Fondo de la página: blanco */
+        }
+
+        /* Estilo para los botones principales, usando el color primario */
+        .main-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .main-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(255, 121, 172, 0.3), 0 4px 6px -4px rgba(255, 121, 172, 0.15);
+            background-color: #f7a0c8; /* Ligeramente más claro al pasar el ratón */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between text-eerie-black">
+
+    <!-- Contenedor Principal Centrado -->
+    <main class="flex flex-col items-center justify-center flex-grow w-full max-w-4xl px-4 py-16 sm:py-24">
+        
+        <!-- Tarjeta de Contenido (Aseguramos que el fondo sea blanco como en la imagen de referencia) -->
+        <div class="bg-white p-6 sm:p-10 md:p-12 w-full"> 
+            
+            <!-- Título y Subtítulo -->
+            <header class="text-center mb-10">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-eerie-black leading-tight">
+                    Welcome to your Spanish Class!
+                </h1>
+                <h2 class="text-xl sm:text-2xl mt-3 font-medium text-gray-700">
+                    Select an activity to start practicing.
+                </h2>
+            </header>
+
+            <!-- Contenedor de Botones de Actividad - Ahora más grandes (p-8) y con flex para manejar el texto interno -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+
+                <!-- Botón 1: Saber y Conocer -->
+                <a href="saberandconocer.html" 
+                   class="main-button flex flex-col justify-center items-start text-left bg-flamingo-pink text-white py-8 px-6 rounded-xl hover:bg-opacity-90 min-h-[150px]">
+                    <!-- Texto Principal -->
+                    <span class="text-2xl sm:text-3xl font-bold mb-1">
+                        The Verbs <span class="font-extrabold">Saber</span> and <span class="font-extrabold">Conocer</span>
+                    </span>
+                    <!-- Texto Secundario/Subtítulo (Añadido) -->
+                    <span class="text-sm font-light opacity-80">
+                        Los verbos Saber y Conocer
+                    </span>
+                </a>
+
+                <!-- Botón 2: Actividades -->
+                <a href="activities.html" 
+                   class="main-button flex flex-col justify-center items-start text-left bg-flamingo-pink text-white py-8 px-6 rounded-xl hover:bg-opacity-90 min-h-[150px]">
+                    <!-- Texto Principal -->
+                    <span class="text-2xl sm:text-3xl font-bold mb-1">
+                        Actividades / Activities
+                    </span>
+                    <!-- Texto Secundario/Subtítulo (Añadido) -->
+                    <span class="text-sm font-light opacity-80">
+                        Práctica tus lecciones de español
+                    </span>
+                </a>
+            </div>
+
+            <!-- El mensaje opcional de práctica fue movido al footer para simplificar el centro -->
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-white border-t border-gray-200 py-6 px-4 text-center">
+        <p class="text-sm text-eerie-black mb-4">
+            © 2025 Spanish Lessons with María C. All rights reserved.
+        </p>
+        
+        <!-- Botón de Redirección a Preply -->
+        <a href="https://preply.com/en/tutor/5105409?utm_source=friend&utm_medium=ref&utm_campaign=stu_plg_plg_all_0_mul_xx_multiplesub_share-tutor-tutoring_1&utm_content=OTQ2NTAwNQ==" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="inline-block bg-eerie-black text-white font-medium py-3 px-6 rounded-full text-sm hover:bg-gray-800 transition duration-300 shadow-md">
+            Find your Spanish class here.
+        </a>
+    </footer>
+
+</body>
+</html>
