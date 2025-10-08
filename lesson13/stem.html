@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stem-Changing Verbs</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /*
+        El font 'Platform Medium Font' no es una fuente web estándar.
+        Usaremos Inter (la fuente de Tailwind/Google Fonts) como base,
+        con una pila de fuentes sans-serif limpia que simula una fuente moderna y legible.
+        */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+        body {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: #FFFFFF; /* Fondo Blanco */
+            color: #121118; /* Eerie Black */
+        }
+        /* Definición de colores personalizados para Tailwind */
+        :root {
+            --color-flamingo-pink: #FF79AC;
+            --color-eerie-black: #121118;
+        }
+
+        .text-eerie-black { color: var(--color-eerie-black); }
+        .text-flamingo-pink { color: var(--color-flamingo-pink); }
+        .border-flamingo-pink { border-color: var(--color-flamingo-pink); }
+        .bg-flamingo-pink { background-color: var(--color-flamingo-pink); }
+
+        /* Estilo específico para la tabla de conjugación */
+        .conjugation-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem 2rem;
+            align-items: center;
+        }
+
+        /* Estilo para simular un borde de "bota" (boot) con color rosa flamenco */
+        .boot-highlight {
+            border: 2px solid var(--color-flamingo-pink);
+            padding: 0.1rem 0.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Estilo para las listas de vocabulario de dos columnas */
+        .vocab-line {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive adjustments for the vocab list */
+        @media (max-width: 640px) {
+            .vocab-line {
+                flex-direction: column;
+            }
+            .vocab-line > div {
+                width: 100%;
+                margin-bottom: 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10 antialiased min-h-screen">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Título de la Página -->
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-8 text-eerie-black border-b-4 pb-2 border-flamingo-pink">
+            Stem-Changing Verbs
+        </h1>
+
+        <!-- SECCIÓN I: Vocabulario Nuevo -->
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 text-flamingo-pink">
+            I. Vocabulario nuevo / <span class="text-eerie-black">New Vocabulary</span>
+        </h2>
+
+        <div class="space-y-4 text-lg md:text-xl font-medium">
+            <!-- Grupo 1 -->
+            <div>
+                <div class="vocab-line">
+                    <div class="w-full sm:w-1/2"><strong>el cambio</strong> – change</div>
+                    <div class="w-full sm:w-1/2"><strong>el piano</strong> – piano</div>
+                </div>
+                <div class="vocab-line">
+                    <div class="w-full sm:w-1/2"><strong>la raíz</strong> – root, stem of a verb</div>
+                    <div class="w-full sm:w-1/2"><strong>el énfasis</strong> – emphasis</div>
+                </div>
+                <div class="vocab-line">
+                    <div class="w-full sm:w-1/2"><strong>la conjugación</strong> – conjugation</div>
+                    <div class="w-full sm:w-1/2"></div> <!-- Espacio para mantener el formato -->
+                </div>
+            </div>
+
+            <!-- Separador invisible entre grupos de vocabulario -->
+            <div class="border-t border-gray-200 pt-4"></div>
+
+            <!-- Grupo 2 -->
+            <div>
+                <div class="vocab-line">
+                    <div class="w-full sm:w-1/2"><strong>sin mí</strong> – without me</div>
+                    <div class="w-full sm:w-1/2"><strong>contigo</strong> – with you [informal, singular]</div>
+                </div>
+                <div class="vocab-line">
+                    <div class="w-full sm:w-1/2"><strong>hacia ti</strong> – toward you</div>
+                    <div class="w-full sm:w-1/2"><strong>próximo</strong> – next</div>
+                </div>
+                <div class="vocab-line">
+                    <div class="w-full sm:w-1/2"><strong>conmigo</strong> – with me</div>
+                    <div class="w-full sm:w-1/2"></div> <!-- Espacio para mantener el formato -->
+                </div>
+            </div>
+
+            <!-- Separador invisible entre grupos de vocabulario -->
+            <div class="border-t border-gray-200 pt-4"></div>
+
+            <!-- Grupo 3 (Verbos) -->
+            <div>
+                <!-- Bloque de 2 columnas para verbos -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-8 mb-4">
+                    <div><strong>comprender</strong> – to understand</div>
+                    <div><strong>poder</strong> – to be able to</div>
+                    <div><strong>tocar</strong> – to play an instrument, to touch</div>
+                    <div><strong>almorzar</strong> – to have lunch</div>
+                    <div><strong>pensar</strong> – to think</div>
+                    <div><strong>recordar</strong> – to remember</div>
+                    <div><strong>cerrar</strong> – to close</div>
+                    <div><strong>mostrar</strong> – to show</div>
+                    <div><strong>comenzar</strong> – to begin</div>
+                    <div><strong>volver</strong> – to return</div>
+                    <div><strong>empezar</strong> – to begin</div>
+                    <div><strong>devolver</strong> – to return something</div>
+                    <div><strong>entender</strong> – to understand</div>
+                    <div><strong>dormir</strong> – to sleep</div>
+                    <div><strong>perder</strong> – to lose</div>
+                    <div><strong>morir</strong> – to die</div>
+                    <div><strong>querer</strong> – to want, to love</div>
+                    <div><strong>jugar</strong> – to play</div>
+                    <div><strong>mentir</strong> – to lie</div>
+                    <div><strong>servir</strong> – to serve</div>
+                    <div><strong>preferir</strong> – to prefer</div>
+                    <div><strong>pedir</strong> – to ask for</div>
+                    <div><strong>encontrar</strong> – to find</div>
+                    <div><strong>repetir</strong> – to repeat</div>
+                    <div><strong>costar</strong> – to cost</div>
+                    <div></div>
+                </div>
+
+                <!-- Separador simple (corresponde a la línea de guiones bajos en el prompt) -->
+                <div class="border-t border-gray-300 w-full my-4"></div>
+
+                <!-- ¡Qué elegante! como un item de vocabulario alineado a la izquierda -->
+                <div class="mt-4">
+                    <strong>¡Qué elegante!</strong> – How elegant!
+                </div>
+            </div>
+        </div>
+
+        <!-- Línea de separación larga (Esta marca el final de la Sección I y es la de color rosa) -->
+        <hr class="my-8 border-4 border-flamingo-pink rounded-full">
+
+        <!-- SECCIÓN II: Repaso General -->
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 text-flamingo-pink">
+            II. Repaso general / <span class="text-eerie-black">General Review</span>
+        </h2>
+
+        <!-- A. Stem-Changing Verbs in the Present -->
+        <h3 class="text-xl md:text-2xl font-bold mb-4 text-eerie-black border-b border-gray-300 pb-1">
+            A. Stem-Changing Verbs in the Present
+        </h3>
+
+        <!-- Párrafos con justificación añadida (text-justify) -->
+        <p class="mb-6 leading-relaxed text-justify">
+            Stem-changing verbs in the present tense have regular endings but change stem in all the singular forms and in the third-person plural form (there is no stem change for the <strong>nosotros</strong> or <strong>vosotros</strong> forms). The four possible stem changes are <strong>e &rarr; ie</strong>, <strong>o &rarr; ue</strong>, <strong>e &rarr; i</strong>, and <strong>u &rarr; ue</strong> (<strong>jugar</strong> is the only verb with a <strong>u &rarr; ue</strong> stem change).
+        </p>
+        <p class="mb-6 leading-relaxed text-justify">
+            Conjugations of stem-changing verbs in the present include the following.
+        </p>
+
+        <!-- Conjugation Tables (Layout kept centered/aligned internally) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+            <!-- Querer (e -> ie) -->
+            <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-2 border-flamingo-pink/50">
+                <h4 class="text-xl font-bold mb-2 text-flamingo-pink"><strong>querer</strong> [to want, to love]</h4>
+                <p class="text-sm font-semibold mb-3 text-eerie-black">e &rarr; ie</p>
+                <div class="conjugation-grid text-lg">
+                    <!-- yo, nosotros -->
+                    <span class="boot-highlight">quiero</span>
+                    <span>queremos</span>
+                    <!-- tú, vosotros -->
+                    <span class="boot-highlight">quieres</span>
+                    <span>queréis</span>
+                    <!-- él/ella/Ud., ellos/ellas/Uds. -->
+                    <span class="boot-highlight">quiere</span>
+                    <span class="boot-highlight">quieren</span>
+                </div>
+            </div>
+
+            <!-- Encontrar (o -> ue) -->
+            <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-2 border-flamingo-pink/50">
+                <h4 class="text-xl font-bold mb-2 text-flamingo-pink"><strong>encontrar</strong> [to find]</h4>
+                <p class="text-sm font-semibold mb-3 text-eerie-black">o &rarr; ue</p>
+                <div class="conjugation-grid text-lg">
+                    <!-- yo, nosotros -->
+                    <span class="boot-highlight">encuentro</span>
+                    <span>encontramos</span>
+                    <!-- tú, vosotros -->
+                    <span class="boot-highlight">encuentras</span>
+                    <span>encontráis</span>
+                    <!-- él/ella/Ud., ellos/ellas/Uds. -->
+                    <span class="boot-highlight">encuentra</span>
+                    <span class="boot-highlight">encuentran</span>
+                </div>
+            </div>
+
+            <!-- Servir (e -> i) -->
+            <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-2 border-flamingo-pink/50">
+                <h4 class="text-xl font-bold mb-2 text-flamingo-pink"><strong>servir</strong> [to serve]</h4>
+                <p class="text-sm font-semibold mb-3 text-eerie-black">e &rarr; i</p>
+                <div class="conjugation-grid text-lg">
+                    <!-- yo, nosotros -->
+                    <span class="boot-highlight">sirvo</span>
+                    <span>servimos</span>
+                    <!-- tú, vosotros -->
+                    <span class="boot-highlight">sirves</span>
+                    <span>servís</span>
+                    <!-- él/ella/Ud., ellos/ellas/Uds. -->
+                    <span class="boot-highlight">sirve</span>
+                    <span class="boot-highlight">sirven</span>
+                </div>
+            </div>
+
+            <!-- Jugar (u -> ue) -->
+            <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-2 border-flamingo-pink/50">
+                <h4 class="text-xl font-bold mb-2 text-flamingo-pink"><strong>jugar</strong> [to play]</h4>
+                <p class="text-sm font-semibold mb-3 text-eerie-black">u &rarr; ue</p>
+                <div class="conjugation-grid text-lg">
+                    <!-- yo, nosotros -->
+                    <span class="boot-highlight">juego</span>
+                    <span>jugamos</span>
+                    <!-- tú, vosotros -->
+                    <span class="boot-highlight">juegas</span>
+                    <span>jugáis</span>
+                    <!-- él/ella/Ud., ellos/ellas/Uds. -->
+                    <span class="boot-highlight">juega</span>
+                    <span class="boot-highlight">juegan</span>
+                </div>
+            </div>
+        </div>
+        <!-- End Conjugation Tables -->
+
+        <p class="mb-6 leading-relaxed text-justify">
+            What’s easy about stem-changing verbs is remembering that all endings are regular and that the stem change happens only in the <strong>boot</strong> (in all forms except the <strong>nosotros</strong> and <strong>vosotros</strong> forms). What’s difficult about stem-changing verbs is remembering which verbs change stem and what the stem change is for each verb.
+        </p>
+
+        <p class="mb-10 leading-relaxed p-4 bg-flamingo-pink/10 rounded-lg border-l-4 border-flamingo-pink text-justify">
+            A commonly used stem-changing verb is <strong>costar</strong>, meaning “to cost” (e.g., ¿Cuánto <strong>cuesta</strong> la computadora? is “How much does the computer cost?”; ¿Cuánto <strong>cuestan</strong> los zapatos? is “How much do the shoes cost?”).
+        </p>
+
+
+        <!-- B. Prepositional Pronouns -->
+        <h3 class="text-xl md:text-2xl font-bold mb-4 text-eerie-black border-b border-gray-300 pb-1">
+            B. Prepositional Pronouns
+        </h3>
+
+        <p class="mb-6 leading-relaxed text-justify">
+            Pronouns used after a preposition (also known as <strong>prepositional pronouns</strong>) are the same as the subject pronouns, with two exceptions: The first-person singular form is <strong>mí</strong> and the second-person singular, informal form is <strong>ti</strong>. The prepositional pronouns are as follows.
+        </p>
+
+        <!-- Prepositional Pronoun List/Table (Layout kept left-aligned) -->
+        <div class="grid grid-cols-2 gap-4 text-lg p-4 rounded-lg bg-gray-50 max-w-lg mb-6">
+            <span class="font-bold text-flamingo-pink">mí</span>
+            <span class="font-bold text-eerie-black">nosotros, nosotras</span>
+
+            <span class="font-bold text-flamingo-pink">ti</span>
+            <span class="font-bold text-eerie-black">vosotros, vosotras</span>
+
+            <span class="font-bold text-eerie-black">usted</span>
+            <span class="font-bold text-eerie-black">ustedes</span>
+
+            <span class="font-bold text-eerie-black">él</span>
+            <span class="font-bold text-eerie-black">ellos</span>
+
+            <span class="font-bold text-eerie-black">ella</span>
+            <span class="font-bold text-eerie-black">ellas</span>
+        </div>
+
+        <p class="mb-10 leading-relaxed text-justify">
+            Two forms that are irregular are <strong>conmigo</strong>, which means “with me,” and <strong>contigo</strong>, which means “with you” (using the informal, singular form of “you”).
+        </p>
+
+
+        <!-- C. Knowing Where to Place Spoken Stress -->
+        <h3 class="text-xl md:text-2xl font-bold mb-4 text-eerie-black border-b border-gray-300 pb-1">
+            C. Knowing Where to Place Spoken Stress
+        </h3>
+
+        <p class="mb-6 leading-relaxed text-justify">
+            Spanish has three rules that determine where to place the stress in a word when speaking.
+        </p>
+
+        <!-- List items with highlighted stressed syllables -->
+        <ol class="list-decimal list-inside space-y-3 pl-4 text-lg">
+            <li>When a word ends with a <strong>vowel</strong> or with the letter <strong>n</strong> or <strong>s</strong>, you stress the <strong>second-to-last</strong> syllable (e.g., <strong class="text-flamingo-pink font-extrabold">co</strong>men, cer<strong class="text-flamingo-pink font-extrabold">ve</strong>zas, trabaja<strong class="text-flamingo-pink font-extrabold">do</strong>ra).</li>
+            <li>When a word ends with a <strong>consonant</strong> that is not the letter <strong>n</strong> or <strong>s</strong>, you stress the <strong>last</strong> syllable (e.g., enten<strong class="text-flamingo-pink font-extrabold">der</strong>, pa<strong class="text-flamingo-pink font-extrabold">red</strong>, acciden<strong class="text-flamingo-pink font-extrabold">tal</strong>).</li>
+            <li>When a word does not follow the first two rules, an <strong>accent mark</strong> is used to show which syllable should be stressed (e.g., fran<strong class="text-flamingo-pink font-extrabold">cés</strong>, <strong class="text-flamingo-pink font-extrabold">Án</strong>gela, re<strong class="text-flamingo-pink font-extrabold">pú</strong>blica).</li>
+        </ol>
+
+        <!-- Footer / Spacing -->
+        <!-- The end message has been removed as requested -->
+    </div>
+
+</body>
+</html>

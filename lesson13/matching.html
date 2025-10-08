@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empareja las Palabras</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de la fuente Poppins como alternativa a Platform Medium Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Definición de colores principales */
+        :root {
+            --color-pink: #FF79AC; /* Flamingo Pink */
+            --color-black: #121118; /* Eerie Black */
+            --color-correct: #B9FBC0; /* Verde Claro para acierto */
+            --color-error: #FFADAD; /* Rojo Claro para error */
+        }
+        
+        /* Uso de Poppins Medium (600) como alternativa */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFFFF; /* Fondo Blanco */
+        }
+
+        .game-button {
+            background-color: var(--color-pink);
+            color: white; 
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px var(--color-black);
+        }
+
+        .game-button:hover:not(.matched):not(.selected) {
+            background-color: #FF98B9; /* Ligeramente más claro al pasar el ratón */
+            transform: translateY(-2px);
+            box-shadow: 0 6px var(--color-black);
+        }
+
+        .game-button.selected {
+            background-color: var(--color-pink);
+            border: 3px solid var(--color-black); /* Borde negro para indicar selección */
+            transform: translateY(-1px);
+            box-shadow: 0 4px var(--color-black);
+            opacity: 0.9;
+        }
+
+        .game-button.matched {
+            background-color: var(--color-correct);
+            color: var(--color-black); /* Mantener texto visible sobre fondo claro */
+            box-shadow: 0 4px #65A30D; /* Sombra verde oscuro */
+            cursor: default;
+        }
+
+        .game-button.error {
+            background-color: var(--color-error) !important;
+            color: var(--color-black) !important; /* Texto negro temporalmente para contraste */
+            box-shadow: 0 4px #B91C1C; /* Sombra roja oscura */
+            cursor: default;
+            transform: scale(1.02);
+            animation: shake 0.5s;
+        }
+
+        /* Animación para el error */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4">
+
+    <div class="w-full max-w-4xl text-center">
+        <!-- Título con fondo Pink y letras Black -->
+        <h1 class="text-4xl sm:text-5xl font-extrabold p-4 rounded-xl shadow-lg mb-8" 
+            style="background-color: var(--color-pink); color: var(--color-black);">
+            Empareja las Palabras
+        </h1>
+        
+        <div id="game-status" class="text-xl font-semibold mb-6 text-gray-700">
+            Cargando...
+        </div>
+
+        <!-- Estructura de dos columnas forzadas: una en español y otra en inglés -->
+        <div id="game-columns-wrapper" class="grid grid-cols-2 gap-4 md:gap-8">
+            <div id="spanish-column" class="flex flex-col gap-4">
+                <h3 class="text-lg font-bold text-gray-800 border-b pb-2 mb-2" style="border-color: var(--color-pink);">Español</h3>
+                <!-- Botones de español se insertarán aquí -->
+            </div>
+            <div id="english-column" class="flex flex-col gap-4">
+                <h3 class="text-lg font-bold text-gray-800 border-b pb-2 mb-2" style="border-color: var(--color-pink);">Inglés</h3>
+                <!-- Botones de inglés se insertarán aquí -->
+            </div>
+        </div>
+        <!-- Fin de la estructura de columnas -->
+
+        <div id="message-area" class="mt-8">
+            <!-- Mensajes de fin de fase/juego irán aquí -->
+        </div>
+
+        <button id="next-phase-button"
+            class="hidden mt-8 px-8 py-3 text-lg font-bold rounded-xl text-white shadow-xl hover:shadow-2xl transition duration-300"
+            style="background-color: var(--color-pink);">
+            Siguiente Fase
+        </button>
+    </div>
+
+    <script>
+        // Definición de las constantes del juego
+        const VOCABULARY_PAIRS = [
+            { es: 'el cambio', en: 'change' },
+            { es: 'el piano', en: 'piano' },
+            { es: 'la raíz', en: 'root, stem of a verb' },
+            { es: 'el énfasis', en: 'emphasis' },
+            { es: 'la conjugación', en: 'conjugation' },
+            { es: 'sin mí', en: 'without me' },
+            { es: 'contigo', en: 'with you [informal, singular]' },
+            { es: 'hacia ti', en: 'toward you' },
+            { es: 'próximo', en: 'next' },
+            { es: 'conmigo', en: 'with me' },
+            { es: 'comprender', en: 'to understand' },
+            { es: 'poder', en: 'to be able to' },
+            { es: 'tocar', en: 'to play an instrument, to touch' },
+            { es: 'almorzar', en: 'to have lunch' },
+            { es: 'pensar', en: 'to think' },
+            { es: 'recordar', en: 'to remember' },
+            { es: 'cerrar', en: 'to close' },
+            { es: 'mostrar', en: 'to show' },
+            { es: 'comenzar', en: 'to begin' },
+            { es: 'volver', en: 'to return' },
+            { es: 'empezar', en: 'to begin' },
+            { es: 'devolver', en: 'to return something' },
+            { es: 'entender', en: 'to understand' },
+            { es: 'dormir', en: 'to sleep' },
+            { es: 'perder', en: 'to lose' },
+            { es: 'morir', en: 'to die' },
+            { es: 'querer', en: 'to want, to love' },
+            { es: 'jugar', en: 'to play' },
+            { es: 'mentir', en: 'to lie' },
+            { es: 'servir', en: 'to serve' },
+            { es: 'preferir', en: 'to prefer' },
+            { es: 'pedir', en: 'to ask for' },
+            { es: 'encontrar', en: 'to find' },
+            { es: 'repetir', en: 'to repeat' },
+            { es: 'costar', en: 'to cost' },
+            { es: '¡Qué elegante!', en: 'How elegant!' },
+        ];
+        
+        // Configuraciones de fase para cumplir con la solicitud (6 fases de 5, 1 fase de 6)
+        const TOTAL_PHASES = 7;
+        const STANDARD_PHASE_SIZE = 5;
+
+        // Referencia a las nuevas columnas
+        const spanishColumn = document.getElementById('spanish-column');
+        const englishColumn = document.getElementById('english-column');
+        
+        const gameStatus = document.getElementById('game-status');
+        const nextPhaseButton = document.getElementById('next-phase-button');
+        const messageArea = document.getElementById('message-area');
+
+        let currentPhase = 0;
+        let selectedButtons = [];
+        let matchedPairsCount = 0;
+        let currentPhasePairs = [];
+        let isProcessing = false; // Bloquea clics durante el error/animación
+
+        // --- Funciones de Utilidad ---
+
+        /** Mezcla un array de elementos (algoritmo Fisher-Yates) */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        /** Obtiene las palabras para la fase actual, asegurando 7 fases (6x5 + 1x6) */
+        function getPhaseWords(phaseIndex) {
+            const totalPairs = VOCABULARY_PAIRS.length; // 36
+
+            // Es la última fase (índice 6)
+            if (phaseIndex === TOTAL_PHASES - 1) { 
+                const pairsInPreviousPhases = (TOTAL_PHASES - 1) * STANDARD_PHASE_SIZE; // 6 * 5 = 30
+                const start = pairsInPreviousPhases; // 30
+                const end = totalPairs; // 36 (La longitud restante es 6)
+                return VOCABULARY_PAIRS.slice(start, end);
+            } 
+            // Son las primeras 6 fases (índices 0 a 5)
+            else if (phaseIndex < TOTAL_PHASES - 1) { 
+                const start = phaseIndex * STANDARD_PHASE_SIZE;
+                const end = start + STANDARD_PHASE_SIZE;
+                return VOCABULARY_PAIRS.slice(start, end); // 5 pares
+            }
+            
+            return []; // Fuera de rango
+        }
+
+        /** Renderiza los botones de la fase actual */
+        function renderPhase(pairs) {
+            // Limpiar solo los contenedores de botones, manteniendo los títulos de las columnas
+            // Se asume que setupColumns ya fue llamado en initGame
+            const esContainer = document.getElementById('es-buttons');
+            const enContainer = document.getElementById('en-buttons');
+            
+            esContainer.innerHTML = ''; 
+            enContainer.innerHTML = '';
+            
+            currentPhasePairs = pairs;
+            matchedPairsCount = 0;
+            selectedButtons = [];
+
+            // 1. Prepara y separa los elementos por idioma
+            let spanishWords = pairs.map(p => ({ word: p.es, match: p.en, lang: 'es' }));
+            let englishWords = pairs.map(p => ({ word: p.en, match: p.es, lang: 'en' }));
+            
+            // Mezclar cada lista por separado para que el orden sea aleatorio DENTRO de cada columna
+            shuffleArray(spanishWords); 
+            shuffleArray(englishWords); 
+
+            // Función para crear un botón
+            const createButton = (item) => {
+                const button = document.createElement('button');
+                button.textContent = item.word;
+                button.className = 'game-button w-full px-4 py-3 rounded-xl font-semibold text-lg hover:opacity-90'; 
+                button.dataset.match = item.match; // El valor a emparejar
+                button.dataset.lang = item.lang; // Idioma (es o en)
+                button.addEventListener('click', () => handleButtonClick(button));
+                return button;
+            };
+
+            // 2. Insertar botones en las columnas correctas
+            spanishWords.forEach(item => {
+                esContainer.appendChild(createButton(item));
+            });
+            
+            englishWords.forEach(item => {
+                enContainer.appendChild(createButton(item));
+            });
+            
+            // 3. Actualiza el estado
+            updateStatus();
+        }
+
+        /** Inicializa la estructura interna de las columnas (añadiendo IDs para los contenedores de botones) */
+        function setupColumns() {
+            spanishColumn.innerHTML = '<h3 class="text-lg font-bold text-gray-800 border-b pb-2 mb-2" style="border-color: var(--color-pink);">Español</h3><div class="flex flex-col gap-4" id="es-buttons"></div>';
+            englishColumn.innerHTML = '<h3 class="text-lg font-bold text-gray-800 border-b pb-2 mb-2" style="border-color: var(--color-pink);">Inglés</h3><div class="flex flex-col gap-4" id="en-buttons"></div>';
+        }
+
+
+        /** Actualiza el texto del estado del juego */
+        function updateStatus() {
+            // Se usa TOTAL_PHASES hardcodeado a 7
+            const totalPhases = TOTAL_PHASES; 
+            const wordsInCurrentPhase = currentPhasePairs.length;
+            
+            if (currentPhase < totalPhases) {
+                gameStatus.textContent = `Fase ${currentPhase + 1} de ${totalPhases} | Pares: ${matchedPairsCount} / ${wordsInCurrentPhase}`;
+            } else {
+                gameStatus.textContent = `¡Juego Terminado!`;
+            }
+        }
+
+        /** Muestra un mensaje temporal */
+        function showMessage(text, colorClass) {
+            messageArea.innerHTML = `<p class="text-2xl font-bold ${colorClass}">${text}</p>`;
+            setTimeout(() => {
+                messageArea.innerHTML = '';
+            }, 3000);
+        }
+
+        // --- Lógica Principal del Juego ---
+
+        function handleButtonClick(button) {
+            if (isProcessing || button.classList.contains('matched')) {
+                return;
+            }
+
+            // Si el botón ya está seleccionado, deselecciónalo
+            if (button.classList.contains('selected')) {
+                button.classList.remove('selected');
+                selectedButtons = selectedButtons.filter(b => b !== button);
+                return;
+            }
+
+            // Regla de un idioma: solo se puede seleccionar un botón de ES y uno de EN.
+            const selectedLang = selectedButtons.length > 0 ? selectedButtons[0].dataset.lang : null;
+            if (selectedLang && selectedLang === button.dataset.lang) {
+                // Si ya seleccionaste un botón y el nuevo es del mismo idioma, deselecciona el primero y selecciona el nuevo.
+                selectedButtons[0].classList.remove('selected');
+                selectedButtons = [button];
+            } else {
+                // Agrega el botón a la selección
+                button.classList.add('selected');
+                selectedButtons.push(button);
+            }
+
+
+            // Si se han seleccionado dos botones, intenta el emparejamiento
+            if (selectedButtons.length === 2) {
+                isProcessing = true;
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const [btn1, btn2] = selectedButtons;
+
+            // Regla 1: No se puede emparejar el mismo idioma (aunque la lógica del click ya lo restringe, este es el chequeo final)
+            if (btn1.dataset.lang === btn2.dataset.lang) {
+                 // Esto no debería suceder si handleButtonClick está funcionando bien, pero es una buena salvaguarda.
+                 handleMismatch(btn1, btn2, "¡Error interno! Selecciona uno de Español y uno de Inglés.");
+                 return;
+            }
+            
+            // Regla 2: El emparejamiento debe ser correcto
+            // Se comparan los textos de los botones con el atributo data-match de su pareja.
+            const isMatch = (btn1.textContent === btn2.dataset.match) || (btn2.textContent === btn1.dataset.match);
+
+            if (isMatch) {
+                handleMatch(btn1, btn2);
+            } else {
+                handleMismatch(btn1, btn2, "¡Incorrecto! Vuelve a intentarlo.");
+            }
+        }
+
+        function handleMatch(btn1, btn2) {
+            // Cambio de color permanente a verde claro
+            btn1.classList.remove('selected');
+            btn2.classList.remove('selected');
+            btn1.classList.add('matched');
+            btn2.classList.add('matched');
+
+            matchedPairsCount++;
+            updateStatus();
+            selectedButtons = [];
+            isProcessing = false;
+
+            // Comprueba si la fase ha terminado
+            if (matchedPairsCount === currentPhasePairs.length) {
+                currentPhase++;
+                
+                if (currentPhase < TOTAL_PHASES) {
+                    messageArea.innerHTML = `<p class="text-3xl font-bold text-green-700">🎉 ¡Fase ${currentPhase} completada! 🎉</p>`;
+                    nextPhaseButton.classList.remove('hidden');
+                } else {
+                    messageArea.innerHTML = `
+                        <p class="text-3xl font-bold text-green-700 mb-4">¡Felicidades! Has completado todo el vocabulario en ${TOTAL_PHASES} fases.</p>
+                        <p class="text-xl text-gray-600">Puedes recargar la página para volver a empezar.</p>
+                    `;
+                    nextPhaseButton.classList.add('hidden');
+                }
+            }
+        }
+
+        function handleMismatch(btn1, btn2, msg) {
+            // Cambio de color temporal a rojo claro
+            btn1.classList.remove('selected');
+            btn2.classList.remove('selected');
+            btn1.classList.add('error');
+            btn2.classList.add('error');
+            
+            showMessage(msg, 'text-red-700');
+
+            setTimeout(() => {
+                // Quitar el color de error y restablecer
+                btn1.classList.remove('error');
+                btn2.classList.remove('error');
+                selectedButtons = [];
+                isProcessing = false;
+            }, 1000); // 1 segundo en color rojo
+        }
+
+        /** Inicializa el juego */
+        function initGame() {
+            setupColumns(); // Prepara la estructura de las columnas
+            currentPhase = 0;
+            const firstPhaseWords = getPhaseWords(currentPhase);
+            renderPhase(firstPhaseWords);
+        }
+
+        // --- Event Listener para el botón de siguiente fase ---
+
+        nextPhaseButton.addEventListener('click', () => {
+            const nextPhaseWords = getPhaseWords(currentPhase);
+            if (nextPhaseWords.length > 0) {
+                renderPhase(nextPhaseWords);
+                messageArea.innerHTML = '';
+                nextPhaseButton.classList.add('hidden');
+            }
+        });
+
+        // Iniciar el juego cuando la ventana se cargue
+        window.onload = initGame;
+
+    </script>
+</body>
+</html>
