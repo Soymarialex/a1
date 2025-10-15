@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indefinite Articles and Numbers to 100</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración para colores y fuente personalizados -->
+    <style>
+        /* Definición del color personalizado Eerie Black y Flamingo Pink */
+        :root {
+            --eerie-black: #121118;
+            --flamingo-pink: #FF79AC;
+        }
+
+        /* Usamos Inter como fallback para la fuente Platform Medium */
+        body {
+            font-family: "Platform Medium Font", 'Inter', sans-serif;
+            color: var(--eerie-black);
+            background-color: white;
+        }
+
+        /* Clase para el texto justificado */
+        .text-justified {
+            text-align: justify;
+        }
+        
+        /* Aseguramos que los bold sean fuertes y no dependan de asteriscos */
+        b, .font-bold {
+            font-weight: 700 !important;
+        }
+
+        /* Estilo para los grupos de vocabulario de dos columnas */
+        .vocab-line {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 2px 0;
+        }
+        .vocab-item {
+            width: 48%; /* 48% para dejar un pequeño margen entre ellos */
+            min-width: 250px;
+        }
+
+        /* Adaptación para dispositivos pequeños */
+        @media (max-width: 640px) {
+            .vocab-item {
+                width: 100%;
+                min-width: auto;
+            }
+            .vocab-line {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10 min-h-screen">
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Título de la Página (Título principal en negro, "Articles" y "Numbers" en rosa) -->
+        <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-6 p-4 rounded-xl" style="color: var(--eerie-black); border: 2px solid var(--flamingo-pink);">
+            Indefinite <span style="color: var(--flamingo-pink);">Articles</span> and <span style="color: var(--flamingo-pink);">Numbers</span> to 100
+        </h1>
+
+        <!-- SECCIÓN I: Vocabulario nuevo -->
+        <h2 class="text-2xl font-bold mt-10 mb-6 border-b-2 pb-2" style="border-color: var(--flamingo-pink); color: var(--flamingo-pink);">
+            I. Vocabulario nuevo / New Vocabulary
+        </h2>
+
+        <div class="space-y-3 text-lg">
+            
+            <!-- Grupo 1: Artículos Indefinidos -->
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">un</b> – a, an [masculine, singlar]</span>
+                <span class="vocab-item"><b class="font-bold">unos</b> – some [masculine]</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">una</b> – a, an [feminine, singular]</span>
+                <span class="vocab-item"><b class="font-bold">unas</b> – some [feminine]</span>
+            </div>
+
+            <div class="h-4"></div> <!-- Separador de grupo -->
+            
+            <!-- Grupo 2: Sustantivos -->
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">el estudiante</b> – male student</span>
+                <span class="vocab-item"><b class="font-bold">el béisbol</b> – baseball</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">la estudiante</b> – female student</span>
+                <span class="vocab-item"><b class="font-bold">el examen</b> – exam</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">el águila</b> – eagle [feminine]</span>
+                <span class="vocab-item"><b class="font-bold">el kilómetro</b> – kilometer</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">el zapato</b> – shoe</span>
+                <span class="vocab-item"><b class="font-bold">el kilo</b> – kilo</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">el deporte</b> – sport</span>
+                <span class="vocab-item"><b class="font-bold">la cerveza</b> – beer</span>
+            </div>
+
+            <div class="h-4"></div> <!-- Separador de grupo -->
+            
+            <!-- Grupo 3: Adjetivos -->
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">católico</b> – Catholic</span>
+                <span class="vocab-item"><b class="font-bold">extra</b> – extra</span>
+            </div>
+            
+            <div class="h-4"></div> <!-- Separador de grupo -->
+
+            <!-- Grupo 4: Verbos -->
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">enseñar</b> – to teach</span>
+                <span class="vocab-item"><b class="font-bold">mirar</b> – to look at</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">caminar</b> – to walk</span>
+                <span class="vocab-item"><b class="font-bold">llevar</b> – to wear, to carry</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">buscar</b> – to look for</span>
+                <span class="vocab-item"><b class="font-bold">necesitar</b> – to need</span>
+            </div>
+
+            <div class="h-4"></div> <!-- Separador de grupo -->
+
+            <!-- Grupo 5: Preguntas y Expresiones -->
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">¿cuánto?</b>, <b class="font-bold">¿cuánta?</b> – how much?</span>
+                <span class="vocab-item"><b class="font-bold">para</b> – for</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">¿cuántos?</b>, <b class="font-bold">¿cuántas?</b> – how many?</span>
+                <span class="vocab-item"><b class="font-bold">por favor</b> – please</span>
+            </div>
+
+            <div class="h-4"></div> <!-- Separador de grupo -->
+
+            <!-- Grupo 6: Números 0-10 -->
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">cero</b> – zero</span>
+                <span class="vocab-item"><b class="font-bold">seis</b> – six</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">uno</b> – one</span>
+                <span class="vocab-item"><b class="font-bold">siete</b> – seven</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">dos</b> – two</span>
+                <span class="vocab-item"><b class="font-bold">ocho</b> – eight</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">tres</b> – three</span>
+                <span class="vocab-item"><b class="font-bold">nueve</b> – nine</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">cuatro</b> – four</span>
+                <span class="vocab-item"><b class="font-bold">diez</b> – ten</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">cinco</b> – five</span>
+                <span class="vocab-item"></span>
+            </div>
+
+            <div class="h-4"></div> <!-- Separador de grupo -->
+
+            <!-- Grupo 7: Números 11-20 -->
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">once</b> – eleven</span>
+                <span class="vocab-item"><b class="font-bold">dieciséis</b> – sixteen</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">doce</b> – twelve</span>
+                <span class="vocab-item"><b class="font-bold">diecisiete</b> – seventeen</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">trece</b> – thirteen</span>
+                <span class="vocab-item"><b class="font-bold">dieciocho</b> – eighteen</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">catorce</b> – fourteen</span>
+                <span class="vocab-item"><b class="font-bold">diecinueve</b> – nineteen</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">quince</b> – fifteen</span>
+                <span class="vocab-item"><b class="font-bold">veinte</b> – twenty</span>
+            </div>
+
+            <div class="h-4"></div> <!-- Separador de grupo -->
+
+            <!-- Grupo 8: Múltiplos de 10 -->
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">treinta</b> – thirty</span>
+                <span class="vocab-item"><b class="font-bold">setenta</b> – seventy</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">cuarenta</b> – forty</span>
+                <span class="vocab-item"><b class="font-bold">ochenta</b> – eighty</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">cincuenta</b> – fifty</span>
+                <span class="vocab-item"><b class="font-bold">noventa</b> – ninety</span>
+            </div>
+            <div class="vocab-line">
+                <span class="vocab-item"><b class="font-bold">sesenta</b> – sixty</span>
+                <span class="vocab-item"><b class="font-bold">cien</b> – one hundred</span>
+            </div>
+        </div>
+
+
+        <!-- SECCIÓN II: Repaso general -->
+        <h2 class="text-2xl font-bold mt-10 mb-6 border-b-2 pb-2" style="border-color: var(--flamingo-pink); color: var(--flamingo-pink);">
+            II. Repaso general / General Review
+        </h2>
+
+        <div class="space-y-6 text-base md:text-lg">
+            
+            <!-- A. Improving Your Ability to Communicate in Spanish -->
+            <div class="text-justified">
+                <b class="font-bold">A. Improving Your Ability to Communicate in Spanish</b>
+                <p class="mt-2">
+                    Being proficient in Spanish really means performing it as needed. And proper performance of Spanish—when speaking or writing—happens only as the result of sufficient practice. That’s why the most effective way to improve your ability to communicate in Spanish is to practice it as much as possible, whether by engaging with the audio glossary, speaking activities, and workbook or by interacting with other Spanish speakers. Also, try to use Spanish even when you’re not studying the language by, for example, counting in Spanish in your daily life. The more contact you have with Spanish—the more you speak it, read it, write it, or hear it—the quicker and more fully you will acquire the language.
+                </p>
+            </div>
+
+            <!-- B. Indefinite Articles -->
+            <div class="text-justified">
+                <b class="font-bold">B. Indefinite Articles</b>
+                <p class="mt-2">
+                    While “a” and “an” (in the singular) and “some” (in the plural) are the indefinite articles in English, in Spanish there are four forms of the indefinite article: <b class="font-bold">un</b> (masculine singular), <b class="font-bold">una</b> (feminine singular), <b class="font-bold">unos</b> (masculine plural), <b class="font-bold">unas</b> (feminine plural). Examples of indefinite articles used with nouns include <b class="font-bold">un zapato</b> [a shoe], <b class="font-bold">una cerveza</b> [a beer], <b class="font-bold">unos kilómetros</b> [some kilometers], and <b class="font-bold">unas águilas</b> [some eagles].
+                </p>
+                <p class="mt-4">
+                    In general, the indefinite article in Spanish is used much as it is in English. For example, “Carlos is taking an exam” is <b class="font-bold">Carlos toma un examen</b>. Unlike English, indefinite articles are typically not used when talking about one’s profession, religion, or nationality (e.g., “María is a doctor” is <b class="font-bold">María es doctora</b>; “Pedro is a Catholic” is <b class="font-bold">Pedro es católico</b>; “Teresa is a Spaniard” is <b class="font-bold">Teresa es española</b>). When, however, the profession, religion, or nationality is modified by an adjective, then an indefinite article is used (e.g., <b class="font-bold">María es una doctora excelente</b>; <b class="font-bold">Pedro es un buen católico</b>; <b class="font-bold">Teresa es una española famosa</b>).
+                </p>
+                <p class="mt-4">
+                    Feminine nouns beginning with the sound <b class="font-bold">a</b> in a stressed syllable use <b class="font-bold">un</b> rather than <b class="font-bold">una</b> as their indefinite article. <b class="font-bold">Un águila</b> [an eagle], for example, is indeed a feminine noun, but it uses <b class="font-bold">un</b> rather than <b class="font-bold">una</b> as its indefinite article. [Note: If <b class="font-bold">una</b> were used as the definite article for <b class="font-bold">águila</b>, then the two <b class="font-bold">a</b> sounds would run together when pronounced and sound like <b class="font-bold">unaaaáguila</b>; using <b class="font-bold">un</b> instead of <b class="font-bold">una</b> avoids this problem.] Feminine nouns beginning with the sound <b class="font-bold">a</b> in a syllable that is not stressed keep the usual definite article of <b class="font-bold">una</b> (e.g., <b class="font-bold">una actitud</b> [an attitude]).
+                </p>
+            </div>
+            
+            <!-- C. Numbers 1 to 100 -->
+            <div class="text-justified">
+                <b class="font-bold">C. Numbers 1 to 100</b>
+                <p class="mt-2">
+                    Once you learn the numbers one to ten, you can use those numbers to help you learn ten to twenty and then the multiples of ten from ten to one hundred. Notice the similarities and differences in the following numbers.
+                </p>
+                <!-- Tabla/Alineación de números -->
+                <div class="mt-4 grid grid-cols-3 gap-y-1 gap-x-4 text-sm md:text-base whitespace-nowrap">
+                    <span><b class="font-bold">uno</b></span>
+                    <span><b class="font-bold">once</b></span>
+                    <span><b class="font-bold">diez</b></span>
+                    
+                    <span><b class="font-bold">dos</b></span>
+                    <span><b class="font-bold">doce</b></span>
+                    <span><b class="font-bold">veinte</b></span>
+                    
+                    <span><b class="font-bold">tres</b></span>
+                    <span><b class="font-bold">trece</b></span>
+                    <span><b class="font-bold">treinta</b></span>
+                    
+                    <span><b class="font-bold">cuatro</b></span>
+                    <span><b class="font-bold">catorce</b></span>
+                    <span><b class="font-bold">cuarenta</b></span>
+                    
+                    <span><b class="font-bold">cinco</b></span>
+                    <span><b class="font-bold">quince</b></span>
+                    <span><b class="font-bold">cincuenta</b></span>
+                    
+                    <span><b class="font-bold">seis</b></span>
+                    <span><b class="font-bold">dieciséis</b></span>
+                    <span><b class="font-bold">sesenta</b></span>
+                    
+                    <span><b class="font-bold">siete</b></span>
+                    <span><b class="font-bold">diecisiete</b></span>
+                    <span><b class="font-bold">setenta</b></span>
+                    
+                    <span><b class="font-bold">ocho</b></span>
+                    <span><b class="font-bold">dieciocho</b></span>
+                    <span><b class="font-bold">ochenta</b></span>
+                    
+                    <span><b class="font-bold">nueve</b></span>
+                    <span><b class="font-bold">diecinueve</b></span>
+                    <span><b class="font-bold">noventa</b></span>
+                    
+                    <span><b class="font-bold">diez</b></span>
+                    <span><b class="font-bold">veinte</b></span>
+                    <span><b class="font-bold">cien</b></span>
+                </div>
+                <!-- Fin Tabla/Alineación de números -->
+
+                <p class="mt-4">
+                    Usually, a number doesn’t change its form when modifying a noun. For example, <b class="font-bold">siete</b> stays the same in <b class="font-bold">Hay siete chicos</b> and <b class="font-bold">Hay siete chicas</b>. Numbers that do change are those ending in <b class="font-bold">-un</b> or <b class="font-bold">-una</b>. For example, “twenty-one men” uses the masculine form <b class="font-bold">veintiún hombres</b>, while “forty-one women” uses the feminine form <b class="font-bold">cuarenta y una mujeres</b>.
+                </p>
+            </div>
+
+            <!-- D. Pronunciation -->
+            <div class="text-justified">
+                <b class="font-bold">D. Pronunciation</b>
+                <p class="mt-2">
+                    The Spanish letters <b class="font-bold">b</b> and <b class="font-bold">v</b> are associated with the same sound: the sound made when a <b class="font-bold">b</b> is pronounced in English. Like the sound associated with the letter <b class="font-bold">t</b>, the sounds associated with the letters <b class="font-bold">p</b>, <b class="font-bold">b</b>, <b class="font-bold">v</b>, and <b class="font-bold">k</b> in Spanish are not aspirated, meaning that you produce no puff of air when you pronounce words with these letters in them. When you say, for example, <b class="font-bold">Bolivia</b> or <b class="font-bold">El taco es para Teresa</b>, your mouth should produce no puffs of air. You can test this by putting your hand in front of your mouth when speaking; your hand should not feel any puffs of air when you pronounce the sounds associated with <b class="font-bold">t</b>, <b class="font-bold">p</b>, <b class="font-bold">b</b>, <b class="font-bold">v</b>, and <b class="font-bold">k</b>.
+                </p>
+                <p class="mt-4">
+                    The letters <b class="font-bold">k</b> and <b class="font-bold">w</b> are hardly used in Spanish because they only appear in words that come from other languages (e.g., <b class="font-bold">el kilo</b>, <b class="font-bold">el whisky</b>). The sound associated with the letter <b class="font-bold">w</b> in Spanish is the same as it is in English.
+                </p>
+                <p class="mt-4">
+                    The sounds made when pronouncing the letters <b class="font-bold">c</b> and <b class="font-bold">g</b> are as follows: The <b class="font-bold">k</b> sound is made when <b class="font-bold">c</b> appears before <b class="font-bold">a</b>, <b class="font-bold">o</b>, or <b class="font-bold">u</b> (e.g., <b class="font-bold">la casa</b>, <b class="font-bold">el taco</b>, <b class="font-bold">Cuba</b>); in Latin America, the <b class="font-bold">s</b> sound is made when <b class="font-bold">c</b> appears before <b class="font-bold">e</b> or <b class="font-bold">i</b>, while in Spain, the sound made is <b class="font-bold">th</b>, as in the English word “this.” So, Latin Americans would pronounce <b class="font-bold">cero</b> and <b class="font-bold">cinco</b> by saying these words with an <b class="font-bold">s</b> sound, while someone from Madrid would say these words with a <b class="font-bold">th</b> sound. The sound associated with <b class="font-bold">z</b> is always the same as the sound associated with <b class="font-bold">ce</b> and <b class="font-bold">ci</b>: Latin Americans would say <b class="font-bold">zapato</b> [shoe] by pronouncing an <b class="font-bold">s</b> sound, while someone from Madrid would pronounce the word with a <b class="font-bold">th</b> sound.
+                </p>
+                <p class="mt-4">
+                    The letter <b class="font-bold">g</b> is like <b class="font-bold">c</b> because the way it’s pronounced depends on the letter that follows it: The hard <b class="font-bold">g</b> sound is made when <b class="font-bold">g</b> is followed by <b class="font-bold">a</b>, <b class="font-bold">o</b>, or <b class="font-bold">u</b> (e.g., <b class="font-bold">la galleta</b> [cookie], <b class="font-bold">Gonzalo</b>, <b class="font-bold">Gustavo</b>); the Spanish <b class="font-bold">j</b> sound is made when the letter following <b class="font-bold">g</b> is <b class="font-bold">e</b> or <b class="font-bold">i</b> (e.g., <b class="font-bold">Argentina</b>, <b class="font-bold">el gigante</b> [giant]).
+                </p>
+                <p class="mt-4">
+                    The letter <b class="font-bold">x</b> in Spanish is usually associated with the same sound produced by the <b class="font-bold">x</b> in English (e.g., <b class="font-bold">el taxi</b>). With certain Mexican place names, the <b class="font-bold">x</b> is pronounced with the sound made by <b class="font-bold">jota</b> (e.g., <b class="font-bold">México</b>); at other times, the <b class="font-bold">x</b> is pronounced as an <b class="font-bold">s</b>, as in <b class="font-bold">el xilófono</b> [xylophone]. The letter <b class="font-bold">ñ</b> is associated with the sound made in the English word “onion” (e.g., <b class="font-bold">España</b>).
+                </p>
+            </div>
+
+        </div> <!-- Fin de las secciones de Repaso general -->
+
+    </div>
+</body>
+</html>

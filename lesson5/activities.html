@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración para colores y fuente personalizados -->
+    <style>
+        /* Definición de colores */
+        :root {
+            --eerie-black: #121118;
+            --flamingo-pink: #FF79AC;
+            --light-green: #D1FAE5; /* Verde claro para respuesta correcta */
+            --light-red: #FEE2E2;   /* Rojo claro para respuesta incorrecta */
+        }
+
+        /* Tipografía y colores base */
+        body {
+            font-family: "Platform Medium Font", 'Inter', sans-serif; /* Se usa Inter como fallback */
+            color: var(--eerie-black);
+            background-color: white;
+            line-height: 1.6;
+        }
+
+        /* Clase para el texto justificado */
+        .text-justified {
+            text-align: justify;
+        }
+        
+        /* Aseguramos que las negritas se vean fuertes sin asteriscos */
+        b, .font-bold {
+            font-weight: 700 !important;
+        }
+
+        /* Ajuste para inputs dentro de texto */
+        .inline-input-container {
+            display: inline-flex;
+            align-items: center;
+        }
+        .inline-input {
+            width: 80px;
+            height: 1.5em; 
+            margin: 0 4px;
+            text-align: center;
+            border: none;
+            border-bottom: 2px solid var(--eerie-black);
+            background-color: transparent;
+            font-size: 1em;
+            padding: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Estilo para la cuadrícula de la actividad A */
+        .activity-a-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        /* Adaptación móvil */
+        @media (max-width: 768px) {
+            .activity-a-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10 min-h-screen">
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Título de la Página -->
+        <h1 class="text-3xl md:text-4xl font-extrabold text-center mb-10 p-4 rounded-xl" style="color: var(--flamingo-pink); border: 2px solid var(--flamingo-pink);">
+            III. Actividades / Activities
+        </h1>
+
+        <div class="space-y-12">
+            
+            <!-- ACTIVIDAD A -->
+            <div>
+                <b class="font-bold text-lg mb-3 block text-justified">a. Marisol asiste ahora a una nueva escuela secundaria: la escuela Miguel de Cervantes. Marisol habla con su madre Alejandra sobre las cosas que se encuentran en su aula de biología. / Marisol is now attending a new high school: Miguel de Cervantes High School. Marisol talks to her mother Alejandra about the things that can be found in her biology classroom.</b>
+                
+                <p class="mb-4 text-sm md:text-base text-justified">
+                    Agrega el artículo indefinido apropiado. / Add the correct indefinite article. 
+                </p>
+                
+                <p class="text-base font-semibold mb-6 italic">En el aula [classroom] hay:</p>
+
+                <div id="activity-a-container" class="activity-a-grid text-base md:text-lg">
+                    <!-- Columna 1 -->
+                    <div>
+                        <p class="mb-2">1. <input type="text" class="inline-input" data-completion-id="1" maxlength="5"> lápices</p>
+                        <p class="mb-2">2. <input type="text" class="inline-input" data-completion-id="2" maxlength="5"> mesa</p>
+                        <p class="mb-2">3. <input type="text" class="inline-input" data-completion-id="3" maxlength="5"> exámenes</p>
+                        <p class="mb-2">4. <input type="text" class="inline-input" data-completion-id="4" maxlength="5"> reloj</p>
+                        <p class="mb-2">5. <input type="text" class="inline-input" data-completion-id="5" maxlength="5"> libros</p>
+                        <p class="mb-2">6. <input type="text" class="inline-input" data-completion-id="6" maxlength="5"> computadoras [computers]</p>
+                        <p class="mb-2">7. <input type="text" class="inline-input" data-completion-id="7" maxlength="5"> cuadernos</p>
+                        <p class="mb-2">8. <input type="text" class="inline-input" data-completion-id="8" maxlength="5"> diccionarios [dictionaries]</p>
+                    </div>
+                    <!-- Columna 2 -->
+                    <div>
+                        <p class="mb-2">9. <input type="text" class="inline-input" data-completion-id="9" maxlength="5"> esqueleto [skeleton]</p>
+                        <p class="mb-2">10. <input type="text" class="inline-input" data-completion-id="10" maxlength="5"> sillas</p>
+                        <p class="mb-2">11. <input type="text" class="inline-input" data-completion-id="11" maxlength="5"> televisor</p>
+                        <p class="mb-2">12. <input type="text" class="inline-input" data-completion-id="12" maxlength="5"> mapas</p>
+                        <p class="mb-2">13. <input type="text" class="inline-input" data-completion-id="13" maxlength="5"> teléfono</p>
+                        <p class="mb-2">14. <input type="text" class="inline-input" data-completion-id="14" maxlength="5"> maestra [teacher]</p>
+                        <p class="mb-2">15. <input type="text" class="inline-input" data-completion-id="15" maxlength="5"> chicos</p>
+                        <p class="mb-2">16. <input type="text" class="inline-input" data-completion-id="16" maxlength="5"> estudiantes altas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTIVIDAD B/C (fusionadas en el prompt) -->
+            <div>
+                <b class="font-bold text-lg mb-3 block text-justified">b. El padre de Marisol, Carlos González, quiere aprender a hacer algo nuevo en su tiempo libre. / Marisol’s father, Carlos González, wants to learn how to do something new in his free time.</b>
+                
+                <p class="mb-4 text-sm md:text-base text-justified">
+                    <b class="font-bold">c.</b> Completa las frases con el artículo indefinido correcto. / Complete the sentences with the correct indefinite article. 
+                </p>
+
+                <div class="text-base md:text-lg text-justified">
+                    Carlos quiere aprender a hacer algo nuevo. 
+                    <p class="mt-2">
+                        Él mira 
+                        <span class="font-bold">1.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="17" maxlength="5"></span> sitios web [websites] interesantes. 
+                        <span class="font-bold">2.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="18" maxlength="5"></span> amigo le recomendó [recommended to him] tomar 
+                        <span class="font-bold">3.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="19" maxlength="5"></span> curso en casa.
+                        Ahora él busca 
+                        <span class="font-bold">4.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="20" maxlength="5"></span> curso de fotografía [photography] de The Great Courses.
+                        Él necesita 
+                        <span class="font-bold">5.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="21" maxlength="5"></span> cámara [camera], 
+                        <span class="font-bold">6.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="22" maxlength="5"></span> ideas [ideas] y 
+                        <span class="font-bold">7.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="23" maxlength="5"></span> buena actitud.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ACTIVIDAD D -->
+            <div>
+                <b class="font-bold text-lg mb-3 block text-justified">d. La familia González Fallas está conociendo a los vecinos de Villa Celeste. Ellos hablan sobre las profesiones que todos tienen. / The González Fallas family is getting to know their neighbors in Villa Celeste. They talk about the professions that everyone has.</b>
+                
+                <p class="mb-4 text-sm md:text-base text-justified">
+                    Completa las frases con el artículo indefinido correcto. Si la frase no necesita un artículo, escribe “X”. / Complete the sentences with the correct indefinite article. If the sentence does not need an article, write an “X.” 
+                </p>
+
+                <div class="text-base md:text-lg text-justified space-y-2">
+                    <p>Luis Cortés es <span class="font-bold">1.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="24" maxlength="5"></span> dueño [owner] de una agencia de viajes.</p>
+                    <p>Su [His] esposa [wife] Cecilia es <span class="font-bold">2.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="25" maxlength="5"></span> secretaria ejecutiva. </p>
+                    <p>Cecilia es <span class="font-bold">3.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="26" maxlength="5"></span> secretaria excelente.</p>
+                    <p>Su hijo [son] Alberto es <span class="font-bold">4.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="27" maxlength="5"></span> dentista fantástico.</p>
+                    <p>Su hijo Diego es <span class="font-bold">5.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="28" maxlength="5"></span> estudiante.</p>
+                    <p>Su hijo Javier es <span class="font-bold">6.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="29" maxlength="5"></span> ingeniero [engineer] muy responsable.</p>
+                    <p>El otro [other] vecino, Esteban Quirós, no solo es <span class="font-bold">7.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="30" maxlength="5"></span> doctor, él es <span class="font-bold">8.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="31" maxlength="5"></span> doctor muy famoso en el hospital.</p>
+                    <p>Luisa, la esposa de Esteban, es <span class="font-bold">9.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="32" maxlength="5"></span> nutricionista [nutritionist].</p>
+                    <p>Ella es <span class="font-bold">10.</span> <span class="inline-input-container"><input type="text" class="inline-input" data-completion-id="33" maxlength="5"></span> nutricionista muy trabajadora.</p>
+                </div>
+            </div>
+
+            <!-- ACTIVIDAD E (Modificada) -->
+            <div>
+                <b class="font-bold text-lg mb-3 block text-justified">e. Escribe los números correctos. / Write the correct numbers.</b>
+                
+                <div class="text-base md:text-lg space-y-3">
+                    <p><span class="font-bold">1.</span> ¿Cuántos estados [states] hay en los Estados Unidos? <input type="text" class="inline-input" data-completion-id="34" maxlength="20"></p>
+                    <p><span class="font-bold">2.</span> ¿Cuántos días hay en enero [January]? <input type="text" class="inline-input" data-completion-id="35" maxlength="20"></p>
+                    <p><span class="font-bold">3.</span> ¿Cuántos días hay en un febrero [February] normal? <input type="text" class="inline-input" data-completion-id="36" maxlength="20"></p>
+                    <p><span class="font-bold">4.</span> ¿Cuántas dedos [fingers] hay en dos manos? <input type="text" class="inline-input" data-completion-id="37" maxlength="20"></p>
+                    <p><span class="font-bold">5.</span> ¿Cuántas semanas [weeks] hay en un año [year]? <input type="text" class="inline-input" data-completion-id="38" maxlength="20"></p>
+                    <p><span class="font-bold">6.</span> ¿En cuántas naciones de América Central se habla [is spoken] español como lengua oficial? <input type="text" class="inline-input" data-completion-id="39" maxlength="20"></p>
+                </div>
+            </div>
+
+            <!-- Botón para mostrar las respuestas -->
+            <div class="mt-12 pt-8 border-t-2 border-gray-200">
+                <button id="toggle-answers" class="w-full py-3 px-6 text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl" style="background-color: var(--flamingo-pink);">
+                    Mostrar Respuestas / Show Answers
+                </button>
+
+                <!-- Contenedor de Respuestas (Inicialmente oculto) -->
+                <div id="answer-key" class="hidden mt-6 p-6 bg-gray-50 rounded-xl border border-gray-200">
+                    <h2 class="text-xl font-bold mb-4" style="color: var(--eerie-black);">Respuestas correctas / Correct Answers</h2>
+                    
+                    <!-- Respuestas A -->
+                    <div class="mb-6">
+                        <p class="font-bold mb-2">a.</p>
+                        <div class="grid grid-cols-2 gap-x-8 gap-y-1 text-base">
+                            <p>1. unos</p><p>9. un</p>
+                            <p>2. una</p><p>10. unas</p>
+                            <p>3. unos</p><p>11. un</p>
+                            <p>4. un</p><p>12. unos</p>
+                            <p>5. unos</p><p>13. un</p>
+                            <p>6. unas</p><p>14. una</p>
+                            <p>7. unos</p><p>15. unos</p>
+                            <p>8. unos</p><p>16. unas</p>
+                        </div>
+                    </div>
+
+                    <!-- Respuestas B -->
+                    <div class="mb-6">
+                        <p class="font-bold mb-2">b.</p>
+                        <div class="grid grid-cols-2 gap-x-8 gap-y-1 text-base">
+                            <p>1. unos</p><p>5. una</p>
+                            <p>2. Un</p><p>6. unas</p>
+                            <p>3. un</p><p>7. una</p>
+                            <p>4. un</p>
+                        </div>
+                    </div>
+
+                    <!-- Respuestas C (Corresponde a la actividad D en el cuerpo del texto) -->
+                    <div class="mb-6">
+                        <p class="font-bold mb-2">c.</p>
+                        <div class="grid grid-cols-2 gap-x-8 gap-y-1 text-base">
+                            <p>1. X</p><p>6. un</p>
+                            <p>2. X</p><p>7. X</p>
+                            <p>3. una</p><p>8. un</p>
+                            <p>4. un</p><p>9. X</p>
+                            <p>5. X</p><p>10. una</p>
+                        </div>
+                    </div>
+
+                    <!-- Respuestas D (Corresponde a la actividad E en el cuerpo del texto - ACTUALIZADA) -->
+                    <div class="mb-6">
+                        <p class="font-bold mb-2">d.</p>
+                        <!-- Estructura de la lista de respuestas actualizada para reflejar los cambios -->
+                        <div class="grid grid-cols-2 gap-x-8 gap-y-1 text-base">
+                            <p>1. cincuenta</p><p>4. diez</p>
+                            <p>2. treinta y uno</p><p>5. cincuenta y dos</p>
+                            <p>3. veintiocho</p><p>6. seis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Fin del Contenedor de Actividades -->
+
+    </div>
+
+    <script>
+        // Objeto con las respuestas correctas basado estrictamente en la lista proporcionada por el usuario.
+        const correctAnswers = {
+            // Actividad A (1-16)
+            '1': ['unos'], '2': ['una'], '3': ['unos'], '4': ['un'], '5': ['unos'], '6': ['unas'], '7': ['unos'], '8': ['unos'],
+            '9': ['un'], '10': ['unas'], '11': ['un'], '12': ['unos'], '13': ['un'], '14': ['una'], '15': ['unos'], '16': ['unas'],
+            
+            // Actividad B/C (17-23) - Mapea a la sección 'b.' de respuestas
+            '17': ['unos'], '18': ['un'], '19': ['un'], '20': ['un'], '21': ['una'], '22': ['unas'], '23': ['una'],
+            
+            // Actividad D (24-33) - Mapea a la sección 'c.' de respuestas (incluye 'X')
+            '24': ['x'], '25': ['x'], '26': ['una'], '27': ['un'], '28': ['x'], '29': ['un'], '30': ['x'], '31': ['un'], '32': ['x'], '33': ['una'],
+            
+            // Actividad E (34-39) - Mapea a la sección 'd.' de respuestas (IDs 40 y la respuesta 'nueve' se eliminaron)
+            '34': ['cincuenta', '50'], 
+            '35': ['treinta y uno', '31'], 
+            '36': ['veintiocho', '28'], 
+            '37': ['diez', '10'], 
+            '38': ['cincuenta y dos', '52'], 
+            '39': ['seis', '6'] // Esta era la respuesta con ID 40 (pregunta 7) y ahora es ID 39 (pregunta 6)
+        };
+
+        const totalInputs = Object.keys(correctAnswers).length;
+
+        /**
+         * Verifica la respuesta en el input, aplica el estilo y bloquea si es correcta.
+         * @param {HTMLInputElement} input - El elemento input a verificar.
+         */
+        function checkAnswer(input) {
+            const id = input.dataset.completionId;
+            const userAnswer = input.value.trim().toLowerCase();
+            
+            // Permitir 'X' o 'x' para el artículo nulo
+            if (userAnswer === 'x') {
+                input.value = 'X'; 
+            }
+
+            // Si la respuesta es vacía, limpiar el estilo
+            if (userAnswer === '') {
+                input.style.backgroundColor = 'transparent';
+                input.style.borderColor = 'var(--eerie-black)';
+                input.readOnly = false;
+                return false;
+            }
+
+            // Verificar si la respuesta está en el array de respuestas correctas
+            const correct = correctAnswers[id] && correctAnswers[id].some(
+                correctOption => correctOption.toLowerCase() === userAnswer
+            );
+
+            if (correct) {
+                input.style.backgroundColor = 'var(--light-green)';
+                input.style.borderColor = 'var(--light-green)';
+                input.readOnly = true; 
+            } else {
+                input.style.backgroundColor = 'var(--light-red)';
+                input.style.borderColor = 'var(--light-red)';
+                input.readOnly = false; // Permitir reintento
+            }
+            return correct;
+        }
+
+        /**
+         * Maneja el evento KeyDown para la tecla Enter y salta al siguiente input.
+         * @param {KeyboardEvent} event - El evento de teclado.
+         */
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); 
+                const currentInput = event.target;
+                const currentId = parseInt(currentInput.dataset.completionId);
+
+                // 1. Verificar la respuesta actual
+                checkAnswer(currentInput); 
+
+                // 2. Saltar al siguiente input disponible (no completado)
+                let nextId = currentId + 1;
+                let nextInput = document.querySelector(`[data-completion-id="${nextId}"]`);
+
+                // Buscar el siguiente input disponible que NO esté en modo solo lectura
+                while (nextInput && nextInput.readOnly) {
+                    nextId++;
+                    nextInput = document.querySelector(`[data-completion-id="${nextId}"]`);
+                }
+
+                if (nextInput) {
+                    nextInput.focus();
+                } else {
+                    // Si es el último, buscar el primer incompleto
+                    const firstIncomplete = document.querySelector('input:not([readonly])');
+                    if (firstIncomplete) {
+                         firstIncomplete.focus();
+                    } else {
+                        currentInput.blur(); // Quitar foco si todo está completo
+                    }
+                }
+            }
+        }
+
+        // Inicialización: Añadir event listeners a todos los inputs y al botón de respuestas
+        window.onload = function() {
+            const inputs = document.querySelectorAll('.inline-input');
+            inputs.forEach(input => {
+                // Evento para la verificación con Enter
+                input.addEventListener('keydown', handleEnter);
+                // Evento para la verificación al perder el foco (blur)
+                input.addEventListener('blur', () => checkAnswer(input));
+            });
+
+            // Lógica para el botón de respuestas
+            const toggleButton = document.getElementById('toggle-answers');
+            const answerKey = document.getElementById('answer-key');
+
+            toggleButton.addEventListener('click', () => {
+                answerKey.classList.toggle('hidden');
+                if (!answerKey.classList.contains('hidden')) {
+                    toggleButton.textContent = 'Ocultar Respuestas / Hide Answers';
+                } else {
+                    toggleButton.textContent = 'Mostrar Respuestas / Show Answers';
+                }
+            });
+        };
+    </script>
+</body>
+</html>

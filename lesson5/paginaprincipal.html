@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Lessons with María C.</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración para colores y fuente personalizados -->
+    <style>
+        /* Definición de colores base */
+        :root {
+            --eerie-black: #121118;
+            --flamingo-pink: #FF79AC;
+            --default-bg: #FFFFFF;
+        }
+
+        /* Tipografía y colores base */
+        body {
+            /* Usando 'Inter' como fallback, asumiendo Platform Medium Font no está cargada externamente */
+            font-family: "Platform Medium Font", 'Inter', sans-serif; 
+            color: var(--eerie-black);
+            background-color: var(--default-bg);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Estilo para los botones principales */
+        .main-button {
+            background-color: var(--flamingo-pink);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            font-size: 1.125rem; /* text-xl */
+            border: 2px solid transparent;
+        }
+
+        .main-button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.15);
+            border-color: var(--eerie-black);
+        }
+
+        /* Estilo para el botón de enlace externo */
+        .external-button {
+            background-color: var(--eerie-black);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 600;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .external-button:hover {
+            background-color: var(--flamingo-pink);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-grow max-w-4xl mx-auto w-full p-6 md:p-10 flex flex-col justify-center items-center">
+        
+        <!-- Título Principal (Placeholder ya que no se especificó un título para la página principal) -->
+        <h1 class="text-5xl md:text-6xl font-extrabold text-center mb-12" style="color: var(--eerie-black);">
+            Welcome to your Spanish Class!
+        </h1>
+
+        <!-- Contenedor de Botones de Navegación -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
+            
+            <a href="vocabulary.html" class="main-button">
+                Indefinite Articles and Numbers to 100
+            </a>
+
+            <a href="activities.html" class="main-button">
+                Actividades / Activities
+            </a>
+
+            <a href="lectura.html" class="main-button">
+                Lectura cultural / Cultural Reading
+            </a>
+
+            <a href="game.html" class="main-button">
+                Matching game / test your memory
+            </a>
+            
+        </div>
+        
+    </div>
+
+    <!-- Pie de Página (Footer) -->
+    <footer class="mt-auto p-6 md:p-8 text-center" style="background-color: var(--default-bg); border-top: 1px solid #eee;">
+        <p class="text-sm mb-4" style="color: var(--eerie-black);">
+            © 2025 Spanish Lessons with María C. All rights reserved.
+        </p>
+        
+        <!-- Botón de Enlace Externo -->
+        <a 
+            href="https://preply.com/en/tutor/5105409?utm_source=friend&utm_medium=ref&utm_campaign=stu_plg_plg_all_0_mul_xx_multiplesub_share-tutor-tutoring_1&utm_content=OTQ2NTAwNQ==" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="external-button inline-block text-lg"
+        >
+            Find your Spanish class here.
+        </a>
+    </footer>
+</body>
+</html>

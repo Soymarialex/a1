@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV. Lectura cultural / Cultural Reading</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración para colores y fuente personalizados -->
+    <style>
+        /* Definición de colores */
+        :root {
+            --eerie-black: #121118;
+            --flamingo-pink: #FF79AC;
+            --light-green: #D1FAE5; /* Verde claro para respuesta correcta */
+            --light-red: #FEE2E2;   /* Rojo claro para respuesta incorrecta */
+            --default-border: #D1D5DB; /* Gris suave para el borde inicial del botón */
+        }
+
+        /* Tipografía y colores base */
+        body {
+            /* Usando 'Inter' como fallback, asumiendo que 'Platform Medium Font' no está disponible globalmente */
+            font-family: "Platform Medium Font", 'Inter', sans-serif; 
+            color: var(--eerie-black);
+            background-color: white;
+            line-height: 1.6;
+        }
+
+        /* Clase para el texto justificado (Requerimiento) */
+        .text-justified {
+            text-align: justify;
+        }
+        
+        /* Aseguramos que las negritas se vean fuertes sin asteriscos (Requerimiento) */
+        b, .font-bold {
+            font-weight: 700 !important;
+        }
+
+        /* Estilo base para los botones de respuesta C/F */
+        .answer-btn {
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: white; /* Color de fondo por defecto */
+            border-color: var(--default-border);
+            color: var(--eerie-black);
+        }
+
+        /* Estilo para botones ya respondidos/deshabilitados */
+        .response-completed .answer-btn:not([disabled]) {
+            opacity: 0.6;
+        }
+        
+        /* Estilo para cuando un botón está deshabilitado */
+        .answer-btn[disabled] {
+            cursor: default;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10 min-h-screen">
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Título de la Página -->
+        <h1 class="text-3xl md:text-4xl font-extrabold text-center mb-10 p-4 rounded-xl" style="color: var(--flamingo-pink); border: 2px solid var(--flamingo-pink);">
+            IV. Lectura cultural / Cultural Reading
+        </h1>
+
+        <div class="space-y-8">
+            
+            <p class="mb-4 text-sm md:text-base text-justified font-bold">
+                Lee el texto siguiente sobre la comida latinoamericana y contesta las preguntas de forma cierto (“C”) o falso (“F”). / Read the following text about Latin American food and answer the questions as either true (“C”) or false (“F”). 
+            </p>
+
+            <!-- TEXTO EN ESPAÑOL -->
+            <div class="space-y-4 text-base md:text-lg text-justified">
+                <p>
+                    La comida latinoamericana es más que burritos, quesadillas y tacos. Aunque en los Estados Unidos una de las comidas más conocida es la comida mexicana, esta también está compuesta de una gran variedad de ingredientes, colores y sabores. En la comida latinoamericana hay una mezcla de cultura con influencia indígena y europea, por ejemplo, de España, Italia, e incluso de África. 
+                </p>
+                <p>
+                    Es importante notar que la comida varía según la región geográfica y el país. Estas variaciones gastronómicas dependen de los productos de cada región, de la cercanía con el mar, de la geografía particular de cada zona y de las tradiciones y orígenes culturales de cada pueblo. Por ejemplo, en el norte de México los tamales se envuelven con las hojas de maíz y en el sur con las hojas del plátano. Pero en general, en todo México se utilizan distintos tipos de chiles para sazonar las comidas y por eso es común que la comida mexicana sea muy picante. Los elementos básicos en el país son las tortillas, el arroz, los frijoles, el ajo y los chiles picantes. 
+                </p>
+                <p>
+                    En Centroamérica, las comidas son similares a México, pero cada país tiene sus propios platos típicos. También, en las costas se utilizan muchos mariscos que pueden prepararse en estofados, a la parrilla, crudos, o encurtidos como el ceviche. Aunque el ceviche se come en Centroamérica y América del Sur, es especialmente famoso el de Perú. El ceviche básico consiste en pescado crudo marinado en cítricos como el limón. Se le agregan condimentos como cebolla, chile, pimienta y sal. 
+                </p>
+                <p>
+                    En el caso de la carne de res, los argentinos y uruguayos son los más conocidos en consumo y preparación de carnes, seguidos de los colombianos, venezolanos y brasileños. El plátano es muy común en platos de comida colombiana y centroamericana. Los patacones (plátanos verdes fritos) de Colombia son famosos e indispensables en la comida colombiana. Son tradicionales también en los platos venezolanos y puertorriqueños, pero estos últimos les llaman tostones. 
+                </p>
+            </div>
+            
+            <hr class="border-gray-300">
+            
+            <!-- Preguntas Cierto/Falso con Botones -->
+            <div id="questions-container" class="space-y-4">
+                
+                <!-- Pregunta 1 -->
+                <div class="flex items-start">
+                    <span class="font-bold w-6 pt-1">1.</span> 
+                    <p class="flex-1 text-justified mr-4">La comida latinoamericana consiste solo en burritos, tacos y quesadillas.</p>
+                    <div data-question-id="1" class="flex space-x-2 response-buttons shrink-0">
+                        <button class="answer-btn text-lg py-1 px-3 rounded-md border w-10" data-answer="C">C</button>
+                        <button class="answer-btn text-lg py-1 px-3 rounded-md border w-10" data-answer="F">F</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="flex items-start">
+                    <span class="font-bold w-6 pt-1">2.</span> 
+                    <p class="flex-1 text-justified mr-4">La comida latinoamericana tiene una influencia indígena y europea.</p>
+                    <div data-question-id="2" class="flex space-x-2 response-buttons shrink-0">
+                        <button class="answer-btn text-lg py-1 px-3 rounded-md border w-10" data-answer="C">C</button>
+                        <button class="answer-btn text-lg py-1 px-3 rounded-md border w-10" data-answer="F">F</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="flex items-start">
+                    <span class="font-bold w-6 pt-1">3.</span> 
+                    <p class="flex-1 text-justified mr-4">Los tamales en el norte y el sur de México son diferentes.</p>
+                    <div data-question-id="3" class="flex space-x-2 response-buttons shrink-0">
+                        <button class="answer-btn text-lg py-1 px-3 rounded-md border w-10" data-answer="C">C</button>
+                        <button class="answer-btn text-lg py-1 px-3 rounded-md border w-10" data-answer="F">F</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 4 -->
+                <div class="flex items-start">
+                    <span class="font-bold w-6 pt-1">4.</span> 
+                    <p class="flex-1 text-justified mr-4">Dos elementos básicos de la comida de México son los chiles picantes y los tostones.</p>
+                    <div data-question-id="4" class="flex space-x-2 response-buttons shrink-0">
+                        <button class="answer-btn text-lg py-1 px-3 rounded-md border w-10" data-answer="C">C</button>
+                        <button class="answer-btn text-lg py-1 px-3 rounded-md border w-10" data-answer="F">F</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 5 -->
+                <div class="flex items-start">
+                    <span class="font-bold w-6 pt-1">5.</span> 
+                    <p class="flex-1 text-justified mr-4">Los argentinos y uruguayos son famosos por la preparación de la carne de res.</p>
+                    <div data-question-id="5" class="flex space-x-2 response-buttons shrink-0">
+                        <button class="answer-btn text-lg py-1 px-3 rounded-md border w-10" data-answer="C">C</button>
+                        <button class="answer-btn text-lg py-1 px-3 rounded-md border w-10" data-answer="F">F</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TEXTO EN INGLÉS -->
+            <div class="space-y-4 text-sm md:text-base text-justified text-gray-600 italic mt-8">
+                <p>
+                    Latin American food is more than burritos, quesadillas, and tacos. Even though in the United States Mexican food is one of the most well-known kinds, Mexican food is also composed of a great variety of ingredients, colors, and flavors. In Latin American food, there is a mixture of culture with indigenous and European influence from, for example, Spain, Italy, and even Africa. 
+                </p>
+                <p>
+                    It’s important to note that food varies according to geographical region and country. These gastronomic variations depend on the products of each region, proximity to the sea, the particular geography of each zone, and the traditions and cultural origins of each nation. For example, in the north of Mexico tamales are wrapped in corn husks and in the south in banana leaves. But in general, in all of Mexico, different types of chili peppers are used to season food, and for that reason it’s common for Mexican food to be spicy. The basic elements in the country are tortillas, rice, beans, garlic, and hot chilis. 
+                </p>
+                <p>
+                    In Central America, the food is similar to Mexican food, but each country has its own typical dishes. Also, on the coasts many shellfish are used that can be prepared in stews, on the grill, raw, or pickled as in ceviche. Although ceviche is eaten in Central America and South America, it is especially famous in Peru. Basic ceviche consists of raw fish marinated in citrus fruit like lemon. Condiments like onion, chili peppers, pepper, and salt are added to it. 
+                </p>
+                <p>
+                    The Argentines and the Uruguayans are the most known for consuming and cooking beef, followed by the Colombians, Venezuelans, and Brazilians. Bananas are very common in dishes of Colombian and Central American food. Patacones (fried green bananas) from Colombia are famous and indispensable in Colombian food. They are also traditional in Venezuelan and Puerto Rican dishes, but people there call them tostones.
+                </p>
+            </div>
+
+
+            <!-- Botón para mostrar las respuestas -->
+            <div class="mt-12 pt-8 border-t-2 border-gray-200">
+                <button id="toggle-answers" class="w-full py-3 px-6 text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl" style="background-color: var(--flamingo-pink);">
+                    Mostrar Respuestas / Show Answers
+                </button>
+
+                <!-- Contenedor de Respuestas (Inicialmente oculto) -->
+                <div id="answer-key" class="hidden mt-6 p-6 bg-gray-50 rounded-xl border border-gray-200">
+                    <h2 class="text-xl font-bold mb-4" style="color: var(--eerie-black);">Respuestas correctas / Correct Answers</h2>
+                    
+                    <!-- Respuestas C/F -->
+                    <div class="mb-2">
+                        <div class="grid grid-cols-5 gap-4 text-lg font-bold">
+                            <p>1. F</p>
+                            <p>2. C</p>
+                            <p>3. C</p>
+                            <p>4. F</p>
+                            <p>5. C</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Fin del Contenedor de Actividades -->
+
+    </div>
+
+    <script>
+        // Objeto con las respuestas correctas. Solo acepta 'C' o 'F'.
+        const correctAnswers = {
+            '1': 'F', // FALSO
+            '2': 'C', // CIERTO
+            '3': 'C', // CIERTO
+            '4': 'F', // FALSO
+            '5': 'C'  // CIERTO
+        };
+
+        const LIGHT_GREEN = 'var(--light-green)';
+        const LIGHT_RED = 'var(--light-red)';
+        const DEFAULT_BG = 'white';
+        const DEFAULT_BORDER = 'var(--default-border)';
+        const EERIE_BLACK = 'var(--eerie-black)';
+        
+
+        /**
+         * Maneja el clic en los botones C/F, verifica la respuesta y aplica estilos.
+         * @param {Event} event - El evento de clic.
+         */
+        function handleAnswerClick(event) {
+            const clickedButton = event.target;
+            
+            // Si el botón ya está deshabilitado (pregunta respondida), no hacer nada
+            if (clickedButton.disabled) return; 
+
+            const questionDiv = clickedButton.closest('.response-buttons');
+            const questionContainer = questionDiv.closest('.flex.items-start');
+            const questionId = questionDiv.dataset.questionId;
+            const userAnswer = clickedButton.dataset.answer;
+            const correctAnswer = correctAnswers[questionId];
+
+            // Determinar la corrección
+            const isCorrect = userAnswer === correctAnswer;
+
+            // 1. Aplicar color al botón clickeado
+            clickedButton.style.backgroundColor = isCorrect ? LIGHT_GREEN : LIGHT_RED;
+            clickedButton.style.borderColor = isCorrect ? LIGHT_GREEN : LIGHT_RED;
+            clickedButton.style.color = EERIE_BLACK;
+            clickedButton.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+
+            // 2. Deshabilitar todos los botones para esta pregunta
+            const allButtons = questionDiv.querySelectorAll('.answer-btn');
+            allButtons.forEach(btn => {
+                btn.disabled = true;
+                
+                // Si la respuesta fue incorrecta, destacar la respuesta correcta
+                if (!isCorrect && btn.dataset.answer === correctAnswer) {
+                    btn.style.backgroundColor = LIGHT_GREEN;
+                    btn.style.borderColor = LIGHT_GREEN;
+                    btn.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+                } else if (!isCorrect && btn !== clickedButton) {
+                    // Si no es el correcto ni el que acabamos de presionar, hacerlo más opaco
+                    btn.style.opacity = '0.5';
+                    btn.style.borderColor = DEFAULT_BORDER;
+                    btn.style.boxShadow = 'none';
+                }
+            });
+
+            // 3. Marcar el contenedor de la pregunta como completado (para estilos de elementos no clickeados)
+            questionContainer.classList.add('response-completed');
+        }
+
+        // Inicialización: Añadir event listeners a todos los botones C/F y al botón de respuestas
+        window.onload = function() {
+            const answerButtons = document.querySelectorAll('.answer-btn');
+            answerButtons.forEach(button => {
+                button.addEventListener('click', handleAnswerClick);
+            });
+
+            // Lógica para el botón de respuestas (mostrar/ocultar)
+            const toggleButton = document.getElementById('toggle-answers');
+            const answerKey = document.getElementById('answer-key');
+
+            toggleButton.addEventListener('click', () => {
+                answerKey.classList.toggle('hidden');
+                if (!answerKey.classList.contains('hidden')) {
+                    toggleButton.textContent = 'Ocultar Respuestas / Hide Answers';
+                } else {
+                    toggleButton.textContent = 'Mostrar Respuestas / Show Answers';
+                }
+            });
+        };
+    </script>
+</body>
+</html>
