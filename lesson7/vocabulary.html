@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular -er and -ir Verbs in the Present</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración personalizada de Tailwind para usar los colores definidos y la fuente Inter como un sustituto robusto de Platform Medium -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        'light-pink': '#FEEFF3', // Nuevo color rosa claro para los recuadros de ejemplo
+                    },
+                    fontFamily: {
+                        // Usamos Inter como fuente sans-serif moderna y clara
+                        sans: ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilo para la fuente del cuerpo principal */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--eerie-black); /* Aplicar el negro misterioso al texto */
+        }
+        /* Estilo para asegurar el texto justificado */
+        .text-justified {
+            text-align: justify;
+            text-align-last: initial; /* Para evitar problemas en el último renglón en algunos navegadores */
+        }
+        /* Clase para el espaciador gris claro entre grupos de vocabulario */
+        .vocab-divider {
+            height: 1px;
+            background-color: #e5e7eb; /* Un gris muy claro (gray-200 de Tailwind) */
+            margin: 1.5rem 0;
+        }
+        /* Estilo para las tablas de conjugación para que se vean limpias y centradas */
+        .conjugation-table {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.5rem 2rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center; /* CENTRADO APLICADO AQUÍ */
+        }
+        /* Estilo para las listas de vocabulario de dos columnas */
+        .vocab-two-column {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem 3rem;
+        }
+        @media (min-width: 768px) {
+            .vocab-two-column {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-eerie-black p-4 md:p-8 min-h-screen">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Título Principal con formato de dos líneas -->
+        <header class="mb-8">
+            <h1 class="font-extrabold text-center text-eerie-black tracking-tight">
+                <!-- Primera línea: Regular -er and -ir (Tamaño grande) -->
+                <span class="block text-4xl md:text-5xl">Regular -er and -ir</span>
+                <!-- Segunda línea: Verbs in the Present (Tamaño más pequeño y menos negrita) -->
+                <span class="block text-2xl md:text-3xl font-semibold opacity-90 mt-1">Verbs in the Present</span>
+            </h1>
+        </header>
+
+        <!-- Sección I: Vocabulario nuevo / New Vocabulary -->
+        <section class="mb-10">
+            <h2 class="text-2xl md:text-3xl font-semibold text-flamingo-pink mb-4 border-b-2 border-flamingo-pink pb-1">
+                I. Vocabulario nuevo / New Vocabulary
+            </h2>
+
+            <!-- Grupo 1: Verbos -er / -ir -->
+            <div class="vocab-two-column">
+                <div class="flex justify-between md:block"><strong>comer</strong> – to eat</div>
+                <div class="flex justify-between md:block"><strong>vivir</strong> – to live</div>
+                
+                <div class="flex justify-between md:block"><strong>leer</strong> – to read</div>
+                <div class="flex justify-between md:block"><strong>abrir</strong> – to open</div>
+                
+                <div class="flex justify-between md:block"><strong>beber</strong> – to drink</div>
+                <div class="flex justify-between md:block"><strong>recibir</strong> – to receive</div>
+                
+                <div class="flex justify-between md:block"><strong>creer</strong> – to believe, to think</div>
+                <div class="flex justify-between md:block"><strong>descubrir</strong> – to discover</div>
+                
+                <div class="flex justify-between md:block"><strong>aprender</strong> – to learn</div>
+                <div class="flex justify-between md:block"><strong>subir</strong> – to go up</div>
+                
+                <div class="flex justify-between md:block"><strong>correr</strong> – to run</div>
+                <div class="flex justify-between md:block"><strong>escribir</strong> – to write</div>
+                
+                <div class="flex justify-between md:block"><strong>vender</strong> – to sell</div>
+                <div class="flex justify-between md:block"><strong>decidir</strong> – to decide</div>
+                
+                <div class="flex justify-between md:block"><strong>deber</strong> – should</div>
+                <div class="flex justify-between md:block"><strong>asistir a</strong> – to attend</div>
+            </div>
+
+            <!-- Divisor gris claro -->
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 2: Adjetivos Posesivos -->
+            <div class="vocab-two-column">
+                <div class="flex justify-between md:block"><strong>mi</strong> / <strong>mis</strong> – my</div>
+                <div class="flex justify-between md:block"><strong>nuestro(s)</strong> / <strong>nuestra(s)</strong> – our</div>
+                
+                <div class="flex justify-between md:block"><strong>tu</strong> / <strong>tus</strong> – your [informal, singular]</div>
+                <div class="flex justify-between md:block"><strong>vuestro(s)</strong> / <strong>vuestra(s)</strong> – your [informal, plural]</div>
+                
+                <div class="col-span-1 md:col-span-2"><strong>su</strong> / <strong>sus</strong> [his, her, their, your (formal, singular)] <strong>su</strong> / <strong>sus</strong> [their, your (formal, plural)]</div>
+            </div>
+
+            <!-- Divisor gris claro -->
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 3: Preguntas Cortas -->
+            <div class="vocab-two-column">
+                <div class="flex justify-between md:block"><strong>¿no?</strong> – Isn’t that so?</div>
+                <div class="flex justify-between md:block"><strong>¿cierto?</strong> – right?</div>
+                
+                <div class="flex justify-between md:block"><strong>¿verdad?</strong> – right?</div>
+                <div></div>
+            </div>
+
+            <!-- Divisor gris claro -->
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 4: La Familia -->
+            <div class="vocab-two-column">
+                <div class="flex justify-between md:block"><strong>los parientes</strong> – relatives</div>
+                <div class="flex justify-between md:block"><strong>el abuelo</strong> – grandfather</div>
+                
+                <div class="flex justify-between md:block"><strong>los padres</strong> – parents</div>
+                <div class="flex justify-between md:block"><strong>la abuela</strong> – grandmother</div>
+                
+                <div class="flex justify-between md:block"><strong>la madre</strong> – mother</div>
+                <div class="flex justify-between md:block"><strong>el tío</strong> – uncle</div>
+                
+                <div class="flex justify-between md:block"><strong>la mamá</strong> – mom</div>
+                <div class="flex justify-between md:block"><strong>la tía</strong> – aunt</div>
+                
+                <div class="flex justify-between md:block"><strong>mami</strong> – mommy</div>
+                <div class="flex justify-between md:block"><strong>el primo</strong> – male cousin</div>
+                
+                <div class="flex justify-between md:block"><strong>el padre</strong> – father</div>
+                <div class="flex justify-between md:block"><strong>la prima</strong> – female cousin</div>
+                
+                <div class="flex justify-between md:block"><strong>el papá</strong> – dad</div>
+                <div class="flex justify-between md:block"><strong>el sobrino</strong> – nephew</div>
+                
+                <div class="flex justify-between md:block"><strong>papi</strong> – daddy</div>
+                <div class="flex justify-between md:block"><strong>la sobrina</strong> – niece</div>
+                
+                <div class="flex justify-between md:block"><strong>el esposo</strong> – husband</div>
+                <div class="flex justify-between md:block"><strong>el nieto</strong> – grandson</div>
+                
+                <div class="flex justify-between md:block"><strong>la esposa</strong> – wife</div>
+                <div class="flex justify-between md:block"><strong>la nieta</strong> – granddaughter</div>
+                
+                <div class="flex justify-between md:block"><strong>el hijo</strong> – son</div>
+                <div class="flex justify-between md:block"><strong>el nombre</strong> – name</div>
+                
+                <div class="flex justify-between md:block"><strong>la hija</strong> – daughter</div>
+                <div class="flex justify-between md:block"><strong>el apellido</strong> – last name</div>
+                
+                <div class="flex justify-between md:block"><strong>el hermano</strong> – brother</div>
+                <div class="flex justify-between md:block"><strong>materno</strong> – maternal</div>
+                
+                <div class="flex justify-between md:block"><strong>la hermana</strong> – sister</div>
+                <div class="flex justify-between md:block"><strong>paterno</strong> – paternal</div>
+            </div>
+
+            <!-- Divisor gris claro -->
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 5: Objetos -->
+            <div class="vocab-two-column">
+                <div class="flex justify-between md:block"><strong>la computadora</strong> – computer</div>
+                <div class="flex justify-between md:block"><strong>el trabajo</strong> – work, job</div>
+                
+                <div class="flex justify-between md:block"><strong>el diccionario</strong> – dictionary</div>
+                <div class="flex justify-between md:block"><strong>la pluma</strong> – pen</div>
+            </div>
+        </section>
+
+        <!-- Sección II: Repaso general / General Review -->
+        <section>
+            <h2 class="text-2xl md:text-3xl font-semibold text-flamingo-pink mb-6 border-b-2 border-flamingo-pink pb-1">
+                II. Repaso general / General Review
+            </h2>
+
+            <!-- Subsección A: Conjugation of Regular Verbs -->
+            <h3 class="text-xl font-bold text-flamingo-pink mb-3">
+                A. Conjugation of Regular Verbs
+            </h3>
+            
+            <p class="text-justified mb-4">
+                In a previous lesson, you learned that <strong>-ar</strong> verbs have the following endings in the present.
+            </p>
+
+            <div class="bg-light-pink p-4 rounded-lg mb-6">
+                <!-- Título Centrado -->
+                <p class="text-lg font-bold mb-2 text-eerie-black text-center"><strong>estudiar</strong> [to study]</p>
+                <div class="conjugation-table">
+                    <!-- NOSOTROS: estudiAMOS (TERMINACIÓN COMPLETA EN NEGRITA) -->
+                    <span>estudi<strong>o</strong></span> <span>estudi<strong>amos</strong></span>
+                    <span>estudi<strong>as</strong></span> <span>estudi<strong>áis</strong></span>
+                    <span>estudi<strong>a</strong></span> <span>estudi<strong>an</strong></span>
+                </div>
+            </div>
+
+            <p class="text-justified mb-4">
+                In this lesson, you learned that <strong>-er</strong> verb endings in the present can be formed by making just one change to the above <strong>-ar</strong> endings: Replace any <strong>a</strong> you see in an <strong>-ar</strong> ending with the letter <strong>e</strong>. Making that one change gives us the following <strong>-er</strong> endings in the present.
+            </p>
+            
+            <div class="bg-light-pink p-4 rounded-lg mb-6">
+                <!-- Título Centrado -->
+                <p class="text-lg font-bold mb-2 text-eerie-black text-center"><strong>beber</strong> [to drink]</p>
+                <div class="conjugation-table">
+                    <!-- NOSOTROS: bebEMOS (TERMINACIÓN COMPLETA EN NEGRITA) -->
+                    <span>beb<strong>o</strong></span> <span>beb<strong>emos</strong></span>
+                    <span>Beb<strong>es</strong></span> <span>beb<strong>éis</strong></span>
+                    <span>beb<strong>e</strong></span> <span>beb<strong>en</strong></span>
+                </div>
+            </div>
+
+            <p class="text-justified mb-4">
+                Making the following two changes to <strong>-er</strong> endings gives us the <strong>-ir</strong> endings in the present: <strong>emos</strong> <span class="font-bold">→</span> <strong>imos</strong>, <strong>éis</strong> <span class="font-bold">→</span> <strong>ís</strong>. Those two changes give us the following <strong>-ir</strong> endings in the present.
+            </p>
+
+            <div class="bg-light-pink p-4 rounded-lg mb-6">
+                <!-- Título Centrado -->
+                <p class="text-lg font-bold mb-2 text-eerie-black text-center"><strong>decidir</strong> [to decide]</p>
+                <div class="conjugation-table">
+                    <!-- NOSOTROS: decidIMOS (TERMINACIÓN COMPLETA EN NEGRITA) -->
+                    <span>decid<strong>o</strong></span> <span>decid<strong>imos</strong></span>
+                    <span>decid<strong>es</strong></span> <span>decid<strong>ís</strong></span>
+                    <span>decid<strong>e</strong></span> <span>decid<strong>en</strong></span>
+                </div>
+            </div>
+            
+            <p class="text-justified mb-8">
+                When two verbs are used together, you conjugate the first and put the second in the infinitive form. This can be seen with a first verb like <strong>deber</strong> (should) or <strong>necesitar</strong> (to need). “We should run” is <strong>Debemos correr</strong>. “They need to open the book” is <strong>Necesitan abrir el libro</strong>. In both of these cases, the first verb (<strong>debemos</strong>, <strong>necesitan</strong>) is conjugated, while the second verb (<strong>correr</strong>, <strong>abrir</strong>) is in the infinitive form.
+            </p>
+
+            <!-- Subsección B: Possessive Adjectives -->
+            <h3 class="text-xl font-bold text-flamingo-pink mb-3">
+                B. Possessive Adjectives
+            </h3>
+            
+            <p class="text-justified mb-4">
+                Possessive adjectives agree in number and gender with the thing possessed. They are as follows.
+            </p>
+            
+            <div class="vocab-two-column mb-8">
+                <div class="flex justify-between md:block"><strong>mi</strong> / <strong>mis</strong> [my]</div>
+                <div class="flex justify-between md:block"><strong>nuestro</strong> / <strong>nuestra</strong> / <strong>nuestros</strong> / <strong>nuestras</strong> [our]</div>
+                
+                <div class="flex justify-between md:block"><strong>tu</strong> / <strong>tus</strong> [your (informal)]</div>
+                <div class="flex justify-between md:block"><strong>vuestro</strong> / <strong>vuestra</strong> / <strong>vuestros</strong> / <strong>vuestras</strong> [your (informal)]</div>
+                
+                <div class="col-span-1 md:col-span-2"><strong>su</strong> / <strong>sus</strong> [his, her, your (formal, singular)] <strong>su</strong> / <strong>sus</strong> [their, your (formal, plural)]</div>
+            </div>
+
+            <!-- Subsección C: Asking a Yes/No Question -->
+            <h3 class="text-xl font-bold text-flamingo-pink mb-3">
+                C. Asking a Yes/No Question
+            </h3>
+            
+            <p class="text-justified mb-4">
+                There are three ways to ask yes/no questions in Spanish.
+            </p>
+
+            <ol class="list-decimal list-inside space-y-2 mb-4 pl-4 text-justified">
+                <li>Raise the pitch of your voice at the end of the sentence.</li>
+                <li>End the sentence with <strong>¿no?</strong> [Isn’t that so?], <strong>¿verdad?</strong> [right?], or <strong>¿cierto?</strong> [right?].</li>
+                <li>Put the verb before the subject.</li>
+            </ol>
+            
+            <p class="text-justified mb-8">
+                Here are the ways to make the following statement into a question: <strong>Pedro vende su casa</strong>. [Pablo is selling his house.]
+            </p>
+
+            <div class="bg-light-pink p-4 rounded-lg">
+                <p class="mb-2">1. <strong>¿Pedro vende su casa?</strong> (Say it with a rising pitch at the end of the sentence.)</p>
+                <p class="mb-2">2. <strong>Pedro vende su casa, ¿no?</strong>; <strong>Pedro vende su casa, ¿verdad?</strong>; <strong>Pedro vende su casa, ¿cierto?</strong></p>
+                <p>3. <strong>¿Vende Pedro su casa?</strong></p>
+            </div>
+        </section>
+        
+    </div>
+
+</body>
+</html>

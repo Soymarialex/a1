@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración personalizada de Tailwind para usar los colores definidos y la fuente Inter -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        'light-pink': '#FEEFF3', 
+                        'light-green': '#D1FAE5', // Tailwind green-100
+                        'light-red': '#FEE2E2',   // Tailwind red-100
+                    },
+                    fontFamily: {
+                        // Usamos Inter como sustituto de Platform Medium
+                        sans: ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #121118;
+            background-color: white;
+        }
+
+        /* Asegura el texto justificado */
+        .text-justified {
+            text-align: justify;
+            text-align-last: initial; 
+        }
+
+        /* Estilo base para los inputs de respuesta */
+        .answer-input {
+            border: 1px solid #FF79AC;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem; /* rounded-md */
+            width: 100%;
+            max-width: 200px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Estilo para los botones de selección (actividades B y D) */
+        .select-option {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            margin: 0.25rem 0;
+            border: 1px solid #FF79AC;
+            background-color: white;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .select-option:hover {
+            background-color: #FEEFF3; /* light-pink */
+        }
+        .select-option.correct {
+            background-color: #D1FAE5; /* light-green */
+            border-color: #10B981; /* green-500 */
+        }
+        .select-option.incorrect {
+            background-color: #FEE2E2; /* light-red */
+            border-color: #EF4444; /* red-500 */
+        }
+
+        /* Estilo para el contenedor de la respuesta seleccionada */
+        .selected-answer-display {
+            display: inline-block;
+            min-width: 120px;
+            padding: 0.25rem 0.5rem;
+            border: 1px dashed #FF79AC;
+            border-radius: 0.375rem;
+            min-height: 2.25rem; /* Para mantener la altura */
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Título de la Página -->
+        <header class="mb-8">
+            <h1 class="font-extrabold text-center text-eerie-black tracking-tight">
+                <span class="block text-4xl md:text-5xl">III. Actividades / Activities</span>
+            </h1>
+        </header>
+
+        <!-- Contenedor principal de las actividades -->
+        <main id="activities-container">
+
+            <!--
+            ================================================================================
+            ACTIVIDAD A: Completar con Adjetivos Posesivos (Input Text)
+            ================================================================================
+            -->
+            <div class="mb-10 p-6 rounded-lg shadow-lg bg-white border border-light-pink">
+                <h2 class="text-xl font-bold text-flamingo-pink mb-4 border-b pb-2 border-flamingo-pink">
+                    a. Marisol está hablando por Videollamada con sus amigas Pilar y Carolina sobre su nueva escuela. / Marisol is talking on videocall with her friends Pilar and Carolina about her new school. 
+                </h2>
+                <p class="text-justified mb-4">Completa el diálogo siguiente con los adjetivos posesivos apropiados. / Complete the following dialogue with the appropriate possessive adjectives.</p>
+                
+                <div class="space-y-3">
+                    <p>Marisol: ¡Hola! ¿Cómo están?</p>
+                    <p>Pilar: ¡Nosotras estamos muy bien! ¿Y tú?</p>
+                    <p>Marisol: Estoy un poco triste porque no estoy con ustedes, pero estoy bien.</p>
+                    
+                    <p>Carolina: ¿Cómo es 
+                        <span class="inline-block relative">
+                            <span class="font-bold">1.</span> <input type="text" id="a-1" class="answer-input" data-correct-answer="tu" data-group="a" onkeydown="checkAnswer(event, 'a', 1)" placeholder="_________">
+                        </span> nueva escuela?
+                    </p>
+                    
+                    <p>Marisol: Es muy grande y muy bonita. 
+                        <span class="inline-block relative">
+                            <span class="font-bold">2.</span> <input type="text" id="a-2" class="answer-input" data-correct-answer="mi/nuestra" data-group="a" onkeydown="checkAnswer(event, 'a', 2)" placeholder="_________">
+                        </span> clase de inglés es excelente y 
+                        <span class="inline-block relative">
+                            <span class="font-bold">3.</span> <input type="text" id="a-3" class="answer-input" data-correct-answer="mis/nuestros" data-group="a" onkeydown="checkAnswer(event, 'a', 3)" placeholder="_________">
+                        </span> libros para la clase son muy interesantes.
+                    </p>
+                    
+                    <p>Carolina: Marisol, ¿Hay muchos estudiantes en 
+                        <span class="inline-block relative">
+                            <span class="font-bold">4.</span> <input type="text" id="a-4" class="answer-input" data-correct-answer="tu" data-group="a" onkeydown="checkAnswer(event, 'a', 4)" placeholder="_________">
+                        </span> clase de inglés?
+                    </p>
+                    
+                    <p>Marisol: En 
+                        <span class="inline-block relative">
+                            <span class="font-bold">5.</span> <input type="text" id="a-5" class="answer-input" data-correct-answer="mi/nuestra" data-group="a" onkeydown="checkAnswer(event, 'a', 5)" placeholder="_________">
+                        </span> clase hay 35 estudiantes.
+                    </p>
+                    
+                    <p>Pilar: Carolina y yo estamos en una clase de historia fenomenal y en una clase de matemáticas terrible. En 
+                        <span class="inline-block relative">
+                            <span class="font-bold">6.</span> <input type="text" id="a-6" class="answer-input" data-correct-answer="nuestra" data-group="a" onkeydown="checkAnswer(event, 'a', 6)" placeholder="_________">
+                        </span> clase de historia también hay 35 estudiantes, pero en 
+                        <span class="inline-block relative">
+                            <span class="font-bold">7.</span> <input type="text" id="a-7" class="answer-input" data-correct-answer="nuestra" data-group="a" onkeydown="checkAnswer(event, 'a', 7)" placeholder="_________">
+                        </span> clase de matemáticas solo hay 15 estudiantes.
+                    </p>
+                    
+                    <p>Carolina: ¿Qué tal son los maestros [teachers] en la nueva escuela?</p>
+                    
+                    <p>Marisol: 8. Todos 
+                        <span class="inline-block relative">
+                            <span class="font-bold">8.</span> <input type="text" id="a-8" class="answer-input" data-correct-answer="mis/nuestros" data-group="a" onkeydown="checkAnswer(event, 'a', 8)" placeholder="_________">
+                        </span> maestros son inteligentes, pero no todos son simpáticos.
+                    </p>
+                </div>
+            </div>
+
+            <!--
+            ================================================================================
+            ACTIVIDAD B: Selección Múltiple (Radio Buttons con autocompletado)
+            ================================================================================
+            -->
+            <div class="mb-10 p-6 rounded-lg shadow-lg bg-white border border-light-pink">
+                <h2 class="text-xl font-bold text-flamingo-pink mb-4 border-b pb-2 border-flamingo-pink">
+                    b. Felipe está limpiando su casa después de una fiesta. / Felipe is cleaning his house after a party. 
+                </h2>
+                <p class="text-justified mb-6">Completa las frases con los adjetivos posesivos correctos. / Complete the sentences with the correct possessive adjectives.</p>
+
+                <div id="activity-b-container" class="space-y-6">
+                    <!-- Pregunta B1 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">1. Felipe: Elena, el teléfono celular es de Rogelio, ¿cierto?</p>
+                        <p class="mb-3">Elena: No, es 
+                            <span id="b-1-display" class="selected-answer-display font-bold">________________</span> teléfono celular.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="b-1" data-value="mi" data-correct="true">b) mi</label>
+                            <label class="select-option" data-question="b-1" data-value="vuestros" data-correct="false">a) vuestros</label>
+                            <label class="select-option" data-question="b-1" data-value="su" data-correct="false">c) su</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Pregunta B2 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">2. Felipe: Elena, el libro de Isabel Allende es de mami, ¿cierto?</p>
+                        <p class="mb-3">Elena: No, es de 
+                            <span id="b-2-display" class="selected-answer-display font-bold">________________</span> amiga Maribel.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="b-2" data-value="su" data-correct="true">a) su</label>
+                            <label class="select-option" data-question="b-2" data-value="vuestras" data-correct="false">b) vuestras</label>
+                            <label class="select-option" data-question="b-2" data-value="sus" data-correct="false">c) sus</label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta B3 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">3. Felipe: Elena, los papeles son de Mariana, ¿verdad?</p>
+                        <p class="mb-3">Elena: No, son de 
+                            <span id="b-3-display" class="selected-answer-display font-bold">________________</span> tía.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="b-3" data-value="nuestros" data-correct="false">a) nuestros</label>
+                            <label class="select-option" data-question="b-3" data-value="mis" data-correct="false">b) mis</label>
+                            <label class="select-option" data-question="b-3" data-value="nuestra" data-correct="true">c) nuestra</label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta B4 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">4. Felipe: Elena, los iPads son de Margarita y Lourdes, ¿no?</p>
+                        <p class="mb-3">Elena: No, son de 
+                            <span id="b-4-display" class="selected-answer-display font-bold">________________</span> amigos David y Miguel.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="b-4" data-value="mi" data-correct="false">a) mi</label>
+                            <label class="select-option" data-question="b-4" data-value="tus" data-correct="true">b) tus</label>
+                            <label class="select-option" data-question="b-4" data-value="nuestro" data-correct="false">c) nuestro</label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta B5 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">5. Felipe: Elena, las plumas son de Sebastián, ¿no?</p>
+                        <p class="mb-3">Elena: No, son 
+                            <span id="b-5-display" class="selected-answer-display font-bold">________________</span> plumas.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="b-5" data-value="tu" data-correct="false">a) tu</label>
+                            <label class="select-option" data-question="b-5" data-value="nuestros" data-correct="false">b) nuestros</label>
+                            <label class="select-option" data-question="b-5" data-value="mis" data-correct="true">c) mis</label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta B6 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">6. Felipe: Elena, los cuadernos son de Sandra y Valentina, ¿verdad?</p>
+                        <p class="mb-3">Elena: No, son de 
+                            <span id="b-6-display" class="selected-answer-display font-bold">________________</span> sobrinas Diana y Mariana.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="b-6" data-value="nuestras" data-correct="true">a) nuestras</label>
+                            <label class="select-option" data-question="b-6" data-value="nuestra" data-correct="false">b) nuestra</label>
+                            <label class="select-option" data-question="b-6" data-value="vuestra" data-correct="false">c) vuestra</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--
+            ================================================================================
+            ACTIVIDAD C: Preguntas Abiertas (Input Text)
+            ================================================================================
+            -->
+            <div class="mb-10 p-6 rounded-lg shadow-lg bg-white border border-light-pink">
+                <h2 class="text-xl font-bold text-flamingo-pink mb-4 border-b pb-2 border-flamingo-pink">
+                    c. Contesta las siguientes preguntas. Conjuga el verbo en el presente. / Answer the following questions. Conjugate the verb in the present.
+                </h2>
+                
+                <div class="space-y-3">
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">1. Lees libros de ciencia ficción [science fiction], ¿no?</span> 
+                        <input type="text" id="c-1" class="answer-input flex-grow" data-correct-answer="Sí, leo libros de ciencia ficción./No, no leo libros de ciencia ficción." data-group="c" onkeydown="checkAnswer(event, 'c', 1)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">2. Bebes mucha agua, ¿verdad?</span> 
+                        <input type="text" id="c-2" class="answer-input flex-grow" data-correct-answer="Sí, bebo mucha agua./No, no bebo mucha agua." data-group="c" onkeydown="checkAnswer(event, 'c', 2)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">3. Tú y tu amigo vendéis carros en vuestro trabajo, ¿cierto?</span> 
+                        <input type="text" id="c-3" class="answer-input flex-grow" data-correct-answer="Sí, vendemos carros en nuestro trabajo./No, no vendemos carros en nuestro trabajo." data-group="c" onkeydown="checkAnswer(event, 'c', 3)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">4. Trabajas 40 horas a la semana [hours per week], ¿verdad?</span> 
+                        <input type="text" id="c-4" class="answer-input flex-grow" data-correct-answer="Sí, trabajo 40 horas a la semana./No, no trabajo 40 horas a la semana." data-group="c" onkeydown="checkAnswer(event, 'c', 4)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">5. Tú y tu familia comen pizza en casa, ¿verdad?</span> 
+                        <input type="text" id="c-5" class="answer-input flex-grow" data-correct-answer="Sí, comemos pizza en casa./No, no comemos pizza en casa." data-group="c" onkeydown="checkAnswer(event, 'c', 5)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">6. Tú y tu familia viven en los Estados Unidos, ¿cierto?</span> 
+                        <input type="text" id="c-6" class="answer-input flex-grow" data-correct-answer="Sí, vivimos en los Estados Unidos./No, no vivimos en los Estados Unidos." data-group="c" onkeydown="checkAnswer(event, 'c', 6)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">7. ¿Los estudiantes asisten a una buena escuela?</span> 
+                        <input type="text" id="c-7" class="answer-input flex-grow" data-correct-answer="Sí, los estudiantes asisten a una buena escuela./No, los estudiantes asisten a una mala escuela." data-group="c" onkeydown="checkAnswer(event, 'c', 7)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">8. ¿Deben estudiar música tus hermanos?</span> 
+                        <input type="text" id="c-8" class="answer-input flex-grow" data-correct-answer="Sí, mis hermanos deben estudiar música./No, mis hermanos no deben estudiar música." data-group="c" onkeydown="checkAnswer(event, 'c', 8)" placeholder="Respuesta aquí">
+                    </p>
+                </div>
+            </div>
+            
+            <!--
+            ================================================================================
+            ACTIVIDAD D: Selección Múltiple (Parentesco)
+            ================================================================================
+            -->
+            <div class="mb-10 p-6 rounded-lg shadow-lg bg-white border border-light-pink">
+                <h2 class="text-xl font-bold text-flamingo-pink mb-4 border-b pb-2 border-flamingo-pink">
+                    d. Luis Cortés le está explicando a su amigo Juan Manuel Ríos el parentesco de sus amigos en el vecindario. / Luis Cortés is explaining to his friend Juan Manuel Ríos the kinship of his friends in the neighborhood.
+                </h2>
+                
+                <!-- Contenedor de la imagen del árbol genealógico -->
+                <div class="text-center italic mb-6">
+                    <img src="https://i.imgur.com/oYPavGb.jpeg" 
+                         alt="Diagrama de un árbol genealógico necesario para responder la actividad." 
+                         class="mx-auto max-w-full h-auto rounded-lg shadow-md border border-gray-300"
+                         onerror="this.style.display='none';"
+                    >
+                </div>
+
+                <div id="activity-d-container" class="space-y-6">
+                    <!-- Pregunta D1 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">1. Diana es la 
+                            <span id="d-1-display" class="selected-answer-display font-bold">________________</span> de Luis y Cecilia.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="d-1" data-value="nieta" data-correct="true">c) nieta</label>
+                            <label class="select-option" data-question="d-1" data-value="hermana" data-correct="false">a) hermana</label>
+                            <label class="select-option" data-question="d-1" data-value="hija" data-correct="false">b) hija</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Pregunta D2 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">2. Javier es el 
+                            <span id="d-2-display" class="selected-answer-display font-bold">________________</span> de Luis y Cecilia.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="d-2" data-value="hijo" data-correct="true">b) hijo</label>
+                            <label class="select-option" data-question="d-2" data-value="abuelo" data-correct="false">a) abuelo</label>
+                            <label class="select-option" data-question="d-2" data-value="sobrino" data-correct="false">c) sobrino</label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta D3 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">3. Mariana es la 
+                            <span id="d-3-display" class="selected-answer-display font-bold">________________</span> de Diana.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="d-3" data-value="hermana" data-correct="true">c) hermana</label>
+                            <label class="select-option" data-question="d-3" data-value="nieta" data-correct="false">a) nieta</label>
+                            <label class="select-option" data-question="d-3" data-value="abuela" data-correct="false">b) abuela</label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta D4 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">4. Carlos es el 
+                            <span id="d-4-display" class="selected-answer-display font-bold">________________</span> de Pablo y Marisol.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="d-4" data-value="padre" data-correct="true">a) padre</label>
+                            <label class="select-option" data-question="d-4" data-value="tío" data-correct="false">c) tío</label>
+                            <label class="select-option" data-question="d-4" data-value="sobrino" data-correct="false">c) sobrino</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Pregunta D5 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">5. Erica, Felipe y Elena son los 
+                            <span id="d-5-display" class="selected-answer-display font-bold">________________</span> de Esteban y Luisa.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="d-5" data-value="hijos" data-correct="true">b) hijos</label>
+                            <label class="select-option" data-question="d-5" data-value="nietos" data-correct="false">a) nietos</label>
+                            <label class="select-option" data-question="d-5" data-value="primos" data-correct="false">c) primos</label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta D6 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">6. Erica es la 
+                            <span id="d-6-display" class="selected-answer-display font-bold">________________</span> de Javier.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="d-6" data-value="esposa" data-correct="true">c) esposa</label>
+                            <label class="select-option" data-question="d-6" data-value="prima" data-correct="false">a) prima</label>
+                            <label class="select-option" data-question="d-6" data-value="hermana" data-correct="false">b) hermana</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Pregunta D7 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">7. Carlos es el 
+                            <span id="d-7-display" class="selected-answer-display font-bold">________________</span> de Alejandra.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="d-7" data-value="esposo" data-correct="true">b) esposo</label>
+                            <label class="select-option" data-question="d-7" data-value="tío" data-correct="false">a) tío</label>
+                            <label class="select-option" data-question="d-7" data-value="nieto" data-correct="false">c) nieto</label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta D8 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">8. Mariana es la 
+                            <span id="d-8-display" class="selected-answer-display font-bold">________________</span> de Diego.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="d-8" data-value="sobrina" data-correct="true">c) sobrina</label>
+                            <label class="select-option" data-question="d-8" data-value="hija" data-correct="false">a) hija</label>
+                            <label class="select-option" data-question="d-8" data-value="hermana" data-correct="false">b) hermana</label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta D9 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">9. Luis y Cecilia son los 
+                            <span id="d-9-display" class="selected-answer-display font-bold">________________</span> de Diana.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="d-9" data-value="abuelos" data-correct="true">c) abuelos</label>
+                            <label class="select-option" data-question="d-9" data-value="tíos" data-correct="false">a) tíos</label>
+                            <label class="select-option" data-question="d-9" data-value="primos" data-correct="false">b) primos</label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta D10 -->
+                    <div class="border p-4 rounded-md bg-light-pink/50">
+                        <p class="font-semibold mb-2">10. Alberto y Diego son los
+                            <span id="d-10-display" class="selected-answer-display font-bold">________________</span> de Mariana.
+                        </p>
+                        <div class="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0">
+                            <label class="select-option" data-question="d-10" data-value="tíos" data-correct="true">b) tíos</label>
+                            <label class="select-option" data-question="d-10" data-value="primos" data-correct="false">a) primos</label>
+                            <label class="select-option" data-question="d-10" data-value="hijos" data-correct="false">c) hijos</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--
+            ================================================================================
+            ACTIVIDAD E: Preguntas Abiertas (Input Text)
+            ================================================================================
+            -->
+            <div class="mb-10 p-6 rounded-lg shadow-lg bg-white border border-light-pink">
+                <h2 class="text-xl font-bold text-flamingo-pink mb-4 border-b pb-2 border-flamingo-pink">
+                    e. ¡Ahora es tu turno! Contesta las siguientes preguntas. / Now it’s your turn! Answer the following questions.
+                </h2>
+                
+                <div class="space-y-3">
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">1. ¿Quiénes son tus padres?</span> 
+                        <input type="text" id="e-1" class="answer-input flex-grow" data-correct-answer="Mis padres son..../Mi padre es.... y mi madre es...." data-group="e" onkeydown="checkAnswer(event, 'e', 1)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">2. ¿Quiénes son tus hermanos?</span> 
+                        <input type="text" id="e-2" class="answer-input flex-grow" data-correct-answer="Mis hermanos son..../Soy hijo/hija único/única." data-group="e" onkeydown="checkAnswer(event, 'e', 2)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">3. ¿Quiénes son tus abuelos?</span> 
+                        <input type="text" id="e-3" class="answer-input flex-grow" data-correct-answer="Mis abuelos son...." data-group="e" onkeydown="checkAnswer(event, 'e', 3)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">4. El hijo de tu hija es tu</span> 
+                        <input type="text" id="e-4" class="answer-input flex-grow" data-correct-answer="nieto" data-group="e" onkeydown="checkAnswer(event, 'e', 4)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">5. Los padres de tu padre son tus</span> 
+                        <input type="text" id="e-5" class="answer-input flex-grow" data-correct-answer="abuelos" data-group="e" onkeydown="checkAnswer(event, 'e', 5)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">6. Las hijas de tu hermano son tus</span> 
+                        <input type="text" id="e-6" class="answer-input flex-grow" data-correct-answer="sobrinas" data-group="e" onkeydown="checkAnswer(event, 'e', 6)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">7. La hija de tus tíos es tu</span> 
+                        <input type="text" id="e-7" class="answer-input flex-grow" data-correct-answer="prima" data-group="e" onkeydown="checkAnswer(event, 'e', 7)" placeholder="Respuesta aquí">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">8. Los hermanos de tu madre son tus</span> 
+                        <input type="text" id="e-8" class="answer-input flex-grow" data-correct-answer="tíos" data-group="e" onkeydown="checkAnswer(event, 'e', 8)" placeholder="Respuesta aquí">
+                    </p>
+                </div>
+            </div>
+
+            <!--
+            ================================================================================
+            ACTIVIDAD F: Apellidos (Input Text)
+            ================================================================================
+            -->
+            <div class="mb-10 p-6 rounded-lg shadow-lg bg-white border border-light-pink">
+                <h2 class="text-xl font-bold text-flamingo-pink mb-4 border-b pb-2 border-flamingo-pink">
+                    f. ¿Puedes adivinar los apellidos de las siguientes personas? / Can you guess the last names of the following people?
+                </h2>
+                
+                <div class="space-y-3">
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">1. Padres: Luis Cortés Navarro y Cecilia Ruiz Ramírez. Hijo: Alberto</span> 
+                        <input type="text" id="f-1" class="answer-input flex-grow" data-correct-answer="Cortés Ruiz" data-group="f" onkeydown="checkAnswer(event, 'f', 1)" placeholder="_________">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">2. Padres: Esteban Quirós Sánchez y Luisa García Vega. Hija: Elena</span> 
+                        <input type="text" id="f-2" class="answer-input flex-grow" data-correct-answer="Quirós García" data-group="f" onkeydown="checkAnswer(event, 'f', 2)" placeholder="_________">
+                    </p>
+                    <p class="flex flex-col md:flex-row md:space-x-2">
+                        <span class="font-semibold">3. Padres: Carlos González Pérez y Alejandra Fallas Ureña. Hijo: Pablo</span> 
+                        <input type="text" id="f-3" class="answer-input flex-grow" data-correct-answer="González Fallas" data-group="f" data-last-in-group="true" onkeydown="checkAnswer(event, 'f', 3)" placeholder="_________">
+                    </p>
+                </div>
+            </div>
+
+            <!--
+            ================================================================================
+            Botón y Área de Respuestas Correctas
+            ================================================================================
+            -->
+            <div class="text-center mt-12 mb-10">
+                <button onclick="toggleAnswers()" 
+                        class="bg-flamingo-pink text-white font-bold py-3 px-6 rounded-full shadow-lg hover:bg-pink-600 transition duration-300 transform hover:scale-105">
+                    IV. Respuestas correctas / Correct Answers
+                </button>
+            </div>
+
+            <div id="correct-answers" class="hidden bg-gray-50 p-6 rounded-lg border-2 border-flamingo-pink/50">
+                <h2 class="text-2xl font-bold text-eerie-black mb-4">IV. Respuestas correctas / Correct Answers</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-lg text-flamingo-pink mb-2">a. Adjetivos Posesivos</h3>
+                        <ul class="list-disc list-inside space-y-1 ml-4">
+                            <li>1. tu</li>
+                            <li>2. Mi / Nuestra</li>
+                            <li>3. mis / nuestros</li>
+                            <li>4. tu</li>
+                            <li>5. mi / nuestra</li>
+                            <li>6. nuestra</li>
+                            <li>7. nuestra</li>
+                            <li>8. mis / nuestros</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg text-flamingo-pink mb-2">b. Selección de Posesivos</h3>
+                        <ul class="list-disc list-inside space-y-1 ml-4">
+                            <li>1. b) mi</li>
+                            <li>2. a) su</li>
+                            <li>3. c) nuestra</li>
+                            <li>4. b) tus</li>
+                            <li>5. c) mis</li>
+                            <li>6. a) nuestras</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg text-flamingo-pink mb-2">c. Preguntas de Conjugación</h3>
+                        <ul class="list-disc list-inside space-y-1 ml-4">
+                            <li>1. Sí, leo libros de ciencia ficción. / No, no leo libros de ciencia ficción.</li>
+                            <li>2. Sí, bebo mucha agua. / No, no bebo mucha agua.</li>
+                            <li>3. Sí, vendemos carros en nuestro trabajo. / No, no vendemos carros en nuestro trabajo.</li>
+                            <li>4. Sí, trabajo 40 horas a la semana. / No, no trabajo 40 horas a la semana.</li>
+                            <li>5. Sí, comemos pizza en casa. / No, no comemos pizza en casa.</li>
+                            <li>6. Sí, vivimos en los Estados Unidos. / No, no vivimos en los Estados Unidos.</li>
+                            <li>7. Sí, los estudiantes asisten a una buena escuela. / No, los estudiantes asisten a una mala escuela.</li>
+                            <li>8. Sí, mis hermanos deben estudiar música. / No, mis hermanos no deben estudiar música.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg text-flamingo-pink mb-2">d. Parentesco</h3>
+                        <ul class="list-disc list-inside space-y-1 ml-4">
+                            <li>1. c) nieta</li>
+                            <li>2. b) hijo</li>
+                            <li>3. c) hermana</li>
+                            <li>4. a) padre</li>
+                            <li>5. b) hijos</li>
+                            <li>6. c) esposa</li>
+                            <li>7. b) esposo</li>
+                            <li>8. c) sobrina</li>
+                            <li>9. c) abuelos</li>
+                            <li>10. b) tíos</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg text-flamingo-pink mb-2">e. Preguntas Personales</h3>
+                        <ul class="list-disc list-inside space-y-1 ml-4">
+                            <li>1. Mis padres son….</li>
+                            <li>2. Mis hermanos son…. / Soy hijo/hija único/única.</li>
+                            <li>3. Mis abuelos son….</li>
+                            <li>4. nieto</li>
+                            <li>5. abuelos</li>
+                            <li>6. sobrinas</li>
+                            <li>7. prima</li>
+                            <li>8. tíos</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold text-lg text-flamingo-pink mb-2">f. Apellidos</h3>
+                        <ul class="list-disc list-inside space-y-1 ml-4">
+                            <li>1. Alberto Cortés Ruiz</li>
+                            <li>2. Elena Quirós García</li>
+                            <li>3. Pablo González Fallas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+    
+    <script>
+        // Mapping de los inputs por grupo para determinar el último elemento de cada sección
+        const inputGroups = {
+            'a': ['a-1', 'a-2', 'a-3', 'a-4', 'a-5', 'a-6', 'a-7', 'a-8'],
+            'c': ['c-1', 'c-2', 'c-3', 'c-4', 'c-5', 'c-6', 'c-7', 'c-8'],
+            'e': ['e-1', 'e-2', 'e-3', 'e-4', 'e-5', 'e-6', 'e-7', 'e-8'],
+            'f': ['f-1', 'f-2', 'f-3']
+        };
+        
+        // Listado de IDs de contenedores de selección para navegación (Actividades B, D)
+        const selectionOrder = [
+            'b-1-display', 'b-2-display', 'b-3-display', 'b-4-display', 'b-5-display', 'b-6-display',
+            'd-1-display', 'd-2-display', 'd-3-display', 'd-4-display', 'd-5-display', 'd-6-display', 'd-7-display', 'd-8-display', 'd-9-display', 'd-10-display'
+        ];
+
+        /**
+         * Normaliza una cadena de texto para comparación (trim, lowercase, elimina puntuación).
+         * @param {string} text 
+         * @returns {string}
+         */
+        function normalize(text) {
+            if (typeof text !== 'string') return '';
+            // Reemplaza múltiples espacios con uno solo, convierte a minúsculas y elimina tildes/puntuación básica para ser menos estricto con la entrada.
+            return text.toLowerCase().trim().replace(/á/g, 'a').replace(/é/g, 'e').replace(/í/g, 'i').replace(/ó/g, 'o').replace(/ú/g, 'u').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ");
+        }
+
+        /**
+         * Verifica la respuesta de un input de texto y navega al siguiente DENTRO DE LA MISMA ACTIVIDAD.
+         * @param {Event} event 
+         * @param {string} prefix Prefijo de la actividad (e.g., 'a', 'c')
+         * @param {number} index Número de la pregunta
+         */
+        function checkAnswer(event, prefix, index) {
+            if (event.key !== 'Enter') return;
+
+            event.preventDefault(); // Evita el submit del formulario si hubiera uno
+            const input = event.target;
+            const currentId = `${prefix}-${index}`;
+            const groupInputs = inputGroups[prefix];
+            const currentIndex = groupInputs.indexOf(currentId);
+            
+            // 1. Verificar y dar feedback visual
+            const rawCorrectAnswers = input.getAttribute('data-correct-answer');
+            const correctAnswers = rawCorrectAnswers.split('/').map(ans => normalize(ans));
+            const userAnswer = normalize(input.value);
+
+            let isCorrect = false;
+            if (userAnswer) {
+                isCorrect = correctAnswers.some(correct => {
+                    // Para respuestas cortas (A y F)
+                    if (prefix === 'a' || prefix === 'f') {
+                        return correct === userAnswer; 
+                    }
+                    // Para respuestas abiertas (C y E)
+                    return correct === userAnswer; 
+                });
+            }
+
+            input.classList.remove('bg-light-green', 'bg-light-red');
+            if (isCorrect) {
+                input.classList.add('bg-light-green');
+            } else if (userAnswer) {
+                input.classList.add('bg-light-red');
+            }
+
+            // 2. Navegar al siguiente input DENTRO DEL GRUPO, O DETENERSE
+            const nextIndex = currentIndex + 1;
+
+            if (nextIndex < groupInputs.length) {
+                const nextInput = document.getElementById(groupInputs[nextIndex]);
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            } else {
+                // Si es el último elemento del grupo, solo verifica y no hace nada más (solución al requerimiento).
+                // Opcionalmente, puedes devolver el foco al input actual para que el usuario sepa que ha terminado la sección.
+                input.focus();
+            }
+        }
+
+        /**
+         * Maneja la selección de las actividades B y D.
+         * @param {HTMLElement} labelElement Elemento label seleccionado.
+         */
+        function checkSelection(labelElement) {
+            const questionId = labelElement.getAttribute('data-question'); // b-1, d-5, etc.
+            const value = labelElement.getAttribute('data-value');
+            const isCorrect = labelElement.getAttribute('data-correct') === 'true';
+            const displayElement = document.getElementById(`${questionId}-display`);
+
+            // 1. Limpiar feedback visual de todas las opciones de la misma pregunta
+            document.querySelectorAll(`[data-question="${questionId}"]`).forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+                opt.style.backgroundColor = 'white';
+                opt.style.borderColor = '#FF79AC';
+            });
+
+            // 2. Aplicar feedback visual a la opción seleccionada
+            if (isCorrect) {
+                labelElement.classList.add('correct');
+            } else {
+                labelElement.classList.add('incorrect');
+            }
+
+            // 3. Rellenar el espacio de completación
+            if (displayElement) {
+                displayElement.textContent = value;
+                displayElement.classList.remove('bg-light-green', 'bg-light-red');
+                displayElement.style.borderStyle = 'solid';
+                if (isCorrect) {
+                    displayElement.classList.add('bg-light-green');
+                } else {
+                    displayElement.classList.add('bg-light-red');
+                }
+            }
+            
+            // 4. Mover el foco (simulado) a la siguiente pregunta de selección
+            setTimeout(() => {
+                 const currentIndex = selectionOrder.indexOf(displayElement.id);
+                 const nextIndex = currentIndex + 1;
+                 
+                 if (nextIndex < selectionOrder.length) {
+                     const nextDisplayId = selectionOrder[nextIndex];
+                     // Buscamos la primera opción de la siguiente pregunta para enfocar
+                     const nextQuestionId = nextDisplayId.split('-')[0] + '-' + nextDisplayId.split('-')[1];
+                     const nextOption = document.querySelector(`[data-question="${nextQuestionId}"]`);
+                     if (nextOption) {
+                        nextOption.focus(); // Enfocar el siguiente botón/label
+                     }
+                 }
+            }, 500); // Pequeño retraso para que el usuario vea el feedback
+        }
+        
+
+        // Asignar el listener a las opciones de selección y el foco inicial
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.select-option').forEach(label => {
+                label.addEventListener('click', () => checkSelection(label));
+                // Habilitar foco con tabindex para navegación
+                label.setAttribute('tabindex', '0');
+            });
+            // Enfocar el primer input al cargar la página
+            const firstInput = document.getElementById(inputGroups['a'][0]);
+            if (firstInput) {
+                firstInput.focus();
+            }
+        });
+
+        /**
+         * Muestra/Oculta la sección de respuestas correctas.
+         */
+        function toggleAnswers() {
+            const answersDiv = document.getElementById('correct-answers');
+            answersDiv.classList.toggle('hidden');
+            // Desplazarse hacia el área de respuestas
+            if (!answersDiv.classList.contains('hidden')) {
+                answersDiv.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+    </script>
+</body>
+</html>
