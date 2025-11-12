@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game - Test Your Memory</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Estilos y configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        'light-pink': '#FFE5F0',
+                        'correct-green': '#B2F4B2',
+                        'error-red': '#FFB7B7',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Aplicar la fuente Inter y el color de texto principal */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #121118;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        /* Estilo base para los botones del juego */
+        .card-button {
+            /* Estilo base: Rosa claro, borde inferior rosa flamenco, texto negro */
+            background-color: #FFE5F0;
+            color: #121118;
+            border-bottom: 4px solid #FF79AC;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            user-select: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            text-align: center;
+            line-height: 1.25;
+            height: auto;
+        }
+
+        .card-button:hover:not(.matched):not(.selected):not(.error) {
+            background-color: #ffd8ec;
+        }
+
+        /* Estilo para tarjetas seleccionadas */
+        .card-button.selected {
+            background-color: #FF79AC;
+            color: white;
+            border-bottom: 4px solid #121118;
+            transform: translateY(1px);
+        }
+
+        /* Estilo para tarjetas emparejadas (verde claro) */
+        .card-button.matched {
+            background-color: #B2F4B2;
+            color: #121118;
+            border-bottom: 4px solid #33AA33;
+            cursor: default;
+        }
+
+        /* Estilo para tarjetas con error (rojo claro) */
+        .card-button.error {
+            background-color: #FFB7B7 !important;
+            color: #121118 !important;
+            border-bottom: 4px solid #CC3333 !important;
+        }
+        
+        /* Contenedor principal para las dos columnas */
+        #columns-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 columnas de igual ancho */
+            gap: 1rem;
+        }
+
+        /* Contenedores de idioma */
+        .language-column {
+            display: grid;
+            grid-template-columns: 1fr; /* Los elementos dentro de la columna son de 1fr */
+            gap: 0.75rem; /* Espacio entre botones dentro de la columna */
+        }
+
+        /* Estilo para los botones de Nivel */
+        .level-select-button {
+            background-color: #FFE5F0; /* Rosa claro */
+            color: #FF79AC; /* Texto Rosa Flamenco */
+            font-weight: 700;
+            padding: 0.5rem 0.75rem;
+            border-radius: 9999px; /* Píldora */
+            border: 2px solid #FF79AC;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+        .level-select-button:hover {
+            background-color: #FF79AC;
+            color: white;
+        }
+        .level-select-button.active {
+            background-color: #121118; /* Negro */
+            color: white;
+            border-color: #121118;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="app" class="w-full max-w-4xl mx-auto p-4 md:p-8 bg-white rounded-xl shadow-2xl">
+        
+        <!-- Encabezado -->
+        <header class="text-center mb-6">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-flamingo-pink tracking-tight">
+                Matching game
+            </h1>
+            <h2 class="text-xl md:text-2xl font-medium text-eerie-black mt-2">
+                test your memory
+            </h2>
+            <div id="level-display" class="mt-4 text-lg font-semibold text-eerie-black"></div>
+        </header>
+
+        <!-- BARRA DE SELECCIÓN DE NIVELES -->
+        <div id="level-buttons-bar" class="flex justify-center flex-wrap gap-2 mb-6 border-b pb-4 border-gray-200">
+            <!-- Los botones se inyectarán aquí con JavaScript -->
+        </div>
+
+        <!-- CONTENEDOR DEL JUEGO -->
+        <div id="game-container" class="space-y-6">
+
+            <!-- Mensaje de estado/victoria -->
+            <div id="message-box" class="text-center h-8 text-lg font-medium">
+                <!-- Los mensajes del juego aparecerán aquí -->
+            </div>
+
+            <!-- Estructura de 2 Columnas: Español (Izquierda) e Inglés (Derecha) -->
+            <div id="columns-container">
+                <div id="spanish-column" class="language-column">
+                    <!-- Botones en español se inyectarán aquí -->
+                </div>
+                <div id="english-column" class="language-column">
+                    <!-- Botones en inglés se inyectarán aquí -->
+                </div>
+            </div>
+
+            <div id="final-message" class="hidden text-2xl font-bold text-flamingo-pink text-center pt-8">
+                ¡Felicidades! ¡Has completado todos los niveles!
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Definición de datos de vocabulario por nivel
+        const VOCABULARY_LEVELS = [
+            // Nivel 1: Tiempo Básico
+            [
+                ['el presente', 'present'],
+                ['la semana', 'week'],
+                ['el tiempo', 'time, weather'],
+                ['el fin de semana', 'weekend'],
+                ['el segundo', 'second'],
+                ['el mes', 'month'],
+                ['el minuto', 'minute'],
+                ['el año', 'year'],
+            ],
+            // Nivel 2: Expresiones de Tiempo 1
+            [
+                ['la hora', 'hour, time'],
+                ['antes de', 'before'],
+                ['hoy', 'today'],
+                ['después de', 'after'],
+                ['¿Qué hora es?', 'What time is it?'],
+                ['la tarde', 'afternoon'],
+                ['el cuarto', 'quarter'],
+                ['por la tarde', 'in the afternoon'],
+            ],
+            // Nivel 3: Expresiones de Tiempo 2
+            [
+                ['la media (hora)', 'half an hour'],
+                ['la noche', 'night'],
+                ['en punto', 'on the dot, exactly'],
+                ['por la noche', 'at night'],
+                ['Son las tres.', 'It’s three o’clock.'],
+                ['la fecha', 'date'],
+                ['a las cinco', 'at five o’clock'],
+                ['¿Cuál es la fecha de hoy?', 'What is today’s date?'],
+            ],
+            // Nivel 4: Partes del Día y Días Festivos
+            [
+                ['el mediodía', 'noon'],
+                ['la celebración', 'celebration'],
+                ['la medianoche', 'midnight'],
+                ['el cumpleaños', 'birthday'],
+                ['la mañana', 'morning'],
+                ['el Año Nuevo', 'New Year’s Day'],
+                ['por la mañana', 'in the morning'],
+                ['la Navidad', 'Christmas'],
+            ],
+            // Nivel 5: Días y Meses 1
+            [
+                ['lunes', 'Monday'],
+                ['viernes', 'Friday'],
+                ['martes', 'Tuesday'],
+                ['sábado', 'Saturday'],
+                ['miércoles', 'Wednesday'],
+                ['domingo', 'Sunday'],
+                ['jueves', 'Thursday'],
+                ['enero', 'January'],
+            ],
+            // Nivel 6: Meses 2
+            [
+                ['julio', 'July'],
+                ['febrero', 'February'],
+                ['agosto', 'August'],
+                ['marzo', 'March'],
+                ['septiembre', 'September'],
+                ['abril', 'April'],
+                ['octubre', 'October'],
+                ['mayo', 'May'],
+            ],
+            // Nivel 7: Meses y Estaciones
+            [
+                ['noviembre', 'November'],
+                ['junio', 'June'],
+                ['diciembre', 'December'],
+                ['la estación', 'season'],
+                ['el otoño', 'autumn'],
+                ['la primavera', 'spring'],
+                ['el invierno', 'winter'],
+                ['el verano', 'summer'],
+            ]
+        ];
+
+        // --- Variables de Estado del Juego ---
+        let currentLevel = 0; // Índice del nivel actual (0 para Nivel 1)
+        let cards = []; 
+        let selectedCards = [];
+        let matchesFound = 0;
+        let isProcessing = false; 
+
+        // Elementos del DOM
+        const spanishColumn = document.getElementById('spanish-column');
+        const englishColumn = document.getElementById('english-column');
+        const levelDisplay = document.getElementById('level-display');
+        const messageBox = document.getElementById('message-box');
+        const finalMessage = document.getElementById('final-message');
+        const levelButtonsBar = document.getElementById('level-buttons-bar');
+
+
+        /**
+         * Función de utilidad para mezclar un array (Algoritmo de Fisher-Yates).
+         * @param {Array<any>} array
+         * @returns {Array<any>} Array mezclado.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /**
+         * Crea y renderiza los 7 botones de nivel.
+         */
+        function renderLevelButtons() {
+            levelButtonsBar.innerHTML = ''; // Limpiar botones anteriores
+
+            for (let i = 0; i < VOCABULARY_LEVELS.length; i++) {
+                const button = document.createElement('button');
+                button.textContent = `Nivel ${i + 1}`;
+                button.classList.add('level-select-button');
+                button.id = `level-btn-${i}`;
+                
+                // Añadir el listener para iniciar el juego en ese nivel
+                button.onclick = () => startGame(i); 
+
+                levelButtonsBar.appendChild(button);
+            }
+        }
+
+        /**
+         * Actualiza el estado visual de los botones de nivel, marcando el nivel activo.
+         */
+        function updateLevelButtonActiveState() {
+            document.querySelectorAll('.level-select-button').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === currentLevel) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+
+        /**
+         * Inicializa o reinicia el juego para un nivel específico.
+         * @param {number} levelIndex El índice del nivel a cargar.
+         */
+        function startGame(levelIndex) {
+            // Restablecer el estado
+            currentLevel = levelIndex;
+            selectedCards = [];
+            matchesFound = 0;
+            isProcessing = false;
+            cards = [];
+
+            // Limpiar mensaje final
+            finalMessage.classList.add('hidden');
+
+            const pairs = VOCABULARY_LEVELS[levelIndex];
+            const spanishWords = [];
+            const englishWords = [];
+
+            // 1. Crear el set completo de cartas y separarlas por idioma
+            pairs.forEach(([esWord, enWord], pairId) => {
+                spanishWords.push({ id: `es-${pairId}`, text: esWord, lang: 'es', pairId });
+                englishWords.push({ id: `en-${pairId}`, text: enWord, lang: 'en', pairId });
+            });
+
+            // 2. Mezclar las palabras en cada idioma de forma independiente
+            const shuffledSpanish = shuffleArray(spanishWords);
+            const shuffledEnglish = shuffleArray(englishWords);
+
+            // 3. Unir las listas para el array de estado
+            cards = [...shuffledSpanish, ...shuffledEnglish];
+
+            // 4. Renderizar el tablero
+            renderBoard(shuffledSpanish, shuffledEnglish);
+
+            // 5. Actualizar UI
+            levelDisplay.textContent = `Nivel ${currentLevel + 1} de ${VOCABULARY_LEVELS.length}`;
+            messageBox.textContent = '¡Encuentra los pares Español-Inglés!';
+            updateLevelButtonActiveState(); // Marcar el botón de nivel activo
+        }
+
+        /**
+         * Renderiza los botones en las columnas de idioma.
+         * @param {Array} spanishCards Lista de cartas en español mezcladas.
+         * @param {Array} englishCards Lista de cartas en inglés mezcladas.
+         */
+        function renderBoard(spanishCards, englishCards) {
+            spanishColumn.innerHTML = '';
+            englishColumn.innerHTML = '';
+
+            const createButton = (card) => {
+                const button = document.createElement('button');
+                button.id = card.id;
+                button.textContent = card.text;
+                button.classList.add('card-button', 'text-sm', 'lg:text-base', 'disabled:opacity-100');
+                button.setAttribute('data-pair-id', card.pairId);
+                button.onclick = () => handleCardClick(card.id);
+                return button;
+            };
+
+            // Llenar la columna en español (izquierda)
+            spanishCards.forEach(card => {
+                spanishColumn.appendChild(createButton(card));
+            });
+
+            // Llenar la columna en inglés (derecha)
+            englishCards.forEach(card => {
+                englishColumn.appendChild(createButton(card));
+            });
+        }
+
+        /**
+         * Maneja la lógica al hacer clic en una carta.
+         * @param {string} cardId El ID de la carta clicada.
+         */
+        function handleCardClick(cardId) {
+            if (isProcessing) return;
+
+            const cardElement = document.getElementById(cardId);
+            const cardData = cards.find(c => c.id === cardId);
+            
+            // Si ya está emparejada o ya está seleccionada, o si se intenta seleccionar el mismo idioma dos veces
+            if (cardElement.classList.contains('matched') || cardElement.classList.contains('selected')) {
+                return;
+            }
+
+            // Validación de idioma: Asegurarse de que no se seleccionen dos cartas del mismo idioma
+            if (selectedCards.length === 1) {
+                const prevCardId = selectedCards[0];
+                const prevCardData = cards.find(c => c.id === prevCardId);
+
+                if (prevCardData.lang === cardData.lang) {
+                    messageBox.textContent = 'Debes seleccionar una palabra en español Y una en inglés.';
+                    return;
+                }
+            } else if (selectedCards.length === 2) {
+                selectedCards = [];
+            }
+            
+            // 1. Seleccionar la carta
+            cardElement.classList.add('selected');
+            selectedCards.push(cardId);
+
+            if (selectedCards.length === 2) {
+                // 2. Comprobar el emparejamiento
+                isProcessing = true; // Bloquear nuevos clics
+
+                const [id1, id2] = selectedCards;
+                const card1 = cards.find(c => c.id === id1);
+                const card2 = cards.find(c => c.id === id2);
+
+                const element1 = document.getElementById(id1);
+                const element2 = document.getElementById(id2);
+
+                if (card1.pairId === card2.pairId) {
+                    // --- ¡Acierto! (Verde claro) ---
+                    messageBox.textContent = '¡Correcto! Sigue así.';
+                    
+                    element1.classList.remove('selected');
+                    element2.classList.remove('selected');
+                    element1.classList.add('matched');
+                    element2.classList.add('matched');
+
+                    matchesFound++;
+                    isProcessing = false; // Desbloquear
+
+                    if (matchesFound === VOCABULARY_LEVELS[currentLevel].length) {
+                        handleLevelComplete();
+                    }
+
+                } else {
+                    // --- Error (Rojo claro temporal) ---
+                    messageBox.textContent = 'Error. Intenta de nuevo.';
+                    
+                    element1.classList.remove('selected');
+                    element2.classList.remove('selected');
+                    element1.classList.add('error');
+                    element2.classList.add('error');
+
+                    // Revertir a los estilos originales después de 1 segundo
+                    setTimeout(() => {
+                        element1.classList.remove('error');
+                        element2.classList.remove('error');
+                        // Volver a aplicar el estilo original (light-pink)
+                        element1.classList.remove('selected');
+                        element2.classList.remove('selected');
+                        isProcessing = false; // Desbloquear clics
+                    }, 1000);
+                }
+
+                // 3. Restablecer selección después de la verificación
+                selectedCards = [];
+            }
+        }
+
+        /**
+         * Maneja la finalización de un nivel.
+         */
+        function handleLevelComplete() {
+            // Deshabilitar los botones de las cartas
+            document.querySelectorAll('.card-button').forEach(btn => btn.disabled = true);
+            
+            if (currentLevel + 1 < VOCABULARY_LEVELS.length) {
+                messageBox.textContent = `¡Nivel ${currentLevel + 1} completado! Selecciona el siguiente nivel arriba.`;
+            } else {
+                 messageBox.textContent = '¡Felicidades! ¡Has completado todos los niveles!';
+                 finalMessage.classList.remove('hidden');
+            }
+        }
+
+        // --- Inicialización del Juego ---
+        window.onload = () => {
+            renderLevelButtons(); // Renderiza los botones de nivel 1-7
+            startGame(0);        // Inicia el juego en el Nivel 1
+        };
+
+    </script>
+</body>
+</html>

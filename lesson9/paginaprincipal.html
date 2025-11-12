@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to your Spanish Class!</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración personalizada de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC', // Rosa Flamenco
+                        'eerie-black': '#121118', // Negro Misterioso
+                        'background-white': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF; /* Fondo blanco */
+            color: #121118; /* Texto principal negro misterioso */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        /* Estilo para los botones principales (unificado) */
+        .main-button {
+            /* Colores: Rosa con letras blancas */
+            background-color: #FF79AC; /* Flamingo Pink */
+            color: #FFFFFF; /* Todas las letras en blanco */
+            font-weight: 600; /* Medium/Semi-bold */
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem; /* Esquinas redondeadas */
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            line-height: 1.5;
+            box-shadow: 0 4px 0 0 #121118; /* Borde inferior negro misterioso (simulado con sombra) */
+            transform: translateY(0);
+        }
+
+        .main-button:hover {
+            background-color: #fa5d98; /* Un poco más oscuro al pasar el ratón */
+            box-shadow: 0 2px 0 0 #121118;
+            transform: translateY(2px);
+        }
+
+        /* Estilo para el botón de enlace externo (find class here) */
+        .link-button {
+            background-color: #121118; /* Negro misterioso */
+            color: #FFFFFF;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-button:hover {
+            background-color: #333333;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div id="app" class="w-full max-w-2xl mx-auto p-6 md:p-10 bg-white rounded-xl shadow-2xl space-y-8">
+        
+        <!-- Título Principal -->
+        <header class="text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-eerie-black tracking-tight">
+                Welcome to your Spanish Class!
+            </h1>
+        </header>
+
+        <!-- Contenedor de Botones de Navegación -->
+        <div class="grid grid-cols-1 gap-6">
+
+            <!-- Botón 1: Expressing Time in Spanish -->
+            <a href="vocabulary.html" class="main-button text-2xl">
+                Expressing Time in Spanish
+            </a>
+
+            <!-- Botón 2: Actividades / Activities -->
+            <a href="activities.html" class="main-button text-2xl">
+                Actividades / Activities
+            </a>
+
+            <!-- Botón 3: Matching game / test your memory -->
+            <a href="game.html" class="main-button text-2xl">
+                Matching game / test your memory
+            </a>
+
+        </div>
+
+        <!-- Pie de Página y Enlaces -->
+        <footer class="text-center pt-8 space-y-4">
+            
+            <!-- Derechos de autor -->
+            <p class="text-sm text-gray-600">
+                © 2025 Spanish Lessons with María C. All rights reserved.
+            </p>
+
+            <!-- Botón de Enlace Externo -->
+            <a href="https://preply.com/en/tutor/5105409?utm_source=friend&utm_medium=ref&utm_campaign=stu_plg_plg_all_0_mul_xx_multiplesub_share-tutor-tutoring_1&utm_content=OTQ2NTAwNQ==" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="inline-block link-button transition hover:scale-105">
+                Find your Spanish class here.
+            </a>
+
+        </footer>
+    </div>
+
+</body>
+</html>
