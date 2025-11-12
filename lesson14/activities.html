@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de Fuente Inter (sustituto de Platform Medium Font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Colores y Fuente Centrales */
+        :root {
+            --color-pink: #FF79AC; /* Flamingo Pink */
+            --color-black: #121118; /* Eerie Black */
+            --font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: white;
+            color: var(--color-black);
+            padding: 20px;
+        }
+
+        .text-pink {
+            color: var(--color-pink);
+        }
+
+        .bg-pink-light {
+            background-color: #FFECF3; /* Versión más clara del Flamingo Pink para fondos de recuadros */
+        }
+        
+        /* Estilos para el texto del diálogo (Actividad B) */
+        .speaker-erica {
+            color: var(--color-black);
+            font-weight: 700;
+        }
+        .speaker-diana {
+            color: var(--color-pink);
+            font-weight: 700;
+        }
+
+        /* Estilo para los inputs de completación */
+        .completion-input {
+            width: 180px;
+            text-align: center;
+            border: 1px solid #d1d5db;
+            padding: 2px 5px;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+
+        /* Fuerza la justificación en todos los bloques de contenido */
+        .justify-text {
+            text-align: justify;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center">
+
+    <div class="w-full max-w-4xl space-y-8 p-6">
+
+        <h1 class="text-4xl font-black text-center mb-10 text-pink">
+            III. Actividades / Activities
+        </h1>
+
+        <!-- ============================================== -->
+        <!-- A. COMPLETAR ORACIONES -->
+        <!-- ============================================== -->
+        <div id="activity-a" class="space-y-4">
+            <h2 class="text-xl font-bold mb-4 justify-text">
+                a. Completa las siguientes oraciones con el verbo y conjugación adecuada. / Complete the following sentences with the appropriate verb and conjugation.
+            </h2>
+            <p class="text-lg font-bold justify-text mb-4 text-pink">
+                oír (2) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;escoger &nbsp;&nbsp;&nbsp;&nbsp;proteger &nbsp;&nbsp;&nbsp;&nbsp;dar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;venir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;corregir &nbsp;&nbsp;&nbsp;&nbsp;decir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ver
+            </p>
+            <div class="space-y-3 justify-text">
+                <p>1. Los domingos vosotros <input type="text" data-activity="a" data-index="0" class="completion-input" aria-label="Respuesta 1"> películas [movies] con vuestros amigos.</p>
+                <p>2. Tú <input type="text" data-activity="a" data-index="1" class="completion-input" aria-label="Respuesta 2"> a las reuniones generalmente diez minutos tarde.</p>
+                <p>3. Mi hermano y yo siempre <input type="text" data-activity="a" data-index="2" class="completion-input" aria-label="Respuesta 3"> lo mismo [the same thing] de la carta [menu] cuando vamos a un restaurante.</p>
+                <p>4. Yo <input type="text" data-activity="a" data-index="3" class="completion-input" aria-label="Respuesta 4"> mi piel [skin] contra el sol todos los días.</p>
+                <p>5. La profesora <input type="text" data-activity="a" data-index="4" class="completion-input" aria-label="Respuesta 5"> los exámenes de sus estudiantes cada mes.</p>
+                <p>6. Yo <input type="text" data-activity="a" data-index="5" class="completion-input" aria-label="Respuesta 6"> música cuando trabajo en la computadora.</p>
+                <p>7. Ustedes <input type="text" data-activity="a" data-index="6" class="completion-input" aria-label="Respuesta 7"> música cuando manejan su automóvil.</p>
+                <p>8. Yo siempre <input type="text" data-activity="a" data-index="7" class="completion-input" aria-label="Respuesta 8"> la verdad (truth).</p>
+                <p>9. Todos los años él le [to her] <input type="text" data-activity="a" data-index="8" class="completion-input" aria-label="Respuesta 9"> un regalo [gift] a su mejor [best] amiga por su cumpleaños.</p>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- B. COMPLETAR DIÁLOGO -->
+        <!-- ============================================== -->
+        <div id="activity-b" class="space-y-4 pt-10">
+            <h2 class="text-xl font-bold mb-4 justify-text">
+                b. Erica y sus hijas Diana y Mariana están en el zoológico [zoo]. / Erica and her daughters Diana and Mariana are at the zoo.
+            </h2>
+            <p class="justify-text text-sm mb-4">
+                Completa el diálogo con la conjugación correcta del verbo indicado. / Complete the dialogue with the correct conjugation of the indicated verb.
+            </p>
+            <div class="space-y-3 justify-text">
+                <p><span class="speaker-erica">Erica:</span> Diana y Mariana, 1. ¿ <input type="text" data-activity="b" data-index="0" class="completion-input" aria-label="Diálogo 1"> (oír) ese [that] sonido (sound)?</p>
+                <p><span class="speaker-diana">Diana:</span> ¡Sí, mami!</p>
+                <p><span class="speaker-erica">Erica:</span> Son las guacamayas [macaws]. ¡Están cantando! [They are singing]</p>
+                <p><span class="speaker-diana">Diana:</span> ¿Por qué 2. <input type="text" data-activity="b" data-index="1" class="completion-input" aria-label="Diálogo 2"> (cantar)?</p>
+                <p><span class="speaker-erica">Erica:</span> Porque 3. <input type="text" data-activity="b" data-index="2" class="completion-input" aria-label="Diálogo 3"> (estar) felices.</p>
+                <p><span class="speaker-erica">Erica:</span> Diana, 4. <input type="text" data-activity="b" data-index="3" class="completion-input" aria-label="Diálogo 4"> (ver) todos los colores [colors] de sus plumas [feathers]?</p>
+                <p><span class="speaker-diana">Diana:</span> ¡Sí! ¿Por qué 5. <input type="text" data-activity="b" data-index="4" class="completion-input" aria-label="Diálogo 5"> (tener) tantos [so many] colores?</p>
+                <p><span class="speaker-erica">Erica:</span> Mmmm, porque 6. <input type="text" data-activity="b" data-index="5" class="completion-input" aria-label="Diálogo 6"> (representar) [represent] los colores de la naturaleza [nature].</p>
+                <p><span class="speaker-erica">Erica:</span> ¡Vamos a 7. <input type="text" data-activity="b" data-index="6" class="completion-input" aria-label="Diálogo 7"> (ver) los monos [monkeys]!</p>
+                <p><span class="speaker-diana">Diana:</span> ¡No, mami! No 8. <input type="text" data-activity="b" data-index="7" class="completion-input" aria-label="Diálogo 8"> (querer) ir.</p>
+                <p><span class="speaker-erica">Erica:</span> ¿Por qué no 9. <input type="text" data-activity="b" data-index="8" class="completion-input" aria-label="Diálogo 9"> (querer) ir? Tú siempre les [to them] 10. <input type="text" data-activity="b" data-index="9" class="completion-input" aria-label="Diálogo 10"> (dar) comida [food] a los monos.</p>
+                <p><span class="speaker-diana">Diana:</span> Hoy no quiero ver los monos.</p>
+                <p><span class="speaker-erica">Erica:</span> Bueno, tú 11. <input type="text" data-activity="b" data-index="10" class="completion-input" aria-label="Diálogo 11"> (deber) escoger qué animal quieres ver ahora.</p>
+                <p><span class="speaker-diana">Diana:</span> Yo 12. <input type="text" data-activity="b" data-index="11" class="completion-input" aria-label="Diálogo 12"> (querer) ver los elefantes [elephants].</p>
+                <p><span class="speaker-erica">Erica:</span> Pero tú siempre 13. <input type="text" data-activity="b" data-index="12" class="completion-input" aria-label="Diálogo 13"> (venir) a ver los elefantes. 14. <input type="text" data-activity="b" data-index="13" class="completion-input" aria-label="Diálogo 14"> (ir) a ver otros animales ahora.</p>
+                <p><span class="speaker-diana">Diana:</span> ¡No, mami! Es la primera vez que Mariana visita el zoológico y quiero 15. <input type="text" data-activity="b" data-index="14" class="completion-input" aria-label="Diálogo 15"> (ver) los elefantes con ella.</p>
+                <p><span class="speaker-erica">Erica:</span> ¿Los elefantes son tu animal favorito [favorite]?</p>
+                <p><span class="speaker-diana">Diana:</span> No, mami. Yo no 16. <input type="text" data-activity="b" data-index="15" class="completion-input" aria-label="Diálogo 16"> (tener) un animal favorito. Todos 17. <input type="text" data-activity="b" data-index="16" class="completion-input" aria-label="Diálogo 17"> (ser) muy bonitos.</p>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- C. LEER Y CONTESTAR PREGUNTAS (RECUADRO ROSA) -->
+        <!-- ============================================== -->
+        <div id="activity-c" class="p-6 rounded-xl bg-pink-light mt-10 space-y-4 justify-text">
+            <h2 class="text-xl font-bold mb-4 justify-text">
+                c. Lee el siguiente párrafo y contesta las preguntas. / Read the following paragraph and answer the questions.
+            </h2>
+
+            <div class="justify-text mb-6 p-4 border border-pink rounded-lg bg-white">
+                <p class="justify-text">
+                    <strong>Hoy, en la capital de los Estados Unidos, el presidente Obama se reunió con el presidente de México, Enrique Peña Nieto, para hablar de la situación económica de los dos países. Durante las conversaciones, los dos presidentes hablaron del Tratado de Libre Comercio de América del Norte y del asunto de la inmigración, tanto legal como ilegal, entre México y los Estados Unidos. Los dos líderes van a verse de nuevo en una semana cuando el presidente mexicano y el presidente estadounidense viajen a Río de Janeiro para una reunión de todos los jefes de Estado de las Américas.</strong>
+                </p>
+            </div>
+            
+            <div class="space-y-4 justify-text">
+                <p>1. ¿Cuándo van a verse [meet, see each other] de nuevo [again] los presidentes de los Estados Unidos y México? </p>
+                <input type="text" data-activity="c" data-index="0" class="w-full completion-input bg-white" aria-label="Pregunta C1">
+                <div data-hint="c" data-index="0" class="hint-box text-sm text-pink-light bg-pink-light rounded-md p-1 mt-1 transition-all duration-300"></div>
+
+                <p>2. ¿Adónde van a viajar los presidentes?</p>
+                <input type="text" data-activity="c" data-index="1" class="w-full completion-input bg-white" aria-label="Pregunta C2">
+                <div data-hint="c" data-index="1" class="hint-box text-sm text-pink-light bg-pink-light rounded-md p-1 mt-1 transition-all duration-300"></div>
+
+                <p>3. ¿Por qué van a hacer el viaje [trip]?</p>
+                <input type="text" data-activity="c" data-index="2" class="w-full completion-input bg-white" aria-label="Pregunta C3">
+                <div data-hint="c" data-index="2" class="hint-box text-sm text-pink-light bg-pink-light rounded-md p-1 mt-1 transition-all duration-300"></div>
+
+                <p>4. ¿Quiénes más van a estar con los presidentes Peña Nieto y Obama?</p>
+                <input type="text" data-activity="c" data-index="3" class="w-full completion-input bg-white" aria-label="Pregunta C4">
+                <div data-hint="c" data-index="3" class="hint-box text-sm text-pink-light bg-pink-light rounded-md p-1 mt-1 transition-all duration-300"></div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- D. COGNADOS Y CIERTO/FALSO (RECUADRO ROSA) -->
+        <!-- ============================================== -->
+        <div id="activity-d" class="p-6 rounded-xl bg-pink-light mt-10 space-y-4 justify-text">
+            <h2 class="text-xl font-bold mb-4 justify-text">
+                d. Lee el siguiente párrafo. Encuentra al menos seis cognados y contesta las preguntas. / Read the following paragraph. Find at least six cognates and answer the questions.
+            </h2>
+
+            <div class="justify-text mb-6 p-4 border border-pink rounded-lg bg-white">
+                <p class="justify-text">
+                    <strong>El náhuatl</strong>
+                    <br><br>
+                    <strong>El náhuatl es una lengua que se habla principalmente en los pueblos indígenas nahuas en México. Aunque el náhuatl, con un millón y medio de hablantes en el país, es la lengua indígena hablada por el mayor número de grupos étnicos en México, también existe una gran cantidad de dialectos entre estos grupos. El náhuatl es la lengua indígena más importante en México, pero en ese país existen más de sesenta “lenguas vivas.” Además de México, hay otros países que aún emplean lenguas prehispánicas como parte de su comunicación básica—por ejemplo, Guatemala, Ecuador, Perú y otros. El náhuatl y el español se han influenciado entre sí e incluso la Real Academia Española ha reconocido varios préstamos lingüísticos del náhuatl al español. Palabras como, por ejemplo, “chocolate,” “tomate,” “aguacate,” “guacamole” y “tamal” son palabras en español que vienen de náhuatl.</strong>
+                </p>
+            </div>
+
+            <!-- Cognados -->
+            <div class="mb-6">
+                <p class="font-bold mb-2">Cognados:</p>
+                <div id="cognate-inputs" class="flex flex-wrap gap-4 justify-start">
+                    <!-- Seis espacios para cognados -->
+                    <input type="text" data-activity="d_cog" data-index="0" class="completion-input bg-white" aria-label="Cognado 1">
+                    <input type="text" data-activity="d_cog" data-index="1" class="completion-input bg-white" aria-label="Cognado 2">
+                    <input type="text" data-activity="d_cog" data-index="2" class="completion-input bg-white" aria-label="Cognado 3">
+                    <input type="text" data-activity="d_cog" data-index="3" class="completion-input bg-white" aria-label="Cognado 4">
+                    <input type="text" data-activity="d_cog" data-index="4" class="completion-input bg-white" aria-label="Cognado 5">
+                    <input type="text" data-activity="d_cog" data-index="5" class="completion-input bg-white" aria-label="Cognado 6">
+                </div>
+            </div>
+
+            <!-- Cierto/Falso -->
+            <h3 class="font-bold text-lg mb-4">Cierto (“C”) o Falso (“F”) / True (“C”) or False (“F”)</h3>
+            <div id="tf-questions" class="space-y-3">
+                <div class="flex items-center space-x-4 justify-start">
+                    <p class="flex-grow justify-text">1. Un millón y medio de personas hablan náhuatl en México.</p>
+                    <button data-tf-index="0" data-value="C" class="tf-btn bg-white hover:bg-gray-100 px-4 py-2 rounded-lg font-bold border border-gray-300 transition-colors">C</button>
+                    <button data-tf-index="0" data-value="F" class="tf-btn bg-white hover:bg-gray-100 px-4 py-2 rounded-lg font-bold border border-gray-300 transition-colors">F</button>
+                </div>
+                <div class="flex items-center space-x-4 justify-start">
+                    <p class="flex-grow justify-text">2. El español es la lengua indígena más importante de México.</p>
+                    <button data-tf-index="1" data-value="C" class="tf-btn bg-white hover:bg-gray-100 px-4 py-2 rounded-lg font-bold border border-gray-300 transition-colors">C</button>
+                    <button data-tf-index="1" data-value="F" class="tf-btn bg-white hover:bg-gray-100 px-4 py-2 rounded-lg font-bold border border-gray-300 transition-colors">F</button>
+                </div>
+                <div class="flex items-center space-x-4 justify-start">
+                    <p class="flex-grow justify-text">3. México es el único país que utiliza [uses] lenguas prehispánicas.</p>
+                    <button data-tf-index="2" data-value="C" class="tf-btn bg-white hover:bg-gray-100 px-4 py-2 rounded-lg font-bold border border-gray-300 transition-colors">C</button>
+                    <button data-tf-index="2" data-value="F" class="tf-btn bg-white hover:bg-gray-100 px-4 py-2 rounded-lg font-bold border border-gray-300 transition-colors">F</button>
+                </div>
+                <div class="flex items-center space-x-4 justify-start">
+                    <p class="flex-grow justify-text">4. La Real Academia Española no ha reconocido [has not recognized] los préstamos lingüísticos [loanwords] del náhuatl.</p>
+                    <button data-tf-index="3" data-value="C" class="tf-btn bg-white hover:bg-gray-100 px-4 py-2 rounded-lg font-bold border border-gray-300 transition-colors">C</button>
+                    <button data-tf-index="3" data-value="F" class="tf-btn bg-white hover:bg-gray-100 px-4 py-2 rounded-lg font-bold border border-gray-300 transition-colors">F</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================== -->
+        <!-- IV. RESPUESTAS CORRECTAS -->
+        <!-- ============================================== -->
+        <div class="pt-10 text-center">
+            <button id="toggle-answers-btn" class="bg-pink text-white text-lg font-bold px-6 py-3 rounded-xl shadow-lg transition duration-300 hover:bg-pink-light hover:text-pink-light" style="background-color: var(--color-pink);">
+                IV. Respuestas correctas / Correct Answers
+            </button>
+        </div>
+
+        <div id="answer-section" class="mt-8 p-6 border-4 border-dashed rounded-xl border-pink" style="display: none;">
+            <h2 class="text-3xl font-black text-pink mb-6">Respuestas Correctas</h2>
+
+            <div class="space-y-6">
+                <!-- A. Respuestas -->
+                <div class="justify-text">
+                    <h3 class="font-bold text-xl mb-2 text-pink">a.</h3>
+                    <ul class="list-disc list-inside ml-4 space-y-1 justify-text">
+                        <li>1. veis</li>
+                        <li>2. vienes</li>
+                        <li>3. escogemos</li>
+                        <li>4. protejo</li>
+                        <li>5. corrige</li>
+                        <li>6. oigo</li>
+                        <li>7. oyen</li>
+                        <li>8. digo</li>
+                        <li>9. da</li>
+                    </ul>
+                </div>
+
+                <!-- B. Respuestas -->
+                <div class="justify-text">
+                    <h3 class="font-bold text-xl mb-2 text-pink">b.</h3>
+                    <ul class="list-disc list-inside ml-4 space-y-1 justify-text">
+                        <li>1. oyen / oís</li>
+                        <li>2. cantan</li>
+                        <li>3. están</li>
+                        <li>4. ves</li>
+                        <li>5. tienen</li>
+                        <li>6. representan</li>
+                        <li>7. ver</li>
+                        <li>8. quiero</li>
+                        <li>9. quieres</li>
+                        <li>10. das</li>
+                        <li>11. debes</li>
+                        <li>12. quiero</li>
+                        <li>13. vienes</li>
+                        <li>14. Vamos</li>
+                        <li>15. ver</li>
+                        <li>16. tengo</li>
+                        <li>17. son</li>
+                    </ul>
+                </div>
+
+                <!-- C. Respuestas y Traducción -->
+                <div class="justify-text">
+                    <h3 class="font-bold text-xl mb-2 text-pink">c.</h3>
+                    <ul class="list-disc list-inside ml-4 space-y-1 justify-text">
+                        <li>1. Van a verse de nuevo en una semana.</li>
+                        <li>2. Van a viajar a Río de Janeiro.</li>
+                        <li>3. Van a hacer el viaje porque hay una reunión de todos los jefes de Estado de las América.</li>
+                        <li>4. Todos los jefes de Estado de las Américas van a estar con ellos.</li>
+                    </ul>
+                    
+                    <h4 class="font-bold text-lg mt-4 text-pink">Traducción del Párrafo (C):</h4>
+                    <p class="mt-2 justify-text">
+                        Today, in the capital of the United States, President Obama met with the president of Mexico, Enrique Peña Nieto, to discuss the economic situation of the two countries. During the conversations, the two presidents discussed the North American Free Trade Agreement and the issue of immigration, both legal and illegal, between Mexico and the United States. The two leaders will meet again in a week when the Mexican president and U.S. president travel to Rio de Janeiro for a meeting of all heads of state of the Americas.
+                    </p>
+                </div>
+                
+                <!-- D. Respuestas -->
+                <div class="justify-text">
+                    <h3 class="font-bold text-xl mb-2 text-pink">d.</h3>
+                    <p class="font-bold">Cognados válidos:</p>
+                    <p class="justify-text text-sm">
+                        millón [million], indígena [indigenous], número [number], grupos [groups], étnicos [ethnic], existe [exists], cantidad [quantity], dialectos [dialects], importantes [important], pre-hispánicas [pre-Hispanic], comunicación [communication], básica [basic], ejemplo [example], influenciado [influenced], reconocido [recognized], varios [various], chocolate [chocolate], tomate [tomato], tamal [tamale], guacamole [guacamole]
+                    </p>
+                    <p class="font-bold mt-2">Cierto (“C”) o Falso (“F”):</p>
+                    <ul class="list-disc list-inside ml-4 space-y-1 justify-text">
+                        <li>1. C</li>
+                        <li>2. F</li>
+                        <li>3. F</li>
+                        <li>4. F</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    
+    <script>
+        const CORRECT_ANSWERS = {
+            'a': ['veis', 'vienes', 'escogemos', 'protejo', 'corrige', 'oigo', 'oyen', 'digo', 'da'],
+            'b': [
+                ['oyen', 'oís'], // 1
+                'cantan', 'están', 'ves', 'tienen', 'representan', 'ver', 'quiero', 'quieres', 'das',
+                'debes', 'quiero', 'vienes', 'Vamos', 'ver', 'tengo', 'son'
+            ],
+            'c_suggested': [
+                'Van a verse de nuevo en una semana.',
+                'Van a viajar a Río de Janeiro.',
+                'Van a hacer el viaje porque hay una reunión de todos los jefes de Estado de las América.',
+                'Todos los jefes de Estado de las Américas van a estar con ellos.'
+            ],
+            'd_cognates': [
+                'millón', 'million', 'indígena', 'indigenous', 'número', 'number', 'grupos', 'groups',
+                'étnicos', 'ethnic', 'existe', 'exists', 'cantidad', 'quantity', 'dialectos', 'dialects',
+                'importantes', 'important', 'pre-hispánicas', 'pre-Hispanic', 'comunicación', 'communication',
+                'básica', 'basic', 'ejemplo', 'example', 'influenciado', 'influenced', 'reconocido', 'recognized',
+                'varios', 'various', 'chocolate', 'tomate', 'tamal', 'tamale', 'guacamole', 'guacamole', 'principalmente', 'principally', 'indígenas', 'indigenous'
+            ],
+            'd_tf': ['C', 'F', 'F', 'F']
+        };
+
+        const inputs = document.querySelectorAll('input[data-activity]');
+        const tfButtons = document.querySelectorAll('.tf-btn');
+        const cognateInputs = document.querySelectorAll('input[data-activity="d_cog"]');
+
+        /**
+         * Normaliza la respuesta para la verificación (elimina espacios y convierte a minúsculas).
+         * @param {string} text El texto de entrada.
+         * @returns {string} El texto normalizado.
+         */
+        const normalize = (text) => text.toLowerCase().trim().replace(/á/g, 'a').replace(/é/g, 'e').replace(/í/g, 'i').replace(/ó/g, 'o').replace(/ú/g, 'u');
+
+        /**
+         * Verifica si una respuesta es correcta para las actividades A y B.
+         * @param {string} activityType 'a' o 'b'.
+         * @param {number} index Índice de la pregunta.
+         * @param {string} userAnswer La respuesta del usuario.
+         * @returns {boolean} True si es correcta, False si no.
+         */
+        function checkAnswer(activityType, index, userAnswer) {
+            const normalizedUserAnswer = normalize(userAnswer);
+            const correctValue = CORRECT_ANSWERS[activityType][index];
+
+            if (Array.isArray(correctValue)) {
+                // Múltiples respuestas válidas (solo para B.1: oyen/oís)
+                return correctValue.map(normalize).includes(normalizedUserAnswer);
+            }
+            return normalize(correctValue) === normalizedUserAnswer;
+        }
+        
+        /**
+         * Maneja la verificación de respuestas para A y B.
+         * @param {Event} e El evento de teclado.
+         */
+        function handleValidation(e) {
+            if (e.key !== 'Enter') return;
+
+            const input = e.target;
+            const activityType = input.dataset.activity;
+            let index = parseInt(input.dataset.index);
+            const userAnswer = input.value;
+            const currentInput = input;
+
+            // No validar o cambiar de foco si está vacío
+            if (userAnswer.trim() === '') return;
+
+            if (activityType === 'a' || activityType === 'b') {
+                const isCorrect = checkAnswer(activityType, index, userAnswer);
+
+                // 1. Aplicar color de fondo
+                if (isCorrect) {
+                    currentInput.classList.remove('bg-red-100', 'bg-white');
+                    currentInput.classList.add('bg-green-100');
+                } else {
+                    currentInput.classList.remove('bg-green-100', 'bg-white');
+                    currentInput.classList.add('bg-red-100');
+                }
+                
+                // 2. Saltar al siguiente campo de completación
+                const nextIndex = index + 1;
+                const nextInput = document.querySelector(`input[data-activity="${activityType}"][data-index="${nextIndex}"]`);
+                if (nextInput) {
+                    e.preventDefault(); // Previene el salto de línea o envío de formulario
+                    nextInput.focus();
+                } else {
+                    currentInput.blur(); // Quita el foco si es el último
+                }
+
+            } else if (activityType === 'c') {
+                // Actividad C: Mostrar respuesta sugerida sin estricta validación de color
+                const hintBox = document.querySelector(`div[data-hint="c"][data-index="${index}"]`);
+                const suggestedAnswer = CORRECT_ANSWERS.c_suggested[index];
+                
+                if (userAnswer.trim() !== '' && hintBox) {
+                    hintBox.innerHTML = `<strong>Respuesta Sugerida:</strong> ${suggestedAnswer}`;
+                    hintBox.classList.remove('text-pink-light', 'bg-pink-light');
+                    hintBox.classList.add('text-black', 'bg-white', 'border', 'border-pink');
+                } else if (hintBox) {
+                    // Ocultar si se borra el texto y se presiona enter
+                    hintBox.innerHTML = '';
+                    hintBox.classList.add('text-pink-light', 'bg-pink-light');
+                    hintBox.classList.remove('text-black', 'bg-white', 'border', 'border-pink');
+                }
+                
+                // Saltar al siguiente campo
+                const nextIndex = index + 1;
+                const nextInput = document.querySelector(`input[data-activity="${activityType}"][data-index="${nextIndex}"]`);
+                if (nextInput) {
+                    e.preventDefault();
+                    nextInput.focus();
+                } else {
+                    currentInput.blur();
+                }
+            }
+        }
+
+        /**
+         * Maneja la verificación de cognados (no estricta, solo color).
+         * @param {Event} e El evento de teclado.
+         */
+        function handleCognateValidation(e) {
+            if (e.key !== 'Enter') return;
+            
+            const input = e.target;
+            const userAnswer = normalize(input.value);
+            const index = parseInt(input.dataset.index);
+
+            if (userAnswer === '') return;
+            
+            // Validar si el cognado está en la lista de respuestas correctas
+            const isCorrect = CORRECT_ANSWERS.d_cognates.map(normalize).includes(userAnswer);
+
+            if (isCorrect) {
+                input.classList.remove('bg-red-100', 'bg-white');
+                input.classList.add('bg-green-100');
+            } else {
+                input.classList.remove('bg-green-100', 'bg-white');
+                input.classList.add('bg-red-100');
+            }
+
+            // Saltar al siguiente campo de cognado
+            const nextIndex = index + 1;
+            const nextInput = document.querySelector(`input[data-activity="d_cog"][data-index="${nextIndex}"]`);
+            if (nextInput) {
+                e.preventDefault();
+                nextInput.focus();
+            } else {
+                input.blur();
+            }
+        }
+        
+        /**
+         * Maneja la verificación Cierto/Falso.
+         * @param {Event} e El evento de click.
+         */
+        function handleTFClick(e) {
+            const button = e.currentTarget;
+            const index = parseInt(button.dataset.tfIndex);
+            const value = button.dataset.value;
+            const correctValue = CORRECT_ANSWERS.d_tf[index];
+            const isCorrect = value === correctValue;
+
+            // Resetear el color de todos los botones para esta pregunta
+            const siblings = button.parentNode.querySelectorAll('.tf-btn');
+            siblings.forEach(btn => {
+                btn.classList.remove('bg-green-300', 'bg-red-300', 'bg-white');
+                btn.classList.add('bg-white');
+            });
+
+            // Aplicar el color de validación al botón clickeado
+            if (isCorrect) {
+                button.classList.remove('bg-white', 'bg-red-300');
+                button.classList.add('bg-green-300');
+            } else {
+                button.classList.remove('bg-white', 'bg-green-300');
+                button.classList.add('bg-red-300');
+            }
+        }
+        
+        // Asignar listeners a todos los inputs de completación (A, B, C)
+        inputs.forEach(input => {
+            input.addEventListener('keydown', handleValidation);
+            // Asegurar que se puede hacer focus al dar click
+            input.addEventListener('click', (e) => e.target.focus());
+        });
+
+        // Asignar listener a los inputs de cognados (D)
+        cognateInputs.forEach(input => {
+            input.addEventListener('keydown', handleCognateValidation);
+            input.addEventListener('click', (e) => e.target.focus());
+        });
+
+        // Asignar listeners a los botones C/F
+        tfButtons.forEach(button => {
+            button.addEventListener('click', handleTFClick);
+        });
+
+        // Toggle de Respuestas Correctas
+        document.getElementById('toggle-answers-btn').addEventListener('click', () => {
+            const answerSection = document.getElementById('answer-section');
+            if (answerSection.style.display === 'none') {
+                answerSection.style.display = 'block';
+                // Puedes cambiar el texto del botón si lo deseas
+                // e.g., button.textContent = 'Ocultar Respuestas / Hide Answers';
+            } else {
+                answerSection.style.display = 'none';
+                // e.g., button.textContent = 'IV. Respuestas correctas / Correct Answers';
+            }
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching game</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de Firebase (Requerido para la plataforma) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Variables globales del entorno
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        if (firebaseConfig) {
+            const app = initializeApp(firebaseConfig);
+            window.db = getFirestore(app);
+            window.auth = getAuth(app);
+            
+            // Autenticación
+            async function authenticate() {
+                try {
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(window.auth, initialAuthToken);
+                    } else {
+                        await signInAnonymously(window.auth);
+                    }
+                    console.log("Firebase Auth iniciado. User ID:", window.auth.currentUser.uid);
+                } catch (error) {
+                    console.error("Error en la autenticación de Firebase:", error);
+                }
+            }
+            authenticate();
+        } else {
+            console.error("Firebase config no disponible. Continuando sin persistencia.");
+        }
+    </script>
+    <style>
+        /* Emulación del estilo "Platform Medium Font" con Inter y peso 500 */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff; /* Color de fondo: Blanco */
+        }
+        .card-button {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            user-select: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+    <script>
+        // Configuración de Tailwind para colores personalizados
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo': '#FF79AC',
+                        'eerie-black': '#121118',
+                        'light-green': '#A7F3D0', /* Tailwind green-200 */
+                        'light-red': '#FECACA',    /* Tailwind red-200 */
+                        'default-bg': '#FCE7F6',   /* Fondo de los botones, un rosa muy claro */
+                        'default-text': '#121118',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen p-4 sm:p-8 bg-white text-eerie-black">
+
+    <!-- Encabezado de la Aplicación -->
+    <header class="text-center mb-10">
+        <h1 class="text-5xl sm:text-7xl font-bold text-flamingo mb-2 tracking-tight">Matching game</h1>
+        <p class="text-xl sm:text-2xl font-medium text-eerie-black">test your memory</p>
+    </header>
+
+    <!-- Contenedor Principal del Juego -->
+    <div id="game-container" class="max-w-4xl mx-auto">
+        <div id="level-selector" class="flex justify-center flex-wrap gap-3 mb-8">
+            <!-- Los botones de nivel se generarán aquí -->
+        </div>
+
+        <div id="current-level-info" class="text-center text-xl font-semibold mb-6">
+            <!-- Información del nivel actual -->
+        </div>
+
+        <div id="game-board" class="grid grid-cols-2 gap-4 sm:gap-6">
+            <!-- Las tarjetas se insertarán aquí -->
+        </div>
+
+        <!-- Mensaje de Completado/Error -->
+        <div id="message-box" class="fixed inset-0 bg-eerie-black bg-opacity-70 flex items-center justify-center p-4 hidden">
+            <div class="bg-white p-8 rounded-xl shadow-2xl text-center max-w-sm w-full">
+                <p id="message-text" class="text-2xl font-bold text-flamingo mb-4"></p>
+                <button id="next-level-button" class="bg-flamingo text-white font-semibold py-3 px-6 rounded-lg transition hover:bg-opacity-80 shadow-md">
+                    Siguiente Nivel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Datos del Juego ---
+        const GAME_DATA = [
+            // Nivel 1
+            [
+                { es: "maravilloso", en: "marvelous" },
+                { es: "la Pascua", en: "Easter" },
+                { es: "la verdad", en: "truth" },
+                { es: "enhorabuena", en: "congratulations" },
+                { es: "nevada", en: "snow-covered" },
+                { es: "colorado", en: "red-colored" }, // <-- ERROR CORREGIDO: Se agregó el ':'
+                { es: "la sierra", en: "mountain range, saw" },
+                { es: "árido", en: "arid" }
+            ],
+            // Nivel 2
+            [
+                { es: "todos los días", en: "every day" },
+                { es: "a veces", en: "at times" }, 
+                { es: "tarde", en: "late" },
+                { es: "de vez en cuando", en: "from time to time" },
+                { es: "temprano", en: "early" },
+                { es: "a menudo", en: "often" },
+                { es: "el domingo", en: "on Sunday" },
+                { es: "los martes", en: "on Tuesdays" }
+            ],
+            // Nivel 3
+            [
+                { es: "responder", en: "to answer" },
+                { es: "corregir", en: "to correct" },
+                { es: "decir", en: "to say, to tell" },
+                { es: "dar", en: "to give" },
+                { es: "venir", en: "to come" },
+                { es: "escoger", en: "to choose" },
+                { es: "oír", en: "to hear" },
+                { es: "proteger", en: "to protect" }
+            ],
+            // Nivel 4
+            [
+                { es: "la telenovela", en: "soap opera" },
+                { es: "el país", en: "country" },
+                { es: "el presidente", en: "president" },
+                { es: "la conversación", en: "conversation" },
+                { es: "la inmigración", en: "immigration" },
+                { es: "el líder", en: "leader" },
+                { es: "legal", en: "legal" },
+                { es: "ilegal", en: "illegal" }
+            ]
+        ];
+
+        // --- 2. Estado del Juego ---
+        let gameState = {
+            currentLevel: 0, // 0-indexed
+            selectedCard: null,
+            matchedPairs: 0,
+            isLocked: false, // Bloquea la interacción durante el chequeo de error
+            cards: [] // Almacena las tarjetas para el nivel actual
+        };
+
+        // --- 3. Referencias del DOM ---
+        const gameBoard = document.getElementById('game-board');
+        const levelSelector = document.getElementById('level-selector');
+        const currentLevelInfo = document.getElementById('current-level-info');
+        const messageBox = document.getElementById('message-box');
+        const messageText = document.getElementById('message-text');
+        const nextLevelButton = document.getElementById('next-level-button');
+
+        // --- 4. Funciones de Utilidad ---
+
+        /**
+         * Mezcla un array usando el algoritmo Fisher-Yates.
+         * @param {Array} array 
+         * @returns {Array} Array mezclado.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /**
+         * Reinicia el estado del juego para un nuevo nivel.
+         */
+        function resetGameState(levelIndex) {
+            gameState.currentLevel = levelIndex;
+            gameState.selectedCard = null;
+            gameState.matchedPairs = 0;
+            gameState.isLocked = false;
+
+            const currentPairs = GAME_DATA[levelIndex];
+            
+            // Crea tarjetas y asigna un ID de grupo (groupId) para el emparejamiento
+            const spanishCards = currentPairs.map((pair, index) => ({
+                text: pair.es,
+                lang: 'es',
+                groupId: index,
+                id: `es-${index}`
+            }));
+            const englishCards = currentPairs.map((pair, index) => ({
+                text: pair.en,
+                lang: 'en',
+                groupId: index,
+                id: `en-${index}`
+            }));
+
+            // Combina y mezcla solo las tarjetas españolas (Columna 1)
+            let shuffledSpanish = shuffleArray([...spanishCards]);
+            // Combina y mezcla solo las tarjetas inglesas (Columna 2)
+            let shuffledEnglish = shuffleArray([...englishCards]);
+
+            // Almacena el estado de las tarjetas
+            gameState.cards = [...shuffledSpanish, ...shuffledEnglish];
+        }
+
+        /**
+         * Renderiza el tablero de juego (los botones) para el nivel actual.
+         */
+        function renderBoard() {
+            gameBoard.innerHTML = '';
+            currentLevelInfo.textContent = `Nivel ${gameState.currentLevel + 1} de ${GAME_DATA.length}`;
+
+            // Separa las tarjetas para las dos columnas
+            const spanishCards = gameState.cards.filter(c => c.lang === 'es');
+            const englishCards = gameState.cards.filter(c => c.lang === 'en');
+
+            const col1 = document.createElement('div');
+            col1.className = 'flex flex-col gap-3'; // Reducir el gap entre filas
+            const col2 = document.createElement('div');
+            col2.className = 'flex flex-col gap-3'; // Reducir el gap entre filas
+
+            // Función para crear botones
+            const createButton = (card) => {
+                const button = document.createElement('button');
+                button.textContent = card.text;
+                button.id = card.id;
+                button.dataset.groupId = card.groupId;
+                button.dataset.lang = card.lang;
+                // CAMBIOS AQUÍ: p-3 (padding) y text-base (tamaño de fuente) son más pequeños que p-4 y text-lg
+                button.className = 'card-button w-full text-left p-3 rounded-lg font-medium text-base bg-default-bg text-default-text shadow-md hover:bg-flamingo hover:text-white disabled:opacity-100';
+                button.onclick = () => handleCardClick(card.id, card.groupId);
+                return button;
+            };
+
+            // Inserta en las columnas
+            spanishCards.forEach(card => col1.appendChild(createButton(card)));
+            englishCards.forEach(card => col2.appendChild(createButton(card)));
+
+            gameBoard.appendChild(col1);
+            gameBoard.appendChild(col2);
+        }
+
+        /**
+         * Maneja el clic en una tarjeta.
+         * @param {string} cardId ID único de la tarjeta.
+         * @param {number} groupId ID de emparejamiento.
+         */
+        function handleCardClick(cardId, groupId) {
+            if (gameState.isLocked) return;
+
+            const clickedButton = document.getElementById(cardId);
+
+            // Evitar clic en una tarjeta ya seleccionada o ya emparejada
+            if (clickedButton.disabled) return;
+            if (gameState.selectedCard && gameState.selectedCard.id === cardId) return;
+
+            // --- Lógica de Selección ---
+            if (!gameState.selectedCard) {
+                // Primera tarjeta seleccionada
+                gameState.selectedCard = { id: cardId, groupId: groupId, lang: clickedButton.dataset.lang };
+                clickedButton.classList.add('ring-4', 'ring-flamingo', 'ring-opacity-50', 'scale-105');
+            } else {
+                // Segunda tarjeta seleccionada
+                const firstCard = document.getElementById(gameState.selectedCard.id);
+                const secondCard = clickedButton;
+
+                // Bloquear el tablero
+                gameState.isLocked = true;
+                
+                // Remover la selección visual de la primera tarjeta
+                firstCard.classList.remove('ring-4', 'ring-flamingo', 'ring-opacity-50', 'scale-105');
+
+                // --- Chequeo de Emparejamiento ---
+                const isMatch = gameState.selectedCard.groupId === groupId && gameState.selectedCard.lang !== clickedButton.dataset.lang;
+
+                if (isMatch) {
+                    // Correcto: Botones cambian a verde claro y se desactivan (permanentemente)
+                    [firstCard, secondCard].forEach(button => {
+                        button.classList.add('bg-light-green', 'text-eerie-black');
+                        button.classList.remove('bg-default-bg', 'hover:bg-flamingo', 'hover:text-white');
+                        button.disabled = true;
+                    });
+                    
+                    gameState.matchedPairs++;
+                    checkLevelCompletion();
+
+                    // Desbloquear y limpiar
+                    gameState.selectedCard = null;
+                    gameState.isLocked = false;
+                } else {
+                    // Incorrecto: Botones cambian a rojo claro, esperan 1.5s, y vuelven al color original
+                    [firstCard, secondCard].forEach(button => {
+                        button.classList.add('bg-light-red', 'text-eerie-black');
+                        button.classList.remove('bg-default-bg', 'hover:bg-flamingo', 'hover:text-white');
+                    });
+                    
+                    setTimeout(() => {
+                        [firstCard, secondCard].forEach(button => {
+                            button.classList.remove('bg-light-red', 'text-eerie-black');
+                            // Volver al color original
+                            button.classList.add('bg-default-bg', 'text-default-text', 'hover:bg-flamingo', 'hover:text-white');
+                        });
+                        
+                        // Desbloquear y limpiar
+                        gameState.selectedCard = null;
+                        gameState.isLocked = false;
+                    }, 1500); // 1.5 segundos en rojo
+                }
+            }
+        }
+
+        /**
+         * Chequea si todas las parejas han sido encontradas.
+         */
+        function checkLevelCompletion() {
+            if (gameState.matchedPairs === GAME_DATA[gameState.currentLevel].length) {
+                showModal(gameState.currentLevel + 1);
+            }
+        }
+
+        /**
+         * Muestra la ventana modal de finalización de nivel/juego.
+         * @param {number} levelCompleted Índice del nivel completado.
+         */
+        function showModal(levelCompleted) {
+            messageBox.classList.remove('hidden');
+
+            if (levelCompleted === GAME_DATA.length) {
+                // Último nivel completado
+                messageText.textContent = "¡Felicidades! Has completado el juego de emparejamiento. ¡Tu memoria es excelente!";
+                nextLevelButton.textContent = "Reiniciar Juego";
+                nextLevelButton.onclick = () => {
+                    hideModal();
+                    loadLevel(0);
+                };
+            } else {
+                // Nivel intermedio completado
+                messageText.textContent = `¡Nivel ${levelCompleted} completado!`;
+                nextLevelButton.textContent = "Siguiente Nivel";
+                nextLevelButton.onclick = () => {
+                    hideModal();
+                    loadLevel(levelCompleted);
+                };
+            }
+        }
+
+        /**
+         * Oculta la ventana modal.
+         */
+        function hideModal() {
+            messageBox.classList.add('hidden');
+        }
+
+        /**
+         * Carga y renderiza un nivel específico.
+         * @param {number} levelIndex Índice del nivel a cargar.
+         */
+        function loadLevel(levelIndex) {
+            if (levelIndex >= 0 && levelIndex < GAME_DATA.length) {
+                resetGameState(levelIndex);
+                renderBoard();
+                renderLevelSelector();
+            }
+        }
+
+        /**
+         * Renderiza los botones para seleccionar niveles.
+         */
+        function renderLevelSelector() {
+            levelSelector.innerHTML = '';
+            GAME_DATA.forEach((_, index) => {
+                const btn = document.createElement('button');
+                btn.textContent = `Nivel ${index + 1}`;
+                btn.className = `font-medium py-2 px-4 rounded-lg transition shadow-md ${
+                    index === gameState.currentLevel
+                        ? 'bg-flamingo text-white'
+                        : 'bg-default-bg text-default-text hover:bg-flamingo hover:text-white'
+                }`;
+                btn.onclick = () => loadLevel(index);
+                levelSelector.appendChild(btn);
+            });
+        }
+
+        // --- 5. Inicialización ---
+        window.onload = function() {
+            loadLevel(0); // Carga el primer nivel al iniciar
+        }
+    </script>
+</body>
+</html>
