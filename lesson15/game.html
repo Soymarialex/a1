@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching game</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Definición de colores y fuente */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --light-pink: #FFE8F2; /* Rosa claro para el fondo inicial del botón */
+            --light-green: #D4EDDA; /* Verde claro para acierto */
+            --light-red: #F8D7DA; /* Rojo claro para error */
+        }
+        
+        /* Uso de una fuente sans-serif genérica para representar "Platform Medium Font" */
+        body {
+            font-family: 'Platform Medium Font', 'Inter', sans-serif;
+            color: var(--eerie-black);
+            background-color: #FFFFFF;
+            /* Alto mínimo para centrar el juego en la pantalla sin scroll vertical (dado que son solo 8 pares) */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Estilo base del botón (color inicial) - TAMAÑO REDUCIDO */
+        .match-button {
+            background-color: var(--light-pink);
+            color: var(--eerie-black);
+            border-bottom: 3px solid var(--flamingo-pink);
+            transition: all 0.1s ease;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            /* Asegura que los botones sean más pequeños */
+            padding: 0.5rem 0.75rem; /* Reducción de padding */
+            font-size: 0.75rem; /* xs */ /* Reducción de fuente */
+            width: 100%; /* Asegura que el botón ocupe todo el ancho de su columna */
+        }
+        @media (min-width: 640px) {
+             .match-button {
+                padding: 0.75rem 1rem; /* Reducción de padding en desktop */
+                font-size: 0.875rem; /* sm */ /* Reducción de fuente en desktop */
+            }
+        }
+
+        /* Estilo para botón seleccionado */
+        .selected {
+            opacity: 0.7;
+            box-shadow: 0 0 8px var(--flamingo-pink);
+            transform: scale(0.98);
+        }
+
+        /* Estilo para botón emparejado (acierto) */
+        .matched {
+            background-color: var(--light-green) !important;
+            border-bottom: 3px solid #38A169; /* Verde oscuro para acierto */
+            pointer-events: none; /* Desactiva el clic */
+        }
+
+        /* Estilo para botón con error */
+        .error {
+            background-color: var(--light-red) !important;
+            border-bottom: 3px solid #E53E3E; /* Rojo oscuro para error */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eerie-black': '#121118',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="max-w-4xl w-full mx-auto text-center p-4 sm:p-8">
+        <!-- Título principal -->
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-eerie-black mb-2">
+            Matching game
+        </h1>
+        <!-- Subtítulo en Rosa Flamenco -->
+        <h2 class="text-xl sm:text-2xl font-semibold mb-8" style="color: var(--flamingo-pink);">
+            test your memory
+        </h2>
+
+        <!-- Contenedor de Niveles (Selector de Niveles) -->
+        <div id="level-selector" class="flex flex-wrap justify-center gap-2 mb-8 p-3 rounded-xl shadow-md bg-gray-50 max-w-lg mx-auto">
+            <!-- Los botones de nivel se insertarán aquí por JavaScript -->
+        </div>
+
+        <!-- Mensaje de estado/juego completo -->
+        <div id="game-message" class="text-xl font-bold mb-6 text-eerie-black hidden"></div>
+
+        <!-- Contenedor del juego de emparejamiento (Vocabulario) -->
+        <div id="game-board-wrapper" class="w-full max-w-3xl mx-auto">
+            <!-- Encabezados de las columnas -->
+            <div class="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 mb-3 font-semibold text-eerie-black">
+                <div class="border-b-2 pb-1" style="border-color: var(--flamingo-pink);">Español</div>
+                <div class="border-b-2 pb-1" style="border-color: var(--flamingo-pink);">English</div>
+            </div>
+            <!-- El tablero real con las dos columnas separadas por idioma -->
+            <div id="game-board" class="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
+                <!-- Las columnas se insertarán aquí por JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Los 40 pares de vocabulario se agrupan en 5 niveles de 8 pares.
+        const allVocabulary = [
+            // Nivel 1 (8 pares)
+            { es: "en este momento", en: "at this moment" },
+            { es: "la felicidad", en: "happiness" },
+            { es: "la actividad", en: "activity" },
+            { es: "la superioridad", en: "superiority" },
+            { es: "el tema", en: "topic" },
+            { es: "la cosa", en: "thing" },
+            { es: "la comunidad", en: "community" },
+            { es: "ocurrir", en: "to occur, to happen" },
+            
+            // Nivel 2 (8 pares)
+            { es: "cambiar", en: "to change" },
+            { es: "el comedor", en: "dining room" },
+            { es: "el tenedor", en: "fork" },
+            { es: "la comida", en: "food" },
+            { es: "el cuchillo", en: "knife" },
+            { es: "la bebida", en: "drink" },
+            { es: "la cuchara", en: "spoon" },
+            { es: "el plato", en: "plate" },
+
+            // Nivel 3 (8 pares)
+            { es: "la cucharita", en: "teaspoon" },
+            { es: "el tazón", en: "bowl" },
+            { es: "el platillo", en: "saucer" },
+            { es: "la servilleta", en: "napkin" },
+            { es: "la taza", en: "cup" },
+            { es: "el mantel", en: "tablecloth" },
+            { es: "el vaso", en: "glass" },
+            { es: "la sal", en: "salt" },
+
+            // Nivel 4 (8 pares)
+            { es: "la copa", en: "wineglass, cocktail" },
+            { es: "la pimienta", en: "pepper" },
+            { es: "el vino", en: "wine" },
+            { es: "el azúcar", en: "sugar" },
+            { es: "el desayuno", en: "breakfast" },
+            { es: "almorzar", en: "to eat lunch" },
+            { es: "desayunar", en: "to eat breakfast" },
+            { es: "la cena", en: "dinner" },
+
+            // Nivel 5 (8 pares)
+            { es: "el almuerzo", en: "lunch" },
+            { es: "cenar", en: "to eat dinner" },
+            { es: "la cafetería", en: "cafeteria" }, 
+            { es: "la cocinera", en: "female cook" },
+            { es: "la cocina", en: "kitchen" },
+            { es: "el mesero", en: "waiter" },
+            { es: "el cocinero", en: "male cook" },
+            { es: "la mesera", en: "waitress" },
+        ];
+
+        const TOTAL_LEVELS = 5;
+        const PAIRS_PER_LEVEL = 8;
+        
+        let currentLevel = 1;
+        let selectedCards = [];
+        let matchedPairs = 0;
+        let isProcessing = false;
+
+        const board = document.getElementById('game-board');
+        const messageDisplay = document.getElementById('game-message');
+        const levelSelector = document.getElementById('level-selector');
+        
+        // --- Funciones Auxiliares ---
+
+        /**
+         * Mezcla un array utilizando el algoritmo de Fisher-Yates.
+         * @param {Array} array - El array a mezclar.
+         * @returns {Array} - El array mezclado.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /**
+         * Obtiene los pares de vocabulario para el nivel actual.
+         * @param {number} level - El número de nivel (1 a 5).
+         * @returns {Array<Object>} - Array de pares de vocabulario para ese nivel.
+         */
+        function getLevelVocabulary(level) {
+            const startIndex = (level - 1) * PAIRS_PER_LEVEL;
+            const endIndex = startIndex + PAIRS_PER_LEVEL;
+            return allVocabulary.slice(startIndex, endIndex);
+        }
+
+        /**
+         * Renderiza los botones de selección de nivel.
+         */
+        function renderLevelSelector() {
+            levelSelector.innerHTML = '';
+            for (let i = 1; i <= TOTAL_LEVELS; i++) {
+                const button = document.createElement('button');
+                button.textContent = `Nivel ${i}`;
+                button.className = `level-button py-2 px-3 rounded-lg font-bold transition-colors duration-200 shadow-sm`;
+                button.dataset.level = i;
+                
+                // Estilo para el nivel activo
+                if (i === currentLevel) {
+                    button.style.backgroundColor = 'var(--flamingo-pink)';
+                    button.style.color = '#FFFFFF';
+                } else {
+                    button.style.backgroundColor = '#E5E7EB';
+                    button.style.color = 'var(--eerie-black)';
+                }
+
+                button.addEventListener('click', () => loadLevel(i));
+                levelSelector.appendChild(button);
+            }
+        }
+
+        /**
+         * Crea un botón de tarjeta con sus propiedades.
+         * @param {Object} card - Objeto de la tarjeta ({id, text, lang}).
+         * @returns {HTMLButtonElement} - El elemento de botón creado.
+         */
+        const createButton = (card) => {
+            const button = document.createElement('button');
+            button.textContent = card.text;
+            // Clases Tailwind que definen el tamaño y la apariencia responsiva
+            button.className = 'match-button rounded font-semibold text-center h-full break-words'; 
+            button.dataset.id = card.id;
+            button.dataset.lang = card.lang;
+            button.style.minHeight = '3rem'; 
+            button.addEventListener('click', handleCardClick);
+            return button;
+        };
+
+        /**
+         * Crea y renderiza el tablero de juego para un nivel.
+         * @param {number} level - El nivel a cargar.
+         */
+        function loadLevel(level) {
+            currentLevel = level;
+            matchedPairs = 0;
+            selectedCards = [];
+            isProcessing = false;
+            board.innerHTML = ''; // Limpiar el contenedor principal del tablero
+            messageDisplay.classList.add('hidden');
+            renderLevelSelector();
+
+            const pairs = getLevelVocabulary(level);
+
+            // 1. Separar tarjetas por idioma
+            const spanishCards = [];
+            const englishCards = [];
+
+            pairs.forEach((pair, index) => {
+                const matchId = `${level}-${index}`; 
+                spanishCards.push({ id: matchId, text: pair.es, lang: 'es' });
+                englishCards.push({ id: matchId, text: pair.en, lang: 'en' });
+            });
+
+            // 2. Barajar cada columna de forma independiente
+            shuffleArray(spanishCards);
+            shuffleArray(englishCards);
+
+            // 3. Crear los contenedores de las columnas
+            const spanishColumn = document.createElement('div');
+            spanishColumn.id = 'spanish-column';
+            // Usar flexbox para apilar los botones y aplicar el espaciado
+            spanishColumn.className = 'flex flex-col gap-2 sm:gap-3 lg:gap-4'; 
+
+            const englishColumn = document.createElement('div');
+            englishColumn.id = 'english-column';
+            englishColumn.className = 'flex flex-col gap-2 sm:gap-3 lg:gap-4';
+
+            // 4. Renderizar las tarjetas en sus columnas
+            spanishCards.forEach(card => {
+                spanishColumn.appendChild(createButton(card));
+            });
+
+            englishCards.forEach(card => {
+                englishColumn.appendChild(createButton(card));
+            });
+            
+            // 5. Agregar las columnas al tablero principal (que tiene grid-cols-2)
+            board.appendChild(spanishColumn);
+            board.appendChild(englishColumn);
+        }
+
+        /**
+         * Maneja el clic en una tarjeta.
+         * @param {Event} event - El evento de clic.
+         */
+        function handleCardClick(event) {
+            if (isProcessing) return;
+            
+            const card = event.target;
+            
+            // Ignorar tarjetas ya emparejadas o ya seleccionadas
+            if (card.classList.contains('matched') || selectedCards.includes(card)) {
+                return;
+            }
+
+            // Regla de juego: solo se permite seleccionar una tarjeta de cada idioma (un español y un inglés)
+            const clickedLang = card.dataset.lang;
+            const selectedLang = selectedCards.length > 0 ? selectedCards[0].dataset.lang : null;
+
+            // Si ya hay una tarjeta seleccionada y la nueva tarjeta es del mismo idioma, ignorar.
+            // La única excepción es si no hay tarjetas seleccionadas.
+            if (selectedLang !== null && clickedLang === selectedLang) {
+                // Deseleccionar la tarjeta previamente seleccionada del mismo idioma y seleccionar la nueva
+                selectedCards[0].classList.remove('selected');
+                selectedCards = [card];
+                card.classList.add('selected');
+                return;
+            }
+
+            // Seleccionar la tarjeta
+            card.classList.add('selected');
+            selectedCards.push(card);
+
+            if (selectedCards.length === 2) {
+                isProcessing = true;
+                checkMatch();
+            }
+        }
+
+        /**
+         * Verifica si las dos tarjetas seleccionadas coinciden.
+         */
+        function checkMatch() {
+            const [card1, card2] = selectedCards;
+
+            // La condición de emparejamiento es que el ID coincida Y el idioma sea diferente (es-en).
+            const isMatch = card1.dataset.id === card2.dataset.id && card1.dataset.lang !== card2.dataset.lang;
+
+            if (isMatch) {
+                // Acierto (Match)
+                matchedPairs++;
+                
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                card1.classList.remove('selected');
+                card2.classList.remove('selected');
+                
+                selectedCards = [];
+                isProcessing = false;
+
+                if (matchedPairs === PAIRS_PER_LEVEL) {
+                    // Nivel completado
+                    messageDisplay.textContent = `¡Nivel ${currentLevel} Completado!`;
+                    messageDisplay.classList.remove('hidden');
+
+                    if (currentLevel < TOTAL_LEVELS) {
+                        // Pasar al siguiente nivel
+                        setTimeout(() => {
+                             loadLevel(currentLevel + 1);
+                        }, 1200); 
+                    } else {
+                        // Juego finalizado
+                        messageDisplay.textContent = '¡Felicidades! Has completado los 5 niveles del juego.';
+                    }
+                }
+
+            } else {
+                // Error (No Match)
+                card1.classList.add('error');
+                card2.classList.add('error');
+
+                setTimeout(() => {
+                    // Revertir colores y estado
+                    card1.classList.remove('selected', 'error');
+                    card2.classList.remove('selected', 'error');
+                    
+                    selectedCards = [];
+                    isProcessing = false;
+                }, 700); // Muestra rojo por 0.7 segundos
+            }
+        }
+
+        // --- Inicialización ---
+        window.onload = () => {
+            loadLevel(1); // Carga el primer nivel inmediatamente al cargar
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV. Lectura cultural / Cultural Reading</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Definición de colores y fuente */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --light-green: #D4EDDA; /* Verde claro para acierto */
+            --light-red: #F8D7DA; /* Rojo claro para error */
+            --standard-black: #000000;
+        }
+        
+        /* Uso de una fuente sans-serif genérica para representar "Platform Medium Font" */
+        body {
+            font-family: 'Platform Medium Font', 'Inter', sans-serif;
+            color: var(--standard-black);
+            background-color: #FFFFFF;
+        }
+
+        /* Estilo para el botón C/F */
+        .cf-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 3rem; /* Ancho fijo para las letras C/F */
+            height: 2.5rem;
+            margin-left: 0.5rem;
+            font-weight: bold;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid var(--eerie-black);
+            color: var(--standard-black);
+        }
+
+        /* Estilos de retroalimentación */
+        .correct-answer {
+            background-color: var(--light-green) !important;
+            border-color: #38A169 !important; /* Borde verde más oscuro */
+        }
+
+        .incorrect-answer {
+            background-color: var(--light-red) !important;
+            border-color: #E53E3E !important; /* Borde rojo más oscuro */
+        }
+
+        /* Estilo para el texto de lectura: Justificación */
+        .justified-text {
+            text-align: justify;
+        }
+        
+        /* Estilo para el título en rosa */
+        .title-pink {
+            color: var(--flamingo-pink);
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eerie-black': '#121118',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="p-4 sm:p-8 md:p-12 max-w-5xl mx-auto">
+
+    <!-- Título de la página: EN ROSA FLAMENCO -->
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-6 title-pink">
+        IV. Lectura cultural / Cultural Reading
+    </h1>
+
+    <!-- Instrucciones -->
+    <p class="text-lg text-center mb-8 font-semibold">
+        Lee el texto siguiente y contesta las preguntas de forma cierto (“C”) o falso (“F”). / Read the following text and answer the questions as either true (“C”) or false (“F”).
+    </p>
+
+    <!-- SECCIÓN DE LECTURA Y PREGUNTAS -->
+    <main class="space-y-10">
+        
+        <h2 class="text-2xl font-bold mb-4 title-pink">
+            El tuk-tuk o mototaxi como medio de transporte
+        </h2>
+        
+        <!-- Contenedor Flex para Lectura e Imagen (Responsive: Columna en móvil, Fila en desktop) -->
+        <div class="flex flex-col md:flex-row gap-8">
+            
+            <!-- Bloque de Imagen (Primer elemento en móvil/desktop) -->
+            <div class="md:w-1/3 flex justify-center items-start">
+                <img 
+                    src="https://i.imgur.com/vUdjv0o.png" 
+                    alt="Una imagen de un tuk-tuk de tres ruedas, un medio de transporte motorizado popular." 
+                    class="rounded-lg shadow-lg w-full max-w-sm md:max-w-none h-auto object-cover"
+                    onerror="this.onerror=null;this.src='https://placehold.co/400x300/FF79AC/121118?text=Imagen+de+Tuk-Tuk'; this.alt='Placeholder para la imagen del tuk-tuk.';">
+            </div>
+
+            <!-- Bloque de Lectura (Segundo elemento en móvil/desktop) -->
+            <div class="md:w-2/3 text-base leading-relaxed justified-text">
+                Entre los medios de transporte tradicionales, encontramos alrededor del mundo trenes, autobuses, taxis, bicicletas, carros, barcos o aviones. Otro de estos medios muy populares especialmente en Asia es el <strong>tuk-tuk</strong>, el cual es una versión del <strong>rickshaw</strong>, o carro de dos ruedas halado por una persona. La diferencia entre el rickshaw y el tuk-tuk es que este último es un triciclo con motor que se usa cada vez más en otros países del mundo, incluyendo algunos en América Latina. 
+                <br><br>
+                Este triciclo es muy popular para el transporte de personas, especialmente en lugares con muchos turistas. Los países que lo utilizan incluyen China, India, Tailandia, Indonesia y algunos países de Europa, como Italia y Holanda. En Centroamérica, hay versiones del tuk-tuk en El Salvador, Guatemala, Honduras y Nicaragua. Actualmente, en Cuba se utiliza como taxi sobre todo en La Habana, en donde les llaman “coco taxi” porque parece ser una fruta del coco sobre un scooter. En América del Sur, también tienen este medio de transporte, por ejemplo, en Ecuador, Perú y Colombia. En Colombia, lo llaman “motocarro,” y es utilizado en ciudades pequeñas. 
+                <br><br>
+                Aunque este vehículo motorizado de tres ruedas no es tan rápido como los carros convencionales, es bastante conveniente por dos razones: usa poca gasolina y produce poca contaminación del medio ambiente. De hecho, actualmente hay compañías en los Estados Unidos interesadas en producir un modelo de tuk-tuk eléctrico.
+            </div>
+        </div>
+        
+        <!-- Preguntas de Cierto/Falso -->
+        <form id="cf-form" class="space-y-6 pt-6 border-t border-gray-300">
+            <!-- Pregunta 1 -->
+            <div class="flex items-center text-lg">
+                <span class="font-semibold w-full md:w-auto justified-text">1. El tuk-tuk es muy popular en Asia.</span>
+                <button type="button" class="cf-button" data-question="1" data-answer="C">C</button>
+                <button type="button" class="cf-button" data-question="1" data-answer="F">F</button>
+            </div>
+            <!-- Pregunta 2 -->
+            <div class="flex items-center text-lg">
+                <span class="font-semibold w-full md:w-auto justified-text">2. El rickshaw es un triciclo con motor.</span>
+                <button type="button" class="cf-button" data-question="2" data-answer="C">C</button>
+                <button type="button" class="cf-button" data-question="2" data-answer="F">F</button>
+            </div>
+            <!-- Pregunta 3 -->
+            <div class="flex items-center text-lg">
+                <span class="font-semibold w-full md:w-auto justified-text">3. El tuk-tuk es un carro de dos ruedas halado por una persona.</span>
+                <button type="button" class="cf-button" data-question="3" data-answer="C">C</button>
+                <button type="button" class="cf-button" data-question="3" data-answer="F">F</button>
+            </div>
+            <!-- Pregunta 4 -->
+            <div class="flex items-center text-lg">
+                <span class="font-semibold w-full md:w-auto justified-text">4. Todos los países de Centroamérica utilizan el tuk-tuk.</span>
+                <button type="button" class="cf-button" data-question="4" data-answer="C">C</button>
+                <button type="button" class="cf-button" data-question="4" data-answer="F">F</button>
+            </div>
+            <!-- Pregunta 5 -->
+            <div class="flex items-center text-lg">
+                <span class="font-semibold w-full md:w-auto justified-text">5. Una ventaja del tuk-tuk es que no usa mucha gasolina.</span>
+                <button type="button" class="cf-button" data-question="5" data-answer="C">C</button>
+                <button type="button" class="cf-button" data-question="5" data-answer="F">F</button>
+            </div>
+        </form>
+    </main>
+    
+    <!-- Botón de Respuestas -->
+    <div class="mt-12 mb-4 text-center">
+        <button id="toggle-answers-btn" class="bg-eerie-black text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 hover:bg-gray-800 shadow-lg" style="background-color: var(--eerie-black);">
+            Mostrar Respuestas
+        </button>
+    </div>
+
+    <!-- SECCIÓN DE RESPUESTAS CORRECTAS (Inicialmente oculta) -->
+    <div id="correct-answers-section" class="mt-10 p-6 rounded-xl border border-gray-200 hidden" style="background-color: #FEE7F2;">
+        
+        <!-- Título de sección de respuestas: EN ROSA -->
+        <h2 class="text-2xl title-pink mb-6 text-center">
+            Respuestas correctas / Correct Answers
+        </h2>
+        
+        <h3 class="font-bold text-xl mb-4 title-pink">Lectura cultural</h3>
+        
+        <!-- Respuestas Clave (C, F, F, F, C) -->
+        <div class="flex justify-start space-x-8 text-lg font-bold mb-8">
+            <p>1. C</p>
+            <p>2. F</p>
+            <p>3. F</p>
+            <p>4. F</p>
+            <p>5. C</p>
+        </div>
+
+        <h3 class="font-bold text-xl mb-4 title-pink">The Tuk-Tuk or Motortaxi as a Means of Transportation</h3>
+        
+        <!-- Traducción del texto (corregida para usar <strong>) -->
+        <div class="text-base leading-relaxed justified-text">
+            Traditional means of transportation we find around the world include trains, buses, taxis, bicycles, cars, boats, and airplanes. Another of these popular means of transportation, especially in Asia, is the <strong>tuk-tuk</strong>, which is a version of the <strong>rickshaw</strong>, a two-wheeled car pulled by a person. The difference between the rickshaw and the tuk-tuk is that the tuk-tuk is a motorized tricycle that’s used more and more in other countries of the world, including some in Latin America. 
+            <br><br>
+            This tricycle is very popular for the transport of people, especially in places with many tourists. Countries that use it include China, India, Thailand, Indonesia, and some European countries, such as Italy and Holland. In Central America, there are versions of the tuk-tuk in El Salvador, Guatemala, Honduras, and Nicaragua. Nowadays, in Cuba it’s used mostly as a taxi in Havana, where they are called “coco taxi” [“coco” means “coconut”] because it seems to be a coconut on top of a scooter. In South America, they also have this means of transportation in, for example, Ecuador, Peru, and Colombia. In Colombia, it’s called “motocarro” and is used in small cities. 
+            <br><br>
+            Although this three-wheeled motorized vehicle is not as fast as conventional cars, it’s rather convenient for two reasons: It doesn’t use much gasoline, and it doesn’t pollute the environment very much. In fact, there are now companies in the United States that are interested in producing an electric tuk-tuk model.
+        </div>
+    </div>
+    
+    <div class="h-10"></div> <!-- Espacio al final de la página -->
+
+    <script>
+        // Respuestas correctas (La clave es el número de pregunta, el valor es 'C' o 'F')
+        const correctAnswers = {
+            1: 'C',
+            2: 'F',
+            3: 'F',
+            4: 'F',
+            5: 'C'
+        };
+
+        /**
+         * Maneja la lógica de validación de Cierto/Falso.
+         * Aplica la clase 'correct-answer' (verde) o 'incorrect-answer' (rojo) al botón seleccionado,
+         * y limpia el estilo de los otros botones de la misma pregunta.
+         * @param {Event} event - El evento de click.
+         */
+        function handleCfClick(event) {
+            const selectedButton = event.currentTarget;
+            const questionId = selectedButton.dataset.question;
+            const userAnswer = selectedButton.dataset.answer;
+            const expectedAnswer = correctAnswers[questionId];
+
+            // 1. Limpiar estilos de todos los botones de la misma pregunta
+            const questionButtons = document.querySelectorAll(`.cf-button[data-question="${questionId}"]`);
+            questionButtons.forEach(btn => {
+                btn.classList.remove('correct-answer', 'incorrect-answer');
+            });
+
+            // 2. Aplicar el estilo al botón seleccionado
+            if (userAnswer === expectedAnswer) {
+                selectedButton.classList.add('correct-answer');
+            } else {
+                selectedButton.classList.add('incorrect-answer');
+            }
+        }
+        
+        /**
+         * Muestra u oculta la sección de respuestas correctas.
+         */
+        function toggleAnswers() {
+            const section = document.getElementById('correct-answers-section');
+            const button = document.getElementById('toggle-answers-btn');
+            
+            if (section.classList.contains('hidden')) {
+                section.classList.remove('hidden');
+                button.textContent = 'Ocultar Respuestas';
+                button.style.backgroundColor = 'var(--flamingo-pink)'; // Cambiar a rosa al mostrar
+            } else {
+                section.classList.add('hidden');
+                button.textContent = 'Mostrar Respuestas';
+                button.style.backgroundColor = 'var(--eerie-black)'; // Volver al negro original
+            }
+        }
+
+        // --- Inicialización y Listeners ---
+        window.onload = () => {
+            // 1. Asignar el listener de click a todos los botones C/F
+            const cfButtons = document.querySelectorAll('.cf-button');
+            cfButtons.forEach(button => {
+                button.addEventListener('click', handleCfClick);
+            });
+            
+            // 2. Asignar el listener al botón de respuestas
+            document.getElementById('toggle-answers-btn').addEventListener('click', toggleAnswers);
+        };
+    </script>
+</body>
+</html>
