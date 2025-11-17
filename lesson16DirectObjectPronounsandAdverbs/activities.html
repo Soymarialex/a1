@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Definición de colores centrales */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --dark-gray: #4A4A4A;   /* Gris oscuro para un personaje */
+            /* Colores de estado */
+            --light-apple-green: #D4EDDA; /* Verde manzana más claro para acierto */
+            --light-red: #FFCDD2;   /* Rojo claro para error */
+            --light-gray-divider: #E0E0E0;
+        }
+
+        /* Estilo para emular Platform Medium Font y asegurar el color de texto */
+        body {
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            color: var(--eerie-black);
+            background-color: white;
+            line-height: 1.75;
+        }
+
+        /* Estilo para negritas (fuerte) sin asteriscos */
+        .content strong, h1, h2, h3 {
+            font-weight: 600; 
+            color: var(--eerie-black);
+        }
+
+        /* Estilo para justificar el texto informativo (solicitado) */
+        .text-justified {
+            text-align: justify;
+        }
+
+        /* Asegurar que los títulos usen el color primario (Pink) */
+        .primary-color {
+            color: var(--flamingo-pink);
+        }
+
+        /* Estilo para la entrada de texto (input) de completación */
+        .fill-in-input {
+            width: 80px;
+            padding: 4px 8px;
+            border: 1px solid var(--flamingo-pink);
+            border-radius: 4px;
+            text-align: center;
+            transition: all 0.3s; /* Transición para el cambio de color */
+            margin: 0 4px;
+            display: inline-block;
+            box-sizing: border-box;
+            background-color: white; /* Inicialmente blanco */
+        }
+        
+        /* Asegurar que el foco no oculte la retroalimentación de color */
+        .fill-in-input:focus {
+            outline: none; /* Eliminar el borde de foco por defecto del navegador */
+            box-shadow: 0 0 0 2px rgba(255, 121, 172, 0.5); /* Sombra suave del color primario */
+        }
+
+        /* Clases de estado de respuesta */
+        /* !important asegura que estos estilos anulen el 'border-color' y 'background-color' base */
+        .correct {
+            background-color: var(--light-apple-green) !important;
+            border-color: #66BB6A !important; /* Un borde verde más vibrante para contraste */
+        }
+        .incorrect {
+            background-color: var(--light-red) !important;
+            border-color: #F44336 !important;
+        }
+        .default {
+            background-color: white !important;
+            border-color: var(--flamingo-pink) !important;
+        }
+        
+        /* Estilo para el subrayado de los objetos directos */
+        .underline {
+            text-decoration: underline;
+            text-decoration-color: var(--eerie-black);
+            text-decoration-thickness: 1.5px;
+            text-underline-offset: 3px;
+        }
+
+        /* Clase para el espaciado de interlineado de los diálogos */
+        .dialogue-line {
+            display: block;
+            margin-bottom: 12px; /* Espacio entre cada línea de diálogo */
+        }
+
+        /* Estilo para las opciones de selección (Actividad C) */
+        .mc-option {
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid var(--light-gray-divider);
+            margin-bottom: 8px;
+            transition: background-color 0.3s;
+        }
+        .mc-option:hover {
+            background-color: #FFF0F5; /* Rosa muy claro al pasar el ratón */
+        }
+        .mc-option.selected-correct {
+            background-color: var(--light-apple-green) !important;
+            border-color: #66BB6A !important;
+        }
+        .mc-option.selected-incorrect {
+            background-color: var(--light-red) !important;
+            border-color: #F44336 !important;
+        }
+
+        /* Estilo para el botón de Respuestas */
+        #toggle-answers-btn {
+            background-color: var(--flamingo-pink);
+            color: white;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: opacity 0.3s;
+            margin-top: 40px;
+        }
+        #toggle-answers-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Estilo para la sección de respuestas */
+        #answer-key {
+            border: 2px solid var(--flamingo-pink);
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #FFF0F5;
+            margin-top: 20px;
+        }
+        #answer-key h3 {
+            color: var(--eerie-black);
+            border-bottom: 1px dashed var(--flamingo-pink);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto rounded-xl">
+        
+        <!-- Título principal --><h1 class="text-4xl sm:text-5xl font-extrabold text-center mt-6 mb-12 primary-color">
+            III. Actividades / Activities
+        </h1>
+
+        <!-- Contenedor de Actividades (Insertado por JS) --><div id="activities-container">
+            <!-- Actividades A, B, C, D serán renderizadas aquí --></div>
+
+        <!-- Botón de Respuestas Correctas --><div class="flex justify-center mt-10">
+            <button id="toggle-answers-btn">
+                Mostrar Respuestas Correctas
+            </button>
+        </div>
+
+        <!-- Sección de Respuestas (Oculta inicialmente) --><div id="answer-key" class="hidden">
+            <h3 class="text-xl font-bold">IV. Respuestas correctas / Correct Answers</h3>
+            <div id="answer-content" class="text-lg">
+                <!-- El contenido de las respuestas se inserta aquí --></div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de las actividades, incluyendo la clave de respuesta
+        const ACTIVITIES_DATA = {
+            A: {
+                title: "a. Dr. Esteban Quirós",
+                description: "En el siguiente diálogo, reemplaza los objetos directos subrayados con los pronombres apropiados. / In the following dialogue, replace the underlined direct objects with the appropriate pronouns.",
+                context: "El Dr. Esteban Quirós tiene una paciente que está muy enojada porque se siente mal todos los días. Ella dice que todos los días está cansada y que nunca tiene energía. / Dr. Esteban Quirós has a patient who is very angry because she feels bad every day. She says that every day she’s tired and never has any energy.",
+                dialogue: [
+                    // Objeto Directo: comida saludable
+                    { text: "Dr. Quirós: ¿Usted come <span class=\"underline\">comida saludable</span> [healthy]? ", type: "text" },
+                    { text: "Paciente: No, no ", type: "text" },
+                    { id: "A1", answer: ["la"], type: "input", placeholder: "1." },
+                    { text: " como. ", type: "text" },
+
+                    // Objeto Directo: muchos programas de televisión
+                    { text: "Dr. Quirós: ¿Usted ve muchos <span class=\"underline\">programas de televisión</span> [television programs]? ", type: "text" },
+                    { text: "Paciente: Sí, claro ", type: "text" },
+                    { id: "A2", answer: ["los"], type: "input", placeholder: "2." },
+                    { text: " veo hasta muy tarde en la noche. ", type: "text" },
+
+                    // Objeto Directo: pastillas
+                    { text: "Dr. Quirós: ¿Usted toma <span class=\"underline\">pastillas</span> [pills] para dormir? ", type: "text" },
+                    { text: "Paciente: Sí, ", type: "text" },
+                    { id: "A3", answer: ["las"], type: "input", placeholder: "3." },
+                    { text: " tomo todas las noches. ", type: "text" },
+
+                    // Objeto Directo: vitaminas (1)
+                    { text: "Dr. Quirós: ¿Usted toma otros medicamentos [medicines]? ", type: "text" },
+                    { text: "Paciente: Sí, tomo <span class=\"underline\">vitaminas</span> [vitaminas] todos los días. Pero ", type: "text" },
+                    { id: "A4", answer: ["las"], type: "input", placeholder: "4." },
+                    { text: " tomo en la mañana. ", type: "text" },
+
+                    // Objeto Directo: ejercicio
+                    { text: "Dr. Quirós: ¿Usted hace <span class=\"underline\">ejercicio</span>? ", type: "text" },
+                    { text: "Paciente: No, nunca [never] ", type: "text" },
+                    { id: "A5", answer: ["lo"], type: "input", placeholder: "5." },
+                    { text: " hago. Tampoco [Neither] veo deportes [sports]. ", type: "text" },
+
+                    // Objeto Directo: cigarrillos
+                    { text: "Dr. Quirós: ¿Usted fuma [smoke] <span class=\"underline\">cigarrillos</span> [cigarrettes]? ", type: "text" },
+                    { text: "Paciente: Sí, ", type: "text" },
+                    { id: "A6", answer: ["los"], type: "input", placeholder: "6." },
+                    { text: " fumo, pero solo cuando estoy estresada [stressed]. ", type: "text" },
+
+                    { text: "Dr. Quirós: ¿Y cuándo está estresada? ", type: "text" },
+                    // Objeto Directo: vitaminas (2) - aparece en el monólogo de la paciente
+                    { text: "Paciente: Todos los días. Pero doctor, yo me siento [I feel] mal y tengo demasiado trabajo. Nunca tengo energía y estoy muy cansada. Pero yo tomo <span class=\"underline\">vitaminas</span> todos los días. ", type: "text" }, 
+                    { text: "Dr. Quirós: Sí, entiendo que ", type: "text" },
+                    { id: "A7", answer: ["las"], type: "input", placeholder: "7." }, // ULTIMO DE A
+                    { text: " toma, pero usted fuma, no come comida saludable, no hace ejercicio, está siempre estresada y duerme pocas horas. ¡Tiene que tener mucho más cuidado con su salud! ", type: "text" },
+                ],
+                answerKey: "1. la, 2. los, 3. las, 4. las, 5. lo, 6. los, 7. las"
+            },
+            B: {
+                title: "b. Picnic en el parque",
+                description: "Reemplaza los objetos directos subrayados con los pronombres apropiados. / Replace the underlined direct objects with the appropriate pronouns.",
+                context: "¡Hace muy buen tiempo! Elena y sus amigas Rebeca y Alicia van a hacer un picnic en el parque. Ellas necesitan saber si tienen toda la comida que necesitan. / The weather is great! Elena and her friends Rebeca and Alicia are going to have a picnic in the park. They need to know if they have all the food they need.",
+                dialogue: [
+                    // Objeto Directo: el café
+                    { text: "Elena: Rebeca, ¿tienes <span class=\"underline\">el café</span>? Sí, ", type: "text" }, 
+                    { id: "B1", answer: ["lo"], type: "input", placeholder: "1." },
+                    // Objeto Directo: el pan
+                    { text: " tengo, pero no tengo <span class=\"underline\">el pan</span>. ", type: "text" }, 
+
+                    { text: "Alicia: Yo ", type: "text" },
+                    { id: "B2", answer: ["lo"], type: "input", placeholder: "2." },
+                    { text: " tengo. ", type: "text" },
+
+                    // Objeto Directo: la mantequilla y la mermelada
+                    { text: "Rebeca: ¿Elena, tienes <span class=\"underline\">la mantequilla y la mermelada</span>? ", type: "text" }, 
+                    { text: "Elena: Sí, ", type: "text" },
+                    { id: "B3", answer: ["las"], type: "input", placeholder: "3." },
+                    // Objeto Directo: el jugo de naranja
+                    { text: " tengo. ¿Tú tienes <span class=\"underline\">el jugo de naranja</span>? ", type: "text" }, 
+
+                    { text: "Rebeca: Sí, ", type: "text" },
+                    { id: "B4", answer: ["lo"], type: "input", placeholder: "4." },
+                    // Objeto Directo: leche
+                    { text: " tengo, pero yo no quiero jugo de naranja. Yo quiero café con leche. ¿Tienes <span class=\"underline\">leche</span> en el refrigerador [refrigerator], Elena? ", type: "text" }, 
+
+                    { text: "Alicia: No, no está en el refrigerador porque yo ", type: "text" },
+                    { id: "B5", answer: ["la"], type: "input", placeholder: "5." },
+                    { text: " tengo aquí. ", type: "text" },
+
+                    // Objeto Directo: los huevos
+                    { text: "Elena: Muy bien, gracias. ¿Tienes <span class=\"underline\">los huevos</span>, Alicia? ", type: "text" }, 
+                    { text: "Alicia: Sí, ", type: "text" },
+                    { id: "B6", answer: ["los"], type: "input", placeholder: "6." }, // ULTIMO DE B
+                    { text: " estoy preparando ahora mismo. ", type: "text" },
+                ],
+                answerKey: "1. lo, 2. lo, 3. las, 4. lo, 5. la, 6. los"
+            },
+            C: {
+                title: "c. Reunión de amigos",
+                description: "Escoge la respuesta correcta con el pronombre de objeto directo apropiado. / Choose the correct answer with the appropriate direct object pronoun. ",
+                context: "Javier quiere hacer una reunión de amigos de la secundaria en su casa. Él está pidiéndoles ayuda a todos para hacer la reunión. / Javier wants to have a gathering of friends from high school at his home. He is asking everyone to help with the gathering.",
+                questions: [
+                    {
+                        id: "C1",
+                        prompt: "Ingrid: ¿Puedes llamar a Patricia y Virginia?",
+                        options: [
+                            { text: "a) Sí, puedo llamarnos mañana.", key: "a", correct: false },
+                            { text: "b) Sí, puedo llamarlas mañana.", key: "b", correct: true },
+                            { text: "c) Sí, puedo llamarlos mañana.", key: "c", correct: false }
+                        ],
+                        correctAnswerKey: "b"
+                    },
+                    {
+                        id: "C2",
+                        prompt: "Ingrid: Javier, ¿cuándo vas a limpiar tu casa?",
+                        options: [
+                            { text: "a) Voy a limpiarlo el sábado.", key: "a", correct: false },
+                            { text: "b) Voy a limpiarme el sábado.", key: "b", correct: false },
+                            { text: "c) Voy a limpiarla el sábado.", key: "c", correct: true }
+                        ],
+                        correctAnswerKey: "c"
+                    },
+                    {
+                        id: "C3",
+                        prompt: "Ingrid: ¿Necesitas ayuda para limpiar tu casa?",
+                        options: [
+                            { text: "a) No, no la necesito, gracias.", key: "a", correct: true },
+                            { text: "b) No, no me necesito, gracias.", key: "b", correct: false },
+                            { text: "c) No, no nos necesito, gracias.", key: "c", correct: false }
+                        ],
+                        correctAnswerKey: "a"
+                    },
+                    {
+                        id: "C4",
+                        prompt: "Javier: Ingrid, ¿me llamas más tarde? Quiero saber si Patricia y Virginia pueden venir.",
+                        options: [
+                            { text: "a) ¡Sí, claro! Te voy a llamar en la noche.", key: "a", correct: true },
+                            { text: "b) ¡Sí, claro! Me voy a llamar en la noche.", key: "b", correct: false },
+                            { text: "c) ¡Sí, claro! Nos voy a llamar en la noche.", key: "c", correct: false }
+                        ],
+                        correctAnswerKey: "a"
+                    },
+                    {
+                        id: "C5",
+                        prompt: "Vania: Javier, ¿vas a invitar a Manrique y Antonio?",
+                        options: [
+                            { text: "a) Sí, posiblemente os voy a invitar ahora.", key: "a", correct: false },
+                            { text: "b) Sí, posiblemente te voy a invitar ahora.", key: "b", correct: false },
+                            { text: "c) Sí, posiblemente los voy a invitar ahora.", key: "c", correct: true }
+                        ],
+                        correctAnswerKey: "c"
+                    },
+                    {
+                        id: "C6",
+                        prompt: "Javier: Vania, ¿quieres tú hacer un brindis en la reunión?",
+                        options: [
+                            { text: "a) No, yo no quiero hacerme.", key: "a", correct: false },
+                            { text: "b) No, yo no quiero hacerlo.", key: "b", correct: true },
+                            { text: "c) No, yo no quiero hacerlos.", key: "c", correct: false }
+                        ],
+                        correctAnswerKey: "b"
+                    },
+                    {
+                        id: "C7",
+                        prompt: "Néstor: ¿Quién va a comprar las cervezas, Javier?",
+                        options: [
+                            { text: "a) Yo. Las voy a comprar después.", key: "a", correct: true },
+                            { text: "b) Yo. Los voy a comprar después.", key: "b", correct: false },
+                            { text: "c) Yo. Me voy a comprar después.", key: "c", correct: false }
+                        ],
+                        correctAnswerKey: "a"
+                    },
+                    {
+                        id: "C8",
+                        prompt: "Javier: Vania, ¿puedes preparar el postre? Tú cocinas muy bien.",
+                        options: [
+                            { text: "a) ¡Sí, por supuesto! Yo me puedo preparar.", key: "a", correct: false },
+                            { text: "b) ¡Sí, por supuesto! Yo os puedo preparar.", key: "b", correct: false },
+                            { text: "c) ¡Sí, por supuesto! Yo lo puedo preparar.", key: "c", correct: true }
+                        ],
+                        correctAnswerKey: "c" // ULTIMO DE C 
+                    }
+                ],
+                answerKey: "1. b, 2. c, 3. a, 4. a, 5. c, 6. b, 7. a, 8. c"
+            },
+            D: {
+                title: "d. Elena, Rebeca y Alicia están hablando",
+                description: "Completa las frases con los adverbios apropiados. / Complete the sentences with the appropriate adverbs.",
+                context: "Elena, Rebeca, and Alicia are talking.",
+                wordBank: ["temprano", "mucho", "también (2)", "aquí", "claro", "ahora", "bastante", "posiblemente", "poco"],
+                dialogue: [
+                    { text: "Alicia: Creo que hace un tiempo perfecto [perfect] hoy. ", type: "text" },
+                    { text: "Rebeca: Yo ", type: "text" },
+                    { id: "D1", answer: ["también"], type: "input", placeholder: "1." },
+                    { text: " lo creo. ", type: "text" },
+
+                    { text: "Alicia: ¡Qué lugar [place] tan [so] bonito! Este parque es ", type: "text" },
+                    { id: "D2", answer: ["bastante"], type: "input", placeholder: "2." },
+                    { text: " tranquilo. ", type: "text" },
+
+                    { text: "Elena: Sí, por eso [that’s why] ", type: "text" },
+                    { id: "D3", answer: ["aquí"], type: "input", placeholder: "3." },
+                    { text: " hay muchos niños. Son las ocho de la mañana, es ", type: "text" },
+                    { id: "D4", answer: ["temprano"], type: "input", placeholder: "4." },
+                    { text: ", pero ", type: "text" },
+                    { id: "D5", answer: ["posiblemente"], type: "input", placeholder: "5." },
+                    { text: " en la tarde van a venir más niños. ", type: "text" },
+
+                    { text: "Rebeca: ¿Vamos a estudiar juntas para el examen del lunes? ", type: "text" },
+                    { text: "Alicia: Sí, ¡", type: "text" },
+                    { id: "D6", answer: ["claro"], type: "input", placeholder: "6." },
+                    { text: "! Pero yo voy a estudiar solo un ", type: "text" },
+                    { id: "D7", answer: ["poco"], type: "input", placeholder: "7." },
+                    { text: ". Estoy muy cansada. ", type: "text" },
+
+                    { text: "Elena: Yo necesito estudiar ", type: "text" },
+                    { id: "D8", answer: ["mucho"], type: "input", placeholder: "8." },
+                    { text: ". Tengo miedo de ese examen. ", type: "text" },
+
+                    { text: "Rebeca: Yo ", type: "text" },
+                    { id: "D9", answer: ["también"], type: "input", placeholder: "9." },
+                    { text: " tengo miedo. ¿Podemos empezar a estudiar ", type: "text" },
+                    { id: "D10", answer: ["ahora"], type: "input", placeholder: "10." }, // ULTIMO DE D
+                    { text: ", no? ", type: "text" },
+                    
+                    { text: "Elena: ¡Buena idea! ", type: "text" },
+                    { text: "Alicia: ¡Es hora de estudiar! ", type: "text" },
+                ],
+                answerKey: "1. también, 2. bastante, 3. aquí, 4. temprano, 5. posiblemente, 6. claro, 7. poco, 8. mucho, 9. también, 10. ahora"
+            }
+        };
+        
+        // IDs de los últimos inputs de cada actividad que deben permanecer enfocados
+        const LAST_INPUT_IDS = ['A7', 'B6', 'D10']; 
+
+        const activityContainer = document.getElementById('activities-container');
+        const allInputIds = [];
+        let inputOrder = [];
+
+        /**
+         * Aplica el estilo (color y negrita) a la etiqueta del personaje.
+         * @param {string} text - El texto original (ej: "Dr. Quirós: ¿Usted come...")
+         * @param {string} activityKey - La clave de la actividad (A, B, D).
+         * @returns {string} El texto con la etiqueta del personaje estilizada.
+         */
+        const styleSpeakerLabel = (text, activityKey) => {
+            let speaker = "";
+            let styleClass = "";
+
+            if (activityKey === 'A') {
+                if (text.startsWith("Dr. Quirós:")) {
+                    speaker = "Dr. Quirós:";
+                    styleClass = `color: var(--eerie-black);`;
+                } else if (text.startsWith("Paciente:")) {
+                    speaker = "Paciente:";
+                    styleClass = `color: var(--flamingo-pink);`;
+                }
+            } else if (activityKey === 'B' || activityKey === 'D') {
+                if (text.startsWith("Elena:")) {
+                    speaker = "Elena:";
+                    styleClass = `color: var(--flamingo-pink);`;
+                } else if (text.startsWith("Rebeca:")) {
+                    speaker = "Rebeca:";
+                    styleClass = `color: var(--dark-gray);`;
+                } else if (text.startsWith("Alicia:")) {
+                    speaker = "Alicia:";
+                    styleClass = `color: var(--eerie-black);`;
+                }
+            }
+            
+            if (speaker) {
+                // Reemplaza la etiqueta del orador con la etiqueta estilizada en negrita
+                const styledSpeaker = `<span class="font-bold" style="${styleClass}">${speaker}</span>`;
+                return text.replace(speaker, styledSpeaker);
+            }
+            return text;
+        };
+
+
+        // --- Funciones de Renderizado ---
+
+        /**
+         * Renderiza una actividad de diálogo con campos de entrada (A, B, D).
+         * @param {string} key - Clave de la actividad (A, B, D).
+         * @param {Object} data - Datos de la actividad.
+         */
+        const renderInputActivity = (key, data) => {
+            let html = `
+                <div id="activity-${key}" class="mb-12 p-6 rounded-xl border border-pink-200 shadow-md">
+                    <h2 class="text-2xl font-bold mb-3 primary-color">${data.title}</h2>
+                    <p class="text-justified mb-4 text-sm italic">${data.context}</p>
+                    <p class="text-justified mb-6 text-lg"><strong>${data.description}</strong></p>
+            `;
+
+            if (data.wordBank) {
+                 html += `<div class="mb-6 p-3 bg-pink-50 rounded-lg text-sm">
+                            <strong class="primary-color">Banco de Palabras (Adverbios):</strong> ${data.wordBank.join(' • ')}
+                          </div>`;
+            }
+
+            html += `<div class="dialogue text-lg leading-relaxed">`;
+            
+            let currentLineHtml = '';
+            
+            data.dialogue.forEach(part => {
+                if (part.type === 'text') {
+                    // 1. Aplicar el estilo al nombre del personaje
+                    let styledText = styleSpeakerLabel(part.text, key);
+
+                    // 2. Detectar el final de una frase que puede ser el final de un turno
+                    const isEndOfTurn = part.text.trim().endsWith('.') || part.text.trim().endsWith('?') || part.text.trim().endsWith('!');
+                    
+                    currentLineHtml += styledText;
+
+                    if (isEndOfTurn) {
+                        html += `<span class="dialogue-line">${currentLineHtml}</span>`;
+                        currentLineHtml = '';
+                    }
+
+                } else if (part.type === 'input') {
+                    const number = part.placeholder;
+                    const inputElement = `
+                        <input 
+                            type="text" 
+                            id="${part.id}" 
+                            data-activity-id="${key}"
+                            class="fill-in-input default text-base" 
+                            placeholder="${number}" 
+                            data-answer="${part.answer[0].toLowerCase()}"
+                            size="${part.answer[0].length + 2}"
+                            maxlength="${part.answer[0].length + 3}"
+                        >
+                    `;
+                    currentLineHtml += inputElement;
+                    allInputIds.push(part.id);
+                }
+            });
+
+            // Si queda contenido en currentLineHtml
+            if (currentLineHtml) {
+                 html += `<span class="dialogue-line">${currentLineHtml}</span>`;
+            }
+
+
+            html += `</div></div>`;
+            return html;
+        };
+
+        /**
+         * Renderiza la actividad de selección múltiple (C).
+         * @param {Object} data - Datos de la actividad.
+         */
+        const renderMultipleChoiceActivity = (data) => {
+            let html = `
+                <div id="activity-C" class="mb-12 p-6 rounded-xl border border-pink-200 shadow-md">
+                    <h2 class="text-2xl font-bold mb-3 primary-color">${data.title}</h2>
+                    <p class="text-justified mb-4 text-sm italic">${data.context}</p>
+                    <p class="text-justified mb-6 text-lg"><strong>${data.description}</strong></p>
+                    <div class="space-y-6">
+            `;
+
+            data.questions.forEach((q, index) => {
+                html += `
+                    <div class="question border-b border-pink-100 pb-4" data-question-id="${q.id}">
+                        <p class="text-lg mb-3"><strong>${index + 1}.</strong> ${q.prompt}</p>
+                        <div class="options space-y-2">
+                `;
+                q.options.forEach(opt => {
+                    html += `
+                        <div class="mc-option text-base" 
+                             data-key="${q.id}-${opt.key}" 
+                             data-correct="${opt.correct}"
+                             data-question-id="${q.id}">
+                            ${opt.text}
+                        </div>
+                    `;
+                });
+                html += `</div></div>`;
+            });
+
+            html += `</div></div>`;
+            return html;
+        };
+
+        /**
+         * Inicializa y adjunta los listeners a la página.
+         */
+        const initActivities = () => {
+            // 1. Renderizar todas las actividades
+            const activitiesHtml = [
+                renderInputActivity('A', ACTIVITIES_DATA.A),
+                renderInputActivity('B', ACTIVITIES_DATA.B),
+                renderMultipleChoiceActivity(ACTIVITIES_DATA.C),
+                renderInputActivity('D', ACTIVITIES_DATA.D)
+            ].join('');
+            activityContainer.innerHTML = activitiesHtml;
+            
+            // 2. Establecer el orden de los inputs (A1, A2... B1, B2... D1, D2...)
+            // Los elementos de la actividad C no son inputs y se manejan aparte.
+            inputOrder = allInputIds.map(id => document.getElementById(id)).filter(el => el);
+
+
+            // 3. Adjuntar listeners de Enter (Actividades A, B, D)
+            inputOrder.forEach(input => {
+                input.addEventListener('keydown', handleInputKeydown);
+                input.addEventListener('blur', handleInputBlur);
+            });
+
+            // 4. Adjuntar listeners de clic (Actividad C - Selección Múltiple)
+            document.querySelectorAll('.mc-option').forEach(option => {
+                option.addEventListener('click', handleMultipleChoiceClick);
+            });
+
+            // 5. Adjuntar listener para el botón de respuestas
+            document.getElementById('toggle-answers-btn').addEventListener('click', toggleAnswerKey);
+            
+            // 6. Cargar contenido de la clave de respuestas
+            loadAnswerKeyContent();
+        };
+
+        // --- Funciones de Lógica del Juego ---
+
+        /**
+         * Maneja la verificación automática al presionar Enter.
+         * @param {Event} e - Evento de teclado.
+         */
+        const handleInputKeydown = (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Evita la acción por defecto del Enter
+                verifyInput(e.target);
+            }
+        };
+
+        /**
+         * Maneja la verificación al salir del campo.
+         * @param {Event} e - Evento de blur.
+         */
+        const handleInputBlur = (e) => {
+            if (e.target.value.trim() !== '') {
+                verifyInput(e.target);
+            } else {
+                // Si está vacío, resetear a estado por defecto
+                e.target.classList.remove('correct', 'incorrect');
+                e.target.classList.add('default');
+            }
+        };
+
+        /**
+         * Verifica la respuesta de un campo de texto y aplica estilo.
+         * @param {HTMLElement} input - El elemento input.
+         */
+        const verifyInput = (input) => {
+            const userAnswer = input.value.trim().toLowerCase();
+            const correctAnswer = input.dataset.answer;
+
+            // Limpiar clases de estado previas
+            input.classList.remove('correct', 'incorrect', 'default');
+
+            if (userAnswer === correctAnswer) {
+                input.classList.add('correct');
+                // Si es correcto y se presionó Enter, manejar el foco
+                if (document.activeElement === input) {
+                    focusNextInput(input.id, input.dataset.activityId);
+                }
+            } else if (userAnswer !== '') {
+                input.classList.add('incorrect');
+            } else {
+                 // Si el campo está vacío (después de una posible corrección), asegurar el estado por defecto
+                 input.classList.add('default');
+            }
+        };
+
+        /**
+         * Encuentra el siguiente input en la secuencia y le da el foco.
+         * Si es el último de la actividad, el foco permanece.
+         * @param {string} currentId - ID del input actual.
+         * @param {string} currentActivityId - ID de la actividad actual (A, B, D).
+         */
+        const focusNextInput = (currentId, currentActivityId) => {
+            // Si es uno de los últimos inputs, no hacer nada (el foco permanece)
+            if (LAST_INPUT_IDS.includes(currentId)) {
+                return; 
+            }
+
+            const currentIndex = inputOrder.findIndex(input => input.id === currentId);
+            
+            if (currentIndex !== -1 && currentIndex < inputOrder.length - 1) {
+                const nextInput = inputOrder[currentIndex + 1];
+                
+                // Verificar si el siguiente input pertenece a la misma actividad
+                if (nextInput.dataset.activityId === currentActivityId) {
+                    nextInput.focus();
+                } 
+                // Si no pertenecen a la misma actividad, el foco se mantiene.
+            }
+        };
+
+
+        /**
+         * Maneja la lógica de selección múltiple (Actividad C).
+         * @param {Event} e - Evento de clic.
+         */
+        const handleMultipleChoiceClick = (e) => {
+            const selectedOption = e.currentTarget;
+            const questionId = selectedOption.dataset.questionId;
+            const isCorrect = selectedOption.dataset.correct === 'true';
+            
+            // 1. Limpiar estilos de todas las opciones de la misma pregunta
+            document.querySelectorAll(`.question[data-question-id="${questionId}"] .mc-option`).forEach(opt => {
+                opt.classList.remove('selected-correct', 'selected-incorrect');
+                // Al quitar las clases de estado, se aplica el estilo base definido en .mc-option
+            });
+            
+            // 2. Aplicar el estilo a la opción seleccionada
+            if (isCorrect) {
+                selectedOption.classList.add('selected-correct');
+            } else {
+                selectedOption.classList.add('selected-incorrect');
+            }
+        };
+
+        /**
+         * Muestra u oculta la sección de respuestas.
+         */
+        const toggleAnswerKey = () => {
+            const answerKeyDiv = document.getElementById('answer-key');
+            const button = document.getElementById('toggle-answers-btn');
+            
+            if (answerKeyDiv.classList.contains('hidden')) {
+                answerKeyDiv.classList.remove('hidden');
+                button.textContent = 'Ocultar Respuestas Correctas';
+            } else {
+                answerKeyDiv.classList.add('hidden');
+                button.textContent = 'Mostrar Respuestas Correctas';
+            }
+        };
+
+        /**
+         * Carga el contenido estático de las respuestas.
+         */
+        const loadAnswerKeyContent = () => {
+            const contentDiv = document.getElementById('answer-content');
+            let html = '';
+
+            // Actividad A
+            html += `<h4 class="font-semibold text-lg mt-3">A. Dr. Esteban Quirós:</h4>`;
+            html += `<p class="ml-4">${ACTIVITIES_DATA.A.answerKey.replace(/, /g, ' &bull; ')}</p>`;
+            
+            // Actividad B
+            html += `<h4 class="font-semibold text-lg mt-3">B. Picnic en el parque:</h4>`;
+            html += `<p class="ml-4">${ACTIVITIES_DATA.B.answerKey.replace(/, /g, ' &bull; ')}</p>`;
+            
+            // Actividad C
+            html += `<h4 class="font-semibold text-lg mt-3">C. Reunión de amigos:</h4>`;
+            html += `<p class="ml-4">${ACTIVITIES_DATA.C.answerKey.replace(/, /g, ' &bull; ')}</p>`;
+
+            // Actividad D
+            html += `<h4 class="font-semibold text-lg mt-3">D. Elena, Rebeca y Alicia están hablando:</h4>`;
+            html += `<p class="ml-4">${ACTIVITIES_DATA.D.answerKey.replace(/, /g, ' &bull; ')}</p>`;
+
+            contentDiv.innerHTML = html;
+        };
+
+        // Iniciar la página
+        window.onload = initActivities;
+
+    </script>
+</body>
+</html>
