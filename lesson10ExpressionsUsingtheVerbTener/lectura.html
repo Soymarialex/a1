@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV. Lectura cultural / Cultural Reading</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de la fuente Inter (alternativa a Platform Medium) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Definición de la fuente y colores */
+        :root {
+            --color-flamingo-pink: #FF79AC;
+            --color-eerie-black: #121118;
+            --color-light-flamingo: #FFE0EC; /* Fondo rosa claro para el texto */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-eerie-black);
+            background-color: white; /* Fondo blanco */
+        }
+        /* Estilos personalizados para justificar el texto dentro de la caja rosa */
+        .text-justified {
+            text-align: justify;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo': 'var(--color-flamingo-pink)',
+                        'eerie-black': 'var(--color-eerie-black)',
+                        'light-flamingo': 'var(--color-light-flamingo)',
+                        'correct-green': '#D1FAE5', /* Verde claro */
+                        'incorrect-red': '#FEE2E2', /* Rojo claro */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="p-4 sm:p-8 md:p-12 min-h-screen">
+
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Título principal -->
+        <header class="mb-8 p-4 border-b-4 border-flamingo rounded-lg">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-eerie-black">
+                IV. Lectura cultural / Cultural Reading
+            </h1>
+        </header>
+
+        <!-- Introducción -->
+        <p class="text-lg mb-6 text-center text-eerie-black">
+            Lee el texto siguiente y contesta las preguntas de forma cierto (“C”) o falso (“F”). / Read the following text and answer the questions as either true (“C”) or false (“F”).
+        </p>
+
+        <!-- Contenido de la lectura con fondo rosa claro y justificación -->
+        <section id="reading-text" class="bg-light-flamingo p-6 sm:p-8 rounded-xl shadow-lg mb-10">
+            <div class="text-justified space-y-4 text-eerie-black leading-relaxed">
+                <p>
+                    Aunque la lengua española es uno de los aspectos que une al mundo hispano, también existen muchas diferencias entre regiones y países. Ahora sabes que hay países, áreas y regiones que pronuncian consonantes y/o palabras de manera diferente. También, hay palabras que en un país tienen un significado diferente que en otro. Hay palabras que solo tienen un uso o significado particular en una región específica, pero no existen en otras. Por ejemplo, “cake” en Argentina se dice <b class="font-semibold">torta</b>, en Puerto Rico <b class="font-semibold">bizcocho</b>, en España <b class="font-semibold">tarta</b> y en México <b class="font-semibold">pastel</b>. Otra palabra interesante es “popcorn,” que en Colombia se dice <b class="font-semibold">crispetas</b>, en Argentina <b class="font-semibold">pochoclo</b> y en España <b class="font-semibold">palomitas</b>. Además, “bus” en Argentina se dice <b class="font-semibold">colectivo</b>, en Cuba y Puerto Rico <b class="font-semibold">guagua</b>, en Costa Rica <b class="font-semibold">bus</b> y en México <b class="font-semibold">camión</b>.
+                </p>
+                <p>
+                    Otra de las diferencias importantes es la correspondiente a la localización del país dependiendo del hemisferio. Los países que están al norte del ecuador tienen diferentes estaciones que los países al sur del ecuador. Cuando es el verano para los países en el hemisferio norte, es el invierno para los países del hemisferio sur. Otros países solo tienen una temporada seca y una temporada de lluvia, pero no tienen cuatro estaciones como los Estados Unidos, por ejemplo.
+                </p>
+                <p>
+                    Otro de los contrastes entre los países hispanos son los días feriados. Aunque muchos países tienen los mismos días feriados, no todos hacen las mismas celebraciones. Estas celebraciones van a ser diferentes dependiendo del país y las regiones dentro de cada país. Esto se debe a que cada país tiene su propia cultura y costumbres. Los días feriados pueden ser nacionales o regionales, y muchas veces las celebraciones regionales dependen de creencias religiosas y de los personajes santos asociados a una región. En cuanto al Día de la Independencia, Guatemala, El Salvador, Costa Rica, Honduras y Nicaragua lo celebran cada año el 15 de septiembre, mientras que México lo celebra el 16 de septiembre y Chile el 18 de ese mes. En agosto esta celebración la tienen Ecuador, Bolivia y Uruguay. En el mes de julio, se celebra el Día de la Independencia para Venezuela, Argentina, Colombia y Perú. Por supuesto, este día es una celebración muy importante en cada país y tiene sus orígenes en la historia independentista de España.
+                </p>
+                <p>
+                    No se puede negar la influencia de España en Hispanoamérica, y en cuanto a uno de los feriados importantes para las familias se encuentra el Día de los Reyes Magos, que se celebra el seis de enero o la medianoche del cinco de enero. La idea general y tradicional es que los Reyes Magos—Melchor, Gaspar y Baltasar—les llevan regalos a los niños. Esta celebración es común en muchos de los países hispanohablantes.
+                </p>
+            </div>
+        </section>
+
+        <!-- Sección de preguntas (Quiz) -->
+        <section id="quiz-questions" class="space-y-6">
+            <div class="text-xl font-bold mb-4 text-eerie-black">Preguntas:</div>
+
+            <ul id="questions-list" class="space-y-4">
+                <!-- Las preguntas serán inyectadas aquí por el JS -->
+            </ul>
+        </section>
+
+        <!-- Botón para mostrar las respuestas correctas -->
+        <div class="mt-12 pt-6 border-t border-gray-300">
+            <button id="show-answers-button" 
+                    class="w-full sm:w-auto px-6 py-3 bg-flamingo text-white font-bold rounded-lg shadow-md hover:bg-pink-400 transition duration-200">
+                Mostrar Respuestas Correctas
+            </button>
+        </div>
+
+        <!-- Contenedor de respuestas correctas (Inicialmente oculto) -->
+        <div id="correct-answers-box" class="mt-8 bg-gray-50 p-6 rounded-xl shadow-inner hidden">
+            <h3 class="text-xl font-bold mb-4 border-b pb-2 text-eerie-black">Respuestas correctas / Correct answers</h3>
+            <pre class="text-lg font-mono whitespace-pre-wrap text-eerie-black leading-relaxed">
+1. F
+2. F
+3. F
+4. C
+5. C
+6. F
+            </pre>
+        </div>
+
+    </div>
+
+    <!-- Contenedor de mensajes/feedback (reemplazo de alert()) -->
+    <div id="feedback-message" class="fixed top-0 left-0 w-full h-full bg-eerie-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm text-center">
+            <h4 class="text-xl font-bold mb-4 text-eerie-black">¡Atención!</h4>
+            <p id="feedback-text" class="text-eerie-black mb-6">Mensaje de retroalimentación.</p>
+            <button onclick="document.getElementById('feedback-message').classList.add('hidden')" 
+                    class="px-4 py-2 bg-flamingo text-white rounded-lg hover:bg-pink-400 transition duration-200">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        // Datos del quiz
+        const questionsData = [
+            { text: "“Cake” en México es bizcocho.", answer: 'F' },
+            { text: "“Bus” se dice [is said] igual [the same] en todos los países de Hispanoamérica.", answer: 'F' },
+            { text: "Todos los países en Hispanoamérica tienen cuatro estaciones como en los Estados Unidos.", answer: 'F' },
+            { text: "Algunos países tienen una temporada seca y una temporada lluviosa.", answer: 'C' },
+            { text: "Cada país en Hispanoamérica tiene su propia cultura y costumbres.", answer: 'C' },
+            { text: "Todos los días feriados en Hispanoamérica son feriados nacionales.", answer: 'F' },
+        ];
+
+        // Función para mostrar un mensaje de feedback personalizado (en lugar de alert())
+        function showFeedback(text) {
+            document.getElementById('feedback-text').textContent = text;
+            document.getElementById('feedback-message').classList.remove('hidden');
+        }
+
+        // Función para verificar la respuesta
+        function checkAnswer(questionIndex, selectedAnswer, cButton, fButton) {
+            const correctAnswer = questionsData[questionIndex].answer;
+            const isCorrect = selectedAnswer === correctAnswer;
+
+            // Reiniciar colores de los botones
+            cButton.classList.remove('bg-correct-green', 'bg-incorrect-red');
+            fButton.classList.remove('bg-correct-green', 'bg-incorrect-red');
+            cButton.classList.add('bg-gray-200');
+            fButton.classList.add('bg-gray-200');
+
+            // Aplicar el color de feedback
+            const selectedButton = (selectedAnswer === 'C') ? cButton : fButton;
+            const otherButton = (selectedAnswer === 'C') ? fButton : cButton;
+
+            if (isCorrect) {
+                selectedButton.classList.add('bg-correct-green', 'border-green-500');
+                selectedButton.classList.remove('bg-gray-200');
+                // showFeedback("¡Correcto!"); // Opcional, pero se mantiene simple sin feedback popup
+            } else {
+                selectedButton.classList.add('bg-incorrect-red', 'border-red-500');
+                selectedButton.classList.remove('bg-gray-200');
+                // showFeedback("Incorrecto. Intenta de nuevo."); // Opcional
+            }
+        }
+
+        // Función para renderizar las preguntas
+        function renderQuestions() {
+            const list = document.getElementById('questions-list');
+            
+            questionsData.forEach((item, index) => {
+                const qNum = index + 1;
+                const li = document.createElement('li');
+                li.className = 'flex flex-col sm:flex-row items-start sm:items-center p-4 bg-white rounded-lg shadow border border-gray-200';
+                
+                // Contenedor de texto de la pregunta
+                const textContainer = document.createElement('span');
+                textContainer.className = 'flex-grow text-lg mb-3 sm:mb-0 sm:mr-4 text-eerie-black';
+                textContainer.innerHTML = `<span class="font-bold mr-2 text-flamingo">${qNum}.</span> ${item.text}`;
+
+                // Contenedor de botones
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.className = 'flex space-x-3 ml-auto';
+
+                // Botón 'C' (Cierto)
+                const cButton = document.createElement('button');
+                cButton.textContent = 'C';
+                cButton.className = 'px-4 py-2 font-bold rounded-lg transition duration-150 border-2 border-gray-300 bg-gray-200 hover:bg-gray-300';
+                cButton.onclick = () => checkAnswer(index, 'C', cButton, fButton);
+
+                // Botón 'F' (Falso)
+                const fButton = document.createElement('button');
+                fButton.textContent = 'F';
+                fButton.className = 'px-4 py-2 font-bold rounded-lg transition duration-150 border-2 border-gray-300 bg-gray-200 hover:bg-gray-300';
+                fButton.onclick = () => checkAnswer(index, 'F', cButton, fButton);
+
+                buttonsContainer.appendChild(cButton);
+                buttonsContainer.appendChild(fButton);
+                
+                li.appendChild(textContainer);
+                li.appendChild(buttonsContainer);
+                list.appendChild(li);
+            });
+        }
+
+        // Event listener para el botón "Mostrar Respuestas Correctas"
+        document.getElementById('show-answers-button').addEventListener('click', () => {
+            const answersBox = document.getElementById('correct-answers-box');
+            answersBox.classList.toggle('hidden');
+        });
+
+        // Inicializar el quiz
+        window.onload = renderQuestions;
+    </script>
+
+</body>
+</html>

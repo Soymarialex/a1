@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expressions Using the Verb Tener</title>
+    <!-- Carga de Tailwind CSS para estilos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuración de Tailwind para los colores y fuentes requeridos
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        'light-gray': '#E5E7EB', // Gris muy claro para las líneas divisorias
+                    },
+                    // Uso de 'Inter' (la fuente sans-serif por defecto de Tailwind) 
+                    // como una fuente moderna, similar a Platform Medium Font.
+                    fontFamily: {
+                        sans: ['Inter', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos CSS personalizados */
+        body {
+            /* Fuente Platform Medium, simulada con Inter y peso 500 (Medium) */
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            background-color: white;
+            color: #121118; /* Eerie Black */
+        }
+        /* Clase para justificar el texto informativo */
+        .text-justify {
+            text-align: justify;
+        }
+        /* Grid para el vocabulario: 2 columnas, adaptable a móvil */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        /* Estilo para las líneas divisorias de los grupos de vocabulario */
+        .divider {
+            height: 1px;
+            background-color: #E5E7EB; /* light-gray */
+            margin: 2rem 0;
+            grid-column: 1 / -1; /* Ocupa el ancho completo */
+        }
+        /* Asegura que los textos en negrita usen la etiqueta <strong> sin asteriscos */
+        strong {
+            font-weight: 700;
+            color: #121118; /* Asegura el color negro para el texto normal */
+        }
+    </style>
+</head>
+
+<body class="p-4 sm:p-8 max-w-4xl mx-auto">
+
+    <!-- Título de la página -->
+    <h1 class="text-3xl sm:text-4xl font-extrabold mb-8 text-center text-eerie">
+        <span class="text-flamingo-pink">Expressions</span> Using the <span class="text-flamingo-pink">Verb Tener</span>
+    </h1>
+
+
+    <!-- I. Vocabulario nuevo / New Vocabulary -->
+    <h2 class="text-2xl font-semibold mb-6 text-flamingo-pink">
+        I. Vocabulario nuevo / New Vocabulary
+    </h2>
+
+    <div class="vocab-container space-y-4">
+        
+        <!-- Grupo 1 -->
+        <div class="vocab-grid">
+            <p><strong>el número</strong> – number</p>
+            <p><strong>el estudio</strong> – study</p>
+            <p><strong>la característica</strong> – characteristic</p>
+            <p><strong>la capital</strong> – capital city</p>
+            <p><strong>la expresión</strong> – expression</p>
+            <p><strong>el periódico</strong> – newspaper</p>
+        </div>
+        
+        <!-- Divisor 1 (Línea gris claro) -->
+        <div class="divider"></div>
+
+        <!-- Grupo 2 (Expresiones con tener) -->
+        <div class="vocab-grid">
+            <p><strong>tener</strong> – to have</p>
+            <p><strong>tener razón</strong> – to be right</p>
+            <p><strong>tener frío</strong> – to be cold</p>
+            <p><strong>tener miedo</strong> – to be afraid</p>
+            <p><strong>tener calor</strong> – to be hot</p>
+            <p><strong>tener cuidado</strong> – to be careful</p>
+            <p><strong>tener hambre</strong> – to be hungry</p>
+            <p><strong>tener suerte</strong> – to be lucky</p>
+            <p><strong>tener sed</strong> – to be thirsty</p>
+            <p><strong>tener treinta años</strong> – to be thirty years old</p>
+            <p><strong>tener sueño</strong> – to be sleepy</p>
+            <p><strong>tener que</strong> – to have to do something</p>
+            <p><strong>tener prisa</strong> – to be in a hurry</p>
+            <p><strong>tener ganas de</strong> – to feel like doing something</p>
+            <p><strong>tener éxito</strong> – to be successful</p>
+            <!-- Columna vacía para que el último par quede alineado a 2 por línea -->
+            <p></p> 
+        </div>
+
+        <!-- Divisor 2 (Línea gris claro) -->
+        <div class="divider"></div>
+
+        <!-- Grupo 3 (Adjetivos y adverbios) -->
+        <div class="vocab-grid">
+            <p><strong>muerto</strong> – dead</p>
+            <p><strong>difícil</strong> – difficult</p>
+            <p><strong>único</strong> – only, unique</p>
+            <p><strong>finalmente</strong> – finally</p>
+            <p><strong>fácil</strong> – easy</p>
+            <p><strong>otro</strong> – other, another</p>
+        </div>
+
+        <!-- Divisor 3 (Línea gris claro) -->
+        <div class="divider"></div>
+
+        <!-- Grupo 4 (Familiares políticos) -->
+        <div class="vocab-grid">
+            <p><strong>la suegra</strong> – mother-in-law</p>
+            <p><strong>la hijastra</strong> – stepdaughter</p>
+            <p><strong>el suegro</strong> – father-in-law</p>
+            <p><strong>el hijastro</strong> – stepson</p>
+            <p><strong>la cuñada</strong> – sister-in-law</p>
+            <p><strong>la hermanastra</strong> – stepsister</p>
+            <p><strong>el cuñado</strong> – brother-in-law</p>
+            <p><strong>el hermanastro</strong> – stepbrother</p>
+            <p><strong>la nuera</strong> – daughter-in-law</p>
+            <p><strong>el medio hermano</strong> – half brother</p>
+            <p><strong>el yerno</strong> – son-in-law</p>
+            <p><strong>el bisabuelo</strong> – great-grandfather</p>
+            <p><strong>la madrastra</strong> – stepmother</p>
+            <p><strong>la bisnieta</strong> – great-granddaughter</p>
+            <p><strong>el padrastro</strong> – stepfather</p>
+            <p><strong>el gemelo</strong> – twin</p>
+        </div>
+    </div>
+
+    <div class="mt-12">
+        <!-- II. Repaso general / General Review -->
+        <h2 class="text-2xl font-semibold mb-6 text-flamingo-pink">
+            II. Repaso general / General Review
+        </h2>
+
+        <div class="space-y-6 text-justify text-eerie text-base">
+
+            <!-- A. The Verb tener -->
+            <h3 class="text-xl font-semibold text-flamingo-pink">
+                A. The Verb tener
+            </h3>
+            <p>
+                One of the most commonly used verbs in Spanish is <strong>tener</strong>, which means “to have.” In many cases, <strong>tener</strong> is used as it is in English (e.g., <strong>Tenemos muchas sobrinas</strong> is “We have many nieces”). The present tense endings for <strong>tener</strong> are regular -er endings, but there is a <strong>g</strong> in the <strong>yo</strong> form and an <strong>ie</strong> in the stem of the <strong>tú, usted,</strong> and <strong>ustedes</strong> forms. The conjugation of <strong>tener</strong> is as follows.
+            </p>
+
+            <div class="my-4 p-4 border border-flamingo-pink/50 rounded-lg bg-flamingo-pink/10 max-w-sm mx-auto">
+                <h4 class="font-bold text-lg mb-2 text-eerie">tener [to have]</h4>
+                <div class="grid grid-cols-2 gap-2 font-mono text-eerie">
+                    <p><strong>tengo</strong></p><p><strong>tenemos</strong></p>
+                    <p><strong>tienes</strong></p><p><strong>tenéis</strong></p>
+                    <p><strong>tiene</strong></p><p><strong>tienen</strong></p>
+                </div>
+            </div>
+
+            <!-- B. Expressions with tener -->
+            <h3 class="text-xl font-semibold text-flamingo-pink">
+                B. Expressions with tener
+            </h3>
+            <p>
+                The verb <strong>tener</strong> is used with a number of different expressions in Spanish. Some of these expressions describe physical conditions (e.g., <strong>tener frío</strong> is “to be cold”; <strong>tener hambre</strong> is “to be hungry”), while others describe emotional conditions or situations (e.g., <strong>tener miedo</strong> is “to be afraid”; <strong>tener razón</strong> is “to be right”). Among the most commonly used <strong>tener</strong> expressions are <strong>tener que + infinitive</strong> [to have to do something] and <strong>tener ganas de + infinitive</strong> [to feel like doing something] (e.g., <strong>Tengo que hablar con mi suegro</strong> is “I have to speak with my father-in-law”; <strong>¿Tienes ganas de ir al teatro?</strong> is “Do you feel like going to the theater?”).
+            </p>
+
+            <!-- C. Estar: Showing the Result of an Action -->
+            <h3 class="text-xl font-semibold text-flamingo-pink">
+                C. Estar: Showing the Result of an Action
+            </h3>
+            <p>
+                One way <strong>estar</strong> is used is to show the result of a previous action. This use of <strong>estar</strong> can be seen, for example, with the verbs <strong>morir</strong> [to die] and <strong>abrir</strong> [to open] (e.g., <strong>Mi abuelo está muerto</strong> is “My grandfather is dead”; <strong>Las puertas están abiertas</strong> is “The doors are open”).
+            </p>
+
+            <!-- D. Characteristics of Successful Language Learners -->
+            <h3 class="text-xl font-semibold text-flamingo-pink">
+                D. Characteristics of Successful Language Learners
+            </h3>
+            <p>
+                Improving skills in a second language results form staying motivated and developing good learning habits. Language learners make the most progress when studying the language becomes important to them—important enough to practice consistently, important enough to be comfortable making mistakes, and important enough to accept that achieving proficiency takes considerable time and effort. In fact, studying a second language shares much in common with playing a sport or a musical instrument. Some of it’s about knowing what to do, but much more of it is practicing so that what you do becomes natural, even automatic.
+            </p>
+            <p>
+                Successful language learners most often have some real-world connection to the language, such as a desire to travel, a job situation, or a relationship that gives them a personal stake in being able to communicate in another language. There are so many Spanish speakers in the United States right now that, if you look for them, you should be able to find opportunities to communicate in the language. It also helps to be interested not only in the language, but also in the culture and history of the Spanish-speaking world. Practice often, make mistakes, and have some fun. Your Spanish proficiency is sure to improve as long as learning Spanish is important to you.
+            </p>
+
+            <!-- E. When to Use the Dictionary -->
+            <h3 class="text-xl font-semibold text-flamingo-pink">
+                E. When to Use the Dictionary
+            </h3>
+            <p>
+                As a beginning language learner, you will certainly encounter words in Spanish you don’t understand, so you should consult a dictionary from time to time. Be careful, however, not to use the dictionary too much. Because there are many words you won’t recognize when you read them, you might be tempted to look up any words you don’t understand. But using the dictionary too much results in reduced reading comprehension, because going back and forth to the dictionary so often means that you lose the point of the text you’re reading.
+            </p>
+            <p>
+                One way to think about when to use the dictionary is the following: You should only use the dictionary when you’re angry. This means that you should use the dictionary when you come across a word that you have seen so much—and you still don’t know what it means—that it makes you angry. Using the dictionary only when you’re angry means that you’ll be looking up the most important words—the ones you come across often in your reading.
+            </p>
+
+            <!-- F. Improving Your Reading Skills -->
+            <h3 class="text-xl font-semibold text-flamingo-pink">
+                F. Improving Your Reading Skills
+            </h3>
+            <p>
+                If you make it a habit to begin each day by reading the news in Spanish on the Internet, you will improve your reading skills while you find out what’s happening in the world. Accept that you’re not going to understand everything you read, and that’s okay. Your purpose with this reading is not to understand every word but, rather, to read in Spanish to get a general sense of what’s going on in the world of politics, sports, entertainment, or whatever specific topic interests you. Accepting less-than-perfect reading comprehension is like being willing to make mistakes in conversation. Dive in and do your best; with time and practice, improved reading proficiency will follow.
+            </p>
+            <p>
+                Two popular websites with news from the United States are <strong>CNN en Español</strong> and <strong>Fox News Latino</strong> (as long as you look at the version in Spanish). For news from Mexico, you might consult the website for the newspaper <strong>El Universal</strong>. One good place to get news from Spain is the website for the newspaper <strong>El País</strong>. If you’re more interested in what’s happening in some other country, do a Google search using the word <strong>periódico</strong> [newspaper] and the name of the country that interests you.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

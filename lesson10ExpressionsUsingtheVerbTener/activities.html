@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS para estilos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuración de Tailwind para los colores y fuentes requeridos
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        'light-gray': '#E5E7EB',
+                        'correct-green': '#D1FAE5', // bg-green-100
+                        'incorrect-red': '#FEE2E2', // bg-red-100
+                    },
+                    // Uso de 'Inter' como una fuente moderna, similar a Platform Medium Font.
+                    fontFamily: {
+                        sans: ['Inter', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos CSS personalizados */
+        body {
+            /* Fuente Platform Medium, simulada con Inter y peso 500 (Medium) */
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            background-color: white;
+            color: #121118; /* Eerie Black */
+        }
+        /* Clase para justificar el texto informativo */
+        .text-justify {
+            text-align: justify;
+        }
+        /* Asegura que los textos en negrita usen la etiqueta <strong> sin asteriscos */
+        strong {
+            font-weight: 700;
+            color: #121118;
+        }
+        /* Estilo base para los campos de respuesta */
+        .response-input {
+            border: 1px solid #121118;
+            border-radius: 0.25rem;
+            padding: 0.1rem 0.5rem;
+            display: inline-block;
+            transition: background-color 0.3s;
+            min-width: 150px;
+        }
+    </style>
+</head>
+
+<body class="p-4 sm:p-8 max-w-4xl mx-auto">
+
+    <!-- Título de la página -->
+    <h1 class="text-3xl sm:text-4xl font-extrabold mb-8 text-center text-eerie">
+        III. Actividades / Activities
+    </h1>
+
+    <div class="space-y-12">
+
+        <!-- ACTIVIDAD A -->
+        <section id="activity-a">
+            <h2 class="text-xl font-semibold mb-4 text-flamingo-pink">
+                a. Contesta las siguientes preguntas usando el verbo tener. / Answer the following questions using the verb tener.
+            </h2>
+            
+            <img src="https://i.imgur.com/oYPavGb.jpeg" alt="[Image of family tree]" class="rounded-lg shadow-lg mb-6 max-w-full h-auto">
+
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center">
+                    <label for="input-a-1" class="w-full sm:w-1/2">1. ¿Cuántos hermanos tiene Elena?</label>
+                    <input type="text" id="input-a-1" class="response-input w-full sm:w-1/2" data-act="a" data-idx="1" onkeypress="handleInputCheck(event, 'a', 1)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center">
+                    <label for="input-a-2" class="w-full sm:w-1/2">2. ¿Cuántas hermanos tiene Pablo?</label>
+                    <input type="text" id="input-a-2" class="response-input w-full sm:w-1/2" data-act="a" data-idx="2" onkeypress="handleInputCheck(event, 'a', 2)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center">
+                    <label for="input-a-3" class="w-full sm:w-1/2">3. ¿Cuántos hijos tienen Luis y Cecilia?</label>
+                    <input type="text" id="input-a-3" class="response-input w-full sm:w-1/2" data-act="a" data-idx="3" onkeypress="handleInputCheck(event, 'a', 3)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center">
+                    <label for="input-a-4" class="w-full sm:w-1/2">4. ¿Cuántos tíos tienen Mariana y Diana?</label>
+                    <input type="text" id="input-a-4" class="response-input w-full sm:w-1/2" data-act="a" data-idx="4" onkeypress="handleInputCheck(event, 'a', 4)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center">
+                    <label for="input-a-5" class="w-full sm:w-1/2">5. ¿Cuántos hermanos tiene una hija única?</label>
+                    <input type="text" id="input-a-5" class="response-input w-full sm:w-1/2" data-act="a" data-idx="5" onkeypress="handleInputCheck(event, 'a', 5)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center">
+                    <label for="input-a-6" class="w-full sm:w-1/2">6. ¿Cuántos años tiene en 2020 una persona que nació [who was born] en 1995?</label>
+                    <input type="text" id="input-a-6" class="response-input w-full sm:w-1/2" data-act="a" data-idx="6" onkeypress="handleInputCheck(event, 'a', 6)">
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVIDAD B -->
+        <section id="activity-b">
+            <h2 class="text-xl font-semibold mb-4 text-flamingo-pink">
+                b. Javier y Erica tienen dos hijas: Diana de cuatro años y Mariana de un año. Erica está embarazada otra vez, y todos están muy felices. Erica y Javier están hablando sobre sus hijas y los planes para hoy. / Javier and Erica have two daughters: Diana, who is four years old, and Mariana, who is one. Erica is pregnant again, and everyone is very happy. Erica and Javier are talking about their daughters and the plans for today.
+            </h2>
+            <p class="text-justify mb-4">
+                Completa el siguiente diálogo utilizando <strong>tener que</strong> y/o <strong>tener ganas de</strong>. Tienes que conjugar <strong>tener</strong> de manera correcta. / Complete the following dialogue using <strong>tener que</strong> and/or <strong>tener ganas de</strong>. You have to conjugate <strong>tener</strong> correctly.
+            </p>
+
+            <div class="space-y-3">
+                <p>Erica: Hoy (yo) 1. 
+                    <input type="text" id="input-b-1" class="response-input" data-act="b" data-idx="1" onkeypress="handleInputCheck(event, 'b', 1)">
+                    llevar a las niñas [girls] al parque. Ellas necesitan estar con [with] otros niños [children].
+                </p>
+                <p>Javier: Sí, es una buena idea.</p>
+                <p>Erica: También, 2. 
+                    <input type="text" id="input-b-2" class="response-input" data-act="b" data-idx="2" onkeypress="handleInputCheck(event, 'b', 2)">
+                    ir al supermercado porque no tenemos pañales [diapers] para Mariana. 3. 
+                    <input type="text" id="input-b-3" class="response-input" data-act="b" data-idx="3" onkeypress="handleInputCheck(event, 'b', 3)">
+                    comprar suficientes [enough] para el fin de semana.
+                </p>
+                <p>Javier: 4. 
+                    <input type="text" id="input-b-4" class="response-input" data-act="b" data-idx="4" onkeypress="handleInputCheck(event, 'b', 4)">
+                    invitar [to invite] a cenar [to have dinner] a mis padres el viernes. ¿Está bien?
+                </p>
+                <p>Erica: ¡Sí, por supuesto [of course]! Pero el viernes Diana 5. 
+                    <input type="text" id="input-b-5" class="response-input" data-act="b" data-idx="5" onkeypress="handleInputCheck(event, 'b', 5)">
+                    ir al dentista a las 4:00. Nosotras vamos a regresar a casa [go home] a las 5:30.
+                </p>
+                <p>Javier: 6. 
+                    <input type="text" id="input-b-6" class="response-input" data-act="b" data-idx="6" onkeypress="handleInputCheck(event, 'b', 6)">
+                    hablar con mis padres para pedirles que lleguen [ask them to arrive] a las 7:00.
+                </p>
+                <p>Erica: 7. 
+                    <input type="text" id="input-b-7" class="response-input" data-act="b" data-idx="7" onkeypress="handleInputCheck(event, 'b', 7)">
+                    comer dos postres [dessert] diferentes. ¿Cuáles?
+                </p>
+                <p>Erica: Diana solo 8. 
+                    <input type="text" id="input-b-8" class="response-input" data-act="b" data-idx="8" onkeypress="handleInputCheck(event, 'b', 8)">
+                    comer helado [ice cream], pero yo quiero un pastel [cake].
+                </p>
+                <p>Javier: Podemos [We can] comer un pastel y helado.</p>
+                <p>Erica: ¡OK! 9. (Yo) 
+                    <input type="text" id="input-b-9" class="response-input" data-act="b" data-idx="9" onkeypress="handleInputCheck(event, 'b', 9)">
+                    hablar con tu madre. En la noche, ella puede cantarle una canción [song] a Diana porque ella tiene miedo de la oscuridad [dark].
+                </p>
+            </div>
+        </section>
+
+        <!-- ACTIVIDAD C -->
+        <section id="activity-c">
+            <h2 class="text-xl font-semibold mb-4 text-flamingo-pink">
+                c. Completa las siguientes frases utilizando expresiones con tener. / Complete the following sentences using expressions with tener.
+            </h2>
+            <div class="flex flex-wrap gap-4 mb-6 text-eerie text-sm font-bold">
+                <span class="p-1 border rounded-md">tener sueño</span>
+                <span class="p-1 border rounded-md">tener hambre</span>
+                <span class="p-1 border rounded-md">tener miedo</span>
+                <span class="p-1 border rounded-md">tener éxito</span>
+                <span class="p-1 border rounded-md">tener suerte</span>
+                <span class="p-1 border rounded-md">tener ___ años</span>
+                <span class="p-1 border rounded-md">tener frío</span>
+                <span class="p-1 border rounded-md">tener prisa</span>
+            </div>
+
+            <div class="space-y-4">
+                <p>1. Son las 2:45 de la tarde y Alberto no ha comido nada [hasn’t eaten anything] hoy.<br>
+                    Alberto 
+                    <input type="text" id="input-c-1" class="response-input" data-act="c" data-idx="1" onkeypress="handleInputCheck(event, 'c', 1)">
+                    .
+                </p>
+                <p>2. Alberto tiene muchos pacientes (patients) todos los días. Él 
+                    <input type="text" id="input-c-2" class="response-input" data-act="c" data-idx="2" onkeypress="handleInputCheck(event, 'c', 2)">
+                    como [as] dentista.
+                </p>
+                <p>3. Son las 7:50 de la mañana, pero Diego tiene clase a las 8:00. El 
+                    <input type="text" id="input-c-3" class="response-input" data-act="c" data-idx="3" onkeypress="handleInputCheck(event, 'c', 3)">
+                    para llegar a la universidad.
+                </p>
+                <p>4. Donde [Where] yo vivo, hay posibilidad de huracanes [hurricanes] de junio a noviembre. Nosotros siempre 
+                    <input type="text" id="input-c-4" class="response-input" data-act="c" data-idx="4" onkeypress="handleInputCheck(event, 'c', 4)">
+                    en esos [those] meses.
+                </p>
+                <p>5. Generalmente [Generally], Diego no estudia para sus exámenes, pero sus notas [grades] son muy buenas. Él 
+                    <input type="text" id="input-c-5" class="response-input" data-act="c" data-idx="5" onkeypress="handleInputCheck(event, 'c', 5)">
+                    .
+                </p>
+                <p>6. Luis trabaja mucho por la noche y solo duerme [sleeps] cinco horas. Él 
+                    <input type="text" id="input-c-6" class="response-input" data-act="c" data-idx="6" onkeypress="handleInputCheck(event, 'c', 6)">
+                    .
+                </p>
+                <!-- ** CAMBIO SOLICITADO AQUÍ (C.7) ** -->
+                <p>7. Diana, la nieta de Luis y Cecilia, 
+                    <input type="text" id="input-c-7-part1" class="response-input" data-act="c" data-idx="7" data-part="1" onkeypress="handleInputCheck(event, 'c', 7)">
+                    cuatro
+                    <input type="text" id="input-c-7-part2" class="response-input" data-act="c" data-idx="7" data-part="2" onkeypress="handleInputCheck(event, 'c', 7)">
+                    .
+                </p>
+                <!-- ** FIN CAMBIO C.7 ** -->
+                <p>8. Pablo y Marisol están en un bar con aire acondicionado [air conditioning] muy fuerte.<br>
+                    Ellos 
+                    <input type="text" id="input-c-8" class="response-input" data-act="c" data-idx="8" onkeypress="handleInputCheck(event, 'c', 8)">
+                    .
+                </p>
+            </div>
+        </section>
+
+        <!-- ACTIVIDAD D -->
+        <section id="activity-d">
+            <h2 class="text-xl font-semibold mb-4 text-flamingo-pink">
+                d. Luis y Cecilia van a cenar en la casa de su hijo. / Luis and Cecilia are going to have dinner at their son’s house.
+            </h2>
+            <p class="text-justify mb-4">
+                Lee el siguiente diálogo y contesta las preguntas. / Read the following dialogue and answer the questions.
+            </p>
+            <div class="border p-4 rounded-lg bg-light-gray/50 mb-6 text-justify">
+                <p><strong>Luis:</strong> Vamos a ir a la casa de Javier y Erica a las siete porque Diana tiene una cita [appointment] con el dentista. ¿Quieres llevar algo [something] para la cena?</p>
+                <p><strong>Cecilia:</strong> Si, quiero preparar un postre [dessert]. Voy a preparar tres leches [a sponge cake soaked in three kinds of milk], pero tengo que ir al supermercado por los ingredientes [ingredients].</p>
+                <p><strong>Luis:</strong> Tengo que llamar a un cliente [client] antes de ir al supermercado.</p>
+                <p><strong>Cecilia:</strong> OK. Vamos a las cinco menos cuarto.</p>
+                <p><strong>Luis:</strong> ¡Está bien! Tengo que leer mi correo electrónico [e-mail] y llamar a la oficina.</p>
+                <p><strong>Cecilia:</strong> Yo también tengo que leer mi correo electrónico, pero no tengo que llamar a la oficina.</p>
+                <p><strong>Luis:</strong> Tengo ganas de llevar mi guitarra [guitar] para cantarles a las niñas.</p>
+                <p><strong>Cecilia:</strong> ¡Qué bien! Yo también [also] quiero [I want] cantar.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center">
+                    <label for="input-d-1" class="w-full sm:w-1/2">1. ¿Qué prepara Cecilia para la cena?</label>
+                    <input type="text" id="input-d-1" class="response-input w-full sm:w-1/2" data-act="d" data-idx="1" onkeypress="handleInputCheck(event, 'd', 1)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center">
+                    <label for="input-d-2" class="w-full sm:w-1/2">2. ¿Por qué Cecilia tiene que ir al supermercado?</label>
+                    <input type="text" id="input-d-2" class="response-input w-full sm:w-1/2" data-act="d" data-idx="2" onkeypress="handleInputCheck(event, 'd', 2)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center">
+                    <label for="input-d-3" class="w-full sm:w-1/2">3. ¿Qué va a llevar Luis a la casa de su hijo?</label>
+                    <input type="text" id="input-d-3" class="response-input w-full sm:w-1/2" data-act="d" data-idx="3" onkeypress="handleInputCheck(event, 'd', 3)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center">
+                    <label for="input-d-4" class="w-full sm:w-1/2">4. ¿Tiene Cecilia que llamar a la oficina?</label>
+                    <input type="text" id="input-d-4" class="response-input w-full sm:w-1/2" data-act="d" data-idx="4" onkeypress="handleInputCheck(event, 'd', 4)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Botón y Respuestas Correctas -->
+        <div class="mt-12 pt-6 border-t border-light-gray">
+            <button onclick="toggleAnswers()" class="px-6 py-3 bg-flamingo-pink text-white font-bold rounded-lg shadow-md hover:bg-flamingo-pink/80 transition duration-300">
+                Mostrar Respuestas Correctas (V.)
+            </button>
+
+            <div id="correct-answers-section" class="mt-6 hidden p-6 border-2 border-flamingo-pink rounded-lg bg-flamingo-pink/10">
+                <h2 class="text-2xl font-semibold mb-4 text-flamingo-pink">
+                    V. Respuestas correctas / Correct Answers
+                </h2>
+                
+                <h3 class="font-bold mb-2 text-eerie">a.</h3>
+                <ol class="list-decimal list-inside space-y-1 pl-4 mb-4 text-justify">
+                    <li>Elena tiene dos hermanos: Felipe y Érica.</li>
+                    <li>Pablo tiene una hermana: Marisol.</li>
+                    <li>Luis y Cecilia tienen tres hijos: Alberto, Diego y Javier.</li>
+                    <li>Mariana y Diana tienen tres tíos—Alberto, Diego y Felipe—y una tía: Elena.</li>
+                    <li>Una hija única no tiene hermanos.</li>
+                    <li>La persona tiene veinticinco años.</li>
+                </ol>
+
+                <h3 class="font-bold mb-2 text-eerie">b.</h3>
+                <ol class="list-decimal list-inside space-y-1 pl-4 mb-4">
+                    <li>tengo ganas de</li>
+                    <li>tengo que</li>
+                    <li>Tengo que</li>
+                    <li>Tengo ganas de</li>
+                    <li>tiene que</li>
+                    <li>Tengo que / Tenemos que</li>
+                    <li>Tengo ganas de</li>
+                    <li>tiene ganas de</li>
+                    <li>Tengo que / Tengo ganas de</li>
+                </ol>
+
+                <h3 class="font-bold mb-2 text-eerie">c.</h3>
+                <ol class="list-decimal list-inside space-y-1 pl-4 mb-4">
+                    <li>tiene hambre</li>
+                    <li>tiene éxito</li>
+                    <li>tiene prisa</li>
+                    <li>tenemos miedo</li>
+                    <li>tiene suerte</li>
+                    <li>tiene sueño</li>
+                    <li>tiene cuatro años</li>
+                    <li>tienen frío</li>
+                </ol>
+
+                <h3 class="font-bold mb-2 text-eerie">d.</h3>
+                <ol class="list-decimal list-inside space-y-1 pl-4 mb-4 text-justify">
+                    <li>Cecilia prepara un postre: tres leches.</li>
+                    <li>Cecilia tiene que comprar ingredientes para el postre.</li>
+                    <li>Luis va a llevar una guitarra a la casa de su hijo.</li>
+                    <li>No, Cecilia no tiene que llamar a la oficina.</li>
+                </ol>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Objeto con las respuestas correctas para la verificación
+        const correctAnswers = {
+            'a': [
+                'Elena tiene dos hermanos: Felipe y Érica.',
+                'Pablo tiene una hermana: Marisol.',
+                'Luis y Cecilia tienen tres hijos: Alberto, Diego y Javier.',
+                'Mariana y Diana tienen tres tíos—Alberto, Diego y Felipe—y una tía: Elena.',
+                'Una hija única no tiene hermanos.',
+                'La persona tiene veinticinco años.'
+            ],
+            'b': [
+                'tengo ganas de',
+                'tengo que',
+                'Tengo que',
+                'Tengo ganas de',
+                'tiene que',
+                ['Tengo que', 'Tenemos que'], // b.6 tiene 2 respuestas
+                'Tengo ganas de',
+                'tiene ganas de',
+                ['Tengo que', 'Tengo ganas de'], // b.9 tiene 2 respuestas
+            ],
+            'c': [
+                'tiene hambre',
+                'tiene éxito',
+                'tiene prisa',
+                'tenemos miedo',
+                'tiene suerte',
+                'tiene sueño',
+                ['tiene', 'años'], // c.7 es ahora un array de dos partes: [0] = conjugación de tener, [1] = años
+                'tienen frío'
+            ],
+            'd': [
+                'Cecilia prepara un postre: tres leches.',
+                'Cecilia tiene que comprar ingredientes para el postre.',
+                'Luis va a llevar una guitarra a la casa de su hijo.',
+                'No, Cecilia no tiene que llamar a la oficina.'
+            ]
+        };
+
+        /**
+         * Normaliza la respuesta para la comparación (trim, lower case, elimina puntuación).
+         * @param {string} answer - La respuesta a normalizar.
+         * @returns {string} La respuesta normalizada.
+         */
+        function normalize(answer) {
+            // Reemplaza solo la puntuación final que no esté en el medio del texto
+            return answer.trim().toLowerCase().replace(/[.,;!?]$/, '');
+        }
+
+        /**
+         * Verifica la respuesta al presionar Enter y salta al siguiente campo.
+         * @param {Event} event - El evento keypress.
+         * @param {string} act - La letra de la actividad (e.g., 'a', 'b', 'c', 'd').
+         * @param {number} idx - El índice de la pregunta (1-based).
+         */
+        function handleInputCheck(event, act, idx) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); 
+                const inputElement = event.target; // Usa event.target para el elemento
+                const userAnswer = normalize(inputElement.value);
+                
+                let correct;
+                let nextInputId = '';
+                let isCorrect = false;
+
+                if (act === 'c' && idx === 7) {
+                    // Manejo especial para C.7 con dos inputs
+                    const part = parseInt(inputElement.dataset.part); // '1' o '2'
+                    correct = correctAnswers[act][idx - 1][part - 1]; // [6][0] o [6][1]
+                    
+                    if (Array.isArray(correct)) {
+                         // Esto no debería suceder para partes individuales, pero por si acaso
+                         isCorrect = correct.some(ans => normalize(ans) === userAnswer);
+                    } else {
+                        isCorrect = normalize(correct) === userAnswer;
+                    }
+
+                    if (isCorrect) {
+                        if (part === 1) {
+                            nextInputId = 'input-c-7-part2'; // Saltar a la parte 2
+                        } else if (part === 2) {
+                            nextInputId = 'input-c-8'; // Saltar a C.8
+                        }
+                    }
+
+                } else {
+                    // Manejo estándar para todas las demás preguntas
+                    correct = correctAnswers[act][idx - 1];
+
+                    if (Array.isArray(correct)) {
+                        isCorrect = correct.some(ans => normalize(ans) === userAnswer);
+                    } else {
+                        isCorrect = normalize(correct) === userAnswer;
+                    }
+                    
+                    if (isCorrect) {
+                        const nextIdx = idx + 1;
+                        nextInputId = `input-${act}-${nextIdx}`;
+                    }
+                }
+                
+                // Asignar color
+                inputElement.classList.remove('bg-correct-green', 'bg-incorrect-red');
+                if (isCorrect) {
+                    inputElement.classList.add('bg-correct-green');
+                    
+                    // Saltar al siguiente input si se ha determinado
+                    const nextInput = document.getElementById(nextInputId);
+                    if (nextInput) {
+                        nextInput.focus();
+                    }
+                } else {
+                    inputElement.classList.add('bg-incorrect-red');
+                }
+            }
+        }
+
+        /**
+         * Muestra u oculta la sección de respuestas correctas.
+         */
+        function toggleAnswers() {
+            const answersDiv = document.getElementById('correct-answers-section');
+            if (answersDiv.classList.contains('hidden')) {
+                answersDiv.classList.remove('hidden');
+            } else {
+                answersDiv.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
