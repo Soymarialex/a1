@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Define custom Tailwind configuration and explicit HEX colors for guaranteed JS style application */
+        :root {
+            --color-primary: #FF79AC; /* Flamingo Pink */
+            --color-text-dark: #121118; /* Eerie Black */
+            --color-victoria: #4B5563; /* Gris Oscuro */
+            
+            /* Explicit HEX values for JS access and background fill */
+            --green-light-hex: #D1FAE5; /* Correct background (e.g., Green-100) */
+            --red-light-hex: #FEE2E2;   /* Incorrect background (e.g., Red-100) */
+            
+            /* Darker shades for borders (e.g., Green-800 / Red-800) */
+            --green-border-hex: #065F46; 
+            --red-border-hex: #B91C1C;
+        }
+
+        /* Custom configuration to include the specified colors and font handling */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': 'var(--color-primary)',
+                        'text-dark': 'var(--color-text-dark)',
+                        'victoria': 'var(--color-victoria)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+        
+        /* General Body Styles */
+        body {
+            background-color: white;
+            color: var(--color-text-dark);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Enforce justified text for informational sections */
+        .text-justified {
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        /* Input field styling for completion activities */
+        .completion-input {
+            display: inline-block;
+            width: 200px;
+            text-align: center;
+            /* Default styles */
+            border: 1px solid var(--color-text-dark);
+            background-color: white;
+            padding: 2px 4px;
+            margin: 0 4px;
+            /* Critical: smooth transition for the inline styles */
+            transition: background-color 0.3s, border-color 0.3s; 
+            border-radius: 4px;
+        }
+
+        /* Shared style for blank spaces in selection activity (B) */
+        .selection-blank {
+            display: inline-block; 
+            width: 80px; 
+            border-bottom: 2px solid var(--color-text-dark); 
+            text-align: center; 
+            font-weight: bold;
+            transition: color 0.3s;
+            margin: 0 2px;
+            height: 1.5em; /* Ensure consistent height */
+        }
+        
+        /* Activity B button styling */
+        .selection-button {
+            padding: 4px 8px;
+            margin: 0 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            border: 2px solid var(--color-primary);
+            color: var(--color-text-dark);
+            transition: background-color 0.3s, opacity 0.3s, border-color 0.3s;
+        }
+        
+        .selection-button:hover:not(:disabled) {
+            background-color: var(--color-primary);
+            color: white;
+        }
+        
+        .button-disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        /* Custom styles for character names */
+        .marisol {
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+        .gabriela {
+            color: var(--color-text-dark);
+            font-weight: bold;
+        }
+        .victoria {
+            color: var(--color-victoria);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 lg:p-12 min-h-screen">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Título principal -->
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-8 text-center tracking-tight rounded-lg p-3" style="color: var(--color-text-dark); background-color: var(--color-primary); color: white;">
+            III. Actividades / Activities
+        </h1>
+
+        <!-- Actividad A: Completar la frase -->
+        <h2 class="text-xl sm:text-2xl font-bold border-b-4 border-text-dark pb-2 mt-10 mb-6" style="color: var(--color-text-dark);">
+            a. En la escuela secundaria donde estudia Marisol, hay una nueva estudiante. Su nombre es Gabriela, y está muy nerviosa porque no conoce a nadie. / In the high school where Marisol studies, there is a new student. Her name is Gabriela, and she is very nervous because she doesn’t know anybody.
+        </h2>
+
+        <p class="text-lg font-semibold mb-4 text-justified" style="color: var(--color-text-dark);">
+            Completa las frases con las expresiones afirmativas o negativas apropiadas. / Complete the sentences with the appropriate affirmative or negative expressions.
+        </p>
+
+        <div class="mb-6 bg-gray-50 p-4 rounded-lg">
+            <p class="text-sm italic mb-4">
+                siempre &bull; alguien &bull; tampoco &bull; ni…ni &bull; nadie &bull; también
+ </p>
+            <div class="space-y-2 text-text-dark" id="activity-a">
+                <p><span class="marisol">Marisol:</span> Hola, ¿cómo te llamas?</p>
+                <p><span class="gabriela">Gabriela:</span> Hola, soy Gabriela.</p>
+                <p><span class="marisol">Marisol:</span> Mucho gusto. Puedes sentarte [sit down] aquí cerca de mi asiento [seat].</p>
+                <p><span class="gabriela">Gabriela:</span> Muchas gracias.</p>
+                <p><span class="marisol">Marisol:</span> ¿Conoces a Victoria?</p>
+                <p><span class="gabriela">Gabriela:</span> No, no conozco a 1. <input type="text" id="a1" data-activity="a" data-num="1" class="completion-input" autocomplete="off"> en la escuela.</p>
+                <p><span class="marisol">Marisol:</span> Victoria, esta es Gabriela.</p>
+                <p><span class="victoria">Victoria:</span> Encantada. No te preocupes [Don’t worry]. Todos aquí son muy simpáticos. ¿Tienes tus libros?</p>
+                <p><span class="gabriela">Gabriela:</span> No, no los tengo todavía.</p>
+                <p><span class="marisol">Marisol:</span> Está bien. Puedes usar mis libros. ¿Conoces a algún [any] profesor?</p>
+                <p><span class="victoria">Victoria:</span> No, no conozco 2. <input type="text" id="a2" data-activity="a" data-num="2" class="completion-input" autocomplete="off"> a los profesores 3. <input type="text" id="a3" data-activity="a" data-num="3" class="completion-input" autocomplete="off"> a la consejera [counselor]. 4. <input type="text" id="a4" data-activity="a" data-num="4" class="completion-input" autocomplete="off"> conozco la ciudad [city].</p>
+                <p><span class="victoria">Victoria:</span> Marisol 5. <input type="text" id="a5" data-activity="a" data-num="5" class="completion-input" autocomplete="off"> es nueva en esta ciudad. Yo puedo llevarlas a conocerla.</p>
+                <p><span class="marisol">Marisol:</span> Sí, Victoria 6. <input type="text" id="a6" data-activity="a" data-num="6" class="completion-input" autocomplete="off"> me ayuda con las clases, con la ciudad y con otras personas.</p>
+                <p><span class="gabriela">Gabriela:</span> Muchas gracias. Es muy bueno finalmente conocer a 7. <input type="text" id="a7" data-activity="a" data-num="7" class="completion-input" autocomplete="off">.</p>
+            </div>
+        </div>
+
+        <!-- Actividad B: Selección con botones -->
+        <h2 class="text-xl sm:text-2xl font-bold border-b-4 border-text-dark pb-2 mt-10 mb-6" style="color: var(--color-text-dark);">
+            b. Es la hora de almuerzo y Marisol y Victoria están hablando con Gabriela. / It’s lunchtime and Marisol and Victoria are talking to Gabriela.
+        </h2>
+
+        <p class="text-lg font-semibold mb-4 text-justified" style="color: var(--color-text-dark);">
+            Escoge la expresión afirmativa o negativa correcta. / Choose the correct affirmative o negative expression.
+        </p>
+
+        <div class="mb-6 p-4 rounded-lg bg-gray-50" id="activity-b">
+            <!-- Pregunta 1 -->
+            <div class="mb-4">
+                <span class="font-bold">1.</span> Yo generalmente no como mucha comida en el almuerzo, pero <span id="b1_span" class="selection-blank">_______</span> tomo un refresco con mi almuerzo.
+                <div class="mt-2 space-x-2">
+                    <button class="selection-button" data-q="b1" data-val="siempre" data-display="siempre">siempre</button>
+                    <button class="selection-button" data-q="b1" data-val="también" data-display="también">también</button>
+                </div>
+            </div>
+            <!-- Pregunta 2 (CORREGIDA para tener dos espacios separados) -->
+            <div class="mb-4">
+                <span class="font-bold">2.</span> No como 
+                <span id="b2_span_1" class="selection-blank w-16">_______</span> 
+                guisantes 
+                <span id="b2_span_2" class="selection-blank w-16">_______</span> 
+                espinacas.
+                <div class="mt-2 space-x-2">
+                    <button class="selection-button" data-q="b2" data-val="tampoco…también" data-display="tampoco|también">tampoco…también</button>
+                    <button class="selection-button" data-q="b2" data-val="ni…ni…" data-display="ni|ni">ni… ni…</button>
+                </div>
+            </div>
+            <!-- Pregunta 3 -->
+            <div class="mb-4">
+                <span class="font-bold">3.</span> No sé <span id="b3_span" class="selection-blank">_______</span> de la comida italiana, pero como pizza con mis amigos.
+                <div class="mt-2 space-x-2">
+                    <button class="selection-button" data-q="b3" data-val="nada" data-display="nada">nada</button>
+                    <button class="selection-button" data-q="b3" data-val="algo" data-display="algo">algo</button>
+                </div>
+            </div>
+            <!-- Pregunta 4 -->
+            <div class="mb-4">
+                <span class="font-bold">4.</span> Tomo mucha agua mineral, pero <span id="b4_span" class="selection-blank">_______</span> tomo café.
+                <div class="mt-2 space-x-2">
+                    <button class="selection-button" data-q="b4" data-val="tampoco" data-display="tampoco">tampoco</button>
+                    <button class="selection-button" data-q="b4" data-val="nunca" data-display="nunca">nunca</button>
+                </div>
+            </div>
+            <!-- Pregunta 5 (También corregida para tener dos espacios separados) -->
+            <div class="mb-4">
+                <span class="font-bold">5.</span> Mis padres toman 
+                <span id="b5_span_1" class="selection-blank w-16">_______</span> 
+                vino blanco 
+                <span id="b5_span_2" class="selection-blank w-16">_______</span> 
+                vino tinto en la cena.
+                <div class="mt-2 space-x-2">
+                    <button class="selection-button" data-q="b5" data-val="o…o…" data-display="o|o">o…o…</button>
+                    <button class="selection-button" data-q="b5" data-val="ni…ni…" data-display="ni|ni">ni…ni…</button>
+                </div>
+            </div>
+            <!-- Pregunta 6 -->
+            <div class="mb-4">
+                <span class="font-bold">6.</span> Generalmente como helado los sábados. Yo <span id="b6_span" class="selection-blank">_______</span> como helado los sábados.
+                <div class="mt-2 space-x-2">
+                    <button class="selection-button" data-q="b6" data-val="también" data-display="también">también</button>
+                    <button class="selection-button" data-q="b6" data-val="tampoco" data-display="tampoco">tampoco</button>
+                </div>
+            </div>
+            <!-- Pregunta 7 -->
+            <div class="mb-4">
+                <span class="font-bold">7.</span> En mi familia, no cenamos después de las 8:00 de la noche. Nosotros <span id="b7_span" class="selection-blank">_______</span> cenamos después de las 8:00 de la noche.
+                <div class="mt-2 space-x-2">
+                    <button class="selection-button" data-q="b7" data-val="tampoco" data-display="tampoco">tampoco</button>
+                    <button class="selection-button" data-q="b7" data-val="también" data-display="también">también</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actividad C: Completar la frase con demostrativos -->
+        <h2 class="text-xl sm:text-2xl font-bold border-b-4 border-text-dark pb-2 mt-10 mb-6" style="color: var(--color-text-dark);">
+            c. Gabriela, Marisol y Victoria están escogiendo la comida que van a comer en la cafetería. / Gabriela, Marisol, and Victoria are choosing the food they are going to eat in the cafeteria.
+        </h2>
+
+        <p class="text-lg font-semibold mb-4 text-justified" style="color: var(--color-text-dark);">
+            Completa las frases con el adjetivo o pronombre demostrativo correcto. / Complete the sentences with the correct demonstrative adjective or pronoun.
+        </p>
+
+        <div class="mb-6 p-4 rounded-lg bg-gray-50">
+            <p class="text-sm italic mb-4">
+                este, esta, estos, estas (aquí) &bull; ese, esa, esos, esas (allí) &bull; aquel, aquella, aquellos, aquellas (allá)
+            </p>
+            <div class="space-y-2 text-text-dark" id="activity-c">
+                <p><span class="gabriela">Gabriela:</span> Quiero ensalada con 1. <input type="text" id="c1" data-activity="c" data-num="1" class="completion-input" autocomplete="off"> tomates de aquí, pero no con 2. <input type="text" id="c2" data-activity="c" data-num="2" class="completion-input" autocomplete="off"> de allá.</p>
+                <p><span class="victoria">Victoria:</span> No me gustan [I don’t like] los tomates, pero sí quiero comer espinacas, 3. <input type="text" id="c3" data-activity="c" data-num="3" class="completion-input" autocomplete="off"> que están aquí.</p>
+                <p><span class="marisol">Marisol:</span> Yo no quiero ensalada, gracias. Yo quiero sopa, pero 4. <input type="text" id="c4" data-activity="c" data-num="4" class="completion-input" autocomplete="off"> de allá está muy caliente. Prefiero 5. <input type="text" id="c5" data-activity="c" data-num="5" class="completion-input" autocomplete="off"> sopa de allí.</p>
+                <p><span class="marisol">Marisol:</span> Yo quiero arroz blanco y pollo.</p>
+                <p><span class="victoria">Victoria:</span> Yo también quiero arroz, pero no 6. <input type="text" id="c6" data-activity="c" data-num="6" class="completion-input" autocomplete="off"> de aquí; quiero 7. <input type="text" id="c7" data-activity="c" data-num="7" class="completion-input" autocomplete="off"> arroz con maíz que está allí.</p>
+                <p><span class="gabriela">Gabriela:</span> Yo quiero pescado y 8. <input type="text" id="c8" data-activity="c" data-num="8" class="completion-input" autocomplete="off"> verduras de allá.</p>
+                <p><span class="victoria">Victoria:</span> ¿Quieren ver 9. <input type="text" id="c9" data-activity="c" data-num="9" class="completion-input" autocomplete="off"> postres de allá?</p>
+                <p><span class="marisol">Marisol</span>, <span class="gabriela">Gabriela:</span> ¡Sí, claro!</p>
+            </div>
+        </div>
+
+        <!-- Botón de Respuestas Correctas -->
+        <button id="show-answers-btn" class="w-full text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-pink-500 transition-colors mt-8 mb-4" style="background-color: var(--color-primary);">
+            Mostrar Respuestas Correctas / Show Correct Answers
+        </button>
+
+        <!-- Respuestas Correctas (Ocultas por defecto) -->
+        <div id="correct-answers-section" class="hidden mt-8 p-6 border-2 border-primary rounded-lg bg-pink-50">
+            <h2 class="text-2xl font-bold mb-4" style="color: var(--color-primary);">
+                IV. Respuestas correctas / Correct Answers
+            </h2>
+            
+            <div class="space-y-4">
+                <!-- Respuestas A -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-1" style="color: var(--color-text-dark);">a.</h3>
+                    <div class="grid grid-cols-2 gap-2 text-text-dark">
+                        <span>1. nadie</span>
+                        <span>5. también</span>
+                        <span>2. ni</span>
+                        <span>6. siempre</span>
+                        <span>3. ni</span>
+                        <span>7. alguien</span>
+                        <span>4. Tampoco</span>
+                    </div>
+                </div>
+                
+                <!-- Respuestas B -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-1" style="color: var(--color-text-dark);">b.</h3>
+                    <div class="grid grid-cols-2 gap-2 text-text-dark">
+                        <span>1. siempre</span>
+                        <span>2. ni…ni…</span>
+                        <span>3. nada</span>
+                        <span>4. nunca</span>
+                        <span>5. o…o…</span>
+                        <span>6. también</span>
+                        <span>7. tampoco</span>
+                    </div>
+                </div>
+
+                <!-- Respuestas C -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-1" style="color: var(--color-text-dark);">c.</h3>
+                    <div class="grid grid-cols-2 gap-2 text-text-dark">
+                        <span>1. estos</span>
+                        <span>6. este</span>
+                        <span>2. aquellos</span>
+                        <span>7. ese</span>
+                        <span>3. estas</span>
+                        <span>8. aquellas</span>
+                        <span>4. aquella</span>
+                        <span>9. aquellos</span>
+                        <span>5. esa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Objeto de respuestas correctas para la validación (case-insensitive)
+        const correctAnswers = {
+            // Activity A (Completion)
+            'a1': 'nadie',
+            'a2': 'ni',
+            'a3': 'ni',
+            'a4': 'Tampoco', 
+            'a5': 'también',
+            'a6': 'siempre',
+            'a7': 'alguien',
+
+            // Activity B (Selection)
+            'b1': 'siempre',
+            'b2': 'ni…ni…', // Note: The value here is for validation, display uses '|'
+            'b3': 'nada',
+            'b4': 'nunca',
+            'b5': 'o…o…',   // Note: The value here is for validation, display uses '|'
+            'b6': 'también',
+            'b7': 'tampoco',
+            
+            // Activity C (Completion)
+            'c1': 'estos',
+            'c2': 'aquellos',
+            'c3': 'estas',
+            'c4': 'aquella',
+            'c5': 'esa',
+            'c6': 'este',
+            'c7': 'ese',
+            'c8': 'aquellas',
+            'c9': 'aquellos',
+        };
+
+        /**
+         * Generic validation and focus handling for completion activities (A and C).
+         * Sets up keydown listener for 'Enter'.
+         * @param {string} activityIdPrefix - 'a' or 'c'
+         */
+        function setupCompletionActivity(activityIdPrefix) {
+            const inputs = document.querySelectorAll(`input[data-activity="${activityIdPrefix}"]`);
+            
+            inputs.forEach((input) => {
+                input.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        validateCompletionInput(input, inputs);
+                    }
+                });
+            });
+        }
+
+        /**
+         * Validates a single completion input field and applies guaranteed color feedback
+         * using inline styles for background and border.
+         * @param {HTMLInputElement} input - The input element to validate.
+         * @param {NodeListOf<HTMLInputElement>} allInputs - List of all inputs in the current activity.
+         */
+        function validateCompletionInput(input, allInputs) {
+            const id = input.id;
+            const userAnswer = input.value.trim();
+            const expectedAnswer = correctAnswers[id];
+            
+            // 1. Determine correctness
+            let isCorrect = false;
+            // Check for a4 ('Tampoco') case-sensitive or others case-insensitive
+            if (id === 'a4') {
+                isCorrect = userAnswer === expectedAnswer || userAnswer.toLowerCase() === expectedAnswer.toLowerCase();
+            } else {
+                isCorrect = userAnswer.toLowerCase() === expectedAnswer.toLowerCase();
+            }
+
+            // 2. Apply visual feedback (Guaranteed using inline styles based on CSS root variables)
+            const rootStyle = getComputedStyle(document.documentElement);
+            
+            // Clear previous styles first
+            input.style.backgroundColor = '';
+            input.style.borderColor = 'var(--color-text-dark)'; 
+
+            if (isCorrect) {
+                // Correct: Apply light green background and dark green border
+                input.style.backgroundColor = rootStyle.getPropertyValue('--green-light-hex').trim();
+                input.style.borderColor = rootStyle.getPropertyValue('--green-border-hex').trim();
+            } else {
+                // Incorrect: Apply light red background and dark red border
+                input.style.backgroundColor = rootStyle.getPropertyValue('--red-light-hex').trim();
+                input.style.borderColor = rootStyle.getPropertyValue('--red-border-hex').trim();
+            }
+
+            // 3. Find next input and focus
+            const currentIndex = Array.from(allInputs).indexOf(input);
+            const nextIndex = currentIndex + 1;
+
+            if (nextIndex < allInputs.length) {
+                // Autoscroll and focus on the next input
+                allInputs[nextIndex].focus();
+                allInputs[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        /**
+         * Sets up the selection activity (Activity B) with color feedback.
+         */
+        function setupSelectionActivity() {
+            const buttons = document.querySelectorAll('#activity-b .selection-button');
+            const rootStyle = getComputedStyle(document.documentElement);
+            const greenBg = rootStyle.getPropertyValue('--green-light-hex').trim();
+            const redBg = rootStyle.getPropertyValue('--red-light-hex').trim();
+            const greenBorder = rootStyle.getPropertyValue('--green-border-hex').trim();
+            const redBorder = rootStyle.getPropertyValue('--red-border-hex').trim();
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const questionId = button.dataset.q; // e.g., 'b1'
+                    const selectedValue = button.dataset.val; // e.g., 'siempre' or 'ni…ni…'
+                    
+                    // Use data-val for comparison, use data-display for filling
+                    const displayValue = button.dataset.display; 
+                    const isCorrect = selectedValue === correctAnswers[questionId];
+                    
+                    const buttonsInGroup = document.querySelectorAll(`button[data-q="${questionId}"]`);
+
+                    // 1. Fill the blank space(s)
+                    if (questionId === 'b2' || questionId === 'b5') {
+                        // Special handling for questions with two blanks (b2: ni...ni..., b5: o...o...)
+                        // The display value is split by '|' e.g., "ni|ni"
+                        const displayParts = displayValue.split('|');
+                        const span1 = document.getElementById(`${questionId}_span_1`);
+                        const span2 = document.getElementById(`${questionId}_span_2`);
+
+                        if (span1 && span2) {
+                            span1.textContent = displayParts[0].trim();
+                            span2.textContent = displayParts[1].trim();
+                            // Optional: Change the text color of the filled blank to black for contrast
+                            span1.style.color = 'black';
+                            span2.style.color = 'black';
+                        }
+                    } else {
+                        // Standard handling for single blank
+                        const spanToFill = document.getElementById(`${questionId}_span`);
+                        if (spanToFill) {
+                            spanToFill.textContent = displayValue.replace(/\.\.\./g, ''); 
+                            spanToFill.style.color = 'black';
+                        }
+                    }
+
+                    // 2. Apply color feedback to the selected button
+                    buttonsInGroup.forEach(btn => {
+                        // Clear previous styling from all buttons in the group
+                        btn.style.backgroundColor = 'white';
+                        btn.style.borderColor = 'var(--color-primary)'; 
+                    });
+                    
+                    if (isCorrect) {
+                        button.style.backgroundColor = greenBg;
+                        button.style.borderColor = greenBorder; 
+                    } else {
+                        button.style.backgroundColor = redBg;
+                        button.style.borderColor = redBorder; 
+                    }
+                    
+                    // 3. Disable all buttons in the group
+                    buttonsInGroup.forEach(btn => {
+                        btn.disabled = true;
+                        btn.classList.add('button-disabled');
+                        // Set non-selected buttons to a neutral, disabled state
+                        if (btn !== button) {
+                           btn.style.opacity = '0.7';
+                           btn.style.backgroundColor = 'white';
+                           btn.style.borderColor = 'gray';
+                        }
+                    });
+                });
+            });
+        }
+        
+        /**
+         * Sets up the "Show Answers" button.
+         */
+        function setupAnswerButton() {
+            const btn = document.getElementById('show-answers-btn');
+            const section = document.getElementById('correct-answers-section');
+            
+            btn.addEventListener('click', () => {
+                const isHidden = section.classList.contains('hidden');
+                section.classList.toggle('hidden');
+                btn.textContent = isHidden ? 
+                    'Ocultar Respuestas Correctas / Hide Correct Answers' : 
+                    'Mostrar Respuestas Correctas / Show Correct Answers';
+            });
+        }
+
+        // Initialize all activities on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCompletionActivity('a');
+            setupCompletionActivity('c');
+            setupSelectionActivity();
+            setupAnswerButton();
+            
+            // Set focus on the very first input for Activity A
+            const firstInput = document.getElementById('a1');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        });
+    </script>
+</body>
+</html>

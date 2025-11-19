@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affirmatives, Negatives, and Demonstratives</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Define custom Tailwind configuration */
+        :root {
+            --color-primary: #FF79AC; /* Flamingo Pink */
+            --color-text-dark: #121118; /* Eerie Black */
+        }
+
+        /* Custom configuration to include the specified colors */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': 'var(--color-primary)',
+                        'text-dark': 'var(--color-text-dark)',
+                        'border-light': '#e5e7eb', /* Light gray for separators */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        /* NOTE: "Platform Medium Font" is not a standard web font. 
+                           Using Inter (Tailwind default) for maximum compatibility, 
+                           as per general instructions. */
+                    }
+                }
+            }
+        }
+        
+        /* Ensure the body uses the white background and Inter font */
+        body {
+            background-color: white;
+            color: var(--color-text-dark);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Enforce justified text for review sections */
+        .text-justified {
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        /* Custom style for the list separators */
+        .vocab-separator {
+            border-top: 1px solid var(--tw-color-border-light);
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 lg:p-12 min-h-screen">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Título de la página: Letras principales en rosa, comas y "and" en negro (todo con color en línea asegurado) -->
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-6 text-center tracking-tight rounded-lg p-3 bg-primary/10" style="color: #FF79AC;">
+            Affirmatives<span style="color: #121118;">,</span> Negatives<span style="color: #121118;">,</span> <span style="color: #121118;">and</span> Demonstratives
+        </h1>
+
+        <!-- Subtítulo I. Vocabulario nuevo / New Vocabulary - Rosa asegurado con color en línea -->
+        <h2 class="text-2xl sm:text-3xl font-bold border-b-4 border-primary pb-2 mt-10 mb-6" style="color: #FF79AC;">
+            I. Vocabulario nuevo / New Vocabulary
+        </h2>
+
+        <!-- Sección de Vocabulario -->
+        <div class="text-base text-text-dark">
+            
+            <!-- Grupo 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-1">
+                <span class="pr-4"><b>este</b> – this [masculine, singular]</span>
+                <span class="pr-4"><b>aquí</b> – here</span>
+                <span class="pr-4"><b>ese</b> – that [masculine, singular]</span>
+                <span class="pr-4"><b>allí</b> – there</span>
+                <span class="pr-4"><b>aquel</b> – that over there [masculine, singular]</span>
+                <span class="pr-4"><b>allá</b> – over there</span>
+            </div>
+            <hr class="vocab-separator">
+
+            <!-- Grupo 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-1">
+                <span class="pr-4"><b>esto</b> – this</span>
+                <span class="pr-4"><b>aquello</b> – that</span>
+                <span class="pr-4"><b>eso</b> – that</span>
+            </div>
+            <hr class="vocab-separator">
+
+            <!-- Grupo 3 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-1">
+                <span class="pr-4"><b>demostrativo</b> – demonstrative</span>
+                <span class="pr-4"><b>típico</b> – typical</span>
+                <span class="pr-4"><b>afirmativo</b> – affirmative</span>
+                <span class="pr-4"><b>útil</b> – useful</span>
+                <span class="pr-4"><b>negativo</b> – negative</span>
+            </div>
+            <hr class="vocab-separator">
+
+            <!-- Grupo 4 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-1">
+                <span class="pr-4"><b>el mundo</b> – world</span>
+                <span class="pr-4"><b>la región</b> – region</span>
+            </div>
+            <hr class="vocab-separator">
+
+            <!-- Grupo 5: Comida y Bebida -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-1">
+                <span class="pr-4"><b>el agua mineral</b> – mineral water [feminine]</span>
+                <span class="pr-4"><b>las espinacas</b> – spinach</span>
+                <span class="pr-4"><b>el vino blanco</b> – white wine</span>
+                <span class="pr-4"><b>el pollo</b> – chicken</span>
+                <span class="pr-4"><b>el vino tinto</b> – red wine</span>
+                <span class="pr-4"><b>el pescado</b> – fish</span>
+                <span class="pr-4"><b>el aperitivo</b> – appetizer</span>
+                <span class="pr-4"><b>la carne</b> – meat</span>
+                <span class="pr-4"><b>la lechuga</b> – lettuce</span>
+                <span class="pr-4"><b>el bistec</b> – steak</span>
+                <span class="pr-4"><b>el pastel</b> – cake</span>
+                <span class="pr-4"><b>las verduras</b> – vegetables</span>
+                <span class="pr-4"><b>el helado</b> – ice cream</span>
+                <span class="pr-4"><b>la ensalada</b> – salad</span>
+                <span class="pr-4"><b>la carta</b> – menu</span>
+                <span class="pr-4"><b>el maíz</b> – corn</span>
+                <span class="pr-4"><b>el menú</b> – menu</span>
+                <span class="pr-4"><b>los guisantes</b> – peas</span>
+            </div>
+            <hr class="vocab-separator">
+
+            <!-- Grupo 6: Expresiones Afirmativas y Negativas 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-1">
+                <span class="pr-4"><b>algo</b> – something</span>
+                <span class="pr-4"><b>también</b> – also</span>
+                <span class="pr-4"><b>alguien</b> – someone</span>
+                <span class="pr-4"><b>o…o</b> – either…or</span>
+            </div>
+            <hr class="vocab-separator">
+
+            <!-- Grupo 7: Expresiones Afirmativas y Negativas 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-1">
+                <span class="pr-4"><b>nada</b> – nothing</span>
+                <span class="pr-4"><b>tampoco</b> – neither</span>
+                <span class="pr-4"><b>nadie</b> – no one</span>
+                <span class="pr-4"><b>ni…ni</b> – neither…nor</span>
+                <span class="pr-4"><b>nunca</b> – never</span>
+            </div>
+            <hr class="vocab-separator">
+            
+        </div>
+        
+        <!-- Subtítulo II. Repaso general / General Review - Rosa asegurado con color en línea -->
+        <h2 class="text-2xl sm:text-3xl font-bold border-b-4 border-primary pb-2 mt-10 mb-6" style="color: #FF79AC;">
+            II. Repaso general / General Review
+        </h2>
+
+        <div class="space-y-6 text-lg">
+            
+            <!-- A. Demonstrative Adjectives - Rosa asegurado con color en línea -->
+            <h3 class="text-xl font-semibold" style="color: #FF79AC;">A. Demonstrative Adjectives</h3>
+            <p class="text-justified">
+                English has two demonstrative adjectives: “<b>this</b>” and “<b>that</b>.” “<b>This</b>” is used to talk about something near the speaker, while “<b>that</b>” is used to talk about something farther away. As for plurals, the plural of “<b>this</b>” is “<b>these</b>,” and the plural of “<b>that</b>” is “<b>those</b>.” Spanish has three demonstrative adjectives: <b>este</b> [this] is used to talk about something near the speaker and is often used with the adverb <b>aquí</b> [here]; <b>ese</b> [that] is used to talk about something farther away and is often used with the adverb <b>allí</b> [there]; and <b>aquel</b> [that over there] is used to talk about something even farther away and is often used with the adverb <b>allá</b> [over there].
+            </p>
+            <p class="text-justified">
+                Each of these demonstrative adjectives has four forms: masculine singular, feminine singular, masculine plural, and feminine plural. These forms are as follows: <b>este</b> [this], <b>esta</b> [this], <b>estos</b> [these], <b>estas</b> [these]; <b>ese</b> [that], <b>esa</b> [that], <b>esos</b> [those], <b>esas</b> [those]; <b>aquel</b> [that over there], <b>aquella</b> [that over there], <b>aquellos</b> [those over there], <b>aquellas</b> [those over there]. Demonstrative adjectives, unlike most adjectives in Spanish, go before the modified noun (e.g., <b>estas cartas</b> [these menus]; <b>esos guisantes</b> [those peas]; <b>aquel aperitivo</b> [that appetizer over there]).
+            </p>
+
+            <!-- B. Demonstrative Pronouns - Rosa asegurado con color en línea -->
+            <h3 class="text-xl font-semibold" style="color: #FF79AC;">B. Demonstrative Pronouns</h3>
+            <p class="text-justified">
+                All of the demonstrative adjectives, which clearly are used to modify nouns, can also be used as demonstrative pronouns, meaning that they can replace nouns as well (e.g., <b>De los dos pasteles, ¿prefieres este o ese?</b> is “Of the two cakes, do you prefer this one or that one?”). There are also three neuter demonstrative pronouns that are not demonstrative adjectives: <b>esto</b> [this], <b>eso</b> [that], and <b>aquello</b> [that]. These three pronouns, which cannot be used as adjectives, are used to talk not about some specific object but, rather, about a situation in general or some idea that has already been mentioned. For example, <b>¿Qué es esto?</b> is “What is this?,” a question often used by someone who comes upon some odd situation he or she doesn’t understand.
+            </p>
+            
+            <!-- C. Affirmative and Negative Expressions - Rosa asegurado con color en línea -->
+            <h3 class="text-xl font-semibold" style="color: #FF79AC;">C. Affirmative and Negative Expressions</h3>
+            <p class="text-justified">
+                It can be helpful to learn affirmative and negative expressions together so that you’re learning a word and its opposite (e.g., <b>algo</b> [something] and <b>nada</b> [nothing]; <b>alguien</b> [someone] and <b>nadie</b> [no one]; <b>siempre</b> [always] or <b>a veces</b> [at times] and <b>nunca</b> [never]; <b>también</b> [also] and <b>tampoco</b> [neither]; <b>o…o</b> [either…or] and <b>ni…ni</b> [neither…nor]).
+            </p>
+            <p class="text-justified">
+                <b>También</b> is used if you agree with something affirmative someone has said, while <b>tampoco</b> is used if you agree with something negative someone has said (e.g., <b>Siempre visito este museo. Yo también</b> is “I always visit this museum.” “Me too”; <b>No cocinamos mucho. Nosotros tampoco</b> is “We don’t cook much.” “We don’t either”).
+            </p>
+            <p class="text-justified">
+                Double negatives are grammatically acceptable in Spanish. In fact, it’s very common to put <b>no</b> before the verb and another negative word after the verb (e.g., <b>No viajan nunca</b> is “They never travel”; <b>No estudia nadie</b> is “No one studies”; <b>No veo a nadie</b> is “I don’t see anyone”). Besides putting <b>no</b> before the verb and a different negative word after it, you can also simply put the negative word before the verb (e.g., <b>Nunca viajan</b>; <b>Nadie estudia</b>; <b>A nadie veo</b>).
+            </p>
+
+            <!-- D. Variations in Grammar and Vocabulary in Spanish - Rosa asegurado con color en línea -->
+            <h3 class="text-xl font-semibold" style="color: #FF79AC;">D. Variations in Grammar and Vocabulary in Spanish</h3>
+            <p class="text-justified">
+                You have already learned that the subject pronouns <b>vosotros</b> and <b>vosotras</b> (the informal, plural forms of <b>tú</b>) are used only in Spain. Another regional difference in subject pronoun use deals with the use, or lack of use, of the subject pronoun <b>tú</b>. In certain areas of the Spanish-speaking world—in many parts of Argentina, Uruguay, and Paraguay and in a number of Central American countries—speakers use the subject pronoun <b>vos</b> instead of <b>tú</b>. Someone speaking informally to you using <b>vos</b> would not ask <b>¿De dónde eres tú?</b> to say “Where are you from?”; instead, the speaker would ask <b>¿De dónde sos vos?</b> (<b>Sos</b> is the form of the verb <b>ser</b> that is used with <b>vos</b>). So, if you interact with a Spanish speaker using <b>vos</b>, just know that it’s a second-person singular subject pronoun.
+            </p>
+            <p class="text-justified">
+                As for vocabulary, it’s not surprising that different words are used in different regions. For example, “a bowl” in Spanish could be <b>un bol</b>, <b>un cuenco</b>, <b>un tazón</b>, <b>un plato</b>, or <b>un plato hondo</b>, depending on the country. If you talk to someone who uses a different word than you do (e.g., <b>zumo</b> instead of <b>jugo</b> for “juice” or <b>camarera</b> instead of <b>mesera</b> for “waitress”), use the encounter as an opportunity to expand your vocabulary.
+            </p>
+            
+            <!-- E. Varieties of Accents in Spoken Spanish - Rosa asegurado con color en línea -->
+            <h3 class="text-xl font-semibold" style="color: #FF79AC;">E. Varieties of Accents in Spoken Spanish</h3>
+            <p class="text-justified">
+                Spanish speakers in different regions of the world pronounce words in the language in different ways. You have learned that in northern and central Spain, a speaker would pronounce the <b>z</b> in <b>zapato</b> with a <b>th</b> sound, rather than the <b>s</b> sound common in Latin America. Many speakers in <b>el cono sur</b> [the southern cone] region that includes Chile, Argentina, and Uruguay pronounce both the <b>y</b> and <b>ll</b> as a <b>sh</b> sound. And it is common in Spanish-speaking regions of the Caribbean for speakers to drop the sounds associated with <b>s</b> and <b>d</b>, such that <b>¿Cómo están ustedes?</b> might sound more like <b>¿Cómo etá utee?</b>.
+            </p>
+            <p class="text-justified">
+                There are two very interesting and useful academic websites that can help you become familiar with different varieties of spoken Spanish. One website, maintained by The Ohio State University, is called the <b>Digital Catalog of the Sounds of Spanish</b>. If you go to this website, you’ll be able to watch short videos of Spanish speakers from Spain, almost all the Spanish-speaking countries in Latin America, and even the United States. Most of the videos you’ll find also include a transcript of the Spanish being spoken by the person in the video. So, as you’re listening to the words being spoken, you can, if you want, read the words as well. Another academic website is called <b>Spanish Proficiency Exercises</b>, and you can find it at the University of Texas at Austin website. This website also includes video clips of a variety of Spanish speakers in different countries talking about a wide range of topics. And very often you can read the text of what the person is saying as you listen to the Spanish.
+            </p>
+            <p class="text-justified">
+                Interacting with these two websites will help you get a sense of different ways that Spanish is spoken in different countries. It will allow you to compare a Mexican accent with one from Chile and a Guatemalan accent with one from Spain. Traveling to Spanish-speaking countries is another great way to become accustomed to the variety of ways Spanish is pronounced in different regions of the world.
+            </p>
+        </div>
+        
+    </div>
+
+</body>
+</html>

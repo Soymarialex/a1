@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título principal -->
+    <title>Juego de Emparejamiento</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de Poppins (una fuente moderna y legible) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Definición de colores centrales */
+        :root {
+            --color-pink: #FF79AC;       /* Rosa Flamenco */
+            --color-black: #121118;      /* Negro Sombrío */
+            --color-pink-light: #FFE0F0; /* Rosa claro para fondo inicial de botón */
+            --color-green-light: #D1FAE5; /* Verde claro para acierto */
+            --color-red-light: #FEE2E2;  /* Rojo claro para error */
+            --color-green-dark: #065F46; /* Borde de acierto */
+        }
+
+        /* Configuración de Tailwind para usar la fuente y colores */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': 'var(--color-pink)',
+                        'text-dark': 'var(--color-black)',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'], 
+                    }
+                }
+            }
+        }
+        
+        /* Estilos generales del cuerpo */
+        body {
+            background-color: white;
+            color: var(--color-black);
+            font-family: 'Poppins', 'sans-serif';
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Estilo para los botones de las tarjetas del juego */
+        .card-button {
+            width: 100%;
+            padding: 10px 8px; /* Aumentado el padding para mejor toque en móvil */
+            margin-bottom: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--color-black);
+            background-color: var(--color-pink-light);
+            border-radius: 12px; /* Ligeramente más redondeado */
+            cursor: pointer;
+            font-size: 0.95rem;
+            
+            /* Borde inferior destacado */
+            border-bottom: 5px solid var(--color-pink); 
+            border-left: 1px solid var(--color-pink);
+            border-right: 1px solid var(--color-pink);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            
+            /* Transiciones para feedback de color */
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+        }
+
+        /* Efecto al pasar el mouse/tocar */
+        .card-button:hover:not(.matched):not(.selected) {
+            background-color: #FFC4E1; 
+            transform: translateY(-2px); /* Pequeño levantamiento */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para el botón seleccionado (primer clic) */
+        .card-button.selected {
+            background-color: var(--color-pink);
+            color: white;
+            border-color: var(--color-black);
+            transform: translateY(0);
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para el botón emparejado correctamente (verde claro) */
+        .card-button.matched {
+            background-color: var(--color-green-light) !important;
+            color: var(--color-green-dark);
+            border-color: var(--color-green-dark) !important;
+            cursor: default;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Contenedor del juego principal (dos columnas) */
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 20px;
+        }
+
+        /* Estilo para los botones de navegación de nivel */
+        .level-btn {
+            padding: 6px 14px;
+            background-color: white;
+            border: 2px solid var(--color-pink);
+            color: var(--color-black);
+            font-weight: 600;
+            border-radius: 9999px; /* Botón redondo */
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        /* Estilo para el botón de nivel activo */
+        .level-btn.active, .level-btn:hover {
+            background-color: var(--color-pink);
+            color: white;
+        }
+        
+        /* En dispositivos móviles, las columnas se apilan verticalmente */
+        @media (max-width: 640px) {
+             #game-board {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto w-full">
+        <!-- Títulos (Título principal en rosa, como se solicitó) -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight" style="color: var(--color-pink);">
+                Matching game
+            </h1>
+            <!-- Nuevo subtítulo agregado aquí -->
+            <p class="text-xl sm:text-2xl font-normal mt-2" style="color: var(--color-black);">
+                Test your memory
+            </p>
+        </header>
+
+        <!-- Navegación de Niveles -->
+        <div id="level-selector" class="flex justify-center space-x-3 sm:space-x-4 mb-8">
+            <!-- Los botones se insertarán aquí por JavaScript -->
+        </div>
+
+        <!-- Contenedor del Juego (Contiene las dos sub-columnas) -->
+        <div id="game-container" class="w-full flex justify-center">
+            <div id="game-board">
+                <!-- Los divs de las columnas de Español e Inglés se insertarán aquí por JavaScript -->
+            </div>
+        </div>
+
+        <!-- Mensaje de Fin de Nivel (oculto por defecto) -->
+        <div id="level-complete-message" class="hidden text-center mt-8 p-4 bg-primary text-white rounded-xl shadow-xl">
+            <p class="text-2xl font-bold">¡Nivel Completado!</p>
+            <p class="mt-1">¡Buen trabajo! Selecciona el siguiente nivel para continuar.</p>
+        </div>
+    </div>
+
+    <script>
+        // Objeto que contiene las palabras para todos los niveles
+        const levels = [
+            { // Nivel 1 (7 pares)
+                words: [
+                    { es: 'aquí', en: 'here' },
+                    { es: 'allí', en: 'there' },
+                    { es: 'allá', en: 'over there' },
+                    { es: 'típico', en: 'typical' },
+                    { es: 'útil', en: 'useful' },
+                    { es: 'el mundo', en: 'world' },
+                    { es: 'el agua mineral', en: 'mineral water' },
+                ]
+            },
+            { // Nivel 2 (7 pares)
+                words: [
+                    { es: 'las espinacas', en: 'spinach' },
+                    { es: 'el vino blanco', en: 'white wine' },
+                    { es: 'el pollo', en: 'chicken' },
+                    { es: 'el vino tinto', en: 'red wine' },
+                    { es: 'el pescado', en: 'fish' },
+                    { es: 'el aperitivo', en: 'appetizer' },
+                    { es: 'la carne', en: 'meat' },
+                ]
+            },
+            { // Nivel 3 (7 pares)
+                words: [
+                    { es: 'la lechuga', en: 'lettuce' },
+                    { es: 'el bistec', en: 'steak' },
+                    { es: 'el tomate', en: 'tomato' },
+                    { es: 'el pastel', en: 'cake' },
+                    { es: 'las verduras', en: 'vegetables' },
+                    { es: 'el helado', en: 'ice cream' },
+                    { es: 'la ensalada', en: 'salad' },
+                ]
+            },
+            { // Nivel 4 (7 pares)
+                words: [
+                    { es: 'la carta', en: 'menu' },
+                    { es: 'el maíz', en: 'corn' },
+                    { es: 'los guisantes', en: 'peas' },
+                    { es: 'algo', en: 'something' },
+                    { es: 'también', en: 'also' },
+                    { es: 'alguien', en: 'someone' },
+                    { es: 'o…o', en: 'either…or' },
+                ]
+            },
+            { // Nivel 5 (6 pares)
+                words: [
+                    { es: 'nada', en: 'nothing' },
+                    { es: 'tampoco', en: 'neither' },
+                    { es: 'nadie', en: 'no one' },
+                    { es: 'ni…ni', en: 'neither…nor' },
+                    { es: 'nunca', en: 'never' },
+                    { es: 'siempre', en: 'always' },
+                ]
+            }
+        ];
+
+        let currentLevel = 0; // Empieza en el Nivel 1 (índice 0)
+        let selectedCards = []; // Almacena las 1 o 2 tarjetas seleccionadas
+        let matchedPairs = 0; // Contador de parejas encontradas
+        let isChecking = false; // Bandera para evitar clics mientras se verifica
+        
+        // Elementos del DOM
+        const gameBoard = document.getElementById('game-board');
+        const levelSelector = document.getElementById('level-selector');
+        const levelCompleteMessage = document.getElementById('level-complete-message');
+
+        // --- Funciones de Utilidad ---
+
+        /**
+         * Mezcla un array (Algoritmo Fisher-Yates).
+         * @param {Array} array El array a mezclar.
+         * @returns {Array} El array mezclado.
+         */
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        /**
+         * Crea un botón de tarjeta (HTMLButtonElement) con sus datos.
+         * @param {object} card - El objeto tarjeta con text, key y lang.
+         * @returns {HTMLButtonElement} El botón creado.
+         */
+        function createCardButton(card) {
+            const button = document.createElement('button');
+            button.textContent = card.text;
+            button.className = 'card-button';
+            button.dataset.key = card.key; // La palabra en el idioma opuesto (la clave para el match)
+            button.dataset.lang = card.lang; // Idioma de esta tarjeta ('es' o 'en')
+            button.dataset.text = card.text; // El texto propio de la tarjeta
+            button.addEventListener('click', () => handleCardClick(button));
+            return button;
+        }
+
+        /**
+         * Inicializa la interfaz de botones para la navegación de niveles.
+         */
+        function initializeLevelSelector() {
+            levelSelector.innerHTML = '';
+            levels.forEach((_, index) => {
+                const button = document.createElement('button');
+                button.textContent = `Nivel ${index + 1}`;
+                button.className = `level-btn text-sm sm:text-base`;
+                button.dataset.level = index;
+                button.addEventListener('click', () => loadLevel(index));
+                levelSelector.appendChild(button);
+            });
+        }
+
+        /**
+         * Genera las tarjetas para el nivel actual, separadas por idioma.
+         * @param {number} levelIndex El índice del nivel a cargar.
+         */
+        function loadLevel(levelIndex) {
+            if (isChecking) return; // No permitir cambio si hay verificación en curso
+
+            currentLevel = levelIndex;
+            matchedPairs = 0;
+            selectedCards = [];
+            levelCompleteMessage.classList.add('hidden');
+            gameBoard.innerHTML = ''; // Limpia el contenedor principal
+            
+            // 1. Crear las columnas separadas para Español e Inglés
+            const spanishColDiv = document.createElement('div');
+            spanishColDiv.id = 'spanish-column';
+            spanishColDiv.className = 'flex flex-col gap-1';
+            
+            const englishColDiv = document.createElement('div');
+            englishColDiv.id = 'english-column';
+            englishColDiv.className = 'flex flex-col gap-1';
+            
+            gameBoard.appendChild(spanishColDiv);
+            gameBoard.appendChild(englishColDiv);
+            
+            // 2. Preparar y separar los datos
+            const currentWords = levels[levelIndex].words;
+            const spanishCards = [];
+            const englishCards = [];
+
+            currentWords.forEach(pair => {
+                // Tarjeta en español (la clave es la traducción en inglés)
+                spanishCards.push({ text: pair.es, key: pair.en, lang: 'es' });
+                // Tarjeta en inglés (la clave es la traducción en español)
+                englishCards.push({ text: pair.en, key: pair.es, lang: 'en' });
+            });
+
+            // 3. Mezclar cada lista independientemente
+            const shuffledSpanish = shuffle(spanishCards);
+            const shuffledEnglish = shuffle(englishCards);
+
+            // 4. Renderizar las tarjetas en sus columnas
+            shuffledSpanish.forEach(card => {
+                spanishColDiv.appendChild(createCardButton(card));
+            });
+
+            shuffledEnglish.forEach(card => {
+                englishColDiv.appendChild(createCardButton(card));
+            });
+            
+            // 5. Actualizar botones de navegación
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.dataset.level) === levelIndex) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        /**
+         * Maneja el clic en una tarjeta (botón).
+         * @param {HTMLButtonElement} clickedCard El botón clickeado.
+         */
+        function handleCardClick(clickedCard) {
+            // Evita clics si ya se está verificando o si la tarjeta ya está emparejada/seleccionada
+            if (isChecking || clickedCard.classList.contains('matched') || clickedCard.classList.contains('selected')) {
+                return;
+            }
+
+            // Si ya hay una tarjeta seleccionada, y es del mismo idioma, deselecciónala
+            if (selectedCards.length === 1 && selectedCards[0].dataset.lang === clickedCard.dataset.lang) {
+                selectedCards[0].classList.remove('selected');
+                selectedCards = [];
+                // Ahora selecciona la nueva tarjeta
+                clickedCard.classList.add('selected');
+                selectedCards.push(clickedCard);
+                return;
+            }
+
+            // Selecciona la tarjeta
+            clickedCard.classList.add('selected');
+            selectedCards.push(clickedCard);
+
+            // Si es la primera tarjeta (o solo una), espera el segundo clic
+            if (selectedCards.length === 1) {
+                return;
+            }
+
+            // Si es la segunda tarjeta, verifica el emparejamiento
+            isChecking = true;
+            const card1 = selectedCards[0];
+            const card2 = selectedCards[1];
+
+            // Condición de emparejamiento:
+            // 1. Deben ser de idiomas diferentes.
+            // 2. El texto de la Tarjeta 1 debe coincidir con la clave (traducción) de la Tarjeta 2, Y viceversa.
+            const isDifferentLang = card1.dataset.lang !== card2.dataset.lang;
+            const isMatch = isDifferentLang && 
+                            (card1.dataset.text === card2.dataset.key) && 
+                            (card2.dataset.text === card1.dataset.key);
+
+            if (isMatch) {
+                // ACIERTO: Poner en verde y deshabilitar
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                card1.classList.remove('selected');
+                card2.classList.remove('selected');
+                
+                matchedPairs++;
+
+                if (matchedPairs === levels[currentLevel].words.length) {
+                    // Nivel completado
+                    setTimeout(() => {
+                        levelCompleteMessage.classList.remove('hidden');
+                        isChecking = false;
+                    }, 500);
+                } else {
+                    isChecking = false;
+                }
+                
+                selectedCards = [];
+
+            } else {
+                // ERROR: Poner en rojo por un segundo y revertir
+                const RED_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--color-red-light').trim();
+                const INITIAL_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--color-pink-light').trim();
+                const INITIAL_BORDER_COLOR = 'var(--color-pink)'; // Borde Flamingo Pink
+
+                card1.style.backgroundColor = RED_COLOR;
+                card2.style.backgroundColor = RED_COLOR;
+                card1.style.borderColor = RED_COLOR; 
+                card2.style.borderColor = RED_COLOR; 
+
+                setTimeout(() => {
+                    // Revertir colores y deseleccionar
+                    card1.style.backgroundColor = INITIAL_COLOR;
+                    card2.style.backgroundColor = INITIAL_COLOR;
+                    card1.style.borderColor = INITIAL_BORDER_COLOR; // Restaurar borde Flamingo Pink
+                    card2.style.borderColor = INITIAL_BORDER_COLOR; // Restaurar borde Flamingo Pink
+                    card1.classList.remove('selected');
+                    card2.classList.remove('selected');
+                    
+                    selectedCards = [];
+                    isChecking = false;
+                }, 1000); // 1 segundo de retroalimentación roja
+            }
+        }
+        
+        // --- Inicialización ---
+        window.onload = function() {
+            initializeLevelSelector();
+            loadLevel(currentLevel); // Cargar Nivel 1 al inicio
+        };
+    </script>
+</body>
+</html>
