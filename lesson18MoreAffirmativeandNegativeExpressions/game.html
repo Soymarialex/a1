@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de la fuente Inter (como estándar web) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Definición de colores principales */
+        :root {
+            --color-flamingo-pink: #FF79AC;
+            --color-eerie-black: #121118;
+            --color-light-pink: #FFE8F1; /* Rosa claro para el estado inicial */
+            --color-light-green: #A7F3D0; /* Verde claro para acierto */
+            --color-light-red: #FECACA; /* Rojo claro para error */
+            /* La fuente solicitada no es estándar, usamos una moderna similar */
+            --font-family: 'Montserrat', 'Platform Medium Font', sans-serif;
+        }
+
+        body {
+            background-color: #FFFFFF; /* Fondo blanco */
+            color: var(--color-eerie-black);
+            font-family: var(--font-family);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin-top: 2rem;
+        }
+
+        .level-button {
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 0.5rem 0.75rem; /* py-2 px-3 */
+            margin: 0.25rem;
+            font-weight: 700; /* font-bold */
+            transition: all 0.2s;
+            background-color: var(--color-light-pink);
+            color: var(--color-eerie-black);
+            border-bottom: 3px solid var(--color-flamingo-pink);
+        }
+
+        .level-button.active {
+            background-color: var(--color-flamingo-pink);
+            color: #FFFFFF;
+            border-bottom: 3px solid var(--color-eerie-black);
+        }
+
+        .word-button {
+            width: 100%;
+            min-height: 40px;
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500;
+            transition: background-color 0.1s, transform 0.1s;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+            /* Estado inicial */
+            background-color: var(--color-light-pink);
+            color: var(--color-eerie-black);
+            border-bottom: 3px solid var(--color-flamingo-pink);
+        }
+
+        .word-button:not([disabled]):hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Estados del juego */
+        .word-button.correct {
+            background-color: var(--color-light-green);
+            border-bottom: 3px solid #10B981; /* Tailwind green-500 */
+            cursor: default;
+        }
+
+        .word-button.error {
+            background-color: var(--color-light-red) !important;
+            border-bottom: 3px solid #EF4444; /* Tailwind red-500 */
+        }
+
+        .word-button.selected {
+            background-color: var(--color-flamingo-pink);
+            color: #FFFFFF;
+            border-bottom: 3px solid var(--color-eerie-black);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container flex flex-col items-center">
+
+        <!-- Título y Subtítulo -->
+        <h1 class="text-4xl font-extrabold mb-2" style="color: var(--color-flamingo-pink);">Matching game</h1>
+        <h2 class="text-xl font-medium mb-8" style="color: var(--color-eerie-black);">test your memory</h2>
+
+        <!-- Contenedor de Botones de Nivel -->
+        <div id="level-buttons-container" class="flex flex-wrap justify-center mb-8 max-w-full">
+            <!-- Los botones de nivel se inyectarán aquí por JavaScript -->
+        </div>
+
+        <!-- Contenedor del Juego (Columnas de Palabras) -->
+        <div id="game-container" class="w-full">
+            <div class="grid grid-cols-2 gap-4">
+                <div id="column-es" class="flex flex-col items-stretch">
+                    <h3 class="text-lg font-bold text-center mb-2" style="color: var(--color-eerie-black);">Español</h3>
+                </div>
+                <div id="column-en" class="flex flex-col items-stretch">
+                    <h3 class="text-lg font-bold text-center mb-2" style="color: var(--color-eerie-black);">English</h3>
+                </div>
+            </div>
+            <!-- Mensaje de Fin de Nivel/Juego -->
+            <div id="message-box" class="mt-8 p-4 text-center rounded-lg font-bold hidden" style="background-color: var(--color-light-green); color: var(--color-eerie-black);">
+                ¡Nivel completado! Cargando siguiente nivel...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Definición de datos del juego por nivel
+        const ALL_LEVEL_DATA = [
+            // Nivel 1: 7 pares
+            [
+                { es: 'A trabajar', en: 'Let’s work' },
+                { es: 'de nuevo', en: 'again' },
+                { es: 'mejor', en: 'better' },
+                { es: 'alguno', en: 'any, one' },
+                { es: 'favorito', en: 'favorite' },
+                { es: 'algunos', en: 'some' },
+                { es: 'diferente', en: 'different' },
+            ],
+            // Nivel 2: 7 pares
+            [
+                { es: 'otra vez', en: 'again' },
+                { es: 'ninguno', en: 'none, not any' },
+                { es: 'el interés', en: 'interest' },
+                { es: 'el elefante', en: 'elephant' },
+                { es: 'el deseo', en: 'desire' },
+                { es: 'el sol', en: 'sun' },
+                { es: 'la bandera', en: 'flag' },
+            ],
+            // Nivel 3: 7 pares
+            [
+                { es: 'el cielo', en: 'sky' },
+                { es: 'la región', en: 'region' },
+                { es: 'el color', en: 'color' },
+                { es: 'el perro', en: 'dog' },
+                { es: 'rojo', en: 'red' },
+                { es: 'rosa', en: 'pink' },
+                { es: 'naranja', en: 'orange' },
+            ],
+            // Nivel 4: 7 pares
+            [
+                { es: 'negro', en: 'black' },
+                { es: 'amarillo', en: 'yellow' },
+                { es: 'marrón', en: 'brown' },
+                { es: 'verde', en: 'green' },
+                { es: 'blanco', en: 'white' },
+                { es: 'azul', en: 'blue' },
+                { es: 'gris', en: 'gray' },
+            ],
+            // Nivel 5: 8 pares
+            [
+                { es: 'morado', en: 'purple' },
+                { es: 'la ropa', en: 'clothing' },
+                { es: 'el suéter', en: 'sweater' },
+                { es: 'la camisa', en: 'shirt' },
+                { es: 'la chaqueta', en: 'jacket' },
+                { es: 'el saco', en: 'suit jacket' },
+                { es: 'el abrigo', en: 'coat' },
+                { es: 'la camiseta', en: 'T-shirt' },
+            ],
+            // Nivel 6: 8 pares
+            [
+                { es: 'la corbata', en: 'tie' },
+                { es: 'la blusa', en: 'blouse' },
+                { es: 'el cinturón', en: 'belt' },
+                { es: 'la falda', en: 'skirt' },
+                { es: 'los pantalones', en: 'pants' },
+                { es: 'el vestido', en: 'dress' },
+                { es: 'el traje', en: 'suit' },
+                { es: 'las sandalias', en: 'sandals' },
+            ],
+            // Nivel 7: 8 pares
+            [
+                { es: 'la ropa interior', en: 'underwear' },
+                { es: 'los calcetines', en: 'socks' },
+                { es: 'las medias', en: 'stockings' },
+                { es: 'los zapatos', en: 'shoes' },
+                { es: 'los zapatos deportivos', en: 'sneakers' },
+                { es: 'el sombrero', en: 'hat' },
+                { es: 'las botas', en: 'boots' },
+                { es: 'la gorra', en: 'cap' },
+            ],
+        ];
+
+        let currentLevel = 0; // Índice del nivel actual (0 a 6)
+        let selectedWord = null;
+        let matchedPairs = 0;
+        let isProcessing = false;
+
+        const containerEs = document.getElementById('column-es');
+        const containerEn = document.getElementById('column-en');
+        const levelButtonsContainer = document.getElementById('level-buttons-container');
+        const messageBox = document.getElementById('message-box');
+
+        // Función de utilidad para mezclar un array
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Función para cargar un nivel específico
+        function loadLevel(levelIndex) {
+            if (levelIndex < 0 || levelIndex >= ALL_LEVEL_DATA.length) {
+                // Fin del juego
+                messageBox.textContent = '¡Felicidades! Has completado todos los niveles de memoria.';
+                messageBox.classList.remove('hidden');
+                messageBox.style.backgroundColor = 'var(--color-flamingo-pink)';
+                messageBox.style.color = '#FFFFFF';
+                levelButtonsContainer.querySelectorAll('.level-button').forEach(btn => btn.disabled = true);
+                return;
+            }
+
+            currentLevel = levelIndex;
+            selectedWord = null;
+            matchedPairs = 0;
+            isProcessing = false;
+            messageBox.classList.add('hidden');
+
+            // Actualizar botones de nivel
+            document.querySelectorAll('.level-button').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === currentLevel) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Limpiar contenedores
+            containerEs.innerHTML = '<h3 class="text-lg font-bold text-center mb-2" style="color: var(--color-eerie-black);">Español</h3>';
+            containerEn.innerHTML = '<h3 class="text-lg font-bold text-center mb-2" style="color: var(--color-eerie-black);">English</h3>';
+
+            const levelData = ALL_LEVEL_DATA[levelIndex];
+
+            // 1. Crear listas de palabras y emparejamientos
+            let spanishWords = levelData.map(item => ({ text: item.es, type: 'es', pair: item.en }));
+            let englishWords = levelData.map(item => ({ text: item.en, type: 'en', pair: item.es }));
+
+            // 2. Mezclar ambas listas
+            shuffle(spanishWords);
+            shuffle(englishWords);
+
+            // 3. Renderizar botones
+            const createButton = (wordObj) => {
+                const button = document.createElement('button');
+                button.textContent = wordObj.text;
+                button.className = 'word-button';
+                button.dataset.type = wordObj.type;
+                button.dataset.pair = wordObj.pair;
+                button.onclick = () => handleSelection(button);
+                return button;
+            };
+
+            spanishWords.forEach(word => containerEs.appendChild(createButton(word)));
+            englishWords.forEach(word => containerEn.appendChild(createButton(word)));
+        }
+
+        // Lógica de selección y emparejamiento
+        function handleSelection(button) {
+            if (isProcessing || button.disabled || button.classList.contains('selected')) {
+                return;
+            }
+
+            button.classList.add('selected');
+
+            if (!selectedWord) {
+                // Primer palabra seleccionada
+                selectedWord = button;
+            } else {
+                // Segunda palabra seleccionada
+                isProcessing = true;
+                const secondWord = button;
+
+                // Verificar si son la misma columna (Error inmediato)
+                if (selectedWord.dataset.type === secondWord.dataset.type) {
+                    handleError(selectedWord, secondWord, "No puedes emparejar dos palabras del mismo idioma.");
+                    return;
+                }
+
+                // Lógica de emparejamiento
+                const isMatch = selectedWord.dataset.pair === secondWord.textContent && secondWord.dataset.pair === selectedWord.textContent;
+
+                if (isMatch) {
+                    // Acierto
+                    handleMatch(selectedWord, secondWord);
+                } else {
+                    // Error
+                    handleError(selectedWord, secondWord, "Error, las palabras no coinciden.");
+                }
+            }
+        }
+
+        function handleMatch(btn1, btn2) {
+            btn1.classList.remove('selected');
+            btn2.classList.remove('selected');
+
+            btn1.classList.add('correct');
+            btn2.classList.add('correct');
+
+            btn1.disabled = true;
+            btn2.disabled = true;
+
+            selectedWord = null;
+            isProcessing = false;
+            matchedPairs++;
+
+            const totalPairs = ALL_LEVEL_DATA[currentLevel].length;
+
+            if (matchedPairs === totalPairs) {
+                // Nivel completado
+                messageBox.textContent = (currentLevel === ALL_LEVEL_DATA.length - 1)
+                    ? '¡Felicidades! Has completado todo el juego.'
+                    : '¡Nivel completado! Cargando siguiente nivel...';
+                messageBox.classList.remove('hidden');
+
+                // Esperar un momento antes de cargar el siguiente nivel
+                setTimeout(() => {
+                    loadLevel(currentLevel + 1);
+                }, 1500);
+            }
+        }
+
+        function handleError(btn1, btn2, msg) {
+            // Mostrar error (rojo claro)
+            btn1.classList.remove('selected');
+            btn2.classList.remove('selected');
+
+            btn1.classList.add('error');
+            btn2.classList.add('error');
+
+            // Revertir a color original después de 1 segundo
+            setTimeout(() => {
+                btn1.classList.remove('error');
+                btn2.classList.remove('error');
+
+                // Resetear estado
+                selectedWord = null;
+                isProcessing = false;
+            }, 1000);
+        }
+
+        // Función para inicializar los botones de nivel
+        function initializeLevelButtons() {
+            ALL_LEVEL_DATA.forEach((_, index) => {
+                const button = document.createElement('button');
+                button.textContent = `Nivel ${index + 1}`;
+                button.className = 'level-button';
+                button.onclick = () => loadLevel(index);
+                levelButtonsContainer.appendChild(button);
+            });
+        }
+
+        // Inicialización al cargar la página
+        window.onload = function() {
+            initializeLevelButtons();
+            loadLevel(0); // Cargar el primer nivel por defecto
+        };
+    </script>
+</body>
+</html>
