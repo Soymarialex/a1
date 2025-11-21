@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS CDN -->
+    <!-- Ruta relativa sin barra inicial y con parámetro de versión para anti-caché. -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    
+    <!-- Configuración personalizada de colores y fuente para Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        // Colores para personajes del diálogo
+                        'dialog-pink': '#FF79AC',
+                        'dialog-black': '#121118',
+                        'dialog-gray': '#6b7280',
+                        'dialog-blue': '#1e40af',
+                    },
+                    fontFamily: {
+                        // Utilizando Inter como fuente estándar y aplicando un peso medio para simular 'Platform Medium'.
+                        'platform': ['Inter', 'sans-serif'], 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos generales para asegurar la fuente y el color de texto */
+        body {
+            font-family: 'platform', sans-serif;
+            background-color: #FFFFFF; /* Fondo blanco */
+            color: #121118; /* Eerie Black */
+            font-weight: 500; /* Simulación de Platform Medium */
+        }
+        /* Estilo para justificar el texto informativo */
+        .text-justify-info {
+            text-align: justify;
+        }
+        /* Estilos para el campo de entrada */
+        .completion-input {
+            width: 100px; 
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 2px 4px;
+            margin: 0 4px;
+            transition: background-color 0.3s;
+            outline: none;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #121118;
+        }
+        /* Estilos para las clases de validación (Light Green y Light Red) */
+        .correct-answer {
+            background-color: #d1fae5; /* Tailwind bg-green-100 */
+        }
+        .incorrect-answer {
+            background-color: #fee2e2; /* Tailwind bg-red-100 */
+        }
+        /* Estilo para el botón de respuestas */
+        .answer-button:hover {
+            background-color: #e35a91;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+        
+        <!-- Título principal -->
+        <h1 class="text-3xl md:text-4xl font-extrabold pb-3 mb-6" style="color: #FF79AC; border-bottom: 4px solid #FF79AC;">
+            III. Actividades / Activities
+        </h1>
+
+        <!-- Contenedor de Actividades -->
+        <div class="space-y-12" id="activities-container">
+
+            <!-- Actividad A: Indirect Object Pronouns (Diálogo) -->
+            <section id="activity-a">
+                <h2 class="text-2xl font-bold text-eerie-black mb-4">a. Alejandra está llamando a Cecilia. Hoy no pueden mirar la telenovela juntas porque Alejandra tiene muchas cosas que hacer. / Alejandra is calling Cecilia. Today they won’t be able to watch the soap opera together because Alejandra has a lot of things to do.</h2>
+                
+                <p class="mb-4 text-justify-info leading-relaxed text-eerie-black">
+                    Completa las frases con el pronombre de objeto indirecto correcto. / Complete the sentences with the correct indirect object pronoun. 
+                </p>
+
+                <p class="mb-4 font-bold text-lg text-flamingo-pink">
+                    me &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; te &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; le &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nos &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; os &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; les
+                </p>
+
+                <!-- Diálogo A -->
+                <div class="space-y-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #FF79AC;">Alejandra:</b> ¡Hola, Cecilia! ¡Qué lástima [What a shame]!, pero hoy no voy a ver la telenovela contigo porque tengo muchas cosas que hacer. Vamos a ir a una boda [wedding] de un primo de Carlos y necesito comprar muchas cosas. Tengo que comprar<input type="text" id="a-1" data-next="a-2" data-activity="a" class="completion-input w-12" maxlength="3" autofocus> (1) a Marisol un vestido elegante. <input type="text" id="a-2" data-next="a-3" data-activity="a" class="completion-input w-12" maxlength="3"> (2) voy a comprar a Pablo un traje negro, y voy a comprar<input type="text" id="a-3" data-next="a-4" data-activity="a" class="completion-input w-12" maxlength="4"> (3) a Pablo y a Marisol zapatos nuevos. A los novios [couple] <input type="text" id="a-4" data-next="a-5" data-activity="a" class="completion-input w-12" maxlength="4"> (4) vamos a regalar una máquina [machine] de hacer café. Yo voy a comprar<input type="text" id="a-5" data-next="a-6" data-activity="a" class="completion-input w-12" maxlength="4"> (5) un saco azul para mí, y sé que tengo una falda perfecta para la boda. También para mí, <input type="text" id="a-6" data-next="a-7" data-activity="a" class="completion-input w-12" maxlength="3"> (6) voy a comprar unos jeans. No son para la boda, pero son muy bonitos. A Carlos no <input type="text" id="a-7" data-next="a-8" data-activity="a" class="completion-input w-12" maxlength="3"> (7) gustan las corbatas ni los trajes. Cuando hablamos, él siempre <input type="text" id="a-8" data-next="a-9" data-activity="a" class="completion-input w-12" maxlength="3"> (8) dice que no le gusta la ropa formal. No sé que comprar<input type="text" id="a-9" data-next="a-10" data-activity="a" class="completion-input w-12" maxlength="4"> (9) a él.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #121118;">Cecilia:</b> Quizás [Maybe] puedes llevar<input type="text" id="a-10" data-next="a-11" data-activity="a" class="completion-input w-12" maxlength="4"> (10) una camisa de su tienda de ropa favorita. ¿Tienes joyería para la boda?
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #FF79AC;">Alejandra:</b> Más o menos, mis joyas son muy viejas.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #121118;">Cecilia:</b> No te preocupes [Don’t worry]. Yo voy a prestar <input type="text" id="a-11" data-next="a-12" data-activity="a" class="completion-input w-12" maxlength="4"> (11) mis joyas. Y no te preocupes por la telenovela; <input type="text" id="a-12" data-next="b-1" data-activity="a" class="completion-input w-12" maxlength="3"> (12) la voy a contar [tell] mañana.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Actividad B: Verbs like gustar or molestar -->
+            <section id="activity-b">
+                <h2 class="text-2xl font-bold text-eerie-black mb-4">b. Usando el contexto del diálogo previo, completa las frases siguientes utilizando el verbo <b>gustar</b> o <b>molestar</b>. / Using the context of the previous dialogue, complete the following sentences using the verb <b>gustar</b> or <b>molestar</b>.</h2>
+                
+                <div class="space-y-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <p class="leading-relaxed text-eerie-black">
+                        1. <b style="color: #1e40af;">Carlos:</b> No me <input type="text" id="b-1" data-next="b-2" data-activity="b" class="completion-input" maxlength="7"> las corbatas.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        2. <b style="color: #1e40af;">Carlos:</b> Me <input type="text" id="b-2" data-next="b-3" data-activity="b" class="completion-input" maxlength="7"> la ropa formal.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        3. <b style="color: #FF79AC;">Marisol:</b> No me <input type="text" id="b-3" data-next="b-4" data-activity="b" class="completion-input" maxlength="7"> estos zapatos porque el color me parece feo.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        4. <b style="color: #121118;">Alejandra:</b> Me <input type="text" id="b-4" data-next="b-5" data-activity="b" class="completion-input" maxlength="7"> este saco porque es muy chico, y necesito una talla mediana.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        5. <b style="color: #FF79AC;">Marisol:</b> No me <input type="text" id="b-5" data-next="b-6" data-activity="b" class="completion-input" maxlength="7"> este suéter para nada [at all], porque me <input type="text" id="b-6" data-next="b-7" data-activity="b" class="completion-input" maxlength="7"> la lana.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        6. <b style="color: #121118;">Alejandra:</b> A Marisol y a mí nos <input type="text" id="b-7" data-next="b-8" data-activity="b" class="completion-input" maxlength="7"> mucho estas joyas porque son preciosas [beautiful].
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        7. <b style="color: #6b7280;">Pablo:</b> A mí sí me <input type="text" id="b-8" data-next="b-9" data-activity="b" class="completion-input" maxlength="7"> mis zapatos.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        8. <b style="color: #6b7280;">Pablo:</b> Me <input type="text" id="b-9" data-next="c-1" data-activity="b" class="completion-input" maxlength="7"> mis cosas. ¡Gracias, mami!
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Actividad C: Indirect Object Pronouns (Diálogo) -->
+            <section id="activity-c">
+                <h2 class="text-2xl font-bold text-eerie-black mb-4">c. <b>Pablo</b> le está pidiendo dinero a su padre. / <b>Pablo</b> is asking his father for money.</h2>
+                
+                <p class="mb-4 text-justify-info leading-relaxed text-eerie-black">
+                    Completa las frases usando pronombres de objeto indirecto. / Complete the sentences using indirect object pronouns.
+                </p>
+
+                <!-- Diálogo C -->
+                <div class="space-y-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #6b7280;">Pablo:</b> Papi, ¿puedes dar<input type="text" id="c-1" data-next="c-2" data-activity="c" class="completion-input w-12" maxlength="4"> (1) dinero?
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #1e40af;">Carlos:</b> ¿Para qué, Pablo?
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #6b7280;">Pablo:</b> Quiero comprar<input type="text" id="c-2" data-next="c-3" data-activity="c" class="completion-input w-12" maxlength="4"> (2) un regalo [gift] a mami.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #1e40af;">Carlos:</b> ¿Por qué, Pablo? No es su cumpleaños, ¿verdad?
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #6b7280;">Pablo:</b> No, no es su cumpleaños. Pero <input type="text" id="c-3" data-next="c-4" data-activity="c" class="completion-input w-12" maxlength="3"> (3) quiero dar una sorpresa [surprise]. Ella siempre (4) <input type="text" id="c-4" data-next="c-5" data-activity="c" class="completion-input w-12" maxlength="4"> compra cosas a nosotros.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #1e40af;">Carlos:</b> ¿Qué <input type="text" id="c-5" data-next="c-6" data-activity="c" class="completion-input w-12" maxlength="3"> (5) quieres comprar?
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #6b7280;">Pablo:</b> ¡No sé! Creo que tú <input type="text" id="c-6" data-next="c-7" data-activity="c" class="completion-input w-12" maxlength="3"> (6) puedes ayudar con algunas ideas.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #1e40af;">Carlos:</b> Yo nunca sé qué dar<input type="text" id="c-7" data-next="c-8" data-activity="c" class="completion-input w-12" maxlength="4"> (7) a tu madre.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #6b7280;">Pablo:</b> Pero, ¿<input type="text" id="c-8" data-next="c-9" data-activity="c" class="completion-input w-12" maxlength="3"> (8) vas a dar dinero?
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        <b style="color: #1e40af;">Carlos:</b> Sí, Pablo. Estoy escribíendo<input type="text" id="c-9" data-next="d-1" data-activity="c" class="completion-input w-12" maxlength="4"> (9) un cheque [check].
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Actividad D: Complete the Answers (Full sentences) - CORRECCIÓN EN TEXTO INCLUIDA -->
+            <section id="activity-d">
+                <h2 class="text-2xl font-bold text-eerie-black mb-4">d. Completa las siguientes respuestas. / Complete the following answers.</h2>
+                
+                <div class="space-y-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <p class="leading-relaxed text-eerie-black">
+                        1. ¿Te gusta más la ropa de algodón o la ropa de lana? <input type="text" id="d-1" data-next="d-2" data-activity="d" class="completion-input w-full md:w-96" maxlength="50"> la ropa de algodón.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        2. ¿A tu amigo le molestan las conversaciones sobre política [politics]? No, a <input type="text" id="d-2" data-next="d-3" data-activity="d" class="completion-input w-full md:w-96" maxlength="100">.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        3. ¿Te interesan los deportes? Sí, <input type="text" id="d-3" data-next="d-4" data-activity="d" class="completion-input w-full md:w-96" maxlength="50">.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        4. ¿A tus padres les encanta la primavera? Sí, a <input type="text" id="d-4" data-next="d-5" data-activity="d" class="completion-input w-full md:w-96" maxlength="50">.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        5. ¿Te gusta más la ropa formal o la ropa informal? <input type="text" id="d-5" data-next="d-6" data-activity="d" class="completion-input w-full md:w-96" maxlength="50"> ropa informal.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        6. ¿Te molestan las personas que siempre llegan tarde? Sí, <input type="text" id="d-6" data-next="d-7" data-activity="d" class="completion-input w-full md:w-96" maxlength="70">.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        7. ¿Te interesa hacer amigos de otros países? Si, <input type="text" id="d-7" data-next="d-8" data-activity="d" class="completion-input w-full md:w-96" maxlength="70">.
+                    </p>
+                    <p class="leading-relaxed text-eerie-black">
+                        8. ¿A tí te gusta ir de compras? Sí, <input type="text" id="d-8" data-next="" data-activity="d" class="completion-input w-full md:w-96" maxlength="50">.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Botón para mostrar/ocultar respuestas -->
+        <button id="toggle-answers" class="answer-button mt-12 mb-4 px-6 py-3 font-bold text-white rounded-lg shadow-md transition-colors duration-200" style="background-color: #FF79AC;">
+            Mostrar/Ocultar Respuestas Correctas
+        </button>
+
+        <!-- Sección de Respuestas Correctas (Inicialmente oculta) -->
+        <section id="correct-answers-section" class="hidden mt-8 p-6 bg-gray-100 rounded-lg border-2 border-flamingo-pink">
+            <h2 class="text-2xl font-extrabold text-eerie-black pb-2 mb-4" style="border-bottom: 2px solid #FF79AC;">
+                IV. Respuestas correctas / Correct Answers
+            </h2>
+            
+            <div class="space-y-4">
+                
+                <!-- Respuestas A -->
+                <div>
+                    <h3 class="font-bold text-lg text-flamingo-pink">a. (Pronombre de objeto indirecto)</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-eerie-black">
+                        <p>1. le</p><p>2. Le</p><p>3. les</p><p>4. les</p>
+                        <p>5. me</p><p>6. me</p><p>7. le</p><p>8. me</p>
+                        <p>9. le</p><p>10. le</p><p>11. te</p><p>12. te</p>
+                    </div>
+                </div>
+
+                <!-- Respuestas B -->
+                <div>
+                    <h3 class="font-bold text-lg text-flamingo-pink">b. (Verbo gustar o molestar)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-eerie-black">
+                        <p>1. gustan</p><p>5. gusta...molesta</p>
+                        <p>2. molesta</p><p>6. gustan</p>
+                        <p>3. gustan</p><p>7. gustan</p>
+                        <p>4. molesta</p><p>8. gustan</p>
+                    </div>
+                </div>
+
+                <!-- Respuestas C -->
+                <div>
+                    <h3 class="font-bold text-lg text-flamingo-pink">c. (Pronombre de objeto indirecto)</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-eerie-black">
+                        <p>1. me</p><p>2. le</p><p>3. le</p><p>4. nos</p>
+                        <p>5. le</p><p>6. me</p><p>7. le</p><p>8. me</p>
+                        <p>9. te</p>
+                    </div>
+                </div>
+
+                <!-- Respuestas D -->
+                <div>
+                    <h3 class="font-bold text-lg text-flamingo-pink">d. (Respuesta completa)</h3>
+                    <p class="text-eerie-black">1. Me gusta más la ropa de algodón.</p>
+                    <p class="text-eerie-black">2. No, a mi amigo no le molestan las conversaciones sobre política. / No, a mi amigo le gustan las conversaciones sobre política.</p>
+                    <p class="text-eerie-black">3. Sí, me interesan los deportes.</p>
+                    <p class="text-eerie-black">4. Sí, a mis padres les encanta la primavera.</p>
+                    <p class="text-eerie-black">5. Me gusta más la ropa informal.</p>
+                    <p class="text-eerie-black">6. Sí, me molestan las personas que siempre llegan tarde.</p>
+                    <p class="text-eerie-black">7. Sí, me interesa hacer amigos de otros países.</p>
+                    <p class="text-eerie-black">8. Sí, a mí me gusta ir de compras.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script para la lógica de autocorrección y salto de foco -->
+    <script>
+        // Objeto de respuestas correctas. Usamos arrays para las respuestas de la Actividad D.
+        // Las respuestas de las Actividades A y C solo aceptan el pronombre de objeto indirecto (IOP).
+        const correctAnswers = {
+            // Activity A (IOP only, case-insensitive)
+            'a-1': ['le'], 'a-2': ['le'], 'a-3': ['les'], 'a-4': ['les'], 'a-5': ['me'], 'a-6': ['me'],
+            'a-7': ['le'], 'a-8': ['me'], 'a-9': ['le'], 'a-10': ['le'], 'a-11': ['te'], 'a-12': ['te'],
+            
+            // Activity B (Verb forms, case-insensitive)
+            'b-1': ['gustan'], 'b-2': ['molesta'], 'b-3': ['gustan'], 'b-4': ['molesta'], 
+            'b-5': ['gusta'], 'b-6': ['molesta'], 'b-7': ['gustan'], 'b-8': ['gustan'], 
+            'b-9': ['gustan'],
+            
+            // Activity C (IOP only, case-insensitive)
+            'c-1': ['me'], 'c-2': ['le'], 'c-3': ['le'], 'c-4': ['nos'], 'c-5': ['le'], 'c-6': ['me'],
+            'c-7': ['le'], 'c-8': ['me'], 'c-9': ['te'], 
+            
+            // Activity D (Full sentence/phrase, trim whitespace, case-insensitive)
+            // *** CORRECCIONES APLICADAS PARA D-2, D-4 Y D-5 ***
+            
+            // D-1: El usuario debe completar "Me gusta más"
+            'd-1': ['me gusta más'], 
+
+            // D-2: Se elimina la "a" inicial de la respuesta esperada porque ya está en el HTML: "No, a [INPUT]."
+            'd-2': ['mi amigo no le molestan las conversaciones sobre política', 'mi amigo le gustan las conversaciones sobre política', 'mi amigo no le molestan las conversaciones sobre política.', 'mi amigo le gustan las conversaciones sobre política.'],
+
+            // D-3: El usuario debe completar "me interesan los deportes"
+            'd-3': ['me interesan los deportes', 'me interesan los deportes.'],
+            
+            // D-4: Se elimina la "a" inicial de la respuesta esperada porque ya está en el HTML: "Sí, a [INPUT]."
+            'd-4': ['mis padres les encanta la primavera', 'mis padres les encanta la primavera.'],
+            
+            // D-5: Se añade "la" a la respuesta esperada: "[INPUT] ropa informal." --> "Me gusta más la"
+            'd-5': ['me gusta más la'], 
+            
+            // D-6: El usuario debe completar "me molestan las personas que siempre llegan tarde"
+            'd-6': ['me molestan las personas que siempre llegan tarde', 'me molestan las personas que siempre llegan tarde.'],
+            
+            // D-7: El usuario debe completar "me interesa hacer amigos de otros países"
+            'd-7': ['me interesa hacer amigos de otros países', 'me interesa hacer amigos de otros países.'],
+            
+            // D-8: El usuario debe completar "a mí me gusta ir de compras" o "me gusta ir de compras"
+            'd-8': ['a mí me gusta ir de compras', 'me gusta ir de compras', 'a mí me gusta ir de compras.', 'me gusta ir de compras.'],
+        };
+
+        const inputElements = Array.from(document.querySelectorAll('.completion-input'));
+
+        function checkAnswerAndMove(event) {
+            // Solo procesar si la tecla presionada es Enter (código 13)
+            if (event.keyCode !== 13) {
+                return;
+            }
+            
+            event.preventDefault(); // Previene el envío del formulario si estuviera en uno
+            
+            const currentInput = event.target;
+            const inputId = currentInput.id;
+            // Trim y convertir a minúsculas
+            const userAnswer = currentInput.value.trim().toLowerCase();
+            const correctOptions = correctAnswers[inputId];
+            const nextId = currentInput.getAttribute('data-next');
+
+            if (!correctOptions) {
+                console.error(`No hay respuestas definidas para el ID: ${inputId}`);
+                return;
+            }
+
+            // Validar la respuesta
+            const isCorrect = correctOptions.includes(userAnswer);
+
+            // Aplicar el color de fondo
+            currentInput.classList.remove('correct-answer', 'incorrect-answer');
+            if (isCorrect) {
+                currentInput.classList.add('correct-answer');
+            } else {
+                currentInput.classList.add('incorrect-answer');
+            }
+
+            // Mover el foco al siguiente campo, si existe
+            if (nextId) {
+                const nextInput = document.getElementById(nextId);
+                // Solo mover si no es el último campo de la actividad actual
+                if (nextInput && nextInput.getAttribute('data-activity') === currentInput.getAttribute('data-activity')) {
+                    nextInput.focus();
+                }
+            }
+        }
+
+        // Asignar el event listener a todos los campos de entrada
+        inputElements.forEach(input => {
+            input.addEventListener('keyup', checkAnswerAndMove);
+        });
+
+        // Lógica para el botón de Respuestas Correctas
+        document.getElementById('toggle-answers').addEventListener('click', () => {
+            const answersSection = document.getElementById('correct-answers-section');
+            answersSection.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

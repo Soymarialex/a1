@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV. Lectura cultural / Cultural reading</title>
+    <!-- Carga de Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Definición de colores principales */
+        :root {
+            --color-pink: #FF79AC; /* Flamingo Pink */
+            --color-black: #121118; /* Eerie Black */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-black);
+            background-color: white; /* Fondo blanco */
+            line-height: 1.6;
+        }
+
+        /* Utilizo negritas de Tailwind para evitar los asteriscos */
+        .font-bold, strong {
+            font-weight: 700;
+        }
+
+        /* Estilos de retroalimentación (colores claros) */
+        /* Nota: Estos se aplican al contenedor principal de la pregunta (la fila completa) */
+        .correct-bg {
+            background-color: #D1FAE5; /* Light Green */
+            border-left: 6px solid #10B981; /* Darker Green border */
+            padding-left: 10px;
+        }
+        .incorrect-bg {
+            background-color: #FEE2E2; /* Light Red */
+            border-left: 6px solid #EF4444; /* Darker Red border */
+            padding-left: 10px;
+        }
+
+        /* Estilos de los botones C/F */
+        .cf-button {
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+            border: 2px solid var(--color-pink);
+            color: var(--color-pink);
+            background-color: white; 
+        }
+        
+        .cf-button:active {
+            transform: scale(0.98);
+        }
+
+        .cf-button:hover {
+             background-color: #ffe6f0; /* Pink hover light */
+        }
+
+        /* Estilo para el botón SELECCIONADO (antes de comprobar) */
+        .cf-button.selected {
+             background-color: var(--color-pink);
+             color: white;
+             border-color: var(--color-pink);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-black mb-8 border-b-4 pb-2" style="border-color: var(--color-pink); color: var(--color-black);">
+            IV. Lectura cultural / Cultural reading
+        </h1>
+
+        <!-- SECCIÓN DE LECTURA -->
+        <section id="reading-text" class="mb-12">
+            <h2 class="text-2xl font-bold mb-4" style="color: var(--color-pink);">
+                La industria textil / The Textile Industry
+            </h2>
+            <p class="mb-6 text-lg">
+                <strong>Lee la lectura siguiente sobre la industria textil y contesta las preguntas de forma cierto (“C”) o falso (“F”). / Read the following text about the textile industry and answer the questions as either true (“C”) or false (“F”).</strong>
+            </p>
+
+            <!-- Párrafo en español (Texto justificado) -->
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-inner border border-gray-200">
+                <h3 class="font-bold mb-3 text-lg">La industria textil</h3>
+                <p class="text-justify mb-4">
+                    Los constantes cambios en la economía global han hecho que los países busquen distintos medios para mejorar sus propias economías y mantenerse en el mercado financiero global. Es común que se piense en América Latina como una economía con base en la agricultura. Sin embargo, otra de las industrias muy importantes para la región en cuanto a exportaciones es la industria textil. Las compañías dedicadas a estas actividades confeccionan todo tipo de ropa y algunas veces también zapatos.
+                </p>
+                <p class="text-justify mb-4">
+                    Colombia, Panamá, Honduras, El Salvador y Perú son algunos de los países con altos niveles de exportación, en especial hacia los Estados Unidos. No solamente los diseños sino también la alta calidad de las prendas de vestir han hecho que muchas compañías extranjeras inviertan y se interesen en la producción textil que se realiza en estos países. En el pasado, se asociaban las maquiladoras con empleados del género femenino. Hoy en día en las maquiladoras, hay tantos empleados masculinos como femeninos.
+                </p>
+                <p class="text-justify">
+                    Otro tipo de ropa que es característico de la cultura en América Latina es la elaborada por mujeres indígenas. Estas prendas tienen muchos colores y diferentes diseños que representan la cultura indígena. Muchas de estas mujeres y sus familias han encontrado en la confección y venta de su ropa una manera de mejorar su situación económica. En la región de Altos de Chiapas, en México, varias mujeres indígenas se han organizado para vender su ropa. Aunque mantienen la tradición del bordado multicolor a mano, ellas han empezado a utilizar la máquina de coser también. Este grupo tiene ahora un nombre para su ropa: <strong>Taj Kotoltik</strong>, que significa “Entre Todas,” y tienen una exhibición de las prendas que confeccionan en el Museo de la Ciudad de México.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE PREGUNTAS (C/F) -->
+        <section id="activity-cf" class="mb-12">
+            <h2 class="text-xl font-bold mb-4" style="color: var(--color-pink);">
+                Preguntas de Cierto (“C”) o Falso (“F”)
+            </h2>
+
+            <!-- Botón para comprobar todas las respuestas a la vez -->
+            <button onclick="checkAllCF()" class="mb-4 px-6 py-2 rounded-full text-white font-bold shadow-md transition duration-300 transform hover:scale-105" style="background-color: #34D399; /* Green 500 */">
+                Comprobar Respuestas
+            </button>
+
+
+            <div id="cf-questions" class="space-y-4 p-4 border rounded-lg border-gray-300">
+                <!-- Pregunta 1 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-md transition-colors duration-500 border border-gray-200" data-q="cf1">
+                    <p class="font-medium mb-2 sm:mb-0 sm:w-3/4">1. La economía en Hispanoamérica solo tiene una base en la agricultura.</p>
+                    <div class="flex gap-4" role="group">
+                        <button class="cf-button px-6 py-2 rounded-lg font-bold" data-option="C" onclick="selectCF('cf1', 'C', this)">C</button>
+                        <button class="cf-button px-6 py-2 rounded-lg font-bold" data-option="F" onclick="selectCF('cf1', 'F', this)">F</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-md transition-colors duration-500 border border-gray-200" data-q="cf2">
+                    <p class="font-medium mb-2 sm:mb-0 sm:w-3/4">2. En la industria textil, se confecciona ropa y algunas veces zapatos.</p>
+                    <div class="flex gap-4" role="group">
+                        <button class="cf-button px-6 py-2 rounded-lg font-bold" data-option="C" onclick="selectCF('cf2', 'C', this)">C</button>
+                        <button class="cf-button px-6 py-2 rounded-lg font-bold" data-option="F" onclick="selectCF('cf2', 'F', this)">F</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-md transition-colors duration-500 border border-gray-200" data-q="cf3">
+                    <p class="font-medium mb-2 sm:mb-0 sm:w-3/4">3. Hoy en día, hay hombres y mujeres que trabajan en las maquiladoras.</p>
+                    <div class="flex gap-4" role="group">
+                        <button class="cf-button px-6 py-2 rounded-lg font-bold" data-option="C" onclick="selectCF('cf3', 'C', this)">C</button>
+                        <button class="cf-button px-6 py-2 rounded-lg font-bold" data-option="F" onclick="selectCF('cf3', 'F', this)">F</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 4 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-md transition-colors duration-500 border border-gray-200" data-q="cf4">
+                    <p class="font-medium mb-2 sm:mb-0 sm:w-3/4">4. La ropa elaborada por mujeres indígenas tiene dos colores.</p>
+                    <div class="flex gap-4" role="group">
+                        <button class="cf-button px-6 py-2 rounded-lg font-bold" data-option="C" onclick="selectCF('cf4', 'C', this)">C</button>
+                        <button class="cf-button px-6 py-2 rounded-lg font-bold" data-option="F" onclick="selectCF('cf4', 'F', this)">F</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 5 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-md transition-colors duration-500 border border-gray-200" data-q="cf5">
+                    <p class="font-medium mb-2 sm:mb-0 sm:w-3/4">5. Mujeres indígenas de Colombia y Perú tienen su propia marca de ropa.</p>
+                    <div class="flex gap-4" role="group">
+                        <button class="cf-button px-6 py-2 rounded-lg font-bold" data-option="C" onclick="selectCF('cf5', 'C', this)">C</button>
+                        <button class="cf-button px-6 py-2 rounded-lg font-bold" data-option="F" onclick="selectCF('cf5', 'F', this)">F</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOTÓN DE RESPUESTAS CORRECTAS -->
+        <section class="mb-12 pt-8 border-t border-gray-300">
+            <button onclick="toggleAnswers()" class="px-8 py-3 rounded-full text-white font-bold shadow-lg transition duration-300 transform hover:scale-105" style="background-color: var(--color-pink);">
+                Mostrar Respuestas Correctas / Show Correct Answers
+            </button>
+            
+            <div id="correct-answers" class="hidden mt-6 p-6 rounded-lg shadow-xl" style="background-color: #f7f7f7; border: 2px solid var(--color-pink);">
+                <h2 class="text-2xl font-bold mb-4">Respuestas correctas / Correct Answers</h2>
+                
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg mb-2">Preguntas de Cierto o Falso</h3>
+                    <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1">
+                        <p>1. <strong>F</strong> (Falso)</p>
+                        <p>2. <strong>C</strong> (Cierto)</p>
+                        <p>3. <strong>C</strong> (Cierto)</p>
+                        <p>4. <strong>F</strong> (Falso)</p>
+                        <p>5. <strong>F</strong> (Falso)</p>
+                    </div>
+                </div>
+
+                <!-- TRADUCCIÓN AL INGLÉS AÑADIDA AQUÍ -->
+                <h3 class="font-bold text-xl mt-8 mb-2 border-t pt-4 border-gray-300">The Textile Industry (English Translation)</h3>
+                <p class="text-justify italic text-gray-700 mb-4">
+                    The constant changes in the global economy have resulted in countries looking for different ways to improve their own economies and maintain themselves in the global financial market. It’s common to think of Latin America as an economy based in agriculture. Nevertheless, another of the very important industries for the region in terms of exports is the textile industry. The companies dedicated to these activities make all sorts of clothing and sometimes shoes as well.
+                </p>
+                <p class="text-justify italic text-gray-700 mb-4">
+                    Colombia, Panamá, Honduras, El Salvador, and Perú are some of the countries with high levels of exportation, especially to the United States. Not only the designs but also the high quality of the garments have made many foreign countries invest and become interested in the textile production that is done in these countries. In the past, the textile factories were associated with women. Nowadays in the textile factories, there are as many male as female workers.
+                </p>
+                <p class="text-justify italic text-gray-700">
+                    Another kind of clothing that is characteristic of Latin American culture is the clothing made by indigenous women. These garments have many colors and different designs that represent the indigenous culture. Many of these women and their families have found in the making and selling of their clothing a way to improve their economic situation. In the region of Altos de Chiapas, in Mexico, various indigenous women have organized themselves to sell their clothing. Although they maintain the tradition of multicolored hand embroidery, they have begun to use the sewing machine as well. This group now has a name for its clothing: Taj Kotoltik, which means “Among All the Women,” and they have a display of the garments that they make in the Museum of the City of Mexico.
+                </p>
+                
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // --- DATA DE RESPUESTAS CORRECTAS ---
+        const correctAnswers = {
+            // C: Cierto, F: Falso
+            cf1: 'F', 
+            cf2: 'C', 
+            cf3: 'C', 
+            cf4: 'F', 
+            cf5: 'F'
+        };
+
+        // Almacenamiento de la selección actual del usuario
+        const userSelections = {};
+
+        // Colores fuertes
+        const COLOR_GREEN_STRONG = '#10B981'; // Tailwind Green 600
+        const COLOR_RED_STRONG = '#EF4444';   // Tailwind Red 500
+        const COLOR_PINK = 'var(--color-pink)'; // Pink base
+
+        /**
+         * Maneja la selección de un botón C o F. 
+         * Solo almacena la selección y actualiza el estilo visual del botón a Pink/White.
+         */
+        function selectCF(questionId, selectedOption, buttonElement) {
+            userSelections[questionId] = selectedOption;
+            const container = buttonElement.closest(`[data-q="${questionId}"]`);
+            const allButtons = container.querySelectorAll('.cf-button');
+
+            // 1. Limpia cualquier feedback de color de todos los botones
+            allButtons.forEach(btn => {
+                btn.classList.remove('selected');
+                btn.style.backgroundColor = 'white';
+                btn.style.color = COLOR_PINK;
+                btn.style.borderColor = COLOR_PINK;
+            });
+
+            // 2. Aplica el estilo 'selected' (Pink/White) al botón presionado
+            buttonElement.classList.add('selected');
+            buttonElement.style.backgroundColor = COLOR_PINK;
+            buttonElement.style.color = 'white';
+            buttonElement.style.borderColor = COLOR_PINK;
+
+            // 3. Limpia el feedback de fondo del contenedor (toda la fila) al cambiar la selección.
+            container.classList.remove('correct-bg', 'incorrect-bg');
+            container.style.borderLeft = '6px solid var(--color-pink)'; // Mantiene un borde neutro o similar
+        }
+
+        /**
+         * Comprueba la respuesta de una pregunta específica y aplica el feedback de color.
+         */
+        function checkCF(questionId) {
+            const selectedOption = userSelections[questionId];
+            const correctAnswer = correctAnswers[questionId];
+            const container = document.querySelector(`[data-q="${questionId}"]`);
+            const allButtons = container.querySelectorAll('.cf-button');
+            
+            if (!selectedOption) {
+                // Si no hay selección, limpia el fondo y sale
+                container.classList.remove('correct-bg', 'incorrect-bg');
+                container.style.borderLeft = '';
+                return;
+            }
+
+            const isCorrect = selectedOption === correctAnswer;
+
+            // 1. Aplica feedback de color CLARO al CONTENEDOR (toda la fila)
+            container.classList.remove('correct-bg', 'incorrect-bg');
+            if (isCorrect) {
+                container.classList.add('correct-bg');
+            } else {
+                container.classList.add('incorrect-bg');
+            }
+
+            // 2. Aplica feedback a los botones (colores fuertes)
+            allButtons.forEach(btn => {
+                const btnOption = btn.getAttribute('data-option');
+                
+                // Opción A: Es la respuesta correcta (se pone verde fuerte)
+                if (btnOption === correctAnswer) {
+                    btn.style.backgroundColor = COLOR_GREEN_STRONG; 
+                    btn.style.borderColor = COLOR_GREEN_STRONG;
+                    btn.style.color = 'white';
+                    btn.classList.remove('selected');
+
+                    // Si es incorrecta, la correcta se pone verde.
+                    // Si es correcta, la seleccionada (que es la correcta) también es verde.
+
+                } 
+                // Opción B: Fue la respuesta incorrecta del usuario (se pone rojo fuerte)
+                else if (btnOption === selectedOption && !isCorrect) {
+                    btn.style.backgroundColor = COLOR_RED_STRONG; 
+                    btn.style.borderColor = COLOR_RED_STRONG;
+                    btn.style.color = 'white';
+                    btn.classList.add('selected'); // Mantiene el selected para indicar la elección del usuario
+                }
+                // Opción C: Cualquier otro botón no seleccionado (vuelve a Pink/White)
+                else {
+                    btn.style.backgroundColor = 'white';
+                    btn.style.color = COLOR_PINK;
+                    btn.style.borderColor = COLOR_PINK;
+                    btn.classList.remove('selected');
+                }
+            });
+        }
+        
+        /**
+         * Comprueba todas las preguntas en el quiz.
+         */
+        function checkAllCF() {
+            Object.keys(correctAnswers).forEach(checkCF);
+        }
+
+
+        // --- LÓGICA PARA MOSTRAR/OCULTAR RESPUESTAS ---
+        function toggleAnswers() {
+            const answersDiv = document.getElementById('correct-answers');
+            answersDiv.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

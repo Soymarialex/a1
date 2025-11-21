@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-pink: #FF79AC; /* Flamingo Pink */
+            --color-black: #121118; /* Eerie Black */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-black);
+            background-color: white;
+            line-height: 1.6;
+        }
+        .text-justify {
+            text-align: justify;
+        }
+        /* Estilos generales para inputs y placeholders (verde/rojo) */
+        .correct {
+            background-color: #D1FAE5; /* Light Green */
+            border-color: #34D399;
+        }
+        .incorrect {
+            background-color: #FEE2E2; /* Light Red */
+            border-color: #F87171;
+        }
+
+        /* Estilos de los inputs para la retroalimentación */
+        .completion-input {
+            transition: background-color 0.3s ease;
+            border-color: var(--color-pink);
+            color: var(--color-black);
+            font-weight: 700; /* Medium/Bold for the content */
+        }
+        /* Estilo para el espacio de completación dinámico en las preguntas de selección múltiple (A) */
+        .dynamic-placeholder {
+            padding: 2px 4px;
+            border-radius: 4px;
+            min-width: 100px; /* Espacio mínimo */
+            display: inline-block;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            background-color: #e5e7eb; /* Gris claro por defecto */
+            color: var(--color-black);
+            font-weight: 700;
+        }
+
+        /* Estilos de los botones de selección múltiple */
+        .mc-button {
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border: 2px solid var(--color-pink);
+            color: var(--color-pink);
+        }
+        .mc-button:hover:not(.correct):not(.incorrect) {
+            background-color: #ffe6f0;
+        }
+        .mc-button.correct {
+            background-color: #34D399; /* Green 500 */
+            border-color: #10B981;
+            color: white;
+        }
+        .mc-button.incorrect {
+            background-color: #F87171; /* Red 500 */
+            border-color: #EF4444;
+            color: white;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-black mb-8 border-b-4 pb-2" style="border-color: var(--color-pink);">
+            III. Actividades / Activities
+        </h1>
+
+        <!-- SECCIÓN A: SELECCIÓN MÚLTIPLE -->
+        <section id="activity-a" class="mb-12">
+            <h2 class="text-xl font-bold mb-4" style="color: var(--color-pink);">
+                a. Pablo y su hermana Marisol están en el centro comercial. Pablo quiere comprarle un regalo a su madre. / Pablo and his sister Marisol are at the mall. Pablo wants to buy a present for his mother.
+            </h2>
+            <p class="mb-4 text-lg"><strong>Escoge la respuesta apropiada. / Choose the appropriate answer.</strong></p>
+
+            <!-- Preguntas de Selección Múltiple -->
+            <div id="mc-questions" class="space-y-6">
+                <!-- Pregunta 1 (Necesita rellenar placeholder) -->
+                <div class="p-4 rounded-lg border border-gray-200">
+                    <p class="mb-3">1. Me gustan esas pulseras. ¿Puede <span id="placeholder-a1" class="dynamic-placeholder">_______________</span> por favor?</p>
+                    <div class="flex flex-wrap gap-3" data-q="a1">
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="a" data-text="mostrártele" onclick="checkMultipleChoice('a1', 'a', this)">a) mostrártele</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="b" data-text="mostrármela" onclick="checkMultipleChoice('a1', 'b', this)">b) mostrármela</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="c" data-text="mostrármelas" onclick="checkMultipleChoice('a1', 'c', this)">c) mostrármelas</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 (Necesita rellenar placeholder) -->
+                <div class="p-4 rounded-lg border border-gray-200">
+                    <p class="mb-3">2. Me gustan esos aretes. ¿Puede <span id="placeholder-a2" class="dynamic-placeholder">_______________</span> por favor?</p>
+                    <div class="flex flex-wrap gap-3" data-q="a2">
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="a" data-text="dármelos" onclick="checkMultipleChoice('a2', 'a', this)">a) dármelos</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="b" data-text="dármeles" onclick="checkMultipleChoice('a2', 'b', this)">b) dármeles</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="c" data-text="dármelas" onclick="checkMultipleChoice('a2', 'c', this)">c) dármelas</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 3 (Necesita rellenar placeholder) -->
+                <div class="p-4 rounded-lg border border-gray-200">
+                    <p class="mb-3">3. Esas flores [flowers] son muy bonitas. Voy a <span id="placeholder-a3" class="dynamic-placeholder">_______________</span> a mami.</p>
+                    <div class="flex flex-wrap gap-3" data-q="a3">
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="a" data-text="comprárteles" onclick="checkMultipleChoice('a3', 'a', this)">a) comprárteles</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="b" data-text="comprárselas" onclick="checkMultipleChoice('a3', 'b', this)">b) comprárselas</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="c" data-text="comprárlelas" onclick="checkMultipleChoice('a3', 'c', this)">c) comprárlelas</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 4 (Solo botón) -->
+                <div class="p-4 rounded-lg border border-gray-200">
+                    <p class="mb-3">4. ¿Vas a darle las flores a mami hoy?</p>
+                    <div class="flex flex-wrap gap-3" data-q="a4">
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="a" onclick="checkMultipleChoice('a4', 'a', this)">a) Sí, voy a dármelas en la cena.</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="b" onclick="checkMultipleChoice('a4', 'b', this)">b) Sí, voy a dársete en la cena.</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="c" onclick="checkMultipleChoice('a4', 'c', this)">c) Sí, voy a dárselas en la cena.</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 5 (Solo botón) -->
+                <div class="p-4 rounded-lg border border-gray-200">
+                    <p class="mb-3">5. ¿Vas a preparar la cena para mami?</p>
+                    <div class="flex flex-wrap gap-3" data-q="a5">
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="a" onclick="checkMultipleChoice('a5', 'a', this)">a) Sí, se la voy a preparar.</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="b" onclick="checkMultipleChoice('a5', 'b', this)">b) Sí, la se voy a preparar.</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="c" onclick="checkMultipleChoice('a5', 'c', this)">c) Sí, le la voy a preparar.</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 6 (Solo botón) -->
+                <div class="p-4 rounded-lg border border-gray-200">
+                    <p class="mb-3">6. ¿Vas a cocinarle su postre favorito?</p>
+                    <div class="flex flex-wrap gap-3" data-q="a6">
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="a" onclick="checkMultipleChoice('a6', 'a', this)">a) No, no voy a cocinársele.</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="b" onclick="checkMultipleChoice('a6', 'b', this)">b) No, no voy a cocinármele.</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="c" onclick="checkMultipleChoice('a6', 'c', this)">c) No, no voy a cocinárselo.</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 7 (Necesita rellenar placeholder) -->
+                <div class="p-4 rounded-lg border border-gray-200">
+                    <p class="mb-3">7. ¿Vas a prepararme mi comida favorita? No, no voy a <span id="placeholder-a7" class="dynamic-placeholder">_______________</span>.</p>
+                    <div class="flex flex-wrap gap-3" data-q="a7">
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="a" data-text="prerarártese" onclick="checkMultipleChoice('a7', 'a', this)">a) prerarártese</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="b" data-text="preparártela" onclick="checkMultipleChoice('a7', 'b', this)">b) preparártela</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="c" data-text="preparármela" onclick="checkMultipleChoice('a7', 'c', this)">c) preparármela</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 8 (Solo botón) -->
+                <div class="p-4 rounded-lg border border-gray-200">
+                    <p class="mb-3">8. ¿Vas a darle los aretes a mami durante la cena?</p>
+                    <div class="flex flex-wrap gap-3" data-q="a8">
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="a" onclick="checkMultipleChoice('a8', 'a', this)">a) No, les voy a dar mañana.</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="b" onclick="checkMultipleChoice('a8', 'b', this)">b) No, se los voy a dar mañana.</button>
+                        <button class="mc-button px-4 py-2 rounded-full font-bold" data-option="c" onclick="checkMultipleChoice('a8', 'c', this)">c) No, voy a dármeles mañana.</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN B: COMPLETACIÓN (DO/IO PRONOUNS) - ANCHOS AJUSTADOS a w-64 -->
+        <section id="activity-b" class="mb-12">
+            <h2 class="text-xl font-bold mb-4" style="color: var(--color-pink);">
+                b. Marisol está haciéndole una pequeña entrevista a su hermano para un proyecto en la escuela. / Marisol is doing a little interview with her brother for a school project.
+            </h2>
+            <p class="mb-4 text-lg"><strong>Contesta las siguientes preguntas utilizando los pronombres de objeto directo e indirecto. / Answer the following questions using double object pronouns.</strong></p>
+
+            <div class="space-y-4">
+                <p>1. ¿Les compras regalos a tus amigos para sus cumpleaños? No, no <input type="text" id="b1" data-next="b2" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'b1')">.</p>
+                <p>2. ¿Preparas fiestas de cumpleaños para tus amigos? No, no <input type="text" id="b2" data-next="b3" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'b2')">.</p>
+                <p>3. Escribes correos electrónicos [e-mails] a tus amigos con frecuencia? No, no <input type="text" id="b3" data-next="b4" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'b3')">.</p>
+                <p>4. ¿Te pones lentes de sol cuando vas a la playa? Sí, <input type="text" id="b4" data-next="c1" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'b4')">.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN C: LECTURA Y PREGUNTAS - ANCHOS AJUSTADOS a w-64 (C2 y C5 ahora también) -->
+        <section id="activity-c" class="mb-12">
+            <h2 class="text-xl font-bold mb-4" style="color: var(--color-pink);">
+                c. Alberto está divorciado, y por problemas económicos, vive con sus padres Luis y Cecilia. Ahora está un poco mejor y está buscando una casa. Él está llamando a su madre para contarle sobre la quinta casa que vio. / Alberto is divorced, and because of his financial problems, he lives with his parents Luis and Cecilia. He is doing a little better now and is looking for a house. He is calling his mother to tell her about the fifth house he saw.
+            </h2>
+            <p class="mb-4 text-lg"><strong>Lee el siguiente párrafo y contesta las preguntas. / Read the following paragraph and answer the questions.</strong></p>
+
+            <div class="bg-gray-50 p-6 rounded-lg mb-6 shadow-inner">
+                <p class="text-justify italic">
+                    Alberto: ¡Hola, mami! Estoy cansado de ver casas. Parece que no tengo mucha suerte hoy. ¡La quinta casa que vi [I saw] es terrible! La sala es muy pequeña y tiene una alfombra muy vieja. Sabes que soy alérgico [alergic], y no me gustan las alfombras. La primera habitación es muy grande, y la segunda es muy pequeña. El baño solo tiene una ducha, pero no hay una bañera. La casa no tiene lavaplatos, y la estufa no sirve [doesn’t work]. La primera habitación tiene un armario, y la segunda solo tiene una cómoda. En general, la casa tiene pocas ventanas y está cerca de una residencia estudiantil. Creo que esta casa no es una buena opción [option] para mí. Voy a vivir con ustedes un poco más.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <p>1. ¿Cómo es la segunda habitación? <input type="text" id="c1" data-next="c2" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'c1')">.</p>
+                <p>2. ¿Qué no le gusta a Alberto de la sala? <input type="text" id="c2" data-next="c3" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'c2')">.</p>
+                <p>3. ¿Qué no tiene el baño? <input type="text" id="c3" data-next="c4" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'c3')">.</p>
+                <p>4. ¿Cuántas ventanas tiene la casa? <input type="text" id="c4" data-next="c5" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'c4')">.</p>
+                <p>5. ¿Va a vivir Alberto en esta casa que acaba de ver [he has just seen]? <input type="text" id="c5" data-next="d1" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'c5')">.</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN D: COMPLETACIÓN DE RESPUESTAS - ANCHOS AJUSTADOS a w-64 -->
+        <section id="activity-d" class="mb-12">
+            <h2 class="text-xl font-bold mb-4" style="color: var(--color-pink);">
+                d. Completa las siguientes respuestas. / Complete the following answers.
+            </h2>
+            
+            <div class="space-y-4">
+                <!-- Inputs w-64 -->
+                <p>1. ¿Cuál es tu parte favorita de tu casa? Como [since] me gusta cocinar, <input type="text" id="d1" data-next="d2" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'd1')">.</p>
+                <p>2. ¿Tienes una alfombra en la sala de tu casa? No, <input type="text" id="d2" data-next="d3" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'd2')">.</p>
+                <p>3. ¿Piensas salir de vacaciones dentro de poco [soon]? <input type="text" id="d3" data-next="d4" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'd3')"> porque tengo demasiado trabajo.</p>
+                <!-- Pregunta 4 con w-64 -->
+                <p>4. ¿En qué piensas frecuentemente? <input type="text" id="d4" data-next="end" class="completion-input border-b-2 outline-none p-1 w-64" placeholder="" onkeydown="handleCompletionKeydown(event, 'd4')"> mejorar mi español.</p>
+            </div>
+        </section>
+
+        <!-- BOTÓN DE RESPUESTAS CORRECTAS -->
+        <section class="mb-12 pt-8 border-t border-gray-300">
+            <button onclick="toggleAnswers()" class="px-8 py-3 rounded-full text-white font-bold shadow-lg transition duration-300 transform hover:scale-105" style="background-color: var(--color-pink);">
+                Mostrar Respuestas Correctas / Show Correct Answers
+            </button>
+            
+            <div id="correct-answers" class="hidden mt-6 p-6 rounded-lg shadow-xl" style="background-color: #f7f7f7; border: 2px solid var(--color-pink);">
+                <h2 class="text-2xl font-bold mb-4">V. Respuestas correctas / Correct Answers</h2>
+                
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg mb-2">a. Selección Múltiple</h3>
+                    <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1">
+                        <p>1. <strong>c)</strong> mostrármelas</p>
+                        <p>5. <strong>a)</strong> Sí, se la voy a preparar.</p>
+                        <p>2. <strong>a)</strong> dármelos</p>
+                        <p>6. <strong>c)</strong> No, no voy a cocinárselo.</p>
+                        <p>3. <strong>b)</strong> comprárselas</p>
+                        <p>7. <strong>b)</strong> preparártela</p>
+                        <p>4. <strong>c)</strong> Sí, voy a dárselas en la cena.</p>
+                        <p>8. <strong>b)</strong> No, se los voy a dar mañana.</p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg mb-2">b. Completación (Pronombres de Objeto)</h3>
+                    <div class="grid sm:grid-cols-2 gap-x-6 gap-y-1">
+                        <p>1. <strong>se los compro.</strong></p>
+                        <p>3. <strong>se los escribo con frecuencia.</strong></p>
+                        <p>2. <strong>se las preparo.</strong></p>
+                        <p>4. <strong>me los pongo cuando voy a la playa.</strong></p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg mb-2">c. Lectura y Preguntas</h3>
+                    <ol class="list-decimal list-inside space-y-1">
+                        <li>La segunda habitación es muy pequeña.</li>
+                        <li>A Alberto no le gusta la alfombra. / La sala es muy pequeña.</li>
+                        <li>El baño no tiene una bañera.</li>
+                        <li>La casa tiene pocas ventanas.</li>
+                        <li>No, Alberto no va a vivir en la casa porque no le gusta. / No, Alberto prefiere vivir un poco más con sus padres.</li>
+                    </ol>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-bold text-lg mb-2">d. Completación de Respuestas</h3>
+                    <ol class="list-decimal list-inside space-y-1">
+                        <li>mi parte favorita es la cocina</li>
+                        <li>no tengo ninguna alfombra</li>
+                        <li>No, no pienso salir de vacaciones dentro de poco / No, no puedo salir de vacaciones dentro de poco</li>
+                        <!-- Respuesta D4 actualizada para reflejar el nuevo formato de completación de frase -->
+                        <li><span class="font-bold">Pienso en</span> mejorar mi español.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // --- DATA DE RESPUESTAS CORRECTAS ---
+        const correctAnswers = {
+            // Activity A: Multiple Choice (Option key)
+            a1: 'c', a2: 'a', a3: 'b', a4: 'c', a5: 'a', a6: 'c', a7: 'b', a8: 'b',
+
+            // Activity B, C, D: Completion (Simplified, normalized answers for flexible matching)
+            b1: ['se los compro'],
+            b2: ['se las preparo'],
+            b3: ['se los escribo con frecuencia', 'se los escribo'],
+            b4: ['me los pongo cuando voy a la playa', 'me los pongo'],
+
+            // Activity C: Reading Comprehension
+            c1: ['la segunda habitacion es muy pequeña', 'es muy pequeña'],
+            c2: ['a alberto no le gusta la alfombra', 'la sala es muy pequeña', 'no le gusta la alfombra', 'la alfombra', 'la sala es muy pequeña y tiene una alfombra muy vieja'],
+            c3: ['el baño no tiene una bañera', 'no tiene una bañera', 'una bañera'],
+            c4: ['la casa tiene pocas ventanas', 'pocas ventanas'],
+            c5: ['no, alberto no va a vivir en la casa porque no le gusta', 'no, alberto prefiere vivir un poco mas con sus padres', 'no', 'no va a vivir en la casa', 'no va a vivir'],
+
+            // Activity D: Completion
+            d1: ['mi parte favorita es la cocina', 'mi parte favorita es la cocina.'],
+            d2: ['no tengo ninguna alfombra', 'no tengo ninguna alfombra.'],
+            d3: ['no, no pienso salir de vacaciones dentro de poco', 'no, no puedo salir de vacaciones dentro de poco', 'no, no pienso', 'no, no puedo', 'no pienso salir de vacaciones dentro de poco', 'no puedo salir de vacaciones dentro de poco'],
+            // D4 actualizada para esperar solo la frase de inicio "Pienso en"
+            d4: ['pienso en'],
+        };
+
+        /**
+         * Normaliza el texto para una comparación flexible (ignora mayúsculas, tildes y puntuación).
+         * @param {string} text - El texto a normalizar.
+         * @returns {string} - El texto normalizado.
+         */
+        function normalizeText(text) {
+            return text.toLowerCase()
+                       .trim()
+                       .normalize("NFD")
+                       .replace(/[\u0300-\u036f]/g, "") // Elimina tildes y diéresis
+                       .replace(/[.,;!?]/g, '')        // Elimina puntuación común
+                       .replace(/\s+/g, ' ');         // Normaliza espacios múltiples
+        }
+
+        // --- LÓGICA PARA SELECCIÓN MÚLTIPLE (ACTIVIDAD A) ---
+        function checkMultipleChoice(questionId, selectedOption, buttonElement) {
+            const correctAnswer = correctAnswers[questionId];
+            const isCorrect = selectedOption === correctAnswer;
+            const container = buttonElement.closest(`[data-q="${questionId}"]`);
+            const allButtons = container.querySelectorAll('.mc-button');
+            
+            // 1. Limpia clases de todos los botones en el grupo
+            allButtons.forEach(btn => {
+                btn.classList.remove('correct', 'incorrect');
+                btn.classList.remove('bg-green-500', 'bg-red-500', 'text-white'); // Limpieza más específica para los colores fuertes
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+            });
+
+            // 2. Aplica feedback al botón presionado
+            if (isCorrect) {
+                // Colores fuertes para el botón
+                buttonElement.classList.add('correct'); 
+            } else {
+                buttonElement.classList.add('incorrect');
+            }
+
+            // 3. Lógica específica para preguntas con placeholder (1, 2, 3, 7)
+            const placeholderId = `placeholder-${questionId}`;
+            const placeholderElement = document.getElementById(placeholderId);
+            
+            if (placeholderElement) {
+                // Obtiene el texto de la opción sin el prefijo (a), b), c))
+                const selectedText = buttonElement.getAttribute('data-text');
+
+                // a) Actualiza el texto del placeholder
+                placeholderElement.textContent = selectedText;
+                
+                // b) Limpia y aplica la clase de color CLARO al placeholder
+                placeholderElement.classList.remove('correct', 'incorrect');
+                if (isCorrect) {
+                    placeholderElement.classList.add('correct');
+                } else {
+                    placeholderElement.classList.add('incorrect');
+                }
+            }
+        }
+
+        // --- LÓGICA PARA COMPLETACIÓN DE TEXTO (ACTIVIDADES B, C, D) ---
+        function checkCompletion(questionId, inputValue) {
+            const normalizedInput = normalizeText(inputValue);
+            const validAnswers = correctAnswers[questionId].map(ans => normalizeText(ans));
+            
+            // Verifica si la respuesta coincide con alguna de las respuestas correctas
+            const isCorrect = validAnswers.includes(normalizedInput);
+
+            const inputElement = document.getElementById(questionId);
+            
+            // Limpia clases de feedback
+            inputElement.classList.remove('correct', 'incorrect');
+
+            // Aplica la clase de feedback (colores claros)
+            if (isCorrect) {
+                inputElement.classList.add('correct');
+            } else {
+                inputElement.classList.add('incorrect');
+            }
+            
+            return isCorrect;
+        }
+
+        function handleCompletionKeydown(event, questionId) {
+            // Verifica si la tecla presionada es ENTER
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Previene el salto de línea por defecto
+                const inputElement = document.getElementById(questionId);
+                const isCorrect = checkCompletion(questionId, inputElement.value);
+
+                // Lógica de salto (con la restricción de NO saltar entre actividades)
+                const nextInputId = inputElement.getAttribute('data-next');
+                
+                if (nextInputId && nextInputId !== 'end') {
+                    const currentActivity = questionId.match(/^[a-z]/)[0];
+                    const nextActivity = nextInputId.match(/^[a-z]/)?.[0];
+                    
+                    let shouldJump = true;
+                    if (nextActivity && nextActivity !== currentActivity) {
+                        // Es un salto a la siguiente actividad. NO saltamos.
+                        shouldJump = false;
+                    }
+                    
+                    if (shouldJump) {
+                        const nextInput = document.getElementById(nextInputId);
+                        if (nextInput) {
+                            nextInput.focus();
+                        }
+                    }
+                } else if (nextInputId === 'end') {
+                     inputElement.blur();
+                }
+            }
+        }
+
+
+        // --- LÓGICA PARA MOSTRAR/OCULTAR RESPUESTAS ---
+        function toggleAnswers() {
+            const answersDiv = document.getElementById('correct-answers');
+            answersDiv.classList.toggle('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Se asegura de que los botones tengan el estilo correcto al cargar.
+        });
+    </script>
+</body>
+</html>

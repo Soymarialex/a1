@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to your Spanish Class!</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Definición de colores y fuente */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --standard-black: #000000;
+        }
+        
+        /* Uso de la fuente solicitada, con Inter como fallback */
+        body {
+            font-family: 'Platform Medium Font', 'Inter', sans-serif;
+            background-color: #FFFFFF;
+        }
+
+        /* Estilo para el botón de navegación con efecto de "borde negro abajo" */
+        .nav-button {
+            /* Colores y padding base */
+            background-color: var(--flamingo-pink);
+            color: white;
+            font-weight: 700; /* bold */
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            
+            /* Sombra/Borde inferior negro */
+            border: 2px solid var(--eerie-black);
+            border-bottom: 8px solid var(--eerie-black); 
+
+            /* Transición y centrado */
+            transition: all 0.1s ease-in-out;
+            display: block;
+            text-align: center;
+        }
+
+        /* Efecto de hover/activo: simula un "click" moviendo el botón hacia abajo */
+        .nav-button:hover,
+        .nav-button:active {
+            transform: translateY(2px);
+            border-bottom-width: 6px; /* Reduce el tamaño del borde inferior */
+            background-color: #f7689c; /* Ligeramente más oscuro al pasar el ratón */
+        }
+
+        /* Estilo para el botón de enlace externo, con diseño similar pero diferente color base */
+        .external-button {
+            background-color: var(--eerie-black);
+            color: white;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            border: 2px solid var(--eerie-black);
+            border-bottom: 8px solid var(--flamingo-pink); /* Borde rosa para contraste */
+            transition: all 0.1s ease-in-out;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .external-button:hover {
+            transform: translateY(2px);
+            border-bottom-width: 6px;
+            background-color: #2c2b33;
+        }
+
+        /* Estilo para el título */
+        .main-title {
+            color: var(--standard-black);
+            font-weight: 900; /* Extrabold */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eerie-black': '#121118',
+                        'flamingo-pink': '#FF79AC',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="p-4 sm:p-8 md:p-12 min-h-screen flex flex-col">
+
+    <!-- Contenido Principal -->
+    <main class="max-w-4xl mx-auto flex-grow w-full">
+        
+        <!-- Título principal en negro -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl text-center mb-12 main-title tracking-tight">
+            Welcome to your Spanish Class!
+        </h1>
+
+        <!-- Contenedor de Botones de Navegación -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            
+            <!-- Botón 1: The Present Progressive -->
+            <a href="vocabulary.html" class="nav-button text-xl sm:text-2xl">
+                Double Object Pronouns
+            </a>
+
+            <!-- Botón 2: Actividades / Activities -->
+            <a href="activities.html" class="nav-button text-xl sm:text-2xl">
+                Actividades / Activities
+            </a>
+
+            <!-- Botón 3: Lectura cultural / Cultural Reading -->
+            <a href="lectura.html" class="nav-button text-xl sm:text-2xl">
+                Lectura cultural / Cultural Reading
+            </a>
+
+            <!-- Botón 4: Matching game / test your memory -->
+            <a href="game.html" class="nav-button text-xl sm:text-2xl">
+                Matching game / test your memory
+            </a>
+        </div>
+    </main>
+    
+    <!-- Pie de Página / Footer -->
+    <footer class="mt-12 pt-8 pb-4 border-t border-gray-200 text-center max-w-4xl mx-auto w-full">
+        
+        <!-- Texto de Copyright -->
+        <p class="text-sm text-gray-600 mb-6">
+            © 2025 Spanish Lessons with María C. All rights reserved.
+        </p>
+
+        <!-- Botón de Enlace Externo -->
+        <a href="https://preply.com/en/tutor/5105409?utm_source=friend&utm_medium=ref&utm_campaign=stu_plg_plg_all_0_mul_xx_multiplesub_share-tutor-tutoring_1&utm_content=OTQ2NTAwNQ==" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="external-button text-lg">
+            Find your Spanish class here.
+        </a>
+    </footer>
+
+</body>
+</html>

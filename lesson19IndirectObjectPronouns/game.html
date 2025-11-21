@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching game - test your memory</title>
+    <!-- Carga de Tailwind CSS con parámetro de versión para control de caché -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    <style>
+        /* Definición de la fuente y colores personalizados */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --light-pink: #ffe6f0; /* Color inicial de los botones */
+            --correct-green: #a7f3d0; /* Verde claro */
+            --error-red: #fecaca; /* Rojo claro */
+        }
+        /* Intentando simular "Platform Medium Font" con un fuerte Sans Serif */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: white;
+            color: var(--eerie-black);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .match-button {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            /* Estilo inicial del botón */
+            background-color: var(--light-pink);
+            color: var(--eerie-black);
+            border-radius: 0.375rem; /* rounded-md */
+            box-shadow: 0 4px 0 var(--flamingo-pink); /* Sombra/borde inferior */
+            padding: 0.5rem 1rem; /* p-2 py-1 */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* medium */
+            text-align: center;
+            /* Asegura que los botones tengan espacio para el texto sin romperse */
+            white-space: normal;
+        }
+        .match-button:hover:not(.matched):not(.selected) {
+            background-color: #ffd8ec;
+        }
+        .selected {
+            background-color: var(--flamingo-pink) !important;
+            color: white !important;
+            box-shadow: 0 0px 0 var(--eerie-black) !important;
+            transform: translateY(4px);
+        }
+        .matched {
+            background-color: var(--correct-green) !important;
+            box-shadow: none !important;
+            cursor: default;
+            color: var(--eerie-black) !important;
+        }
+        .error {
+            background-color: var(--error-red) !important;
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <header class="text-center mb-8">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-[#FF79AC] tracking-tight mb-2">Matching game</h1>
+        <p class="text-xl sm:text-2xl font-light text-[#121118]">test your memory</p>
+    </header>
+
+    <!-- Botones de navegación de nivel -->
+    <div id="level-nav" class="flex flex-wrap justify-center gap-2 mb-8 p-3 bg-gray-50 rounded-lg shadow-inner max-w-4xl w-full">
+        <!-- Los botones se generarán con JS -->
+    </div>
+
+    <!-- Contenedor del Juego -->
+    <!-- La clase grid-cols-2 de Tailwind asegura el diseño de dos columnas visuales -->
+    <main id="game-board" class="w-full max-w-4xl grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 justify-items-stretch">
+        <!-- Los botones se renderizarán aquí en dos contenedores flexibles (columnas) -->
+    </main>
+
+    <script>
+        // --- CONSTANTES DEL JUEGO ---
+        const FLAMINGO_PINK = '#FF79AC';
+        const EERIE_BLACK = '#121118';
+        const LIGHT_PINK = 'var(--light-pink)';
+        const CORRECT_GREEN = 'var(--correct-green)';
+        const ERROR_RED = 'var(--error-red)';
+
+        // 6 Niveles de vocabulario
+        const PALETTES = [
+            // Nivel 1 (7 pares)
+            [
+                { es: "la prenda", en: "item of clothing" },
+                { es: "el impermeable", en: "raincoat" },
+                { es: "los pantalones cortos", en: "shorts" }, 
+                { es: "la bufanda", en: "scarf" },
+                { es: "el traje de baño", en: "bathing suit" },
+                { es: "los guantes", en: "gloves" },
+                { es: "el pijama", en: "pajamas" }
+            ],
+            // Nivel 2 (7 pares)
+            [
+                { es: "el pañuelo", en: "handkerchief" },
+                { es: "los jeans", en: "jeans" },
+                { es: "los zapatos de tacón alto", en: "high-heel shoes" },
+                { es: "la cartera", en: "wallet" },
+                { es: "la pulsera", en: "bracelet" },
+                { es: "la bolsa", en: "purse" },
+                { es: "los aretes", en: "earrings" }
+            ],
+            // Nivel 3 (7 pares)
+            [
+                { es: "los lentes", en: "glasses" },
+                { es: "el collar", en: "necklace" },
+                { es: "los lentes de sol", en: "sunglasses" }, 
+                { es: "la joyería", en: "jewelry" },
+                { es: "el anillo", en: "ring" }, 
+                { es: "el asiento", en: "seat" },
+                { es: "el algodón", en: "cotton" }
+            ],
+            // Nivel 4 (7 pares)
+            [
+                { es: "el oro", en: "gold" },
+                { es: "la seda", en: "silk" },
+                { es: "la plata", en: "silver" },
+                { es: "la lana", en: "wool" },
+                { es: "la tela", en: "fabric" },
+                { es: "el cuero", en: "leather" },
+                { es: "el material", en: "material" }
+            ],
+            // Nivel 5 (7 pares)
+            [
+                { es: "la talla", en: "size" },
+                { es: "chico", en: "small" },
+                { es: "ir de compras", en: "to go shopping" },
+                { es: "mediano", en: "medium" },
+                { es: "caro", en: "expensive" },
+                { es: "grande", en: "large" },
+                { es: "económico", en: "inexpensive" }
+            ],
+            // Nivel 6 (6 pares) - Nota: Se requiere que este nivel tenga 6 palabras a emparejar.
+            [
+                { es: "expandir", en: "to expand" },
+                { es: "expresar", en: "to express" },
+                { es: "gustar", en: "to be pleasing" },
+                { es: "interesar", en: "to interest" },
+                { es: "encantar", en: "to be very pleasing" },
+                { es: "molestar", en: "to bother" }
+            ]
+        ];
+
+        // --- ESTADO DEL JUEGO ---
+        let gameState = {
+            currentLevel: 0, // 0-indexed
+            selectedButton: null,
+            isLocked: false,
+            matchesFound: 0
+        };
+
+        const boardElement = document.getElementById('game-board');
+        const navElement = document.getElementById('level-nav');
+
+        /**
+         * Función de utilidad para mezclar un array (Algoritmo Fisher-Yates).
+         * @param {Array<any>} array El array a mezclar.
+         * @returns {Array<any>} El array mezclado.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /**
+         * Renderiza los botones de navegación de nivel.
+         */
+        function renderLevelNav() {
+            navElement.innerHTML = '';
+            PALETTES.forEach((_, index) => {
+                const levelNum = index + 1;
+                const button = document.createElement('button');
+                button.textContent = `Nivel ${levelNum}`;
+                button.className = `level-nav-btn match-button ${index === gameState.currentLevel ? 'selected' : ''} shadow-md`;
+                button.onclick = () => loadLevel(index);
+                navElement.appendChild(button);
+            });
+        }
+
+        /**
+         * Carga y renderiza el nivel de juego especificado.
+         * @param {number} levelIndex El índice del nivel (0 a 5).
+         */
+        function loadLevel(levelIndex) {
+            if (gameState.isLocked) return; // Evita cambiar de nivel mientras se revisa un error
+
+            gameState.currentLevel = levelIndex;
+            gameState.selectedButton = null;
+            gameState.matchesFound = 0;
+            boardElement.innerHTML = '';
+
+            // 1. Obtener los pares del nivel actual
+            const currentPairs = PALETTES[levelIndex];
+
+            // 2. Separar y preparar los datos de los botones por idioma
+            let spanishButtonsData = [];
+            let englishButtonsData = [];
+            currentPairs.forEach((pair, index) => {
+                const matchId = index; // Usamos el índice como ID de coincidencia
+                spanishButtonsData.push({ text: pair.es, type: 'es', matchId: matchId });
+                englishButtonsData.push({ text: pair.en, type: 'en', matchId: matchId });
+            });
+
+            // 3. Mezclar las palabras DENTRO de cada lista, pero no entre ellas
+            shuffleArray(spanishButtonsData);
+            shuffleArray(englishButtonsData);
+
+            // 4. Crear los elementos de las dos columnas visuales
+            const spanishColumnElement = document.createElement('div');
+            spanishColumnElement.className = 'flex flex-col gap-3';
+            const englishColumnElement = document.createElement('div');
+            englishColumnElement.className = 'flex flex-col gap-3';
+
+            // Función de ayuda para crear y añadir un botón
+            const createButton = (data) => {
+                const button = document.createElement('button');
+                button.textContent = data.text;
+                button.className = `match-button w-full transition-all duration-300 ease-out`;
+                button.dataset.matchId = data.matchId;
+                button.dataset.type = data.type;
+                button.onclick = () => handleButtonClick(button, data.text, data.matchId);
+                return button;
+            };
+
+            // Rellenar la primera columna con Español
+            spanishButtonsData.forEach(data => spanishColumnElement.appendChild(createButton(data)));
+            
+            // Rellenar la segunda columna con Inglés
+            englishButtonsData.forEach(data => englishColumnElement.appendChild(createButton(data)));
+
+            // Añadir las columnas al tablero de juego
+            boardElement.appendChild(spanishColumnElement);
+            boardElement.appendChild(englishColumnElement);
+
+            // Actualizar la navegación
+            updateLevelNavStyles();
+        }
+
+        /**
+         * Actualiza el estilo del botón de navegación activo.
+         */
+        function updateLevelNavStyles() {
+            document.querySelectorAll('.level-nav-btn').forEach((btn, index) => {
+                btn.classList.remove('selected');
+                if (index === gameState.currentLevel) {
+                    btn.classList.add('selected');
+                }
+            });
+        }
+
+
+        /**
+         * Maneja el clic en un botón del juego.
+         * @param {HTMLButtonElement} button El botón que fue clicado.
+         * @param {string} text El texto del botón.
+         * @param {number} matchId El ID de emparejamiento.
+         */
+        function handleButtonClick(button, text, matchId) {
+            if (gameState.isLocked || button.classList.contains('matched')) {
+                return;
+            }
+
+            // Deseleccionar si se vuelve a hacer clic en el mismo botón
+            if (gameState.selectedButton === button) {
+                button.classList.remove('selected');
+                gameState.selectedButton = null;
+                return;
+            }
+
+            // Si no hay nada seleccionado, seleccionar este
+            if (!gameState.selectedButton) {
+                button.classList.add('selected');
+                gameState.selectedButton = button;
+            } else {
+                // Hay un botón previamente seleccionado, vamos a verificar el emparejamiento
+                const prevButton = gameState.selectedButton;
+
+                // Bloquear el juego temporalmente
+                gameState.isLocked = true;
+
+                // 1. Comprobar que no sean del mismo idioma (es/en) - ¡CRUCIAL para el emparejamiento!
+                const isSameType = prevButton.dataset.type === button.dataset.type;
+
+                // 2. Comprobar si los IDs de emparejamiento coinciden Y que son de diferente idioma
+                const isMatch = (prevButton.dataset.matchId === button.dataset.matchId) && !isSameType;
+
+                if (isMatch) {
+                    // --- Coincidencia Correcta ---
+                    
+                    button.classList.add('matched');
+                    prevButton.classList.remove('selected');
+                    prevButton.classList.add('matched');
+
+                    gameState.matchesFound++;
+                    gameState.selectedButton = null;
+                    gameState.isLocked = false;
+
+                    // Comprobar si el nivel está completo
+                    const totalPairs = PALETTES[gameState.currentLevel].length;
+                    if (gameState.matchesFound === totalPairs) {
+                        setTimeout(() => {
+                            // Mostrar mensaje de éxito (usando una simple alerta visual en lugar de window.alert)
+                            const message = document.createElement('div');
+                            message.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white p-4 rounded-lg shadow-2xl z-50 text-center text-xl font-bold';
+                            message.textContent = `¡Nivel ${gameState.currentLevel + 1} Completado!`;
+                            document.body.appendChild(message);
+                            
+                            setTimeout(() => {
+                                document.body.removeChild(message);
+                                // Cargar el siguiente nivel si existe
+                                if (gameState.currentLevel < PALETTES.length - 1) {
+                                    loadLevel(gameState.currentLevel + 1);
+                                }
+                            }, 1500);
+                        }, 300);
+                    }
+
+                } else {
+                    // --- Coincidencia Incorrecta / Error ---
+                    
+                    button.classList.add('error');
+                    prevButton.classList.remove('selected');
+                    prevButton.classList.add('error');
+
+                    setTimeout(() => {
+                        // Revertir colores y desbloquear
+                        button.classList.remove('error');
+                        prevButton.classList.remove('error');
+                        gameState.selectedButton = null;
+                        gameState.isLocked = false;
+                    }, 700); // 700ms para mostrar el error
+                }
+            }
+        }
+
+        // --- INICIALIZACIÓN ---
+        window.onload = function() {
+            renderLevelNav();
+            loadLevel(0); // Cargar el primer nivel al inicio
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Definición de colores custom para Tailwind */
+        :root {
+            --color-flamingo-pink: #FF79AC;
+            --color-eerie-black: #121118;
+            --color-dialogue-gray: #808080;
+            --color-light-pink: #FEEEEE; /* Rosa Claro */
+        }
+
+        /* Configuración de Tailwind para usar los colores custom */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': 'var(--color-flamingo-pink)',
+                        'eerie-black': 'var(--color-eerie-black)',
+                        'dialogue-gray': 'var(--color-dialogue-gray)',
+                        'light-pink-bg': 'var(--color-light-pink)',
+                    },
+                    /* Se usa la fuente predeterminada (Inter) con el peso 'medium' para simular 'Platform Medium' */
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+
+        /* Estilo para el cuerpo, usando Eerie Black como color principal y fondo blanco */
+        body {
+            color: var(--color-eerie-black);
+            background-color: white;
+            min-height: 100vh;
+        }
+
+        /* ESTILO CORREGIDO PARA EL TÍTULO PRINCIPAL */
+        #main-title {
+            color: var(--color-flamingo-pink) !important; /* ¡Garantiza el color rosa! */
+        }
+        /* FIN ESTILO CORREGIDO */
+
+        /* Estilo para el texto justificado (enunciados e instrucciones) */
+        .text-justified {
+            text-align: justify;
+        }
+
+        /* Estilo para los campos de texto y los espacios de respuesta de selección */
+        .input-response {
+            max-width: 120px;
+            min-width: 100px;
+            padding: 4px 8px;
+            text-align: center;
+            border-radius: 4px;
+            border: 2px solid #D1D5DB;
+            transition: background-color 0.3s, border-color 0.3s;
+            display: inline-block; /* Para el span de la actividad B */
+            line-height: 1.5; /* Para el span de la actividad B */
+            vertical-align: middle; /* Alineación */
+        }
+        
+        /* Estilo para el botón de respuestas */
+        .answer-button {
+            background-color: var(--color-flamingo-pink);
+            color: white;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .answer-button:hover {
+            background-color: #E05A8D;
+        }
+        
+        /* Botones de selección múltiple */
+        .mc-button {
+            padding: 4px 10px;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px;
+            transition: background-color 0.3s, border-color 0.3s;
+            cursor: pointer;
+            background-color: #F9FAFB;
+        }
+        .mc-button:hover {
+            background-color: #F3F4F6;
+        }
+        .mc-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Estilos de diálogo con colores específicos y negrita */
+        .speaker-marisol { color: var(--color-flamingo-pink); font-weight: bold; }
+        .speaker-victoria { color: var(--color-eerie-black); font-weight: bold; }
+        .speaker-gabriela { color: var(--color-dialogue-gray); font-weight: bold; }
+        .speaker-dependiente { color: var(--color-eerie-black); font-weight: bold; }
+        
+        /* Estilo para el "cuadro con las opciones" (banco de palabras) - ROSA CLARO */
+        .word-bank {
+            background-color: var(--color-light-pink); /* Aplicación del Rosa Claro */
+            border: 1px solid #FBCFE8; /* Borde rosa suave */
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 16px 0;
+            font-family: monospace;
+            font-size: 1.1em;
+            color: #374151;
+            line-height: 1.6;
+        }
+        
+        /* Estilo para las negritas (asegura que no haya asteriscos) */
+        strong, b, .font-bold {
+            font-weight: bold;
+        }
+        
+        /* Estilo específico para los subtítulos de actividad para asegurar el color rosa */
+        .activity-subtitle {
+            color: var(--color-flamingo-pink); /* Asegura el color rosa */
+            font-size: 1.25rem; /* text-xl */
+            font-weight: bold;
+        }
+        
+        /* Estilo para asegurar que la pregunta de MC y los botones estén en la misma línea si el ancho lo permite */
+        .mc-group-line {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap; /* Permite que los botones pasen a la siguiente línea si no hay espacio */
+            gap: 8px; /* Espacio entre la pregunta y los botones */
+        }
+        .mc-question-text {
+            /* Asegura que el texto de la pregunta ocupe el espacio necesario */
+            flex-shrink: 0; /* No permite que se encoja la pregunta */
+        }
+
+    </style>
+</head>
+<body class="p-6 md:p-12 font-sans text-lg font-medium">
+
+    <!-- Título principal: III. Actividades / Activities (Ahora con ID para color garantizado) -->
+    <header class="mb-8 text-center">
+        <h1 id="main-title" class="text-4xl md:text-5xl font-extrabold text-flamingo-pink tracking-tight">
+            III. Actividades / Activities
+        </h1>
+    </header>
+
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- ==================================================================== -->
+        <!-- ACTIVIDAD A: COMPLETACIÓN -->
+        <!-- ==================================================================== -->
+        <section id="activity-a" class="mb-12">
+            <h2 class="activity-subtitle mb-2 text-justified">
+                <span class="mr-2">a.</span> Marisol, Victoria y Gabriela están conversando sobre sus planes de ir de compras. / Marisol, Victoria, and Gabriela are talking about their plans to go shopping.
+            </h2>
+            <p class="text-eerie-black font-bold mb-4 text-justified">
+                Completa las frases con la forma correcta de los adjetivos/pronombres afirmativos o negativos. / Complete the sentences with the correct form of the affirmative or negative adjectives/pronouns.
+            </p>
+
+            <!-- Banco de Palabras (Rosa Claro) -->
+            <div class="word-bank" role="complementary">
+                algún &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alguno, alguna, algunos, algunas<br>
+                ningún &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ninguno, ninguna, ningunos, ningunas
+            </div>
+
+            <div class="mb-6 p-4 border rounded-lg bg-gray-50 text-base leading-relaxed dialogue">
+                <p class="mb-2"><span class="speaker-gabriela">Gabriela:</span> ¿Hay 1. <input type="text" id="q-a-1" data-qnum="1" onkeydown="checkFillIn(this, 'a', 1)" class="input-response" /> centro comercial [mall] en la ciudad [city]?</p>
+                <p class="mb-2"><span class="speaker-victoria">Victoria:</span> Sí, hay tres centros comerciales aquí cerca.</p>
+                <p class="mb-2"><span class="speaker-gabriela">Gabriela:</span> Quiero comprar 2. <input type="text" id="q-a-2" data-qnum="2" onkeydown="checkFillIn(this, 'a', 2)" class="input-response" /> zapatos y 3. <input type="text" id="q-a-3" data-qnum="3" onkeydown="checkFillIn(this, 'a', 3)" class="input-response" /> camisetas [T-shirts].</p>
+                <p class="mb-2"><span class="speaker-marisol">Marisol:</span> Yo también quiero comprar zapatos, pero no necesito 4. <input type="text" id="q-a-4" data-qnum="4" onkeydown="checkFillIn(this, 'a', 4)" class="input-response" /> camiseta.</p>
+                <p class="mb-2"><span class="speaker-victoria">Victoria:</span> Marisol, ¿tienes 5. <input type="text" id="q-a-5" data-qnum="5" onkeydown="checkFillIn(this, 'a', 5)" class="input-response" /> vestido para la fiesta de la próxima semana?</p>
+                <p class="mb-2"><span class="speaker-marisol">Marisol:</span> No, todavía no tengo 6. <input type="text" id="q-a-6" data-qnum="6" onkeydown="checkFillIn(this, 'a', 6)" class="input-response" /> vestido para esa fiesta. Podemos ir al centro comercial con Gabriela, ¿no?</p>
+                <p class="mb-2"><span class="speaker-victoria">Victoria:</span> ¡Claro! Gabriela, vas a necesitar un vestido bonito para la fiesta del próximo sábado.</p>
+                <p class="mb-2"><span class="speaker-gabriela">Gabriela:</span> Tengo un vestido negro muy elegante.</p>
+                <p class="mb-2"><span class="speaker-marisol">Marisol:</span> La fiesta empieza a las cuatro de la tarde. El negro no es el mejor [best] color para esa hora. ¿Tienes 7. <input type="text" id="q-a-7" data-qnum="7" onkeydown="checkFillIn(this, 'a', 7)" class="input-response" /> vestido azul, rojo o verde?</p>
+                <p class="mb-2"><span class="speaker-gabriela">Gabriela:</span> No, no tengo 8. <input type="text" id="q-a-8" data-qnum="8" onkeydown="checkFillIn(this, 'a', 8)" class="input-response" /> vestido de esos colores.</p>
+                <p><span class="speaker-victoria">Victoria:</span> No importa [It doesn’t matter]. Vamos a ir juntas de compras.</p>
+            </div>
+        </section>
+        
+        <!-- ==================================================================== -->
+        <!-- ACTIVIDAD B: SELECCIÓN (Una sola línea por oración) -->
+        <!-- ==================================================================== -->
+        <section id="activity-b" class="mb-12">
+            <h2 class="activity-subtitle mb-2 text-justified">
+                <span class="mr-2">b.</span> Marisol, Victoria y Gabriela están en el centro comercial. / Marisol, Victoria, and Gabriela are at the mall.
+            </h2>
+            <p class="text-eerie-black font-bold mb-4 text-justified">
+                Escoge la opción correcta. / Choose the correct option.
+            </p>
+
+            <div class="space-y-4">
+                <!-- Pregunta 1: En una sola línea -->
+                <div class="mc-group mc-group-line p-3 border rounded-lg bg-gray-50">
+                    <div class="mc-question-text">1. Este vestido <span class="mc-input-target input-response"></span> está en venta [on sale].</div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="checkSelection(this, 'b', 1)" class="mc-button">amarillo</button>
+                        <button onclick="checkSelection(this, 'b', 1)" class="mc-button">amarilla</button>
+                        <button onclick="checkSelection(this, 'b', 1)" class="mc-button">amarillos</button>
+                        <button onclick="checkSelection(this, 'b', 1)" class="mc-button">amarillas</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2: En una sola línea -->
+                <div class="mc-group mc-group-line p-3 border rounded-lg bg-gray-50">
+                    <div class="mc-question-text">2. Aquella camiseta <span class="mc-input-target input-response"></span> es más [more] grande que [than] las otras.</div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="checkSelection(this, 'b', 2)" class="mc-button">azul</button>
+                        <button onclick="checkSelection(this, 'b', 2)" class="mc-button">azules</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3: En una sola línea -->
+                <div class="mc-group mc-group-line p-3 border rounded-lg bg-gray-50">
+                    <div class="mc-question-text">3. Los abrigos <span class="mc-input-target input-response"></span> son demasiado grandes.</div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="checkSelection(this, 'b', 3)" class="mc-button">rojo</button>
+                        <button onclick="checkSelection(this, 'b', 3)" class="mc-button">roja</button>
+                        <button onclick="checkSelection(this, 'b', 3)" class="mc-button">rojos</button>
+                        <button onclick="checkSelection(this, 'b', 3)" class="mc-button">rojas</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 4: En una sola línea -->
+                <div class="mc-group mc-group-line p-3 border rounded-lg bg-gray-50">
+                    <div class="mc-question-text">4. Los zapatos <span class="mc-input-target input-response"></span> son muy elegantes.</div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="checkSelection(this, 'b', 4)" class="mc-button">negro</button>
+                        <button onclick="checkSelection(this, 'b', 4)" class="mc-button">negra</button>
+                        <button onclick="checkSelection(this, 'b', 4)" class="mc-button">negros</button>
+                        <button onclick="checkSelection(this, 'b', 4)" class="mc-button">negras</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 5: En una sola línea -->
+                <div class="mc-group mc-group-line p-3 border rounded-lg bg-gray-50">
+                    <div class="mc-question-text">5. Generalmente, no llevo blusas, pero esta <span class="mc-input-target input-response"></span> es bonita.</div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="checkSelection(this, 'b', 5)" class="mc-button">verde</button>
+                        <button onclick="checkSelection(this, 'b', 5)" class="mc-button">verdes</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 6: En una sola línea -->
+                <div class="mc-group mc-group-line p-3 border rounded-lg bg-gray-50">
+                    <div class="mc-question-text">6. Estos pantalones <span class="mc-input-target input-response"></span> están sucios.</div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="checkSelection(this, 'b', 6)" class="mc-button">blanco</button>
+                        <button onclick="checkSelection(this, 'b', 6)" class="mc-button">blanca</button>
+                        <button onclick="checkSelection(this, 'b', 6)" class="mc-button">blancos</button>
+                        <button onclick="checkSelection(this, 'b', 6)" class="mc-button">blancas</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 7: En una sola línea -->
+                <div class="mc-group mc-group-line p-3 border rounded-lg bg-gray-50">
+                    <div class="mc-question-text">7. Esta falda <span class="mc-input-target input-response"></span> cuesta cincuenta dólares.</div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="checkSelection(this, 'b', 7)" class="mc-button">gris</button>
+                        <button onclick="checkSelection(this, 'b', 7)" class="mc-button">grises</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 8: En una sola línea -->
+                <div class="mc-group mc-group-line p-3 border rounded-lg bg-gray-50">
+                    <div class="mc-question-text">8. No me gustan [I don’t like] los calcetines <span class="mc-input-target input-response"></span>.</div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="checkSelection(this, 'b', 8)" class="mc-button">morado</button>
+                        <button onclick="checkSelection(this, 'b', 8)" class="mc-button">morada</button>
+                        <button onclick="checkSelection(this, 'b', 8)" class="mc-button">morados</button>
+                        <button onclick="checkSelection(this, 'b', 8)" class="mc-button">moradas</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ==================================================================== -->
+        <!-- ACTIVIDAD C: COMPLETACIÓN (2) -->
+        <!-- ==================================================================== -->
+        <section id="activity-c" class="mb-12">
+            <h2 class="activity-subtitle mb-2 text-justified">
+                <span class="mr-2">c.</span> Gabriela está hablando con la dependiente. / Gabriela is talking with the store clerk.
+            </h2>
+            <p class="text-eerie-black font-bold mb-4 text-justified">
+                Completa las frases con la forma correcta de los adjetivos/pronombres afirmativos o negativos. / Complete the sentences with the correct form of the affirmative or negative adjectives/pronouns.
+            </p>
+            
+            <!-- Banco de Palabras (Rosa Claro) -->
+            <div class="word-bank" role="complementary">
+                algún &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alguno, alguna, algunos, algunas<br>
+                ningún &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ninguno, ninguna, ningunos, ningunas
+            </div>
+
+            <div class="mb-6 p-4 border rounded-lg bg-gray-50 text-base leading-relaxed dialogue">
+                <p class="mb-2"><span class="speaker-dependiente">Dependiente:</span> ¡Hola! ¿Puedo ayudarla [help you]?</p>
+                <p class="mb-2"><span class="speaker-gabriela">Gabriela:</span> ¡Sí, gracias! Necesito un vestido para una fiesta.</p>
+                <p class="mb-2"><span class="speaker-dependiente">Dependiente:</span> ¿Prefiere 1. <input type="text" id="q-c-1" data-qnum="1" onkeydown="checkFillIn(this, 'c', 1)" class="input-response" /> estilo [style] en particular [particular]?</p>
+                <p class="mb-2"><span class="speaker-gabriela">Gabriela:</span> No, 2. <input type="text" id="q-c-2" data-qnum="2" onkeydown="checkFillIn(this, 'c', 2)" class="input-response" /> en particular. ¿Puede usted recomendarme [recommend to me] 3. <input type="text" id="q-c-3" data-qnum="3" onkeydown="checkFillIn(this, 'c', 3)" class="input-response" /> vestidos?</p>
+                <p class="mb-2"><span class="speaker-dependiente">Dependiente:</span> !Por supuesto [Of course]! Este blanco es perfecto para usted.</p>
+                <p class="mb-2"><span class="speaker-gabriela">Gabriela:</span> Voy a ir a una fiesta que empieza en la tarde y termina en la noche. Creo que este blanco no es una buena opción [option].</p>
+                <p><span class="speaker-dependiente">Dependiente:</span> ¡Lo lamento [I’m sorry]! Pero en esta tienda, no tenemos 4. <input type="text" id="q-c-4" data-qnum="4" onkeydown="checkFillIn(this, 'c', 4)" class="input-response" /> vestido para esas horas. Solamente tenemos 5. <input type="text" id="q-c-5" data-qnum="5" onkeydown="checkFillIn(this, 'c', 5)" class="input-response" /> vestidos para el día.</p>
+                <p class="mt-2"><span class="speaker-gabriela">Gabriela:</span> Bueno, muchas gracias.</p>
+            </div>
+        </section>
+        
+        <!-- ==================================================================== -->
+        <!-- ACTIVIDAD D: PREGUNTAS Y RESPUESTAS -->
+        <!-- ==================================================================== -->
+        <section id="activity-d" class="mb-12">
+            <h2 class="activity-subtitle mb-2 text-justified">
+                <span class="mr-2">d.</span> Responde a las siguientes preguntas. / Answer the following questions.
+            </h2>
+            <p class="text-eerie-black font-bold mb-4">
+                Escribe tu respuesta y presiona ENTER para verificar.
+            </p>
+
+            <div class="space-y-4">
+                <p class="flex flex-col sm:flex-row sm:items-center">
+                    1. ¿Generalmente, qué ropa formal lleva un hombre a una entrevista [interview] de trabajo? <input type="text" id="q-d-1" data-qnum="1" onkeydown="checkFillIn(this, 'd', 1)" class="input-response w-full sm:w-auto sm:ml-2 mt-2 sm:mt-0" />
+                </p>
+                <p class="flex flex-col sm:flex-row sm:items-center">
+                    2. ¿De qué color puede ser una manzana [apple]? <input type="text" id="q-d-2" data-qnum="2" onkeydown="checkFillIn(this, 'd', 2)" class="input-response w-full sm:w-auto sm:ml-2 mt-2 sm:mt-0" />
+                </p>
+                <p class="flex flex-col sm:flex-row sm:items-center">
+                    3. ¿Qué ropa lleva alguien en el invierno cuando hace mucho frío? <input type="text" id="q-d-3" data-qnum="3" onkeydown="checkFillIn(this, 'd', 3)" class="input-response w-full sm:w-auto sm:ml-2 mt-2 sm:mt-0" />
+                </p>
+                <p class="flex flex-col sm:flex-row sm:items-center">
+                    4. ¿Qué colores tiene la bandera de Canadá? <input type="text" id="q-d-4" data-qnum="4" onkeydown="checkFillIn(this, 'd', 4)" class="input-response w-full sm:w-auto sm:ml-2 mt-2 sm:mt-0" />
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================================================================== -->
+        <!-- RESPUESTAS CORRECTAS (Botón y Contenido Oculto) -->
+        <!-- ==================================================================== -->
+        <section id="answer-key" class="mt-16 mb-8 text-center">
+            <button onclick="toggleAnswers()" class="answer-button">
+                Mostrar / Ocultar Respuestas Correctas
+            </button>
+            
+            <div id="correct-answers-content" class="hidden mt-6 p-6 bg-gray-100 border border-gray-300 rounded-lg text-left">
+                <h2 class="text-2xl font-bold text-eerie-black mb-4">IV. Respuestas correctas / Correct Answers</h2>
+                
+                <div class="mb-4">
+                    <h3 class="text-xl font-semibold text-eerie-black mb-2">a.</h3>
+                    <div class="grid grid-cols-2 gap-x-8 text-lg">
+                        <p>1. algún</p><p>5. algún</p>
+                        <p>2. algunos</p><p>6. ningún</p>
+                        <p>3. algunas</p><p>7. algún</p>
+                        <p>4. ninguna</p><p>8. ningún</p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="text-xl font-semibold text-eerie-black mb-2">b.</h3>
+                    <div class="grid grid-cols-2 gap-x-8 text-lg">
+                        <p>1. amarillo</p><p>5. verde</p>
+                        <p>2. azul</p><p>6. blancos</p>
+                        <p>3. rojos</p><p>7. gris</p>
+                        <p>4. negros</p><p>8. morados</p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="text-xl font-semibold text-eerie-black mb-2">c.</h3>
+                    <div class="grid grid-cols-2 gap-x-8 text-lg">
+                        <p>1. algún</p><p>4. ningún</p>
+                        <p>2. ninguno</p><p>5. algunos</p>
+                        <p>3. algunos</p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="text-xl font-semibold text-eerie-black mb-2">d.</h3>
+                    <div class="space-y-2 text-lg">
+                        <p>1. Lleva un saco o un traje con una corbata.</p>
+                        <p>2. Una manzana puede ser verde, roja o amarilla.</p>
+                        <p>3. Lleva un suéter, un abrigo, botas y un sombrero de invierno.</p>
+                        <p>4. La bandera de Canadá es roja y blanca.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Respuestas correctas (basadas en la sección IV)
+        const correctAnswers = {
+            a: {
+                1: "algún", 2: "algunos", 3: "algunas", 4: "ninguna", 5: "algún", 6: "ningún", 7: "algún", 8: "ningún"
+            },
+            b: {
+                1: "amarillo", 2: "azul", 3: "rojos", 4: "negros", 5: "verde", 6: "blancos", 7: "gris", 8: "morados"
+            },
+            c: {
+                1: "algún", 2: "ninguno", 3: "algunos", 4: "ningún", 5: "algunos"
+            },
+            // Las respuestas de la sección D deben ser exactas para la verificación simple
+            d: {
+                1: "Lleva un saco o un traje con una corbata.",
+                2: "Una manzana puede ser verde, roja o amarilla.",
+                3: "Lleva un suéter, un abrigo, botas y un sombrero de invierno.",
+                4: "La bandera de Canadá es roja y blanca."
+            }
+        };
+
+        // Función para cambiar la visibilidad de la sección de respuestas
+        function toggleAnswers() {
+            const content = document.getElementById('correct-answers-content');
+            content.classList.toggle('hidden');
+        }
+
+        // Función para limpiar y normalizar el texto para la comparación
+        function normalizeText(text) {
+            // Elimina espacios al inicio/final, convierte a minúsculas y quita puntuación (puntos, comas)
+            return text.trim().toLowerCase().replace(/[.,]/g, '');
+        }
+
+        // Función para verificar la respuesta de completar (Actividades A, C, D)
+        function checkFillIn(input, activityId, qNum) {
+            // Se ejecuta solo al presionar 'Enter'
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Previene el comportamiento predeterminado
+                const userAnswer = normalizeText(input.value);
+                const rawCorrectAnswer = correctAnswers[activityId][qNum];
+                
+                let isCorrect = false;
+
+                if (activityId === 'd') {
+                    // Para la actividad D, comprobación de la respuesta clave (estricta por simplicidad)
+                    const normalizedAnswer = normalizeText(rawCorrectAnswer);
+                    isCorrect = userAnswer === normalizedAnswer;
+
+                } else {
+                    // Para A y C, se espera la palabra exacta
+                    const correctAnswer = normalizeText(rawCorrectAnswer);
+                    isCorrect = userAnswer === correctAnswer;
+                }
+
+                // Clases de Tailwind para el estilo
+                const correctClasses = ['bg-green-100', 'border-green-500'];
+                const incorrectClasses = ['bg-red-100', 'border-red-500'];
+
+                // Limpiar clases de estado anteriores
+                input.classList.remove(...correctClasses, ...incorrectClasses, 'border-gray-300');
+
+                if (isCorrect) {
+                    input.classList.add(...correctClasses);
+                    input.disabled = true; // Deshabilita si es correcta
+
+                    // Lógica para saltar al siguiente input *dentro de la misma actividad*
+                    if (activityId !== 'd') {
+                        // Busca todos los inputs de texto *habilitados* en la sección actual
+                        const allInputsInActivity = Array.from(
+                            document.querySelectorAll(`#activity-${activityId} input[type="text"]:not([disabled])`)
+                        );
+                        
+                        // Busca el input actual en esa lista
+                        const currentIndex = allInputsInActivity.indexOf(input);
+
+                        // Si existe un siguiente input en la lista, enfócalo
+                        if (currentIndex !== -1 && currentIndex < allInputsInActivity.length - 1) {
+                            allInputsInActivity[currentIndex + 1].focus();
+                        }
+                    }
+                } else {
+                    input.classList.add(...incorrectClasses);
+                    // El cursor permanece en el input si es incorrecto
+                }
+            }
+        }
+
+        // Función para verificar la selección (Actividad B)
+        function checkSelection(button, activityId, qNum) {
+            const parent = button.closest('.mc-group');
+            const targetSpan = parent.querySelector('.mc-input-target');
+            const allButtons = parent.querySelectorAll('.mc-button');
+            const actualCorrectAnswer = correctAnswers[activityId][qNum];
+            
+            const selectedAnswer = button.textContent;
+
+            // Deshabilitar todos los botones para esta pregunta
+            allButtons.forEach(btn => btn.disabled = true);
+
+            const isCorrect = normalizeText(selectedAnswer) === normalizeText(actualCorrectAnswer);
+
+            // Clases de Tailwind
+            const correctClasses = ['bg-green-100', 'border-green-500'];
+            const incorrectClasses = ['bg-red-100', 'border-red-500'];
+
+            // Limpiar clases de estado del contenedor de respuesta
+            targetSpan.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500');
+
+            if (isCorrect) {
+                // Correcto: Botón presionado y espacio de respuesta en verde
+                button.classList.add('bg-green-300', 'border-green-600');
+                targetSpan.classList.add(...correctClasses);
+                // Rellena el espacio con la selección correcta
+                targetSpan.innerHTML = `<strong class="text-eerie-black">${selectedAnswer}</strong>`;
+            } else {
+                // Incorrecto: Botón presionado en rojo, espacio en rojo
+                button.classList.add('bg-red-300', 'border-red-600');
+                targetSpan.classList.add(...incorrectClasses);
+                targetSpan.innerHTML = `<span class="text-red-600 font-bold">Incorrecto</span>`;
+
+                // Resaltar la respuesta correcta en verde para feedback
+                allButtons.forEach(btn => {
+                    if (normalizeText(btn.textContent) === normalizeText(actualCorrectAnswer)) {
+                        btn.classList.add('bg-green-100', 'border-green-500');
+                    }
+                });
+            }
+        }
+
+        // Establece el foco inicial en el primer input de la actividad 'a' al cargar la página.
+        window.onload = () => {
+             const firstInput = document.getElementById('q-a-1');
+             if (firstInput) {
+                 firstInput.focus();
+             }
+        };
+    </script>
+</body>
+</html>
