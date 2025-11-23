@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <!-- Carga de Tailwind CSS: Incluyendo un parámetro de versión simulado en el script (aunque no es para CSS estático, cumple con la intención de cache-control) -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    <style>
+        /* Intención de la fuente "Platform Medium Font"
+        Usamos una pila de fuentes sans-serif moderna, asegurando un diseño limpio y legible, 
+        ya que "Platform Medium Font" no es una fuente web estándar.
+        */
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+    </style>
+    <script>
+        // Configuración de colores personalizados de Tailwind
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        'light-pink': '#FEE7F0', /* Usado para botones iniciales */
+                        'success-green': '#A7F3D0', /* Un verde claro para el éxito (lime-300) */
+                        'error-red': '#FCA5A5',    /* Un rojo claro para el error (red-300) */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-eerie-black min-h-screen flex flex-col items-center p-4 sm:p-8">
+
+    <!-- Contenedor principal y cabecera -->
+    <header class="text-center mb-8 w-full max-w-4xl">
+        <h1 class="text-5xl sm:text-7xl font-bold text-flamingo-pink mb-2">Matching game</h1>
+        <h2 class="text-xl sm:text-2xl text-eerie-black font-semibold">test your memory</h2>
+    </header>
+
+    <!-- Navegación de Niveles -->
+    <nav id="level-nav" class="flex flex-wrap justify-center gap-2 mb-8 w-full max-w-4xl"></nav>
+
+    <!-- Contenedor del Juego -->
+    <div id="game-container" class="w-full max-w-4xl p-4 bg-white rounded-xl shadow-2xl border-2 border-flamingo-pink">
+        <div id="columns-container" class="grid grid-cols-2 gap-4">
+            <!-- Las columnas de botones se renderizarán aquí -->
+        </div>
+        
+        <!-- El mensaje de "Nivel Completado" ha sido ELIMINADO según la solicitud del usuario. -->
+    </div>
+
+    <script type="text/javascript">
+        // Diccionario de vocabulario por niveles
+        const VOCABULARY = [
+            // Nivel 1 (7 pares)
+            [
+                { es: 'tener que ver con', en: 'to have to do with', id: 'a1' },
+                { es: 'la parte', en: 'part', id: 'a2' },
+                { es: 'la categoría', en: 'category', id: 'a3' },
+                { es: 'el miembro', en: 'member', id: 'a4' },
+                { es: 'varios', en: 'various', id: 'a5' },
+                { es: 'el momento', en: 'moment', id: 'a6' },
+                { es: 'la ciudad', en: 'city', id: 'a7' },
+            ],
+            // Nivel 2 (8 pares)
+            [
+                { es: 'en un momento', en: 'in a moment', id: 'b1' },
+                { es: 'delicioso', en: 'delicious', id: 'b2' },
+                { es: 'rico', en: 'rich, delicious', id: 'b3' },
+                { es: 'casado', en: 'married', id: 'b4' },
+                { es: 'explicar', en: 'to explain', id: 'b5' },
+                { es: 'llamarse', en: 'to call oneself', id: 'b6' },
+                { es: 'secarse', en: 'to dry oneself', id: 'b7' },
+                { es: 'bañarse', en: 'to bathe oneself', id: 'b8' },
+            ],
+            // Nivel 3 (8 pares)
+            [
+                { es: 'despertarse', en: 'to wake up', id: 'c1' },
+                { es: 'afeitarse', en: 'to shave', id: 'c2' },
+                { es: 'levantarse', en: 'to get up', id: 'c3' },
+                { es: 'cepillarse los dientes', en: 'to brush your teeth', id: 'c4' },
+                { es: 'acostarse', en: 'to go to bed', id: 'c5' },
+                { es: 'maquillarse', en: 'to put on makeup', id: 'c6' },
+                { es: 'dormirse', en: 'to fall asleep', id: 'c7' },
+                { es: 'ponerse la ropa', en: 'to put on clothing', id: 'c8' },
+            ],
+            // Nivel 4 (8 pares)
+            [
+                { es: 'quitarse la ropa', en: 'to take off clothing', id: 'd1' },
+                { es: 'lavarse', en: 'to wash oneself', id: 'd2' },
+                { es: 'vestirse', en: 'to get dressed', id: 'd3' },
+                { es: 'ducharse', en: 'to shower', id: 'd4' },
+                { es: 'la fruta', en: 'fruit', id: 'd5' },
+                { es: 'el arroz con leche', en: 'rice pudding', id: 'd6' },
+                { es: 'la zanahoria', en: 'carrot', id: 'd7' },
+                { es: 'los dulces', en: 'candy', id: 'd8' },
+            ],
+            // Nivel 5 (8 pares)
+            [
+                { es: 'el plátano/la banana/el banano', en: 'banana', id: 'e1' },
+                { es: 'la fresa', en: 'strawberry', id: 'e2' },
+                { es: 'la pera', en: 'pear', id: 'e3' },
+                { es: 'la manzana', en: 'apple', id: 'e4' },
+                { es: 'la uva', en: 'grape', id: 'e5' },
+                { es: 'la naranja', en: 'orange', id: 'e6' },
+                { es: 'el limón', en: 'lemon', id: 'e7' },
+                { es: 'el flan', en: 'custard', id: 'e8' },
+            ],
+            // Nivel 6 (8 pares)
+            [
+                { es: 'el melón', en: 'melon', id: 'f1' },
+                { es: 'la cebolla', en: 'onion', id: 'f2' },
+                { es: 'el aguacate', en: 'avocado', id: 'f3' },
+                { es: 'el chile', en: 'chili, chili pepper', id: 'f4' },
+                { es: 'la piña', en: 'pineapple', id: 'f5' },
+                { es: 'el chocolate', en: 'chocolate', id: 'f6' },
+                { es: 'la toronja', en: 'grapefruit', id: 'f7' },
+                { es: 'el brócoli', en: 'broccoli', id: 'f8' },
+            ]
+        ];
+
+        // --- Estado del Juego ---
+        let currentLevel = 0; // Índice (0-5)
+        let selectedButton = null;
+        let isProcessing = false;
+        let matchedPairsCount = 0;
+        let totalPairs = 0;
+
+        const levelNavEl = document.getElementById('level-nav');
+        const columnsContainerEl = document.getElementById('columns-container');
+        // Se ha ELIMINADO la referencia a completionMessageEl
+
+        /**
+         * Función auxiliar para mezclar un array (Algoritmo de Fisher-Yates).
+         * @param {Array<T>} array 
+         * @returns {Array<T>} Array mezclado.
+         * @template T
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /**
+         * Inicializa el juego para el nivel dado.
+         * @param {number} levelIndex Índice del nivel (0 a 5).
+         */
+        function initGame(levelIndex) {
+            if (levelIndex < 0 || levelIndex >= VOCABULARY.length) return;
+
+            currentLevel = levelIndex;
+            selectedButton = null;
+            isProcessing = false;
+            matchedPairsCount = 0;
+
+            const words = VOCABULARY[currentLevel];
+            totalPairs = words.length;
+
+            // Se ha ELIMINADO la línea que ocultaba el mensaje de completado.
+
+            // Preparar las palabras para la mezcla y renderizado
+            let spanishWords = words.map(p => ({ text: p.es, id: p.id, lang: 'es' }));
+            let englishWords = words.map(p => ({ text: p.en, id: p.id, lang: 'en' }));
+
+            // Mezclar ambas listas de palabras
+            shuffleArray(spanishWords);
+            shuffleArray(englishWords);
+
+            renderLevelNav();
+            renderButtons(spanishWords, englishWords);
+        }
+
+        /**
+         * Renderiza los botones del juego en dos columnas.
+         * @param {Array<Object>} spanishWords Lista de objetos de palabras en español.
+         * @param {Array<Object>} englishWords Lista de objetos de palabras en inglés.
+         */
+        function renderButtons(spanishWords, englishWords) {
+            columnsContainerEl.innerHTML = ''; // Limpiar el contenedor
+
+            // Crear y rellenar la columna en español (Columna 1)
+            const col1 = document.createElement('div');
+            col1.className = 'flex flex-col gap-3';
+            spanishWords.forEach(word => {
+                col1.appendChild(createButton(word.text, word.id, word.lang));
+            });
+            
+            // Crear y rellenar la columna en inglés (Columna 2)
+            const col2 = document.createElement('div');
+            col2.className = 'flex flex-col gap-3';
+            englishWords.forEach(word => {
+                col2.appendChild(createButton(word.text, word.id, word.lang));
+            });
+
+            columnsContainerEl.appendChild(col1);
+            columnsContainerEl.appendChild(col2);
+        }
+        
+        /**
+         * Crea un botón de vocabulario con la clase y estilos requeridos.
+         * @param {string} text Texto del botón.
+         * @param {string} matchId ID para el emparejamiento.
+         * @param {string} lang Idioma del botón ('es' o 'en').
+         * @returns {HTMLButtonElement} El elemento botón creado.
+         */
+        function createButton(text, matchId, lang) {
+            const button = document.createElement('button');
+            
+            // Clases de estilo inicial para el botón pequeño
+            button.className = 'vocab-btn p-2 rounded-lg text-eerie-black font-semibold text-sm transition duration-150 ease-in-out ' +
+                                'bg-light-pink hover:bg-flamingo-pink hover:text-white ' +
+                                'border-b-4 border-flamingo-pink shadow-md';
+            
+            button.textContent = text;
+            button.dataset.matchId = matchId;
+            button.dataset.lang = lang; // Para evitar emparejar ES con ES o EN con EN
+            button.onclick = handleButtonClick;
+            
+            return button;
+        }
+
+
+        /**
+         * Lógica principal al hacer clic en un botón.
+         * @param {Event} event 
+         */
+        function handleButtonClick(event) {
+            if (isProcessing) return; // Bloquear clics mientras se procesa un par
+
+            const clickedButton = event.currentTarget;
+
+            // 1. Si el botón ya está emparejado o deshabilitado, ignorar
+            if (clickedButton.disabled) return;
+
+            // 2. Primer clic: Seleccionar el botón
+            if (!selectedButton) {
+                // Prevenir seleccionar dos botones del mismo idioma
+                const allSelected = document.querySelectorAll('.vocab-btn.bg-flamingo-pink');
+                if (allSelected.length > 0 && allSelected[0].dataset.lang === clickedButton.dataset.lang) {
+                     // Si ya hay uno seleccionado del mismo idioma, deseleccionarlo primero
+                     allSelected.forEach(btn => btn.classList.remove('bg-flamingo-pink', 'text-white'));
+                     selectedButton = null;
+                }
+                
+                selectedButton = clickedButton;
+                selectedButton.classList.add('bg-flamingo-pink', 'text-white');
+                return;
+            }
+
+            // 3. Segundo clic: Ya hay uno seleccionado
+            if (clickedButton === selectedButton) {
+                // Clic en el mismo botón: deseleccionar
+                selectedButton.classList.remove('bg-flamingo-pink', 'text-white');
+                selectedButton = null;
+                return;
+            }
+
+            // Prevenir seleccionar dos botones del mismo idioma en el segundo clic
+            if (selectedButton.dataset.lang === clickedButton.dataset.lang) {
+                // Deseleccionar el primero, seleccionar el nuevo
+                selectedButton.classList.remove('bg-flamingo-pink', 'text-white');
+                selectedButton = clickedButton;
+                selectedButton.classList.add('bg-flamingo-pink', 'text-white');
+                return;
+            }
+
+            // Deshabilitar temporalmente los clics
+            isProcessing = true;
+            
+            // 4. Verificar la coincidencia
+            if (selectedButton.dataset.matchId === clickedButton.dataset.matchId) {
+                // --- ACIERTO (Cambiar a Verde) ---
+                handleMatchSuccess(selectedButton, clickedButton);
+            } else {
+                // --- ERROR (Cambiar a Rojo y revertir) ---
+                handleMatchError(selectedButton, clickedButton);
+            }
+        }
+
+        /**
+         * Maneja el éxito de la coincidencia.
+         * @param {HTMLButtonElement} btn1 
+         * @param {HTMLButtonElement} btn2 
+         */
+        function handleMatchSuccess(btn1, btn2) {
+            // Quitar el color de selección (flamingo-pink) y aplicar el color de éxito (light-green)
+            btn1.classList.remove('bg-flamingo-pink', 'text-white', 'border-flamingo-pink', 'bg-light-pink', 'shadow-md');
+            btn2.classList.remove('bg-flamingo-pink', 'text-white', 'border-flamingo-pink', 'bg-light-pink', 'shadow-md');
+
+            btn1.classList.add('bg-success-green', 'border-b-4', 'border-green-600', 'shadow-lg');
+            btn2.classList.add('bg-success-green', 'border-b-4', 'border-green-600', 'shadow-lg');
+
+            // Deshabilitar permanentemente y limpiar estado
+            btn1.disabled = true;
+            btn2.disabled = true;
+            selectedButton = null;
+            isProcessing = false;
+            
+            matchedPairsCount++;
+            
+            // Verificar si el nivel ha terminado
+            if (matchedPairsCount === totalPairs) {
+                // Ya no mostramos el mensaje de "¡Nivel Completado!".
+                
+                // Pasar al siguiente nivel automáticamente
+                setTimeout(() => {
+                    if (currentLevel < VOCABULARY.length - 1) {
+                        initGame(currentLevel + 1);
+                    } else {
+                        // El último nivel se ha completado. La navegación sigue activa.
+                    }
+                }, 1000); // Espera 1 segundo antes de avanzar
+            }
+        }
+
+        /**
+         * Maneja el error de coincidencia.
+         * @param {HTMLButtonElement} btn1 
+         * @param {HTMLButtonElement} btn2 
+         */
+        function handleMatchError(btn1, btn2) {
+            // Quitar el color de selección (flamingo-pink) y aplicar el color de error (light-red)
+            btn1.classList.remove('bg-flamingo-pink', 'text-white');
+            btn2.classList.remove('bg-flamingo-pink', 'text-white');
+
+            btn1.classList.add('bg-error-red');
+            btn2.classList.add('bg-error-red');
+
+            // Revertir a los colores originales después de 800ms
+            setTimeout(() => {
+                btn1.classList.remove('bg-error-red');
+                btn2.classList.remove('bg-error-red');
+
+                // Volver a los colores originales de botón
+                btn1.classList.add('bg-light-pink');
+                btn2.classList.add('bg-light-pink');
+
+                // Limpiar el estado
+                selectedButton = null;
+                isProcessing = false;
+            }, 800);
+        }
+
+        /**
+         * Renderiza los botones de navegación de niveles.
+         */
+        function renderLevelNav() {
+            levelNavEl.innerHTML = ''; // Limpiar la navegación
+            
+            VOCABULARY.forEach((_, index) => {
+                const button = document.createElement('button');
+                button.textContent = `Nivel ${index + 1}`;
+                
+                // Clases de estilo para la navegación
+                let classes = 'p-2 text-sm font-bold rounded-lg transition duration-150 ease-in-out shadow-md';
+
+                if (index === currentLevel) {
+                    // Botón de nivel actual (Resaltado)
+                    classes += ' bg-flamingo-pink text-white border-b-4 border-red-700';
+                } else {
+                    // Botones de nivel no actual
+                    classes += ' bg-light-pink text-eerie-black border-b-4 border-flamingo-pink hover:bg-flamingo-pink hover:text-white';
+                }
+
+                button.className = classes;
+                button.onclick = () => initGame(index);
+                levelNavEl.appendChild(button);
+            });
+        }
+
+        // --- Inicialización del Juego al cargar la página ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initGame(0); // Cargar el Nivel 1 por defecto
+        });
+
+    </script>
+</body>
+</html>

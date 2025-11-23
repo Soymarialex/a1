@@ -1,0 +1,253 @@
+<!-- This single-file HTML page contains all necessary structure, styling (Tailwind CSS), and content. -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflexive Verbs</title>
+    <!-- Load Tailwind CSS CDN with cache control parameter for anti-rotura deployment -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    <style>
+        /* Custom Font Setup (using Inter as a modern, clean sans-serif similar to Platform Medium) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        :root {
+            --color-text: #121118; /* Eerie Black */
+            --color-accent: #FF79AC; /* Flamingo Pink */
+            --color-background: #FFFFFF; /* White */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            line-height: 1.6;
+        }
+
+        /* Enforce Justification for all main text */
+        .text-justified {
+            text-align: justify;
+            hyphens: auto; /* Optional: helps with justification */
+        }
+
+        /* Custom Separator Style for Vocabulary groups (light gray) */
+        .vocab-divider {
+            border-top: 1px solid #E5E7EB; /* Light gray border-gray-200 equivalent */
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="p-6 md:p-12 lg:p-16 max-w-4xl mx-auto">
+
+    <header class="mb-8">
+        <h1 class="text-4xl font-extrabold text-center" style="color: var(--color-accent);">
+            Reflexive Verbs
+        </h1>
+    </header>
+
+    <!-- I. Vocabulario nuevo / New Vocabulary -->
+    <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-6 border-b-2 pb-2" style="border-color: var(--color-accent);">
+            I. Vocabulario nuevo / New Vocabulary
+        </h2>
+
+        <div class="space-y-4">
+            <!-- Grupo 1: Pronombres Reflexivos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><span class="font-bold">me</span> – myself</div>
+                <div><span class="font-bold">nos</span> – ourselves</div>
+                <div><span class="font-bold">te</span> – yourself [informal, singular]</div>
+                <div><span class="font-bold">os</span> – yourselves [informal]</div>
+                <div><span class="font-bold">se</span> – himself, herself, yourself [formal]</div>
+                <div><span class="font-bold">se</span> – themselves, yourselves [formal]</div>
+            </div>
+
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 2: Frase Verbal -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><span class="font-bold">tener que ver con</span> – to have to do with</div>
+            </div>
+
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 3: Sustantivos y Adjetivos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><span class="font-bold">la parte</span> – part</div>
+                <div><span class="font-bold">la categoría</span> – category</div>
+                <div><span class="font-bold">el miembro</span> – member</div>
+                <div><span class="font-bold">varios</span> – various</div>
+                <div><span class="font-bold">el momento</span> – moment</div>
+                <div><span class="font-bold">la ciudad</span> – city</div>
+                <div><span class="font-bold">en un momento</span> – in a moment</div>
+            </div>
+
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 4: Más Sustantivos y Adjetivos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><span class="font-bold">el verbo reflexivo</span> – reflexive verb</div>
+                <div><span class="font-bold">delicioso</span> – delicious</div>
+                <div><span class="font-bold">rico</span> – rich, delicious</div>
+                <div><span class="font-bold">casado</span> – married</div>
+            </div>
+
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 5: Verbo simple -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><span class="font-bold">explicar</span> – to explain</div>
+            </div>
+
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 6: Verbos Reflexivos (Rutina Diaria) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><span class="font-bold">llamarse</span> – to call oneself</div>
+                <div><span class="font-bold">secarse</span> – to dry oneself</div>
+                <div><span class="font-bold">despertarse</span> – to wake up</div>
+                <div><span class="font-bold">afeitarse</span> – to shave</div>
+                <div><span class="font-bold">levantarse</span> – to get up</div>
+                <div><span class="font-bold">cepillarse los dientes</span> – to brush your teeth</div>
+                <div><span class="font-bold">acostarse</span> – to go to bed</div>
+                <div><span class="font-bold">maquillarse</span> – to put on makeup</div>
+                <div><span class="font-bold">dormirse</span> – to fall asleep</div>
+                <div><span class="font-bold">ponerse la ropa</span> – to put on clothing</div>
+                <div><span class="font-bold">bañarse</span> – to bathe oneself</div>
+                <div><span class="font-bold">quitarse la ropa</span> – to take off clothing</div>
+                <div><span class="font-bold">lavarse</span> – to wash oneself</div>
+                <div><span class="font-bold">vestirse</span> – to get dressed</div>
+                <div><span class="font-bold">ducharse</span> – to shower</div>
+            </div>
+
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 7: Frutas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><span class="font-bold">la fruta</span> – fruit</div>
+                <div><span class="font-bold">el plátano/la banana/el banano</span> – banana</div>
+                <div><span class="font-bold">la fresa</span> – strawberry</div>
+                <div><span class="font-bold">la pera</span> – pear</div>
+                <div><span class="font-bold">la manzana</span> – apple</div>
+                <div><span class="font-bold">la uva</span> – grape</div>
+                <div><span class="font-bold">la naranja</span> – orange</div>
+                <div><span class="font-bold">el limón</span> – lemon</div>
+            </div>
+
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 8: Más Comida/Vegetales -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><span class="font-bold">el melón</span> – melon</div>
+                <div><span class="font-bold">la cebolla</span> – onion</div>
+                <div><span class="font-bold">el aguacate</span> – avocado</div>
+                <div><span class="font-bold">el chile</span> – chili, chili pepper</div>
+                <div><span class="font-bold">la piña</span> – pineapple</div>
+                <div><span class="font-bold">el chocolate</span> – chocolate</div>
+                <div><span class="font-bold">la toronja</span> – grapefruit</div>
+                <div><span class="font-bold">el flan</span> – custard</div>
+                <div><span class="font-bold">el brócoli</span> – broccoli</div>
+                <div><span class="font-bold">el arroz con leche</span> – rice pudding</div>
+                <div><span class="font-bold">la zanahoria</span> – carrot</div>
+                <div><span class="font-bold">los dulces</span> – candy</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- II. Repaso general / General Review -->
+    <section class="mt-12">
+        <h2 class="text-2xl font-semibold mb-6 border-b-2 pb-2" style="border-color: var(--color-accent);">
+            II. Repaso general / General Review
+        </h2>
+
+        <!-- A. Reflexive Verbs -->
+        <h3 class="text-xl font-bold mb-3 mt-6">A. Reflexive Verbs</h3>
+        <p class="text-justified mb-4">
+            Reflexive verbs are used to describe an action in which the subject and the object of the action are the same. One meaning of the word “reflexive” is “directed or turned back on itself,” and that’s what happens with reflexive verbs: The subject performs the action back on itself. The reflexive pronouns, which must accompany reflexive verbs, are <span class="font-bold">me</span>, <span class="font-bold">te</span>, <span class="font-bold">se</span>, <span class="font-bold">nos</span>, and <span class="font-bold">os</span>. An example of these pronouns shown with a reflexive verb conjugated in the present is as follows.
+        </p>
+
+        <!-- Tabla de Conjugación -->
+        <div class="bg-gray-50 p-4 rounded-lg shadow-inner mb-6">
+            <p class="font-bold mb-2">levantarse <span class="font-normal">[to get up]</span></p>
+            <div class="grid grid-cols-2 gap-2 text-sm md:text-base">
+                <div><span class="font-bold">me</span> levanto</div>
+                <div><span class="font-bold">nos</span> levantamos</div>
+                <div><span class="font-bold">te</span> levantas</div>
+                <div><span class="font-bold">os</span> levantáis</div>
+                <div><span class="font-bold">se</span> levanta</div>
+                <div><span class="font-bold">se</span> levantan</div>
+            </div>
+        </div>
+
+        <p class="text-justified mb-4">
+            Like direct and indirect object pronouns, reflexive pronouns go before a conjugated verb (e.g., <span class="italic"><span class="font-bold">Me visto a las ocho</span> is “I get dressed at eight o’clock”) and either before the conjugated verb or after and attached to an infinitive or present participle (e.g., <span class="italic"><span class="font-bold">Se van a lavar las manos</span> and <span class="italic"><span class="font-bold">Van a lavarse las manos</span> are “They are going to wash their hands”; <span class="italic"><span class="font-bold">Me estoy afeitando</span> and <span class="italic"><span class="font-bold">Estoy afeitándome</span> are “I am shaving myself”).
+        </p>
+
+        <!-- B. Ways to Practice Food Vocabulary -->
+        <h3 class="text-xl font-bold mb-3 mt-8">B. Ways to Practice Food Vocabulary</h3>
+        <p class="text-justified mb-4">
+            One resource that can help you gain familiarity with food vocabulary is the website elgourmet.com. It’s a place where you can explore lots of recipes and articles related to food, and it’s entirely in Spanish. You can also practice your food vocabulary in, for example, a Mexican restaurant. If there’s Spanish on the menu, read the Spanish. And if your waitress or waiter speaks Spanish, speak as much of the language as you can. In fact, you could tell your server something like this: <span class="italic">Estoy tomando un curso de español y mi tarea es hablar solo español aquí. ¿Le parece bien?</span>, which is “I’m taking a Spanish course and my homework is to speak only Spanish here. Does that seem okay to you?”.
+        </p>
+
+        <!-- C. Uses of estar -->
+        <h3 class="text-xl font-bold mb-3 mt-8">C. Uses of estar</h3>
+        <p class="text-justified mb-4">
+            The four basic uses of <span class="font-bold">estar</span> are as follows.
+        </p>
+        <ol class="list-decimal list-inside space-y-3 pl-4 text-justified">
+            <li>
+                With the present participle to talk about something happening right now, a construction known as the present progressive (e.g., <span class="italic"><span class="font-bold">Estamos trabajando ahora mismo</span> is “We are working right now”).
+            </li>
+            <li>
+                To talk about the location of someone or something (e.g., <span class="italic"><span class="font-bold">Las zanahorias están en la mesa</span> is “The carrots are on the table”). [Note: The exceptions to this use of <span class="font-bold">estar</span> are when talking about where someone or something is from and about where an event is taking place. In those two cases, <span class="font-bold">ser</span> is used (e.g., <span class="italic"><span class="font-bold">Somos de Nicaragua</span> is “We are from Nicaragua”; <span class="italic"><span class="font-bold">La fiesta es en mi casa</span> is “The party is in my house”).]
+            </li>
+            <li>
+                To talk about a physical or emotional state or condition, including how drinks or food taste (e.g., <span class="italic"><span class="font-bold">Las meseras están ocupadas</span> is “The waitresses are busy”; <span class="italic"><span class="font-bold">El flan está rico</span> is “The custard is delicious”).
+            </li>
+            <li>
+                To talk about something that’s the result of a change, meaning the result of a previous action, such as the action of dying or getting married (e.g., <span class="italic"><span class="font-bold">Nuestro tío está muerto</span> is “Our uncle is dead”; <span class="italic"><span class="font-bold">Estamos casados</span> is “We are married”).
+            </li>
+        </ol>
+        <p class="text-justified mt-4 mb-4">
+            To summarize, <span class="font-bold">estar</span> is used with the present progressive and to express location, mental, or physical condition or the result of an action. It might help you to remember the uses of <span class="font-bold">estar</span> as the following words ending in <span class="font-bold">-tion.
+        </p>
+        <ol class="list-decimal list-inside space-y-1 pl-4 text-justified">
+            <li>Ongoing ac<span class="font-bold">tion</li>
+            <li>Loca<span class="font-bold">tion</li>
+            <li>Condition and diges<span class="font-bold">tion</li>
+            <li>Result of a previous ac<span class="font-bold">tion</li>
+        </ol>
+
+        <!-- D. Uses of ser -->
+        <h3 class="text-xl font-bold mb-3 mt-8">D. Uses of ser</h3>
+        <p class="text-justified mb-4">
+            The seven basic uses of <span class="font-bold">ser</span> are as follows.
+        </p>
+        <ol class="list-decimal list-inside space-y-3 pl-4 text-justified">
+            <li>
+                To talk about time (e.g., <span class="italic"><span class="font-bold">Mañana es el nueve de noviembre</span> is “Tomorrow is November ninth”).
+            </li>
+            <li>
+                To identify someone or something (e.g., <span class="italic"><span class="font-bold">Soy Paco</span> is “I am Paco”).
+            </li>
+            <li>
+                To describe inherent characteristics of someone or something (e.g., <span class="italic"><span class="font-bold">Nuestra madre es simpática y muy inteligente</span> is “Our mother is nice and very intelligent”).
+            </li>
+            <li>
+                With <span class="font-bold">de</span> to talk about possession, composition, or origination (e.g., <span class="italic"><span class="font-bold">¿Son tus libros?</span> is “Are they your books?”; <span class="italic"><span class="font-bold">La camisa es de algodón</span> is “It’s a cotton shirt”; <span class="italic"><span class="font-bold">Marta es de España</span> is “Marta is from Spain”). [Note: You might remember these three uses of <span class="font-bold">ser</span> with <span class="font-bold">de</span> by thinking about these three questions: <span class="italic"><span class="font-bold">¿De quién es?</span> [Whose is it?] (possession); <span class="italic"><span class="font-bold">¿De qué es?</span> [What’s it made of?] (composition); <span class="italic"><span class="font-bold">¿De dónde es?</span> [Where is he or she from?] (origination).]
+            </li>
+            <li>
+                To talk about a generalization (e.g., <span class="italic"><span class="font-bold">Es fácil preparar esta sopa</span> is “It’s easy to make this soup”).
+            </li>
+            <li>
+                To describe the location of an event (e.g., <span class="italic"><span class="font-bold">Las reuniones son en la biblioteca</span> is “The meetings are in the library”).
+            </li>
+            <li>
+                With <span class="font-bold">para</span> to say for whom or for what something is intended (e.g., <span class="italic"><span class="font-bold">Los postres son para todos</span> is “The desserts are for everyone”).
+            </li>
+        </ol>
+    </section>
+
+</body>
+</html>

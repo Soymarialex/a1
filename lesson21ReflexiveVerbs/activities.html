@@ -1,0 +1,610 @@
+<!-- This single-file HTML page contains all necessary structure, styling (Tailwind CSS), and interactive JavaScript logic. -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Load Tailwind CSS CDN with cache control parameter for anti-rotura deployment -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    <style>
+        /* Custom Font Setup (using Inter as a modern, clean sans-serif similar to Platform Medium) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        :root {
+            --color-text: #121118; /* Eerie Black */
+            --color-accent: #FF79AC; /* Flamingo Pink */
+            --color-background: #FFFFFF; /* White */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            line-height: 1.6;
+        }
+
+        /* Enforce Justification for informational text */
+        .text-justified {
+            text-align: justify;
+        }
+
+        .correct-bg { background-color: #D1FAE5; } /* Tailwind bg-green-100 */
+        .incorrect-bg { background-color: #FEE2E2; } /* Tailwind bg-red-100 */
+        .pink-accent { color: var(--color-accent); }
+        .pink-border { border-color: var(--color-accent); }
+    </style>
+</head>
+<body class="p-6 md:p-10 lg:p-12 max-w-4xl mx-auto">
+
+    <header class="mb-8">
+        <h1 class="text-4xl font-extrabold text-center pink-accent">
+            III. Actividades / Activities
+        </h1>
+    </header>
+
+    <!-- Activity A: Reflexive vs. Non-Reflexive (VR/NR) -->
+    <section id="activity-a" class="mb-10 p-4 border rounded-lg">
+        <h2 class="text-xl font-bold mb-3">a. Diana tiene cuatro años y su hermana Mariana tiene un año. Ellas pueden hacer algunas cosas solas, pero necesitan ayuda en otras. / Diana is four years old and her sister Mariana is one. They can do some things on their own, but they need help with others.</h2>
+        <p class="text-sm italic mb-4">Escribe “VR” si la frase usa un verbo reflexivo o “NR” si la frase no usa un verbo reflexivo. / Write “VR” if the sentence uses a reflexive verb or “NR” if the sentence doesn’t use a reflexive verb.</p>
+
+        <div id="questions-a" class="space-y-3">
+            <!-- Question 1 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="1">
+                <span class="font-semibold w-6">1.</span>
+                <p class="flex-grow">Mariana se despierta a las 6:00 de la mañana.</p>
+                <div class="flex space-x-2">
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="VR" data-q-id="1">VR</button>
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="NR" data-q-id="1">NR</button>
+                </div>
+            </div>
+            <!-- Question 2 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="2">
+                <span class="font-semibold w-6">2.</span>
+                <p class="flex-grow">Diana se levanta a las 7:00 de la mañana.</p>
+                <div class="flex space-x-2">
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="VR" data-q-id="2">VR</button>
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="NR" data-q-id="2">NR</button>
+                </div>
+            </div>
+            <!-- Question 3 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="3">
+                <span class="font-semibold w-6">3.</span>
+                <p class="flex-grow">Erica baña a Mariana a las 6:45 de la mañana.</p>
+                <div class="flex space-x-2">
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="VR" data-q-id="3">VR</button>
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="NR" data-q-id="3">NR</button>
+                </div>
+            </div>
+            <!-- Question 4 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="4">
+                <span class="font-semibold w-6">4.</span>
+                <p class="flex-grow">Erica se baña a las 7:15 de la mañana.</p>
+                <div class="flex space-x-2">
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="VR" data-q-id="4">VR</button>
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="NR" data-q-id="4">NR</button>
+                </div>
+            </div>
+            <!-- Question 5 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="5">
+                <span class="font-semibold w-6">5.</span>
+                <p class="flex-grow">Diana generalmente se baña a las 7:30 de la mañana.</p>
+                <div class="flex space-x-2">
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="VR" data-q-id="5">VR</button>
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="NR" data-q-id="5">NR</button>
+                </div>
+            </div>
+            <!-- Question 6 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="6">
+                <span class="font-semibold w-6">6.</span>
+                <p class="flex-grow">Diana y Erica se lavan los dientes tres veces al día.</p>
+                <div class="flex space-x-2">
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="VR" data-q-id="6">VR</button>
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="NR" data-q-id="6">NR</button>
+                </div>
+            </div>
+            <!-- Question 7 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="7">
+                <span class="font-semibold w-6">7.</span>
+                <p class="flex-grow">Erica lava la ropa de sus hijas.</p>
+                <div class="flex space-x-2">
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="VR" data-q-id="7">VR</button>
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="NR" data-q-id="7">NR</button>
+                </div>
+            </div>
+            <!-- Question 8 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="8">
+                <span class="font-semibold w-6">8.</span>
+                <p class="flex-grow">Erica cepilla el pelo de Mariana.</p>
+                <div class="flex space-x-2">
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="VR" data-q-id="8">VR</button>
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="NR" data-q-id="8">NR</button>
+                </div>
+            </div>
+            <!-- Question 9 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="9">
+                <span class="font-semibold w-6">9.</span>
+                <p class="flex-grow">Erica se maquilla frecuentemente.</p>
+                <div class="flex space-x-2">
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="VR" data-q-id="9">VR</button>
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="NR" data-q-id="9">NR</button>
+                </div>
+            </div>
+            <!-- Question 10 -->
+            <div class="flex items-center space-x-4" data-q="10">
+                <span class="font-semibold w-6">10.</span>
+                <p class="flex-grow">Algunas veces, Diana maquilla a Mariana.</p>
+                <div class="flex space-x-2">
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="VR" data-q-id="10">VR</button>
+                    <button class="btn-vrnr px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-answer="NR" data-q-id="10">NR</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activity B: Completar con Verbos Reflexivos -->
+    <section id="activity-b" class="mb-10 p-4 border rounded-lg">
+        <h2 class="text-xl font-bold mb-3">b. Javier tiene un viaje de negocios mañana y no sabe exactamente cómo debe organizar su horario. / Javier has a business trip tomorrow and doesn’t know exactly how he should organize his schedule.</h2>
+        <p class="text-sm italic mb-4">Completa el siguiente diálogo utilizando verbos reflexivos. / Complete the following dialogue using reflexive verbs.</p>
+
+        <div class="text-justified space-y-2">
+            <p><span class="font-bold">Javier:</span> Erica, ¿puedes llevarme al aeropuerto mañana? Tengo que estar en el aeropuerto a las 6:00 de la mañana. El vuelo [flight] sale a las 7:00.</p>
+            <p><span class="font-bold">Erica:</span> ¡Javier, es muy temprano! Las niñas [girls] no <span class="font-bold">1.</span> <input type="text" data-activity="b" data-index="1" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="conjugación" tabindex="1"> (levantarse) hasta más tarde. ¿No puedes dejar [leave] el carro en el aeropuerto?</p>
+            <p><span class="font-bold">Javier:</span> Bueno, puedo hacer eso. ¿Pero a qué hora tengo que <span class="font-bold">2.</span> <input type="text" data-activity="b" data-index="2" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="conjugación" tabindex="2"> (despertarse)? ¿A las 4:00?</p>
+            <p><span class="font-bold">Erica:</span> ¡Sí!, yo puedo <span class="font-bold">3.</span> <input type="text" data-activity="b" data-index="3" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="conjugación" tabindex="3"> (despertarse) también a las 4:00 para prepararte café.</p>
+            <p><span class="font-bold">Javier:</span> ¡Bueno, gracias! Si nosotros dos <span class="font-bold">4.</span> <input type="text" data-activity="b" data-index="4" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="conjugación" tabindex="4"> (levantarse) tan temprano vamos a estar muy cansados.</p>
+            <p><span class="font-bold">Erica:</span> No importa [It doesn’t matter]. Yo puedo <span class="font-bold">5.</span> <input type="text" data-activity="b" data-index="5" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="conjugación" tabindex="5"> (dormirse) un momento más tarde en la mañana. ¿A qué hora vas a <span class="font-bold">6.</span> <input type="text" data-activity="b" data-index="6" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="conjugación" tabindex="6"> (afeitarse)?</p>
+            <p><span class="font-bold">Javier:</span> No sé—quizás [maybe] a las 4:30. Voy a <span class="font-bold">7.</span> <input type="text" data-activity="b" data-index="7" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="conjugación" tabindex="7"> (bañarse) a las 4:15, y voy a <span class="font-bold">8.</span> <input type="text" data-activity="b" data-index="8" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="conjugación" tabindex="8"> (vestirse) a las 4:30.</p>
+        </div>
+    </section>
+
+    <!-- Activity C: Ser vs. Estar Selection -->
+    <section id="activity-c" class="mb-10 p-4 border rounded-lg">
+        <h2 class="text-xl font-bold mb-3">c. Escoge el verbo correcto para las siguientes frases. / Choose the correct verb for the following sentences.</h2>
+
+        <div id="questions-c" class="space-y-3">
+            <!-- Question 1 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="1">
+                <span class="font-semibold w-6">1.</span>
+                <p class="flex-grow">Javier (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="1" data-answer="está">está</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="1" data-answer="es">es</button>
+                ) preocupado por el viaje.</p>
+            </div>
+            <!-- Question 2 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="2">
+                <span class="font-semibold w-6">2.</span>
+                <p class="flex-grow">Erica (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="2" data-answer="está">está</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="2" data-answer="es">es</button>
+                ) ocupada con las niñas.</p>
+            </div>
+            <!-- Question 3 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="3">
+                <span class="font-semibold w-6">3.</span>
+                <p class="flex-grow">Javier y Erica (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="3" data-answer="están">están</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="3" data-answer="son">son</button>
+                ) casados.</p>
+            </div>
+            <!-- Question 4 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="4">
+                <span class="font-semibold w-6">4.</span>
+                <p class="flex-grow">Javier y Erica (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="4" data-answer="están">están</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="4" data-answer="son">son</button>
+                ) esposos.</p>
+            </div>
+            <!-- Question 5 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="5">
+                <span class="font-semibold w-6">5.</span>
+                <p class="flex-grow">Diana y Mariana (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="5" data-answer="están">están</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="5" data-answer="son">son</button>
+                ) hijas de Javier y Erica.</p>
+            </div>
+            <!-- Question 6 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="6">
+                <span class="font-semibold w-6">6.</span>
+                <p class="flex-grow">Javier se (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="6" data-answer="está">está</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="6" data-answer="es">es</button>
+                ) bañando en este momento.</p>
+            </div>
+            <!-- Question 7 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="7">
+                <span class="font-semibold w-6">7.</span>
+                <p class="flex-grow">Erica (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="7" data-answer="está">está</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="7" data-answer="es">es</button>
+                ) despertándose.</p>
+            </div>
+            <!-- Question 8 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="8">
+                <span class="font-semibold w-6">8.</span>
+                <p class="flex-grow">El vuelo (flight) de Javier (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="8" data-answer="es">es</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="8" data-answer="está">está</button>
+                ) a las 7:00.</p>
+            </div>
+            <!-- Question 9 (Double Selection) -->
+            <div class="flex flex-col space-x-4 border-b pb-2" data-q="9">
+                <div class="flex items-center">
+                    <span class="font-semibold w-6">9.</span>
+                    <p class="flex-grow">¿Qué hora (
+                        <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="9a" data-answer="es">es</button> /
+                        <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="9a" data-answer="está">está</button>
+                    )?</p>
+                </div>
+                <div class="flex items-center mt-2 pl-6">
+                    <p class="flex-grow">(
+                        <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="9b" data-answer="Están">Están</button> /
+                        <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="9b" data-answer="Son">Son</button>
+                    ) las 4:00.</p>
+                </div>
+            </div>
+            <!-- Question 10 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="10">
+                <span class="font-semibold w-6">10.</span>
+                <p class="flex-grow">Javier (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="10" data-answer="es">es</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="10" data-answer="está">está</button>
+                ) ingeniero [engineer].</p>
+            </div>
+            <!-- Question 11 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="11">
+                <span class="font-semibold w-6">11.</span>
+                <p class="flex-grow">Javier y Erica (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="11" data-answer="están">están</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="11" data-answer="son">son</button>
+                ) en la casa ahora.</p>
+            </div>
+            <!-- Question 12 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="12">
+                <span class="font-semibold w-6">12.</span>
+                <p class="flex-grow">Javier (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="12" data-answer="es">es</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="12" data-answer="está">está</button>
+                ) alto y amable.</p>
+            </div>
+            <!-- Question 13 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="13">
+                <span class="font-semibold w-6">13.</span>
+                <p class="flex-grow">Diana y Mariana (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="13" data-answer="están">están</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="13" data-answer="son">son</button>
+                ) durmiendo.</p>
+            </div>
+            <!-- Question 14 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="14">
+                <span class="font-semibold w-6">14.</span>
+                <p class="flex-grow">El mejor amigo de Javier (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="14" data-answer="es">es</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="14" data-answer="está">está</button>
+                ) costarricense.</p>
+            </div>
+            <!-- Question 15 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="15">
+                <span class="font-semibold w-6">15.</span>
+                <p class="flex-grow">Nosotros (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="15" data-answer="somos">somos</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="15" data-answer="estamos">estamos</button>
+                ) una familia.</p>
+            </div>
+            <!-- Question 16 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="16">
+                <span class="font-semibold w-6">16.</span>
+                <p class="flex-grow">Yo (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="16" data-answer="estoy">estoy</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="16" data-answer="soy">soy</button>
+                ) estresado [stressed] porque tengo mucho trabajo.</p>
+            </div>
+            <!-- Question 17 -->
+            <div class="flex items-center space-x-4 border-b pb-2" data-q="17">
+                <span class="font-semibold w-6">17.</span>
+                <p class="flex-grow">Yo (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="17" data-answer="estoy">estoy</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="17" data-answer="soy">soy</button>
+                ) hija de Esteban y Luisa.</p>
+            </div>
+            <!-- Question 18 -->
+            <div class="flex items-center space-x-4" data-q="18">
+                <span class="font-semibold w-6">18.</span>
+                <p class="flex-grow">Tú (
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="18" data-answer="estás">estás</button> /
+                    <button class="btn-serestar px-3 py-1 text-sm font-medium rounded-md border border-gray-300 hover:bg-gray-100 transition" data-q-id="18" data-answer="eres">eres</button>
+                ) una persona muy simpática.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activity D: Food Vocabulary Completion -->
+    <section id="activity-d" class="mb-10 p-4 border rounded-lg">
+        <h2 class="text-xl font-bold mb-3">d. Escoge la respuesta correcta. / Choose the correct answer.</h2>
+        
+        <div class="mb-4 p-3 rounded-lg bg-gray-50 border border-gray-200 text-center font-mono text-sm sm:text-base">
+            frijoles &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; brócoli &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aguacate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; postres &nbsp;&nbsp;&nbsp;&nbsp;&nbsp naranja
+        </div>
+
+        <div class="space-y-3">
+            <p><span class="font-bold">1.</span> Me gusta comer ensalada con <input type="text" data-activity="d" data-index="1" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="respuesta" tabindex="9">.</p>
+            <p><span class="font-bold">2.</span> En Centroamérica, comen muchos <input type="text" data-activity="d" data-index="2" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="respuesta" tabindex="10">.</p>
+            <p><span class="font-bold">3.</span> Me gustan todos los <input type="text" data-activity="d" data-index="3" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="respuesta" tabindex="11">.</p>
+            <p><span class="font-bold">4.</span> En las mañanas, nos gusta tomar jugo de <input type="text" data-activity="d" data-index="4" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="respuesta" tabindex="12">.</p>
+            <p><span class="font-bold">5.</span> A Diana y a Mariana no les gusta el <input type="text" data-activity="d" data-index="5" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-40 px-1 py-0.5 rounded-sm" placeholder="respuesta" tabindex="13">.</p>
+        </div>
+    </section>
+
+    <!-- Activity E: Completion (Conjugation) -->
+    <section id="activity-e" class="mb-10 p-4 border rounded-lg">
+        <h2 class="text-xl font-bold mb-3">e. Completa las siguientes respuestas. / Complete the following answers.</h2>
+
+        <div class="space-y-3">
+            <p><span class="font-bold">1.</span> ¿A qué hora te levantas? <input type="text" data-activity="e" data-index="1" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-64 px-1 py-0.5 rounded-sm" placeholder="respuesta" tabindex="14"> a las siete de la mañana.</p>
+            <p><span class="font-bold">2.</span> ¿A qué hora te acuestas? <input type="text" data-activity="e" data-index="2" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-64 px-1 py-0.5 rounded-sm" placeholder="respuesta" tabindex="15"> a las once de la noche.</p>
+            <p><span class="font-bold">3.</span> ¿Sabes cocinar arroz con leche? No, <input type="text" data-activity="e" data-index="3" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-64 px-1 py-0.5 rounded-sm" placeholder="respuesta" tabindex="16">.</p>
+            <p><span class="font-bold">4.</span> ¿Comes postres frecuentemente? Sí, <input type="text" data-activity="e" data-index="4" class="completion-input border-b border-gray-400 focus:outline-none focus:border-pink-accent w-64 px-1 py-0.5 rounded-sm" placeholder="respuesta" tabindex="17">.</p>
+        </div>
+    </section>
+
+    <!-- Answer Key Button and Display -->
+    <div class="text-center mt-12 mb-4">
+        <button id="show-answers-btn" class="px-6 py-3 font-bold text-white rounded-lg shadow-md hover:shadow-lg transition duration-200" style="background-color: var(--color-accent);" onclick="toggleAnswers()">
+            IV. Respuestas correctas / Correct Answers
+        </button>
+    </div>
+
+    <!-- Answer Key Content (Initially Hidden) -->
+    <section id="answer-key" class="hidden mt-6 p-6 border-2 rounded-lg" style="border-color: var(--color-accent);">
+        <h3 class="text-xl font-bold mb-4 pink-accent">IV. Respuestas correctas / Correct Answers</h3>
+        
+        <div class="space-y-6">
+            <!-- Answers A -->
+            <div>
+                <h4 class="font-bold text-lg mb-2">a.</h4>
+                <div class="grid grid-cols-2 gap-x-6 gap-y-1">
+                    <div><span class="font-mono text-sm">1.</span> VR</div>
+                    <div><span class="font-mono text-sm">6.</span> VR</div>
+                    <div><span class="font-mono text-sm">2.</span> VR</div>
+                    <div><span class="font-mono text-sm">7.</span> NR</div>
+                    <div><span class="font-mono text-sm">3.</span> NR</div>
+                    <div><span class="font-mono text-sm">8.</span> NR</div>
+                    <div><span class="font-mono text-sm">4.</span> VR</div>
+                    <div><span class="font-mono text-sm">9.</span> VR</div>
+                    <div><span class="font-mono text-sm">5.</span> VR</div>
+                    <div><span class="font-mono text-sm">10.</span> NR</div>
+                </div>
+            </div>
+
+            <!-- Answers B -->
+            <div>
+                <h4 class="font-bold text-lg mb-2">b.</h4>
+                <div class="grid grid-cols-2 gap-x-6 gap-y-1">
+                    <div><span class="font-mono text-sm">1.</span> se levantan</div>
+                    <div><span class="font-mono text-sm">5.</span> dormirme</div>
+                    <div><span class="font-mono text-sm">2.</span> despertarme</div>
+                    <div><span class="font-mono text-sm">6.</span> afeitarte</div>
+                    <div><span class="font-mono text-sm">3.</span> despertarme</div>
+                    <div><span class="font-mono text-sm">7.</span> bañarme</div>
+                    <div><span class="font-mono text-sm">4.</span> nos levantamos</div>
+                    <div><span class="font-mono text-sm">8.</span> vestirme</div>
+                </div>
+            </div>
+
+            <!-- Answers C -->
+            <div>
+                <h4 class="font-bold text-lg mb-2">c.</h4>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-1">
+                    <div><span class="font-mono text-sm">1.</span> está</div>
+                    <div><span class="font-mono text-sm">7.</span> está</div>
+                    <div><span class="font-mono text-sm">13.</span> están</div>
+                    <div><span class="font-mono text-sm">2.</span> está</div>
+                    <div><span class="font-mono text-sm">8.</span> es</div>
+                    <div><span class="font-mono text-sm">14.</span> es</div>
+                    <div><span class="font-mono text-sm">3.</span> están</div>
+                    <div><span class="font-mono text-sm">9.</span> es…Son</div>
+                    <div><span class="font-mono text-sm">15.</span> somos</div>
+                    <div><span class="font-mono text-sm">4.</span> son</div>
+                    <div><span class="font-mono text-sm">10.</span> es</div>
+                    <div><span class="font-mono text-sm">11.</span> están</div>
+                    <div><span class="font-mono text-sm">5.</span> son</div>
+                    <div><span class="font-mono text-sm">12.</span> es</div>
+                    <div><span class="font-mono text-sm">17.</span> soy</div>
+                    <div><span class="font-mono text-sm">6.</span> está</div>
+                    <div><span class="font-mono text-sm">18.</span> eres</div>
+                </div>
+            </div>
+            
+            <!-- Answers D -->
+            <div>
+                <h4 class="font-bold text-lg mb-2">d.</h4>
+                <div class="grid grid-cols-2 gap-x-6 gap-y-1">
+                    <div><span class="font-mono text-sm">1.</span> aguacate</div>
+                    <div><span class="font-mono text-sm">4.</span> naranja</div>
+                    <div><span class="font-mono text-sm">2.</span> frijoles</div>
+                    <div><span class="font-mono text-sm">5.</span> brócoli</div>
+                    <div><span class="font-mono text-sm">3.</span> postres</div>
+                </div>
+            </div>
+
+            <!-- Answers E -->
+            <div>
+                <h4 class="font-bold text-lg mb-2">e.</h4>
+                <div class="space-y-1">
+                    <div><span class="font-mono text-sm">1.</span> Me levanto</div>
+                    <div><span class="font-mono text-sm">2.</span> Me acuesto</div>
+                    <div><span class="font-mono text-sm">3.</span> no sé cocinar arroz con leche. / no sé cocinarlo.</div>
+                    <div><span class="font-mono text-sm">4.</span> como postres con frecuencia. / los como con frecuencia.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Clave de respuestas corregida:
+        // El índice 8 corresponde a la pregunta 9 ("Erica se maquilla frecuentemente."), y la respuesta correcta es "VR".
+        const ANSWERS = {
+            a: ["VR", "VR", "NR", "VR", "VR", "VR", "NR", "NR", "VR", "NR"],
+            b: ["se levantan", "despertarme", "despertarme", "nos levantamos", "dormirme", "afeitarte", "bañarme", "vestirme"],
+            c: {
+                "1": "está", "2": "está", "3": "están", "4": "son", "5": "son", "6": "está", "7": "está", "8": "es",
+                "9a": "es", "9b": "Son", "10": "es", "11": "están", "12": "es", "13": "están", "14": "es", "15": "somos",
+                "16": "estoy", "17": "soy", "18": "eres"
+            },
+            d: ["aguacate", "frijoles", "postres", "naranja", "brócoli"],
+            e: [
+                ["me levanto"], 
+                ["me acuesto"], 
+                ["no sé cocinar arroz con leche", "no sé cocinarlo"], 
+                ["como postres con frecuencia", "los como con frecuencia"]
+            ]
+        };
+
+        const completionInputs = Array.from(document.querySelectorAll('.completion-input'));
+
+        function normalizeInput(value) {
+            // Trim whitespace, convert to lower case, and remove accents for robust comparison.
+            return value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        // --- Activity A & C (Button Selection Logic) ---
+        function checkSelection(event) {
+            const button = event.target;
+            const qId = button.getAttribute('data-q-id');
+            const activityType = button.closest('section').id.split('-')[1]; // Determines 'a' or 'c'
+            const userAnswer = button.getAttribute('data-answer');
+            
+            // Get the correct answer(s)
+            let correctAnswer;
+            if (activityType === 'a') {
+                const qIndex = parseInt(qId) - 1;
+                correctAnswer = ANSWERS.a[qIndex];
+            } else if (activityType === 'c') {
+                // For activity C (ser/estar), questions are stored by qId string
+                correctAnswer = ANSWERS.c[qId];
+            }
+
+            const isCorrect = userAnswer === correctAnswer;
+            
+            // Apply color feedback
+            button.classList.remove('hover:bg-gray-100');
+            // Remove previous color classes before adding new one
+            button.classList.remove('correct-bg', 'incorrect-bg');
+            button.classList.add(isCorrect ? 'correct-bg' : 'incorrect-bg');
+            button.classList.add('font-bold');
+
+            // Determine the main question number for the container
+            const mainQNum = qId.replace(/[a-z]/, ''); // e.g., '9a' -> '9'
+            const questionContainer = button.closest(`[data-q="${mainQNum}"]`);
+
+            // Disable all options for this specific question ID (e.g., both VR and NR for Q9)
+            // Note: For C.9, we only disable 9a buttons or 9b buttons separately unless both are clicked.
+            if (qId.length > 1) { // Multi-part question (C.9a, C.9b)
+                const relatedButtons = questionContainer.querySelectorAll(`[data-q-id="${qId}"]`);
+                relatedButtons.forEach(btn => btn.disabled = true);
+                
+                // If both parts of C.9 are now disabled, disable the entire group
+                const allDisabled = questionContainer.querySelectorAll('.btn-serestar').length === questionContainer.querySelectorAll('.btn-serestar:disabled').length;
+                if (allDisabled) {
+                    questionContainer.querySelectorAll('.btn-serestar').forEach(btn => btn.disabled = true);
+                }
+            } else { // Single part question (A.1-10 or C.1-8, C.10-18)
+                const relatedButtons = questionContainer.querySelectorAll(`.btn-${activityType === 'a' ? 'vrnr' : 'serestar'}`);
+                relatedButtons.forEach(btn => btn.disabled = true);
+            }
+        }
+
+        // --- Activity B, D, E (Completion Logic) ---
+
+        function checkCompletion(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent form submission or standard browser behavior
+                
+                const input = event.target;
+                const activity = input.getAttribute('data-activity');
+                const index = parseInt(input.getAttribute('data-index'));
+                const userAnswer = normalizeInput(input.value);
+
+                let isCorrect = false;
+                let correctAnswers;
+                
+                if (activity === 'b') {
+                    // Activity B: Single string answer (using index - 1)
+                    correctAnswers = [normalizeInput(ANSWERS.b[index - 1])];
+                    isCorrect = correctAnswers.includes(userAnswer);
+                } else if (activity === 'd') {
+                    // Activity D: Single string answer
+                    correctAnswers = [normalizeInput(ANSWERS.d[index - 1])];
+                    isCorrect = correctAnswers.includes(userAnswer);
+                } else if (activity === 'e') {
+                    // Activity E: Array of possible string answers
+                    correctAnswers = ANSWERS.e[index - 1].map(normalizeInput);
+                    isCorrect = correctAnswers.includes(userAnswer);
+                }
+
+                // Apply color feedback
+                input.classList.remove('focus:border-pink-accent');
+                input.classList.remove('correct-bg', 'incorrect-bg'); // Clear previous feedback
+                input.classList.add(isCorrect ? 'correct-bg' : 'incorrect-bg');
+                
+                // Move focus to the next input in the document flow
+                focusNextInput(input);
+            }
+        }
+
+        function focusNextInput(currentInput) {
+            const currentActivity = currentInput.getAttribute('data-activity');
+            const currentIndex = parseInt(currentInput.getAttribute('data-index'));
+            
+            // Find the index of the next input within the current activity
+            const nextInput = completionInputs.find(input => 
+                input.getAttribute('data-activity') === currentActivity && 
+                parseInt(input.getAttribute('data-index')) === currentIndex + 1
+            );
+
+            if (nextInput) {
+                // Found next input in the SAME activity, move focus
+                nextInput.focus();
+            }
+            // If nextInput is not found, focus remains on the current input (last one in the activity).
+        }
+        
+        // --- Answer Key Toggle ---
+        function toggleAnswers() {
+            const key = document.getElementById('answer-key');
+            key.classList.toggle('hidden');
+            const button = document.getElementById('show-answers-btn');
+            if (key.classList.contains('hidden')) {
+                button.textContent = 'IV. Respuestas correctas / Correct Answers';
+            } else {
+                button.textContent = 'Ocultar Respuestas / Hide Answers';
+            }
+        }
+
+        // --- Event Listeners Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Setup listeners for VR/NR and Ser/Estar buttons
+            document.querySelectorAll('.btn-vrnr').forEach(button => {
+                button.addEventListener('click', checkSelection);
+            });
+            document.querySelectorAll('.btn-serestar').forEach(button => {
+                button.addEventListener('click', checkSelection);
+            });
+
+            // Setup listeners for completion inputs (on Enter keypress)
+            completionInputs.forEach(input => {
+                // Use keydown to ensure we catch 'Enter' before any default keyup action
+                input.addEventListener('keydown', checkCompletion);
+            });
+            
+            // Focus the first completion input manually (as requested)
+            const firstInput = document.querySelector('[data-activity="b"][data-index="1"]');
+            if (firstInput) {
+                // Set initial tabindex
+                firstInput.tabIndex = 1;
+            }
+        });
+    </script>
+
+</body>
+</html>
