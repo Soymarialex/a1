@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching game</title>
+    <!-- 
+        Uso de rutas relativas y parámetro de versión para control de caché.
+        Esto se aplica al script de Tailwind.
+    -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    
+    <script>
+        // Configuración de Tailwind para colores personalizados
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        // Colores personalizados para el juego
+                        'pink-light': '#FFDBE6', // Rosa claro para botones iniciales
+                        'green-light': '#C8E6C9', // Verde claro para acierto
+                        'red-light': '#FFCDD2',   // Rojo claro para error
+                        'pink-border': '#FF79AC',
+                    },
+                    // Usaremos 'Inter' como fuente base moderna (simulando Platform Medium Font)
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Aplicar la fuente y color de fondo/texto */
+        body {
+            background-color: white;
+            color: #121118; /* eerie-black */
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 sm:p-8 flex flex-col items-center">
+    <div class="max-w-4xl w-full">
+
+        <!-- Título de la Página -->
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-center mb-1" style="color: #FF79AC;">
+            Matching game
+        </h1>
+
+        <!-- Subtítulo -->
+        <h2 class="text-xl sm:text-2xl font-medium text-center mb-8" style="color: #121118;">
+            test your memory
+        </h2>
+
+        <!-- Contenedor de Navegación de Niveles -->
+        <div id="level-nav" class="flex flex-wrap justify-center gap-3 mb-8 p-3 bg-gray-50 rounded-lg shadow-inner">
+            <!-- Los botones de nivel se insertarán aquí por JS -->
+        </div>
+
+        <!-- Contenedor del Juego -->
+        <div id="game-board" class="grid grid-cols-2 gap-4 w-full">
+            <!-- Los botones de vocabulario se insertarán aquí por JS -->
+        </div>
+
+        <!-- Mensaje de Estado / Final del Nivel -->
+        <div id="message-container" class="mt-8 text-center min-h-8">
+            <p id="game-message" class="text-xl font-semibold"></p>
+        </div>
+        
+    </div>
+
+    <script>
+        // Definición de datos de los 7 niveles
+        const LEVEL_DATA = [
+            // Nivel 1 (7 pares)
+            [
+                { es: 'hacer', en: 'to make, to do' },
+                { es: 'ganar', en: 'to win, to earn' },
+                { es: 'poner', en: 'to put' },
+                { es: 'hacer ejercicio', en: 'to exercise' },
+                { es: 'salir', en: 'to leave, to go out' },
+                { es: 'hacer una pregunta', en: 'to ask a question' },
+                { es: 'traer', en: 'to bring' },
+            ],
+            // Nivel 2 (7 pares)
+            [
+                { es: 'hacer una fiesta', en: 'to throw a party' },
+                { es: 'explicar', en: 'to explain' },
+                { es: '¿Cómo está Carla?', en: 'How is Carla?' },
+                { es: '¿Cómo es Carla?', en: 'What is Carla like?' },
+                { es: 'el ejercicio', en: 'exercise' },
+                { es: 'la cama', en: 'bed' },
+                { es: 'la fiesta', en: 'party' }, // ¡Error corregido aquí! Faltaba el ":"
+            ],
+            // Nivel 3 (7 pares)
+            [
+                { es: 'la radio', en: 'radio' },
+                { es: 'la temperatura', en: 'temperature' },
+                { es: 'el huracán', en: 'hurricane' },
+                { es: 'los grados', en: 'degrees' },
+                { es: 'la precipitación', en: 'precipitation' },
+                { es: '¿Qué tiempo hace?', en: 'What’s the weather like?' },
+                { es: 'Truena', en: 'It’s thundering' },
+            ],
+            // Nivel 4 (7 pares)
+            [
+                { es: 'Hace buen tiempo', en: 'It’s good weather' },
+                { es: 'Está nublado', en: 'It’s cloudy' },
+                { es: 'Hace mal tiempo', en: 'It’s bad weather' },
+                { es: 'Está despejado', en: 'It’s clear (cloudless)' },
+                { es: 'Hace sol', en: 'It’s sunny' },
+                { es: 'Llueve', en: 'It’s raining' },
+                { es: 'Hace viento', en: 'It’s windy' },
+            ],
+            // Nivel 5 (7 pares)
+            [
+                { es: 'Está lloviendo', en: 'It’s raining' },
+                { es: 'Hace frío', en: 'It’s cold' },
+                { es: 'la lluvia', en: 'rain' },
+                { es: 'Hace calor', en: 'It’s hot' },
+                { es: 'Hay niebla', en: 'It’s foggy' },
+                { es: 'Hace fresco', en: 'It’s cool' },
+                { es: 'Llovizna', en: 'It’s drizzling' },
+            ],
+            // Nivel 6 (7 pares)
+            [
+                { es: 'Está a veinticinco grados', en: 'It’s twenty-five degrees' },
+                { es: 'Nieva', en: 'It’s snowing' },
+                { es: 'Hay tormenta', en: 'There’s a storm' },
+                { es: 'Hay hielo', en: 'It’s icy' },
+                { es: 'Caen rayos', en: 'It’s lightning' },
+                { es: 'la puntuación', en: 'punctuation' },
+                { es: 'el punto y coma', en: 'semicolon' },
+            ],
+            // Nivel 7 (7 pares)
+            [
+                { es: 'el signo de puntuación', en: 'punctuation mark' },
+                { es: 'los signos de interrogación', en: 'question marks' },
+                { es: 'el punto', en: 'period, point' },
+                { es: 'los signos de exclamación', en: 'exclamation marks' },
+                { es: 'dos puntos', en: 'colon' },
+                { es: 'si', en: 'if' },
+                { es: 'la coma', en: 'comma' },
+            ],
+        ];
+
+        let currentLevel = 0; // 0-indexed
+        let selectedButton = null;
+        let matchedPairsCount = 0;
+        let gameLocked = false;
+
+        const board = document.getElementById('game-board');
+        const levelNav = document.getElementById('level-nav');
+        const messageDisplay = document.getElementById('game-message');
+
+        /**
+         * Mezcla un array de forma aleatoria (algoritmo Fisher-Yates).
+         * @param {Array<any>} array Array a mezclar.
+         * @returns {Array<any>} Array mezclado.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /**
+         * Devuelve las clases Tailwind CSS por defecto para un botón no seleccionado/no matched.
+         * @returns {string} Clases CSS.
+         */
+        function getDefaultClasses() {
+            return `w-full h-12 p-2 rounded-lg font-semibold text-eerie-black 
+                    bg-pink-light border-b-4 border-pink-border transition duration-200 
+                    hover:bg-pink-200 shadow-md`;
+        }
+
+        /**
+         * Renderiza los botones de navegación de nivel.
+         */
+        function renderLevelNav() {
+            levelNav.innerHTML = '';
+            LEVEL_DATA.forEach((_, index) => {
+                const button = document.createElement('button');
+                button.textContent = `Nivel ${index + 1}`;
+                button.className = `px-4 py-2 rounded-full text-sm font-bold transition duration-300`;
+                button.onclick = () => loadLevel(index);
+
+                // Resaltar el nivel actual
+                if (index === currentLevel) {
+                    button.classList.add('bg-flamingo-pink', 'text-white', 'shadow-lg');
+                } else {
+                    button.classList.add('bg-gray-200', 'text-eerie-black', 'hover:bg-gray-300');
+                }
+                levelNav.appendChild(button);
+            });
+        }
+
+        /**
+         * Carga y renderiza el tablero para el nivel especificado.
+         * @param {number} levelIndex Índice del nivel (0 a 6).
+         */
+        function loadLevel(levelIndex) {
+            if (gameLocked) return;
+
+            currentLevel = levelIndex;
+            matchedPairsCount = 0;
+            selectedButton = null;
+            messageDisplay.textContent = '';
+            board.innerHTML = '';
+
+            const levelPairs = LEVEL_DATA[currentLevel];
+            
+            // 1. Crear arrays separados para español e inglés
+            const spanishWords = levelPairs.map(p => ({ word: p.es, key: p.es, lang: 'es' }));
+            const englishWords = levelPairs.map(p => ({ word: p.en, key: p.es, lang: 'en' }));
+            
+            // 2. Mezclar ambos arrays independientemente
+            shuffleArray(spanishWords);
+            shuffleArray(englishWords);
+
+            // 3. Renderizar columnas
+            const spanishColumn = document.createElement('div');
+            spanishColumn.className = 'flex flex-col gap-4';
+            
+            const englishColumn = document.createElement('div');
+            englishColumn.className = 'flex flex-col gap-4';
+
+            // Función para crear un botón
+            const createButton = (data) => {
+                const button = document.createElement('button');
+                button.textContent = data.word;
+                button.className = getDefaultClasses();
+                button.setAttribute('data-key', data.key); // Clave para el emparejamiento (siempre el español)
+                button.setAttribute('data-lang', data.lang); // Idioma
+                button.onclick = () => handleCardClick(button);
+                return button;
+            };
+
+            spanishWords.forEach(data => spanishColumn.appendChild(createButton(data)));
+            englishWords.forEach(data => englishColumn.appendChild(createButton(data)));
+
+            board.appendChild(spanishColumn);
+            board.appendChild(englishColumn);
+
+            renderLevelNav();
+        }
+
+        /**
+         * Maneja el clic en un botón (tarjeta).
+         * @param {HTMLButtonElement} clickedButton El botón que fue presionado.
+         */
+        function handleCardClick(clickedButton) {
+            if (gameLocked || clickedButton.classList.contains('matched')) {
+                return;
+            }
+
+            // Si no hay tarjeta seleccionada, o si se hace clic en la misma
+            if (selectedButton === null) {
+                // Seleccionar tarjeta
+                selectedButton = clickedButton;
+                selectedButton.className = getDefaultClasses() + ' ring-2 ring-eerie-black transform scale-[1.02]';
+                return;
+            }
+            
+            // Si se hace clic en el mismo botón, deseleccionar
+            if (selectedButton === clickedButton) {
+                selectedButton.className = getDefaultClasses();
+                selectedButton = null;
+                return;
+            }
+
+            // Evitar seleccionar dos palabras del mismo idioma
+            if (selectedButton.getAttribute('data-lang') === clickedButton.getAttribute('data-lang')) {
+                // Tratar el primer clic como un error, y cambiar la selección al nuevo botón
+                const oldSelected = selectedButton;
+                gameLocked = true;
+                
+                // Muestra el error brevemente en el botón anterior y luego selecciona el nuevo
+                oldSelected.className = getDefaultClasses() + ' bg-red-light border-red-500';
+
+                setTimeout(() => {
+                    oldSelected.className = getDefaultClasses(); // Vuelve a normal
+                    
+                    // Ahora selecciona el nuevo botón
+                    selectedButton = clickedButton;
+                    selectedButton.className = getDefaultClasses() + ' ring-2 ring-eerie-black transform scale-[1.02]';
+                    gameLocked = false;
+                }, 500);
+
+                return;
+            }
+
+            // Se seleccionaron dos botones de idiomas opuestos
+            const key1 = selectedButton.getAttribute('data-key');
+            const key2 = clickedButton.getAttribute('data-key');
+
+            if (key1 === key2) {
+                // ¡Acierto!
+                
+                // Aplicar estilo de acierto
+                selectedButton.className = getDefaultClasses() + ' matched bg-green-light border-green-700 pointer-events-none shadow-none';
+                clickedButton.className = getDefaultClasses() + ' matched bg-green-light border-green-700 pointer-events-none shadow-none';
+                
+                selectedButton = null;
+                matchedPairsCount++;
+                
+                // Comprobar si se ha completado el nivel
+                if (matchedPairsCount === LEVEL_DATA[currentLevel].length) {
+                    messageDisplay.textContent = `¡Nivel ${currentLevel + 1} completado!`;
+                    messageDisplay.classList.add('primary-color');
+                    
+                    // Si no es el último nivel, cargamos el siguiente automáticamente
+                    if (currentLevel < LEVEL_DATA.length - 1) {
+                        setTimeout(() => {
+                            loadLevel(currentLevel + 1);
+                        }, 1500);
+                    } else {
+                        messageDisplay.textContent = `¡Juego completado! ¡Excelente memoria!`;
+                    }
+                }
+
+            } else {
+                // Error
+                gameLocked = true;
+                messageDisplay.textContent = '¡Error! Inténtalo de nuevo.';
+                messageDisplay.classList.add('text-red-500');
+
+                // Aplicar estilo de error temporal
+                selectedButton.className = getDefaultClasses() + ' bg-red-light border-red-700';
+                clickedButton.className = getDefaultClasses() + ' bg-red-light border-red-700';
+
+                setTimeout(() => {
+                    // Revertir estilos
+                    selectedButton.className = getDefaultClasses();
+                    clickedButton.className = getDefaultClasses();
+                    
+                    selectedButton = null;
+                    gameLocked = false;
+                    messageDisplay.textContent = '';
+                    messageDisplay.classList.remove('text-red-500');
+                }, 750);
+            }
+        }
+
+        // Inicializar el juego al cargar la página
+        window.onload = () => {
+            loadLevel(0); // Cargar Nivel 1 por defecto
+        };
+    </script>
+</body>
+</html>

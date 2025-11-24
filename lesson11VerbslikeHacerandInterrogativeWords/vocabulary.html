@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbs like Hacer and Interrogative Words</title>
+    <!-- 
+        Uso de rutas relativas y parámetro de versión para control de caché, 
+        como se solicitó para despliegues en GitHub Pages. 
+    -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    
+    <script>
+        // Configuración de Tailwind para colores y fuente personalizados
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        'light-gray-divider': '#E5E7EB', // Gris claro para los divisores de vocabulario
+                    },
+                    // Usaremos 'Inter' como fuente base moderna (simulando Platform Medium Font)
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Aplicar la fuente base y el color de texto a todo el cuerpo */
+        body {
+            color: #121118; /* eerie-black */
+            background-color: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Estilo para los títulos y subtítulos */
+        .header-text {
+            color: #121118;
+        }
+
+        /* Estilo para el separador de vocabulario */
+        .vocab-divider {
+            border-bottom: 1px solid #E5E7EB;
+            margin: 1.5rem 0;
+        }
+        
+        /* Asegurar que la negrita se vea fuerte */
+        strong {
+            font-weight: 700;
+            color: #121118;
+        }
+
+        /* El color principal para elementos destacados */
+        .primary-color {
+            color: #FF79AC; /* flamingo-pink */
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 sm:p-8 md:p-12 lg:p-20">
+    <div class="max-w-4xl mx-auto">
+
+        <!-- Título de la Página -->
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-center mb-10 primary-color">
+            Verbs like Hacer and Interrogative Words
+        </h1>
+
+        <!-- Subtitulo: I. Vocabulario nuevo / New Vocabulary -->
+        <h2 class="text-2xl sm:text-3xl font-bold header-text mb-6 pb-2 border-b-2 border-flamingo-pink">
+            I. Vocabulario nuevo / New Vocabulary
+        </h2>
+
+        <!-- Contenedor de Vocabulario -->
+        <div class="space-y-4">
+            
+            <!-- Grupo 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6 text-lg">
+                <span><strong>hacer</strong> – to make, to do</span>
+                <span><strong>ganar</strong> – to win, to earn</span>
+                <span><strong>poner</strong> – to put</span>
+                <span><strong>hacer ejercicio</strong> – to exercise</span>
+                <span><strong>salir</strong> – to leave, to go out</span>
+                <span><strong>hacer una pregunta</strong> – to ask a question</span>
+                <span><strong>traer</strong> – to bring</span>
+                <span><strong>hacer una fiesta</strong> – to throw a party</span>
+                <span><strong>explicar</strong> – to explain</span>
+            </div>
+            
+            <div class="vocab-divider"></div>
+            
+            <!-- Grupo 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6 text-lg">
+                <span><strong>¿Cómo está Carla?</strong> – How is Carla?</span>
+                <span><strong>¿Cómo es Carla?</strong> – What is Carla like?</span>
+            </div>
+
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 3 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6 text-lg">
+                <span><strong>el ejercicio</strong> – exercise</span>
+                <span><strong>la cama</strong> – bed</span>
+                <span><strong>la fiesta</strong> – party</span>
+                <span><strong>la radio</strong> – radio</span>
+            </div>
+
+            <div class="vocab-divider"></div>
+            
+            <!-- Grupo 4 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6 text-lg">
+                <span><strong>la temperatura</strong> – temperature</span>
+                <span><strong>el huracán</strong> – hurricane</span>
+                <span><strong>los grados</strong> – degrees</span>
+                <span><strong>la precipitación</strong> – precipitation</span>
+            </div>
+
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 5: Clima (más extenso) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6 text-lg">
+                <span><strong>¿Qué tiempo hace?</strong> – What’s the weather like?</span>
+                <span><strong>Truena</strong> – It’s thundering</span>
+                <span><strong>Hace buen tiempo</strong> – It’s good weather</span>
+                <span><strong>Está nublado</strong> – It’s cloudy</span>
+                <span><strong>Hace mal tiempo</strong> – It’s bad weather</span>
+                <span><strong>Está despejado</strong> – It’s clear (cloudless)</span>
+                <span><strong>Hace sol</strong> – It’s sunny</span>
+                <span><strong>Llueve</strong> – It’s raining</span>
+                <span><strong>Hace viento</strong> – It’s windy</span>
+                <span><strong>Está lloviendo</strong> – It’s raining</span>
+                <span><strong>Hace frío</strong> – It’s cold</span>
+                <span><strong>la lluvia</strong> – rain</span>
+                <span><strong>Hace calor</strong> – It’s hot</span>
+                <span><strong>Hay niebla</strong> – It’s foggy</span>
+                <span><strong>Hace fresco</strong> – It’s cool</span>
+                <span><strong>Llovizna</strong> – It’s drizzling</span>
+                <span><strong>Nieva.</strong> – It’s snowing</span>
+                <span><strong>Está a veinticinco grados</strong> – It’s twenty-five degrees</span>
+                <span><strong>Hay tormenta</strong> – There’s a storm</span>
+                <span><strong>Hay hielo</strong> – It’s icy</span>
+                <span><strong>Caen rayos</strong> – It’s lightning</span>
+            </div>
+            
+            <div class="vocab-divider"></div>
+
+            <!-- Grupo 6 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6 text-lg">
+                <span><strong>la puntuación</strong> – punctuation</span>
+                <span><strong>el punto y coma</strong> – semicolon</span>
+                <span><strong>el signo de puntuación</strong> – punctuation mark</span>
+                <span><strong>los signos de interrogación</strong> – question marks</span>
+                <span><strong>el punto</strong> – period, point</span>
+                <span><strong>los signos de exclamación</strong> – exclamation marks</span>
+                <span><strong>dos puntos</strong> – colon</span>
+                <span><strong>si</strong> – if</span>
+                <span><strong>la coma</strong> – comma</span>
+            </div>
+        </div>
+
+        <!-- Espacio Separador -->
+        <div class="mt-12"></div>
+
+        <!-- Subtitulo: II. Repaso general / General Review -->
+        <h2 class="text-2xl sm:text-3xl font-bold header-text mb-6 pb-2 border-b-2 border-flamingo-pink">
+            II. Repaso general / General Review
+        </h2>
+
+        <!-- Contenido Informativo (Justificado) -->
+        <div class="space-y-8 text-lg text-justify">
+            
+            <!-- Sección A -->
+            <div>
+                <h3 class="font-bold text-xl mb-3 primary-color">A. Hacer and Expressions with hacer</h3>
+                <p>
+                    The verb <strong>hacer</strong> means “to make” or “to do,” and it’s one of the most commonly used verbs in Spanish. Beyond its normal use (e.g., “I always do my work” is <strong>Siempre hago mi trabajo</strong>), <strong>hacer</strong> is used in a number of expressions, such as <strong>hacer una pregunta</strong>, which is “to ask a question,” and <strong>hacer una fiesta</strong>, which is “to throw a party.” <strong>Hacer</strong> is also used with many of the weather expressions (e.g., <strong>¿Qué tiempo hace?</strong> is “What is the weather like?”; <strong>Hace sol</strong> is “It’s sunny”; <strong>Hace mal tiempo</strong> is “It’s bad weather”). If you consult the website of Spain’s Agencia Estatal de Meteorología [State Meteorological Agency], at aemet.es, you can see a meteorologist giving a weather report. All present tense endings for <strong>hacer</strong> are regular; the only unusual form of the verb is the <strong>yo</strong> form (<strong>hago</strong>), which has a <strong>g</strong>.
+                </p>
+            </div>
+
+            <!-- Sección B -->
+            <div>
+                <h3 class="font-bold text-xl mb-3 primary-color">B. Verbs Conjugated like hacer</h3>
+                <p>
+                    Verbs conjugated like <strong>hacer</strong> (meaning that they also use regular endings and have a <strong>g</strong> in the <strong>yo</strong> form) include <strong>poner</strong> [to put], <strong>salir</strong> [to leave, to go out], and <strong>traer</strong> [to bring]. The <strong>yo</strong> forms for these verbs are <strong>pongo</strong>, <strong>salgo</strong>, and <strong>traigo</strong>.
+                </p>
+            </div>
+
+            <!-- Sección C -->
+            <div>
+                <h3 class="font-bold text-xl mb-3 primary-color">C. Interrogatives</h3>
+                <p>
+                    The meaning of <strong>cómo</strong> is different when used with <strong>estar</strong> than it is when used with <strong>ser</strong> because <strong>estar</strong> expresses a state or condition, while <strong>ser</strong> expresses an inherent characteristic of someone or something. <strong>¿Cómo están las chicas?</strong> asks “How are the girls?” while <strong>¿Cómo son las chicas?</strong> asks “What are the girls like?”
+                </p>
+                <p class="mt-4">
+                    The interrogative <strong>qué</strong> [what] is used directly before a noun (e.g., <strong>¿Qué clases tomas este semestre?</strong> is “What classes are you taking this semester?”). The interrogatives <strong>cuál</strong> and <strong>cuáles</strong> [which or what] are often used before the preposition <strong>de</strong>, as in <strong>¿Cuáles de las camas es tu cama?</strong>, which is “Which of the beds is your bed?” You use <strong>qué</strong> when asking for a definition or explanation (e.g., <strong>¿Qué pasa aquí?</strong> is “What’s happening here?”; <strong>¿Qué significa salir?</strong> is “What does salir mean?”). The interrogatives <strong>cuál</strong> and <strong>cuáles</strong> are used when you want someone to tell you some information, not explain it (e.g., <strong>¿Cuál es la fecha de hoy?</strong> is “What is today’s date?”; <strong>¿Cuál es el nombre de la profesora del curso?</strong> is “What is the name of the professor of the course?”).
+                </p>
+            </div>
+
+            <!-- Sección D -->
+            <div>
+                <h3 class="font-bold text-xl mb-3 primary-color">D. Punctuation</h3>
+                <p>
+                    In Spanish, it is never correct to put a comma after the second-to-last item in a list (e.g., “I’m going to bring many books, a notebook, and a computer” is <strong>Voy a traer muchos libros, un cuaderno y una computadora</strong>).
+                </p>
+                <p class="mt-4">
+                    Questions in Spanish begin with an inverted question mark, which could be at the start of a sentence or at the start of a clause in the middle of a sentence (e.g., <strong>¿Dónde están las camas?</strong> is “Where are the beds?”; <strong>Si tenemos tiempo, ¿debemos salir después de la clase?</strong> is “If we have time, should we go out after the class?”). An exclamation must begin with an inverted exclamation mark and end with an exclamation mark (e.g., <strong>¡Que día fantástico!</strong> is “What a fantastic day!”; <strong>Después del examen, ¡qué fiesta vamos a hacer!</strong> is “After the exam, what a party we’re going to throw!”).
+                </p>
+            </div>
+
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- 
+        Carga de Tailwind CSS para utilizar sus clases de utilidad.
+        Se utiliza el parámetro de versión para evitar problemas de caché.
+    --><script src="https://cdn.tailwindcss.com?v=1.2"></script>
+    
+    <script>
+        // Configuración de Tailwind para colores y fuente personalizados (simulando Platform Medium Font con Inter)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC', // Rosa Flamenco
+                        'eerie-black': '#121118',   // Negro Misterioso
+                        // Colores de retroalimentación
+                        'green-light': '#C8E6C9', // Verde claro para acierto
+                        'red-light': '#FFCDD2',   // Rojo claro para error
+                        'white': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        // 'Inter' como fuente base moderna y legible (simulando Platform Medium)
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Aplicar la fuente y color de fondo/texto */
+        body {
+            background-color: white;
+            color: #121118; /* eerie-black */
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Estilo para simular la negrita sin asteriscos en la vista del usuario (aplicado a títulos y texto clave) */
+        .activity-title {
+            color: #121118;
+        }
+        
+        /* Asegurar que el texto informativo esté justificado */
+        .text-justify {
+            text-align: justify;
+        }
+
+        /* Colores de los interlocutores (Actividad B) */
+        .speaker-diana {
+            color: #FF79AC; /* Flamingo Pink */
+            font-weight: bold;
+        }
+        .speaker-erica {
+            color: #121118; /* Eerie Black */
+            font-weight: bold;
+        }
+
+        /* Estilo para los inputs de completación (Actividades A, B, D) */
+        .completion-input {
+            transition: background-color 0.3s, border-color 0.3s;
+            border: 1px solid #d1d5db;
+            padding: 0.25rem 0.5rem;
+            /* La anchura se define con clases de Tailwind para ser responsiva */
+            border-radius: 0.375rem; /* rounded-md */
+            /* Añadir clases de Tailwind para apariencia inicial */
+            @apply border-gray-300;
+        }
+        
+        /* Estilo para el placeholder de la Actividad C */
+        .completion-placeholder {
+            min-width: 100px;
+            display: inline-block;
+            text-align: center;
+            /* Simular una línea de llenado o un recuadro */
+            border-bottom: 2px solid #a1a1aa; /* línea gris tenue */
+            padding: 0 5px;
+            margin: 0 5px;
+            /* Estilo para la respuesta insertada */
+            font-weight: bold;
+            color: #121118;
+            /* Transición para el texto que aparece */
+            transition: color 0.3s;
+        }
+
+        /* Estilo para botones de selección (Actividad C) */
+        .choice-button {
+            transition: background-color 0.2s, box-shadow 0.2s;
+            /* Aplicar clases base de Tailwind en JS/onload */
+        }
+        .choice-button:disabled {
+            cursor: default;
+            opacity: 0.9; /* Menor opacidad cuando están deshabilitados */
+        }
+        /* ESTILO CORREGIDO PARA LAS IMÁGENES DE LA ACTIVIDAD D */
+        .d-icon {
+            width: 3rem;   /* Aumentado de 2rem a 3rem (aproximadamente 48px x 48px) */
+            height: 3rem;  /* Aumentado de 2rem a 3rem (aproximadamente 48px x 48px) */
+            object-fit: contain;
+            border-radius: 0; 
+            border: 1px solid #d1d5db; 
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 sm:p-8 md:p-12 lg:p-20">
+    <div class="max-w-4xl mx-auto">
+
+        <!-- Título Principal de la Página --><h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-10 text-eerie-black">
+            III. Actividades / Activities
+        </h1>
+
+        <!-- A. Contesta las siguientes preguntas... --><section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 activity-title text-flamingo-pink">
+                a. Contesta las siguientes preguntas sobre el pronóstico del tiempo en Buenos Aires y Guadalajara. / Answer the following questions about the weather forecast in Buenos Aires and Guadalajara.
+            </h2>
+            
+            <div class="flex justify-center mb-6">
+                <!-- Imagen del Pronóstico del Tiempo --><img src="https://imgur.com/GpvR5nu.png" alt="Pronóstico del tiempo para Buenos Aires y Guadalajara" class="rounded-lg shadow-lg max-w-full h-auto md:max-w-md" style="max-height: 350px;">
+            </div>
+
+            <!-- MODIFICACIÓN: Uso de flex-wrap para mantener label e input en línea y permitir que el texto largo se envuelva -->
+            <div id="activity-a-fields" class="space-y-4 text-justify">
+                <div class="flex flex-wrap items-center">
+                    <label for="a-1" class="mr-2">1. ¿Cuándo y dónde hay probabilidad de lluvia? </label>
+                    <input type="text" id="a-1" data-answer-key="a-1" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="a-2" class="mr-2">2. ¿Cuál es la temperatura mínima en Buenos Aires el domingo? </label>
+                    <input type="text" id="a-2" data-answer-key="a-2" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="a-3" class="mr-2">3. ¿Cuál es la temperatura máxima el viernes en Buenos Aires? </label>
+                    <input type="text" id="a-3" data-answer-key="a-3" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="a-4" class="mr-2">4. ¿Cuál es la probabilidad de lluvia en Buenos Aires el sábado? </label>
+                    <input type="text" id="a-4" data-answer-key="a-4" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="a-5" class="mr-2">5. ¿Cuándo y dónde hay probabilidad de tormenta? </label>
+                    <input type="text" id="a-5" data-answer-key="a-5" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="a-6" class="mr-2">6. ¿Qué tiempo hace en Buenos Aires hoy? </label>
+                    <input type="text" id="a-6" data-answer-key="a-6" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="a-7" class="mr-2">7. ¿Qué tiempo va a hacer en Guadalajara el sábado? </label>
+                    <input type="text" id="a-7" data-answer-key="a-7" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="a-8" class="mr-2">8. ¿Cuál es la temperatura máxima de hoy en Guadalajara? </label>
+                    <input type="text" id="a-8" data-answer-key="a-8" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="a-9" class="mr-2">9. ¿Cuál es la temperatura mínima el sábado en Guadalajara? </label>
+                    <input type="text" id="a-9" data-answer-key="a-9" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+            </div>
+        </section>
+
+        <!-- B. Diálogo --><section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 activity-title text-flamingo-pink">
+                b. Diana quiere ir a la piscina de Villa Celeste. Erica va a revisar el pronóstico del tiempo. / Diana wants to go to the pool in Villa Celeste. Erica is going to check the weather forecast.
+            </h2>
+            <p class="mb-4 text-justify">Lee el siguiente diálogo y contesta las preguntas. / Read the following dialogue and answer the questions.</p>
+
+            <!-- Diálogo con estilos de color y negrita para los nombres --><div class="bg-gray-50 p-6 rounded-lg shadow-inner text-justify text-eerie-black text-lg space-y-1">
+                <p><span class="speaker-diana">Diana:</span> ¡Mami, quiero [I want] ir a la piscina!</p>
+                <p><span class="speaker-erica">Erica:</span> Sí, está bien, pero tenemos que llevar a tu hermana Mariana con nosotras.</p>
+                <p><span class="speaker-diana">Diana:</span> Está bien, mami, pero ¡vamos a la piscina!</p>
+                <p><span class="speaker-erica">Erica:</span> Muy bien, pero primero [first] voy a mirar el pronóstico del tiempo.</p>
+                <p><span class="speaker-erica">Erica:</span> Diana, ¿puedes [can you] poner la televisión, por favor?</p>
+                <p><span class="speaker-diana">Diana:</span> ¡Sí, mami!</p>
+                <p><span class="speaker-erica">Erica:</span> Diana, hoy no vamos a ir a la piscina porque va a llover.</p>
+                <p><span class="speaker-diana">Diana:</span> No, mami, ¡hace sol!</p>
+                <p><span class="speaker-erica">Erica:</span> Sí, hace sol ahora, pero en una hora va a llover mucho.</p>
+                <p><span class="speaker-diana">Diana:</span> Pero yo quiero ir a la piscina.</p>
+                <p><span class="speaker-erica">Erica:</span> Yo sé [I know], pero no vamos a salir porque va a llover.</p>
+                <p><span class="speaker-erica">Erica:</span> Mañana sí vamos con tu amiga Valeria, ¿está bien?</p>
+                <p><span class="speaker-diana">Diana:</span> ¡Sí, mañana!</p>
+            </div>
+
+            <div id="activity-b-fields" class="space-y-4 mt-6">
+                <!-- Inputs de la actividad B también se usan con w-48 -->
+                <div class="flex items-center flex-wrap">
+                    <label for="b-1" class="flex-shrink-0 mr-2">1. ¿Por qué Erica y sus hijas no van hoy a la piscina? No van a la piscina porque </label>
+                    <input type="text" id="b-1" data-answer-key="b-1" class="completion-input w-48" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex items-center flex-wrap">
+                    <label for="b-2" class="flex-shrink-0 mr-2">2. ¿Qué tiempo hace ahora? </label>
+                    <input type="text" id="b-2" data-answer-key="b-2" class="completion-input w-48" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex items-center flex-wrap">
+                    <label for="b-3" class="flex-shrink-0 mr-2">3. ¿Cuándo va a llover? </label>
+                    <input type="text" id="b-3" data-answer-key="b-3" class="completion-input w-48" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex items-center flex-wrap">
+                    <label for="b-4" class="flex-shrink-0 mr-2">4. ¿Cómo se llama la amiga de Diana? </label>
+                    <input type="text" id="b-4" data-answer-key="b-4" class="completion-input w-48" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex items-center flex-wrap">
+                    <label for="b-5" class="flex-shrink-0 mr-2">5. ¿Cuándo van a ir a la piscina? </label>
+                    <input type="text" id="b-5" data-answer-key="b-5" class="completion-input w-48" onkeydown="handleInputKey(event)">
+                </div>
+            </div>
+        </section>
+
+        <!-- C. Completa las frases con la opción apropiada (Selección). --><section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 activity-title text-flamingo-pink">
+                c. Completa las frases con la opción apropiada. / Complete the sentences with the appropriate option.
+            </h2>
+
+            <div id="activity-c-fields" class="space-y-6">
+                <!-- Pregunta 1: c) hacer…voy a hacer (Doble completación) --><div data-question-id="c-1">
+                    <p class="mb-2">1. Hoy quiero <span class="completion-placeholder" data-original-text="__________"></span> ejercicio a las seis y media de la tarde. Mañana <span class="completion-placeholder" data-original-text="__________"></span> ejercicio con Victoria a las cinco de la tarde.</p>
+                    <div class="flex flex-wrap gap-2" data-correct-option="c" data-correct-text="hacer…voy a hacer">
+                        <button class="choice-button" data-option="a" data-text="hacemos…hacer" onclick="handleChoiceClick(this, 'c-1')">a) hacemos…hacer</button>
+                        <button class="choice-button" data-option="b" data-text="hacer…vais a hacer" onclick="handleChoiceClick(this, 'c-1')">b) hacer…vais a hacer</button>
+                        <button class="choice-button" data-option="c" data-text="hacer…voy a hacer" onclick="handleChoiceClick(this, 'c-1')">c) hacer…voy a hacer</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2: b) es --><div data-question-id="c-2">
+                    <p class="mb-2">2. ¿Cuál <span class="completion-placeholder" data-original-text="__________"></span> el nombre de tu nuevo vecino?</p>
+                    <div class="flex flex-wrap gap-2" data-correct-option="b" data-correct-text="es">
+                        <button class="choice-button" data-option="a" data-text="está" onclick="handleChoiceClick(this, 'c-2')">a) está</button>
+                        <button class="choice-button" data-option="b" data-text="es" onclick="handleChoiceClick(this, 'c-2')">b) es</button>
+                        <button class="choice-button" data-option="c" data-text="ser" onclick="handleChoiceClick(this, 'c-2')">c) ser</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3: b) es --><div data-question-id="c-3">
+                    <p class="mb-2">3. ¿Cómo <span class="completion-placeholder" data-original-text="__________"></span> la personalidad [personality] de tu vecino?</p>
+                    <div class="flex flex-wrap gap-2" data-correct-option="b" data-correct-text="es">
+                        <button class="choice-button" data-option="a" data-text="está" onclick="handleChoiceClick(this, 'c-3')">a) está</button>
+                        <button class="choice-button" data-option="b" data-text="es" onclick="handleChoiceClick(this, 'c-3')">b) es</button>
+                        <button class="choice-button" data-option="c" data-text="ser" onclick="handleChoiceClick(this, 'c-3')">c) ser</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 4: c) pongo…pongo (Doble completación) --><div data-question-id="c-4">
+                    <p class="mb-2">4. Yo <span class="completion-placeholder" data-original-text="__________"></span> la radio todos los días, pero no <span class="completion-placeholder" data-original-text="__________"></span> la televisión todos los días.</p>
+                    <div class="flex flex-wrap gap-2" data-correct-option="c" data-correct-text="pongo…pongo">
+                        <button class="choice-button" data-option="a" data-text="pongo…poner" onclick="handleChoiceClick(this, 'c-4')">a) pongo…poner</button>
+                        <button class="choice-button" data-option="b" data-text="pongo…ponéis" onclick="handleChoiceClick(this, 'c-4')">b) pongo…ponéis</button>
+                        <button class="choice-button" data-option="c" data-text="pongo…pongo" onclick="handleChoiceClick(this, 'c-4')">c) pongo…pongo</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 5: c) son --><div data-question-id="c-5">
+                    <p class="mb-2">5. ¿Cuáles <span class="completion-placeholder" data-original-text="__________"></span> los ingredientes [ingredients] que necesitas comprar en el supermercado?</p>
+                    <div class="flex flex-wrap gap-2" data-correct-option="c" data-correct-text="son">
+                        <button class="choice-button" data-option="a" data-text="están" onclick="handleChoiceClick(this, 'c-5')">a) están</button>
+                        <button class="choice-button" data-option="b" data-text="eres" onclick="handleChoiceClick(this, 'c-5')">b) eres</button>
+                        <button class="choice-button" data-option="c" data-text="son" onclick="handleChoiceClick(this, 'c-5')">c) son</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 6: a) Cuántos --><div data-question-id="c-6">
+                    <p class="mb-2">6. ¿ <span class="completion-placeholder" data-original-text="__________"></span> vecinos tienes?</p>
+                    <div class="flex flex-wrap gap-2" data-correct-option="a" data-correct-text="Cuántos">
+                        <button class="choice-button" data-option="a" data-text="Cuántos" onclick="handleChoiceClick(this, 'c-6')">a) Cuántos</button>
+                        <button class="choice-button" data-option="b" data-text="Cuántas" onclick="handleChoiceClick(this, 'c-6')">b) Cuántas</button>
+                        <button class="choice-button" data-option="c" data-text="Cuál" onclick="handleChoiceClick(this, 'c-6')">c) Cuál</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 7: b) salen --><div data-question-id="c-7">
+                    <p class="mb-2">7. Marisol y Valeria <span class="completion-placeholder" data-original-text="__________"></span> todos los fines de semana con sus amigos.</p>
+                    <div class="flex flex-wrap gap-2" data-correct-option="b" data-correct-text="salen">
+                        <button class="choice-button" data-option="a" data-text="salgan" onclick="handleChoiceClick(this, 'c-7')">a) salgan</button>
+                        <button class="choice-button" data-option="b" data-text="salen" onclick="handleChoiceClick(this, 'c-7')">b) salen</button>
+                        <button class="choice-button" data-option="c" data-text="salimos" onclick="handleChoiceClick(this, 'c-7')">c) salimos</button>
+                    </div>
+                    </div>
+                
+                <!-- Pregunta 8: b) sales --><div data-question-id="c-8">
+                    <p class="mb-2">8. ¿Y tú? ¿Cuándo <span class="completion-placeholder" data-original-text="__________"></span> con tus amigos?</p>
+                    <div class="flex flex-wrap gap-2" data-correct-option="b" data-correct-text="sales">
+                        <button class="choice-button" data-option="a" data-text="sale" onclick="handleChoiceClick(this, 'c-8')">a) sale</button>
+                        <button class="choice-button" data-option="b" data-text="sales" onclick="handleChoiceClick(this, 'c-8')">b) sales</button>
+                        <button class="choice-button" data-option="c" data-text="salgo" onclick="handleChoiceClick(this, 'c-8')">c) salgo</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 9: c) traen --><div data-question-id="c-9">
+                    <p class="mb-2">9. ¿Y ustedes? ¿Cuándo <span class="completion-placeholder" data-original-text="__________"></span> los libros para estudiar?</p>
+                    <div class="flex flex-wrap gap-2" data-correct-option="c" data-correct-text="traen">
+                        <button class="choice-button" data-option="a" data-text="traigo" onclick="handleChoiceClick(this, 'c-9')">a) traigo</button>
+                        <button class="choice-button" data-option="b" data-text="trae" onclick="handleChoiceClick(this, 'c-9')">b) trae</button>
+                        <button class="choice-button" data-option="c" data-text="traen" onclick="handleChoiceClick(this, 'c-9')">c) traen</button>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- D. Escribe la expresión correspondiente a la imagen. --><section class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 activity-title text-flamingo-pink">
+                d. Escribe la expresión correspondiente a la imagen. / Write the expression corresponding to the image.
+            </h2>
+            
+            <div class="mb-4 p-3 rounded-lg bg-gray-50 border border-gray-200 text-center font-mono text-sm sm:text-base">
+            Hace frío &nbsp;&nbsp;&nbsp; Hace calor &nbsp;&nbsp;&nbsp;Hace fresco &nbsp;&nbsp;&nbsp Hace viento &nbsp;&nbsp;&nbsp; Está despejado &nbsp;&nbsp;&nbsp;Está lloviendo &nbsp;&nbsp;&nbsp; Nieva &nbsp;&nbsp;&nbsp; Hay niebla 
+        </div>
+
+            <div id="activity-d-fields" class="space-y-4">
+                <!-- Inputs de la actividad D también se usan con w-48 -->
+                <div class="flex flex-wrap items-center">
+                    <label for="d-1" class="mr-2 flex items-center">
+                        1. 
+                        <!-- Img 4x4 cm (w-12 h-12) y cuadrada --><img src="https://imgur.com/vyUV6HB.png" alt="Icono de calor" class="d-icon mx-2">
+                    </label>
+                    <input type="text" id="d-1" data-answer-key="d-1" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="d-2" class="mr-2 flex items-center">
+                        2. 
+                        <!-- Img 4x4 cm (w-12 h-12) y cuadrada --><img src="https://imgur.com/qc9GPNP.png" alt="Icono de frío" class="d-icon mx-2">
+                    </label>
+                    <input type="text" id="d-2" data-answer-key="d-2" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="d-3" class="mr-2 flex items-center">
+                        3. 
+                        <!-- Img 4x4 cm (w-12 h-12) y cuadrada --><img src="https://imgur.com/KF3hBhN.png" alt="Icono de lluvia" class="d-icon mx-2">
+                    </label>
+                    <input type="text" id="d-3" data-answer-key="d-3" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+                <div class="flex flex-wrap items-center">
+                    <label for="d-4" class="mr-2 flex items-center">
+                        4. 
+                        <!-- Img 4x4 cm (w-12 h-12) y cuadrada --><img src="https://imgur.com/lSlF6xd.png" alt="Icono de nieve" class="d-icon mx-2">
+                    </label>
+                    <input type="text" id="d-4" data-answer-key="d-4" class="completion-input w-48 flex-grow-0" onkeydown="handleInputKey(event)">
+                </div>
+            </div>
+        </section>
+
+        <!-- Botón de Respuestas Correctas --><div class="mt-12 mb-8 flex justify-center">
+            <button id="toggle-answers-btn" onclick="toggleAnswers()" 
+                    class="px-6 py-3 bg-flamingo-pink text-white font-bold rounded-full shadow-lg hover:bg-pink-600 transition duration-300 transform hover:scale-[1.02] active:scale-95">
+                Mostrar Respuestas Correctas / Show Correct Answers
+            </button>
+        </div>
+
+        <!-- IV. Respuestas correctas / Correct Answers (Inicialmente oculto) --><section id="answers-section" class="hidden bg-gray-50 p-6 rounded-lg shadow-xl border-t-4 border-flamingo-pink">
+            <h2 class="text-2xl font-bold mb-4 text-flamingo-pink">
+                IV. Respuestas correctas / Correct Answers
+            </h2>
+            
+            <h3 class="font-bold text-lg mt-4 mb-2">a.</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4 text-eerie-black">
+                <li>1. Hay probabilidad de lluvia el domingo en Guadalajara.</li>
+                <li>2. La temperatura mínima en Buenos Aires el domingo es de 18 grados.</li>
+                <li>3. La temperatura máxima el viernes en Buenos Aires es de 31 grados.</li>
+                <li>4. No hay probabilidad de lluvia en Buenos Aires el sábado.</li>
+                <li>5. Hay probabilidad de tormenta el domingo en Guadalajara.</li>
+                <li>6. Hoy hace buen tiempo en Buenos Aires. / Hoy en Buenos Aires está soleado. / Hoy en Buenos Aires hace sol. / Hoy está soleado en Buenos Aires.</li>
+                <li>7. El sábado en Guadalajara va a estar parcialmente nublado.</li>
+                <li>8. La temperatura máxima de hoy en Guadalajara es de 41 grados.</li>
+                <li>9. La temperatura mínima el sábado en Guadalajara es de 26 grados.</li>
+            </ul>
+
+            <h3 class="font-bold text-lg mt-4 mb-2">b.</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4 text-eerie-black">
+                <li>1. va a llover.</li>
+                <li>2. Hace sol.</li>
+                <li>3. Va a llover en una hora. / en una hora.</li>
+                <li>4. La amiga de Diana se llama Valeria. / Se llama Valeria.</li>
+                <li>5. Van a ir a la piscina mañana. / mañana.</li>
+            </ul>
+
+            <h3 class="font-bold text-lg mt-4 mb-2">c.</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4 text-eerie-black">
+                <li>1. c) hacer…voy a hacer</li>
+                <li>2. b) es</li>
+                <li>3. b) es</li>
+                <li>4. c) pongo…pongo</li>
+                <li>5. c) son</li>
+                <li>6. a) Cuántos</li>
+                <li>7. b) salen</li>
+                <li>8. b) sales</li>
+                <li>9. c) traen</li>
+            </ul>
+
+            <h3 class="font-bold text-lg mt-4 mb-2">d.</h3>
+            <ul class="list-disc list-inside space-y-1 ml-4 text-eerie-black">
+                <li>1. Hace calor.</li>
+                <li>2. Hace frío.</li>
+                <li>3. Está lloviendo.</li>
+                <li>4. Nieva.</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <script>
+        // Objeto de respuestas correctas para las actividades A, B y D.
+        const CORRECT_ANSWERS = {
+            'a-1': ['el domingo en guadalajara', 'hay probabilidad de lluvia el domingo en guadalajara'],
+            'a-2': ['18 grados', '18'],
+            'a-3': ['31 grados', '31'],
+            'a-4': ['no hay probabilidad de lluvia', 'no hay probabilidad de lluvia en buenos aires el sábado'],
+            'a-5': ['el domingo en guadalajara', 'hay probabilidad de tormenta el domingo en guadalajara'],
+            'a-6': ['hoy hace buen tiempo en buenos aires', 'hoy en buenos aires está soleado', 'hoy en buenos aires hace sol', 'hoy está soleado en buenos aires'],
+            'a-7': ['el sábado en guadalajara va a estar parcialmente nublado', 'parcialmente nublado'],
+            'a-8': ['41 grados', '41'],
+            'a-9': ['26 grados', '26'],
+            
+            'b-1': ['va a llover', 'porque va a llover'],
+            'b-2': ['hace sol'],
+            'b-3': ['va a llover en una hora', 'en una hora'],
+            'b-4': ['valeria', 'la amiga de diana se llama valeria', 'se llama valeria'],
+            'b-5': ['mañana', 'van a ir a la piscina mañana'],
+            
+            'd-1': ['hace calor'],
+            'd-2': ['hace frío'],
+            'd-3': ['está lloviendo'],
+            'd-4': ['nieva'],
+        };
+        
+        /**
+         * Limpia la respuesta del usuario para estandarizarla (minúsculas, sin puntuación).
+         */
+        function sanitizeInput(input) {
+            return input.toLowerCase().trim().replace(/[.,!?;¿¡]/g, '');
+        }
+
+        /**
+         * Verifica la respuesta de un input de texto (Actividades A, B y D).
+         */
+        function checkInput(inputElement) {
+            const userValue = sanitizeInput(inputElement.value);
+            const key = inputElement.dataset.answerKey;
+            const correctOptions = CORRECT_ANSWERS[key];
+
+            // Reestablecer estilos
+            inputElement.style.backgroundColor = '#FFFFFF';
+            inputElement.style.borderColor = '#d1d5db';
+
+            if (userValue.length === 0) {
+                return; // No verificar si está vacío
+            }
+
+            // Verificar si la respuesta del usuario coincide con alguna de las opciones correctas
+            const isCorrect = correctOptions && correctOptions.some(ans => sanitizeInput(ans) === userValue);
+            
+            // Aplicar retroalimentación visual
+            if (isCorrect) {
+                inputElement.style.backgroundColor = '#C8E6C9'; // green-light
+                inputElement.style.borderColor = '#4CAF50';
+            } else {
+                inputElement.style.backgroundColor = '#FFCDD2'; // red-light
+                inputElement.style.borderColor = '#F44336';
+            }
+        }
+
+        /**
+         * Maneja la pulsación de teclas, enfocándose en la verificación al salir del campo.
+         */
+        function handleInputKey(event) {
+            if (event.key === 'Enter' || event.type === 'blur') {
+                checkInput(event.target);
+            }
+        }
+
+        /**
+         * Maneja el clic en los botones de selección (Actividad C) - Lógica Corregida y mejorada.
+         */
+        function handleChoiceClick(button, questionId) {
+            // El contenedor de la pregunta completa, usado para encontrar los placeholders (párrafo)
+            const questionContainer = button.closest(`div[data-question-id="${questionId}"]`);
+            
+            // EL CONTENEDOR DE BOTONES (Contiene los atributos data-correct-text y data-correct-option)
+            const buttonsContainer = button.parentElement; 
+            
+            const buttons = buttonsContainer.querySelectorAll('.choice-button');
+            const correctOption = buttonsContainer.dataset.correctOption;
+            const correctText = buttonsContainer.dataset.correctText;
+            const selectedOption = button.dataset.option;
+            const selectedText = button.dataset.text;
+            
+            // Verificar si el texto correcto existe antes de intentar dividirlo
+            if (!correctText) {
+                console.error(`Error: data-correct-text no se encuentra en el contenedor de botones para la pregunta ${questionId}.`);
+                return; 
+            }
+
+            const isCorrect = selectedOption === correctOption;
+            
+            // 1. Llenar los espacios y aplicar color al texto
+            const placeholders = questionContainer.querySelectorAll('.completion-placeholder');
+            
+            // Dividir la respuesta correcta o seleccionada
+            const textToInsert = isCorrect ? selectedText : correctText;
+            const parts = textToInsert.split('…'); 
+            
+            placeholders.forEach((placeholder, index) => {
+                placeholder.textContent = parts[index] ? parts[index].trim() : '';
+                // Aplicar el color de retroalimentación al texto de la respuesta para mayor claridad
+                placeholder.style.color = isCorrect ? '#14532d' : '#991b1b'; // Verde oscuro o Rojo oscuro
+                placeholder.style.borderBottom = `2px solid ${isCorrect ? '#4CAF50' : '#F44336'}`;
+            });
+
+            
+            // 2. Aplicar estilos y deshabilitar botones
+            buttons.forEach(btn => {
+                // Limpiar estilos de retroalimentación
+                btn.classList.remove('bg-green-light', 'bg-red-light', 'bg-gray-200', 'hover:bg-gray-300');
+                
+                // Aplicar estilo base neutral y deshabilitar
+                btn.classList.add('bg-gray-100'); 
+                btn.disabled = true; 
+            });
+            
+            // 3. Aplicar el estado de la selección (retroalimentación)
+            if (isCorrect) {
+                // Acierto: Aplicar verde al botón seleccionado
+                button.classList.remove('bg-gray-100');
+                button.classList.add('bg-green-light');
+            } else {
+                // Error: Aplicar rojo al botón seleccionado
+                button.classList.remove('bg-gray-100');
+                button.classList.add('bg-red-light');
+                
+                // Resaltar la respuesta correcta con verde
+                buttons.forEach(btn => {
+                    if (btn.dataset.option === correctOption) {
+                        btn.classList.remove('bg-gray-100');
+                        btn.classList.add('bg-green-light');
+                    }
+                });
+            }
+        }
+
+        /**
+         * Muestra/oculta las respuestas correctas.
+         */
+        function toggleAnswers() {
+            const answers = document.getElementById('answers-section');
+            const button = document.getElementById('toggle-answers-btn');
+            
+            if (answers.classList.contains('hidden')) {
+                answers.classList.remove('hidden');
+                button.textContent = 'Ocultar Respuestas Correctas / Hide Correct Answers';
+                
+                // Restablecer la apariencia de todas las actividades al mostrar la solución
+                // Inputs de texto (A, B, D)
+                document.querySelectorAll('.completion-input').forEach(input => {
+                    input.style.backgroundColor = '#FFFFFF';
+                    input.style.borderColor = '#d1d5db';
+                });
+                
+                // Botones de opción (C)
+                document.querySelectorAll('#activity-c-fields .choice-button').forEach(btn => {
+                    // Limpiar estilos de feedback y habilitar
+                    btn.classList.remove('bg-green-light', 'bg-red-light', 'bg-gray-100');
+                    btn.classList.add('bg-gray-200', 'hover:bg-gray-300');
+                    btn.disabled = false;
+                });
+                
+                // Limpiar placeholders (Actividad C)
+                document.querySelectorAll('#activity-c-fields .completion-placeholder').forEach(placeholder => {
+                    placeholder.textContent = '';
+                    placeholder.style.color = '#121118';
+                    placeholder.style.borderBottom = '2px solid #a1a1aa';
+                });
+
+            } else {
+                answers.classList.add('hidden');
+                button.textContent = 'Mostrar Respuestas Correctas / Show Correct Answers';
+            }
+        }
+
+        /**
+         * Inicializa la apariencia de los botones de la Actividad C.
+         */
+        function initializeActivityC() {
+            // Aplicar estilos iniciales mejorados a los botones de la Actividad C
+            document.querySelectorAll('#activity-c-fields .choice-button').forEach(button => {
+                button.classList.add('px-4', 'py-2', 'rounded-full', 'font-semibold', 'text-sm', 'bg-gray-200', 'text-eerie-black', 'hover:bg-gray-300', 'border', 'border-gray-300', 'shadow-sm');
+            });
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeActivityC();
+
+            // Agregar listener de 'blur' a todos los inputs de texto (Actividades A, B, D) para la verificación
+            document.querySelectorAll('.completion-input').forEach(input => {
+                input.addEventListener('blur', (event) => checkInput(event.target));
+            });
+        });
+
+    </script>
+</body>
+</html>
