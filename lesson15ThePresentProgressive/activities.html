@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Definición de colores y fuente */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --light-green: #D4EDDA; /* Verde claro para acierto */
+            --light-red: #F8D7DA; /* Rojo claro para error */
+            --standard-black: #000000;
+        }
+        
+        /* Uso de una fuente sans-serif genérica para representar "Platform Medium Font" */
+        body {
+            font-family: 'Platform Medium Font', 'Inter', sans-serif;
+            color: var(--standard-black);
+            background-color: #FFFFFF;
+        }
+
+        /* Estilo para el contenedor h3 de la actividad para que actúe como una línea flexible */
+        .activity-header {
+            display: flex; /* Permite alinear el número y el texto en la misma línea */
+            align-items: flex-start; /* Alinea los elementos al inicio (arriba) */
+            line-height: 1.5; /* Asegura una buena legibilidad */
+        }
+        /* Estilo para el texto de la descripción para que ocupe el espacio restante */
+        .activity-description {
+            flex-grow: 1; /* Permite que el texto crezca y ocupe el espacio disponible */
+            text-align: justify; /* Aplica la justificación */
+            color: var(--standard-black); 
+            font-weight: normal;
+            margin-left: 0.5rem; /* Pequeño espacio entre el número y el texto */
+        }
+        /* Estilo para el número de actividad (a., b., c.) */
+        .activity-label {
+            white-space: nowrap; /* Evita que el marcador a., b., c. se rompa */
+            font-weight: bold;
+        }
+
+        /* ESTILO PARA TÍTULOS Y SUBTÍTULOS EN ROSA FLAMENCO */
+        .title-pink {
+            color: var(--flamingo-pink) !important;
+            font-weight: bold;
+        }
+        
+        /* Estilo base para las entradas de texto */
+        .completion-input {
+            border: 1px solid #ccc;
+            padding: 0.1rem 0.3rem;
+            width: auto; /* Ancho automático para ajustarse al texto/contenido */
+            min-width: 50px;
+            font-weight: bold;
+            transition: background-color 0.2s ease-in-out;
+            border-radius: 4px;
+        }
+        
+        /* Estilos de retroalimentación */
+        .correct {
+            background-color: var(--light-green) !important;
+            border-color: #38A169 !important;
+        }
+
+        .incorrect {
+            background-color: var(--light-red) !important;
+            border-color: #E53E3E !important;
+        }
+        
+        /* Estilo para las negritas (simulando bold sin asteriscos) */
+        .bold-text {
+            font-weight: bold;
+        }
+        /* Estilo para cursiva */
+        .italic-text {
+            font-style: italic;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eerie-black': '#121118',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="p-4 sm:p-8 md:p-12 max-w-4xl mx-auto">
+
+    <!-- Título de la página: EN ROSA -->
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-10 title-pink">
+        III. Actividades / Activities
+    </h1>
+
+    <form id="activity-form" class="space-y-10">
+
+        <!-- ACTIVIDAD A -->
+        <div data-activity="a">
+            <!-- Título de actividad A: EN ROSA (Descripción justificada) -->
+            <h3 class="text-lg sm:text-xl title-pink mb-4 activity-header">
+                <span class="activity-label">a.</span> 
+                <span class="activity-description">Todos los días Cecilia ve la nueva telenovela <span class="italic-text">La oveja negra</span>, pero hoy tiene que trabajar hasta tarde en un proyecto muy importante. Ella llama a su amiga Alejandra para que ella le cuente lo que está pasando en la historia. / Every day Cecilia watches the new soap opera <span class="italic-text">The Black Sheep</span>, but today she has to work late on a very important project. She calls her friend Alejandra so that she can tell her what’s happening in the story.</span>
+            </h3>
+            <p class="text-content mb-6 font-semibold title-pink">
+                Completa las frases siguientes usando el presente progresivo. / Complete the following sentences using the present progressive.
+            </p>
+            
+            <div class="space-y-4 text-eerie-black">
+                <p>Cecilia: Hola, Alejandra. ¿Qué estás haciendo ahora?</p>
+                
+                <p>Alejandra: Hola, Cecilia. <span class="bold-text">1.</span> <input type="text" id="input-1" data-completion-id="1" class="completion-input w-24"> <span class="bold-text">2.</span> <input type="text" id="input-2" data-completion-id="2" class="completion-input w-28"> (ver) <span class="whitespace-nowrap"><span class="italic-text">La oveja negra</span>.</span></p>
+                <p>Alejandra: ¿Y tú? ¿Qué estás haciendo? ¿No <span class="bold-text">3.</span> <input type="text" id="input-3" data-completion-id="3" class="completion-input w-24"> <span class="bold-text">4.</span> <input type="text" id="input-4" data-completion-id="4" class="completion-input w-28"> (mirar) la novela?</p>
+                
+                <p class="text-content leading-relaxed">
+                    Cecilia: No, no puedo porque <span class="bold-text">5.</span> <input type="text" id="input-5" data-completion-id="5" class="completion-input w-24"> <span class="bold-text">6.</span> <input type="text" id="input-6" data-completion-id="6" class="completion-input w-36"> (trabajar) en la oficina. Tengo un proyecto muy importante que hacer. Mi asistente [assistant] y yo <span class="bold-text">7.</span> <input type="text" id="input-7" data-completion-id="7" class="completion-input w-28"> <span class="bold-text">8.</span> <input type="text" id="input-8" data-completion-id="8" class="completion-input w-36"> (escribir) los objetivos [objectives] del proyecto ahora mismo.
+                </p>
+                
+                <p>Alejandra: ¡Oh, no! ¡Qué terrible!</p>
+                
+                <p class="text-content leading-relaxed">
+                    Cecilia: ¡Lo sé! Por favor, ¿puedes decirme lo que <span class="bold-text">9.</span> <input type="text" id="input-9" data-completion-id="9" class="completion-input w-24"> <span class="bold-text">10.</span> <input type="text" id="input-10" data-completion-id="10" class="completion-input w-36"> (ocurrir) en la novela?
+                </p>
+                
+                <p class="text-content leading-relaxed">
+                    Alejandra: ¡Claro! La novela <span class="bold-text">11.</span> <input type="text" id="input-11" data-completion-id="11" class="completion-input w-24"> <span class="bold-text">12.</span> <input type="text" id="input-12" data-completion-id="12" class="completion-input w-36"> (empezar) en este momento. Ángel Ernesto <span class="bold-text">13.</span> <input type="text" id="input-13" data-completion-id="13" class="completion-input w-24"> <span class="bold-text">14.</span> <input type="text" id="input-14" data-completion-id="14" class="completion-input w-36"> (hablar) con el cantinero [bartender]. Él está muy confundido porque él quiere a Antonieta María, pero él <span class="bold-text">15.</span> <input type="text" id="input-15" data-completion-id="15" class="completion-input w-24"> <span class="bold-text">16.</span> <input type="text" id="input-16" data-completion-id="16" class="completion-input w-36"> (pensar) que también quiere a Adela Lucero.
+                </p>
+                
+                <p>Cecilia: Pero Adela Lucero no quiere a Ángel Ernesto, ¿cierto?</p>
+                
+                <p class="text-content leading-relaxed">
+                    Alejandra: No estoy segura [sure]. Ahora, Adela Lucero <span class="bold-text">17.</span> <input type="text" id="input-17" data-completion-id="17" class="completion-input w-24"> <span class="bold-text">18.</span> <input type="text" id="input-18" data-completion-id="18" class="completion-input w-36"> (leer) y <span class="bold-text">19.</span> <input type="text" id="input-19" data-completion-id="19" class="completion-input w-24"> <span class="bold-text">20.</span> <input type="text" id="input-20" data-completion-id="20" class="completion-input w-36"> (romper [to rip up]) las cartas [letters] de Ángel Ernesto.
+                </p>
+                
+                <p>Cecilia: ¿Qué <span class="bold-text">21.</span> <input type="text" id="input-21" data-completion-id="21" class="completion-input w-24"> <span class="bold-text">22.</span> <input type="text" id="input-22" data-completion-id="22" class="completion-input w-36"> (ocurrir) con María Esmeralda y Lucero?</p>
+                
+                <p class="text-content leading-relaxed">
+                    Alejandra: Ellas <span class="bold-text">23.</span> <input type="text" id="input-23" data-completion-id="23" class="completion-input w-28"> <span class="bold-text">24.</span> <input type="text" id="input-24" data-completion-id="24" class="completion-input w-36"> (llorar [to cry]) porque ahora Adela Lucero <span class="bold-text">25.</span> <input type="text" id="input-25" data-completion-id="25" class="completion-input w-24"> <span class="bold-text">26.</span> <input type="text" id="input-26" data-completion-id="26" class="completion-input w-36"> (empacar [to pack]) para ir a trabajar en otra ciudad. ¡Oh, noooo!
+                </p>
+                
+                <p>Cecilia: ¿Qué pasa?</p>
+                
+                <p class="text-content leading-relaxed">
+                    Alejandra: Antonieta María <span class="bold-text">27.</span> <input type="text" id="input-27" data-completion-id="27" class="completion-input w-24"> <span class="bold-text">28.</span> <input type="text" id="input-28" data-completion-id="28" class="completion-input w-36"> (quemar [to burn]) las cartas de Ángel Ernesto. Yo <span class="bold-text">29.</span> <input type="text" id="input-29" data-completion-id="29" class="completion-input w-24"> <span class="bold-text">30.</span> <input type="text" id="input-30" data-completion-id="30" class="completion-input w-36"> (pensar) que ella sabe sobre Adela. ¡Y ahora, parece que Ángel Ernesto <span class="bold-text">31.</span> <input type="text" id="input-31" data-completion-id="31" class="completion-input w-24"> <span class="bold-text">32.</span> <input type="text" id="input-32" data-completion-id="32" class="completion-input w-36"> (caminar) hacia la casa de Adela!
+                </p>
+                
+                <p>Cecilia: ¿Y Enrique Alonso? Él es el novio de Adela, ¿verdad?</p>
+                
+                <p class="text-content leading-relaxed">
+                    Alejandra: Sí, él es su novio. ¡En estos momentos, él <span class="bold-text">33.</span> <input type="text" id="input-33" data-completion-id="33" data-activity-end="a" class="completion-input w-28"> <span class="bold-text">34.</span> <input type="text" id="input-34" data-completion-id="34" data-activity-end="a" class="completion-input w-36"> (manejar) su carro hacia la casa de Adela!
+                </p>
+                
+                <p>Cecilia y Alejandra: ¡Ooohhh!</p>
+            </div>
+        </div>
+
+        <!-- ACTIVIDAD B -->
+        <div data-activity="b">
+            <!-- Título de actividad B: EN ROSA (Descripción justificada) -->
+            <h3 class="text-lg sm:text-xl title-pink mb-4 activity-header">
+                <span class="activity-label">b.</span>
+                <span class="activity-description">Hoy hay un partido de fútbol importante, entonces Erica, Javier y sus hijas están visitando a los padres de Erica para ver juntos el partido. / Today there is an important soccer game, so Erica, Javier, and their daughters are visiting Erica’s parents to see the game together.</span>
+            </h3>
+            <p class="text-content mb-6 font-semibold title-pink">
+                Completa las frases siguientes usando el presente progresivo. / Complete the following sentences using the present progressive.
+            </p>
+            
+            <div class="space-y-4 text-eerie-black">
+                <p>Diana: Mami, estoy aburrida. ¿Quieres jugar conmigo?</p>
+                
+                <p>Erica: No puedo, mi amor [love]. Yo <span class="bold-text">1.</span> <input type="text" id="input-35" data-completion-id="35" class="completion-input w-24"> <span class="bold-text">2.</span> <input type="text" id="input-36" data-completion-id="36" class="completion-input w-36"> (dormir) a tu hermanita. Puedes jugar con tu abuelito.</p>
+                
+                <p>Diana: No, mami, abuelito <span class="bold-text">3.</span> <input type="text" id="input-37" data-completion-id="37" class="completion-input w-24"> <span class="bold-text">4.</span> <input type="text" id="input-38" data-completion-id="38" class="completion-input w-36"> (cocinar) la carne [meat] en la parrilla [grill].</p>
+                
+                <p>Erica: ¿Y abuelita?</p>
+                
+                <p>Diana: Ella <span class="bold-text">5.</span> <input type="text" id="input-39" data-completion-id="39" class="completion-input w-24"> <span class="bold-text">6.</span> <input type="text" id="input-40" data-completion-id="40" class="completion-input w-36"> (servir) la comida.</p>
+                
+                <p>Erica: ¿Y tu tío Felipe?</p>
+                
+                <p>Diana: Tío Felipe y tía Elena <span class="bold-text">7.</span> <input type="text" id="input-41" data-completion-id="41" class="completion-input w-28"> <span class="bold-text">8.</span> <input type="text" id="input-42" data-completion-id="42" class="completion-input w-36"> (mirar) otro partido de fútbol.</p>
+                
+                <p>Erica: ¿Y tu papá?</p>
+                
+                <p>Diana: Papi <span class="bold-text">9.</span> <input type="text" id="input-43" data-completion-id="43" class="completion-input w-24"> <span class="bold-text">10.</span> <input type="text" id="input-44" data-completion-id="44" class="completion-input w-36"> (oír) las noticias [news].</p>
+                
+                <p class="text-content leading-relaxed">
+                    Diana: Él <span class="bold-text">11.</span> <input type="text" id="input-45" data-completion-id="45" data-activity-end="b" class="completion-input w-24"> <span class="bold-text">12.</span> <input type="text" id="input-46" data-completion-id="46" data-activity-end="b" class="completion-input w-36"> (jugar) al fútbol con su papá. Y yo no quiero jugar porque hace mucho calor.
+                </p>
+                
+                <p>Erica: Hijita, ¿qué tal si juego contigo en diez minutos?</p>
+                
+                <p>Diana: ¡Sí! Gracias, mami.</p>
+            </div>
+        </div>
+
+        <!-- ACTIVIDAD C -->
+        <div data-activity="c">
+            <!-- Título de actividad C: EN ROSA (Descripción justificada) -->
+            <h3 class="text-lg sm:text-xl title-pink mb-4 activity-header">
+                <span class="activity-label">c.</span>
+                <span class="activity-description">Completa las siguientes respuestas con el presente progresivo del verbo indicado. / Complete the following answers with the present progressive of the indicated verb.</span>
+            </h3>
+            <p class="text-content mb-6 font-semibold title-pink">
+                Complete the following answers with the present progressive of the indicated verb.
+            </p>
+            
+            <div class="space-y-4 text-eerie-black">
+                <p class="text-content leading-relaxed">
+                    <span class="bold-text">1.</span> ¿Qué estás haciendo en este momento? <input type="text" id="input-47" data-completion-id="47" class="completion-input w-64"> (hacer) los ejercicios en el cuaderno del curso.
+                </p>
+                <p class="text-content leading-relaxed">
+                    <span class="bold-text">2.</span> ¿Qué está haciendo tu mascota [pet] ahora? <input type="text" id="input-48" data-completion-id="48" class="completion-input w-64"> (dormir) en el suelo [floor].
+                </p>
+                <p class="text-content leading-relaxed">
+                    <span class="bold-text">3.</span> ¿Qué están haciendo tus amigos en este momento? <input type="text" id="input-49" data-completion-id="49" data-activity-end="c" class="completion-input w-64"> (leer) el periódico.
+                </p>
+            </div>
+        </div>
+    </form>
+
+    <!-- Botón de Respuestas -->
+    <div class="mt-12 mb-4 text-center">
+        <button id="toggle-answers-btn" class="bg-eerie-black text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 hover:bg-gray-800 shadow-lg" style="background-color: var(--eerie-black);">
+            Mostrar Respuestas
+        </button>
+    </div>
+
+    <!-- SECCIÓN DE RESPUESTAS CORRECTAS (Inicialmente oculta) -->
+    <div id="correct-answers-section" class="mt-10 p-6 rounded-xl border border-gray-200 hidden" style="background-color: #FEE7F2;">
+        
+        <!-- Título de sección de respuestas: EN ROSA -->
+        <h2 class="text-2xl title-pink mb-6 text-center">
+            V. Respuestas correctas / Correct Answers
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-eerie-black">
+            
+            <!-- Respuestas A -->
+            <div>
+                <h3 class="font-bold text-lg mb-2 title-pink">a.</h3>
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                    <p class="whitespace-nowrap">1. Estoy</p> <p class="whitespace-nowrap">18. leyendo</p>
+                    <p class="whitespace-nowrap">2. viendo</p> <p class="whitespace-nowrap">19. está</p>
+                    <p class="whitespace-nowrap">3. estás</p> <p class="whitespace-nowrap">20. rompiendo</p>
+                    <p class="whitespace-nowrap">4. mirando</p> <p class="whitespace-nowrap">21. está</p>
+                    <p class="whitespace-nowrap">5. estoy</p> <p class="whitespace-nowrap">22. ocurriendo</p>
+                    <p class="whitespace-nowrap">6. trabajando</p> <p class="whitespace-nowrap">23. están</p>
+                    <p class="whitespace-nowrap">7. estamos</p> <p class="whitespace-nowrap">24. llorando</p>
+                    <p class="whitespace-nowrap">8. escribiendo</p> <p class="whitespace-nowrap">25. está</p>
+                    <p class="whitespace-nowrap">9. está</p> <p class="whitespace-nowrap">26. empacando</p>
+                    <p class="whitespace-nowrap">10. ocurriendo</p> <p class="whitespace-nowrap">27. está</p>
+                    <p class="whitespace-nowrap">11. está</p> <p class="whitespace-nowrap">28. quemando</p>
+                    <p class="whitespace-nowrap">12. empezando</p> <p class="whitespace-nowrap">29. estoy</p>
+                    <p class="whitespace-nowrap">13. está</p> <p class="whitespace-nowrap">30. pensando</p>
+                    <p class="whitespace-nowrap">14. hablando</p> <p class="whitespace-nowrap">31. está</p>
+                    <p class="whitespace-nowrap">15. está</p> <p class="whitespace-nowrap">32. caminando</p>
+                    <p class="whitespace-nowrap">16. pensando</p> <p class="whitespace-nowrap">33. está</p>
+                    <p class="whitespace-nowrap">17. está</p> <p class="whitespace-nowrap">34. manejando</p>
+                </div>
+            </div>
+            
+            <!-- Respuestas B -->
+            <div>
+                <h3 class="font-bold text-lg mb-2 title-pink">b.</h3>
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                    <p class="whitespace-nowrap">1. estoy</p> <p class="whitespace-nowrap">7. están</p>
+                    <p class="whitespace-nowrap">2. durmiendo</p> <p class="whitespace-nowrap">8. mirando</p>
+                    <p class="whitespace-nowrap">3. está</p> <p class="whitespace-nowrap">9. está</p>
+                    <p class="whitespace-nowrap">4. cocinando</p> <p class="whitespace-nowrap">10. oyendo</p>
+                    <p class="whitespace-nowrap">5. está</p> <p class="whitespace-nowrap">11. está</p>
+                    <p class="whitespace-nowrap">6. sirviendo</p> <p class="whitespace-nowrap">12. jugando</p>
+                </div>
+            </div>
+            
+            <!-- Respuestas C -->
+            <div>
+                <h3 class="font-bold text-lg mb-2 title-pink">c.</h3>
+                <div class="space-y-1 text-sm">
+                    <p>1. Estoy haciendo</p>
+                    <p>2. Está durmiendo</p>
+                    <p>3. Están leyendo</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="h-10"></div> <!-- Espacio al final de la página -->
+
+    <script>
+        // Mapeo de respuestas correctas. Las claves corresponden a los data-completion-id de los inputs.
+        // Se usa .toLowerCase() para permitir flexibilidad en las mayúsculas/minúsculas.
+        const correctAnswers = {
+            // Actividad A
+            1: 'estoy', 2: 'viendo',
+            3: 'estás', 4: 'mirando',
+            5: 'estoy', 6: 'trabajando',
+            7: 'estamos', 8: 'escribiendo',
+            9: 'está', 10: 'ocurriendo',
+            11: 'está', 12: 'empezando',
+            13: 'está', 14: 'hablando',
+            15: 'está', 16: 'pensando',
+            17: 'está', 18: 'leyendo',
+            19: 'está', 20: 'rompiendo',
+            21: 'está', 22: 'ocurriendo',
+            23: 'están', 24: 'llorando',
+            25: 'está', 26: 'empacando',
+            27: 'está', 28: 'quemando',
+            29: 'estoy', 30: 'pensando',
+            31: 'está', 32: 'caminando',
+            33: 'está', 34: 'manejando',
+
+            // Actividad B
+            35: 'estoy', 36: 'durmiendo',
+            37: 'está', 38: 'cocinando',
+            39: 'está', 40: 'sirviendo',
+            41: 'están', 42: 'mirando',
+            43: 'está', 44: 'oyendo',
+            45: 'está', 46: 'jugando',
+
+            // Actividad C (Respuestas de frase completa)
+            47: 'estoy haciendo',
+            48: 'está durmiendo',
+            49: 'están leyendo'
+        };
+        
+        // El número total de inputs para saber dónde detener el salto automático
+        const TOTAL_INPUTS = 49; 
+
+        /**
+         * Verifica la respuesta y mueve el foco al siguiente input.
+         * @param {Event} event - El evento keydown.
+         */
+        function checkAnswerAndMove(event) {
+            // Solo actuar al presionar la tecla Enter
+            if (event.key !== 'Enter') return;
+            
+            // Prevenir el comportamiento predeterminado de Enter (ej. submit de formulario)
+            event.preventDefault(); 
+
+            const input = event.target;
+            const id = parseInt(input.dataset.completionId);
+            const userAnswer = input.value.trim().toLowerCase();
+            
+            // Obtener la respuesta esperada (maneja casos de frase completa para Actividad C)
+            const expectedAnswer = correctAnswers[id] ? correctAnswers[id].toLowerCase() : '';
+            
+            if (!expectedAnswer) {
+                console.error(`Error: No se encontró respuesta para ID: ${id}`);
+                return;
+            }
+
+            // Limpiar clases de estilo previas
+            input.classList.remove('correct', 'incorrect');
+            
+            let isCorrect = false;
+
+            // Para los inputs 47, 48, 49 (Actividad C) se espera la frase completa
+            if (id >= 47) {
+                // Verificar si la respuesta completa coincide con la esperada
+                isCorrect = userAnswer === expectedAnswer;
+            } else {
+                // Para las actividades A y B, se verifica palabra por palabra (se espera solo una palabra por input)
+                isCorrect = userAnswer === expectedAnswer;
+            }
+
+            // Aplicar estilo basado en la corrección
+            if (isCorrect) {
+                input.classList.add('correct');
+            } else {
+                input.classList.add('incorrect');
+            }
+
+            // Lógica de salto de foco
+            const nextId = id + 1;
+            
+            // Verificar si este input es el último de una actividad (data-activity-end)
+            const isActivityEnd = input.dataset.activityEnd;
+
+            // Si es el último input de una actividad, no salta (se hace manual)
+            if (isActivityEnd) {
+                 // El cursor permanece en el último input
+                 return; 
+            }
+            
+            // Si hay un siguiente ID y no es el final de la actividad
+            if (nextId <= TOTAL_INPUTS) {
+                const nextInput = document.getElementById(`input-${nextId}`);
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+        }
+        
+        /**
+         * Toggles the visibility of the correct answers section.
+         */
+        function toggleAnswers() {
+            const section = document.getElementById('correct-answers-section');
+            const button = document.getElementById('toggle-answers-btn');
+            
+            if (section.classList.contains('hidden')) {
+                section.classList.remove('hidden');
+                button.textContent = 'Ocultar Respuestas';
+                button.style.backgroundColor = 'var(--flamingo-pink)'; // Cambiar color al mostrar
+            } else {
+                section.classList.add('hidden');
+                button.textContent = 'Mostrar Respuestas';
+                button.style.backgroundColor = 'var(--eerie-black)'; // Volver al color original
+            }
+        }
+
+        // --- Inicialización y Listeners ---
+        window.onload = () => {
+            // 1. Asignar el listener de tecla Enter a todos los inputs
+            const inputs = document.querySelectorAll('.completion-input');
+            inputs.forEach(input => {
+                input.addEventListener('keydown', checkAnswerAndMove);
+                // Asegurar que el input esté vacío al cargar
+                input.value = ''; 
+            });
+            
+            // 2. Asignar el listener al botón de respuestas
+            document.getElementById('toggle-answers-btn').addEventListener('click', toggleAnswers);
+            
+            // 3. Poner foco en el primer input al cargar la página
+            const firstInput = document.getElementById('input-1');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        };
+    </script>
+</body>
+</html>
