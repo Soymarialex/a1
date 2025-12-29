@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad de Español</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .correct-answer {
+            color: #10b981;
+            font-weight: bold;
+        }
+        .incorrect-answer {
+            color: #ef4444;
+            font-weight: bold;
+        }
+        .input-correct {
+            border-color: #10b981;
+            box-shadow: 0 0 0 2px #d1fae5;
+        }
+        .input-incorrect {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 2px #fee2e2;
+        }
+        .input-text {
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            width: 100px;
+            display: inline-block;
+            transition: all 0.2s ease-in-out;
+        }
+        .question-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="container">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Actividad de Español</h1>
+        <p class="text-center text-gray-600 mb-8">¡Pon a prueba tus conocimientos de español!</p>
+
+        <!-- Sección A -->
+        <div id="sectionA" class="mb-8">
+            <h2 class="section-title">
+                Completa las siguientes frases con la expresión apropiada. / Complete the following sentences with the appropriate expression.
+            </h2>
+            <div class="space-y-4">
+                <div class="question">
+                    <p>1. Esteban: Hola, ¿_____ están?</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="a1" value="a" class="mr-2">a) Qué</label>
+                        <label class="block"><input type="radio" name="a1" value="b" class="mr-2">b) Cómo</label>
+                        <label class="block"><input type="radio" name="a1" value="c" class="mr-2">c) Quién</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>2. Carlos: ¡_____, gracias!</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="a2" value="a" class="mr-2">a) Hola</label>
+                        <label class="block"><input type="radio" name="a2" value="b" class="mr-2">b) Bien</label>
+                        <label class="block"><input type="radio" name="a2" value="c" class="mr-2">c) Adiós</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>3. Esteban: ¿Cómo _____? (formal) </p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="a3" value="a" class="mr-2">a) te llamas</label>
+                        <label class="block"><input type="radio" name="a3" value="b" class="mr-2">b) estás</label>
+                        <label class="block"><input type="radio" name="a3" value="c" class="mr-2">c) se llama usted</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>4. Carlos: _____ Carlos. ¿Y usted?</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="a4" value="a" class="mr-2">a) Me llamo</label>
+                        <label class="block"><input type="radio" name="a4" value="b" class="mr-2">b) Soy de</label>
+                        <label class="block"><input type="radio" name="a4" value="c" class="mr-2">c) Él es</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>5. Esteban: _____ Esteban, y ella es mi esposa, Luisa.</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="a5" value="a" class="mr-2">a) Ella es</label>
+                        <label class="block"><input type="radio" name="a5" value="b" class="mr-2">b) Soy</label>
+                        <label class="block"><input type="radio" name="a5" value="c" class="mr-2">c) Tú eres</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>6. Carlos: ¡_____ gusto! Ella es mi esposa, Alejandra.</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="a6" value="a" class="mr-2">a) Bien</label>
+                        <label class="block"><input type="radio" name="a6" value="b" class="mr-2">b) Qué</label>
+                        <label class="block"><input type="radio" name="a6" value="c" class="mr-2">c) Mucho</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>7. Alejandra: ¡_____!</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="a7" value="a" class="mr-2">a) Mucho gusto</label>
+                        <label class="block"><input type="radio" name="a7" value="b" class="mr-2">b) Gracias</label>
+                        <label class="block"><input type="radio" name="a7" value="c" class="mr-2">c) Hola</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>8. Luisa: ¡_____!</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="a8" value="a" class="mr-2">a) Igualmente</label>
+                        <label class="block"><input type="radio" name="a8" value="b" class="mr-2">b) Por favor</label>
+                        <label class="block"><input type="radio" name="a8" value="c" class="mr-2">c) De nada</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección B -->
+        <div id="sectionB" class="mb-8">
+            <h2 class="section-title">
+                Elige una expresión similar a la expresión original. / Write an expression similar to the original expression.
+            </h2>
+            <div class="space-y-4">
+                <div class="question">
+                    <p>1. Encantado.</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="b1" value="b" class="mr-2">a) Me llamo</label>
+                        <label class="block"><input type="radio" name="b1" value="a" class="mr-2">b) Mucho gusto.</label>
+                        <label class="block"><input type="radio" name="b1" value="c" class="mr-2">c) Regular.</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>2. ¿Qué tal?</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="b2" value="a" class="mr-2">a) ¡Hola!</label>
+                        <label class="block"><input type="radio" name="b2" value="b" class="mr-2">b) ¿Cómo está usted?</label>
+                        <label class="block"><input type="radio" name="b2" value="c" class="mr-2">c) Hasta luego.</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>3. Muy bien, gracias.</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="b3" value="a" class="mr-2">a) Bien, gracias.</label>
+                        <label class="block"><input type="radio" name="b3" value="b" class="mr-2">b) Adiós.</label>
+                        <label class="block"><input type="radio" name="b3" value="c" class="mr-2">c) Encantado.</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>4. Más o menos.</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="b4" value="a" class="mr-2">a) Regular.</label>
+                        <label class="block"><input type="radio" name="b4" value="b" class="mr-2">b) Bien.</label>
+                        <label class="block"><input type="radio" name="b4" value="c" class="mr-2">c) Hasta luego.</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>5. Mi nombre es....</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="b5" value="a" class="mr-2">a) Hola.</label>
+                        <label class="block"><input type="radio" name="b5" value="b" class="mr-2">b) Soy....</label>
+                        <label class="block"><input type="radio" name="b5" value="c" class="mr-2">c) ¿Qué tal?</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>6. Nos vemos.</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="b6" value="a" class="mr-2">a) Hasta pronto.</label>
+                        <label class="block"><input type="radio" name="b6" value="b" class="mr-2">b) Me llamo....</label>
+                        <label class="block"><input type="radio" name="b6" value="c" class="mr-2">c) Bien, gracias.</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección C -->
+        <div id="sectionC" class="mb-8">
+            <h2 class="section-title">
+                Escoge una respuesta apropiada en cada situación. / Choose an appropriate answer in each situation.
+            </h2>
+            <div class="space-y-4">
+                <div class="question">
+                    <p>1. Hola. ¿Cómo está?</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="c1" value="a" class="mr-2">a) Igualmente.</label>
+                        <label class="block"><input type="radio" name="c1" value="b" class="mr-2">b) Bien, gracias. ¿Y usted?</label>
+                        <label class="block"><input type="radio" name="c1" value="c" class="mr-2">c) Hasta luego.</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>2. Le presento a Luisa.</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="c2" value="a" class="mr-2">a) Más o menos.</label>
+                        <label class="block"><input type="radio" name="c2" value="b" class="mr-2">b) Bien, gracias.</label>
+                        <label class="block"><input type="radio" name="c2" value="c" class="mr-2">c) Mucho gusto.</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>3. Buenas tardes. ¿Qué tal?</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="c3" value="a" class="mr-2">a) Igualmente.</label>
+                        <label class="block"><input type="radio" name="c3" value="b" class="mr-2">b) Muy bien. ¿Y usted?</label>
+                        <label class="block"><input type="radio" name="c3" value="c" class="mr-2">c) Nos vemos.</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>4. Hasta mañana.</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="c4" value="a" class="mr-2">a) Regular.</label>
+                        <label class="block"><input type="radio" name="c4" value="b" class="mr-2">b) Encantado.</label>
+                        <label class="block"><input type="radio" name="c4" value="c" class="mr-2">c) Hasta pronto.</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>5. ¿Cómo te llamas?</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="c5" value="a" class="mr-2">a) Igualmente.</label>
+                        <label class="block"><input type="radio" name="c5" value="b" class="mr-2">b) Buenos días.</label>
+                        <label class="block"><input type="radio" name="c5" value="c" class="mr-2">c) Me llamo Carlos.</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>6. ¡Buenas noches! ¿Cómo estás?</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="c6" value="a" class="mr-2">a) Bien, gracias. ¿Y tú?</label>
+                        <label class="block"><input type="radio" name="c6" value="b" class="mr-2">b) ¿Y usted?</label>
+                        <label class="block"><input type="radio" name="c6" value="c" class="mr-2">c) Encantada.</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección D -->
+        <div id="sectionD" class="mb-8">
+            <h2 class="section-title">
+                Agrega la expresión apropiada. / Add the appropriate expression.
+            </h2>
+            <div class="space-y-4">
+                <div class="question">
+                    <p>1. ¡Buenas _____!</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="d1" value="a" class="mr-2">a) está usted?</label>
+                        <label class="block"><input type="radio" name="d1" value="b" class="mr-2">b) tal?</label>
+                        <label class="block"><input type="radio" name="d1" value="c" class="mr-2">c) tardes!</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>2. ¿Cómo te _____?</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="d2" value="a" class="mr-2">a) llamas?</label>
+                        <label class="block"><input type="radio" name="d2" value="b" class="mr-2">b) presento a mi amigo.</label>
+                        <label class="block"><input type="radio" name="d2" value="c" class="mr-2">c) Carlos</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>3. ¿Qué _____?</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="d3" value="a" class="mr-2">a) tal?</label>
+                        <label class="block"><input type="radio" name="d3" value="b" class="mr-2">b) pronto!</label>
+                        <label class="block"><input type="radio" name="d3" value="c" class="mr-2">c) gusto!</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>4. ¡Mucho _____!</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="d4" value="a" class="mr-2">a) gusto!</label>
+                        <label class="block"><input type="radio" name="d4" value="b" class="mr-2">b) tal?</label>
+                        <label class="block"><input type="radio" name="d4" value="c" class="mr-2">c) Carlos</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>5. Les _____.</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="d5" value="a" class="mr-2">a) presento a mi amigo.</label>
+                        <label class="block"><input type="radio" name="d5" value="b" class="mr-2">b) pronto!</label>
+                        <label class="block"><input type="radio" name="d5" value="c" class="mr-2">c) llamas?</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>6. ¡Hasta _____!</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="d6" value="a" class="mr-2">a) pronto!</label>
+                        <label class="block"><input type="radio" name="d6" value="b" class="mr-2">b) gusto!</label>
+                        <label class="block"><input type="radio" name="d6" value="c" class="mr-2">c) presento a mi amigo.</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>7. ¿Cómo _____?</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="d7" value="a" class="mr-2">a) está usted?</label>
+                        <label class="block"><input type="radio" name="d7" value="b" class="mr-2">b) tal?</label>
+                        <label class="block"><input type="radio" name="d7" value="c" class="mr-2">c) tardes!</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <p>8. Mi nombre es _____.</p>
+                    <div class="space-y-2 mt-2">
+                        <label class="block"><input type="radio" name="d8" value="a" class="mr-2">a) Carlos</label>
+                        <label class="block"><input type="radio" name="d8" value="b" class="mr-2">b) está usted?</label>
+                        <label class="block"><input type="radio" name="d8" value="c" class="mr-2">c) llamas?</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center mt-8">
+            <button onclick="checkAnswers()" class="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
+                Verificar respuestas
+            </button>
+        </div>
+
+        <div id="results" class="mt-8 p-4 bg-gray-100 rounded-lg text-center font-bold" style="display:none;"></div>
+    </div>
+
+    <script>
+        // Respuestas correctas para cada sección
+        const correctAnswers = {
+            a: {
+                'a1': 'b',
+                'a2': 'b',
+                'a3': 'c',
+                'a4': 'a',
+                'a5': 'b',
+                'a6': 'c',
+                'a7': 'a',
+                'a8': 'a',
+            },
+            b: {
+                'b1': 'a',
+                'b2': 'b',
+                'b3': 'a',
+                'b4': 'a',
+                'b5': 'b',
+                'b6': 'a',
+            },
+            c: {
+                'c1': 'b',
+                'c2': 'c',
+                'c3': 'b',
+                'c4': 'c',
+                'c5': 'c',
+                'c6': 'a',
+            },
+            d: {
+                'd1': 'c',
+                'd2': 'a',
+                'd3': 'a',
+                'd4': 'a',
+                'd5': 'a',
+                'd6': 'a',
+                'd7': 'a',
+                'd8': 'a',
+            }
+        };
+
+        function checkAnswers() {
+            let correctCount = 0;
+            let totalCount = 0;
+
+            // Sección A
+            for (let i = 1; i <= 8; i++) {
+                const radios = document.getElementsByName(`a${i}`);
+                let questionIsCorrect = false;
+                radios.forEach(radio => {
+                    radio.parentElement.classList.remove('correct-answer', 'incorrect-answer');
+                    if (radio.checked) {
+                        if (radio.value === correctAnswers.a[`a${i}`]) {
+                            radio.parentElement.classList.add('correct-answer');
+                            questionIsCorrect = true;
+                        } else {
+                            radio.parentElement.classList.add('incorrect-answer');
+                        }
+                    }
+                });
+                if (questionIsCorrect) {
+                    correctCount++;
+                }
+                totalCount++;
+            }
+
+            // Sección B
+            for (let i = 1; i <= 6; i++) {
+                const radios = document.getElementsByName(`b${i}`);
+                let questionIsCorrect = false;
+                radios.forEach(radio => {
+                    radio.parentElement.classList.remove('correct-answer', 'incorrect-answer');
+                    if (radio.checked) {
+                        if (radio.value === correctAnswers.b[`b${i}`]) {
+                            radio.parentElement.classList.add('correct-answer');
+                            questionIsCorrect = true;
+                        } else {
+                            radio.parentElement.classList.add('incorrect-answer');
+                        }
+                    }
+                });
+                if (questionIsCorrect) {
+                    correctCount++;
+                }
+                totalCount++;
+            }
+            
+            // Sección C
+            for (let i = 1; i <= 6; i++) {
+                const radios = document.getElementsByName(`c${i}`);
+                let questionIsCorrect = false;
+                radios.forEach(radio => {
+                    radio.parentElement.classList.remove('correct-answer', 'incorrect-answer');
+                    if (radio.checked) {
+                        if (radio.value === correctAnswers.c[`c${i}`]) {
+                            radio.parentElement.classList.add('correct-answer');
+                            questionIsCorrect = true;
+                        } else {
+                            radio.parentElement.classList.add('incorrect-answer');
+                        }
+                    }
+                });
+                if (questionIsCorrect) {
+                    correctCount++;
+                }
+                totalCount++;
+            }
+            
+            // Sección D
+            for (let i = 1; i <= 8; i++) {
+                const radios = document.getElementsByName(`d${i}`);
+                let questionIsCorrect = false;
+                radios.forEach(radio => {
+                    radio.parentElement.classList.remove('correct-answer', 'incorrect-answer');
+                    if (radio.checked) {
+                        if (radio.value === correctAnswers.d[`d${i}`]) {
+                            radio.parentElement.classList.add('correct-answer');
+                            questionIsCorrect = true;
+                        } else {
+                            radio.parentElement.classList.add('incorrect-answer');
+                        }
+                    }
+                });
+                if (questionIsCorrect) {
+                    correctCount++;
+                }
+                totalCount++;
+            }
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.textContent = `Has obtenido ${correctCount} de ${totalCount} respuestas correctas. ¡Sigue practicando!`;
+            resultsDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

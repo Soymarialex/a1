@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity: Verb Ser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 700px; /* Reduced size to take up less space */
+        }
+        /* Style to make buttons look like the user's drawing */
+        .btn {
+            @apply px-4 py-2 rounded-lg font-bold transition-colors duration-200 border-2 border-blue-700;
+        }
+        .btn-blue {
+            @apply bg-blue-500 text-white hover:bg-blue-600;
+        }
+        .btn-correct {
+            @apply bg-green-500 text-white;
+        }
+        .btn-incorrect {
+            @apply bg-red-500 text-white;
+        }
+        .btn-inactive {
+            @apply bg-blue-300 cursor-not-allowed;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 flex justify-center">
+
+    <div id="main-content" class="container bg-white p-4 sm:p-6 rounded-xl shadow-lg border border-gray-200">
+        <!-- Main Title -->
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-blue-800 mb-2">Practice the Verb SER!</h1>
+        <p class="text-center text-gray-600 mb-8">An activity to master the verb ser in singular and plural.</p>
+
+        <!-- Explanation of the verb "ser" -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-blue-700 mb-4">Uses of the Verb "Ser"</h2>
+            <div class="space-y-4 text-gray-700">
+                <p>The verb "ser" is a fundamental Spanish verb and is used to talk about:</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong class="font-semibold">Identity:</strong> Who someone or something is. (Ej: Yo <strong class="text-blue-600">soy</strong> estudiante.)</li>
+                    <li><strong class="font-semibold">Origin/Nationality:</strong> Where someone is from. (Ej: Ella <strong class="text-blue-600">es</strong> de México.)</li>
+                    <li><strong class="font-semibold">Permanent Characteristics:</strong> To describe lasting qualities. (Ej: Él <strong class="text-blue-600">es</strong> alto.)</li>
+                    <li><strong class="font-semibold">Profession:</strong> Someone's occupation. (Ej: Nosotros <strong class="text-blue-600">somos</strong> profesores.)</li>
+                    <li><strong class="font-semibold">Time/Date:</strong> To indicate the time or date. (Ej: Hoy <strong class="text-blue-600">es</strong> martes.)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Vocabulary Table -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-blue-700 mb-4">Essential Vocabulary</h2>
+            <div class="overflow-x-auto rounded-lg shadow-inner">
+                <table class="w-full table-auto bg-blue-50">
+                    <thead class="bg-blue-200 text-blue-800">
+                        <tr>
+                            <th class="px-4 py-2 text-left">Español</th>
+                            <th class="px-4 py-2 text-left">Inglés</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Yo</td>
+                            <td class="px-4 py-2">I</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Tú</td>
+                            <td class="px-4 py-2">You (informal)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Él</td>
+                            <td class="px-4 py-2">He</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Ella</td>
+                            <td class="px-4 py-2">She</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Usted</td>
+                            <td class="px-4 py-2">You (formal)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Nosotros</td>
+                            <td class="px-4 py-2">We (masculine/mixed)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Nosotras</td>
+                            <td class="px-4 py-2">We (feminine)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Vosotros</td>
+                            <td class="px-4 py-2">You all (Spain, masculine/mixed)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Vosotras</td>
+                            <td class="px-4 py-2">You all (Spain, feminine)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Ellos</td>
+                            <td class="px-4 py-2">They (masculine/mixed)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Ellas</td>
+                            <td class="px-4 py-2">They (feminine)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Ustedes</td>
+                            <td class="px-4 py-2">You all</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Soy</td>
+                            <td class="px-4 py-2">I am</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Eres</td>
+                            <td class="px-4 py-2">You are</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Es</td>
+                            <td class="px-4 py-2">He/She/It is, You are</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Somos</td>
+                            <td class="px-4 py-2">We are</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Sois</td>
+                            <td class="px-4 py-2">You all are (Spain)</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Son</td>
+                            <td class="px-4 py-2">They are, You all are</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Alta/Alto</td>
+                            <td class="px-4 py-2">Tall</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Baja/Bajo</td>
+                            <td class="px-4 py-2">Short</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Amable</td>
+                            <td class="px-4 py-2">Kind</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Inteligente</td>
+                            <td class="px-4 py-2">Intelligent</td>
+                        </tr>
+                        <tr class="hover:bg-100">
+                            <td class="px-4 py-2">Guapa/Guapo</td>
+                            <td class="px-4 py-2">Pretty/Handsome</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Alegre</td>
+                            <td class="px-4 py-2">Cheerful</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Creativo / creativa</td>
+                            <td class="px-4 py-2">Creative</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Joven</td>
+                            <td class="px-4 py-2">Young</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Listo / lista</td>
+                            <td class="px-4 py-2">Clever</td>
+                        </tr>
+                        <tr class="hover:bg-blue-100">
+                            <td class="px-4 py-2">Trabajador / trabajadora</td>
+                            <td class="px-4 py-2">Hardworking</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Activity Selection Buttons -->
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+            <button id="singular-btn" class="btn btn-blue text-lg">Singular</button>
+            <button id="plural-btn" class="btn btn-blue text-lg">Plural</button>
+        </div>
+    </div>
+
+    <!-- Activity Container -->
+    <div id="activity-container" class="hidden container bg-white p-4 sm:p-4 rounded-xl shadow-lg border border-gray-200">
+        <h2 id="activity-title" class="text-2xl font-bold text-center text-blue-700 mb-2"></h2>
+        
+        <!-- Activity buttons organized in columns -->
+        <div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-2 w-full">
+            <!-- Pronouns Column -->
+            <div class="flex flex-col items-center space-y-2 w-full">
+                <h3 class="text-xl font-bold text-blue-800">Pronouns</h3>
+                <div id="pronoun-buttons" class="grid grid-cols-2 gap-2 w-full"></div>
+            </div>
+            <!-- Verb Ser Column -->
+            <div class="flex flex-col items-center space-y-2 w-full">
+                <h3 class="text-xl font-bold text-blue-800">Verb Ser</h3>
+                <div id="verb-buttons" class="grid grid-cols-2 gap-2 w-full"></div>
+            </div>
+            <!-- Adjectives Column -->
+            <div class="flex flex-col items-center space-y-2 w-full">
+                <h3 class="text-xl font-bold text-blue-800">Adjectives</h3>
+                <div id="adjective-buttons" class="flex flex-wrap justify-center gap-2 w-full"></div>
+            </div>
+        </div>
+
+        <!-- Constructed Sentence -->
+        <div class="mt-6 p-3 bg-blue-100 border-l-4 border-blue-500 rounded-lg shadow-inner">
+            <p class="text-xl sm:text-2xl text-center text-blue-900 font-semibold" id="sentence-display"></p>
+        </div>
+        
+        <div class="flex justify-center mt-4 gap-4">
+            <button id="reset-btn" class="btn btn-blue text-base sm:text-lg">Reset</button>
+            <button id="back-btn" class="btn btn-blue text-base sm:text-lg">Back</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const singularBtn = document.getElementById('singular-btn');
+            const pluralBtn = document.getElementById('plural-btn');
+            const mainContent = document.getElementById('main-content');
+            const activityContainer = document.getElementById('activity-container');
+            const activityTitle = document.getElementById('activity-title');
+            const pronounButtonsContainer = document.getElementById('pronoun-buttons');
+            const verbButtonsContainer = document.getElementById('verb-buttons');
+            const adjectiveButtonsContainer = document.getElementById('adjective-buttons');
+            const sentenceDisplay = document.getElementById('sentence-display');
+            const resetBtn = document.getElementById('reset-btn');
+            const backBtn = document.getElementById('back-btn');
+
+            let currentPronoun = null;
+            let currentVerb = null;
+            let currentAdjective = null;
+            let currentType = null;
+            
+            // Concordance rules
+            const singularRules = {
+                'Yo': { verb: 'soy', gender: ['all'] },
+                'Tú': { verb: 'eres', gender: ['all'] },
+                'Él': { verb: 'es', gender: ['masculine'] },
+                'Ella': { verb: 'es', gender: ['feminine'] },
+                'Usted': { verb: 'es', gender: ['all'] }
+            };
+
+            const pluralRules = {
+                'Nosotros': { verb: 'somos', gender: ['masculine'] },
+                'Nosotras': { verb: 'somos', gender: ['feminine'] },
+                'Vosotros': { verb: 'sois', gender: ['masculine'] },
+                'Vosotras': { verb: 'sois', gender: ['feminine'] },
+                'Ellos': { verb: 'son', gender: ['masculine'] },
+                'Ellas': { verb: 'son', gender: ['feminine'] },
+                'Ustedes': { verb: 'son', gender: ['all'] }
+            };
+
+            const singularAdjectives = {
+                'alto': 'masculine', 'alta': 'feminine',
+                'bajo': 'masculine', 'baja': 'feminine',
+                'amable': 'all', 'inteligente': 'all',
+                'guapo': 'masculine', 'guapa': 'feminine',
+                'alegre': 'all', 'creativo': 'masculine', 'creativa': 'feminine',
+                'joven': 'all', 'listo': 'masculine', 'lista': 'feminine',
+                'trabajador': 'masculine', 'trabajadora': 'feminine'
+            };
+
+            const pluralAdjectives = {
+                'altos': 'masculine', 'altas': 'feminine',
+                'bajos': 'masculine', 'bajas': 'feminine',
+                'amables': 'all', 'inteligentes': 'all',
+                'guapos': 'masculine', 'guapas': 'feminine',
+                'alegres': 'all', 'creativos': 'masculine', 'creativas': 'feminine',
+                'jóvenes': 'all', 'listos': 'masculine', 'listas': 'feminine',
+                'trabajadores': 'masculine', 'trabajadoras': 'feminine'
+            };
+
+            const singularPronouns = Object.keys(singularRules);
+            const pluralPronouns = Object.keys(pluralRules);
+            const singularVerbs = ['soy', 'eres', 'es'];
+            const pluralVerbs = ['somos', 'sois', 'son'];
+            
+            // New structured data for adjective buttons
+            const singularAdjectiveGroups = [
+                ['alto', 'alta'],
+                ['bajo', 'baja'],
+                ['amable', 'inteligente'],
+                ['guapo', 'guapa'],
+                ['alegre', 'joven'],
+                ['creativo', 'creativa'],
+                ['listo', 'lista'],
+                ['trabajador', 'trabajadora']
+            ];
+
+            const pluralAdjectiveGroups = [
+                ['altos', 'altas'],
+                ['bajos', 'bajas'],
+                ['amables', 'inteligentes'],
+                ['guapos', 'guapas'],
+                ['alegres', 'jóvenes'],
+                ['creativos', 'creativas'],
+                ['listos', 'listas'],
+                ['trabajadores', 'trabajadoras']
+            ];
+            
+            // Function to render buttons
+            function renderButtons(container, items, type) {
+                container.innerHTML = '';
+                if (type === 'adjective') {
+                    items.forEach(group => {
+                        const groupDiv = document.createElement('div');
+                        groupDiv.classList.add('flex', 'gap-2', 'flex-wrap', 'w-full');
+                        group.forEach(item => {
+                            const button = document.createElement('button');
+                            button.textContent = item;
+                            button.classList.add('btn', 'btn-blue', 'text-sm', 'sm:text-base', 'p-2', 'flex-grow');
+                            button.setAttribute('data-value', item);
+                            button.setAttribute('data-type', type);
+                            groupDiv.appendChild(button);
+                        });
+                        container.appendChild(groupDiv);
+                    });
+                } else {
+                    items.forEach(item => {
+                        const button = document.createElement('button');
+                        button.textContent = item;
+                        button.classList.add('btn', 'btn-blue', 'text-sm', 'sm:text-base', 'w-full', 'p-2');
+                        button.setAttribute('data-value', item);
+                        button.setAttribute('data-type', type);
+                        container.appendChild(button);
+                    });
+                }
+            }
+
+            // Function to handle button clicks
+            function handleButtonClick(event) {
+                const button = event.target;
+                const value = button.getAttribute('data-value');
+                const type = button.getAttribute('data-type');
+                
+                // Reset colors
+                document.querySelectorAll('.btn-incorrect').forEach(btn => {
+                    btn.classList.remove('btn-incorrect');
+                    btn.classList.add('btn-blue');
+                });
+
+                if (type === 'pronoun') {
+                    currentPronoun = { value: value, gender: currentType === 'singular' ? singularRules[value].gender : pluralRules[value].gender };
+                    currentVerb = null;
+                    currentAdjective = null;
+                    sentenceDisplay.textContent = value;
+                    updateButtonState('pronoun', button);
+                    updateButtonState('verb', null);
+                    updateButtonState('adjective', null);
+
+                } else if (type === 'verb') {
+                    if (currentPronoun) {
+                        const correctVerb = currentType === 'singular' ? singularRules[currentPronoun.value].verb : pluralRules[currentPronoun.value].verb;
+                        
+                        if (value === correctVerb) {
+                            currentVerb = value;
+                            button.classList.remove('btn-blue');
+                            button.classList.add('btn-correct');
+                            sentenceDisplay.textContent = `${currentPronoun.value} ${currentVerb}`;
+                            updateButtonState('verb', button);
+                        } else {
+                            button.classList.remove('btn-blue');
+                            button.classList.add('btn-incorrect');
+                        }
+                    }
+
+                } else if (type === 'adjective') {
+                    if (currentPronoun && currentVerb) {
+                        const adjectiveData = currentType === 'singular' ? singularAdjectives : pluralAdjectives;
+                        const adjectiveGender = adjectiveData[value];
+                        const pronounGender = currentPronoun.gender;
+
+                        // Corrected logic for checking gender compatibility
+                        const isCompatible = pronounGender.includes('all') || adjectiveGender === 'all' || pronounGender.includes(adjectiveGender);
+
+                        if (isCompatible) {
+                            currentAdjective = value;
+                            button.classList.remove('btn-blue');
+                            button.classList.add('btn-correct');
+                            sentenceDisplay.textContent = `${currentPronoun.value} ${currentVerb} ${currentAdjective}.`;
+                            updateButtonState('adjective', button);
+                        } else {
+                            button.classList.remove('btn-blue');
+                            button.classList.add('btn-incorrect');
+                        }
+                    }
+                }
+            }
+
+            // Function to update button state
+            function updateButtonState(groupType, activeBtn) {
+                document.querySelectorAll(`[data-type="${groupType}"]`).forEach(btn => {
+                    if (btn === activeBtn) {
+                        btn.classList.remove('btn-blue', 'btn-incorrect');
+                        btn.classList.add('btn-correct');
+                    } else {
+                        btn.classList.remove('btn-correct', 'btn-incorrect');
+                        btn.classList.add('btn-blue');
+                    }
+                });
+            }
+
+            // Event Listeners for activity buttons
+            pronounButtonsContainer.addEventListener('click', handleButtonClick);
+            verbButtonsContainer.addEventListener('click', handleButtonClick);
+            adjectiveButtonsContainer.addEventListener('click', handleButtonClick);
+
+            // Event Listeners for activity selection buttons
+            singularBtn.addEventListener('click', () => {
+                currentType = 'singular';
+                mainContent.classList.add('hidden');
+                activityContainer.classList.remove('hidden');
+                activityTitle.textContent = 'Activity: Singular';
+                renderButtons(pronounButtonsContainer, singularPronouns, 'pronoun');
+                renderButtons(verbButtonsContainer, singularVerbs, 'verb');
+                renderButtons(adjectiveButtonsContainer, singularAdjectiveGroups, 'adjective');
+                resetState();
+            });
+
+            pluralBtn.addEventListener('click', () => {
+                currentType = 'plural';
+                mainContent.classList.add('hidden');
+                activityContainer.classList.remove('hidden');
+                activityTitle.textContent = 'Activity: Plural';
+                renderButtons(pronounButtonsContainer, pluralPronouns, 'pronoun');
+                renderButtons(verbButtonsContainer, pluralVerbs, 'verb');
+                renderButtons(adjectiveButtonsContainer, pluralAdjectiveGroups, 'adjective');
+                resetState();
+            });
+
+            // Function to reset the activity
+            function resetState() {
+                currentPronoun = null;
+                currentVerb = null;
+                currentAdjective = null;
+                sentenceDisplay.textContent = '';
+                document.querySelectorAll('.btn').forEach(btn => {
+                    btn.classList.remove('btn-correct', 'btn-incorrect', 'btn-inactive');
+                    btn.classList.add('btn-blue');
+                });
+            }
+
+            resetBtn.addEventListener('click', resetState);
+            backBtn.addEventListener('click', () => {
+                mainContent.classList.remove('hidden');
+                activityContainer.classList.add('hidden');
+                resetState();
+            });
+
+        });
+    </script>
+</body>
+</html>
