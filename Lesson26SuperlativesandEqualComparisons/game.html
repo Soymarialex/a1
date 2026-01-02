@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <!-- Control de caché mediante parámetro de versión -->
+    <link rel="stylesheet" href="style.css?v=1.0">
+    <style>
+        :root {
+            --flamingo-pink: #FF79AC;
+            --flamingo-light: #FFB3D1;
+            --eerie-black: #121118;
+            --bg-white: #ffffff;
+            --correct-green: #d4edda;
+            --incorrect-red: #f8d7da;
+        }
+
+        body {
+            font-family: "Platform Medium", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-white);
+            color: var(--eerie-black);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--flamingo-pink);
+            font-weight: bold;
+            margin: 10px 0;
+            text-transform: none;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .nav-levels {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .level-btn {
+            background-color: var(--flamingo-light);
+            border: none;
+            border-bottom: 3px solid var(--flamingo-pink);
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--eerie-black);
+            border-radius: 4px;
+            transition: transform 0.1s;
+        }
+
+        .level-btn.active {
+            background-color: var(--flamingo-pink);
+            color: white;
+            font-weight: bold;
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .word-btn {
+            background-color: var(--flamingo-light);
+            border: none;
+            border-bottom: 3px solid var(--flamingo-pink);
+            padding: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: var(--eerie-black);
+            border-radius: 4px;
+            text-align: center;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .word-btn.selected {
+            background-color: #ffd1e3;
+            outline: 2px solid var(--flamingo-pink);
+        }
+
+        .word-btn.matched {
+            background-color: var(--correct-green) !important;
+            border-bottom-color: #28a745;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .word-btn.error {
+            background-color: var(--incorrect-red) !important;
+            border-bottom-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+    <h1><strong>Matching game</strong></h1>
+    <h2>test your memory</h2>
+
+    <div class="nav-levels">
+        <button class="level-btn active" onclick="loadLevel(0)">Nivel 1</button>
+        <button class="level-btn" onclick="loadLevel(1)">Nivel 2</button>
+        <button class="level-btn" onclick="loadLevel(2)">Nivel 3</button>
+        <button class="level-btn" onclick="loadLevel(3)">Nivel 4</button>
+        <button class="level-btn" onclick="loadLevel(4)">Nivel 5</button>
+    </div>
+
+    <div class="game-container">
+        <div class="column" id="col-es"></div>
+        <div class="column" id="col-en"></div>
+    </div>
+
+    <script>
+        const levels = [
+            [
+                { es: "al aire libre", en: "outdoors" },
+                { es: "el boxeo", en: "boxing" },
+                { es: "la liga", en: "league" },
+                { es: "el esquí", en: "skiing" },
+                { es: "el fútbol", en: "soccer" },
+                { es: "el golf", en: "golf" },
+                { es: "el fútbol americano", en: "football" }
+            ],
+            [
+                { es: "el ciclismo", en: "cycling" },
+                { es: "el básquetbol", en: "basketball" },
+                { es: "el jugador", en: "player" },
+                { es: "el campeón", en: "champion" },
+                { es: "el aficionado", en: "fan" },
+                { es: "nadar", en: "to swim" },
+                { es: "la raqueta", en: "racquet" }
+            ],
+            [
+                { es: "la natación", en: "swimming" },
+                { es: "el bate", en: "bat" },
+                { es: "la piscina", en: "swimming pool" },
+                { es: "el palo de golf", en: "golf club" },
+                { es: "levantar pesas", en: "to lift weights" },
+                { es: "la pelota", en: "ball" },
+                { es: "entrenar", en: "to train" },
+                { es: "gratis", en: "free, at no cost" }
+            ],
+            [
+                { es: "el balón", en: "ball" },
+                { es: "el entrenador", en: "coach, trainer" },
+                { es: "el equipo", en: "team" },
+                { es: "la competencia", en: "competition" },
+                { es: "esquiar", en: "to ski" },
+                { es: "tomar el sol", en: "to sunbathe" },
+                { es: "el esquí acuático", en: "water skiiing" },
+                { es: "de hecho", en: "in fact" }
+            ],
+            [
+                { es: "montar a caballo", en: "to ride a horse" },
+                { es: "el buceo", en: "scuba diving" },
+                { es: "hacer yoga", en: "to do yoga" },
+                { es: "bucear", en: "to scuba dive" },
+                { es: "crear", en: "to create" },
+                { es: "conquistador", en: "conqueror" },
+                { es: "creador", en: "creator" },
+                { es: "conquistar", en: "to conquer" }
+            ]
+        ];
+
+        let selectedEs = null;
+        let selectedEn = null;
+        let currentLevelIndex = 0;
+
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function loadLevel(index) {
+            currentLevelIndex = index;
+            selectedEs = null;
+            selectedEn = null;
+
+            // Actualizar botones de navegación
+            const navBtns = document.querySelectorAll('.level-btn');
+            navBtns.forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+
+            const colEs = document.getElementById('col-es');
+            const colEn = document.getElementById('col-en');
+            colEs.innerHTML = '';
+            colEn.innerHTML = '';
+
+            const currentPairs = levels[index];
+            
+            // Crear botones en español
+            const esWords = shuffle(currentPairs.map(p => p.es));
+            esWords.forEach(word => {
+                const btn = document.createElement('button');
+                btn.className = 'word-btn';
+                btn.textContent = word;
+                btn.onclick = () => selectWord(btn, 'es');
+                colEs.appendChild(btn);
+            });
+
+            // Crear botones en inglés
+            const enWords = shuffle(currentPairs.map(p => p.en));
+            enWords.forEach(word => {
+                const btn = document.createElement('button');
+                btn.className = 'word-btn';
+                btn.textContent = word;
+                btn.onclick = () => selectWord(btn, 'en');
+                colEn.appendChild(btn);
+            });
+        }
+
+        function selectWord(btn, lang) {
+            if (btn.classList.contains('matched')) return;
+
+            if (lang === 'es') {
+                if (selectedEs) selectedEs.classList.remove('selected');
+                selectedEs = btn;
+            } else {
+                if (selectedEn) selectedEn.classList.remove('selected');
+                selectedEn = btn;
+            }
+            btn.classList.add('selected');
+
+            if (selectedEs && selectedEn) {
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const esVal = selectedEs.textContent;
+            const enVal = selectedEn.textContent;
+            
+            const pair = levels[currentLevelIndex].find(p => p.es === esVal);
+
+            if (pair && pair.en === enVal) {
+                // Correcto
+                selectedEs.classList.add('matched');
+                selectedEn.classList.add('matched');
+                selectedEs.classList.remove('selected');
+                selectedEn.classList.remove('selected');
+                selectedEs = null;
+                selectedEn = null;
+            } else {
+                // Incorrecto
+                const tempEs = selectedEs;
+                const tempEn = selectedEn;
+                tempEs.classList.add('error');
+                tempEn.classList.add('error');
+                
+                setTimeout(() => {
+                    tempEs.classList.remove('error', 'selected');
+                    tempEn.classList.remove('error', 'selected');
+                }, 1000);
+
+                selectedEs = null;
+                selectedEn = null;
+            }
+        }
+
+        // Cargar primer nivel al iniciar
+        window.onload = () => loadLevel(0);
+    </script>
+</body>
+</html>
