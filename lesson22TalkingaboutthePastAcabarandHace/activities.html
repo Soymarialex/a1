@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS para el estilo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Usamos 'Inter' como alternativa robusta y moderna a Platform Medium -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Definición de la fuente y colores */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF; /* Fondo blanco */
+            color: #121118; /* Eerie Black */
+        }
+        
+        /* Estilo para justificar el texto informativo */
+        .text-justify-info p, .text-justify-info div, .text-justify-info li {
+            text-align: justify;
+        }
+
+        /* Definición de colores personalizados de Tailwind (para referencia rápida) */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --green-light: #D1FAE5; /* Verde claro */
+            --red-light: #FEE2E2;   /* Rojo claro */
+        }
+
+        .bg-flamingo-pink { background-color: var(--flamingo-pink); }
+        .text-eerie-black { color: var(--eerie-black); }
+        .border-flamingo-pink { border-color: var(--flamingo-pink); }
+        
+        /* Estilos para el texto en negrita (simulando Platform Medium en negrita) */
+        /* Asegura que no se vean asteriscos, usando 300 (Extra-Bold) */
+        strong {
+            font-weight: 300; 
+            color: var(--eerie-black); /* Para que resalte el número o palabra sin ser rosa */
+        }
+        .pink-highlight {
+            color: var(--flamingo-pink);
+            font-weight: 300;
+        }
+
+
+        /* Estilos base para los inputs de completación */
+        .completion-input {
+            transition: background-color 0.3s, border-color 0.3s;
+            border-bottom: 2px solid var(--eerie-black);
+            background-color: white;
+            padding: 0.25rem 0.5rem;
+            text-align: left;
+            border-radius: 4px; /* Pequeñas esquinas redondeadas */
+        }
+
+        /* Estilos para los botones de selección */
+        .mc-button {
+            transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+            border: 2px solid var(--flamingo-pink);
+            background-color: white;
+            color: var(--eerie-black);
+        }
+        
+        .mc-button:hover:not(.correct):not(.incorrect) {
+            background-color: var(--flamingo-pink);
+            color: white;
+            border-color: var(--eerie-black);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-12 min-h-screen">
+
+    <header class="mb-10 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-eerie-black border-b-4 border-flamingo-pink pb-3 inline-block rounded-b-md">
+            III. Actividades / Activities
+        </h1>
+    </header>
+
+    <main class="max-w-4xl mx-auto space-y-12">
+
+        <!-- ACTIVIDAD A -->
+        <section id="activity-a">
+            <h2 class="text-2xl font-bold mb-4 text-eerie-black">a. Las amigas de Marisol, Pilar y Carolina, van a ir a un concierto de su grupo favorito. Ahora ellas están esperando al grupo en el aeropuerto. Marisol no puede ir con ellas porque tiene que estudiar para un examen muy difícil. Pilar y Carolina están enviándole mensajes de texto a Marisol. / Marisol’s friends, Pilar and Carolina, are going to a concert of their favorite group. They are now waiting for them in the airport. Marisol can’t go with them because she has to study for a very difficult exam. Pilar and Carolina are texting Marisol.</h2>
+            <div class="text-justify-info text-lg space-y-4 p-4 rounded-lg border border-gray-200 shadow-md">
+                <p class="pink-highlight font-bold">Completa estas frases utilizando acabar + de + infinitivo. / Complete these sentences using acabar + de + infinitive.</p>
+                <div class="flex flex-col space-y-3">
+                    <p>Pilar: Hay muchas chicas en el aeropuerto. Nosotras <strong class="text-flamingo-pink">1.</strong> 
+                        <input type="text" id="a-1" data-activity="a" data-index="1" class="completion-input w-48" placeholder="" onkeydown="handleEnter(event, 'a', 1)"> (llegar).
+                    </p>
+                    <p>Carolina: Los guardaespaldas [bodyguards] también <strong class="text-flamingo-pink">2.</strong>
+                        <input type="text" id="a-2" data-activity="a" data-index="2" class="completion-input w-48" placeholder="" onkeydown="handleEnter(event, 'a', 2)"> (llegar).
+                    </p>
+                    <p>Pilar: El avión con los muchachos <strong class="text-flamingo-pink">3.</strong>
+                        <input type="text" id="a-3" data-activity="a" data-index="3" class="completion-input w-48" placeholder="" onkeydown="handleEnter(event, 'a', 3)"> (aterrizar [to land]).
+                    </p>
+                    <p>Carolina: ¿Qué estás haciendo, Marisol?</p>
+                    <p>Marisol: <strong class="text-flamingo-pink">4.</strong>
+                        <input type="text" id="a-4" data-activity="a" data-index="4" class="completion-input w-48" placeholder="" onkeydown="handleEnter(event, 'a', 4)"> (leer) un capítulo [chapter] de un libro.
+                    </p>
+                    <p>Marisol: ¿Ustedes van a desayunar más tarde?</p>
+                    <p>Pilar: No, nosotras <strong class="text-flamingo-pink">5.</strong>
+                        <input type="text" id="a-5" data-activity="a" data-index="5" class="completion-input w-48" placeholder="" onkeydown="handleEnter(event, 'a', 5)"> (desayunar) en el carro.
+                    </p>
+                    <p>Marisol: Yo también <strong class="text-flamingo-pink">6.</strong>
+                        <input type="text" id="a-6" data-activity="a" data-index="6" class="completion-input w-48" placeholder="" onkeydown="handleEnter(event, 'a', 6)"> (desayunar) pero en la cocina.
+                    </p>
+                    <p>Carolina: ¡Aquí están! ¡Aquí están! ¡Aquí están! ¡Aquí están! ¡Aquí están!</p>
+                    <p>Carolina: ¡Yo <strong class="text-flamingo-pink">7.</strong>
+                        <input type="text" id="a-7" data-activity="a" data-index="7" class="completion-input w-48" placeholder="" onkeydown="handleEnter(event, 'a', 7)"> (tomar) muchas fotos [photos] de ellos!
+                    </p>
+                    <p>Pilar: Te vamos a escribir después. Vamos a tomar más fotos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACTIVIDAD B -->
+        <section id="activity-b">
+            <h2 class="text-2xl font-bold mb-4 text-eerie-black">b. Lee los apuntes de una entrevista que le hizo Marisol a su hermano Pablo para un proyecto de la secundaria. Luego contesta las preguntas. / Read the notes of an interview that Marisol conducted with her brother Pablo for a high school project. Then answer the questions.</h2>
+            <div class="text-justify-info text-lg space-y-4 p-4 rounded-lg border border-gray-200 shadow-md">
+                <p>Nunca les compro regalos de cumpleaños a mis amigos porque no me gusta ir de compras. Tampoco me gusta hacer fiestas sorpresa [surprise] para mis amigos. No es que no me guste [It’s not that I don’t like] hacer fiestas, sino que las fiestas sorpresa necesitan más planificación [planning] y cuidado. Además [Moreover], mis amigos y yo somos más espontáneos [spontaneous] y tomamos decisiones en el momento. No escribo correos electrónicos [e-mails] a mis amigos sino que les envío mensajes de texto. Es más fácil, y recibo una respuesta inmediatamente. Pero a mis profesores les escribo correos electrónicos. Creo que no solo tengo buenos amigos, sino también buenos profesores. Hace dos años que no voy a la playa, pero sí uso lentes de sol cuando voy a la playa. No solo llevo mis lentes sino también una gorra. Si hago deportes, generalmente llevo una gorra también. Me gusta el sol, pero no me gusta quemarme [get a sunburn]. Hace quince años que practico [I play] deportes, y no puedo imaginar [imagine] mi vida sin deportes. Hace dos años que soy co-entrenador [co-coach] de fútbol en mi ex-secundaria, y me encanta. Hace tres semanas que no monto bicicleta porque tengo problemas en una rodilla [knee], pero me encanta montar bicicleta.</p>
+                
+                <ol class="list-decimal list-inside space-y-4 pt-4 ml-4">
+                    <li class="pl-2">¿Por qué a Pablo no le gustan las fiestas sorpresa?
+                        <input type="text" id="b-1" data-activity="b" data-index="1" class="completion-input w-full mt-1" placeholder="" onkeydown="handleEnter(event, 'b', 1)">
+                    </li>
+                    <li class="pl-2">¿Cómo se comunica Pablo con sus profesores?
+                        <input type="text" id="b-2" data-activity="b" data-index="2" class="completion-input w-full mt-1" placeholder="" onkeydown="handleEnter(event, 'b', 2)">
+                    </li>
+                    <li class="pl-2">¿Hace cuanto tiempo que Pablo no va a la playa?
+                        <input type="text" id="b-3" data-activity="b" data-index="3" class="completion-input w-full mt-1" placeholder="" onkeydown="handleEnter(event, 'b', 3)">
+                    </li>
+                    <li class="pl-2">¿Qué lleva Pablo a la playa?
+                        <input type="text" id="b-4" data-activity="b" data-index="4" class="completion-input w-full mt-1" placeholder="" onkeydown="handleEnter(event, 'b', 4)">
+                    </li>
+                    <li class="pl-2">¿Hace cuánto (tiempo) que Pablo practica deportes?
+                        <input type="text" id="b-5" data-activity="b" data-index="5" class="completion-input w-full mt-1" placeholder="" onkeydown="handleEnter(event, 'b', 5)">
+                    </li>
+                    <li class="pl-2">¿Hace cuánto que Pablo es co-entrenador de fútbol?
+                        <input type="text" id="b-6" data-activity="b" data-index="6" class="completion-input w-full mt-1" placeholder="" onkeydown="handleEnter(event, 'b', 6)">
+                    </li>
+                    <li class="pl-2">¿Por qué hace tres semanas que Pablo no monta bicicleta?
+                        <input type="text" id="b-7" data-activity="b" data-index="7" class="completion-input w-full mt-1" placeholder="" onkeydown="handleEnter(event, 'b', 7)">
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ACTIVIDAD C (Selección) -->
+        <section id="activity-c">
+            <h2 class="text-2xl font-bold mb-4 text-eerie-black">c. Escoge la respuesta correcta. / Choose the correct answer.</h2>
+            <div class="text-lg space-y-6 p-4 rounded-lg border border-gray-200 shadow-md">
+                <!-- Pregunta 1 -->
+                <div data-question="1">
+                    <p class="mb-2"><strong class="text-flamingo-pink">1.</strong> Pilar y Carolina no toman fotos con una cámara __________ con su teléfono celular.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="handleSelection(this, 'c', 1, 'a')" data-value="a" class="mc-button py-2 px-6 rounded-full font-semibold">a) pero</button>
+                        <button onclick="handleSelection(this, 'c', 1, 'b')" data-value="b" class="mc-button py-2 px-6 rounded-full font-semibold">b) sino</button>
+                        <button onclick="handleSelection(this, 'c', 1, 'c')" data-value="c" class="mc-button py-2 px-6 rounded-full font-semibold">c) sino que</button>
+                    </div>
+                </div>
+                <!-- Pregunta 2 -->
+                <div data-question="2">
+                    <p class="mb-2"><strong class="text-flamingo-pink">2.</strong> Pilar y Carolina no llaman por teléfono a Marisol ____________ le envían textos.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="handleSelection(this, 'c', 2, 'a')" data-value="a" class="mc-button py-2 px-6 rounded-full font-semibold">a) pero</button>
+                        <button onclick="handleSelection(this, 'c', 2, 'b')" data-value="b" class="mc-button py-2 px-6 rounded-full font-semibold">b) sino</button>
+                        <button onclick="handleSelection(this, 'c', 2, 'c')" data-value="c" class="mc-button py-2 px-6 rounded-full font-semibold">c) sino que</button>
+                    </div>
+                </div>
+                <!-- Pregunta 3 -->
+                <div data-question="3">
+                    <p class="mb-2"><strong class="text-flamingo-pink">3.</strong> A Pablo le gustan las fiestas ___________ no le gusta organizar fiestas sorpresa.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="handleSelection(this, 'c', 3, 'a')" data-value="a" class="mc-button py-2 px-6 rounded-full font-semibold">a) pero</button>
+                        <button onclick="handleSelection(this, 'c', 3, 'b')" data-value="b" class="mc-button py-2 px-6 rounded-full font-semibold">b) sino</button>
+                        <button onclick="handleSelection(this, 'c', 3, 'c')" data-value="c" class="mc-button py-2 px-6 rounded-full font-semibold">c) sino que</button>
+                    </div>
+                </div>
+                <!-- Pregunta 4 -->
+                <div data-question="4">
+                    <p class="mb-2"><strong class="text-flamingo-pink">4.</strong> Marisol quiere ir al concierto ___________ tiene que estudiar.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="handleSelection(this, 'c', 4, 'a')" data-value="a" class="mc-button py-2 px-6 rounded-full font-semibold">a) pero</button>
+                        <button onclick="handleSelection(this, 'c', 4, 'b')" data-value="b" class="mc-button py-2 px-6 rounded-full font-semibold">b) sino</button>
+                        <button onclick="handleSelection(this, 'c', 4, 'c')" data-value="c" class="mc-button py-2 px-6 rounded-full font-semibold">c) sino que</button>
+                    </div>
+                </div>
+                <!-- Pregunta 5 -->
+                <div data-question="5">
+                    <p class="mb-2"><strong class="text-flamingo-pink">5.</strong> Pilar y Carolina están en el aeropuerto __________ también van a ir al concierto.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="handleSelection(this, 'c', 5, 'a')" data-value="a" class="mc-button py-2 px-6 rounded-full font-semibold">a) pero</button>
+                        <button onclick="handleSelection(this, 'c', 5, 'b')" data-value="b" class="mc-button py-2 px-6 rounded-full font-semibold">b) sino</button>
+                        <button onclick="handleSelection(this, 'c', 5, 'c')" data-value="c" class="mc-button py-2 px-6 rounded-full font-semibold">c) sino que</button>
+                    </div>
+                </div>
+                <!-- Pregunta 6 -->
+                <div data-question="6">
+                    <p class="mb-2"><strong class="text-flamingo-pink">6.</strong> No acaba de llegar la policía [police] _________ los guardaespaldas acaban de llegar.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="handleSelection(this, 'c', 6, 'a')" data-value="a" class="mc-button py-2 px-6 rounded-full font-semibold">a) pero</button>
+                        <button onclick="handleSelection(this, 'c', 6, 'b')" data-value="b" class="mc-button py-2 px-6 rounded-full font-semibold">b) sino</button>
+                        <button onclick="handleSelection(this, 'c', 6, 'c')" data-value="c" class="mc-button py-2 px-6 rounded-full font-semibold">c) sino que</button>
+                    </div>
+                </div>
+                <!-- Pregunta 7 -->
+                <div data-question="7">
+                    <p class="mb-2"><strong class="text-flamingo-pink">7.</strong> A Pilar, Carolina y Marisol no solo les gustan los chicos del grupo musical _________ también su música y sus canciones [songs].</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="handleSelection(this, 'c', 7, 'a')" data-value="a" class="mc-button py-2 px-6 rounded-full font-semibold">a) pero</button>
+                        <button onclick="handleSelection(this, 'c', 7, 'b')" data-value="b" class="mc-button py-2 px-6 rounded-full font-semibold">b) sino</button>
+                        <button onclick="handleSelection(this, 'c', 7, 'c')" data-value="c" class="mc-button py-2 px-6 rounded-full font-semibold">c) sino que</button>
+                    </div>
+                </div>
+                <!-- Inputs ocultos para almacenar la respuesta seleccionada (para la funcionalidad de completar) -->
+                <input type="hidden" id="c-1-result" data-index="1" data-activity="c">
+                <input type="hidden" id="c-2-result" data-index="2" data-activity="c">
+                <input type="hidden" id="c-3-result" data-index="3" data-activity="c">
+                <input type="hidden" id="c-4-result" data-index="4" data-activity="c">
+                <input type="hidden" id="c-5-result" data-index="5" data-activity="c">
+                <input type="hidden" id="c-6-result" data-index="6" data-activity="c">
+                <input type="hidden" id="c-7-result" data-index="7" data-activity="c">
+            </div>
+        </section>
+        
+        <!-- ACTIVIDAD D -->
+        <section id="activity-d">
+            <h2 class="text-2xl font-bold mb-4 text-eerie-black">d. Completa las siguientes respuestas. / Complete the following answers.</h2>
+            <div class="text-justify-info text-lg space-y-4 p-4 rounded-lg border border-gray-200 shadow-md">
+                <ol class="list-decimal list-inside space-y-4 ml-4">
+                    <li class="pl-2">¿Qué acabas de hacer?
+                        <strong class="text-flamingo-pink">1.</strong>
+                        <input type="text" id="d-1-1" data-activity="d" data-index="1" class="completion-input w-40" placeholder="" onkeydown="handleEnter(event, 'd', 1)">
+                        leer las instrucciones [instructions] del ejercicio d.
+                    </li>
+                    <li class="pl-2">¿Qué acaban de hacer los chicos?
+                        <strong class="text-flamingo-pink">2.</strong>
+                        <input type="text" id="d-2-1" data-activity="d" data-index="2" class="completion-input w-40" placeholder="" onkeydown="handleEnter(event, 'd', 2)">
+                        mirar algunos programas en la televisión.
+                    </li>
+                    <li class="pl-2">¿A qué hora te levantas normalmente?
+                        <strong class="text-flamingo-pink">3.</strong>
+                        <input type="text" id="d-3-1" data-activity="d" data-index="3" class="completion-input w-50" placeholder="" onkeydown="handleEnter(event, 'd', 3)">
+                        a las seis de la mañana.
+                    </li>
+                    <li class="pl-2">¿Hace cuanto tiempo que tú y tus amigos estudiáis español?
+                        <strong class="text-flamingo-pink">1.</strong>
+                        <input type="text" id="d-4-1" data-activity="d" data-index="4" class="completion-input w-24" placeholder="" onkeydown="handleEnter(event, 'd', 4)">
+                        dos meses
+                        <strong class="text-flamingo-pink">2.</strong>
+                        <input type="text" id="d-4-2" data-activity="d" data-index="5" class="completion-input w-2/5" placeholder="" onkeydown="handleEnter(event, 'd', 5)">.
+                    </li>
+                    <li class="pl-2">¿Hace cuanto tiempo que Pedro tiene un teléfono celular [cell]?
+                        <strong class="text-flamingo-pink">1.</strong>
+                        <input type="text" id="d-5-1" data-activity="d" data-index="6" class="completion-input w-24" placeholder="" onkeydown="handleEnter(event, 'd', 6)">
+                        cuatro años
+                        <strong class="text-flamingo-pink">2.</strong>
+                        <input type="text" id="d-5-2" data-activity="d" data-index="7" class="completion-input w-2/5" placeholder="" onkeydown="handleEnter(event, 'd', 7)">.
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Botón para mostrar respuestas correctas -->
+        <div class="text-center pt-8">
+            <button onclick="showAnswers()" class="bg-flamingo-pink text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition duration-300">
+                IV. Respuestas correctas / Correct Answers
+            </button>
+        </div>
+
+        <!-- Sección de respuestas correctas (Inicialmente oculta) -->
+        <section id="answers-section" class="mt-8 hidden p-6 border-4 border-flamingo-pink rounded-xl bg-gray-50 shadow-inner">
+            <h2 class="text-2xl font-bold mb-4 text-eerie-black">IV. Respuestas correctas / Correct Answers</h2>
+            <div class="text-lg space-y-6 text-justify-info">
+                
+                <!-- Respuestas A -->
+                <div>
+                    <h3 class="font-semibold text-xl pink-highlight mb-2">a.</h3>
+                    <ul class="list-disc list-inside space-y-1 ml-4">
+                        <li>1. acabamos de llegar</li>
+                        <li>2. acaban de llegar</li>
+                        <li>3. acaba de aterrizar</li>
+                        <li>4. Acabo de leer</li>
+                        <li>5. acabamos de desayunar</li>
+                        <li>6. acabo de desayunar</li>
+                        <li>7. acabo de tomar</li>
+                    </ul>
+                </div>
+                
+                <!-- Respuestas B -->
+                <div>
+                    <h3 class="font-semibold text-xl pink-highlight mb-2">b.</h3>
+                    <ol class="list-decimal list-inside space-y-2 ml-4">
+                        <li>A Pablo no le gustan las fiestas sorpresa porque necesitan más planificación y cuidado.</li>
+                        <li>Pablo les envía correos electrónicos a sus profesores. / Pablo les escribe correos electrónicos a sus profesores.</li>
+                        <li>Hace dos años que Pablo no va a la playa.</li>
+                        <li>Pablo lleva lentes de sol y una gorra a la playa.</li>
+                        <li>Hace quince años que Pablo practica deportes.</li>
+                        <li>Hace dos años que Pablo es co-entrenador de fútbol.</li>
+                        <li>Porque Pablo tiene problemas en una rodilla.</li>
+                    </ol>
+                </div>
+
+                <!-- Respuestas C -->
+                <div>
+                    <h3 class="font-semibold text-xl pink-highlight mb-2">c.</h3>
+                    <ul class="list-disc list-inside space-y-1 ml-4">
+                        <li>1. b) sino</li>
+                        <li>2. c) sino que</li>
+                        <li>3. a) pero</li>
+                        <li>4. a) pero</li>
+                        <li>5. a) pero</li>
+                        <li>6. c) sino que</li>
+                        <li>7. b) sino</li>
+                    </ul>
+                </div>
+
+                <!-- Respuestas D -->
+                <div>
+                    <h3 class="font-semibold text-xl pink-highlight mb-2">d.</h3>
+                    <ol class="list-decimal list-inside space-y-1 ml-4">
+                        <li>Acabo de</li>
+                        <li>Los chicos acaban de / acaban de</li>
+                        <li>Normalmente me levanto a las seis de la mañana</li>
+                        <li>1. Hace 2. que mis amigos y yo estudiamos español / que estudiamos español</li>
+                        <li>1. Hace 2. que Pedro tiene un teléfono celular.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Objeto que contiene todas las respuestas correctas para la validación
+        const CORRECT_ANSWERS = {
+            'a': {
+                '1': ['acabamos de llegar'], '2': ['acaban de llegar'], '3': ['acaba de aterrizar'],
+                '4': ['acabo de leer', 'Acabo de leer'], '5': ['acabamos de desayunar'],
+                '6': ['acabo de desayunar'], '7': ['acabo de tomar']
+            },
+            // Actividad B: Se aceptan variaciones que contengan el núcleo de la respuesta
+            'b': {
+                '1': ['A Pablo no le gustan las fiestas sorpresa porque necesitan más planificación y cuidado','porque necesitan mas planificacion y cuidado'],
+                '2': ['les envia correos electronicos a sus profesores', 'les escribe correos electronicos a sus profesores', 'Pablo les envia correos electronicos a sus profesores', 'Pablo les escribe correos electronicos a sus profesores', 'les envía correos electrónicos a sus profesores', 'les escribe correos electrónicos a sus profesores'],
+                '3': ['Hace dos años que Pablo no va a la playa', 'hace dos años'],
+                '4': ['lentes de sol y una gorra', 'lleva lentes de sol y una gorra', 'Pablo lleva lentes de sol y una gorra a la playa'],
+                '5': ['Hace quince años que Pablo practica deportes', 'hace quince años'],
+                '6': ['Hace dos años que Pablo es co-entrenador de fútbol', 'hace dos años', 'Hace dos años'],
+                '7': ['Porque Pablo tiene problemas en una rodilla', 'porque tiene problemas en una rodilla', 'por problemas en una rodilla']
+            },
+            'c': {
+                '1': ['b'], '2': ['c'], '3': ['a'], '4': ['a'], '5': ['a'], '6': ['c'], '7': ['b']
+            },
+            'd': {
+                '1': ['acabo de', 'Acabo de'],
+                '2': ['acaban de', 'Los chicos acaban de'],
+                '3': ['normalmente me levanto', 'Normalmente me levanto', 'Me levanto'],
+                '4': ['hace', 'Hace'],
+                '5': ['que mis amigos y yo estudiamos español', 'que estudiamos español', 'que mis amigos y yo estudiamos'],
+                '6': ['hace', 'Hace'],
+                '7': ['que Pedro tiene un telefono celular', 'que tiene un telefono celular', 'que Pedro tiene un teléfono celular', 'que tiene un teléfono celular']
+            }
+        };
+
+        /**
+         * Normaliza la entrada de texto: minúsculas, quita acentos, simplifica espacios, elimina puntuación.
+         * @param {string} text - El texto a normalizar.
+         * @returns {string} El texto normalizado.
+         */
+        function normalize(text) {
+            let normalized = text.toLowerCase().trim();
+            // Quita acentos y tildes (simple)
+            normalized = normalized.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            // Simplifica espacios y quita puntuación
+            normalized = normalized.replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ');
+            return normalized;
+        }
+
+        /**
+         * Valida la respuesta de un input contra las respuestas correctas.
+         */
+        function validateAnswer(activityId, index, answer) {
+            const normalizedUserAnswer = normalize(answer);
+            const correctOptions = CORRECT_ANSWERS[activityId][index.toString()];
+
+            if (!correctOptions) return false;
+
+            return correctOptions.some(correctOption => normalize(correctOption) === normalizedUserAnswer);
+        }
+
+        /**
+         * Maneja el evento KeyDown para la tecla Enter en los inputs de completación.
+         */
+        function handleEnter(event, activityId, currentIndex) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita el submit del formulario
+                const input = event.target;
+                const value = input.value;
+                const index = parseInt(input.getAttribute('data-index'));
+                const maxIndex = getMaxIndex(activityId);
+
+                if (!value.trim() && !input.classList.contains('bg-green-100')) {
+                    input.classList.remove('bg-red-100');
+                    return; // No valida si está vacío
+                }
+
+                if (validateAnswer(activityId, index, value)) {
+                    // Correcto: verde claro
+                    input.classList.remove('bg-red-100');
+                    input.classList.add('bg-green-100');
+                    input.disabled = true; // Deshabilita una vez correcto
+                } else {
+                    // Incorrecto: rojo claro
+                    input.classList.remove('bg-green-100');
+                    input.classList.add('bg-red-100');
+                }
+
+                // Lógica de salto de foco
+                if (index < maxIndex) {
+                    const nextIndex = index + 1;
+                    const nextInput = document.querySelector(`input[data-activity="${activityId}"][data-index="${nextIndex}"]:not([disabled])`);
+                    
+                    if (nextInput) {
+                        nextInput.focus();
+                    }
+                } else {
+                    // Último campo de la actividad, quita el foco
+                    input.blur();
+                }
+            }
+        }
+        
+        /**
+         * Obtiene el índice más alto para una actividad específica.
+         */
+        function getMaxIndex(activityId) {
+            // Encuentra el índice más alto entre los elementos de la actividad
+            const inputs = document.querySelectorAll(`input[data-activity="${activityId}"][data-index]`);
+            if (inputs.length === 0) return 0;
+            
+            let maxIndex = 0;
+            inputs.forEach(input => {
+                const index = parseInt(input.getAttribute('data-index'));
+                if (index > maxIndex) {
+                    maxIndex = index;
+                }
+            });
+            return maxIndex;
+        }
+
+
+        /**
+         * Maneja la lógica de selección en la actividad C.
+         */
+        function handleSelection(button, activityId, questionIndex, selectedValue) {
+            const questionDiv = button.closest(`div[data-question="${questionIndex}"]`);
+            const allButtons = questionDiv.querySelectorAll('.mc-button');
+            const resultInputId = `${activityId}-${questionIndex}-result`;
+            const resultInput = document.getElementById(resultInputId);
+            const correctAnswer = CORRECT_ANSWERS[activityId][questionIndex.toString()][0];
+
+            // Si ya es correcto, no se permite cambiar
+            if (resultInput.classList.contains('bg-green-100')) {
+                return;
+            }
+
+            // Limpia clases de todos los botones en el grupo
+            allButtons.forEach(btn => {
+                btn.classList.remove('bg-red-100', 'bg-green-100', 'text-white');
+                btn.classList.add('bg-white', 'text-eerie-black'); 
+            });
+
+            if (selectedValue === correctAnswer) {
+                // Correcto: Botón se pone verde claro y se rellena el input
+                button.classList.add('bg-green-100', 'text-eerie-black'); // Añadir text-eerie-black para que el texto sea visible
+                button.classList.remove('bg-white');
+                
+                // Rellena el campo de completación con el texto de la respuesta para simular la completación
+                const answerText = button.textContent.trim();
+                resultInput.value = answerText;
+                resultInput.classList.remove('bg-red-100');
+                resultInput.classList.add('bg-green-100'); // Marca el resultado como correcto/finalizado
+
+                // Lógica de salto de foco (si aplica)
+                // Encuentra el siguiente input de la Actividad C que no sea el actual
+                const nextQuestionIndex = questionIndex + 1;
+                const nextResultInput = document.getElementById(`${activityId}-${nextQuestionIndex}-result`);
+                
+                if (nextResultInput) {
+                    // Intenta enfocar el primer botón de la siguiente pregunta
+                    const nextQuestionDiv = document.querySelector(`div[data-question="${nextQuestionIndex}"]`);
+                    const nextButton = nextQuestionDiv ? nextQuestionDiv.querySelector('.mc-button') : null;
+                    if (nextButton) {
+                        nextButton.focus();
+                    }
+                }
+            } else {
+                // Incorrecto: Botón se pone rojo claro, espera 500ms y vuelve al original
+                button.classList.add('bg-red-100', 'text-eerie-black');
+                button.classList.remove('bg-white');
+
+                setTimeout(() => {
+                    // Vuelve a su estado original (blanco con borde rosa)
+                    button.classList.remove('bg-red-100', 'text-eerie-black');
+                    button.classList.add('bg-white', 'text-eerie-black');
+                }, 500);
+            }
+        }
+
+        /**
+         * Muestra/Oculta la sección de respuestas correctas.
+         */
+        function showAnswers() {
+            const answersSection = document.getElementById('answers-section');
+            const isHidden = answersSection.classList.contains('hidden');
+
+            if (isHidden) {
+                answersSection.classList.remove('hidden');
+                // Scroll a la sección para que sea visible
+                answersSection.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                answersSection.classList.add('hidden');
+            }
+        }
+
+        // Inicializar el foco en el primer campo de la primera actividad al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstInput = document.getElementById('a-1');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        });
+
+    </script>
+</body>
+</html>
