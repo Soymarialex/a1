@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?v=1.2"></script>
+    <style>
+        /* Definición de colores y fuente base */
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            color: #121118; /* Eerie Black */
+            background-color: white;
+            font-weight: 500; /* Medium weight */
+        }
+        .text-eerie-black { color: #121118; }
+        .text-flamingo-pink { color: #FF79AC; }
+        .text-apple-green { color: #65A30D; } /* Lime-600 para un verde manzana vibrante */
+        .bg-flamingo-pink-light { background-color: #FFECF3; } /* Rosa muy claro para fondo */
+
+        /* Estilo para justificar el texto informativo */
+        .text-justified {
+            text-align: justify;
+        }
+        
+        /* Estilos de feedback (verde/rojo claro) - USANDO !important PARA GARANTIZAR VISIBILIDAD EN BOTONES */
+        .bg-correct { background-color: #D1FAE5 !important; } /* Verde claro: bg-green-100 */
+        .bg-incorrect { background-color: #FEE2E2 !important; } /* Rojo claro: bg-red-100 */
+
+        /* Estilo para la línea de completación */
+        .completion-line {
+            display: inline-block;
+            min-width: 150px; /* Ancho base */
+            padding: 0 0.5rem;
+            border-bottom: 1px solid #121118; /* Línea inferior negra */
+            outline: none; /* Quitar el contorno de enfoque */
+            cursor: text;
+            text-align: left;
+            transition: background-color 0.3s ease;
+            white-space: nowrap; /* Evita que el texto se rompa */
+        }
+        
+        /* Estilos específicos para la línea en Actividad C (para que se parezca más a un campo de texto relleno) */
+        .completion-line-c {
+            min-width: 100px; /* Un poco más pequeño para verbos */
+            text-align: center; /* Centra el verbo seleccionado */
+            pointer-events: none; /* Evita que el usuario lo edite manualmente */
+        }
+
+        .answer-button {
+            transition: background-color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #FF79AC;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+        }
+        
+        /* Ajuste para que las líneas de completación se expandan en Actividades A y B */
+        .completion-container-a, .completion-container-b {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .completion-container-a > div, .completion-container-b > div {
+            display: flex;
+            flex-wrap: wrap; /* Permite que el contenido fluya */
+            align-items: baseline;
+            gap: 0.5rem;
+            width: 100%;
+        }
+        .completion-line-full {
+             min-width: 70%; 
+             flex-grow: 1;
+        }
+
+    </style>
+    <script>
+        // Configuración de Tailwind para los colores centrales
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eerie-black': '#121118',
+                        'flamingo-pink': '#FF79AC',
+                        'apple-green': '#B8F297', // Nuevo color para Esteban
+                    },
+                }
+            }
+        }
+
+        // --- Lógica de la aplicación para interactividad ---
+        
+        const correctAnswers = {
+            // Actividad A: Respuestas aceptadas (Lowercased y sin puntuación final para ser más indulgente)
+            'a1': ['porque ignacio siempre esta muy ocupado'],
+            'a2': [
+                // Respuestas con frase completa
+                'ellos tienen veintiocho años', 
+                'tienen veintiocho años', 
+                'ellos tienen 28 años',
+                'tienen 28 años',
+                // Respuestas cortas o solo edad
+                'veintiocho años',
+                '28 años', 
+                'veintiocho', 
+                '28', 
+                'veintiocho años igual que yo',
+                '28 años igual que yo'
+            ],
+            'a3': [
+                // Respuestas con frase completa
+                'hace diez años que se conocen', 
+                'ellos se conocen desde hace diez años',
+                'se conocen desde hace diez años',
+                'hace 10 años que se conocen',
+                'ellos se conocen desde hace 10 años',
+                'se conocen desde hace 10 años',
+                'desde hace diez años que se conocen',
+                'desde hace 10 años que se conocen',
+                // Respuestas cortas
+                'hace diez años', 
+                'se conocen hace diez años',
+                'diez años',
+                '10 años', 
+                'diez', 
+                '10' 
+            ],
+            'a4': ['el cafe de puerto rico'], // Corregido: "el café de puerto rico" normalizado
+            
+            // Actividad B
+            'b1': ['porque javier quiere invitar a ignacio a la casa y la casa es un desastre', 'porque la casa es un desastre', 'porque la casa no esta limpia', 'la casa es un desastre'],
+            'b2': ['desde hace un mes', 'hace un mes'],
+            'b3': ['desde hace dos meses', 'hace dos meses'],
+            'b4': ['porque javier esta mas ocupado que erica'],
+            'b5': ['ellas recogen sus juguetes', 'ellas recogen los juguetes', 'recogen los juguetes'],
+
+            // Actividad C (Se maneja por el valor del botón)
+            'c1': 'a',
+            'c2': 'd',
+            'c3': 'b',
+            'c4': 'c',
+            'c5': 'c',
+            'c6': 'b',
+
+            // Actividad D (Completación de palabra única)
+            'd1': ['organizarla'],
+            'd2': ['estudiar'],
+            'd3': ['limpiarla'],
+            'd4': ['comprar'],
+            'd5': ['pasar']
+        };
+
+        /**
+         * Normaliza el texto para la verificación.
+         * ESTA ES LA FUNCIÓN CORREGIDA.
+         * Remueve acentos, convierte a minúsculas, remueve signos de puntuación, y recorta espacios.
+         * @param {string} text 
+         * @returns {string}
+         */
+        function normalizeText(text) {
+            if (typeof text !== 'string') text = String(text); // Asegurar que es un string
+            
+            // 1. Minúsculas
+            text = text.toLowerCase();
+            
+            // 2. Normalizar para acento removal (NFD form, then remove diacritics)
+            text = text.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); 
+            
+            // 3. Remover todos los caracteres que NO son letras (a-z), números (0-9), o espacios.
+            text = text.replace(/[^a-z0-9\s]/g, ""); 
+            
+            // 4. Reemplazar múltiples espacios con un solo espacio.
+            text = text.replace(/\s{2,}/g," "); 
+            
+            // 5. Recortar espacios iniciales/finales.
+            return text.trim();
+        }
+
+        /**
+         * Verifica la respuesta de un campo de texto (Actividades A, B, D).
+         * Usa contenteditable spans.
+         * @param {Event} event 
+         */
+        function handleTextCompletion(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita el salto de línea y mantiene el foco
+                const span = event.target;
+                const questionId = span.id;
+                // Si el span tiene la clase completion-line-c (Actividad C), no hacemos nada con Enter.
+                if (span.classList.contains('completion-line-c')) return; 
+
+                const userAnswer = normalizeText(span.textContent);
+                
+                const acceptableAnswers = correctAnswers[questionId];
+                
+                let isCorrect = false;
+
+                // Verificación de la respuesta
+                // Recorremos la lista de respuestas correctas normalizadas y comparamos
+                if (acceptableAnswers) {
+                    const normalizedAcceptableAnswers = acceptableAnswers.map(normalizeText);
+                    if (normalizedAcceptableAnswers.includes(userAnswer)) {
+                        isCorrect = true;
+                    }
+                }
+                
+                // 1. Aplicar estilo
+                span.classList.remove('bg-correct', 'bg-incorrect', 'bg-white');
+                if (isCorrect) {
+                    span.classList.add('bg-correct');
+                } else {
+                    span.classList.add('bg-incorrect');
+                }
+
+                // 2. Saltar al siguiente campo (span editable)
+                const allSpans = Array.from(document.querySelectorAll('.completion-line:not(.completion-line-c)')); // Excluye Actividad C
+                const currentIndex = allSpans.indexOf(span);
+
+                if (currentIndex !== -1 && currentIndex < allSpans.length - 1) {
+                    const nextSpan = allSpans[currentIndex + 1];
+                    const currentActivity = questionId.match(/[a-z]/)[0];
+                    const nextActivity = nextSpan.id.match(/[a-z]/)[0];
+                    
+                    // Solo salta si el siguiente campo es parte de la misma actividad
+                    if (currentActivity === nextActivity) {
+                        nextSpan.focus();
+                        // Mover el cursor al final del texto (para mejor UX)
+                        const range = document.createRange();
+                        const selection = window.getSelection();
+                        if (nextSpan.firstChild) {
+                             range.setStart(nextSpan.firstChild, nextSpan.firstChild.length);
+                        } else {
+                            range.setStart(nextSpan, 0);
+                        }
+                        range.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
+                }
+            }
+        }
+
+        /**
+         * Verifica la respuesta de selección múltiple (Actividad C).
+         * @param {HTMLElement} button - El botón que fue presionado.
+         * @param {string} questionId - ID de la pregunta (e.g., 'c1').
+         * @param {string} selection - La opción seleccionada (e.g., 'a', 'b', 'c', 'd').
+         */
+        function handleSelection(button, questionId, selection) {
+            const correctAnswer = correctAnswers[questionId];
+            const isCorrect = selection === correctAnswer;
+            const parentDiv = button.closest('.grid'); // Contenedor de la pregunta
+            
+            // Para la pregunta 5, tenemos dos spans (c5 y c5-2)
+            const isC5 = questionId === 'c5';
+            const parts = isC5 ? button.textContent.trim().substring(2).split('…') : [button.textContent.trim().substring(2)];
+
+            const completionSpan1 = document.getElementById(`completion-${questionId}`);
+            const completionSpan2 = isC5 ? document.getElementById(`completion-${questionId}-2`) : null;
+
+            // 1. Limpiar estilos previos en todos los botones de la pregunta
+            const buttons = parentDiv.querySelectorAll('.answer-button');
+            buttons.forEach(btn => {
+                // Limpiamos todas las clases de feedback y la clase base 'bg-white'
+                btn.classList.remove('bg-correct', 'bg-incorrect', 'bg-flamingo-pink-light', 'bg-white');
+                // Reestablecemos el color blanco como base
+                btn.classList.add('bg-white');
+            });
+            
+            // 2. Aplicar estilo al botón (el botón presionado) y a los spans de completación
+            
+            // Si es correcta, aplicamos verde.
+            if (isCorrect) {
+                // El botón presionado se vuelve verde
+                button.classList.remove('bg-white'); // Aseguramos la remoción de blanco antes de aplicar el color de feedback
+                button.classList.add('bg-correct'); 
+                
+                // Spans de completación se vuelven verdes
+                completionSpan1.classList.remove('bg-incorrect');
+                completionSpan1.classList.add('bg-correct');
+                completionSpan1.textContent = parts[0].trim();
+                
+                if (completionSpan2) {
+                    completionSpan2.classList.remove('bg-incorrect');
+                    completionSpan2.classList.add('bg-correct');
+                    completionSpan2.textContent = parts[1].trim();
+                }
+            } else {
+                // El botón presionado se vuelve rojo
+                button.classList.remove('bg-white'); // Aseguramos la remoción de blanco antes de aplicar el color de feedback
+                button.classList.add('bg-incorrect');
+                
+                // Spans de completación se vuelven rojos
+                completionSpan1.classList.remove('bg-correct');
+                completionSpan1.classList.add('bg-incorrect');
+                completionSpan1.textContent = parts[0].trim();
+                
+                if (completionSpan2) {
+                    completionSpan2.classList.remove('bg-correct');
+                    completionSpan2.classList.add('bg-incorrect');
+                    completionSpan2.textContent = parts[1].trim();
+                }
+                
+                // 3. Si es incorrecta, muestra la respuesta correcta en color sutil (rosa claro)
+                const correctButton = parentDiv.querySelector(`[data-selection="${correctAnswer}"]`);
+                if (correctButton) {
+                    correctButton.classList.remove('bg-white'); // Aseguramos la remoción de blanco
+                    correctButton.classList.add('bg-flamingo-pink-light');
+                }
+            }
+        }
+        
+        /**
+         * Muestra/Oculta la sección de respuestas correctas.
+         */
+        function toggleAnswers() {
+            const answersDiv = document.getElementById('correct-answers-section');
+            const button = document.getElementById('toggle-answers-button');
+
+            const isHidden = answersDiv.classList.toggle('hidden');
+            
+            if (isHidden) {
+                button.textContent = 'Mostrar Respuestas Correctas';
+            } else {
+                button.textContent = 'Ocultar Respuestas Correctas';
+            }
+        }
+
+        // Asignar event listeners a todos los campos de texto
+        document.addEventListener('DOMContentLoaded', () => {
+            const spans = document.querySelectorAll('.completion-line');
+            spans.forEach(span => {
+                span.addEventListener('keydown', handleTextCompletion);
+            });
+        });
+
+    </script>
+</head>
+<body class="p-4 sm:p-8 lg:p-12 max-w-4xl mx-auto">
+
+    <!-- Título de la página -->
+    <header class="mb-8 text-center sm:mb-12">
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight text-eerie-black">
+            <span class="text-flamingo-pink">III. Actividades / Activities</span>
+        </h1>
+    </header>
+
+    <main>
+        <!-- Actividad A -->
+        <section class="mb-10">
+            <h3 class="text-xl font-bold mb-3 mt-6 text-eerie-black">a. Javier siempre está hablando de Ignacio, su mejor amigo costarricense, pero sus suegros Esteban y Luisa no lo conocen muy bien. Ellos están haciéndole preguntas a Javier para saber más sobre Ignacio. / Javier is always talking about Ignacio, his Costa Rican best friend, but his parents-in-law Esteban and Luisa don’t know him very well. They are asking Javier questions in order to know more about Ignacio.</h3>
+            </p>
+            <p class="text-sm italic mb-6">
+                Lee el diálogo y contesta las preguntas. / Read the dialogue and answer the questions.
+            </p>
+
+            <!-- Diálogo A - Esteban (verde) y Luisa (rosa) resaltados -->
+            <div class="bg-gray-50 p-4 rounded-lg text-sm mb-6 text-eerie-black">
+                <p><strong class="font-bold text-apple-green">Esteban:</strong> ¿De dónde es tu mejor amigo, Javier?</p>
+                <p><strong class="font-bold">Javier:</strong> Él es de Costa Rica.</p>
+                <p><strong class="font-bold text-flamingo-pink">Luisa:</strong> ¿Hace cuánto tiempo que lo conoces?</p>
+                <p><strong class="font-bold">Javier:</strong> Hace diez años que lo conozco.</p>
+                <p><strong class="font-bold text-flamingo-pink">Luisa:</strong> ¿Cuánto tiempo hace que no lo ves?</p>
+                <p><strong class="font-bold">Javier:</strong> Hace más o menos seis meses que no lo veo.</p>
+                <p><strong class="font-bold text-flamingo-pink">Luisa:</strong> ¿Cuántos años tiene?</p>
+                <p><strong class="font-bold">Javier:</strong> Tiene veintiocho años, <strong class="font-bold">igual</strong> [the same] que yo.</p>
+                <p><strong class="font-bold text-apple-green">Esteban:</strong> ¿Vas a invitarlo a tu casa muy pronto?</p>
+                <p><strong class="font-bold">Javier:</strong> Sí, quiero invitarlo, pero siempre está muy ocupado. No estoy <strong class="font-bold">seguro</strong> [sure] si va a tener tiempo.</p>
+                <p><strong class="font-bold text-flamingo-pink">Luisa:</strong> A nosotros nos gustaría [we would like] conocerlo. Podemos tomar un café todos juntos, ¿no?</p>
+                <p><strong class="font-bold">Javier:</strong> Claro. ¡Qué buena idea! ¡Él va a traerme café de Costa Rica! Hace mucho tiempo que no tomo café de Costa Rica.</p>
+                <p><strong class="font-bold text-apple-green">Esteban:</strong> Mi café favorito es el de Puerto Rico, pero no sé nada del café de Costa Rica. Bueno, podemos <strong class="font-bold">probar</strong> [try] los dos cafés.</p>
+                <p><strong class="font-bold">Javier:</strong> Voy a llamar a Ignacio para decirle el <strong class="font-bold">plan</strong> [plan].</p>
+            </div>
+
+            <!-- Preguntas A - Usando spans contenteditable para la línea de fondo -->
+            <div class="space-y-3 completion-container-a">
+                <div>
+                    <label for="a1" class="font-bold">1. ¿Por qué Javier no está seguro si Ignacio va a poder visitarlo?</label>
+                    <span id="a1" contenteditable="true" class="completion-line completion-line-full bg-white"></span>
+                </div>
+                <div>
+                    <label for="a2" class="font-bold">2. ¿Cuántos años tienen Javier e Ignacio?</label>
+                    <span id="a2" contenteditable="true" class="completion-line completion-line-full bg-white"></span>
+                </div>
+                <div>
+                    <label for="a3" class="font-bold">3. ¿Hace cuánto (tiempo) que Javier e Ignacio se conocen?</label>
+                    <span id="a3" contenteditable="true" class="completion-line completion-line-full bg-white"></span>
+                </div>
+                <div>
+                    <label for="a4" class="font-bold">4. ¿Cuál es el café favorito de Esteban?</label>
+                    <span id="a4" contenteditable="true" class="completion-line completion-line-full bg-white"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actividad B -->
+        <section class="mb-10">
+            <h3 class="text-xl font-bold mb-3 mt-8 text-eerie-black">b. Erica está muy enojada con Javier porque él quiere invitar a su amigo y la casa no está lista para visitas. / Erica is very upset with Javier because he wants to invite his friend and the house is not ready for visits.</h3>
+            </p>
+            <p class="text-sm italic mb-6">
+                Lee el diálogo y contesta las preguntas. / Read the dialogue and answer the questions.
+            </p>
+
+            <!-- Diálogo B - Luisa (rosa) resaltada -->
+            <div class="bg-gray-50 p-4 rounded-lg text-sm mb-6 text-eerie-black">
+                <p><strong class="font-bold text-flamingo-pink">Luisa:</strong> Erica, ¿por qué estás tan enojada?</p>
+                <p><strong class="font-bold">Erica:</strong> Mami, Javier quiere invitar a Ignacio y la casa es un <strong class="font-bold">desastre</strong> [disaster].</p>
+                <p><strong class="font-bold text-flamingo-pink">Luisa:</strong> Pero Erica, creo que eso no es un problema. Además, no sabes si Ignacio va a venir a no.</p>
+                <p><strong class="font-bold">Erica:</strong> Yo sé, mami, pero ¿sabes hace cuánto tiempo que no limpio la casa?</p>
+                <p><strong class="font-bold text-flamingo-pink">Luisa:</strong> No, no lo sé.</p>
+                <p><strong class="font-bold">Erica:</strong> ¡Desde hace dos meses! <strong class="font-bold">Además</strong> [Moreover], hace un mes que no ordeno la casa, hace dos meses que no paso la aspiradora, y Javier está más ocupado que yo con su trabajo.</p>
+                <p><strong class="font-bold text-flamingo-pink">Luisa:</strong> Bueno, pero quizás [maybe] no hay mucho polvo.</p>
+                <p><strong class="font-bold">Erica:</strong> Mami, todo tiene polvo. ¡Hace dos meses y medio que no quito el polvo de la casa!</p>
+                <p><strong class="font-bold text-flamingo-pink">Luisa:</strong> ¿Desde cuándo no recoges los <strong class="font-bold">juguetes</strong> [toys] de las <strong class="font-bold">niñas</strong> [girls]?</p>
+                <p><strong class="font-bold">Erica:</strong> Desde hace dos días. Ellas me ayudan porque siempre recogen los juguetes.</p>
+                <p><strong class="font-bold text-flamingo-pink">Luisa:</strong> Bueno, si los juguetes no están por toda la casa, la casa va a parecer limpia.</p>
+            </div>
+
+            <!-- Preguntas B - Usando spans contenteditable para la línea de fondo -->
+            <div class="space-y-3 completion-container-b">
+                <div>
+                    <label for="b1" class="font-bold">1. ¿Por qué Erica está enojada?</label>
+                    <span id="b1" contenteditable="true" class="completion-line completion-line-full bg-white"></span>
+                </div>
+                <div>
+                    <label for="b2" class="font-bold">2. ¿Desde cuándo Erica no ordena la casa?</label>
+                    <span id="b2" contenteditable="true" class="completion-line completion-line-full bg-white"></span>
+                </div>
+                <div>
+                    <label for="b3" class="font-bold">3. ¿Desde cuándo Erica no pasa la aspiradora?</label>
+                    <span id="b3" contenteditable="true" class="completion-line completion-line-full bg-white"></span>
+                </div>
+                <div>
+                    <label for="b4" class="font-bold">4. ¿Por qué Javier no puede ayudarle a Erica?</label>
+                    <span id="b4" contenteditable="true" class="completion-line completion-line-full bg-white"></span>
+                </div>
+                <div>
+                    <label for="b5" class="font-bold">5. ¿Cómo le ayudan las niñas a Erica?</label>
+                    <span id="b5" contenteditable="true" class="completion-line completion-line-full bg-white"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actividad C -->
+        <section class="mb-10">
+            <h3 class="text-xl font-bold mb-3 mt-8 text-eerie-black">c. Ir, venir, llevar y traer y el Presente Progresivo / Verbs of Motion and Present Progressive</h3>
+            <p class="text-sm italic mb-4">Erica está tratando de limpiar la casa. / Erica is trying to clean the house.</p>
+            <p class="text-sm italic mb-6">Escoge la respuesta correcta. / Choose the correct answer.</p>
+
+            <div class="space-y-6">
+                
+                <!-- Pregunta C1 -->
+                <div class="p-3 rounded-lg border border-gray-200">
+                    <p class="mb-2 font-bold">1. 
+                        <span id="completion-c1" class="completion-line completion-line-c bg-white" contenteditable="true" placeholder="Respuesta aquí"></span>
+                        a ir al supermercado mañana. Hoy necesito limpiar la casa.
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="a" onclick="handleSelection(this, 'c1', 'a')"><span class="font-bold">a)</span> Voy</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="b" onclick="handleSelection(this, 'c1', 'b')"><span class="font-bold">b)</span> Llevo</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="c" onclick="handleSelection(this, 'c1', 'c')"><span class="font-bold">c)</span> Vengo</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="d" onclick="handleSelection(this, 'c1', 'd')"><span class="font-bold">d)</span> Traigo</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta C2 -->
+                <div class="p-3 rounded-lg border border-gray-200">
+                    <p class="mb-2 font-bold">2. Erica: Javier, ¿puedes 
+                        <span id="completion-c2" class="completion-line completion-line-c bg-white" contenteditable="true" placeholder="Respuesta aquí"></span>
+                        más bolsas [bags] para la aspiradora?
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="a" onclick="handleSelection(this, 'c2', 'a')"><span class="font-bold">a)</span> ir</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="b" onclick="handleSelection(this, 'c2', 'b')"><span class="font-bold">b)</span> llevarme</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="c" onclick="handleSelection(this, 'c2', 'c')"><span class="font-bold">c)</span> venir</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="d" onclick="handleSelection(this, 'c2', 'd')"><span class="font-bold">d)</span> traerme</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta C3 -->
+                <div class="p-3 rounded-lg border border-gray-200">
+                    <p class="mb-2 font-bold">3. Erica: Mami, ¿puedes 
+                        <span id="completion-c3" class="completion-line completion-line-c bg-white" contenteditable="true" placeholder="Respuesta aquí"></span>
+                        a las niñas al parque mientras [while] limpio un poco?
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="a" onclick="handleSelection(this, 'c3', 'a')"><span class="font-bold">a)</span> ir</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="b" onclick="handleSelection(this, 'c3', 'b')"><span class="font-bold">b)</span> llevar</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="c" onclick="handleSelection(this, 'c3', 'c')"><span class="font-bold">c)</span> venir</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="d" onclick="handleSelection(this, 'c3', 'd')"><span class="font-bold">d)</span> traer</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta C4 -->
+                <div class="p-3 rounded-lg border border-gray-200">
+                    <p class="mb-2 font-bold">4. Erica: Javier, ¿va a 
+                        <span id="completion-c4" class="completion-line completion-line-c bg-white" contenteditable="true" placeholder="Respuesta aquí"></span>
+                        a nuestra casa Ignacio el próximo fin de semana?
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="a" onclick="handleSelection(this, 'c4', 'a')"><span class="font-bold">a)</span> ir</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="b" onclick="handleSelection(this, 'c4', 'b')"><span class="font-bold">b)</span> llevar</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="c" onclick="handleSelection(this, 'c4', 'c')"><span class="font-bold">c)</span> venir</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="d" onclick="handleSelection(this, 'c4', 'd')"><span class="font-bold">d)</span> traer</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta C5 -->
+                <div class="p-3 rounded-lg border border-gray-200">
+                    <p class="mb-2 font-bold">5. Cuando Ignacio 
+                        <span id="completion-c5" class="completion-line completion-line-c bg-white" contenteditable="true" placeholder="Respuesta aquí"></span>, 
+                        siempre 
+                        <span id="completion-c5-2" class="completion-line completion-line-c bg-white" contenteditable="true" placeholder="Respuesta aquí"></span>
+                        café de Costa Rica.
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="a" onclick="handleSelection(this, 'c5', 'a')"><span class="font-bold">a)</span> va…lleva</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="b" onclick="handleSelection(this, 'c5', 'b')"><span class="font-bold">b)</span> lleva…va</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="c" onclick="handleSelection(this, 'c5', 'c')"><span class="font-bold">c)</span> viene…trae</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="d" onclick="handleSelection(this, 'c5', 'd')"><span class="font-bold">d)</span> trae…viene</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta C6 -->
+                <div class="p-3 rounded-lg border border-gray-200">
+                    <p class="mb-2 font-bold">6. Diana y Mariana 
+                        <span id="completion-c6" class="completion-line completion-line-c bg-white" contenteditable="true" placeholder="Respuesta aquí"></span>
+                        sus juguetes de la sala a su cuarto.
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="a" onclick="handleSelection(this, 'c6', 'a')"><span class="font-bold">a)</span> van</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="b" onclick="handleSelection(this, 'c6', 'b')"><span class="font-bold">b)</span> llevan</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="c" onclick="handleSelection(this, 'c6', 'c')"><span class="font-bold">c)</span> vienen</button>
+                        <button class="answer-button bg-white hover:bg-gray-100" data-selection="d" onclick="handleSelection(this, 'c6', 'd')"><span class="font-bold">d)</span> traen</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Actividad D -->
+        <section class="mb-10">
+            <h3 class="text-xl font-bold mb-3 mt-8 text-eerie-black">d. Hay + que + infinitivo: Escoge la respuesta correcta. / Hay + que + infinitive: Choose the correct answer.</h3>
+            
+            <div class="text-center mb-6 p-4 bg-flamingo-pink-light rounded-lg font-bold text-eerie-black text-lg flex flex-wrap justify-center gap-4">
+                <span>limpiarla</span> 
+                <span>estudiar</span> 
+                <span>pasar</span> 
+                <span>organizarla</span> 
+                <span>comprar</span>
+            </div>
+
+            <!-- Preguntas D - Usando spans contenteditable para la línea de fondo -->
+            <div class="space-y-3">
+                <div class="flex flex-wrap items-baseline gap-2">
+                    <label for="d1" class="font-bold">1. Si quieres hacer una fiesta sorpresa [surprise], hay que</label>
+                    <span id="d1" contenteditable="true" class="completion-line bg-white"></span>
+                    <span class="font-bold">.</span>
+                </div>
+                <div class="flex flex-wrap items-baseline gap-2">
+                    <label for="d2" class="font-bold">2. Si tienes un examen, hay que</label>
+                    <span id="d2" contenteditable="true" class="completion-line bg-white"></span>
+                    <span class="font-bold">.</span>
+                </div>
+                <div class="flex flex-wrap items-baseline gap-2">
+                    <label for="d3" class="font-bold">3. Si tú casa está sucia, hay que</label>
+                    <span id="d3" contenteditable="true" class="completion-line bg-white"></span>
+                    <span class="font-bold">.</span>
+                </div>
+                <div class="flex flex-wrap items-baseline gap-2">
+                    <label for="d4" class="font-bold">4. Si quieres ir a un concierto, hay que</label>
+                    <span id="d4" contenteditable="true" class="completion-line bg-white"></span>
+                    <label class="font-bold">las entradas.</label>
+                </div>
+                <div class="flex flex-wrap items-baseline gap-2">
+                    <label for="d5" class="font-bold">5. Si tu alfombra está sucia, hay que</label>
+                    <span id="d5" contenteditable="true" class="completion-line bg-white"></span>
+                    <label class="font-bold">la aspiradora.</label>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Botón para mostrar respuestas -->
+        <div class="flex justify-center mt-12 mb-8">
+            <button id="toggle-answers-button" 
+                    onclick="toggleAnswers()" 
+                    class="px-8 py-3 font-bold text-white bg-flamingo-pink rounded-lg shadow-lg hover:bg-pink-600 transition duration-300">
+                Mostrar Respuestas Correctas
+            </button>
+        </div>
+        
+        <!-- Sección de Respuestas Correctas (Inicialmente oculta) -->
+        <section id="correct-answers-section" class="hidden border-2 border-flamingo-pink p-6 rounded-xl bg-gray-50">
+            <h2 class="text-3xl font-bold mb-4 border-b border-flamingo-pink pb-2 text-eerie-black">
+                IV. Respuestas correctas / Correct Answers
+            </h2>
+            
+            <!-- Respuestas Actividad A -->
+            <h3 class="text-xl font-bold mt-4 mb-2 text-eerie-black">a.</h3>
+            <ul class="list-disc ml-6 space-y-1 text-justified text-eerie-black">
+                <li><strong class="font-bold">1.</strong> Porque Ignacio siempre está muy ocupado.</li>
+                <li><strong class="font-bold">2.</strong> Ellos tienen veintiocho años. / Tienen 28 años.</li>
+                <li><strong class="font-bold">3.</strong> Hace diez años que se conocen. / Ellos se conocen desde hace diez años.</li>
+                <li><strong class="font-bold">4.</strong> El café de Puerto Rico es su favorito.</li>
+            </ul>
+
+            <!-- Respuestas Actividad B -->
+            <h3 class="text-xl font-bold mt-6 mb-2 text-eerie-black">b.</h3>
+            <ul class="list-disc ml-6 space-y-1 text-justified text-eerie-black">
+                <li><strong class="font-bold">1.</strong> Porque Javier quiere invitar a Ignacio a la casa y la casa es un desastre. / Porque la casa es un desastre. / Porque la casa no está limpia.</li>
+                <li><strong class="font-bold">2.</strong> Desde hace un mes. / Hace un mes.</li>
+                <li><strong class="font-bold">3.</strong> Desde hace dos meses. / Hace dos meses.</li>
+                <li><strong class="font-bold">4.</strong> Porque Javier está más ocupado que Erica.</li>
+                <li><strong class="font-bold">5.</strong> Ellas recogen sus juguetes. / Ellas recogen los juguetes.</li>
+            </ul>
+
+            <!-- Respuestas Actividad C -->
+            <h3 class="text-xl font-bold mt-6 mb-2 text-eerie-black">c.</h3>
+            <ul class="list-disc ml-6 space-y-1 text-eerie-black">
+                <li><strong class="font-bold">1.</strong> Voy</li>
+                <li><strong class="font-bold">2.</strong> traerme</li>
+                <li><strong class="font-bold">3.</strong> llevar</li>
+                <li><strong class="font-bold">4.</strong> venir</li>
+                <li><strong class="font-bold">5.</strong> viene…trae</li>
+                <li><strong class="font-bold">6.</strong> llevan</li>
+            </ul>
+            
+            <!-- Respuestas Actividad D -->
+            <h3 class="text-xl font-bold mt-6 mb-2 text-eerie-black">d.</h3>
+            <ul class="list-disc ml-6 space-y-1 text-eerie-black">
+                <li><strong class="font-bold">1.</strong> organizarla</li>
+                <li><strong class="font-bold">2.</strong> estudiar</li>
+                <li><strong class="font-bold">3.</strong> limpiarla</li>
+                <li><strong class="font-bold">4.</strong> comprar</li>
+                <li><strong class="font-bold">5.</strong> pasar</li>
+            </ul>
+        </section>
+
+    </main>
+    
+</body>
+</html>
