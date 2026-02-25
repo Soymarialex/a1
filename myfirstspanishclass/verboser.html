@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende el Verbo 'Ser'</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+        .match-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            text-align: center;
+            background-color: #3b82f6; /* Tailwind blue-500 */
+            color: white;
+            font-weight: bold;
+        }
+        .match-card:hover {
+            background-color: #2563eb; /* Tailwind blue-600 */
+            transform: scale(1.05);
+        }
+        .match-card.selected {
+            box-shadow: 0 0 0 4px #3b82f6, 0 4px 6px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+        }
+        .match-card.correct {
+            background-color: #98FB98; /* Green */
+            box-shadow: 0 8px 10px rgba(76, 175, 80, 0.4);
+            cursor: default;
+            animation: pulse 1s infinite alternate;
+        }
+        .match-card.correct .star {
+            opacity: 1;
+        }
+        .match-card.incorrect {
+            animation: shake 0.5s;
+        }
+        .message-box {
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            color: white;
+            transition-property: opacity;
+            transition-duration: 300ms;
+        }
+        .message-box.correct {
+            background-color: #98FB98;
+        }
+        .message-box.incorrect {
+            background-color: #ef4444;
+        }
+        .input-name {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border-width: 1px;
+            border-color: #d1d5db;
+            outline: none;
+            box-shadow: none;
+            transition: ring 0.2s;
+        }
+        .input-name:focus {
+            ring-2: 2px;
+            ring-blue-500: #3b82f6;
+        }
+        .back-button {
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #e5e7eb;
+            color: #4b5563;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .back-button:hover {
+            background-color: #d1d5db;
+        }
+        .page-section {
+            transition: opacity 0.5s;
+        }
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-5px); }
+            40% { transform: translateX(5px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 sm:p-6 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white rounded-xl shadow-2xl p-6 sm:p-8 max-w-4xl w-full relative overflow-hidden">
+        <div class="mb-4">
+            <label for="studentName" class="text-sm font-medium text-gray-700">Tu nombre / Your name:</label>
+            <input type="text" id="studentName" placeholder="Escribe tu nombre" class="input-name w-full sm:w-48">
+        </div>
+
+        <div id="main-page" class="page-section">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-600 mb-2">¡Hola! Let's learn 'Ser'!</h1>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">This lesson will help you master the verb 'ser'. You will learn about pronouns, nationalities, occupations, and its main uses.</p>
+            </div>
+            <div class="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="showPage('pronouns-page')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">Pronombres (Pronouns)</button>
+                <button onclick="showPage('nationalities-page')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">Nacionalidades (Nationalities)</button>
+                <button onclick="showPage('occupations-page')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">Ocupaciones (Occupations)</button>
+                <button onclick="showPage('uses-page')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">Usos del Verbo 'Ser'</button>
+            </div>
+        </div>
+
+        <div id="pronouns-page" class="page-section hidden">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4">Pronombres (Pronouns)</h2>
+            <div class="bg-blue-50 p-6 rounded-xl mb-6">
+                <h3 class="text-xl font-semibold text-blue-800 mb-3">Pronombres personales</h3>
+                <p class="text-gray-700 mb-4">Personal pronouns in Spanish are essential. They indicate who is performing the action.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center text-lg">
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Yo (I)</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Tú (You - informal)</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Él (He)</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Ella (She)</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Usted (You - formal)</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Nosotros/Nosotras (We)</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Vosotros/Vosotras (You all - Spain)</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Ellos/Ellas (They)</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Ustedes (You all)</div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-xl shadow-inner">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Activity: Match the Pronouns!</h3>
+                <div id="pronouns-match" class="grid grid-cols-2 gap-4">
+                    <div id="pronouns-spanish-column" class="flex flex-col gap-2"></div>
+                    <div id="pronouns-english-column" class="flex flex-col gap-2"></div>
+                </div>
+                <div id="pronouns-message" class="message-box hidden"></div>
+            </div>
+            <button onclick="showPage('main-page')" class="back-button">Regresar a la página principal / Back to the main page</button>
+        </div>
+
+        <div id="nationalities-page" class="page-section hidden">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4">Nacionalidades (Nationalities)</h2>
+            <p class="text-gray-700 mb-6">
+                In Spanish, nationalities have masculine and feminine forms, which change depending on the gender of the person you are talking about.
+            </p>
+            
+            <div class="bg-blue-50 p-6 rounded-xl mb-6">
+                <h3 class="text-xl font-semibold text-blue-800 mb-3">Tabla de Nacionalidades</h3>
+                <div class="grid grid-cols-3 gap-2 font-bold text-center text-gray-700 bg-blue-100 p-2 rounded-t-lg">
+                    <span>País</span>
+                    <span>Nacionalidad M</span>
+                    <span>Nacionalidad F</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 text-center text-gray-700 bg-white">
+                    <span class="p-2 border-b border-gray-200">España / Spain</span>
+                    <span class="p-2 border-b border-gray-200">Español</span>
+                    <span class="p-2 border-b border-gray-200">Española</span>
+                    <span class="p-2 border-b border-gray-200">Italia / Italy</span>
+                    <span class="p-2 border-b border-gray-200">Italiano</span>
+                    <span class="p-2 border-b border-gray-200">Italiana</span>
+                    <span class="p-2 border-b border-gray-200">Francia / France</span>
+                    <span class="p-2 border-b border-gray-200">Francés</span>
+                    <span class="p-2 border-b border-gray-200">Francesa</span>
+                    <span class="p-2 border-b border-gray-200">Alemania / Germany</span>
+                    <span class="p-2 border-b border-gray-200">Alemán</span>
+                    <span class="p-2 border-b border-gray-200">Alemana</span>
+                    <span class="p-2 border-b border-gray-200">Polonia / Poland</span>
+                    <span class="p-2 border-b border-gray-200">Polaco</span>
+                    <span class="p-2 border-b border-gray-200">Polaca</span>
+                    <span class="p-2 border-b border-gray-200">México / Mexico</span>
+                    <span class="p-2 border-b border-gray-200">Mexicano</span>
+                    <span class="p-2 border-b border-gray-200">Mexicana</span>
+                    <span class="p-2 border-b border-gray-200">Colombia / Colombia</span>
+                    <span class="p-2 border-b border-gray-200">Colombiano</span>
+                    <span class="p-2 border-b border-gray-200">Colombiana</span>
+                    <span class="p-2 border-b border-gray-200">Venezuela / Venezuela</span>
+                    <span class="p-2 border-b border-gray-200">Venezolano</span>
+                    <span class="p-2 border-b border-gray-200">Venezolana</span>
+                    <span class="p-2 border-b border-gray-200">Brasil / Brazil</span>
+                    <span class="p-2 border-b border-gray-200">Brasileño</span>
+                    <span class="p-2 border-b border-gray-200">Brasileña</span>
+                    <span class="p-2 border-b border-gray-200">Argentina / Argentina</span>
+                    <span class="p-2 border-b border-gray-200">Argentino</span>
+                    <span class="p-2 border-b border-gray-200">Argentina</span>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-xl shadow-inner mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Actividad de emparejar</h3>
+                <div id="nationalities-match-1" class="grid grid-cols-2 gap-4">
+                    <div id="nationalities-spanish-column-1" class="flex flex-col gap-2"></div>
+                    <div id="nationalities-english-column-1" class="flex flex-col gap-2"></div>
+                </div>
+                <div id="nationalities-message-1" class="message-box hidden"></div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-xl shadow-inner">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Actividad de emparejar</h3>
+                <div id="nationalities-match-2" class="grid grid-cols-2 gap-4">
+                    <div id="nationalities-spanish-column-2" class="flex flex-col gap-2"></div>
+                    <div id="nationalities-english-column-2" class="flex flex-col gap-2"></div>
+                </div>
+                <div id="nationalities-message-2" class="message-box hidden"></div>
+            </div>
+            
+            <button onclick="showPage('main-page')" class="back-button">Regresar a la página principal / Back to the main page</button>
+        </div>
+
+        <div id="occupations-page" class="page-section hidden">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4">Ocupaciones (Occupations)</h2>
+            <p class="text-gray-700 mb-6">
+                In Spanish, many professions have different endings depending on if the person is a man or a woman. For example, 'profesor' (male teacher) and 'profesora' (female teacher). Sometimes, the word is the same for both, like 'dentista' or 'policía'.
+            </p>
+            <div class="bg-blue-50 p-6 rounded-xl mb-6">
+                <h3 class="text-xl font-semibold text-blue-800 mb-3">Lista de Ocupaciones</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-lg">
+                    <div class="p-3 bg-blue-100 rounded-lg">Ingeniero/a (Engineer)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Profesor/a (Teacher)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Abogado/a (Lawyer)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Dentista (Dentist)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Doctor/a (Doctor)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Policía (Police Officer)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Cantante (Singer)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Futbolista ⚽ (Football Player)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Bombero/a (Firefighter)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Enfermero/a (Nurse)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Contador/a (Accountant)</div>
+                    <div class="p-3 bg-blue-100 rounded-lg">Científico/a (Scientist)</div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-xl shadow-inner mb-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Actividad de emparejar</h3>
+                <div id="occupations-match-1" class="grid grid-cols-2 gap-4">
+                    <div id="occupations-spanish-column-1" class="flex flex-col gap-2"></div>
+                    <div id="occupations-english-column-1" class="flex flex-col gap-2"></div>
+                </div>
+                <div id="occupations-message-1" class="message-box hidden"></div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-xl shadow-inner">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Actividad de emparejar</h3>
+                <div id="occupations-match-2" class="grid grid-cols-2 gap-4">
+                    <div id="occupations-spanish-column-2" class="flex flex-col gap-2"></div>
+                    <div id="occupations-english-column-2" class="flex flex-col gap-2"></div>
+                </div>
+                <div id="occupations-message-2" class="message-box hidden"></div>
+            </div>
+
+            <button onclick="showPage('main-page')" class="back-button">Regresar a la página principal / Back to the main page</button>
+        </div>
+
+        <div id="uses-page" class="page-section hidden">
+            <h2 class="text-3xl font-bold text-blue-700 mb-4">Usos del Verbo 'Ser'</h2>
+            <div class="bg-blue-50 p-6 rounded-xl mb-8 border-l-4 border-blue-500">
+                <h3 class="text-2xl font-bold text-blue-700 mb-4">Conjugación (Presente)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center text-lg">
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Yo soy</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Tú eres</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Él/Ella/Usted es</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Nosotros/Nosotras somos</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Vosotros/Vosotras sois</div>
+                    <div class="bg-blue-100 p-3 rounded-lg font-medium">Ellos/Ellas/Ustedes son</div>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-inner border-l-4 border-gray-400">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">1. Description (Permanent Characteristics)</h3>
+                    <p class="text-gray-600 mb-3">Use 'ser' to describe what someone or something is like: personality, physical traits, nationality.</p>
+                    <div class="pl-4 border-l-2 border-gray-300 space-y-2">
+                        <p class="text-gray-700">
+                            <span class="font-bold text-blue-600">Example:</span> Yo <span class="text-red-500 font-bold">soy</span> alto. <span class="text-sm italic text-gray-500">(I am tall.)</span>
+                        </p>
+                        <p class="text-gray-700">
+                            <span class="font-bold text-blue-600">Example:</span> Ella <span class="text-red-500 font-bold">es</span> inteligente. <span class="text-sm italic text-gray-500">(She is smart.)</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-inner border-l-4 border-gray-400">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">2. Occupation</h3>
+                    <p class="text-gray-600 mb-3">Use 'ser' to say what someone's profession is.</p>
+                    <div class="pl-4 border-l-2 border-gray-300 space-y-2">
+                        <p class="text-gray-700">
+                            <span class="font-bold text-blue-600">Example:</span> Él <span class="text-red-500 font-bold">es</span> doctor. <span class="text-sm italic text-gray-500">(He is a doctor.)</span>
+                        </p>
+                        <p class="text-700">
+                            <span class="font-bold text-blue-600">Example:</span> Nosotros <span class="text-red-500 font-bold">somos</span> estudiantes. <span class="text-sm italic text-gray-500">(We are students.)</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-inner border-l-4 border-gray-400">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">3. Origin or Nationality</h3>
+                    <p class="text-gray-600 mb-3">Use 'ser' to talk about where someone or something is from.</p>
+                    <div class="pl-4 border-l-2 border-gray-300 space-y-2">
+                        <p class="text-gray-700">
+                            <span class="font-bold text-blue-600">Example:</span> Tú <span class="text-red-500 font-bold">eres</span> de México. <span class="text-sm italic text-gray-500">(You are from Mexico.)</span>
+                        </p>
+                        <p class="text-gray-700">
+                            <span class="font-bold text-blue-600">Example:</span> Ellos <span class="text-red-500 font-bold">son</span> americanos. <span class="text-sm italic text-gray-500">(They are American.)</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-inner border-l-4 border-gray-400">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">4. Time and Date</h3>
+                    <p class="text-gray-600 mb-3">Use 'ser' to talk about the time or the date. When talking about hours, 'son' is used for everything except for one o'clock, which is 'es'.</p>
+                    <div class="pl-4 border-l-2 border-gray-300 space-y-2">
+                        <p class="text-gray-700">
+                            <span class="font-bold text-blue-600">Example:</span> <span class="text-red-500 font-bold">Son</span> las tres. <span class="text-sm italic text-gray-500">(It is three o'clock.)</span>
+                        </p>
+                        <p class="text-gray-700">
+                            <span class="font-bold text-blue-600">Example:</span> Hoy <span class="text-red-500 font-bold">es</span> lunes. <span class="text-sm italic text-gray-500">(Today is Monday.)</span>
+                        </p>
+                        <p class="text-gray-700">
+                            <span class="font-bold text-blue-600">Example:</span> <span class="text-red-500 font-bold">Es</span> la una. <span class="text-sm italic text-gray-500">(It is one o'clock.)</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-xl shadow-inner mt-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Activity: Translate the Sentences</h3>
+                <div id="translation-game-container" class="flex flex-col items-center">
+                    <p id="spanish-sentence" class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center"></p>
+                    <div id="translation-options" class="flex flex-wrap justify-center gap-4 w-full max-w-lg">
+                        </div>
+                    <div id="translation-message" class="message-box hidden mt-4"></div>
+                </div>
+            </div>
+
+            <button onclick="showPage('main-page')" class="back-button">Regresar a la página principal / Back to the main page</button>
+        </div>
+    </div>
+
+    <script>
+        const pages = ['main-page', 'pronouns-page', 'nationalities-page', 'occupations-page', 'uses-page'];
+        const studentNameInput = document.getElementById('studentName');
+        
+        function showPage(pageId) {
+            pages.forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+            document.getElementById(pageId).style.display = 'block';
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+        
+        function createMatchingGame(spanishColumnId, englishColumnId, messageBoxId, pairs) {
+            const spanishColumn = document.getElementById(spanishColumnId);
+            const englishColumn = document.getElementById(englishColumnId);
+            const messageBox = document.getElementById(messageBoxId);
+
+            let selectedSpanishCard = null;
+            let selectedEnglishCard = null;
+            let matchedPairs = 0;
+            let isLocked = false;
+
+            const spanishPairs = pairs.map(p => ({ text: p.spanish, key: p.spanish }));
+            const englishPairs = pairs.map(p => ({ text: p.english, key: p.spanish }));
+            
+            shuffle(spanishPairs);
+            shuffle(englishPairs);
+
+            spanishColumn.innerHTML = '';
+            englishColumn.innerHTML = '';
+
+            spanishPairs.forEach(pair => {
+                const card = createCard(pair.text, pair.key, 'spanish');
+                spanishColumn.appendChild(card);
+            });
+
+            englishPairs.forEach(pair => {
+                const card = createCard(pair.text, pair.key, 'english');
+                englishColumn.appendChild(card);
+            });
+
+            function createCard(text, key, lang) {
+                const card = document.createElement('div');
+                card.classList.add('match-card');
+                card.setAttribute('data-key', key);
+                card.setAttribute('data-lang', lang);
+                card.textContent = text;
+                card.addEventListener('click', handleCardClick);
+                return card;
+            }
+
+            function handleCardClick(event) {
+                if (isLocked) return;
+
+                const clickedCard = event.currentTarget;
+                const lang = clickedCard.getAttribute('data-lang');
+
+                if (clickedCard.classList.contains('correct')) return;
+
+                if (lang === 'spanish') {
+                    if (selectedSpanishCard) {
+                        selectedSpanishCard.classList.remove('selected');
+                    }
+                    selectedSpanishCard = clickedCard;
+                    selectedSpanishCard.classList.add('selected');
+                } else {
+                    if (selectedEnglishCard) {
+                        selectedEnglishCard.classList.remove('selected');
+                    }
+                    selectedEnglishCard = clickedCard;
+                    selectedEnglishCard.classList.add('selected');
+                }
+
+                if (selectedSpanishCard && selectedEnglishCard) {
+                    isLocked = true;
+                    checkForMatch();
+                }
+            }
+
+            function checkForMatch() {
+                const spanishKey = selectedSpanishCard.getAttribute('data-key');
+                const englishKey = selectedEnglishCard.getAttribute('data-key');
+
+                if (spanishKey === englishKey) {
+                    // Match found
+                    selectedSpanishCard.classList.remove('selected');
+                    selectedEnglishCard.classList.remove('selected');
+
+                    selectedSpanishCard.classList.add('correct');
+                    selectedEnglishCard.classList.add('correct');
+
+                    displayMessage(`¡Excelente, ${studentNameInput.value || 'amigo'}! ¡Sigue así!`, 'correct', messageBox);
+
+                    matchedPairs++;
+                    if (matchedPairs === pairs.length) {
+                        displayMessage(`¡Felicidades, ${studentNameInput.value || 'amigo'}! ¡Has terminado la actividad! 🎉`, 'correct', messageBox);
+                    }
+                    resetSelection();
+                } else {
+                    // No match
+                    displayMessage(`¡Inténtalo otra vez, ${studentNameInput.value || 'amigo'}!`, 'incorrect', messageBox);
+                    setTimeout(() => {
+                        selectedSpanishCard.classList.remove('selected');
+                        selectedEnglishCard.classList.remove('selected');
+                        selectedEnglishCard.classList.add('incorrect');
+                        selectedSpanishCard.classList.add('incorrect');
+                        setTimeout(() => {
+                            selectedEnglishCard.classList.remove('incorrect');
+                            selectedSpanishCard.classList.remove('incorrect');
+                        }, 500);
+                        resetSelection();
+                    }, 1000);
+                }
+            }
+
+            function resetSelection() {
+                selectedSpanishCard = null;
+                selectedEnglishCard = null;
+                isLocked = false;
+            }
+        }
+
+        function displayMessage(message, type, box) {
+            box.textContent = message;
+            box.classList.remove('hidden', 'correct', 'incorrect');
+            box.classList.add(type);
+            setTimeout(() => {
+                box.classList.remove(type);
+                box.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Data for the matching games
+        const pronouns = [
+            { spanish: 'Yo', english: 'I' },
+            { spanish: 'Tú', english: 'You (informal)' },
+            { spanish: 'Él', english: 'He' },
+            { spanish: 'Ella', english: 'She' },
+            { spanish: 'Usted', english: 'You (formal)' },
+            { spanish: 'Nosotros/Nosotras', english: 'We' },
+            { spanish: 'Ellos/Ellas', english: 'They' },
+            { spanish: 'Ustedes', english: 'You all' }
+        ];
+
+        const allNationalities = [
+            { spanish: 'Español', english: 'Spanish' },
+            { spanish: 'Italiano', english: 'Italian' },
+            { spanish: 'Francés', english: 'French' },
+            { spanish: 'Alemán', english: 'German' },
+            { spanish: 'Polaco', english: 'Polish' },
+            { spanish: 'Mexicano', english: 'Mexican' },
+            { spanish: 'Colombiano', english: 'Colombian' },
+            { spanish: 'Venezolano', english: 'Venezuelan' },
+            { spanish: 'Brasileño', english: 'Brazilian' },
+            { spanish: 'Argentino', english: 'Argentine' }
+        ];
+
+        const nationalitiesPart1 = allNationalities.slice(0, 5);
+        const nationalitiesPart2 = allNationalities.slice(5, 10);
+
+        const occupations = [
+            { spanish: 'Ingeniero/a ⚙️', english: 'Engineer' },
+            { spanish: 'Profesor/a 📚', english: 'Teacher' },
+            { spanish: 'Abogado/a ⚖️', english: 'Lawyer' },
+            { spanish: 'Dentista 🦷', english: 'Dentist' },
+            { spanish: 'Doctor/a 🩺', english: 'Doctor' },
+            { spanish: 'Policía 🚨', english: 'Police Officer' },
+            { spanish: 'Cantante 🎤', english: 'Singer' },
+            { spanish: 'Futbolista ⚽', english: 'Football Player' },
+            { spanish: 'Bombero/a 🚒', english: 'Firefighter' },
+            { spanish: 'Enfermero/a 🏥', english: 'Nurse' },
+            { spanish: 'Contador/a 📊', english: 'Accountant' },
+            { spanish: 'Científico/a 🔬', english: 'Scientist' }
+        ];
+        
+        const occupationsPart1 = occupations.slice(0, 6);
+        const occupationsPart2 = occupations.slice(6, 12);
+
+        // Data for the new translation game
+        const translationSentences = [
+            { spanish: 'Yo soy alto.', english: 'I am tall.' },
+            { spanish: 'Ella es inteligente.', english: 'She is smart.' },
+            { spanish: 'Él es doctor.', english: 'He is a doctor.' },
+            { spanish: 'Nosotros somos estudiantes.', english: 'We are students.' },
+            { spanish: 'Tú eres de México.', english: 'You are from Mexico.' },
+            { spanish: 'Ellos son americanos.', english: 'They are American.' },
+            { spanish: 'Son las tres.', english: 'It is three o\'clock.' },
+            { spanish: 'Hoy es lunes.', english: 'Today is Monday.' },
+            { spanish: 'Es la una.', english: 'It is one o\'clock.' }
+        ];
+
+        let currentSentenceIndex = 0;
+        let shuffledSentences = [...translationSentences];
+
+        function setupTranslationGame() {
+            shuffle(shuffledSentences);
+            currentSentenceIndex = 0;
+            showNextSentence();
+        }
+
+        function showNextSentence() {
+            if (currentSentenceIndex >= shuffledSentences.length) {
+                // Game over
+                document.getElementById('spanish-sentence').textContent = `¡Felicidades, ${studentNameInput.value || 'amigo'}! ¡Has terminado la actividad! 🎉`;
+                document.getElementById('translation-options').innerHTML = '';
+                return;
+            }
+
+            const currentSentence = shuffledSentences[currentSentenceIndex];
+            const spanishSentenceEl = document.getElementById('spanish-sentence');
+            const optionsContainer = document.getElementById('translation-options');
+            const messageBox = document.getElementById('translation-message');
+
+            spanishSentenceEl.textContent = currentSentence.spanish;
+            optionsContainer.innerHTML = '';
+            messageBox.classList.add('hidden');
+
+            const allTranslations = translationSentences.map(s => s.english);
+            let options = [currentSentence.english];
+            while (options.length < 3) {
+                const randomTranslation = allTranslations[Math.floor(Math.random() * allTranslations.length)];
+                if (!options.includes(randomTranslation)) {
+                    options.push(randomTranslation);
+                }
+            }
+            shuffle(options);
+
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('bg-blue-600', 'hover:bg-blue-700', 'text-white', 'font-bold', 'py-3', 'px-6', 'rounded-lg', 'transition-all', 'duration-300', 'transform', 'hover:scale-105', 'shadow-lg');
+                button.setAttribute('data-correct', option === currentSentence.english);
+                button.onclick = (event) => checkAnswer(event.currentTarget);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function checkAnswer(clickedButton) {
+            const isCorrect = clickedButton.getAttribute('data-correct') === 'true';
+            const messageBox = document.getElementById('translation-message');
+            const optionsContainer = document.getElementById('translation-options');
+
+            if (isCorrect) {
+                clickedButton.classList.add('correct');
+                clickedButton.innerHTML += ' ⭐';
+                displayMessage(`¡Correcto, ${studentNameInput.value || 'amigo'}!`, 'correct', messageBox);
+                
+                const allButtons = optionsContainer.querySelectorAll('button');
+                allButtons.forEach(btn => btn.disabled = true);
+
+                setTimeout(() => {
+                    currentSentenceIndex++;
+                    showNextSentence();
+                }, 1500);
+            } else {
+                clickedButton.classList.add('incorrect');
+                displayMessage(`¡Incorrecto! Inténtalo de nuevo.`, 'incorrect', messageBox);
+                setTimeout(() => {
+                    clickedButton.classList.remove('incorrect');
+                }, 500);
+            }
+        }
+
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('main-page');
+            createMatchingGame('pronouns-spanish-column', 'pronouns-english-column', 'pronouns-message', pronouns);
+            createMatchingGame('nationalities-spanish-column-1', 'nationalities-english-column-1', 'nationalities-message-1', nationalitiesPart1);
+            createMatchingGame('nationalities-spanish-column-2', 'nationalities-english-column-2', 'nationalities-message-2', nationalitiesPart2);
+            createMatchingGame('occupations-spanish-column-1', 'occupations-english-column-1', 'occupations-message-1', occupationsPart1);
+            createMatchingGame('occupations-spanish-column-2', 'occupations-english-column-2', 'occupations-message-2', occupationsPart2);
+            setupTranslationGame();
+        });
+
+    </script>
+</body>
+</html>
