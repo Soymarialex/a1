@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Gender Practice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Paleta actualizada con el color solicitado: #FF79AC (Rosa Vibrante)
+                        'primary': '#FF79AC', // Nuevo color principal
+                        'secondary': '#FDD8E8', // Rosa muy pálido para elementos secundarios
+                        'success': '#10B981', // Mantener verde esmeralda para éxito
+                        'error': '#DC3545',
+                        'light-bg': '#FFF5F8', // Fondo ligeramente teñido de rosa
+                        'card-bg': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .word-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            background-color: theme('colors.card-bg');
+            border-radius: theme('borderRadius.lg');
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+        .article-button {
+            transition: background-color 0.15s, transform 0.1s, border-color 0.15s;
+            border-width: 2px;
+            border-color: theme('colors.primary'); /* Borde Rosa Vibrante */
+            color: theme('colors.primary'); /* Texto Rosa Vibrante */
+        }
+        /* Style for when the button is actively selected, before feedback is given */
+        .article-button.selected-temp {
+            background-color: theme('colors.primary');
+            color: white;
+            transform: scale(1.03);
+        }
+
+        /* SUCCESS: Correct feedback (Usando verde para mantener el significado universal) */
+        .article-button.correct-feedback {
+            background-color: #D6FAE9; /* Un verde claro */
+            border-color: theme('colors.success'); /* Verde esmeralda */
+            color: #059669; /* Verde oscuro */
+            pointer-events: none;
+            transform: none;
+        }
+
+        /* INCORRECT: Incorrect feedback */
+        .article-button.incorrect-feedback {
+            background-color: #fee2e2; /* red-100 */
+            border-color: #f87171; /* red-400 */
+            color: #991b1b; /* red-800 */
+            transform: scale(1.03);
+        }
+
+        .audio-button {
+            background-color: theme('colors.secondary'); /* Rosa pálido */
+            color: theme('colors.gray.900');
+        }
+        .audio-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="bg-light-bg min-h-screen font-sans p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-8">
+            <!-- El color del texto del subtítulo ahora es el nuevo 'primary' rosa -->
+            <h1 class="text-4xl font-bold text-gray-800">Spanish Gender Agreement Practice</h1>
+            <p class="text-xl text-primary mt-2">Practice matching <strong>'el'</strong> and <strong>'la'</strong> with nouns.</p>
+        </header>
+
+        <!-- Instructions (Cambiado a un estilo rosa suave para armonizar) -->
+        <div class="bg-[#ffe6f0] border-l-4 border-primary text-gray-700 p-4 rounded-lg mb-8" role="alert">
+            <h2 class="font-bold text-lg mb-1">Instructions</h2>
+            <p class="text-sm">
+                For each noun, select the correct definite article. You will receive <strong>instant feedback</strong>:
+                <!-- Colores de feedback verde y rojo específicos -->
+                <span class="font-bold text-green-700">Light green</span> means correct, and the full word and translation will appear.
+                <span class="font-bold text-red-700">Light red</span> means incorrect. Keep trying!
+            </p>
+        </div>
+        
+        <!-- Loading Indicator for TTS -->
+        <div id="global-loading" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center">
+            <div class="bg-white p-6 rounded-lg shadow-xl flex items-center space-x-3">
+                <!-- Color del spinner ajustado a 'primary' -->
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <p class="text-gray-700">Generating audio...</p>
+            </div>
+        </div>
+
+        <!-- Word List Container (Single section) -->
+        <div id="practice-container">
+            <div class="word-list-section bg-card-bg p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-700">Select the Correct Article</h2>
+                <div id="word-grid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    <!-- Words will be rendered here by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        // --- Web Speech API Handler (Reemplazo para la API de Gemini TTS) ---
+
+        /**
+         * Reproduce el texto usando la función nativa de Texto a Voz del navegador (Web Speech API).
+         * @param {string} text - El texto a reproducir.
+         * @returns {boolean} - True si la reproducción fue iniciada, False si el API no es compatible.
+         */
+        const speakText = (text) => {
+            if (!('speechSynthesis' in window)) {
+                alert("Tu navegador no soporta la función nativa de Texto a Voz (Web Speech API).");
+                return false;
+            }
+
+            // Cancela cualquier reproducción anterior para evitar solapamientos
+            window.speechSynthesis.cancel(); 
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-ES'; // Establecer el idioma a español
+            utterance.rate = 0.9; // Velocidad ligeramente más lenta
+
+            // Encontrar una voz española disponible. Esto debe hacerse de forma asíncrona,
+            // por lo que usamos un pequeño retraso si las voces no están cargadas inmediatamente.
+            const setSpanishVoice = () => {
+                const spanishVoice = window.speechSynthesis.getVoices().find(voice => voice.lang.startsWith('es-'));
+                if (spanishVoice) {
+                    utterance.voice = spanishVoice;
+                }
+                window.speechSynthesis.speak(utterance);
+            };
+
+            // Asegurar que las voces se cargan antes de hablar
+            if (window.speechSynthesis.getVoices().length === 0) {
+                window.speechSynthesis.onvoiceschanged = setSpanishVoice;
+            } else {
+                setSpanishVoice();
+            }
+
+            return true;
+        };
+
+        // Helper function to show/hide global loading spinner (only for visual consistency, not strictly needed for local API)
+        const toggleLoading = (isVisible) => {
+            // Se mantiene la función pero se omite su llamada en la API nativa ya que es casi instantánea.
+        };
+        
+        /**
+         * Handles the click event for the 'Listen' button.
+         * @param {Event} event - The click event.
+         */
+        const handleListenClick = (event) => {
+            const button = event.currentTarget;
+            const textToSpeak = button.dataset.text;
+            const originalText = button.innerHTML;
+            
+            if (!textToSpeak) return;
+
+            button.disabled = true;
+            button.innerHTML = `
+                <svg class="animate-spin h-4 w-4 mr-1 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Speaking...
+            `;
+            
+            const success = speakText(textToSpeak);
+
+            if (success) {
+                // Configurar un detector de eventos para saber cuándo termina la voz y re-habilitar el botón
+                const checkSpeechEnd = setInterval(() => {
+                    if (!window.speechSynthesis.speaking) {
+                        clearInterval(checkSpeechEnd);
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }
+                }, 100);
+                
+                // Fallback de seguridad por si el evento de finalización no funciona correctamente
+                setTimeout(() => {
+                    if (window.speechSynthesis.speaking) {
+                        window.speechSynthesis.cancel();
+                    }
+                    if(checkSpeechEnd) clearInterval(checkSpeechEnd);
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }, 5000); // Re-habilitar después de 5 segundos máximo
+                
+            } else {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        };
+
+
+        // --- Application Data & Logic ---
+
+        // Consolidated list of all 33 words
+        const allWordData = [
+            { word: "libro", gender: "el", translation: "book" },
+            { word: "mano", gender: "la", translation: "hand" },
+            { word: "silla", gender: "la", translation: "chair" },
+            { word: "mapa", gender: "el", translation: "map" },
+            { word: "mesa", gender: "la", translation: "table" },
+            { word: "problema", gender: "el", translation: "problem" },
+            { word: "casa", gender: "la", translation: "house" },
+
+            { word: "sistema", gender: "el", translation: "system" },
+            { word: "clase", gender: "la", translation: "class" },
+            { word: "día", gender: "el", translation: "day" },
+            { word: "reloj", gender: "el", translation: "watch, clock" },
+            { word: "cuaderno", gender: "el", translation: "notebook, workbook" },
+            { word: "lápiz", gender: "el", translation: "pencil" },
+            { word: "agua", gender: "el", translation: "water" },
+
+            { word: "pared", gender: "la", translation: "wall" },
+            { word: "letra", gender: "la", translation: "letter" },
+            { word: "música", gender: "la", translation: "music" },
+            { word: "hotel", gender: "el", translation: "hotel" },
+            { word: "televisor", gender: "el", translation: "television set" },
+            { word: "familia", gender: "la", translation: "family" },
+            { word: "papel", gender: "el", translation: "paper" },
+            
+            // --- NUEVAS PALABRAS AÑADIDAS ---
+            { word: "educación", gender: "la", translation: "education" },
+            { word: "libertad", gender: "la", translation: "liberty, freedom" },
+            { word: "nación", gender: "la", translation: "nation" },
+            { word: "posibilidad", gender: "la", translation: "possibility" },
+            { word: "lección", gender: "la", translation: "lesson" },
+            { word: "actitud", gender: "la", translation: "attitude" },
+            { word: "universidad", gender: "la", translation: "university" },
+            { word: "virtud", gender: "la", translation: "virtue" },
+            { word: "oeste", gender: "el", translation: "west" },
+            { word: "sur", gender: "el", translation: "south" },
+            { word: "este", gender: "el", translation: "east" },
+            { word: "norte", gender: "el", translation: "north" }
+            // ---------------------------------
+        ];
+
+        const correctedWords = new Set(); // Tracks indices of correctly answered words
+
+        /**
+         * Generates the HTML content for the result area (translation and listen button).
+         * @param {number} index - The index of the word.
+         * @param {object} item - The word data object.
+         * @returns {string} - HTML string.
+         */
+        const generateResultContent = (index, item) => {
+            return `
+                <p class="text-sm font-semibold mt-1 text-gray-700">
+                    <span class="text-gray-500 mr-1">English:</span> ${item.translation}
+                </p>
+                <button id="listen-${index}" 
+                        data-text="${item.gender} ${item.word}"
+                        class="audio-button mt-2 py-1 px-3 text-sm rounded-full font-bold hover:opacity-90 flex items-center justify-center transition duration-150 mx-auto">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 7.24a1 1 0 01.192 1.374c-.232.427-.582.787-.992 1.093A8.003 8.003 0 0015.75 10a8.003 8.003 0 00-1.893 2.293c.41.306.76.666.992 1.093.19.35.196.726.04 1.077A1 1 0 0114.12 16a6 6 0 000-12z" clip-rule="evenodd"></path></svg>
+                    Listen
+                </button>
+            `;
+        };
+
+        /**
+         * Handles the selection of an article button and provides instant feedback.
+         * @param {number} wordIndex - The index of the word.
+         * @param {string} article - The selected article ('el' or 'la').
+         */
+        const selectArticle = (wordIndex, article) => {
+            if (correctedWords.has(wordIndex)) return; // Word is already correct
+
+            const item = allWordData[wordIndex];
+            const isCorrect = article === item.gender;
+            const wordElement = document.getElementById(`word-card-${wordIndex}`);
+            const buttons = wordElement.querySelectorAll('.article-button');
+            const resultArea = document.getElementById(`result-${wordIndex}`);
+            const wordDisplay = document.getElementById(`noun-${wordIndex}`);
+
+            // Reset all buttons in this card to default state
+            buttons.forEach(btn => {
+                btn.classList.remove('incorrect-feedback', 'correct-feedback', 'selected-temp');
+                btn.classList.add('text-primary', 'border-primary');
+            });
+
+            const selectedButton = Array.from(buttons).find(btn => btn.textContent.trim().toLowerCase() === article);
+
+            if (isCorrect) {
+                // CORRECT: Apply light green feedback, disable buttons, update display
+                correctedWords.add(wordIndex);
+                
+                selectedButton.classList.remove('text-primary', 'border-primary');
+                selectedButton.classList.add('correct-feedback'); // Light green style
+
+                // Disable all buttons in the card
+                buttons.forEach(btn => btn.disabled = true);
+                
+                // Update noun display: el/la Noun
+                wordDisplay.innerHTML = `<span class="text-primary font-bold">${item.gender}</span> ${item.word}`;
+
+                // Show translation and Listen button immediately
+                resultArea.innerHTML = generateResultContent(wordIndex, item);
+                resultArea.classList.remove('opacity-0');
+
+                // Attach listener for the new "Listen" button
+                document.getElementById(`listen-${wordIndex}`).addEventListener('click', handleListenClick);
+
+            } else {
+                // INCORRECT: Apply light red feedback, keep buttons enabled
+                selectedButton.classList.remove('text-primary', 'border-primary');
+                selectedButton.classList.add('incorrect-feedback'); // Light red style
+                
+                // Temporarily select style for non-feedback visual
+            }
+        };
+        
+        /**
+         * Renders all words in a single grid layout.
+         */
+        const renderWords = () => {
+            const gridContainer = document.getElementById('word-grid');
+            gridContainer.innerHTML = allWordData.map((item, index) => `
+                <div id="word-card-${index}" class="word-card p-4 flex flex-col justify-between">
+                    <p id="noun-${index}" class="text-xl font-medium text-gray-900 mb-3 h-7 text-center">${item.word}</p>
+                    <div class="flex justify-center space-x-3 mb-2">
+                        <button onclick="selectArticle(${index}, 'el')"
+                                class="article-button flex-1 py-2 px-4 font-bold rounded-lg focus:outline-none text-lg">
+                            el
+                        </button>
+                        <button onclick="selectArticle(${index}, 'la')"
+                                class="article-button flex-1 py-2 px-4 font-bold rounded-lg focus:outline-none text-lg">
+                            la
+                        </button>
+                    </div>
+                    <!-- Result and Listen Button Area -->
+                    <div id="result-${index}" class="text-center mt-2 opacity-0 transition-opacity duration-500">
+                        <!-- Content appears instantly upon correct selection -->
+                    </div>
+                </div>
+            `).join('');
+
+            // Expose utility function to global scope for use in inline HTML click handlers
+            window.selectArticle = selectArticle;
+            // Asegura que las voces del navegador se carguen al iniciar
+            window.speechSynthesis.getVoices(); 
+        };
+
+        // Custom modal implementation for alerts (since window.alert is disallowed)
+        const customAlert = (message) => {
+            let modal = document.getElementById('custom-alert-modal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'custom-alert-modal';
+                modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75 hidden';
+                modal.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg shadow-2xl max-w-sm w-full mx-4 transform transition-all duration-300 scale-95">
+                        <h3 class="text-xl font-bold text-error mb-4">Aviso</h3>
+                        <p class="text-gray-700 mb-6" id="alert-message"></p>
+                        <button id="close-alert-btn" class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-primary/90">
+                            OK
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                document.getElementById('close-alert-btn').onclick = () => {
+                    modal.classList.add('hidden');
+                };
+            }
+            document.getElementById('alert-message').textContent = message;
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.querySelector('.transform').classList.remove('scale-95');
+                modal.querySelector('.transform').classList.add('scale-100');
+            }, 50);
+        };
+
+        // Replace native alert with custom implementation
+        window.alert = customAlert;
+
+        // Initialize the app on page load
+        window.onload = function() {
+            renderWords();
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <style>
+        :root {
+            --primary-pink: #FF79AC;
+            --secondary-pink: #FFB3D1;
+            --eerie-black: #121118;
+            --white: #FFFFFF;
+            --success-bg: #D4EDDA;
+            --error-bg: #F8D7DA;
+            --box-bg: #F9F9F9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--white);
+            color: var(--eerie-black);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-pink);
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .activity-block {
+            margin-bottom: 40px;
+        }
+
+        .activity-block p {
+            margin-bottom: 15px;
+        }
+
+        /* Grillas para columnas */
+        .grid-layout {
+            display: grid;
+            gap: 10px 30px;
+            margin-top: 15px;
+        }
+
+        .cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        /* Estilo de Inputs según Guía */
+        input[type="text"] {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            text-align: center;
+            font-size: 1rem;
+            padding: 2px 5px;
+            outline: none;
+            transition: background-color 0.3s ease;
+            width: 80px;
+        }
+
+        .wide-input { width: 160px; }
+
+        input.correct { background-color: var(--success-bg) !important; }
+        input.incorrect { background-color: var(--error-bg) !important; }
+
+        /* Estilo de Botones según Guía */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 10px 0 20px 20px;
+        }
+
+        .option-btn {
+            background-color: var(--secondary-pink);
+            border: none;
+            border-bottom: 3px solid var(--primary-pink);
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.9rem;
+            width: fit-content;
+            min-width: 200px;
+            color: var(--eerie-black);
+            transition: opacity 0.2s;
+        }
+
+        .option-btn:hover { opacity: 0.9; }
+        .option-btn.btn-correct { background-color: var(--success-bg) !important; }
+        .option-btn.btn-incorrect { background-color: var(--error-bg) !important; }
+
+        /* Botón de Respuestas e Información Final */
+        .toggle-btn {
+            background-color: var(--secondary-pink);
+            border: none;
+            border-bottom: 3px solid var(--primary-pink);
+            border-radius: 5px;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        #answers-content {
+            display: none;
+            background-color: var(--box-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            font-size: 0.95rem;
+        }
+
+        .ans-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .cols-3, .cols-2, .ans-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>III. Actividades / Activities</h1>
+
+    <!-- ACTIVIDAD A -->
+    <div class="activity-block">
+        <p><strong>a. Agrega el artículo definido apropiado a cada sustantivo. / Add the appropriate definite article to each noun.</strong></p>
+        <div class="grid-layout cols-3">
+            <div class="item">1. <input type="text" data-order="1" data-answer="la"> universidad</div>
+            <div class="item">4. <input type="text" data-order="4" data-answer="los"> lápices</div>
+            <div class="item">7. <input type="text" data-order="7" data-answer="los"> mapas</div>
+            
+            <div class="item">2. <input type="text" data-order="2" data-answer="los"> libros</div>
+            <div class="item">5. <input type="text" data-order="5" data-answer="el"> sistema</div>
+            <div class="item">8. <input type="text" data-order="8" data-answer="la"> educación</div>
+            
+            <div class="item">3. <input type="text" data-order="3" data-answer="el"> día</div>
+            <div class="item">6. <input type="text" data-order="6" data-answer="los"> cuadernos</div>
+            <div class="item">9. <input type="text" data-order="9" data-answer="la"> actitud</div>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD B -->
+    <div class="activity-block">
+        <p><strong>b. La familia González Fallas desempaca las cajas que tienen las cosas que necesitan en su nueva casa. / The González Fallas family is unpacking the boxes that have the things they need in their new home.</strong></p>
+        <p>Ayuda a la familia González Fallas a desempacar sus cosas. Agrega el artículo definido apropiado a cada sustantivo. / Help the González Fallas family unpack their things. Add the appropriate definite article to each noun.</p>
+        
+        <div class="grid-layout cols-2">
+            <div class="item">1. <input type="text" data-order="10" data-answer="el"> televisor</div>
+            <div class="item">6. <input type="text" data-order="15" data-answer="la"> alfombra [rug]</div>
+            
+            <div class="item">2. <input type="text" data-order="11" data-answer="las"> mesas</div>
+            <div class="item">7. <input type="text" data-order="16" data-answer="los"> cuadernos</div>
+            
+            <div class="item">3. <input type="text" data-order="12" data-answer="las"> lámparas [lamps]</div>
+            <div class="item">8. <input type="text" data-order="17" data-answer="los"> mapas</div>
+            
+            <div class="item">4. <input type="text" data-order="13" data-answer="los"> papeles</div>
+            <div class="item">9. <input type="text" data-order="18" data-answer="los"> libros</div>
+            
+            <div class="item">5. <input type="text" data-order="14" data-answer="la"> computadora [computer]</div>
+            <div class="item">10. <input type="text" data-order="19" data-answer="las"> mesas</div>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD C -->
+    <div class="activity-block">
+        <p><strong>c. La familia González Fallas no recuerda cuántas cosas tienen en las cajas. / The González Fallas family doesn’t remember how many things they have in the boxes.</strong></p>
+        <p>Ayúdalos haciendo el plural de las siguientes cosas que han desempacado. / Help them by making the plural of the following things they have unpacked.</p>
+        
+        <div class="grid-layout cols-2">
+            <div class="item">1. el cuaderno <input type="text" class="wide-input" data-order="20" data-answer="los cuadernos"></div>
+            <div class="item">7. la cama [bed] <input type="text" class="wide-input" data-order="26" data-answer="las camas"></div>
+            
+            <div class="item">2. la lámpara <input type="text" class="wide-input" data-order="21" data-answer="las lámparas"></div>
+            <div class="item">8. el reloj <input type="text" class="wide-input" data-order="27" data-answer="los relojes"></div>
+            
+            <div class="item">3. el televisor <input type="text" class="wide-input" data-order="22" data-answer="los televisores"></div>
+            <div class="item">9. la bicicleta [bicycle] <input type="text" class="wide-input" data-order="28" data-answer="las bicicletas"></div>
+            
+            <div class="item">4. el zapato [shoe] <input type="text" class="wide-input" data-order="23" data-answer="los zapatos"></div>
+            <div class="item">10. el perfume [perfume] <input type="text" class="wide-input" data-order="29" data-answer="los perfumes"></div>
+            
+            <div class="item">5. el mapa <input type="text" class="wide-input" data-order="24" data-answer="los mapas"></div>
+            <div class="item">11. el papel <input type="text" class="wide-input" data-order="30" data-answer="los papeles"></div>
+            
+            <div class="item">6. la alfombra <input type="text" class="wide-input" data-order="25" data-answer="las alfombras"></div>
+            <div class="item">12. el lápiz <input type="text" class="wide-input" data-order="31" data-answer="los lápices"></div>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD D -->
+    <div class="activity-block">
+        <p><strong>d. Escoge la respuesta correcta. / Choose the correct answer.</strong></p>
+        
+        <div class="q-group">
+            <p>1. ¿Cuál [What] es el plural de reloj?</p>
+            <div class="options-container">
+                <button class="option-btn" data-correct="true">a) relojes</button>
+                <button class="option-btn" data-correct="false">b) relojs</button>
+                <button class="option-btn" data-correct="false">c) relojeces</button>
+            </div>
+        </div>
+
+        <div class="q-group">
+            <p>2. ¿Cuál es el singular de televisores?</p>
+            <div class="options-container">
+                <button class="option-btn" data-correct="false">a) televiso</button>
+                <button class="option-btn" data-correct="true">b) televisor</button>
+                <button class="option-btn" data-correct="false">c) televisore</button>
+            </div>
+        </div>
+
+        <div class="q-group">
+            <p>3. ¿Cuál es el plural de hotel?</p>
+            <div class="options-container">
+                <button class="option-btn" data-correct="false">a) hotel</button>
+                <button class="option-btn" data-correct="true">b) hoteles</button>
+                <button class="option-btn" data-correct="false">c) hotels</button>
+            </div>
+        </div>
+
+        <div class="q-group">
+            <p>4. ¿Cuál es el singular de doctoras?</p>
+            <div class="options-container">
+                <button class="option-btn" data-correct="false">a) doctor</button>
+                <button class="option-btn" data-correct="false">b) doctoras</button>
+                <button class="option-btn" data-correct="true">c) doctora</button>
+            </div>
+        </div>
+
+        <div class="q-group">
+            <p>5. ¿Cuál es el artículo definido de sistema?</p>
+            <div class="options-container">
+                <button class="option-btn" data-correct="false">a) la</button>
+                <button class="option-btn" data-correct="false">b) las</button>
+                <button class="option-btn" data-correct="true">c) el</button>
+            </div>
+        </div>
+
+        <div class="q-group">
+            <p>6. ¿Cuál es el artículo definido de mano?</p>
+            <div class="options-container">
+                <button class="option-btn" data-correct="false">a) el</button>
+                <button class="option-btn" data-correct="true">b) la</button>
+                <button class="option-btn" data-correct="false">c) los</button>
+            </div>
+        </div>
+
+        <div class="q-group">
+            <p>7. ¿Cuál es el artículo definido de problemas?</p>
+            <div class="options-container">
+                <button class="option-btn" data-correct="true">a) los</button>
+                <button class="option-btn" data-correct="false">b) las</button>
+                <button class="option-btn" data-correct="false">c) el</button>
+            </div>
+        </div>
+
+        <div class="q-group">
+            <p>8. ¿Cuál es el artículo definido de dentistas?</p>
+            <div class="options-container">
+                <button class="option-btn" data-correct="true">a) los</button>
+                <button class="option-btn" data-correct="true">b) las</button>
+                <button class="option-btn" data-correct="false">c) la</button>
+            </div>
+        </div>
+
+        <div class="q-group">
+            <p>9. ¿Cuál es el artículo definido de futbolistas?</p>
+            <div class="options-container">
+                <button class="option-btn" data-correct="true">a) los</button>
+                <button class="option-btn" data-correct="true">b) las</button>
+                <button class="option-btn" data-correct="false">c) la</button>
+            </div>
+        </div>
+
+        <div class="q-group">
+            <p>10. ¿Cuál es el artículo definido de papel?</p>
+            <div class="options-container">
+                <button class="option-btn" data-correct="false">a) la</button>
+                <button class="option-btn" data-correct="true">b) el</button>
+                <button class="option-btn" data-correct="false">c) las</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESPUESTAS CORRECTAS -->
+    <button class="toggle-btn" onclick="toggleAnswers()">IV. Respuestas correctas / Correct Answers</button>
+    <div id="answers-content">
+        <div class="ans-grid">
+            <div>
+                <strong>a.</strong><br>
+                1. la universidad | 4. los lápices | 7. los mapas<br>
+                2. los libros | 5. el sistema | 8. la educación<br>
+                3. el día | 6. los cuadernos | 9. la actitud
+            </div>
+            <div>
+                <strong>b.</strong><br>
+                1. el | 6. la<br>
+                2. las | 7. los<br>
+                3. las | 8. los<br>
+                4. los | 9. los<br>
+                5. la | 10. las
+            </div>
+        </div>
+        <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ccc;">
+        <div class="ans-grid">
+            <div>
+                <strong>c.</strong><br>
+                1. los cuadernos | 7. las camas<br>
+                2. las lámparas | 8. los relojes<br>
+                3. los televisores | 9. las bicicletas<br>
+                4. los zapatos | 10. los perfumes<br>
+                5. los mapas | 11. los papeles<br>
+                6. las alfombras | 12. los lápices
+            </div>
+            <div>
+                <strong>d.</strong><br>
+                1. a) relojes | 2. b) televisor | 3. b) hoteles<br>
+                4. c) doctora | 5. c) el | 6. b) la<br>
+                7. a) los | 8. a) los y b) las<br>
+                9. a) los y b) las | 10. b) el
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Obtener todos los campos de texto y ordenarlos por data-order
+    const textInputs = Array.from(document.querySelectorAll('input[type="text"]'))
+                           .sort((a, b) => parseInt(a.dataset.order) - parseInt(b.dataset.order));
+
+    textInputs.forEach((input, index) => {
+        // Validación al escribir
+        input.addEventListener('input', () => {
+            const val = input.value.trim().toLowerCase();
+            const correct = input.dataset.answer.toLowerCase();
+            
+            if (val === "") {
+                input.classList.remove('correct', 'incorrect');
+            } else if (val === correct) {
+                input.classList.add('correct');
+                input.classList.remove('incorrect');
+            } else {
+                input.classList.add('incorrect');
+                input.classList.remove('correct');
+            }
+        });
+
+        // Salto de cursor al presionar Enter siguiendo el orden numérico
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const next = textInputs[index + 1];
+                if (next) next.focus();
+            }
+        });
+    });
+
+    // Lógica para botones de selección de la actividad d.
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const container = btn.closest('.options-container');
+            const isCorrect = btn.getAttribute('data-correct') === 'true';
+            
+            // Limpiar estados previos en ese grupo
+            container.querySelectorAll('.option-btn').forEach(b => {
+                b.classList.remove('btn-correct', 'btn-incorrect');
+            });
+
+            // Aplicar feedback
+            if (isCorrect) {
+                btn.classList.add('btn-correct');
+            } else {
+                btn.classList.add('btn-incorrect');
+            }
+        });
+    });
+
+    // Mostrar/Ocultar respuestas
+    function toggleAnswers() {
+        const content = document.getElementById('answers-content');
+        content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>

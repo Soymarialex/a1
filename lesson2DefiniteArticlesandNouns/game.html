@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --primary-pink: #FF79AC;
+            --secondary-pink: #FFEBF2;
+            --text-main: #121118;
+            --bg-page: #FFFFFF;
+            --success-bg: #D4EDDA;
+            --error-bg: #F8D7DA;
+            --btn-bg: #FFB3D1;
+            --box-bg: #F9F9F9;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-pink);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            color: var(--primary-pink);
+            font-size: 1.6rem;
+            border-bottom: 2px solid var(--primary-pink);
+            display: inline-block;
+            margin-bottom: 30px;
+            padding-bottom: 5px;
+            text-transform: lowercase;
+        }
+
+        /* Navegación de niveles */
+        .level-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .level-btn {
+            background-color: var(--btn-bg);
+            border: none;
+            border-bottom: 3px solid var(--primary-pink);
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: black;
+            transition: opacity 0.2s;
+        }
+
+        .level-btn.active {
+            background-color: var(--primary-pink);
+            color: white;
+        }
+
+        /* Área de juego */
+        .game-area {
+            background-color: var(--box-bg);
+            border-radius: 8px;
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            min-height: 250px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .word-btn {
+            width: 100%;
+            max-width: 220px;
+            background-color: var(--btn-bg);
+            border: none;
+            border-bottom: 2px solid #808080; /* Gris según guía */
+            border-radius: 5px;
+            padding: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: black;
+            text-align: center;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        /* Estados de los botones */
+        .word-btn.selected {
+            background-color: var(--secondary-pink);
+            border-bottom-color: var(--primary-pink);
+        }
+
+        .word-btn.match-success {
+            background-color: var(--success-bg) !important;
+            border-bottom-color: #28a745;
+            pointer-events: none;
+        }
+
+        .word-btn.match-error {
+            background-color: var(--error-bg) !important;
+            border-bottom-color: #dc3545;
+        }
+
+        /* Responsividad básica */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .game-area { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Matching game</h1>
+    <h2>test your memory</h2>
+
+    <div class="level-selector" id="levelSelector">
+        <button class="level-btn active" onclick="changeLevel(0)">Nivel 1</button>
+        <button class="level-btn" onclick="changeLevel(1)">Nivel 2</button>
+        <button class="level-btn" onclick="changeLevel(2)">Nivel 3</button>
+        <button class="level-btn" onclick="changeLevel(3)">Nivel 4</button>
+        <button class="level-btn" onclick="changeLevel(4)">Nivel 5</button>
+    </div>
+
+    <div class="game-area">
+        <div class="column" id="colSpanish"></div>
+        <div class="column" id="colEnglish"></div>
+    </div>
+</div>
+
+<script>
+    const levelsData = [
+        [
+            { es: "el libro", en: "book" },
+            { es: "la mano", en: "hand" },
+            { es: "la silla", en: "chair" },
+            { es: "el mapa", en: "map" },
+            { es: "la mesa", en: "table" }
+        ],
+        [
+            { es: "el problema", en: "problem" },
+            { es: "la casa", en: "house" },
+            { es: "el sistema", en: "system" },
+            { es: "la clase", en: "class" },
+            { es: "el día", en: "day" }
+        ],
+        [
+            { es: "el reloj", en: "watch, clock" },
+            { es: "el cuaderno", en: "notebook, workbook" },
+            { es: "el lápiz", en: "pencil" },
+            { es: "el agua", en: "water [feminine]" },
+            { es: "la pared", en: "wall" }
+        ],
+        [
+            { es: "la letra", en: "letter" },
+            { es: "la música", en: "music" },
+            { es: "el hotel", en: "hotel" },
+            { es: "el televisor", en: "television set" },
+            { es: "la familia", en: "family" }
+        ],
+        [
+            { es: "el papel", en: "paper" },
+            { es: "el norte", en: "north" },
+            { es: "el sur", en: "south" },
+            { es: "el oeste", en: "west" },
+            { es: "el este", en: "east" }
+        ]
+    ];
+
+    let currentLevel = 0;
+    let selectedSpanish = null;
+    let selectedEnglish = null;
+    let isChecking = false;
+
+    function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
+    function changeLevel(levelIdx) {
+        if (isChecking) return;
+        currentLevel = levelIdx;
+        
+        // UI de niveles
+        const buttons = document.querySelectorAll('.level-btn');
+        buttons.forEach((btn, idx) => {
+            btn.classList.toggle('active', idx === levelIdx);
+        });
+
+        resetGame();
+        renderLevel();
+    }
+
+    function resetGame() {
+        selectedSpanish = null;
+        selectedEnglish = null;
+        isChecking = false;
+        document.getElementById('colSpanish').innerHTML = '';
+        document.getElementById('colEnglish').innerHTML = '';
+    }
+
+    function renderLevel() {
+        const data = levelsData[currentLevel];
+        
+        const spanishWords = shuffle(data.map(item => item.es));
+        const englishWords = shuffle(data.map(item => item.en));
+
+        const colEs = document.getElementById('colSpanish');
+        const colEn = document.getElementById('colEnglish');
+
+        spanishWords.forEach(word => {
+            const btn = document.createElement('button');
+            btn.className = 'word-btn';
+            btn.textContent = word;
+            btn.onclick = () => selectWord(btn, 'es');
+            colEs.appendChild(btn);
+        });
+
+        englishWords.forEach(word => {
+            const btn = document.createElement('button');
+            btn.className = 'word-btn';
+            btn.textContent = word;
+            btn.onclick = () => selectWord(btn, 'en');
+            colEn.appendChild(btn);
+        });
+    }
+
+    function selectWord(btn, lang) {
+        if (isChecking || btn.classList.contains('match-success')) return;
+
+        if (lang === 'es') {
+            if (selectedSpanish) selectedSpanish.classList.remove('selected');
+            selectedSpanish = btn;
+            btn.classList.add('selected');
+        } else {
+            if (selectedEnglish) selectedEnglish.classList.remove('selected');
+            selectedEnglish = btn;
+            btn.classList.add('selected');
+        }
+
+        if (selectedSpanish && selectedEnglish) {
+            checkMatch();
+        }
+    }
+
+    function checkMatch() {
+        isChecking = true;
+        const esVal = selectedSpanish.textContent;
+        const enVal = selectedEnglish.textContent;
+
+        const correctPair = levelsData[currentLevel].find(p => p.es === esVal && p.en === enVal);
+
+        if (correctPair) {
+            selectedSpanish.classList.remove('selected');
+            selectedEnglish.classList.remove('selected');
+            selectedSpanish.classList.add('match-success');
+            selectedEnglish.classList.add('match-success');
+            selectedSpanish = null;
+            selectedEnglish = null;
+            isChecking = false;
+        } else {
+            selectedSpanish.classList.add('match-error');
+            selectedEnglish.classList.add('match-error');
+
+            setTimeout(() => {
+                selectedSpanish.classList.remove('match-error', 'selected');
+                selectedEnglish.classList.remove('match-error', 'selected');
+                selectedSpanish = null;
+                selectedEnglish = null;
+                isChecking = false;
+            }, 1000);
+        }
+    }
+
+    // Inicializar
+    window.onload = renderLevel;
+</script>
+
+</body>
+</html>
