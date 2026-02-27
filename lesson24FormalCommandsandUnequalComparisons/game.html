@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game - Test Your Memory</title>
+    <!--
+        Rutas (Anti-Rotura en GitHub): Usando CDN con rutas absolutas, no hay problemas de rutas relativas.
+        Control de Caché (Anti-Diseño Roto): Se añade ?v=1.0 al CDN de Tailwind.
+        Fuente tipográfica: Se usa 'Inter' con font-weight 700 para simular la fuerza de 'Platform Medium'.
+        Colores: Flamingo Pink (#FF79AC) y Eerie Black (#121118).
+    -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    
+    <style>
+        /* Definición de colores centrales para usarlos fácilmente */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --button-default: #FFEFF4; /* Rosa muy claro para el fondo del botón */
+            --correct-green: #D4EDDA; /* Verde claro para acierto */
+            --incorrect-red: #F8D7DA; /* Rojo claro para error */
+            --border-color: #FF79AC;
+        }
+        
+        /* Estilos generales para fuente, fondo y título */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            color: var(--eerie-black);
+            min-height: 100vh;
+        }
+
+        /* Estilo para el título principal: Matching game (rosa y negrita) */
+        .main-title {
+            color: var(--flamingo-pink);
+            font-weight: 700; /* Simula Platform Medium */
+        }
+        
+        /* Estilos base para los botones del juego */
+        .card-button {
+            background-color: var(--button-default);
+            color: var(--eerie-black);
+            border: 2px solid var(--flamingo-pink);
+            border-bottom: 5px solid var(--flamingo-pink); /* Borde inferior resaltado */
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            line-height: 1.2;
+            height: auto;
+            min-height: 50px; /* Asegura un tamaño táctil adecuado */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-button:hover:not(.matched):not(.selected) {
+            background-color: #ffe6f0; /* Un tono un poco más oscuro al pasar el ratón */
+        }
+
+        /* Estilos de estado para las cartas */
+        .selected {
+            background-color: var(--flamingo-pink) !important;
+            color: white !important;
+            border-bottom: 5px solid var(--eerie-black) !important;
+        }
+
+        .matched {
+            background-color: var(--correct-green) !important;
+            border-color: #38A169 !important; /* Verde oscuro */
+            border-bottom: 5px solid #38A169 !important;
+            cursor: default;
+        }
+        
+        .error {
+            background-color: var(--incorrect-red) !important;
+            border-color: #EF4444 !important; /* Rojo oscuro */
+            border-bottom: 5px solid #EF4444 !important;
+        }
+        
+        /* Estilos para los botones de navegación de niveles */
+        .level-button {
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            border-radius: 9999px; /* rounded-full */
+            transition: all 0.2s;
+            background-color: #FEE7F2; /* Rosa más claro */
+            color: var(--flamingo-pink);
+            border: 2px solid var(--flamingo-pink);
+        }
+
+        .level-button.active {
+            background-color: var(--flamingo-pink);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(255, 121, 172, 0.5);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    <div class="max-w-4xl mx-auto">
+
+        <!-- TÍTULO Y SUBTÍTULO -->
+        <header class="mb-6 text-center">
+            <h1 class="main-title text-5xl sm:text-6xl mb-1">
+                Matching game
+            </h1>
+            <h2 class="text-xl sm:text-2xl text-[var(--eerie-black)] opacity-80 font-light italic">
+                test your memory
+            </h2>
+        </header>
+
+        <!-- NAVEGACIÓN DE NIVELES -->
+        <div id="level-nav" class="flex justify-center space-x-2 sm:space-x-4 mb-6 p-3 rounded-xl bg-gray-50 shadow-inner">
+            <!-- Los botones se renderizarán aquí -->
+        </div>
+
+        <!-- CONTENEDOR DEL JUEGO: Dos sub-contenedores para las columnas separadas -->
+        <div id="game-container" class="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+            <!-- Columna de Español (Izquierda) -->
+            <div id="spanish-column" class="flex flex-col space-y-3"></div>
+            <!-- Columna de Inglés (Derecha) -->
+            <div id="english-column" class="flex flex-col space-y-3"></div>
+        </div>
+
+        <!-- El mensaje de victoria ha sido ELIMINADO según la solicitud -->
+
+    </div>
+
+    <!-- SCRIPT DE LÓGICA DEL JUEGO -->
+    <script>
+        // Array de palabras, 7 pares por nivel
+        const LEVELS = [
+            // Nivel 1: Comparaciones y Sustantivos
+            [
+                { spanish: 'mayor', english: 'older' },
+                { spanish: 'mejor', english: 'better' },
+                { spanish: 'menor', english: 'younger' },
+                { spanish: 'peor', english: 'worse' },
+                { spanish: 'tanto como', english: 'as well as' },
+                { spanish: 'la oración', english: 'sentence' },
+                { spanish: 'la gente', english: 'people' }
+            ],
+            // Nivel 2: Mandatos y Lugares (Tiendas)
+            [
+                { spanish: 'el mandato', english: 'command' },
+                { spanish: 'el perfume', english: 'perfume' },
+                { spanish: 'la atención', english: 'attention' },
+                { spanish: 'depositar', english: 'to deposit' },
+                { spanish: 'prestar atención', english: 'to pay attention' },
+                { spanish: 'la librería', english: 'bookstore' },
+                { spanish: 'la zapatería', english: 'shoe store' }
+            ],
+            // Nivel 3: Lugares
+            [
+                { spanish: 'la pizzería', english: 'pizzeria' },
+                { spanish: 'la panadería', english: 'bakery' },
+                { spanish: 'la frutería', english: 'greengrocer\'s' },
+                { spanish: 'la perfumería', english: 'perfume store' },
+                { spanish: 'el gimnasio', english: 'gymnasium' },
+                { spanish: 'el correo', english: 'post office' },
+                { spanish: 'el estadio', english: 'stadium' }
+            ],
+            // Nivel 4: Lugares y Frases
+            [
+                { spanish: 'la calle', english: 'street' },
+                { spanish: 'el bar', english: 'bar' },
+                { spanish: 'la autopista', english: 'highway' },
+                { spanish: 'el zoológico', english: 'zoo' },
+                { spanish: 'el edificio', english: 'building' },
+                { spanish: 'la catedral', english: 'cathedral' },
+                { spanish: 'Es pan comido', english: 'It\'s a piece of cake' }
+            ]
+        ];
+
+        // VARIABLES DE ESTADO Y ELEMENTOS DEL DOM
+        let currentLevel = 0; // 0-indexed
+        let selectedCards = [];
+        let matches = 0;
+        let isChecking = false; // Bandera para evitar clics mientras se evalúa la pareja
+
+        const spanishColumn = document.getElementById('spanish-column');
+        const englishColumn = document.getElementById('english-column');
+        const levelNav = document.getElementById('level-nav');
+        // Las variables de DOM para el mensaje de victoria han sido eliminadas.
+
+        /**
+         * Función de utilidad para mezclar un array (Algoritmo Fisher-Yates).
+         * @param {Array} array Array a mezclar.
+         * @returns {Array} Array mezclado.
+         */
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        /**
+         * Renderiza los botones de navegación de niveles.
+         */
+        function renderLevelButtons() {
+            levelNav.innerHTML = '';
+            LEVELS.forEach((_, index) => {
+                const button = document.createElement('button');
+                button.textContent = `Nivel ${index + 1}`;
+                button.className = 'level-button';
+                if (index === currentLevel) {
+                    button.classList.add('active');
+                }
+                button.addEventListener('click', () => {
+                    loadLevel(index);
+                });
+                levelNav.appendChild(button);
+            });
+        }
+
+        /**
+         * Carga el juego para un nivel específico.
+         * @param {number} levelIndex Índice del nivel (0 a 3).
+         */
+        function loadLevel(levelIndex) {
+            currentLevel = levelIndex;
+            selectedCards = [];
+            matches = 0;
+            isChecking = false;
+            // Eliminado: winMessage.classList.add('hidden');
+
+            renderLevelButtons(); // Actualiza el estado del botón activo
+            renderGameGrid();
+        }
+
+        /**
+         * Renderiza la cuadrícula de juego con las tarjetas en dos columnas separadas.
+         */
+        function renderGameGrid() {
+            // 1. Limpiar el contenido de las dos columnas
+            spanishColumn.innerHTML = '';
+            englishColumn.innerHTML = '';
+            
+            const currentPairs = LEVELS[currentLevel];
+            
+            // 2. Crear las listas de tarjetas separadas
+            const spanishCards = [];
+            const englishCards = [];
+
+            currentPairs.forEach((pair, index) => {
+                // Tarjeta en español
+                spanishCards.push({
+                    id: `card-es-${index}`, 
+                    text: pair.spanish, 
+                    language: 'es', 
+                    matchId: index 
+                });
+                // Tarjeta en inglés
+                englishCards.push({ 
+                    id: `card-en-${index}`, 
+                    text: pair.english, 
+                    language: 'en', 
+                    matchId: index 
+                });
+            });
+
+            // 3. Mezclar las tarjetas INDEPENDIENTEMENTE para mantener el orden de aparición aleatorio dentro de su columna
+            const shuffledSpanish = shuffle(spanishCards);
+            const shuffledEnglish = shuffle(englishCards);
+
+            // Helper function para crear el botón
+            const createButton = (card) => {
+                const button = document.createElement('button');
+                button.textContent = card.text;
+                // Se añade 'w-full' para que el botón ocupe el ancho completo de su columna
+                button.className = 'card-button w-full'; 
+                button.setAttribute('data-id', card.id);
+                button.setAttribute('data-match-id', card.matchId);
+                button.setAttribute('data-lang', card.language);
+                button.addEventListener('click', () => handleCardClick(button, card));
+                return button;
+            };
+
+            // 4. Renderizar tarjetas en la columna de español
+            shuffledSpanish.forEach(card => {
+                spanishColumn.appendChild(createButton(card));
+            });
+
+            // 5. Renderizar tarjetas en la columna de inglés
+            shuffledEnglish.forEach(card => {
+                englishColumn.appendChild(createButton(card));
+            });
+        }
+
+        /**
+         * Lógica para avanzar automáticamente al siguiente nivel.
+         */
+        function handleLevelComplete() {
+            setTimeout(() => {
+                let nextLevelIndex;
+                if (currentLevel < LEVELS.length - 1) {
+                    nextLevelIndex = currentLevel + 1;
+                } else {
+                    nextLevelIndex = 0; // Vuelve al Nivel 1 si es el último
+                }
+                loadLevel(nextLevelIndex);
+            }, 2000); // 2000ms = 2 segundos
+        }
+
+
+        /**
+         * Maneja el clic en una tarjeta.
+         * @param {HTMLElement} element El botón de la tarjeta.
+         * @param {Object} card El objeto de datos de la tarjeta.
+         */
+        function handleCardClick(element, card) {
+            // No hacer nada si se está revisando o si la tarjeta ya está seleccionada o emparejada
+            if (isChecking || element.classList.contains('selected') || element.classList.contains('matched')) {
+                return;
+            }
+
+            // Evitar seleccionar dos cartas del mismo idioma
+            if (selectedCards.length === 1 && selectedCards[0].card.language === card.language) {
+                // Deseleccionar la primera tarjeta y seleccionar la nueva para el mismo idioma
+                selectedCards[0].element.classList.remove('selected');
+                selectedCards = [];
+                element.classList.add('selected');
+                selectedCards.push({ element, card });
+                return;
+            }
+
+            // Seleccionar la tarjeta
+            element.classList.add('selected');
+            selectedCards.push({ element, card });
+
+            // Si ya hay dos cartas seleccionadas, revisar la coincidencia
+            if (selectedCards.length === 2) {
+                isChecking = true;
+                checkMatch();
+            }
+        }
+
+        /**
+         * Verifica si las dos tarjetas seleccionadas coinciden.
+         */
+        function checkMatch() {
+            const [card1, card2] = selectedCards;
+
+            // Coincidencia correcta: mismo 'matchId'
+            if (card1.card.matchId === card2.card.matchId) {
+                
+                // Marcar como correctas (verde) y fijar
+                [card1, card2].forEach(item => {
+                    item.element.classList.remove('selected');
+                    item.element.classList.add('matched');
+                    // Remover listener para fijar el par
+                    item.element.removeEventListener('click', handleCardClick);
+                });
+
+                matches++;
+                selectedCards = [];
+                isChecking = false;
+
+                // Revisar si el nivel ha sido completado
+                if (matches === LEVELS[currentLevel].length) {
+                    handleLevelComplete(); // Llama a la nueva función de avance automático
+                }
+
+            } else {
+                
+                // Coincidencia incorrecta: marcar como error (rojo) y reiniciar tras un breve período
+                [card1, card2].forEach(item => {
+                    item.element.classList.remove('selected');
+                    item.element.classList.add('error');
+                });
+
+                setTimeout(() => {
+                    [card1, card2].forEach(item => {
+                        // Volver al color original (eliminando la clase error y selected)
+                        item.element.classList.remove('error');
+                        item.element.classList.remove('selected');
+                    });
+                    selectedCards = [];
+                    isChecking = false;
+                }, 700); // 700ms en rojo claro
+            }
+        }
+        
+        // INICIALIZACIÓN: Cargar el primer nivel al cargar la página.
+        window.onload = () => {
+            loadLevel(0);
+        };
+    </script>
+</body>
+</html>

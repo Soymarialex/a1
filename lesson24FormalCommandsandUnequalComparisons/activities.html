@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!--
+        Colores Centrales:
+        Flamingo Pink (Rosa Flamenco): #FF79AC
+        Eerie Black (Negro Misterioso): #121118
+        Fondo: blanco
+        Fuente: Se usará Inter (el predeterminado de Tailwind) por ser un sans-serif moderno, accesible y similar al estilo Platform Medium.
+    -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    
+    <style>
+        /* Definición de colores centrales para usarlos fácilmente */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --correct-green: #e6ffed; /* Verde claro para respuesta correcta */
+            --incorrect-red: #ffebeb; /* Rojo claro para respuesta incorrecta */
+            --border-color: #d1d5db; /* Gris para bordes de inputs */
+        }
+        
+        /* Estilos generales para fuente y fondo */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            color: var(--eerie-black);
+            min-height: 100vh;
+        }
+
+        /* Estilo para los títulos de sección */
+        .section-title {
+            color: var(--eerie-black);
+            border-bottom: 2px solid var(--flamingo-pink);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Estilo para el texto justificado en la parte informativa */
+        .text-justify-custom {
+            text-align: justify;
+        }
+        
+        /* Estilo base para las entradas de texto */
+        .completion-input {
+            border: 1px solid var(--border-color);
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 0.25rem 0.5rem; /* py-1 px-2 */
+            margin-left: 0.25rem;
+            margin-right: 0.25rem;
+            width: 100px; /* Ancho fijo para consistencia, ajustable en móvil */
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Responsive adjustments for input width */
+        @media (max-width: 640px) {
+            .completion-input {
+                width: 70px;
+            }
+        }
+
+        /* Estilos para la retroalimentación */
+        .correct {
+            background-color: var(--correct-green);
+            border-color: #4ade80; /* verde más oscuro */
+        }
+
+        .incorrect {
+            background-color: var(--incorrect-red);
+            border-color: #f87171; /* rojo más oscuro */
+        }
+
+        /* Estilo para texto en negrita, sin asteriscos */
+        .text-bold-custom {
+            font-weight: 600; /* Semi-bold para distinción */
+        }
+
+        /* El estilo .word-list ya no se usa, fue reemplazado por la caja rosa */
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    <div class="max-w-4xl mx-auto">
+
+        <!-- TÍTULO DE LA PÁGINA -->
+        <header class="mb-8">
+            <h1 class="text-3xl sm:text-5xl font-extrabold mb-2 text-[var(--flamingo-pink)]">
+                III. Actividades / Activities
+            </h1>
+            <hr class="border-[var(--flamingo-pink)] border-t-2">
+        </header>
+
+        <!-- Contenedor principal de actividades, necesario para la lógica de saltar el cursor -->
+        <div id="activities-container">
+
+            <!-- a. Mandatos de ustedes (4) -->
+            <section class="mb-10">
+                <h2 class="text-xl font-bold mb-2">
+                    a. Luis Cortés está preparando la publicidad para un viaje a Puerto Rico. / Luis Cortés is preparing the advertising for a trip to Puerto Rico.
+                </h2>
+                <p class="text-justify-custom mb-3 italic">
+                    <span class="text-bold-custom">Completa estas frases con mandatos de <span class="text-bold-custom">ustedes</span>. / Complete these sentences with <span class="text-bold-custom">ustedes</span> commands.</span> 
+                </p>
+                
+                <!-- Banco de palabras para la actividad A con recuadro rosa -->
+                <div class="p-3 rounded-lg mb-4 text-white bg-[var(--flamingo-pink)] text-sm font-semibold tracking-wide text-center shadow-md">
+                    caminar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; disfrutar [to enjoy] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; venir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;explorar [to explore]
+
+                </div>
+                
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li>
+                        <input type="text" data-activity="a" data-index="1" class="completion-input"> a disfrutar de una semana en el paraíso [paradise]. 
+                    </li>
+                    <li>
+                        <input type="text" data-activity="a" data-index="2" class="completion-input"> por el Viejo San Juan y 
+                        <input type="text" data-activity="a" data-index="3" class="completion-input"> el Morro y San Cristóbal. 
+                    </li>
+                    <li>
+                        ¡<input type="text" data-activity="a" data-index="4" class="completion-input"> de las mejores comidas y bebidas del Caribe! 
+                    </li>
+                </ol>
+            </section>
+
+            <!-- b. Mandatos de usted (6) -->
+            <section class="mb-10">
+                <h2 class="text-xl font-bold mb-2">
+                    b. Cecilia acaba de salir de una reunión con su jefe, y él le ha pedido varias cosas. / Cecilia just left a meeting with her boss, and he has asked her for several things.
+                </h2>
+                <p class="text-justify-custom mb-3 italic">
+                    <span class="text-bold-custom">Completa las frases utilizando mandatos de <span class="text-bold-custom">usted</span>. / Complete the sentences using <span class="text-bold-custom">usted</span> commands.</span> 
+                </p>
+                
+                <!-- Banco de palabras para la actividad B con recuadro rosa -->
+                <div class="p-3 rounded-lg mb-4 text-white bg-[var(--flamingo-pink)] text-sm font-semibold tracking-wide text-center shadow-md">
+                    escribir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;llevar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; llamar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; comprar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;invitar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cancelar
+                </div>
+                
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li>
+                        <input type="text" data-activity="b" data-index="1" class="completion-input"> los boletos de avión para el simposio [symposium] en Panamá. 
+                    </li>
+                    <li>
+                        <input type="text" data-activity="b" data-index="2" class="completion-input"> a los clientes por teléfono para hablarles sobre el viaje a Puerto Rico. 
+                    </li>
+                    <li>
+                        <input type="text" data-activity="b" data-index="3" class="completion-input"> la reunión de mañana porque ya [now] no es necesaria. 
+                    </li>
+                    <li>
+                        <input type="text" data-activity="b" data-index="4" class="completion-input"> el informe [report] esta tarde. 
+                    </li>
+                    <li>
+                        <input type="text" data-activity="b" data-index="5" class="completion-input"> los cheques [checks] al banco. 
+                    </li>
+                    <li>
+                        <input type="text" data-activity="b" data-index="6" class="completion-input"> a los empleados [employees] a la fiesta de este fin de semana. 
+                    </li>
+                </ol>
+            </section>
+
+            <!-- c. Mandatos de ustedes con negativos (7) -->
+            <section class="mb-10">
+                <h2 class="text-xl font-bold mb-2">
+                    c. El Doctor Esteban Quirós está hablando con dos de sus pacientes: Carmen y su esposo Manuel. / Doctor Esteban Quirós is talking to two of his patients: Carmen and her husband Manuel.
+                </h2>
+                <p class="text-justify-custom mb-3 italic">
+                    <span class="text-bold-custom">Completa los mandatos en la forma de <span class="text-bold-custom">ustedes</span>. / Complete the commands in the <span class="text-bold-custom">ustedes</span> form.</span> 
+                </p>
+
+                <!-- Actividad C no tiene banco de palabras explícito, solo los verbos entre paréntesis, por lo que no se añade la caja rosa. -->
+                
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li>
+                        No <input type="text" data-activity="c" data-index="1" class="completion-input"> (comer) después de las diez de la noche. 
+                    </li>
+                    <li>
+                        <input type="text" data-activity="c" data-index="2" class="completion-input"> (jugar) más con sus hijos; es bueno para su salud [health]. 
+                    </li>
+                    <li>
+                        No <input type="text" data-activity="c" data-index="3" class="completion-input"> (ir) tanto [so much] a la oficina. 
+                    </li>
+                    <li>
+                        No <input type="text" data-activity="c" data-index="4" class="completion-input"> (fumar [to smoke]). 
+                    </li>
+                    <li>
+                        <input type="text" data-activity="c" data-index="5" class="completion-input"> (hacer) ejercicio tres veces a la semana. 
+                    </li>
+                    <li>
+                        <input type="text" data-activity="c" data-index="6" class="completion-input"> (beber) mucha agua todos los días. 
+                    </li>
+                    <li>
+                        No <input type="text" data-activity="c" data-index="7" class="completion-input"> (usar [to use]) la computadora justo [just] antes de dormir.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- d. Comparaciones de desigualdad (8) -->
+            <section class="mb-10">
+                <h2 class="text-xl font-bold mb-2">
+                    d. Completa las oraciones utilizando comparaciones de desigualdad. / Complete the sentences using comparisons of inequality.
+                </h2>
+                
+                <!-- Banco de palabras para la actividad D con recuadro rosa -->
+                <div class="p-3 rounded-lg mb-4 text-white bg-[var(--flamingo-pink)] text-sm font-semibold tracking-wide text-center shadow-md">
+                    mejor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; peor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; joven &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mayor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; viejo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; menor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; más &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; menos
+                </div>
+
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li>
+                        Diana mide [measures] 100 centímetros, y Mariana mide 72 centímetros. 
+                        Diana es <input type="text" data-activity="d" data-index="1" class="completion-input w-20"> alta <input type="text" data-activity="d" data-index="2" class="completion-input w-20"> Mariana. 
+                    </li>
+                    <li>
+                        Alberto tiene 37 años. Su hermano Javier tiene 28 años.
+                        Javier es <input type="text" data-activity="d" data-index="3" class="completion-input"> que Alberto. 
+                    </li>
+                    <li>
+                        Javier tiene 28 años. Su hermano Diego tiene 30 años.
+                        Diego es <input type="text" data-activity="d" data-index="4" class="completion-input"> que Javier. 
+                    </li>
+                    <li>
+                        Una ensalada tiene <input type="text" data-activity="d" data-index="5" class="completion-input w-20"> calorías [calories] <input type="text" data-activity="d" data-index="6" class="completion-input w-20"> una pizza. 
+                    </li>
+                    <li>
+                        Alejandra siempre gana cuando juega al tenis, así que [so] ella juega <input type="text" data-activity="d" data-index="7" class="completion-input"> que su esposo Carlos. 
+                    </li>
+                    <li>
+                        Un carro nuevo cuesta <input type="text" data-activity="d" data-index="8" class="completion-input w-20"> dinero <input type="text" data-activity="d" data-index="9" class="completion-input w-20"> un carro viejo. 
+                    </li>
+                    <li>
+                        Las computadoras viejas son <input type="text" data-activity="d" data-index="10" class="completion-input w-20"> rápidas <input type="text" data-activity="d" data-index="11" class="completion-input w-20"> las computadoras nuevas. 
+                    </li>
+                    <li>
+                        República Dominicana es <input type="text" data-activity="d" data-index="12" class="completion-input w-20"> grande <input type="text" data-activity="d" data-index="13" class="completion-input w-20"> Puerto Rico. 
+                    </li>
+                </ol>
+            </section>
+        </div>
+        <!-- Fin del contenedor principal -->
+
+
+        <!-- IV. Respuestas correctas / Correct Answers -->
+        <section class="mt-12 pt-6 border-t border-gray-300">
+            <button id="toggle-answers" class="w-full py-3 px-6 text-white font-bold rounded-lg shadow-md transition duration-200 bg-[var(--flamingo-pink)] hover:bg-[#e05f96] focus:outline-none focus:ring-2 focus:ring-[var(--flamingo-pink)] focus:ring-opacity-50">
+                IV. Respuestas correctas / Correct Answers (Click para ver)
+            </button>
+
+            <div id="answer-key" class="mt-4 p-4 border border-gray-200 rounded-lg hidden bg-gray-50">
+                <h3 class="text-lg font-bold mb-2">a.</h3>
+                <p>1. Vengan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. exploren</p>
+                <p>2. Caminen &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Disfruten</p>
+                
+                <h3 class="text-lg font-bold mt-4 mb-2">b.</h3>
+                <p>1. Compre &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Escriba</p>
+                <p>2. Llame &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. Lleve</p>
+                <p>3. Cancele &nbsp;&nbsp;&nbsp;&nbsp;6. Invite</p>
+                
+                <h3 class="text-lg font-bold mt-4 mb-2">c.</h3>
+                <p>1. coman &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. Hagan</p>
+                <p>2. Jueguen &nbsp;&nbsp;&nbsp;&nbsp;6. Beban</p>
+                <p>3. vayan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. usen</p>
+                <p>4. fumen</p>
+                
+                <h3 class="text-lg font-bold mt-4 mb-2">d.</h3>
+                <p>1. más…que &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. mejor</p>
+                <p>2. menor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. más…que</p>
+                <p>3. mayor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7. menos…que</p>
+                <p>4. menos…que &nbsp;&nbsp;8. más…que</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script para la lógica de verificación y salto de cursor -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = Array.from(document.querySelectorAll('.completion-input'));
+
+            // Definición de las respuestas correctas.
+            // Se usa un objeto para mapear por data-activity y data-index para facilitar la lógica de salto.
+            // Los valores se guardan en minúsculas para una verificación sin distinción de mayúsculas/minúsculas.
+            const correctAnswers = {
+                // Activity A (ustedes commands)
+                'a': {
+                    1: 'vengan',
+                    2: 'caminen',
+                    3: 'exploren',
+                    4: 'disfruten'
+                },
+                // Activity B (usted commands)
+                'b': {
+                    1: 'compre',
+                    2: 'llame',
+                    3: 'cancele',
+                    4: 'escriba',
+                    5: 'lleve',
+                    6: 'invite'
+                },
+                // Activity C (ustedes commands with negatives)
+                'c': {
+                    1: 'coman',
+                    2: 'jueguen',
+                    3: 'vayan',
+                    4: 'fumen',
+                    5: 'hagan',
+                    6: 'beban',
+                    7: 'usen'
+                },
+                // Activity D (Comparisons) - Note that the indices skip when a question has two inputs (e.g., D1, D2)
+                'd': {
+                    1: 'más',
+                    2: 'que',
+                    3: 'menor',
+                    4: 'mayor',
+                    5: 'menos',
+                    6: 'que',
+                    7: 'mejor',
+                    8: 'más',
+                    9: 'que',
+                    10: 'menos',
+                    11: 'que',
+                    12: 'más',
+                    13: 'que'
+                }
+            };
+
+            // Función para verificar una respuesta y saltar al siguiente campo
+            const verifyAndJump = (currentInput) => {
+                const activity = currentInput.getAttribute('data-activity');
+                const index = parseInt(currentInput.getAttribute('data-index'));
+                
+                const userAnswer = currentInput.value.trim().toLowerCase();
+                const correctAnswer = correctAnswers[activity][index];
+
+                // 1. Limpiar el estado de color y deshabilitación actual para re-evaluar
+                currentInput.classList.remove('correct', 'incorrect');
+                currentInput.removeAttribute('disabled');
+
+                if (userAnswer === correctAnswer) {
+                    // Respuesta correcta: Poner en verde y deshabilitar para fijar la respuesta.
+                    currentInput.classList.add('correct');
+                    currentInput.setAttribute('disabled', 'true');
+                    
+                    // Lógica de salto: buscar el siguiente input en la misma actividad.
+                    const nextIndex = index + 1;
+                    const nextInput = document.querySelector(`.completion-input[data-activity="${activity}"][data-index="${nextIndex}"]`);
+                    
+                    if (nextInput) {
+                        nextInput.focus();
+                    } else {
+                        // Si es el último, quitar el foco.
+                        currentInput.blur();
+                    }
+
+                } else if (userAnswer.length > 0) {
+                    // Respuesta incorrecta y no vacía: Poner en rojo, pero NO deshabilitar.
+                    currentInput.classList.add('incorrect');
+                    // Mantener el foco en el campo para que el usuario pueda corregir inmediatamente.
+                    currentInput.focus(); 
+                } else {
+                    // Respuesta vacía: mantener el foco y sin color.
+                    currentInput.focus();
+                }
+            };
+
+            // Añadir el listener de evento a todos los campos de texto
+            inputs.forEach(input => {
+                input.addEventListener('keyup', (event) => {
+                    // Verificar solo si la tecla presionada es ENTER
+                    if (event.key === 'Enter') {
+                        event.preventDefault(); // Prevenir el salto de línea por defecto
+                        verifyAndJump(input);
+                    }
+                });
+            });
+
+            // Lógica para el botón de respuestas correctas
+            const toggleButton = document.getElementById('toggle-answers');
+            const answerKey = document.getElementById('answer-key');
+
+            toggleButton.addEventListener('click', () => {
+                const isHidden = answerKey.classList.contains('hidden');
+                if (isHidden) {
+                    answerKey.classList.remove('hidden');
+                    toggleButton.textContent = 'IV. Respuestas correctas / Correct Answers (Click para ocultar)';
+                } else {
+                    answerKey.classList.add('hidden');
+                    toggleButton.textContent = 'IV. Respuestas correctas / Correct Answers (Click para ver)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
