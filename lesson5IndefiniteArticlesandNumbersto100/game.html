@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching game</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración para colores y fuente personalizados -->
+    <style>
+        /* Definición de colores base */
+        :root {
+            --eerie-black: #121118;
+            --flamingo-pink: #FF79AC;
+            --light-green: #D1FAE5; /* Tailwind Green 100/200 */
+            --light-red: #FEE2E2;   /* Tailwind Red 100/200 */
+            --default-bg: #FFFFFF;
+        }
+
+        /* Tipografía y colores base */
+        body {
+            /* Usando 'Inter' como fallback, asumiendo Platform Medium Font no está cargada externamente */
+            font-family: "Platform Medium Font", 'Inter', sans-serif; 
+            color: var(--eerie-black);
+            background-color: var(--default-bg);
+            line-height: 1.6;
+        }
+
+        /* Estilo para los botones/tarjetas del juego */
+        .card-button {
+            background-color: var(--flamingo-pink);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease, background-color 0.4s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            line-height: 1.25;
+            min-height: 60px; 
+        }
+
+        .card-button:hover:not([disabled]) {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Estado de acierto (verde claro permanente) */
+        .card-button.matched {
+            background-color: var(--light-green) !important;
+            color: var(--eerie-black) !important;
+            cursor: default;
+            pointer-events: none;
+            box-shadow: none;
+            border: 2px solid var(--light-green);
+        }
+
+        /* Estado de error (rojo claro temporal) */
+        .card-button.error {
+            background-color: var(--light-red) !important;
+            color: var(--eerie-black) !important;
+            box-shadow: 0 0 10px var(--light-red);
+        }
+
+        /* Estado seleccionado (negro misterioso) */
+        .card-button.selected {
+            background-color: var(--eerie-black) !important;
+            color: white !important;
+            border: 2px solid var(--flamingo-pink);
+            transform: scale(1.02);
+            box-shadow: 0 8px 10px -3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilos para el layout de dos columnas */
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Español | Inglés */
+            gap: 1rem;
+        }
+        
+        .language-column {
+            display: grid;
+            gap: 1rem;
+            align-content: start;
+        }
+        
+        /* Ajuste de tipografía responsive */
+        .card-button {
+            font-size: 0.95rem;
+        }
+        @media (min-width: 768px) {
+            .card-button {
+                font-size: 1.125rem;
+            }
+        }
+        
+        .game-container {
+            min-height: 400px;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10 min-h-screen">
+    <div class="max-w-4xl mx-auto">
+        
+        <!-- Título principal -->
+        <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-2" style="color: var(--flamingo-pink);">
+            Matching game
+        </h1>
+        <!-- Subtítulo -->
+        <h2 class="text-xl md:text-2xl font-semibold text-center mb-10" style="color: var(--eerie-black);">
+            test your memory
+        </h2>
+
+        <!-- Selector de Nivel -->
+        <div class="flex justify-center space-x-4 mb-8">
+            <button class="level-button px-6 py-2 rounded-full font-bold text-white shadow-md active-level" data-level="1" style="background-color: var(--flamingo-pink);">Nivel 1</button>
+            <button class="level-button px-6 py-2 rounded-full font-bold text-white shadow-md" data-level="2" style="background-color: var(--flamingo-pink); opacity: 0.6;">Nivel 2</button>
+            <button class="level-button px-6 py-2 rounded-full font-bold text-white shadow-md" data-level="3" style="background-color: var(--flamingo-pink); opacity: 0.6;">Nivel 3</button>
+        </div>
+
+        <!-- Contenedor del juego -->
+        <div id="game-container" class="game-container bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
+            <p class="text-center text-lg text-gray-500">Selecciona un nivel para empezar el juego.</p>
+        </div>
+        
+        <!-- Mensaje de Fin de Juego -->
+        <div id="completion-message" class="hidden mt-8 text-center p-6 rounded-xl text-2xl font-bold" style="background-color: var(--light-green); color: var(--eerie-black);">
+            ¡Felicidades! Nivel completado.
+        </div>
+        
+    </div>
+
+    <script>
+        // Datos de las tarjetas (18 pares)
+        const cardsData = [
+            { id: 1, es: 'el béisbol', en: 'baseball' },
+            { id: 2, es: 'el águila', en: 'eagle' },
+            { id: 3, es: 'el kilómetro', en: 'kilometer' },
+            { id: 4, es: 'el zapato', en: 'shoe' },
+            { id: 5, es: 'el deporte', en: 'sport' },
+            { id: 6, es: 'la cerveza', en: 'beer' },
+            { id: 7, es: 'católico', en: 'Catholic' },
+            { id: 8, es: 'enseñar', en: 'to teach' }, // <--- CORRECCIÓN: Se añadió el ':'
+            { id: 9, es: 'mirar', en: 'to look at' },
+            { id: 10, es: 'caminar', en: 'to walk' },
+            { id: 11, es: 'llevar', en: 'to wear, to carry' },
+            { id: 12, es: 'buscar', en: 'to look for' },
+            { id: 13, es: 'necesitar', en: 'to need' },
+            { id: 14, es: '¿cuánto?, ¿cuánta?', en: 'how much?' },
+            { id: 15, es: 'para', en: 'for' },
+            { id: 16, es: '¿cuántos?, ¿cuántas?', en: 'how many?' },
+            { id: 17, es: 'cero', en: 'zero' },
+            { id: 18, es: 'dos', en: 'two' }
+        ];
+
+        // Se definen 3 sets de 6 pares para cada nivel.
+        const levelSets = {
+            1: [1, 2, 3, 4, 5, 6],    // 6 pares: Nouns/Adjectives
+            2: [7, 8, 9, 10, 11, 12], // 6 pares: Verbs/Misc
+            3: [13, 14, 15, 16, 17, 18]  // 6 pares: Numbers/Phrases/Other
+        };
+
+        let game = {
+            currentLevel: 1,
+            selectedCards: [],
+            isProcessing: false,
+            matchesFound: 0,
+            totalMatches: 0
+        };
+
+        const elements = {
+            gameContainer: document.getElementById('game-container'),
+            levelButtons: document.querySelectorAll('.level-button'),
+            completionMessage: document.getElementById('completion-message')
+        };
+        
+        // Constantes de estilo
+        const FLAMINGO_PINK = 'var(--flamingo-pink)';
+        const EERIE_BLACK = 'var(--eerie-black)';
+        const LIGHT_GREEN = 'var(--light-green)';
+        const LIGHT_RED = 'var(--light-red)';
+        const WHITE = 'white';
+        const DEFAULT_BG_COLOR = FLAMINGO_PINK;
+        const DEFAULT_TEXT_COLOR = WHITE;
+        const ERROR_RESET_TIME = 800; // ms para el color rojo de error
+
+        /**
+         * Mezcla un array usando el algoritmo de Fisher-Yates.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /**
+         * Inicializa el juego para el nivel dado, cargando los datos correctos.
+         */
+        function initializeGame(level) {
+            game.currentLevel = level;
+            game.selectedCards = [];
+            game.isProcessing = false;
+            game.matchesFound = 0;
+            
+            // 1. Obtener los IDs de los pares para el nivel
+            const requiredIds = levelSets[level];
+            const levelData = cardsData.filter(card => requiredIds.includes(card.id));
+            
+            game.totalMatches = levelData.length;
+
+            // 2. Crear las listas de tarjetas de Español e Inglés
+            let spanishDeck = [];
+            let englishDeck = [];
+            
+            levelData.forEach(item => {
+                spanishDeck.push({ 
+                    text: item.es, 
+                    matchId: item.id, 
+                    language: 'es' 
+                });
+                englishDeck.push({ 
+                    text: item.en, 
+                    matchId: item.id, 
+                    language: 'en' 
+                });
+            });
+
+            // 3. Mezclar solo la columna de Inglés (la columna de Español se mantiene ordenada)
+            englishDeck = shuffleArray(englishDeck);
+
+            // 4. Renderizar las cartas
+            renderCards(spanishDeck, englishDeck);
+            elements.completionMessage.classList.add('hidden');
+        }
+
+        /**
+         * Renderiza las cartas en dos columnas.
+         */
+        function renderCards(spanishDeck, englishDeck) {
+            elements.gameContainer.innerHTML = '';
+            
+            const gridContainer = document.createElement('div');
+            gridContainer.className = 'game-grid';
+            gridContainer.addEventListener('click', handleCardClick);
+
+            // Columna en Español (izquierda)
+            const spanishColumn = document.createElement('div');
+            spanishColumn.className = 'language-column';
+            spanishDeck.forEach(card => {
+                spanishColumn.appendChild(createCardButton(card));
+            });
+            
+            // Columna en Inglés (derecha)
+            const englishColumn = document.createElement('div');
+            englishColumn.className = 'language-column';
+            englishDeck.forEach(card => {
+                englishColumn.appendChild(createCardButton(card));
+            });
+
+            gridContainer.appendChild(spanishColumn);
+            gridContainer.appendChild(englishColumn);
+            elements.gameContainer.appendChild(gridContainer);
+        }
+        
+        /**
+         * Crea un botón de carta con los datos de emparejamiento.
+         */
+        function createCardButton(card) {
+            const button = document.createElement('button');
+            button.className = 'card-button text-base md:text-lg';
+            button.textContent = card.text;
+            button.dataset.matchId = card.matchId;
+            button.dataset.language = card.language; // 'es' o 'en'
+            
+            button.style.backgroundColor = DEFAULT_BG_COLOR;
+            button.style.color = DEFAULT_TEXT_COLOR;
+            
+            return button;
+        }
+
+        /**
+         * Maneja el clic en una carta.
+         */
+        function handleCardClick(event) {
+            const clickedCard = event.target;
+            if (clickedCard.tagName !== 'BUTTON' || clickedCard.disabled || game.isProcessing) return;
+
+            // 1. Deselección si ya está seleccionada
+            if (game.selectedCards.includes(clickedCard)) {
+                clickedCard.classList.remove('selected');
+                clickedCard.style.backgroundColor = DEFAULT_BG_COLOR;
+                clickedCard.style.color = DEFAULT_TEXT_COLOR;
+                game.selectedCards = game.selectedCards.filter(card => card !== clickedCard);
+                return;
+            }
+            
+            // 2. Restricción de idioma: solo se permite una tarjeta de cada idioma
+            const clickedLanguage = clickedCard.dataset.language;
+            if (game.selectedCards.length === 1) {
+                const selectedLanguage = game.selectedCards[0].dataset.language;
+                if (selectedLanguage === clickedLanguage) {
+                    // Si intenta seleccionar otra del mismo idioma, deselecciona la anterior
+                    game.selectedCards[0].classList.remove('selected');
+                    game.selectedCards[0].style.backgroundColor = DEFAULT_BG_COLOR;
+                    game.selectedCards[0].style.color = DEFAULT_TEXT_COLOR;
+                    game.selectedCards = [];
+                }
+            }
+
+            // 3. Seleccionar la nueva carta
+            clickedCard.classList.add('selected');
+            clickedCard.style.backgroundColor = EERIE_BLACK;
+            clickedCard.style.color = WHITE;
+            game.selectedCards.push(clickedCard);
+
+            // 4. Verificar el emparejamiento
+            if (game.selectedCards.length === 2) {
+                game.isProcessing = true;
+                const [card1, card2] = game.selectedCards;
+                
+                // Un match es válido si tienen el mismo ID y diferentes idiomas (la restricción de idioma ya está cubierta)
+                const isMatch = (card1.dataset.matchId === card2.dataset.matchId);
+
+                if (isMatch) {
+                    handleMatch(card1, card2);
+                } else {
+                    handleMismatch(card1, card2);
+                }
+            }
+        }
+
+        /**
+         * Maneja la lógica de un acierto.
+         */
+        function handleMatch(card1, card2) {
+            [card1, card2].forEach(card => {
+                card.classList.remove('selected');
+                card.classList.add('matched');
+                card.disabled = true; // Deshabilitar permanentemente
+            });
+
+            game.matchesFound++;
+            game.selectedCards = [];
+            game.isProcessing = false;
+
+            if (game.matchesFound === game.totalMatches) {
+                elements.completionMessage.classList.remove('hidden');
+            }
+        }
+
+        /**
+         * Maneja la lógica de un error.
+         */
+        function handleMismatch(card1, card2) {
+            [card1, card2].forEach(card => {
+                card.classList.remove('selected');
+                card.classList.add('error'); // Aplicar rojo claro
+            });
+
+            // Restablecer el estado después de un breve período
+            setTimeout(() => {
+                [card1, card2].forEach(card => {
+                    card.classList.remove('error');
+                    card.style.backgroundColor = DEFAULT_BG_COLOR; // Volver al color original
+                    card.style.color = DEFAULT_TEXT_COLOR;
+                });
+                game.selectedCards = [];
+                game.isProcessing = false;
+            }, ERROR_RESET_TIME);
+        }
+
+        /**
+         * Maneja el cambio de nivel.
+         */
+        function handleLevelChange(event) {
+            const levelButton = event.target.closest('.level-button');
+            if (!levelButton) return;
+            
+            const newLevel = parseInt(levelButton.dataset.level);
+            
+            // Actualizar el estilo del botón activo
+            elements.levelButtons.forEach(btn => {
+                btn.classList.remove('active-level');
+                btn.style.opacity = '0.6';
+            });
+            levelButton.classList.add('active-level');
+            levelButton.style.opacity = '1';
+
+            initializeGame(newLevel);
+        }
+
+        // --- Inicialización del DOM ---
+        window.onload = function() {
+            // Añadir listener a los botones de nivel
+            elements.levelButtons.forEach(btn => {
+                btn.addEventListener('click', handleLevelChange);
+            });
+            
+            // Iniciar el juego en el Nivel 1 por defecto al cargar la página
+            initializeGame(1);
+        };
+    </script>
+</body>
+</html>
