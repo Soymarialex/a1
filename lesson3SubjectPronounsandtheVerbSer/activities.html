@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <link rel="stylesheet" href="style.css?v=1.0">
+    <style>
+        /* 1. Identidad Cromática */
+        :root {
+            --primary-pink: #FF79AC;
+            --secondary-pink: #FFB3D1;
+            --text-main: #121118;
+            --bg-page: #FFFFFF;
+            --success-bg: #D4EDDA;
+            --error-bg: #F8D7DA;
+            --light-gray: #F9F9F9;
+        }
+
+        /* 2. Tipografía y Textos */
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-pink);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-pink);
+            border-bottom: 2px solid var(--primary-pink);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        p, .instruction {
+            font-size: 1.1rem;
+            text-align: justify;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* 3. Elementos Interactivos */
+        .btn-option {
+            background-color: var(--secondary-pink);
+            border: none;
+            border-bottom: 3px solid var(--primary-pink);
+            border-radius: 5px;
+            padding: 8px 16px;
+            color: black;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-option.correct-btn { background-color: var(--success-bg) !important; border-bottom-color: #28a745; }
+        .btn-option.incorrect-btn { background-color: var(--error-bg) !important; border-bottom-color: #dc3545; }
+
+        .input-completion {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            text-align: center;
+            font-size: 1rem;
+            padding: 2px 5px;
+            outline: none;
+            width: 160px;
+        }
+
+        .input-completion.correct-input { background-color: var(--success-bg); border-bottom-color: #28a745; }
+        .input-completion.incorrect-input { background-color: var(--error-bg); border-bottom-color: #dc3545; }
+
+        /* 4. Estructura y Layout */
+        .word-bank {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid #eee;
+            font-weight: 500;
+        }
+
+        .activity-block { margin-bottom: 30px; }
+        .sentence { margin-bottom: 15px; }
+
+        .btn-show-answers {
+            display: block;
+            margin: 50px auto 20px;
+            background-color: var(--secondary-pink);
+            border: none;
+            border-bottom: 3px solid var(--primary-pink);
+            border-radius: 5px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #answers-content {
+            display: none;
+            background-color: var(--light-gray);
+            border: 1px dashed var(--primary-pink);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>III. Actividades / Activities</h1>
+
+    <!-- Actividad A -->
+    <div class="activity-block">
+        <h2>a. Decide si debes dirigirte a las siguientes personas de una manera formal o informal. / Decide if you should address the following people in a formal or informal way.</h2>
+        
+        <div class="sentence">1. You are about to call your friend to ask him to watch the game with you. 
+            <button class="btn-option" onclick="checkSelect(this, 'informal')">formal</button>
+            <button class="btn-option" onclick="checkSelect(this, 'informal')">informal</button>
+        </div>
+        <div class="sentence">2. Your uncle wants to borrow your car. 
+            <button class="btn-option" onclick="checkSelect(this, 'informal')">formal</button>
+            <button class="btn-option" onclick="checkSelect(this, 'informal')">informal</button>
+        </div>
+        <div class="sentence">3. Your boss just sent you an email. 
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">formal</button>
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">informal</button>
+        </div>
+        <div class="sentence">4. Your neighbor is inviting you to a gathering on Saturday. 
+            <button class="btn-option" onclick="checkSelect(this, 'informal')">formal</button>
+            <button class="btn-option" onclick="checkSelect(this, 'informal')">informal</button>
+        </div>
+        <div class="sentence">5. The CEO of the company is entering the room. 
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">formal</button>
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">informal</button>
+        </div>
+        <div class="sentence">6. You just met someone. 
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">formal</button>
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">informal</button>
+        </div>
+        <div class="sentence">7. The President of the United States is coming to your town. 
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">formal</button>
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">informal</button>
+        </div>
+        <div class="sentence">8. You and your sister are going to celebrate her birthday. 
+            <button class="btn-option" onclick="checkSelect(this, 'informal')">formal</button>
+            <button class="btn-option" onclick="checkSelect(this, 'informal')">informal</button>
+        </div>
+        <div class="sentence">9. Someone called and it was a wrong number. 
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">formal</button>
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">informal</button>
+        </div>
+        <div class="sentence">10. You meet a random person at the supermarket. 
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">formal</button>
+            <button class="btn-option" onclick="checkSelect(this, 'formal')">informal</button>
+        </div>
+    </div>
+
+    <!-- Actividad B -->
+    <div class="activity-block">
+        <h2>b. Alejandra está hablando sobre su familia con su vecina Cecilia. / Alejandra is talking about her family with her neighbor Cecilia.</h2>
+        <p>Agrega la conjugación correcta del verbo ser. / Add the correct conjugation of the verb ser.</p>
+        
+        <div class="sentence">1. Carlos <input type="text" class="input-completion" data-ans="es"> mi esposo [my husband].</div>
+        <div class="sentence">2. Pablo <input type="text" class="input-completion" data-ans="es"> mi hijo [son].</div>
+        <div class="sentence">3. Marisol <input type="text" class="input-completion" data-ans="es"> mi hija [daughter].</div>
+        <div class="sentence">4. Pablo y Marisol <input type="text" class="input-completion" data-ans="son"> mis hijos [children].</div>
+        <div class="sentence">5. Yo <input type="text" class="input-completion" data-ans="soy"> la esposa [wife] de Carlos.</div>
+        <div class="sentence">6. Yo <input type="text" class="input-completion" data-ans="soy"> la madre [mother] de Pablo y Marisol.</div>
+        <div class="sentence">7. Nosotros <input type="text" class="input-completion" data-ans="somos"> la familia González Fallas.</div>
+        <div class="sentence">8. Carlos <input type="text" class="input-completion" data-ans="es"> el padre [father] de Pablo y Marisol.</div>
+        <div class="sentence">9. ¿De dónde <input type="text" class="input-completion" data-ans="son"> usted y Luis?</div>
+    </div>
+
+    <!-- Actividad C -->
+    <div class="activity-block">
+        <h2>c. La familia González Fallas continúa conociendo a los miembros de su nuevo vecindario en Villa Celeste. / The González Fallas family continues to meet the members of their new neighborhood in Villa Celeste.</h2>
+        <p>Completa el diálogo entre Alejandra, Luisa, Pablo y Marisol usando el verbo ser y palabras para saludarse y presentarse. / Complete the dialogue between Alejandra, Luisa, Pablo, and Marisol using the verb ser and words to greet others and introduce oneself.</p>
+        
+        <div class="sentence">
+            Alejandra: ¡Hola! Me 1) <input type="text" class="input-completion" data-ans="llamo"> Alejandra.<br>
+            Luisa: Mucho 2) <input type="text" class="input-completion" data-ans="gusto">. 3) <input type="text" class="input-completion" data-ans="Me llamo,Soy,Mi nombre es"> Luisa.<br>
+            Alejandra: Le 4) <input type="text" class="input-completion" data-ans="presento"> a Pablo. Él 5) <input type="text" class="input-completion" data-ans="es"> mi hijo.<br>
+            Luisa: ¡Encantada! Mi nombre 6) <input type="text" class="input-completion" data-ans="es"> Luisa.<br>
+            Pablo: 7) <input type="text" class="input-completion" data-ans="Mucho gusto,Encantado,Es un placer">. Ella 8) <input type="text" class="input-completion" data-ans="es"> mi hermana Marisol.<br>
+            Marisol: ¿Qué tal?<br>
+            Luisa: 9) ¡ <input type="text" class="input-completion" data-ans="Muy"> bien, gracias!<br>
+            Luisa: Le 10) <input type="text" class="input-completion" data-ans="presento a"> mi hija Elena. Ella 11) <input type="text" class="input-completion" data-ans="es"> estudiante de la universidad.<br>
+            Marisol: 12) ¡ <input type="text" class="input-completion" data-ans="Mucho"> gusto!<br>
+            Elena: Igualmente. Erica y Felipe 13) <input type="text" class="input-completion" data-ans="son"> mis hermanos.
+        </div>
+    </div>
+
+    <!-- Actividad D -->
+    <div class="activity-block">
+        <h2>d. Elena está hablando con Marisol. / Elena is talking with Marisol.</h2>
+        <p>¿Qué pronombres personales necesita Elena para hablar de…? / What subject pronouns does Elena need to talk about…?</p>
+        
+        <div class="sentence">1. Mis amigos y yo <input type="text" class="input-completion" data-ans="nosotros">.</div>
+        <div class="sentence">2. Mis vecinas <input type="text" class="input-completion" data-ans="ellas">.</div>
+        <div class="sentence">3. El ex-novio [ex-boyfriend] de Elena <input type="text" class="input-completion" data-ans="él">.</div>
+        <div class="sentence">4. Los ex-novios de Marisol y de Elena <input type="text" class="input-completion" data-ans="ellos">.</div>
+        <div class="sentence">5. Una amiga de Elena <input type="text" class="input-completion" data-ans="ella">.</div>
+        <div class="sentence">6. Elena y su familia <input type="text" class="input-completion" data-ans="nosotros">.</div>
+        <div class="sentence">7. Los amigos de Pablo <input type="text" class="input-completion" data-ans="ellos">.</div>
+        <div class="sentence">8. Las amigas de Elena <input type="text" class="input-completion" data-ans="ellas">.</div>
+        <div class="sentence">9. Elena <input type="text" class="input-completion" data-ans="yo">.</div>
+        <div class="sentence">10. Pablo <input type="text" class="input-completion" data-ans="él">.</div>
+        <div class="sentence">11. Los hermanos [siblings] de Elena (Erica y Felipe) y Elena <input type="text" class="input-completion" data-ans="nosotros">.</div>
+        <div class="sentence">12. La hermana [sister] de Elena y Elena <input type="text" class="input-completion" data-ans="nosotras">.</div>
+        <div class="sentence">13. Marisol <input type="text" class="input-completion" data-ans="usted,tú">.</div>
+        <div class="sentence">14. Marisol y su familia <input type="text" class="input-completion" data-ans="ustedes,vosotros">.</div>
+    </div>
+
+    <!-- Actividad E -->
+    <div class="activity-block">
+        <h2>e. Luisa está hablando con su esposo Esteban sobre los nuevos vecinos. / Luisa is talking with her husband Esteban about the new neighbors.</h2>
+        <p>Completa las frases usando la forma correcta de los adjetivos y el verbo ser si es necesario. / Complete the sentences using the correct form of the adjectives and the verb ser if it’s necessary.</p>
+        
+        <div class="word-bank">
+            activo(a) &nbsp;&nbsp; fantástico(a) &nbsp;&nbsp; alto(a) &nbsp;&nbsp; guapo(a) &nbsp;&nbsp; simpático(a)<br>
+            inteligente &nbsp;&nbsp; excelente &nbsp;&nbsp; responsable &nbsp;&nbsp; simpático (a)
+        </div>
+
+        <div class="sentence">
+            Luisa: Alejandra es una buena persona. 1) <input type="text" class="input-completion" data-ans="Es"> una mujer muy 2) <input type="text" class="input-completion" data-ans="simpática">.<br><br>
+            Esteban: Carlos y Pablo 3) <input type="text" class="input-completion" data-ans="son"> 4) <input type="text" class="input-completion" data-ans="simpáticos,fantásticos"> también [also].<br><br>
+            Luisa: Carlos, Alejandra, Pablo y Marisol 5) <input type="text" class="input-completion" data-ans="son"> la familia González Fallas.<br><br>
+            Esteban: Pablo juega tres deportes [plays three sports]. Él 6) <input type="text" class="input-completion" data-ans="es"> un chico 7) <input type="text" class="input-completion" data-ans="activo">.<br><br>
+            Luisa: Y Pablo está en la escuela secundaria [is in high school]. Sus notas [His grades] 8) <input type="text" class="input-completion" data-ans="son"> 9) <input type="text" class="input-completion" data-ans="fantásticas">. Él 10) <input type="text" class="input-completion" data-ans="es"> 11) <input type="text" class="input-completion" data-ans="inteligente">.<br><br>
+            Esteban: Elena y Marisol también tienen [have] notas 12) <input type="text" class="input-completion" data-ans="fantásticas">. Ellas 13) <input type="text" class="input-completion" data-ans="son"> muy 14) <input type="text" class="input-completion" data-ans="inteligentes">.
+        </div>
+    </div>
+
+    <button class="btn-show-answers" onclick="toggleAnswers()">Respuestas correctas</button>
+    <div id="answers-content">IV. Respuestas correctas / Correct Answers 
+a.
+1. informal         6. formal 
+2. informal*        7. formal 
+3. formal           8. informal 
+4. informal         9. formal 
+5. formal          10. formal 
+
+b. 
+1. es                   6. soy 
+2. es                   7. somos 
+3. es                   8. es 
+4. son                  9. son 
+5. soy 
+
+c. 
+1. llamo                                                8. es 
+2. gusto                                                9. Muy 
+3. Me llamo / Soy / Mi nombre es                        10. presento a 
+4. presento                                             11. es 
+5. es                                                   12. Mucho 
+6. es                                                   13. son 
+7. Mucho gusto. / Encantado. / Es un placer. 
+
+d. 
+1. nosotros                8. ellas 
+2. ellas                   9. yo 
+3. él                      10. él 
+4. ellos                   11. nosotros 
+5. ella                    12. nosotras 
+6. nosotros                13. usted / tú 
+7. ellos                   14. ustedes / vosotros 
+
+e. 
+1. Es                                   8. son 
+2. simpática / fantástica**             9. fantásticas 
+3. son                                  10. es 
+4. simpáticos / fantásticos             11. inteligente 
+5. son                                  12. fantásticas 
+6. es                                   13. son 
+7. activo                               14. inteligentes 
+
+* As is the case with all of these examples, the way you address these people depends on the closeness of your relationship with them. It’s also possible that you might address your uncle in a formal way. 
+** The word fantástica already conveys the idea of something extremely good, so it would be odd to say muy fantástica because it would be redundant. Simpática is the better answer.</div>
+
+</div>
+
+<script>
+    // Lógica para Actividad A (Selección de botones)
+    function checkSelect(btn, correctVal) {
+        const parent = btn.parentElement;
+        const siblings = parent.querySelectorAll('.btn-option');
+        const userVal = btn.innerText.toLowerCase();
+
+        siblings.forEach(s => s.classList.remove('correct-btn', 'incorrect-btn'));
+
+        if (userVal === correctVal) {
+            btn.classList.add('correct-btn');
+        } else {
+            btn.classList.add('incorrect-btn');
+        }
+    }
+
+    // Lógica para Inputs (Completación)
+    const allInputs = Array.from(document.querySelectorAll('.input-completion'));
+
+    allInputs.forEach((input, index) => {
+        // Validación al escribir o perder el foco
+        input.addEventListener('blur', () => validateInput(input));
+
+        // Salto de cursor con Enter
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                validateInput(input);
+                if (index < allInputs.length - 1) {
+                    allInputs[index + 1].focus();
+                }
+            }
+        });
+    });
+
+    function validateInput(el) {
+        const val = el.value.trim().toLowerCase();
+        const rawAnswers = el.getAttribute('data-ans').toLowerCase();
+        const possibleAnswers = rawAnswers.split(',').map(a => a.trim());
+
+        if (val === "") {
+            el.classList.remove('correct-input', 'incorrect-input');
+            return;
+        }
+
+        // Limpiar puntos finales para validación más flexible
+        const cleanVal = val.replace(/\.$/, "");
+        
+        let isCorrect = possibleAnswers.some(ans => {
+            const cleanAns = ans.replace(/\.$/, "");
+            return cleanAns === cleanVal;
+        });
+
+        if (isCorrect) {
+            el.classList.add('correct-input');
+            el.classList.remove('incorrect-input');
+        } else {
+            el.classList.add('incorrect-input');
+            el.classList.remove('correct-input');
+        }
+    }
+
+    // Mostrar/Ocultar respuestas
+    function toggleAnswers() {
+        const content = document.getElementById('answers-content');
+        content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>

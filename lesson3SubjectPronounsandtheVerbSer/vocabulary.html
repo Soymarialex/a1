@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Pronouns and the Verb Ser</title>
+    <link rel="stylesheet" href="styles.css?v=1.0">
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Fallback de Platform Medium */
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: var(--color-primario);
+            font-size: clamp(2.2rem, 5vw, 2.5rem);
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            border-bottom: 2px solid var(--color-primario);
+            padding-bottom: 5px;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--color-texto);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Vocabulario */
+        .vocab-group {
+            border-bottom: 1px solid var(--color-divisor);
+            padding: 15px 0;
+        }
+
+        .vocab-group:last-child {
+            border-bottom: none;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 40px;
+        }
+
+        .vocab-item {
+            font-size: 1.1rem;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        /* Inputs para actividad (interactividad solicitada) */
+        input {
+            border: 1px solid var(--color-divisor);
+            padding: 5px;
+            border-radius: 4px;
+            outline-color: var(--color-primario);
+        }
+
+        @media (max-width: 600px) {
+            .vocab-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Subject Pronouns and the Verb Ser</h1>
+
+    <h2>I. Vocabulario nuevo / New Vocabulary</h2>
+
+    <div class="vocab-group">
+        <div class="vocab-grid">
+            <div class="vocab-item"><strong>yo</strong> – I</div>
+            <div class="vocab-item"><strong>él</strong> – he</div>
+            <div class="vocab-item"><strong>tú</strong> – you [singular, informal]</div>
+            <div class="vocab-item"><strong>ella</strong> – she</div>
+            <div class="vocab-item"><strong>usted</strong> – you [singular, formal]</div>
+            <div class="vocab-item"><strong>nosotros</strong> – we [masculine]</div>
+            <div class="vocab-item"><strong>ustedes</strong> – you [plural, formal]</div>
+            <div class="vocab-item"><strong>nosotras</strong> – we [feminine]</div>
+            <div class="vocab-item"><strong>ellos</strong> – they [masculine]</div>
+            <div class="vocab-item"><strong>vosotros</strong> – you [masculine plural, informal]</div>
+            <div class="vocab-item"><strong>ellas</strong> – they [feminine]</div>
+            <div class="vocab-item"><strong>vosotras</strong> – you [feminine plural, informal]</div>
+        </div>
+    </div>
+
+    <div class="vocab-group">
+        <div class="vocab-grid">
+            <div class="vocab-item"><strong>ser</strong> – to be</div>
+            <div class="vocab-item"><strong>¡Hablen!</strong> – Speak! [plural command]</div>
+            <div class="vocab-item"><strong>¡No esperen!</strong> – Don’t wait! [plural command]</div>
+        </div>
+    </div>
+
+    <div class="vocab-group">
+        <div class="vocab-grid">
+            <div class="vocab-item"><strong>alto</strong> – tall</div>
+            <div class="vocab-item"><strong>accidental</strong> – accidental</div>
+            <div class="vocab-item"><strong>simpático</strong> – nice</div>
+            <div class="vocab-item"><strong>usual</strong> – usual</div>
+            <div class="vocab-item"><strong>antipático</strong> – unfriendly</div>
+            <div class="vocab-item"><strong>normal</strong> – normal</div>
+            <div class="vocab-item"><strong>guapo</strong> – good-looking</div>
+            <div class="vocab-item"><strong>optimista</strong> – optimistic</div>
+            <div class="vocab-item"><strong>bonito</strong> – pretty</div>
+            <div class="vocab-item"><strong>pesimista</strong> – pessimistic</div>
+            <div class="vocab-item"><strong>feo</strong> – ugly</div>
+            <div class="vocab-item"><strong>activo</strong> – active</div>
+            <div class="vocab-item"><strong>joven</strong> – young</div>
+            <div class="vocab-item"><strong>responsable</strong> – responsible</div>
+            <div class="vocab-item"><strong>viejo</strong> – old</div>
+        </div>
+    </div>
+
+    <div class="vocab-group">
+        <div class="vocab-grid">
+            <div class="vocab-item"><strong>largo</strong> – long</div>
+            <div class="vocab-item"><strong>embarazada</strong> – pregnant</div>
+            <div class="vocab-item"><strong>corto</strong> – short in length</div>
+            <div class="vocab-item"><strong>elegante</strong> – elegant</div>
+            <div class="vocab-item"><strong>grande</strong> – big</div>
+            <div class="vocab-item"><strong>excelente</strong> – excellent</div>
+            <div class="vocab-item"><strong>pequeño</strong> – small</div>
+            <div class="vocab-item"><strong>fantástico</strong> – fantastic</div>
+            <div class="vocab-item"><strong>avergonzado</strong> – embarrassed</div>
+        </div>
+    </div>
+
+    <div class="vocab-group">
+        <div class="vocab-grid">
+            <div class="vocab-item"><strong>el accidente</strong> – accident</div>
+            <div class="vocab-item"><strong>el taxi</strong> – taxi</div>
+            <div class="vocab-item"><strong>la cuestión</strong> – question, issue</div>
+            <div class="vocab-item"><strong>el teléfono</strong> – telephone</div>
+            <div class="vocab-item"><strong>la pregunta</strong> – question</div>
+            <div class="vocab-item"><strong>el colegio</strong> – high school</div>
+        </div>
+    </div>
+
+    <div class="vocab-group">
+        <div class="vocab-grid">
+            <div class="vocab-item"><strong>la persona</strong> – person</div>
+            <div class="vocab-item"><strong>el amigo</strong> – male friend</div>
+            <div class="vocab-item"><strong>el vecino</strong> – male neighbor</div>
+            <div class="vocab-item"><strong>la amiga</strong> – female friend</div>
+            <div class="vocab-item"><strong>la vecina</strong> – female neighbor</div>
+            <div class="vocab-item"><strong>el novio</strong> – boyfriend</div>
+            <div class="vocab-item"><strong>el hombre</strong> – man</div>
+            <div class="vocab-item"><strong>la novia</strong> – girlfriend</div>
+            <div class="vocab-item"><strong>la mujer</strong> – woman</div>
+        </div>
+    </div>
+
+    <div class="vocab-group">
+        <div class="vocab-grid">
+            <div class="vocab-item"><strong>y</strong> – and</div>
+            <div class="vocab-item"><strong>sí</strong> – yes</div>
+            <div class="vocab-item"><strong>o</strong> – or</div>
+            <div class="vocab-item"><strong>no</strong> – no, not</div>
+            <div class="vocab-item"><strong>pero</strong> – but</div>
+            <div class="vocab-item"><strong>ahora</strong> – now</div>
+        </div>
+    </div>
+
+    <h2>II. Repaso general / General Review</h2>
+
+    <h3>A. Improving Your Ability to Speak</h3>
+    <p>It’s important as a beginning language learner that you take every opportunity to speak Spanish. Don’t wait until you’ve learned more vocabulary and grammar. <strong>¡Hablen español ahora!</strong> [“Speak Spanish now!”] The best way to improve your spoken Spanish is to speak more.</p>
+
+    <h3>B. Subject Pronouns</h3>
+    <p>The singular subject pronouns in Spanish are <strong>yo</strong> – I; <strong>tú</strong> – you [singular, informal]; <strong>usted</strong> – you [singular, formal]; <strong>él</strong> – he; and <strong>ella</strong> – she. The plural subject pronouns are <strong>nosotros</strong> – we [masculine]; <strong>nosotras</strong> – we [feminine]; <strong>vosotros</strong> – you [masculine plural, informal]; <strong>vosotras</strong> – you [feminine plural, informal]; <strong>ustedes</strong> – you [plural, formal]; <strong>ellos</strong> – they [masculine]; and <strong>ellas</strong> – they [feminine].</p>
+    
+    <p>The informal, singular way to say “you” is <strong>tú</strong>; the formal, singular way to say “you” is <strong>usted</strong>. If you’re speaking to a family member, a friend, or someone else you’re well acquainted with, you’ll probably use <strong>tú</strong>. You’ll use <strong>usted</strong> when talking with someone you have a formal relationship with or with someone you don’t know well. If you’re not sure which pronoun to use, it’s better to use <strong>usted</strong>, because using the informal <strong>tú</strong> can be seen as rude by someone you don’t know well.</p>
+
+    <p>The <strong>vosotros</strong> and <strong>vosotras</strong> forms, which are plural, informal ways to say “you,” are used only in Spain. In Latin America, the plural of <strong>tú</strong> is <strong>ustedes</strong> and the plural of <strong>usted</strong> is <strong>ustedes</strong>; <strong>vosotros</strong> and <strong>vosotras</strong> are never used in Latin America.</p>
+
+    <p>The pronouns <strong>nosotros</strong>, <strong>vosotros</strong>, and <strong>ellos</strong> are used when referring to a group of all men or a mixed group of men and women. Even a group of many women and just one man would be referred to with these masculine pronouns. The pronouns <strong>nosotras</strong>, <strong>vosotras</strong>, and <strong>ellas</strong> are used only when every member of the group is female.</p>
+
+    <h3>C. The Verb ser</h3>
+    <p>The infinitive form, which is the verb form found in the dictionary, of all Spanish verbs ends in -ar, -er, or -ir. <strong>Ser</strong>, the infinitive form meaning “to be,” has the following six forms in the present tense: <strong>soy, eres, es, somos, sois, son</strong>. Conjugating a verb means giving its proper verb forms for different subjects in a given tense. <strong>Ser</strong> is conjugated with the subject pronouns in the present tense as follows.</p>
+
+    <p><strong>Ser</strong> with singular subject pronouns: <strong>yo soy; tú eres; usted, él, or ella es</strong></p>
+    <p><strong>Ser</strong> with plural subject pronouns: <strong>nosotros or nosotras somos; vosotros or vosotras sois; ustedes, ellos, or ellas son</strong></p>
+
+    <p>Any singular subject that is not <strong>yo</strong> or <strong>tú</strong> uses the verb form <strong>es</strong> (e.g., La clase es importante).</p>
+    <p>Any plural subject that is not <strong>nosotros, nosotras, vosotros,</strong> or <strong>vosotras</strong> uses the verb form <strong>son</strong> (e.g., Los amigos son optimistas).</p>
+
+    <p><strong>Ser</strong> is used 1) to identify a person or thing (Ella es Claudia); 2) to talk about one’s profession (Son doctores), origin, or nationality (Roberto es de Chile); or 3) to describe inherent characteristics of someone or something (Carla es inteligente; El hotel es elegante.).</p>
+
+    <h3>D. Cognates</h3>
+    <p>Spanish and English share many cognates, which are words that are the same or similar in two languages. Sometimes Spanish cognates are spelled the same as the word in English: <strong>normal, hotel, usual</strong>. Other Spanish cognates are spelled similar to, but not the same as, the word in English: <strong>activo, responsable, excelente</strong>. Your comprehension of Spanish will improve if you listen for cognates when conversing and look for them when reading.</p>
+
+    <p>Occasionally, a Spanish word will look like an English word but mean something else. These words are called false cognates. Examples include <strong>largo</strong> (which looks like “large” but means “long”) and <strong>colegio</strong> (which looks like “college” but means “high school”). False cognates, however, are relatively rare compared to the vast number of cognates shared by English and Spanish.</p>
+
+    <h3>E. Adjectives</h3>
+    <p>Adjectives in Spanish must agree in number and gender with the noun being modified. So, if the subject is masculine singular, the adjective must also be masculine singular, and if the subject is feminine plural, the adjective must also be feminine plural.</p>
+
+    <p>Adjectives ending in -o have four forms. For example, <strong>viejo</strong>, meaning “old,” has the following four forms: <strong>viejo</strong> (masculine singular); <strong>vieja</strong> (feminine singular); <strong>viejos</strong> (masculine plural); <strong>viejas</strong> (feminine plural).</p>
+
+    <p>Adjectives ending in -e have two forms, as can be seen in <strong>responsable</strong> (masculine and feminine singular) and <strong>responsables</strong> (masculine and feminine plural).</p>
+
+    <p>Adjectives ending in -ista have two forms, as can be seen in <strong>pesimista</strong> (masculine and feminine singular) and <strong>pesimistas</strong> (masculine and feminine plural).</p>
+</div>
+
+<script>
+    // Implementación de salto de foco automático con tecla Enter
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const inputs = Array.from(document.querySelectorAll('input'));
+            const index = inputs.indexOf(document.activeElement);
+            if (index > -1 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
