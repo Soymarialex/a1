@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Sustitución de 'Platform Medium' por Poppins para un aspecto moderno y legible. */
+        @import url('https://fonts.fonts.gstatic.com/s/poppins/v20/pxiEyp8mEldZqYtNBLxZJQ.woff2');
+        
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --correct-bg: #B9FBC0; /* Verde claro */
+            --error-bg: #FCA5A5;   /* Rojo claro */
+        }
+
+        body {
+            background-color: white;
+            color: var(--eerie-black);
+            font-family: 'Poppins', sans-serif;
+            padding: 1rem;
+            min-height: 10vh;
+        }
+
+        .container {
+            max-width: 800px;
+        }
+        
+        /* Estilo para justificar el texto informativo */
+        .text-justify {
+            text-align: justify;
+        }
+
+        /* Estilo para inputs de texto */
+        .text-input {
+            border: 1px solid #ccc;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Estilos de verificación */
+        .text-input.correct {
+            background-color: var(--correct-bg);
+            border-color: darkgreen;
+        }
+
+        .text-input.incorrect {
+            background-color: var(--error-bg);
+            border-color: darkred;
+        }
+
+        /* Estilo base para las opciones de selección */
+        .radio-option {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 0.5rem;
+            line-height: 1.25; /* Mejorar legibilidad del radio */
+        }
+        
+        /* Estilos para el contenedor de opciones de selección (D) */
+        .radio-container.correct .radio-option.selected {
+            background-color: var(--correct-bg);
+            border-color: darkgreen;
+        }
+
+        .radio-container.incorrect .radio-option.selected {
+            background-color: var(--error-bg);
+            border-color: darkred;
+        }
+
+        /* Ocultar el input de radio nativo y simular el check */
+        .radio-option input[type="radio"] {
+            display: none;
+        }
+        
+        /* Estilo para el texto en negrita (sin asteriscos) */
+        .text-bold {
+            font-weight: 700;
+            color: var(--eerie-black);
+        }
+
+        /* Estilo para el placeholder del texto rellenado */
+        .fill-blank {
+            color: var(--flamingo-pink);
+            font-weight: 600;
+            display: inline-block;
+            min-width: 4rem; /* Ancho mínimo para el placeholder */
+            /* Usamos un subrayado para simular el espacio en blanco */
+            border-bottom: 2px dashed #999; 
+            padding-bottom: 2px;
+            margin: 0 0.25rem;
+            text-align: center;
+        }
+        
+        /* Estilo para el botón de Respuestas Correctas */
+        #show-answers-btn {
+            background-color: var(--flamingo-pink);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.1s ease-in-out;
+        }
+        #show-answers-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Estilo para la sección de respuestas */
+        #answer-key {
+            border: 2px solid var(--flamingo-pink);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background-color: #FFF0F5; /* Rosa muy claro */
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Asegurar que las listas en la clave de respuesta no tengan bullet points */
+        #answer-key ul {
+            padding-left: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+<body class="flex justify-center">
+
+    <div class="container p-6 sm:p-8">
+
+        <!-- Título de la página -->
+        <header class="text-center mb-6">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight" style="color: var(--flamingo-pink);">
+                III. Actividades / Activities
+            </h1>
+        </header>
+        
+        <!-- A. Respuestas afirmativas (Completación) -->
+        <section class="mb-8">
+            <p class="mb-4 text-lg text-justify">
+                <span class="text-bold">a.</span> Responde de manera afirmativa a las siguientes preguntas utilizando la construcción <span class="text-bold">ir + a + infinitivo</span>. / Answer 
+                the following questions affirmatively using the construction <span class="text-bold">ir + a + infinitive</span>. 
+            </p>
+            
+            <div id="activity-a" class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="a-1" class="w-full sm:w-1/2 flex-shrink-0">1. ¿Vas a leer los libros mañana?</label>
+                    <input type="text" id="a-1" data-activity="a" data-number="1" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2" 
+                           oninput="clearFeedback(this)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="a-2" class="w-full sm:w-1/2 flex-shrink-0">2. ¿Vais a llamar por teléfono a vuestro hermano?</label>
+                    <input type="text" id="a-2" data-activity="a" data-number="2" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="a-3" class="w-full sm:w-1/2 flex-shrink-0">3. ¿Va a ir al cine Fernando con sus amigos?</label>
+                    <input type="text" id="a-3" data-activity="a" data-number="3" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="a-4" class="w-full sm:w-1/2 flex-shrink-0">4. ¿Va a tomar café Elena a las tres de la tarde?</label>
+                    <input type="text" id="a-4" data-activity="a" data-number="4" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="a-5" class="w-full sm:w-1/2 flex-shrink-0">5. ¿Tus amigos y tú van a bailar en el club?</label>
+                    <input type="text" id="a-5" data-activity="a" data-number="5" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="a-6" class="w-full sm:w-1/2 flex-shrink-0">6. ¿Tus vecinos van a ir al teatro mañana?</label>
+                    <input type="text" id="a-6" data-activity="a" data-number="6" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+            </div>
+        </section>
+
+        <!-- B. Lectura y Preguntas (Solo informativo y Completación) -->
+        <section class="mb-8">
+            <p class="mb-4 text-lg text-justify">
+                <span class="text-bold">b.</span> Esteban y Luisa quieren ir de vacaciones con sus hijos Felipe y Elena, pero no saben adónde ir. / Esteban and Luisa want to go on vacation with their children Felipe and Elena, but they don’t know where to go.
+            </p>
+
+            <p class="mb-4 text-lg text-justify">
+                Lee el siguiente diálogo y contesta las preguntas. / Read the following dialogue and answer the questions.
+            </p>
+
+            <!-- Diálogo Justificado -->
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 text-justify mb-6 text-sm sm:text-base">
+                <p><span class="text-bold">Esteban:</span> ¡Vamos de vacaciones a Puerto Rico!</p>
+                <p><span class="text-bold">Luisa:</span> No quiero [I don’t want] ir a Puerto Rico. ¿Por qué no vamos a Ecuador?</p>
+                <p><span class="text-bold">Felipe:</span> No, mami, Ecuador está muy lejos [far]. Vamos a México.</p>
+                <p><span class="text-bold">Elena:</span> Prefiero [I prefer] ir a la República Dominicana.</p>
+                <p><span class="text-bold">Luisa:</span> Yo creo que [that] México es una buena idea.</p>
+                <p><span class="text-bold">Felipe:</span> ¡Sí, mami, México es una buena idea!</p>
+                <p><span class="text-bold">Esteban:</span> ¡Está bien! Vamos a México.</p>
+                <p><span class="text-bold">Elena:</span> OK, en un año [year], vamos a la República Dominicana. ¿Está bien?</p>
+                <p><span class="text-bold">Esteban:</span> No, Elena, es mucho dinero [money]. Solo vamos a ir a México para nuestras vacaciones. En dos años, vamos a la República Dominicana, ¿OK?</p>
+                <p><span class="text-bold">Elena:</span> Papi y mami, ¿pueden [can they] ir con nosotros mis amigas Rebeca y Alicia?</p>
+                <p><span class="text-bold">Luisa:</span> No, Elena, este es un viaje [trip] de familia, no de amigos.</p>
+                <p><span class="text-bold">Esteban:</span> ¿Y cuándo debemos ir a México? ¿La próxima semana [next week] o en cuatro semanas?</p>
+                <p><span class="text-bold">Felipe:</span> Yo quiero ir la próxima semana.</p>
+                <p><span class="text-bold">Elena:</span> Yo quiero ir en cuatro semanas porque voy a tener [to have] las vacaciones de la universidad.</p>
+                <p><span class="text-bold">Esteban:</span> OK, ¡vamos a México en cuatro semanas!</p>
+            </div>
+
+            <!-- Preguntas de Completación (Respuesta Libre, se verifica contra la clave) -->
+            <div id="activity-b" class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="b-1" class="w-full sm:w-1/2 flex-shrink-0">1. ¿Adónde va de vacaciones la familia Quirós Sánchez?</label>
+                    <input type="text" id="b-1" data-activity="b" data-number="1" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="b-2" class="w-full sm:w-1/2 flex-shrink-0">2. ¿Qué cree Luisa de la posibilidad de ir a México?</label>
+                    <input type="text" id="b-2" data-activity="b" data-number="2" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="b-3" class="w-full sm:w-1/2 flex-shrink-0">3. ¿Por qué Esteban no quiere [doesn’t want] ir a la República Dominicana en un año?</label>
+                    <input type="text" id="b-3" data-activity="b" data-number="3" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="b-4" class="w-full sm:w-1/2 flex-shrink-0">4. ¿Cuándo va la familia a México?</label>
+                    <input type="text" id="b-4" data-activity="b" data-number="4" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="b-5" class="w-full sm:w-1/2 flex-shrink-0">5. ¿Van a ir de vacaciones las amigas de Elena con la familia Quirós Sánchez?</label>
+                    <input type="text" id="b-5" data-activity="b" data-number="5" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="b-6" class="w-full sm:w-1/2 flex-shrink-0">6. ¿Cuándo va la familia a la República Dominicana?</label>
+                    <input type="text" id="b-6" data-activity="b" data-number="6" 
+                           class="text-input w-full mt-1 sm:mt-0 sm:ml-2"
+                           oninput="clearFeedback(this)">
+                </div>
+            </div>
+        </section>
+        
+        <!-- C. ¡Ahora es tu turno! (Completación) -->
+        <section class="mb-8">
+            <p class="mb-4 text-lg text-justify">
+                <span class="text-bold">c.</span> ¡Ahora es tu turno! Completa las siguientes preguntas. / Now it’s your turn! Complete the following answers.
+            </p>
+
+            <div id="activity-c" class="space-y-4">
+                <!-- Ítem 1 -->
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="c-1" class="w-full sm:w-1/2 flex-shrink-0">1. ¿Cuándo van de vacaciones tú y tu familia?</label>
+                    <div class="flex items-center w-full mt-1 sm:mt-0 sm:ml-2">
+                        <!-- Input con ancho limitado para dejar espacio al span -->
+                        <input type="text" id="c-1" data-activity="c" data-number="1" 
+                               class="text-input w-2/5 max-w-[160px] sm:w-auto sm:flex-grow-0 sm:max-w-none"
+                               oninput="clearFeedback(this)">
+                        <span class="ml-2 text-sm text-gray-500 flex-grow">en cinco días.</span>
+                    </div>
+                </div>
+                <!-- Ítem 2 -->
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="c-2" class="w-full sm:w-1/2 flex-shrink-0">2. ¿Adónde van ustedes?</label>
+                    <div class="flex items-center w-full mt-1 sm:mt-0 sm:ml-2">
+                        <input type="text" id="c-2" data-activity="c" data-number="2" 
+                               class="text-input w-2/5 max-w-[160px] sm:w-auto sm:flex-grow-0 sm:max-w-none"
+                               oninput="clearFeedback(this)">
+                        <span class="ml-2 text-sm text-gray-500 flex-grow">Chile.</span>
+                    </div>
+                </div>
+                <!-- Ítem 3 -->
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="c-3" class="w-full sm:w-1/2 flex-shrink-0">3. ¿Quién es tu futbolista favorito?</label>
+                    <div class="flex items-center w-full mt-1 sm:mt-0 sm:ml-2">
+                        <input type="text" id="c-3" data-activity="c" data-number="3" 
+                               class="text-input w-2/5 max-w-[160px] sm:w-auto sm:flex-grow-0 sm:max-w-none"
+                               oninput="clearFeedback(this)">
+                        <span class="ml-2 text-sm text-gray-500 flex-grow">Lionel Messi de Argentina.</span>
+                    </div>
+                </div>
+                <!-- Ítem 4 -->
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="c-4" class="w-full sm:w-1/2 flex-shrink-0">4. ¿Dónde estudia español Ana?</label>
+                    <div class="flex items-center w-full mt-1 sm:mt-0 sm:ml-2">
+                        <input type="text" id="c-4" data-activity="c" data-number="4" 
+                               class="text-input w-2/5 max-w-[160px] sm:w-auto sm:flex-grow-0 sm:max-w-none"
+                               oninput="clearFeedback(this)">
+                        <span class="ml-2 text-sm text-gray-500 flex-grow">en su casa.</span>
+                    </div>
+                </div>
+                <!-- Ítem 5 -->
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="c-5" class="w-full sm:w-1/2 flex-shrink-0">5. ¿Con quiénes vas al cine y al teatro?</label>
+                    <div class="flex items-center w-full mt-1 sm:mt-0 sm:ml-2">
+                        <input type="text" id="c-5" data-activity="c" data-number="5" 
+                               class="text-input w-2/5 max-w-[160px] sm:w-auto sm:flex-grow-0 sm:max-w-none"
+                               oninput="clearFeedback(this)">
+                        <span class="ml-2 text-sm text-gray-500 flex-grow">mis amigos.</span>
+                    </div>
+                </div>
+                <!-- Ítem 6 -->
+                <div class="flex flex-col sm:flex-row sm:items-baseline">
+                    <label for="c-6" class="w-full sm:w-1/2 flex-shrink-0">6. ¿Por qué viaja Roberto mucho a Panamá?</label>
+                    <div class="flex items-center w-full mt-1 sm:mt-0 sm:ml-2">
+                        <input type="text" id="c-6" data-activity="c" data-number="6" 
+                               class="text-input w-2/5 max-w-[160px] sm:w-auto sm:flex-grow-0 sm:max-w-none"
+                               oninput="clearFeedback(this)">
+                        <span class="ml-2 text-sm text-gray-500 flex-grow">sus abuelos viven en Panamá.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- D. Selección (Múltiple Opción) - ESTRUCTURA MODIFICADA PARA RELLENO -->
+        <section class="mb-8">
+            <p class="mb-4 text-lg text-justify">
+                <span class="text-bold">d.</span> De las siguientes frases, escoge la opción más apropiada. / From the following sentences, choose the most appropriate option.
+            </p>
+            
+            <div id="activity-d" class="space-y-6">
+                <!-- Pregunta 1 -->
+                <div class="question-d">
+                    <p class="mb-2">1. Javier y Erica 
+                        <span id="fill-d-1" class="fill-blank">________</span> 
+                        salsa y merengue en el club.
+                    </p>
+                    <div class="flex flex-wrap gap-2 sm:gap-4 radio-container" data-question="d-1">
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-1" value="a" onchange="checkRadioAnswer('d-1')">
+                            <span class="ml-2">a) bailar</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-1" value="b" onchange="checkRadioAnswer('d-1')">
+                            <span class="ml-2">b) bailamos</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-1" value="c" onchange="checkRadioAnswer('d-1')">
+                            <span class="ml-2">c) bailan</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="question-d">
+                    <p class="mb-2">2. La familia Quirós García va a 
+                        <span id="fill-d-2" class="fill-blank">________</span> 
+                        México el próximo mes.
+                    </p>
+                    <div class="flex flex-wrap gap-2 sm:gap-4 radio-container" data-question="d-2">
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-2" value="a" onchange="checkRadioAnswer('d-2')">
+                            <span class="ml-2">a) visitar</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-2" value="b" onchange="checkRadioAnswer('d-2')">
+                            <span class="ml-2">b) visitan</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-2" value="c" onchange="checkRadioAnswer('d-2')">
+                            <span class="ml-2">c) visitáis</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="question-d">
+                    <p class="mb-2">3. Cecilia 
+                        <span id="fill-d-3" class="fill-blank">________</span> 
+                        con su madre todos [every] los días.
+                    </p>
+                    <div class="flex flex-wrap gap-2 sm:gap-4 radio-container" data-question="d-3">
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-3" value="a" onchange="checkRadioAnswer('d-3')">
+                            <span class="ml-2">a) hablan</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-3" value="b" onchange="checkRadioAnswer('d-3')">
+                            <span class="ml-2">b) habla</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-3" value="c" onchange="checkRadioAnswer('d-3')">
+                            <span class="ml-2">c) hablar</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 4 -->
+                <div class="question-d">
+                    <p class="mb-2">4. Alejandra 
+                        <span id="fill-d-4" class="fill-blank">________</span> 
+                        el café todas las mañanas.
+                    </p>
+                    <div class="flex flex-wrap gap-2 sm:gap-4 radio-container" data-question="d-4">
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-4" value="a" onchange="checkRadioAnswer('d-4')">
+                            <span class="ml-2">a) preparan</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-4" value="b" onchange="checkRadioAnswer('d-4')">
+                            <span class="ml-2">b) preparáis</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-4" value="c" onchange="checkRadioAnswer('d-4')">
+                            <span class="ml-2">c) prepara</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 5 -->
+                <div class="question-d">
+                    <p class="mb-2">5. Yo 
+                        <span id="fill-d-5" class="fill-blank">________</span> 
+                        la radio en mi carro.
+                    </p>
+                    <div class="flex flex-wrap gap-2 sm:gap-4 radio-container" data-question="d-5">
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-5" value="a" onchange="checkRadioAnswer('d-5')">
+                            <span class="ml-2">a) escucho</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-5" value="b" onchange="checkRadioAnswer('d-5')">
+                            <span class="ml-2">b) escuchas</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-5" value="c" onchange="checkRadioAnswer('d-5')">
+                            <span class="ml-2">c) escuchamos</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 6 -->
+                <div class="question-d">
+                    <p class="mb-2">6. Guillermo 
+                        <span id="fill-d-6" class="fill-blank">________</span> 
+                        diez horas al día.
+                    </p>
+                    <div class="flex flex-wrap gap-2 sm:gap-4 radio-container" data-question="d-6">
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-6" value="a" onchange="checkRadioAnswer('d-6')">
+                            <span class="ml-2">a) trabajar</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-6" value="b" onchange="checkRadioAnswer('d-6')">
+                            <span class="ml-2">b) trabaja</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-6" value="c" onchange="checkRadioAnswer('d-6')">
+                            <span class="ml-2">c) trabajas</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 7 -->
+                <div class="question-d">
+                    <p class="mb-2">7. Manuel, Sandra y yo 
+                        <span id="fill-d-7" class="fill-blank">___________</span> 
+                        español a las cuatro de la tarde.
+                    </p>
+                    <div class="flex flex-wrap gap-2 sm:gap-4 radio-container" data-question="d-7">
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-7" value="a" onchange="checkRadioAnswer('d-7')">
+                            <span class="ml-2">a) estudiáis</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-7" value="b" onchange="checkRadioAnswer('d-7')">
+                            <span class="ml-2">b) estudian</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-7" value="c" onchange="checkRadioAnswer('d-7')">
+                            <span class="ml-2">c) estudiamos</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 8 -->
+                <div class="question-d">
+                    <p class="mb-2">8. Leonor 
+                        <span id="fill-d-8" class="fill-blank">________</span> 
+                        a casa a las seis de la tarde.
+                    </p>
+                    <div class="flex flex-wrap gap-2 sm:gap-4 radio-container" data-question="d-8">
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-8" value="a" onchange="checkRadioAnswer('d-8')">
+                            <span class="ml-2">a) llegas</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-8" value="b" onchange="checkRadioAnswer('d-8')">
+                            <span class="ml-2">b) llega</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-8" value="c" onchange="checkRadioAnswer('d-8')">
+                            <span class="ml-2">c) llegar</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 9 -->
+                <div class="question-d">
+                    <p class="mb-2">9. Yo 
+                        <span id="fill-d-9" class="fill-blank">____ a ____</span> 
+                        al supermercado.
+                    </p>
+                    <div class="flex flex-wrap gap-2 sm:gap-4 radio-container" data-question="d-9">
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-9" value="a" onchange="checkRadioAnswer('d-9')">
+                            <span class="ml-2">a) voy…ir</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-9" value="b" onchange="checkRadioAnswer('d-9')">
+                            <span class="ml-2">b) ir…voy</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-9" value="c" onchange="checkRadioAnswer('d-9')">
+                            <span class="ml-2">c) ir…vas</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pregunta 10 -->
+                <div class="question-d">
+                    <p class="mb-2">10. Vosotros 
+                        <span id="fill-d-10" class="fill-blank">____ a ____</span> 
+                        karaoke en el bar.
+                    </p>
+                    <div class="flex flex-wrap gap-2 sm:gap-4 radio-container" data-question="d-10">
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-10" value="a" onchange="checkRadioAnswer('d-10')">
+                            <span class="ml-2">a) van…cantar</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-10" value="b" onchange="checkRadioAnswer('d-10')">
+                            <span class="ml-2">b) vais…cantar</span>
+                        </label>
+                        <label class="radio-option flex items-center">
+                            <input type="radio" name="d-10" value="c" onchange="checkRadioAnswer('d-10')">
+                            <span class="ml-2">c) vamos…cantar</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Botón para mostrar las respuestas (AHORA AL FINAL DE LA PÁGINA) -->
+        <div class="flex justify-center mt-10 mb-10">
+            <button id="show-answers-btn" onclick="toggleAnswerKey()">
+                Respuestas Correctas
+            </button>
+        </div>
+
+        <!-- Sección de Respuestas Correctas (Inicialmente oculta) -->
+        <section id="answer-key" style="display: none;">
+            <!-- Contenido generado por JavaScript -->
+        </section>
+
+
+    </div> <!-- Fin del container -->
+
+
+    <script>
+        // --- Respuestas Correctas para Verificación (Estructura de la Sección IV) ---
+        const ANSWERS_DATA = {
+            // Respuestas A: ir + a + infinitivo.
+            'a': [
+                'Sí, voy a leer los libros mañana.',
+                'Sí, vamos a llamar por teléfono a nuestro hermano.',
+                'Sí, Fernando va a ir al cine con sus amigos.',
+                'Sí, Elena va a tomar café a las tres de la tarde.',
+                'Sí, mis amigos y yo vamos a bailar en el club.',
+                'Sí, mis vecinos van a ir al teatro mañana.'
+            ],
+            // Respuestas B: Lectura
+            'b': [
+                'La familia Quirós Sánchez va de vacaciones a México.',
+                'Luisa cree que México es una buena idea.',
+                'Esteban no quiere ir a la República Dominicana en un año porque es mucho dinero.',
+                'La familia va a México en cuatro semanas.',
+                'No, las amigas de Elena no van a ir de vacaciones con la familia Quirós Sánchez.',
+                'La familia va a la República Dominicana en dos años.'
+            ],
+            // Respuestas C: Completación (Solo la parte que escribe el usuario, el resto es contexto)
+            // Nota: Aquí la respuesta es la frase que el usuario debe escribir, no la frase completa.
+            'c': [
+                'Vamos de vacaciones', 
+                'Vamos a', 
+                'Mi futbolista favorito es', 
+                'Ana estudia español', 
+                'Voy al cine y al teatro con', 
+                'Roberto viaja mucho a Panamá porque'
+            ],
+            // Respuestas D: Múltiple opción (a, b, c)
+            'd': {
+                'd-1': 'c', 'd-2': 'a', 'd-3': 'b', 'd-4': 'c', 'd-5': 'a', 
+                'd-6': 'b', 'd-7': 'c', 'd-8': 'b', 'd-9': 'a', 'd-10': 'b'
+            }
+        };
+        
+        // ** DATA D **: El texto a insertar en el espacio en blanco de la Actividad D.
+        const FILL_ANSWERS = {
+            'd-1': 'bailan',
+            'd-2': 'visitar',
+            'd-3': 'habla',
+            'd-4': 'prepara',
+            'd-5': 'escucho',
+            'd-6': 'trabaja',
+            'd-7': 'estudiamos',
+            'd-8': 'llega',
+            // Combinamos las dos partes para la inserción en el span único
+            'd-9': 'voy a ir', 
+            'd-10': 'vais a cantar' 
+        };
+
+        // ANSWERS para la verificación de campos de texto, mapeando ID a un array de respuestas normalizadas.
+        const ANSWERS = {
+            'a-1': [ANSWERS_DATA.a[0]], 'a-2': [ANSWERS_DATA.a[1]], 'a-3': [ANSWERS_DATA.a[2]], 
+            'a-4': [ANSWERS_DATA.a[3]], 'a-5': [ANSWERS_DATA.a[4]], 'a-6': [ANSWERS_DATA.a[5]],
+            'b-1': [ANSWERS_DATA.b[0]], 'b-2': [ANSWERS_DATA.b[1]], 'b-3': [ANSWERS_DATA.b[2]], 
+            'b-4': [ANSWERS_DATA.b[3]], 'b-5': [ANSWERS_DATA.b[4]], 'b-6': [ANSWERS_DATA.b[5]],
+            'c-1': [ANSWERS_DATA.c[0]], 'c-2': [ANSWERS_DATA.c[1]], 'c-3': [ANSWERS_DATA.c[2]], 
+            'c-4': [ANSWERS_DATA.c[3]], 'c-5': [ANSWERS_DATA.c[4]], 'c-6': [ANSWERS_DATA.c[5]],
+            ...ANSWERS_DATA.d
+        };
+
+        // --- Lógica de la Página ---
+
+        /**
+         * Normaliza el texto para una comparación flexible.
+         * @param {string} text El texto a normalizar.
+         * @returns {string} El texto normalizado.
+         */
+        function normalizeText(text) {
+            return text.toLowerCase()
+                       .replace(/¿|¡|\.|,/g, '') // Eliminar signos y puntuación comunes
+                       .trim()
+                       .normalize("NFD").replace(/[\u0300-\u036f]/g, ''); // Eliminar acentos
+        }
+
+        /**
+         * Limpia la retroalimentación visual (colores) si el input está vacío.
+         * Se llama con el evento oninput para permitir la corrección.
+         * @param {HTMLElement} inputElement El elemento input de texto.
+         */
+        window.clearFeedback = function(inputElement) {
+            if (inputElement.value.trim() === '') {
+                inputElement.classList.remove('correct', 'incorrect');
+            }
+        }
+
+        /**
+         * Verifica la respuesta de un input de texto y gestiona la retroalimentación.
+         * @param {HTMLElement} inputElement El elemento input de texto.
+         */
+        function verifyInputAndMove(inputElement) {
+            const id = inputElement.id;
+            const activity = inputElement.dataset.activity;
+            const number = parseInt(inputElement.dataset.number);
+            const rawUserValue = inputElement.value;
+            
+            // Si el campo está vacío, solo limpiar y salir.
+            if (rawUserValue.trim() === '') {
+                inputElement.classList.remove('correct', 'incorrect');
+                return;
+            }
+
+            const normalizedUserValue = normalizeText(rawUserValue);
+            const correctAnswers = ANSWERS[id]; 
+            let isCorrect = false;
+
+            if (correctAnswers && Array.isArray(correctAnswers)) {
+                // Obtener la respuesta correcta (solo tomamos el primer elemento del array, ya que es la clave)
+                const normalizedAnswer = normalizeText(correctAnswers[0]);
+                
+                // Lógica de coincidencia:
+                if (activity === 'c') {
+                    // Para C (Completación): Verificar que la respuesta del usuario coincida exactamente con la clave.
+                    isCorrect = normalizedUserValue === normalizedAnswer;
+                } else {
+                    // Para A y B (Respuestas de frase): Verificar coincidencia exacta.
+                    isCorrect = normalizedUserValue === normalizedAnswer;
+                    
+                    // Se agrega una pequeña tolerancia si la respuesta del usuario es muy cercana.
+                    if (!isCorrect) {
+                        // Una lógica de "fuzzy match" simple para respuestas largas.
+                        // Comprueba si el 80% de la respuesta correcta está en la respuesta del usuario.
+                        if (normalizedAnswer.length > 5) {
+                            const tolerance = Math.floor(normalizedAnswer.length * 0.8);
+                            if (normalizedUserValue.includes(normalizedAnswer.substring(0, tolerance))) {
+                                isCorrect = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Aplicar estilo basado en la verificación
+            inputElement.classList.remove('correct', 'incorrect');
+            if (isCorrect) {
+                inputElement.classList.add('correct');
+            } else {
+                inputElement.classList.add('incorrect');
+            }
+            
+            // Lógica de salto de foco (solo si es correcto)
+            if (isCorrect) {
+                const nextNumber = number + 1;
+                const nextId = `${activity}-${nextNumber}`;
+                const nextInput = document.getElementById(nextId);
+
+                if (nextInput) {
+                    nextInput.focus();
+                } else {
+                    // Si es el último, permanece en el foco.
+                    inputElement.blur(); 
+                }
+            }
+        }
+
+        /**
+         * Maneja el evento keyup para inputs de texto (Actividades A, B, C).
+         */
+        document.addEventListener('keyup', (event) => {
+            const inputElement = event.target;
+            // Verificar si el elemento es un input de texto de las actividades A, B o C
+            if (inputElement.tagName === 'INPUT' && inputElement.type === 'text' && 
+                (inputElement.dataset.activity === 'a' || inputElement.dataset.activity === 'b' || inputElement.dataset.activity === 'c') &&
+                event.key === 'Enter') {
+                
+                verifyInputAndMove(inputElement);
+            }
+        });
+
+        /**
+         * Verifica la respuesta de un grupo de radio buttons (Actividad D).
+         * También completa el espacio en blanco si la respuesta es correcta.
+         * @param {string} questionId El ID de la pregunta (e.g., 'd-1').
+         */
+        window.checkRadioAnswer = function(questionId) {
+            const container = document.querySelector(`.radio-container[data-question="${questionId}"]`);
+            const fillElement = document.getElementById(`fill-${questionId}`);
+            if (!container || !fillElement) return;
+
+            // Obtener el radio button seleccionado dentro del contenedor
+            const selectedRadio = container.querySelector(`input[name="${questionId}"]:checked`);
+            
+            // Remover estilos previos de selección en todas las opciones
+            container.querySelectorAll('.radio-option').forEach(label => label.classList.remove('selected'));
+            container.classList.remove('correct', 'incorrect');
+
+            if (!selectedRadio) {
+                // Si no hay radio seleccionado, restaurar el placeholder visualmente y salir.
+                fillElement.textContent = (questionId === 'd-9' || questionId === 'd-10') ? '____ a ____' : '________';
+                fillElement.style.borderBottom = '2px dashed #999';
+                return;
+            }
+
+            // Marcar la opción seleccionada visualmente
+            const selectedLabel = selectedRadio.closest('.radio-option');
+            selectedLabel.classList.add('selected');
+
+            // Verificar la respuesta
+            const isCorrect = selectedRadio.value === ANSWERS[questionId];
+
+            if (isCorrect) {
+                container.classList.add('correct');
+                
+                // *** IMPLEMENTACIÓN DE RELLENADO CORRECTO ***
+                fillElement.textContent = FILL_ANSWERS[questionId];
+                fillElement.style.borderBottom = 'none'; // Quitar el subrayado para mostrar el texto relleno
+                
+            } else {
+                container.classList.add('incorrect');
+                
+                // *** NO RELLENAR CON INCORRECTO: RESTAURAR EL PLACEHOLDER ***
+                // Determinar el placeholder original
+                const originalPlaceholder = (questionId === 'd-9' || questionId === 'd-10') ? '____ a ____' : '________';
+                
+                // Solo restaurar el placeholder si el elemento NO está ya rellenado con la respuesta correcta (para no sobrescribir una respuesta correcta previa)
+                if (fillElement.textContent !== FILL_ANSWERS[questionId]) {
+                    fillElement.textContent = originalPlaceholder;
+                    fillElement.style.borderBottom = '2px dashed #999';
+                }
+            }
+        }
+        
+        // --- Lógica del Botón de Respuestas ---
+
+        // HTML para la clave de respuesta (Sección IV)
+        const ANSWER_KEY_HTML = `
+            <h2 class="text-2xl font-bold mb-4" style="color: var(--flamingo-pink);">IV. Respuestas correctas / Correct Answers</h2>
+            
+            <div class="space-y-6">
+                <div>
+                    <p class="text-xl font-semibold mb-2 text-bold">a.</p>
+                    <ul class="list-none space-y-1 pl-4 text-sm sm:text-base">
+                        <li>1. ${ANSWERS_DATA.a[0]}</li>
+                        <li>2. ${ANSWERS_DATA.a[1]}</li>
+                        <li>3. ${ANSWERS_DATA.a[2]}</li>
+                        <li>4. ${ANSWERS_DATA.a[3]}</li>
+                        <li>5. ${ANSWERS_DATA.a[4]}</li>
+                        <li>6. ${ANSWERS_DATA.a[5]}</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="text-xl font-semibold mb-2 text-bold">b.</p>
+                    <ul class="list-none space-y-1 pl-4 text-sm sm:text-base">
+                        <li>1. ${ANSWERS_DATA.b[0]}</li>
+                        <li>2. ${ANSWERS_DATA.b[1]}</li>
+                        <li>3. ${ANSWERS_DATA.b[2]}</li>
+                        <li>4. ${ANSWERS_DATA.b[3]}</li>
+                        <li>5. ${ANSWERS_DATA.b[4]}</li>
+                        <li>6. ${ANSWERS_DATA.b[5]}</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="text-xl font-semibold mb-2 text-bold">c.</p>
+                    <ul class="list-none space-y-1 pl-4 text-sm sm:text-base">
+                        <li>1. ${ANSWERS_DATA.c[0]} en cinco días.</li>
+                        <li>2. ${ANSWERS_DATA.c[1]} Chile.</li>
+                        <li>3. ${ANSWERS_DATA.c[2]} Lionel Messi de Argentina.</li>
+                        <li>4. ${ANSWERS_DATA.c[3]} en su casa.</li>
+                        <li>5. ${ANSWERS_DATA.c[4]} mis amigos.</li>
+                        <li>6. ${ANSWERS_DATA.c[5]} sus abuelos viven en Panamá.</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <p class="text-xl font-semibold mb-2 text-bold">d.</p>
+                    <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm sm:text-base pl-4">
+                        <p>1. c) bailan</p><p>6. b) trabaja</p>
+                        <p>2. a) visitar</p><p>7. c) estudiamos</p>
+                        <p>3. b) habla</p><p>8. b) llega</p>
+                        <p>4. c) prepara</p><p>9. a) voy…ir</p>
+                        <p>5. a) escucho</p><p>10. b) vais…cantar</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        /**
+         * Inicializa la sección de respuestas y la lógica del botón.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            const answerKeyElement = document.getElementById('answer-key');
+            answerKeyElement.innerHTML = ANSWER_KEY_HTML;
+        });
+
+        /**
+         * Alterna la visibilidad de la clave de respuestas.
+         */
+        window.toggleAnswerKey = function() {
+            const answerKeyElement = document.getElementById('answer-key');
+            const button = document.getElementById('show-answers-btn');
+            
+            if (answerKeyElement.style.display === 'none' || answerKeyElement.style.display === '') {
+                answerKeyElement.style.display = 'block';
+                button.textContent = 'Ocultar Respuestas Correctas';
+            } else {
+                answerKeyElement.style.display = 'none';
+                button.textContent = 'Respuestas Correctas';
+            }
+        }
+    </script>
+</body>
+</html>
