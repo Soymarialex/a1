@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <style>
+        :root {
+            --primary-pink: #FF79AC;
+            --secondary-pink: #FFB3D1;
+            --eerie-black: #121118;
+            --bg-white: #FFFFFF;
+            --success-green: #D4EDDA;
+            --error-red: #F8D7DA;
+            --input-gray: #E0E0E0;
+            --bank-bg: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--eerie-black);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        h1 {
+            color: var(--primary-pink);
+            font-size: clamp(2.2rem, 5vw, 2.5rem);
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        h2 {
+            color: var(--primary-pink);
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            border-bottom: 2px solid var(--primary-pink);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .activity-block {
+            margin-bottom: 40px;
+        }
+
+        .instruction {
+            font-weight: normal;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Inputs de completación */
+        .fill-input {
+            border: none;
+            border-bottom: 2px solid var(--input-gray);
+            background: transparent;
+            text-align: center;
+            font-size: 1rem;
+            padding: 2px 5px;
+            color: var(--eerie-black);
+            width: 180px;
+            transition: background-color 0.3s ease;
+        }
+
+        .fill-input:focus {
+            outline: none;
+            border-bottom-color: var(--primary-pink);
+        }
+
+        .correct { background-color: var(--success-green) !important; }
+        .incorrect { background-color: var(--error-red) !important; }
+
+        /* Actividad B - Columnas */
+        .grid-b {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+        }
+
+        .item-row {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Actividad C - Botones de selección */
+        .options-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-option {
+            background-color: var(--secondary-pink);
+            border: none;
+            border-bottom: 3px solid var(--primary-pink);
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--eerie-black);
+            transition: all 0.2s ease;
+        }
+
+        .btn-option.selected-correct { background-color: var(--success-green); border-bottom-color: #28a745; }
+        .btn-option.selected-incorrect { background-color: var(--error-red); border-bottom-color: #dc3545; }
+
+        /* Actividad D - Emparejar */
+        .matching-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background-color: var(--bank-bg);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .match-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .match-input {
+            width: 40px;
+            height: 30px;
+        }
+
+        /* Botón de Respuestas */
+        .btn-main {
+            background-color: var(--secondary-pink);
+            border: none;
+            border-bottom: 3px solid var(--primary-pink);
+            border-radius: 5px;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--eerie-black);
+            margin-top: 30px;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .answers-box {
+            display: none;
+            background-color: var(--bank-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid var(--input-gray);
+        }
+
+        @media (max-width: 600px) {
+            .grid-b, .matching-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>III. Actividades / Activities</h1>
+    
+    <p>Carlos González y Alejandra Fallas se acaban de mudar con su familia al vecindario Villa Celeste y están saludando y conociendo a sus vecinos. / Carlos González and Alejandra Fallas have just moved with their family to the neighborhood Villa Celeste and are greeting and getting to know their neighbors.</p>
+
+    <!-- ACTIVIDAD A -->
+    <div class="activity-block">
+        <h2>a. Completa las siguientes frases con la expresión apropiada. / Complete the following sentences with the appropriate expression.</h2>
+        <div id="act-a">
+            <div class="item-row">1. Esteban: Hola, ¿<input type="text" class="fill-input" data-answer='["cómo", "como"]' data-next="a2"> están?</div>
+            <div class="item-row">2. Carlos: ¡<input type="text" class="fill-input" data-answer='["bien", "muy bien"]' data-id="a2" data-next="a3">, gracias!</div>
+            <div class="item-row">3. Esteban: ¿Cómo <input type="text" class="fill-input" data-answer='["se llama usted"]' data-id="a3" data-next="a4">?</div>
+            <div class="item-row">4. Carlos: <input type="text" class="fill-input" data-answer='["me llamo", "soy", "mi nombre es"]' data-id="a4" data-next="a5"> Carlos. ¿Y usted?</div>
+            <div class="item-row">5. Esteban: <input type="text" class="fill-input" data-answer='["soy", "mi nombre es", "me llamo"]' data-id="a5" data-next="a6"> Esteban, y ella es mi esposa, Luisa.</div>
+            <div class="item-row">6. Carlos: ¡<input type="text" class="fill-input" data-answer='["mucho"]' data-id="a6" data-next="a7"> gusto! Ella es mi esposa, Alejandra.</div>
+            <div class="item-row">7. Alejandra: ¡<input type="text" class="fill-input" data-answer='["mucho gusto", "encantada", "es un placer"]' data-id="a7" data-next="a8">!</div>
+            <div class="item-row">8. Luisa: ¡<input type="text" class="fill-input" data-answer='["igualmente"]' data-id="a8" data-next="b1">!</div>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD B -->
+    <div class="activity-block">
+        <h2>b. Escribe una expresión similar a la expresión original. / Write an expression similar to the original expression.</h2>
+        <div class="grid-b" id="act-b">
+            <!-- Columna 1 -->
+            <div>
+                <div class="item-row">1. Encantado. <input type="text" class="fill-input" data-answer='["mucho gusto", "igualmente", "es un placer"]' data-id="b1" data-next="b2"></div>
+                <div class="item-row">2. ¿Qué tal? <input type="text" class="fill-input" data-answer='["cómo está usted", "cómo estás", "¿cómo está usted?", "¿cómo estás?"]' data-id="b2" data-next="b3"></div>
+                <div class="item-row">3. Muy bien, gracias. <input type="text" class="fill-input" data-answer='["bien gracias", "bien, gracias"]' data-id="b3" data-next="b4"></div>
+            </div>
+            <!-- Columna 2 -->
+            <div>
+                <div class="item-row">4. Más o menos. <input type="text" class="fill-input" data-answer='["regular"]' data-id="b4" data-next="b5"></div>
+                <div class="item-row">5. Mi nombre es.... <input type="text" class="fill-input" data-answer='["soy", "me llamo"]' data-id="b5" data-next="b6"></div>
+                <div class="item-row">6. Nos vemos. <input type="text" class="fill-input" data-answer='["hasta luego", "hasta pronto", "adiós", "chao"]' data-id="b6" data-next="c1"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD C -->
+    <div class="activity-block">
+        <h2>c. Escoge una respuesta apropiada en cada situación. / Choose an appropriate answer in each situation.</h2>
+        
+        <div>
+            <p>1. Hola. ¿Cómo está?</p>
+            <div class="options-container">
+                <button class="btn-option" onclick="checkSelect(this, false)">a) Igualmente.</button>
+                <button class="btn-option" id="c1" onclick="checkSelect(this, true)">b) Bien, gracias. ¿Y usted?</button>
+                <button class="btn-option" onclick="checkSelect(this, false)">c) Hasta luego.</button>
+            </div>
+        </div>
+
+        <div>
+            <p>2. Le presento a Luisa.</p>
+            <div class="options-container">
+                <button class="btn-option" onclick="checkSelect(this, false)">a) Más o menos.</button>
+                <button class="btn-option" onclick="checkSelect(this, false)">b) Bien, gracias.</button>
+                <button class="btn-option" onclick="checkSelect(this, true)">c) Mucho gusto.</button>
+            </div>
+        </div>
+
+        <div>
+            <p>3. Buenas tardes. ¿Qué tal?</p>
+            <div class="options-container">
+                <button class="btn-option" onclick="checkSelect(this, false)">a) Igualmente.</button>
+                <button class="btn-option" onclick="checkSelect(this, true)">b) Muy bien. ¿Y usted?</button>
+                <button class="btn-option" onclick="checkSelect(this, false)">c) Nos vemos.</button>
+            </div>
+        </div>
+
+        <div>
+            <p>4. Hasta mañana.</p>
+            <div class="options-container">
+                <button class="btn-option" onclick="checkSelect(this, false)">a) Regular.</button>
+                <button class="btn-option" onclick="checkSelect(this, false)">b) Encantado.</button>
+                <button class="btn-option" onclick="checkSelect(this, true)">c) Hasta pronto.</button>
+            </div>
+        </div>
+
+        <div>
+            <p>5. ¿Cómo te llamas?</p>
+            <div class="options-container">
+                <button class="btn-option" onclick="checkSelect(this, false)">a) Igualmente.</button>
+                <button class="btn-option" onclick="checkSelect(this, false)">b) Buenos días.</button>
+                <button class="btn-option" onclick="checkSelect(this, true)">c) Me llamo Carlos.</button>
+            </div>
+        </div>
+
+        <div>
+            <p>6. ¡Buenas noches! ¿Cómo estás?</p>
+            <div class="options-container">
+                <button class="btn-option" onclick="checkSelect(this, true)">a) Bien, gracias. ¿Y tú?</button>
+                <button class="btn-option" onclick="checkSelect(this, false)">b) ¿Y usted?</button>
+                <button class="btn-option" onclick="checkSelect(this, false)">c) Encantada.</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTIVIDAD D -->
+    <div class="activity-block">
+        <h2>d. Agrega la expresión apropiada. / Add the appropriate expression.</h2>
+        <div class="matching-container">
+            <div>
+                <div class="match-item">1. ¡Buenas <input type="text" class="fill-input match-input" data-answer='["h"]' data-next="d2"></div>
+                <div class="match-item">2. ¿Cómo te <input type="text" class="fill-input match-input" data-answer='["f"]' data-id="d2" data-next="d3"></div>
+                <div class="match-item">3. ¿Qué <input type="text" class="fill-input match-input" data-answer='["b"]' data-id="d3" data-next="d4"></div>
+                <div class="match-item">4. ¡Mucho <input type="text" class="fill-input match-input" data-answer='["c"]' data-id="d4" data-next="d5"></div>
+                <div class="match-item">5. Les <input type="text" class="fill-input match-input" data-answer='["e"]' data-id="d5" data-next="d6"></div>
+                <div class="match-item">6. ¡Hasta <input type="text" class="fill-input match-input" data-answer='["g"]' data-id="d6" data-next="d7"></div>
+                <div class="match-item">7. ¿Cómo <input type="text" class="fill-input match-input" data-answer='["a"]' data-id="d7" data-next="d8"></div>
+                <div class="match-item">8. Mi nombre es <input type="text" class="fill-input match-input" data-answer='["d"]' data-id="d8"></div>
+            </div>
+            <div>
+                <p>a. está usted?</p>
+                <p>b. tal?</p>
+                <p>c. gusto!</p>
+                <p>d. Carlos</p>
+                <p>e. presento a mi amigo.</p>
+                <p>f. llamas?</p>
+                <p>g. pronto!</p>
+                <p>h. tardes!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESPUESTAS -->
+    <button class="btn-main" onclick="toggleAnswers()">IV. Respuestas correctas / Correct Answers</button>
+    
+    <div class="answers-box" id="answers">
+        <strong>a.</strong><br>
+        1. ¿Cómo están?<br>
+        2. ¡Bien, gracias! / ¡Muy bien, gracias!<br>
+        3. ¿Cómo se llama usted?<br>
+        4. Me llamo Carlos / Soy Carlos / Mi nombre es Carlos.<br>
+        5. Soy Esteban / Mi nombre es Esteban / Me llamo Esteban.<br>
+        6. ¡Mucho gusto!<br>
+        7. ¡Mucho gusto! / ¡Encantada! / ¡Es un placer!<br>
+        8. ¡Igualmente!<br><br>
+
+        <strong>b.</strong><br>
+        1. Mucho gusto. / Igualmente. / Es un placer.<br>               
+        2. ¿Cómo está usted? / ¿Cómo estás?<br>                          
+        3. Bien, gracias.<br>
+        4. Regular<br>
+        5. Soy…. / Me llamo<br>
+        6. Hasta luego. / Hasta pronto. / Adiós. / Chao.<br><br>                                           
+
+        <strong>c.</strong><br>
+        1. b) Bien, gracias. ¿Y usted?<br>
+        2. c) Mucho gusto.<br>
+        3. b) Muy bien. ¿Y usted? <br>
+        4. c) Hasta pronto.<br>
+        5. c) Me llamo Carlos.<br>
+        6. a) Bien, gracias. ¿Y tú?<br><br>
+
+        <strong>d.</strong><br>
+        1. h) ¡Buenas tardes!<br>
+        2. f) ¿Cómo te llamas?<br>
+        3. b) ¿Qué tal?<br>
+        4. c) ¡Mucho gusto!<br>
+        5. e) Les presento a mi amigo.<br>
+        6. g) ¡Hasta pronto!<br>
+        7. a) ¿Cómo está usted?<br>
+        8. d) Mi nombre es Carlos.
+    </div>
+</div>
+
+<script>
+    // Validación de inputs
+    const inputs = document.querySelectorAll('.fill-input');
+    
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            validateInput(this);
+        });
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                validateInput(this);
+                const nextId = this.getAttribute('data-next');
+                if (nextId) {
+                    const nextElem = document.querySelector(`[data-id="${nextId}"]`) || document.getElementById(nextId);
+                    if (nextElem) nextElem.focus();
+                }
+            }
+        });
+    });
+
+    function validateInput(el) {
+        const val = el.value.trim().toLowerCase().replace(/[¡!¿?]/g, "");
+        const answers = JSON.parse(el.getAttribute('data-answer'));
+        
+        if (val === "") {
+            el.classList.remove('correct', 'incorrect');
+            return;
+        }
+
+        const isCorrect = answers.some(ans => {
+            const cleanAns = ans.toLowerCase().replace(/[¡!¿?]/g, "");
+            return val.includes(cleanAns) || cleanAns.includes(val);
+        });
+
+        if (isCorrect) {
+            el.classList.add('correct');
+            el.classList.remove('incorrect');
+        } else {
+            el.classList.add('incorrect');
+            el.classList.remove('correct');
+        }
+    }
+
+    // Validación Actividad C
+    function checkSelect(btn, isCorrect) {
+        const parent = btn.parentElement;
+        const siblings = parent.querySelectorAll('.btn-option');
+        
+        siblings.forEach(s => s.classList.remove('selected-correct', 'selected-incorrect'));
+        
+        if (isCorrect) {
+            btn.classList.add('selected-correct');
+        } else {
+            btn.classList.add('selected-incorrect');
+        }
+    }
+
+    // Mostrar respuestas
+    function toggleAnswers() {
+        const box = document.getElementById('answers');
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <style>
+        :root {
+            --primary-pink: #FF79AC;
+            --secondary-pink: #FFEBF2;
+            --button-pink: #FFB3D1;
+            --eerie-black: #121118;
+            --bg-white: #FFFFFF;
+            --success-green: #D4EDDA;
+            --error-red: #F8D7DA;
+            --bank-bg: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--eerie-black);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-pink);
+            font-size: clamp(2.2rem, 5vw, 2.5rem);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-pink);
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            border-bottom: 2px solid var(--primary-pink);
+            padding-bottom: 5px;
+            margin-bottom: 30px;
+            display: inline-block;
+            text-transform: lowercase;
+        }
+
+        /* Navegación de Niveles */
+        .level-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .btn-level {
+            background-color: var(--button-pink);
+            border: none;
+            border-bottom: 3px solid var(--primary-pink);
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--eerie-black);
+            transition: transform 0.1s;
+        }
+
+        .btn-level.active {
+            background-color: var(--primary-pink);
+            color: white;
+        }
+
+        /* Tablero de Juego */
+        .game-board {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background-color: var(--bank-bg);
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 300px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-word {
+            background-color: var(--button-pink);
+            border: none;
+            border-bottom: 3px solid var(--primary-pink);
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--eerie-black);
+            min-height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-word.selected {
+            background-color: var(--secondary-pink);
+            outline: 2px solid var(--primary-pink);
+        }
+
+        .btn-word.correct {
+            background-color: var(--success-green) !important;
+            border-bottom-color: #28a745;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .btn-word.incorrect {
+            background-color: var(--error-red) !important;
+            border-bottom-color: #dc3545;
+        }
+
+        @media (max-width: 600px) {
+            .game-board {
+                gap: 10px;
+                padding: 10px;
+            }
+            .btn-word {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Matching game</h1>
+    <h2>test your memory</h2>
+
+    <div class="level-nav" id="levelNav">
+        <!-- Generado por JS -->
+    </div>
+
+    <div class="game-board">
+        <div class="column" id="colSpanish">
+            <!-- Palabras en español -->
+        </div>
+        <div class="column" id="colEnglish">
+            <!-- Palabras en inglés -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const levels = [
+        [
+            { es: "hola", en: "hello" },
+            { es: "¿Cómo está usted?", en: "How are you? [formal, singular]" },
+            { es: "¿Qué tal?", en: "How’s it going?" },
+            { es: "¿Cómo estás?", en: "How are you? [informal, singular]" },
+            { es: "gracias", en: "thank you" },
+            { es: "la lengua", en: "language" }
+        ],
+        [
+            { es: "Bien, gracias. ¿Y tú?", en: "Fine, thanks. And you? [informal, singular]" },
+            { es: "Bien, gracias. ¿Y usted?", en: "Fine, thanks. And you? [formal, singular]" },
+            { es: "bien", en: "well" },
+            { es: "regular", en: "so-so" },
+            { es: "el castellano", en: "Spanish language" },
+            { es: "la cultura", en: "culture" }
+        ],
+        [
+            { es: "Estoy bien", en: "I’m well" },
+            { es: "más o menos", en: "so-so" },
+            { es: "mal", en: "not well" },
+            { es: "no muy bien", en: "not very well" },
+            { es: "Estoy mal", en: "I’m not well" },
+            { es: "solo", en: "alone, only" }
+        ],
+        [
+            { es: "buenos días", en: "good morning" },
+            { es: "buenas tardes", en: "good afternoon" },
+            { es: "buenas noches", en: "good evening, good night" },
+            { es: "Me llamo….", en: "My name is…." },
+            { es: "los Estados Unidos", en: "United States" },
+            { es: "el español", en: "Spanish language" }
+        ],
+        [
+            { es: "¿Cómo te llamas?", en: "What’s your name? [informal, singular]" },
+            { es: "Soy….", en: "I am…." },
+            { es: "¿Cómo se llama usted?", en: "What’s your name? [formal, singular]" },
+            { es: "Mi nombre es….", en: "My name is…." },
+            { es: "mucho gusto", en: "nice to meet you" },
+            { es: "igualmente", en: "likewise" }
+        ],
+        [
+            { es: "encantado", en: "pleased to meet you" },
+            { es: "Es un placer", en: "It’s a pleasure." },
+            { es: "bienvenidos", en: "welcome [plural]" },
+            { es: "muy bien, gracias", en: "very well, thank you" },
+            { es: "muy", en: "very" },
+            { es: "bastante bien", en: "just fine" }
+        ],
+        [
+            { es: "adiós", en: "good-bye" },
+            { es: "hasta mañana", en: "see you tomorrow" },
+            { es: "chao", en: "bye" },
+            { es: "hasta pronto", en: "see you soon" },
+            { es: "hasta luego", en: "see you later" },
+            { es: "nos vemos", en: "see you" }
+        ]
+    ];
+
+    let currentLevel = 0;
+    let selectedSpanish = null;
+    let selectedEnglish = null;
+    let isProcessing = false;
+
+    function initNav() {
+        const nav = document.getElementById('levelNav');
+        levels.forEach((_, index) => {
+            const btn = document.createElement('button');
+            btn.className = `btn-level ${index === currentLevel ? 'active' : ''}`;
+            btn.innerText = `Nivel ${index + 1}`;
+            btn.onclick = () => loadLevel(index);
+            nav.appendChild(btn);
+        });
+    }
+
+    function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
+    function loadLevel(index) {
+        currentLevel = index;
+        selectedSpanish = null;
+        selectedEnglish = null;
+        
+        // Actualizar botones nav
+        document.querySelectorAll('.btn-level').forEach((btn, i) => {
+            btn.classList.toggle('active', i === index);
+        });
+
+        const colSpanish = document.getElementById('colSpanish');
+        const colEnglish = document.getElementById('colEnglish');
+        colSpanish.innerHTML = '';
+        colEnglish.innerHTML = '';
+
+        const currentData = levels[index];
+        const spanishWords = shuffle([...currentData]);
+        const englishWords = shuffle([...currentData]);
+
+        spanishWords.forEach(pair => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-word';
+            btn.innerText = pair.es;
+            btn.onclick = () => selectWord(btn, 'es', pair.en);
+            colSpanish.appendChild(btn);
+        });
+
+        englishWords.forEach(pair => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-word';
+            btn.innerText = pair.en;
+            btn.onclick = () => selectWord(btn, 'en', pair.en);
+            colEnglish.appendChild(btn);
+        });
+    }
+
+    function selectWord(btn, lang, matchId) {
+        if (isProcessing || btn.classList.contains('correct')) return;
+
+        if (lang === 'es') {
+            document.querySelectorAll('#colSpanish .btn-word').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedSpanish = { btn, matchId };
+        } else {
+            document.querySelectorAll('#colEnglish .btn-word').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedEnglish = { btn, matchId };
+        }
+
+        checkMatch();
+    }
+
+    function checkMatch() {
+        if (selectedSpanish && selectedEnglish) {
+            isProcessing = true;
+            
+            if (selectedSpanish.matchId === selectedEnglish.matchId) {
+                // Acierto
+                selectedSpanish.btn.classList.add('correct');
+                selectedEnglish.btn.classList.add('correct');
+                resetSelection();
+                isProcessing = false;
+            } else {
+                // Error
+                selectedSpanish.btn.classList.add('incorrect');
+                selectedEnglish.btn.classList.add('incorrect');
+                
+                setTimeout(() => {
+                    selectedSpanish.btn.classList.remove('incorrect', 'selected');
+                    selectedEnglish.btn.classList.remove('incorrect', 'selected');
+                    resetSelection();
+                    isProcessing = false;
+                }, 1000);
+            }
+        }
+    }
+
+    function resetSelection() {
+        selectedSpanish = null;
+        selectedEnglish = null;
+        document.querySelectorAll('.btn-word').forEach(b => {
+            if (!b.classList.contains('correct')) b.classList.remove('selected');
+        });
+    }
+
+    // Inicio
+    initNav();
+    loadLevel(0);
+</script>
+
+</body>
+</html>
