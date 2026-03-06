@@ -3,114 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spanish Lessons with María C.</title>
+    <title>Welcome to your Spanish Class!</title>
     <!-- Carga de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configuración para colores y fuente personalizados -->
     <style>
-        /* Definición de colores base */
+        /* Definición de colores y fuente */
         :root {
-            --eerie-black: #121118;
             --flamingo-pink: #FF79AC;
-            --default-bg: #FFFFFF;
+            --eerie-black: #121118;
+            --standard-black: #000000;
         }
-
-        /* Tipografía y colores base */
+        
+        /* Uso de la fuente solicitada, con Inter como fallback */
         body {
-            /* Usando 'Inter' como fallback, asumiendo Platform Medium Font no está cargada externamente */
-            font-family: "Platform Medium Font", 'Inter', sans-serif; 
-            color: var(--eerie-black);
-            background-color: var(--default-bg);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            font-family: 'Platform Medium Font', 'Inter', sans-serif;
+            background-color: #FFFFFF;
         }
 
-        /* Estilo para los botones principales */
-        .main-button {
+        /* Estilo para el botón de navegación con efecto de "borde negro abajo" */
+        .nav-button {
+            /* Colores y padding base */
             background-color: var(--flamingo-pink);
             color: white;
+            font-weight: 700; /* bold */
             padding: 1rem 1.5rem;
             border-radius: 0.75rem; /* rounded-xl */
-            font-weight: 700;
+            
+            /* Sombra/Borde inferior negro */
+            border: 2px solid var(--eerie-black);
+            border-bottom: 8px solid var(--eerie-black); 
+
+            /* Transición y centrado */
+            transition: all 0.1s ease-in-out;
+            display: block;
             text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            font-size: 1.125rem; /* text-xl */
-            border: 2px solid transparent;
         }
 
-        .main-button:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.15);
-            border-color: var(--eerie-black);
+        /* Efecto de hover/activo: simula un "click" moviendo el botón hacia abajo */
+        .nav-button:hover,
+        .nav-button:active {
+            transform: translateY(2px);
+            border-bottom-width: 6px; /* Reduce el tamaño del borde inferior */
+            background-color: #f7689c; /* Ligeramente más oscuro al pasar el ratón */
         }
 
-        /* Estilo para el botón de enlace externo */
+        /* Estilo para el botón de enlace externo, con diseño similar pero diferente color base */
         .external-button {
             background-color: var(--eerie-black);
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem; /* rounded-lg */
-            font-weight: 600;
-            transition: background-color 0.2s ease, transform 0.2s ease;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            border: 2px solid var(--eerie-black);
+            border-bottom: 8px solid var(--flamingo-pink); /* Borde rosa para contraste */
+            transition: all 0.1s ease-in-out;
+            display: inline-block;
+            text-decoration: none;
         }
 
         .external-button:hover {
-            background-color: var(--flamingo-pink);
-            transform: scale(1.05);
+            transform: translateY(2px);
+            border-bottom-width: 6px;
+            background-color: #2c2b33;
+        }
+
+        /* Estilo para el título */
+        .main-title {
+            color: var(--standard-black);
+            font-weight: 900; /* Extrabold */
         }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eerie-black': '#121118',
+                        'flamingo-pink': '#FF79AC',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <div class="flex-grow max-w-4xl mx-auto w-full p-6 md:p-10 flex flex-col justify-center items-center">
+<body class="p-4 sm:p-8 md:p-12 min-h-screen flex flex-col">
+
+    <!-- Contenido Principal -->
+    <main class="max-w-4xl mx-auto flex-grow w-full">
         
-        <!-- Título Principal (Placeholder ya que no se especificó un título para la página principal) -->
-        <h1 class="text-5xl md:text-6xl font-extrabold text-center mb-12" style="color: var(--eerie-black);">
+        <!-- Título principal en negro -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl text-center mb-12 main-title tracking-tight">
             Welcome to your Spanish Class!
         </h1>
 
         <!-- Contenedor de Botones de Navegación -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             
-            <a href="vocabulary.html" class="main-button">
+            <!-- Botón 1: Indefinite Articles and Numbers to 100 -->
+            <a href="vocabulary.html" class="nav-button text-xl sm:text-2xl">
                 Indefinite Articles and Numbers to 100
             </a>
 
-            <a href="activities.html" class="main-button">
+            <!-- Botón 2: Actividades / Activities -->
+            <a href="activities.html" class="nav-button text-xl sm:text-2xl">
                 Actividades / Activities
             </a>
 
-            <a href="lectura.html" class="main-button">
+            <!-- Botón 3: Lectura cultural / Cultural Reading -->
+            <a href="lectura.html" class="nav-button text-xl sm:text-2xl">
                 Lectura cultural / Cultural Reading
             </a>
 
-            <a href="game.html" class="main-button">
+            <!-- Botón 4: Matching game / test your memory -->
+            <a href="game.html" class="nav-button text-xl sm:text-2xl">
                 Matching game / test your memory
             </a>
-            
         </div>
+    </main>
+    
+    <!-- Pie de Página / Footer -->
+    <footer class="mt-12 pt-8 pb-4 border-t border-gray-200 text-center max-w-4xl mx-auto w-full">
         
-    </div>
-
-    <!-- Pie de Página (Footer) -->
-    <footer class="mt-auto p-6 md:p-8 text-center" style="background-color: var(--default-bg); border-top: 1px solid #eee;">
-        <p class="text-sm mb-4" style="color: var(--eerie-black);">
+        <!-- Texto de Copyright -->
+        <p class="text-sm text-gray-600 mb-6">
             © 2025 Spanish Lessons with María C. All rights reserved.
         </p>
-        
+
         <!-- Botón de Enlace Externo -->
-        <a 
-            href="https://preply.com/en/tutor/5105409?utm_source=friend&utm_medium=ref&utm_campaign=stu_plg_plg_all_0_mul_xx_multiplesub_share-tutor-tutoring_1&utm_content=OTQ2NTAwNQ==" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="external-button inline-block text-lg"
-        >
+        <a href="https://preply.com/en/tutor/5105409?utm_source=friend&utm_medium=ref&utm_campaign=stu_plg_plg_all_0_mul_xx_multiplesub_share-tutor-tutoring_1&utm_content=OTQ2NTAwNQ==" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="external-button text-lg">
             Find your Spanish class here.
         </a>
     </footer>
+
 </body>
 </html>
