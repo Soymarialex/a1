@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 
+        Nota: La fuente "Platform Medium" no está disponible públicamente. 
+        Utilizaremos 'Inter' como un sustituto moderno y limpio.
+    -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
+    <style>
+        /* Definición de colores personalizados para Tailwind */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+        }
+
+        /* Aplicación de la fuente y estilos base */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            color: var(--eerie-black);
+        }
+
+        /* Estilo para los campos de texto de las respuestas */
+        .answer-input {
+            border-color: var(--eerie-black);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            padding: 0.35rem 0.75rem;
+            border-width: 1px;
+            border-radius: 0.5rem; /* rounded-lg */
+            display: inline-block;
+            vertical-align: middle;
+            min-width: 80px; /* Asegura un tamaño mínimo */
+            max-width: 100%;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--flamingo-pink);
+            box-shadow: 0 0 0 3px rgba(255, 121, 172, 0.5); /* Sombra de enfoque rosa */
+        }
+        
+        /* Estilos de feedback */
+        .correct-answer {
+            border-color: #10B981 !important; /* Tailwind emerald-500 */
+        }
+        .incorrect-answer {
+            border-color: var(--flamingo-pink) !important;
+            /* La sombra se aplica en el JS para campos correctos/incorrectos */
+        }
+
+        /* Estilo para la lista de respuestas correctas (asegura negritas sin asteriscos) */
+        #correctAnswersList strong {
+            font-weight: 700;
+            color: var(--eerie-black);
+        }
+
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-6 md:p-10 border border-gray-100">
+
+        <!-- TÍTULO -->
+        <header class="mb-10 pb-4 border-b-2 border-pink-100">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-[#121118]">
+                <span class="text-[#FF79AC]">III.</span> Actividades / Activities
+            </h1>
+        </header>
+
+        <form id="activityForm" onsubmit="event.preventDefault(); checkAllAnswers();" class="space-y-12">
+
+            <!-- SECCIÓN A: Conjugación de verbos -->
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-[#121118] mb-3">
+                    a. Cecilia Ruiz Ramírez es una secretaria ejecutiva en un banco muy importante de su ciudad. Ella está explicando lo que hace generalmente durante la semana. / <span class="font-normal text-gray-700">Cecilia Ruiz Ramírez is an executive secretary at a major bank in her city. She is explaining what she usually does during the week.</span>
+                </h2>
+                <p class="mb-4 font-semibold text-gray-700 border-l-4 border-[#FF79AC] pl-3 py-1">
+                    Completa las frases siguientes con la conjugación del verbo en presente. / <span class="font-normal">Complete the following sentences with the present tense conjugation of the verb.</span>
+                </p>
+
+                <div class="space-y-3 text-[#121118] text-base">
+                    <p>Todos los días [Every day], yo 1. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A1" placeholder="(tomar)" onblur="checkSingleAnswer(this)"> café con mi esposo [my husband] Luis.</p>
+                    <p>Mi esposo y yo 2. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A2" placeholder="(llegar)" onblur="checkSingleAnswer(this)"> al trabajo [at work] a las 8:00 de la mañana.</p>
+                    <p>Mis colegas [my colleagues] 3. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A3" placeholder="(llegar)" onblur="checkSingleAnswer(this)"> a las 8:50.</p>
+                    <p>Nosotros 4. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A4" placeholder="(tomar)" onblur="checkSingleAnswer(this)"> café a las 10:50.</p>
+                    <p>En mi trabajo, (yo) 5. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A5" placeholder="(escuchar)" onblur="checkSingleAnswer(this)"> a muchas personas que [that] 6. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A6" placeholder="(hablar)" onblur="checkSingleAnswer(this)"> en las reuniones [meetings].</p>
+                    <p>Yo a veces [at times] 7. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A7" placeholder="(hablar)" onblur="checkSingleAnswer(this)"> también [also], pero generalmente [generally] yo 8. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A8" placeholder="(tomar)" onblur="checkSingleAnswer(this)"> las notas [notes] importantes de las reuniones.</p>
+                    <p>Mi asistente [My assistant] también 9. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A9" placeholder="(tomar)" onblur="checkSingleAnswer(this)"> notas en las reuniones.</p>
+                    <p>Todos los días, mi asistente y yo 10. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A10" placeholder="(llamar)" onblur="checkSingleAnswer(this)"> a muchas personas.</p>
+                    <p>También, yo 11. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A11" placeholder="(viajar)" onblur="checkSingleAnswer(this)"> a dos simposios [symposiums] cada año [each year].</p>
+                    <p>En casa, mi esposo y yo 12. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A12" placeholder="(preparar)" onblur="checkSingleAnswer(this)"> la cena [dinner] juntos [together].</p>
+                    <p>Alberto, mi hijo [son], no 13. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A13" placeholder="(llegar)" onblur="checkSingleAnswer(this)"> a cenar [to have dinner] con [with] nosotros porque [because] él 14. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A14" placeholder="(trabajar)" onblur="checkSingleAnswer(this)"> muy tarde [late].</p>
+                    <p>Diego, mi otro [other] hijo y sus [his] amigos a veces 15. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A15" placeholder="(llegar)" onblur="checkSingleAnswer(this)"> a cenar con nosotros.</p>
+                    <p>Ellos 16. <input type="text" class="answer-input max-w-[150px]" data-answer-id="A16" placeholder="(cocinar)" onblur="checkSingleAnswer(this)"> el postre [dessert].</p>
+                </div>
+            </div>
+
+            <!-- SECCIÓN B: Forma negativa -->
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-[#121118] mb-3">
+                    b. De la historia anterior, escribe la forma negativa de los siguientes verbos. / <span class="font-normal text-gray-700">From the previous story, write the negative form of the following verbs.</span>
+                </h2>
+                <div class="space-y-3 text-[#121118]">
+                    <p>1. Mis colegas y yo <input type="text" class="answer-input w-full md:w-2/3" data-answer-id="B1" placeholder="(tomar)" onblur="checkSingleAnswer(this)"> café a las 11:50 de la mañana.</p>
+                    <p>2. Ellos <input type="text" class="answer-input w-full md:w-2/3" data-answer-id="B2" placeholder="(llegar)" onblur="checkSingleAnswer(this)"> a las 7:50 de la mañana.</p>
+                    <p>3. Yo <input type="text" class="answer-input w-full md:w-2/3" data-answer-id="B3" placeholder="(hablar)" onblur="checkSingleAnswer(this)"> nunca [never] en las reuniones.</p>
+                    <p>4. Diego, mi hijo y su profesora <input type="text" class="answer-input w-full md:w-2/3" data-answer-id="B4" placeholder="(llegar)" onblur="checkSingleAnswer(this)"> a comer con nosotros.</p>
+                </div>
+            </div>
+
+            <!-- SECCIÓN C: Respuestas afirmativas -->
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-[#121118] mb-3">
+                    c. Responde a las preguntas de forma afirmativa. / <span class="font-normal text-gray-700">Answer the questions affirmatively.</span>
+                </h2>
+                <div class="space-y-3 text-[#121118]">
+                    <p>1. ¿Bailas mucho? <input type="text" class="answer-input w-full inline" data-answer-id="C1" onblur="checkSingleAnswer(this)"></p>
+                    <p>2. ¿Clara y Roberto bailan tango? <input type="text" class="answer-input w-full inline" data-answer-id="C2" onblur="checkSingleAnswer(this)"></p>
+                    <p>3. ¿Estudias en la universidad? <input type="text" class="answer-input w-full inline" data-answer-id="C3" onblur="checkSingleAnswer(this)"></p>
+                    <p>4. ¿Tú y tu [your] familia preparan la cena juntos? <input type="text" class="answer-input w-full inline" data-answer-id="C4" onblur="checkSingleAnswer(this)"></p>
+                    <p>5. ¿Tomas agua todos los días? <input type="text" class="answer-input w-full inline" data-answer-id="C5" onblur="checkSingleAnswer(this)"></p>
+                    <p>6. ¿Isabel compra la comida en el supermercado [supermarket]? <input type="text" class="answer-input w-full inline" data-answer-id="C6" onblur="checkSingleAnswer(this)"></p>
+                    <p>7. ¿Andrea Bocelli a veces canta en español? <input type="text" class="answer-input w-full inline" data-answer-id="C7" onblur="checkSingleAnswer(this)"></p>
+                    <p>8. ¿Cocinas pizza con amigos? <input type="text" class="answer-input w-full inline" data-answer-id="C8" onblur="checkSingleAnswer(this)"></p>
+                    <p>9. ¿Las chicas miran el fútbol [soccer]? <input type="text" class="answer-input w-full inline" data-answer-id="C9" onblur="checkSingleAnswer(this)"></p>
+                    <p>10. ¿Escuchan ustedes música en el carro [car]? <input type="text" class="answer-input w-full inline" data-answer-id="C10" onblur="checkSingleAnswer(this)"></p>
+                </div>
+            </div>
+            
+            <!-- SECCIÓN D: Adjetivos de cantidad -->
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-[#121118] mb-3">
+                    d. Cecilia Ruiz Ramírez está en un simposio esta semana. Ella está impresionada por la organización del simposio. / <span class="font-normal text-gray-700">Cecilia Ruiz Ramírez is at a symposium this week. She is impressed by the organization of the symposium.</span>
+                </h2>
+                <p class="mb-4 font-semibold text-gray-700 border-l-4 border-[#FF79AC] pl-3 py-1">
+                    Escoge el adjetivo de cantidad correcto. / <span class="font-normal">Choose the correct adjective of quantity.</span>
+                </p>
+
+                <div class="space-y-3 text-[#121118]">
+                    <p>1. En la mesa hay <input type="text" class="answer-input max-w-[150px]" data-answer-id="D1" onblur="checkSingleAnswer(this)"> (mucho, mucha, muchos, muchas) comida [food].</p>
+                    <p>2. En la recepción [reception desk] hay <input type="text" class="answer-input max-w-[150px]" data-answer-id="D2" onblur="checkSingleAnswer(this)"> (mucho, mucha, muchos, muchas) programas [programs] del simposio.</p>
+                    <p>3. En el salón [meeting room] norte hay <input type="text" class="answer-input max-w-[150px]" data-answer-id="D3" onblur="checkSingleAnswer(this)"> (poco, poca, pocos, pocas) café.</p>
+                    <p>4. En el salón oeste hay <input type="text" class="answer-input max-w-[150px]" data-answer-id="D4" onblur="checkSingleAnswer(this)"> (poco, poca, pocos, pocas) personas.</p>
+                    <p>5. En el salón sur hay <input type="text" class="answer-input max-w-[150px]" data-answer-id="D5" onblur="checkSingleAnswer(this)"> (mucho, mucha, muchos, muchas) personas.</p>
+                    <p>6. En la recepción hay <input type="text" class="answer-input max-w-[150px]" data-answer-id="D6" onblur="checkSingleAnswer(this)"> (mucho, muchas, muchos, muchas) bebidas [drinks] pero</p>
+                    <p>7. <input type="text" class="answer-input max-w-[150px]" data-answer-id="D7" onblur="checkSingleAnswer(this)"> (poco, poca, pocos, pocas) servilletas [napkins].</p>
+                </div>
+            </div>
+
+            <!-- SECCIÓN E: Adjetivos de cualidad y nacionalidad -->
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-[#121118] mb-3">
+                    e. Luis Cortés Navarro es el dueño de una agencia de viajes. El conoce a muchas personas de distintas nacionalidades. Él está mirando un álbum de fotos y está recordando las nacionalidades de sus amigos y amigas. / <span class="font-normal text-gray-700">Luis Cortés Navarro is the owner of a travel agency. He knows many people of different nationalities. He is looking at a photo album and is remembering his friends’ nationalities.</span>
+                </h2>
+                <p class="mb-4 font-semibold text-gray-700 border-l-4 border-[#FF79AC] pl-3 py-1">
+                    Escoge el adjetivo correcto. / <span class="font-normal">Choose the correct adjective.</span>
+                </p>
+
+                <div class="space-y-3 text-[#121118]">
+                    <p>1. Gerardo Martínez es muy <input type="text" class="answer-input max-w-[150px]" data-answer-id="E1a" onblur="checkSingleAnswer(this)"> (simpático, simpática, simpáticos, simpáticas). Él es de la ciudad [city] de Guadalajara, México. Él es <input type="text" class="answer-input max-w-[150px]" data-answer-id="E1b" onblur="checkSingleAnswer(this)"> (mexicano, mexicana, mexicanos, mexicanas).</p>
+                    <p>2. Hagen Hoffmeiter y su esposa [wife] Brigitte son de Núremberg. Ellos son <input type="text" class="answer-input max-w-[150px]" data-answer-id="E2a" onblur="checkSingleAnswer(this)"> (activo, activa, activos, activas) y son <input type="text" class="answer-input max-w-[150px]" data-answer-id="E2b" onblur="checkSingleAnswer(this)"> (alemán, alemana, alemanes, alemanas).</p>
+                    <p>3. El Rey [King] Felipe VI es de Madrid y es muy <input type="text" class="answer-input max-w-[150px]" data-answer-id="E3a" onblur="checkSingleAnswer(this)"> (alto, alta, altos, altas). Su esposa Letizia Ortiz es de Oviedo, Asturias. Ellos son <input type="text" class="answer-input max-w-[150px]" data-answer-id="E3b" onblur="checkSingleAnswer(this)"> (español, española, españoles, españolas).</p>
+                    <p>4. Pierre Dubois es de Dijon y su familia es de Toulouse. Él es <input type="text" class="answer-input max-w-[150px]" data-answer-id="E4a" onblur="checkSingleAnswer(this)"> (francés, francesa, franceses, francesa). Él es <input type="text" class="answer-input max-w-[150px]" data-answer-id="E4b" onblur="checkSingleAnswer(this)"> (estudiante, estudiantes) de medicina [medicine].</p>
+                    <p>5. Juan Manuel Ríos es de Buenos Aires. Él y su hermano son <input type="text" class="answer-input max-w-[150px]" data-answer-id="E5a" onblur="checkSingleAnswer(this)"> (profesor, profesora, profesores, profesoras). Ellos son <input type="text" class="answer-input max-w-[150px]" data-answer-id="E5b" onblur="checkSingleAnswer(this)"> (argentino, argentina, argentinos, argentinas).</p>
+                    <p>6. La familia Flores Quispe es de Lima. Ellos son <input type="text" class="answer-input max-w-[150px]" data-answer-id="E6" onblur="checkSingleAnswer(this)"> (peruano, peruana, peruanos, peruanas).</p>
+                    <p>7. Graciela Mercedes Ramírez Villalba es <input type="text" class="answer-input max-w-[150px]" data-answer-id="E7a" onblur="checkSingleAnswer(this)"> (dentista, dentistas). Ella trabaja en Capiatá. Ella es <input type="text" class="answer-input max-w-[150px]" data-answer-id="E7b" onblur="checkSingleAnswer(this)"> (paraguayo, paraguaya, paraguayos, paraguayas).</p>
+                </div>
+            </div>
+
+            <!-- BOTÓN DE VERIFICACIÓN -->
+            <button type="submit" id="checkButton" class="w-full py-3 bg-[#FF79AC] hover:bg-pink-500 text-white font-bold rounded-lg shadow-md transition duration-300 transform hover:scale-[1.01]">
+                Verificar Respuestas / Check Answers
+            </button>
+        </form>
+
+        <!-- RESULTADOS Y RESPUESTAS CORRECTAS (Inicialmente ocultos) -->
+        <div id="resultsSection" class="mt-12 pt-8 border-t-2 border-pink-100 hidden">
+            <h2 class="text-2xl font-extrabold text-[#121118] mb-4 flex items-center">
+                Resultado de la Verificación 
+                <span id="scoreDisplay" class="ml-4 text-xl font-bold text-[#FF79AC] rounded-full px-3 py-1 bg-pink-50"></span>
+            </h2>
+            <div id="feedbackMessage" class="mb-6 p-4 rounded-lg text-lg font-semibold border-2"></div>
+            
+            <h2 class="text-xl font-extrabold text-[#121118] mb-4">IV. Respuestas correctas / Correct Answers</h2>
+            <div id="correctAnswersList" class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4 text-sm bg-gray-50 p-4 rounded-lg">
+                <!-- Las respuestas se llenarán aquí con JavaScript para asegurar las negritas sin asteriscos -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mapeo de todas las respuestas correctas para verificación
+        const correctAnswers = {
+            // Sección A (Conjugación de verbos)
+            A1: "tomo", A2: "llegamos", A3: "llegan", A4: "tomamos", A5: "escucho", 
+            A6: "hablan", A7: "hablo", A8: "tomo", A9: "toma", A10: "llamamos",
+            A11: "viajo", A12: "preparamos", A13: "llega", A14: "trabaja", 
+            A15: "llegan", A16: "cocinan",
+
+            // Sección B (Forma negativa)
+            B1: "no tomamos", B2: "no llegan", B3: "no hablo", B4: "no llegan",
+
+            // Sección C (Respuestas afirmativas - acepta variaciones)
+            C1: ["sí, bailo mucho.", "bailo mucho."],
+            C2: ["sí, clara y roberto bailan tango.", "clara y roberto bailan tango."],
+            C3: ["sí, estudio en la universidad.", "estudio en la universidad."],
+            C4: ["sí, preparamos la cena juntos.", "preparamos la cena juntos."],
+            C5: ["sí, tomo agua todos los días.", "tomo agua todos los días."],
+            C6: ["sí, isabel compra la comida en el supermercado.", "isabel compra la comida en el supermercado."],
+            C7: ["sí, andrea bocelli a veces canta en español.", "andrea bocelli a veces canta en español."],
+            C8: ["sí, cocino pizza con amigos.", "cocino pizza con amigos.", "sí, mis amigos y yo cocinamos pizza.", "mis amigos y yo cocinamos pizza."],
+            C9: ["sí, las chicas miran el fútbol.", "las chicas miran el fútbol."],
+            C10: ["sí, escuchamos música en el carro.", "escuchamos música en el carro."],
+
+            // Sección D (Adjetivos de cantidad)
+            D1: "mucha", D2: "muchos", D3: "poco", D4: "pocas", D5: "muchas", D6: "muchas", D7: "pocas",
+
+            // Sección E (Adjetivos de cualidad y nacionalidad)
+            E1a: "simpático", E1b: "mexicano",
+            E2a: "activos", E2b: "alemanes",
+            E3a: "alto", E3b: "españoles",
+            E4a: "francés", E4b: "estudiante",
+            E5a: "profesores", E5b: "argentinos",
+            E6: "peruanos",
+            E7a: "dentista", E7b: "paraguaya"
+        };
+
+        const totalQuestions = Object.keys(correctAnswers).length;
+
+        // Función para normalizar el texto (limpiar, quitar tildes, minúsculas)
+        function normalizeText(text) {
+            if (typeof text !== 'string') return '';
+            // Quitar tildes/diacríticos, convertir a minúsculas, limpiar puntuación y espacios
+            return text.toLowerCase().trim()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
+                .replace(/[\.\,\!;\?]/g, ''); 
+        }
+
+        // NUEVA FUNCIÓN: Verifica una sola respuesta y aplica feedback visual sin desplazar.
+        function checkSingleAnswer(input) {
+            const answerId = input.getAttribute('data-answer-id');
+            const userAnswer = normalizeText(input.value);
+            const correctAnswer = correctAnswers[answerId];
+            let isCorrect = false;
+
+            input.classList.remove('correct-answer', 'incorrect-answer');
+            input.style.boxShadow = 'none';
+
+            if (userAnswer === "") {
+                // Si está vacío, solo restablece el borde al color por defecto (eerie black)
+                input.style.borderColor = 'var(--eerie-black)';
+                return;
+            }
+
+            if (Array.isArray(correctAnswer)) {
+                // Para respuestas con múltiples opciones válidas (Sección C)
+                isCorrect = correctAnswer.map(normalizeText).includes(userAnswer);
+            } else {
+                // Para respuestas sencillas (Secciones A, B, D, E)
+                isCorrect = normalizeText(correctAnswer) === userAnswer;
+            }
+            
+            if (isCorrect) {
+                input.classList.add('correct-answer');
+                // Sombra verde para el feedback visual
+                input.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.5)';
+            } else {
+                input.classList.add('incorrect-answer');
+                // Sombra rosa flamenco para el feedback visual
+                input.style.boxShadow = '0 0 0 3px rgba(255, 121, 172, 0.5)'; 
+            }
+            // NO se llama a checkAllAnswers() ni se desplaza la vista aquí.
+        }
+
+
+        // FUNCIÓN PRINCIPAL (checkAllAnswers renombrada): Verifica todas las respuestas, calcula score y muestra la sección final.
+        function checkAllAnswers() {
+            let correctCount = 0;
+            const formInputs = document.querySelectorAll('#activityForm input[data-answer-id]');
+            
+            // 1. Recorre todos los inputs para aplicar el feedback visual y contar el score
+            formInputs.forEach(input => {
+                // Llama a checkSingleAnswer para asegurar que todos los bordes están actualizados antes de contar
+                checkSingleAnswer(input);
+                
+                // Contar solo si el campo no está vacío y es correcto
+                if (!input.classList.contains('incorrect-answer') && input.value.trim() !== "") {
+                    correctCount++;
+                }
+            });
+
+            // 2. Mostrar resultados
+            const resultsSection = document.getElementById('resultsSection');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const feedbackMessage = document.getElementById('feedbackMessage');
+            const correctAnswersList = document.getElementById('correctAnswersList');
+            
+            resultsSection.classList.remove('hidden');
+            scoreDisplay.textContent = `${correctCount} / ${totalQuestions}`;
+            
+            // Mensaje de feedback
+            if (correctCount === totalQuestions) {
+                feedbackMessage.textContent = "¡Felicidades! Has completado todas las actividades correctamente. ¡Excelente trabajo!";
+                feedbackMessage.className = 'mb-6 p-4 rounded-lg text-lg font-semibold border-2 border-emerald-400 bg-emerald-50 text-emerald-700';
+            } else if (correctCount > totalQuestions * 0.7) {
+                feedbackMessage.textContent = `¡Muy bien! Tienes ${correctCount} respuestas correctas. ¡Sigue practicando!`;
+                feedbackMessage.className = 'mb-6 p-4 rounded-lg text-lg font-semibold border-2 border-yellow-400 bg-yellow-50 text-yellow-700';
+            } else {
+                feedbackMessage.textContent = `Sigue intentándolo. Tienes ${correctCount} respuestas correctas. Revisa las respuestas correctas abajo.`;
+                feedbackMessage.className = 'mb-6 p-4 rounded-lg text-lg font-semibold border-2 border-red-400 bg-red-50 text-red-700';
+            }
+
+            // 3. Generar lista de respuestas correctas
+            displayCorrectAnswers(correctAnswersList);
+
+            // IMPORTANTE: Se ha eliminado la llamada a .scrollIntoView() aquí, 
+            // cumpliendo con la solicitud de no desplazar la página.
+        }
+        
+        // Función para generar la lista de respuestas correctas usando <strong>
+        function displayCorrectAnswers(container) {
+            container.innerHTML = ''; // Limpiar
+            
+            // Estructura de respuestas originales con <strong> para las negritas
+            const answersContent = `
+                <div class="space-y-4">
+                    <p class="font-bold text-[#FF79AC]">a.</p>
+                    <p>1. <strong>tomo</strong></p>
+                    <p>2. <strong>llegamos</strong></p>
+                    <p>3. <strong>llegan</strong></p>
+                    <p>4. <strong>tomamos</strong></p>
+                    <p>5. <strong>escucho</strong></p>
+                    <p>6. <strong>hablan</strong></p>
+                    <p>7. <strong>hablo</strong></p>
+                    <p>8. <strong>tomo</strong></p>
+                    <p>9. <strong>toma</strong></p>
+                    <p>10. <strong>llamamos</strong></p>
+                    <p>11. <strong>viajo</strong></p>
+                    <p>12. <strong>preparamos</strong></p>
+                    <p>13. <strong>llega</strong></p>
+                    <p>14. <strong>trabaja</strong></p>
+                    <p>15. <strong>llegan</strong></p>
+                    <p>16. <strong>cocinan</strong></p>
+                </div>
+
+                <div class="space-y-4">
+                    <p class="font-bold text-[#FF79AC]">b.</p>
+                    <p>1. <strong>no tomamos</strong></p>
+                    <p>2. <strong>no llegan</strong></p>
+                    <p>3. <strong>no hablo</strong></p>
+                    <p>4. <strong>no llegan</strong></p>
+                </div>
+                
+                <div class="space-y-4">
+                    <p class="font-bold text-[#FF79AC]">c. (Ejemplos de respuestas afirmativas)</p>
+                    <p>1. <strong>Sí, bailo mucho.</strong></p>
+                    <p>2. <strong>Sí, Clara y Roberto bailan tango.</strong></p>
+                    <p>3. <strong>Sí, estudio en la universidad.</strong></p>
+                    <p>4. <strong>Sí, preparamos la cena juntos.</strong></p>
+                    <p>5. <strong>Sí, tomo agua todos los días.</strong></p>
+                    <p>6. <strong>Sí, Isabel compra la comida en el supermercado.</strong></p>
+                    <p>7. <strong>Sí, Andrea Bocelli a veces canta en español.</strong></p>
+                    <p>8. <strong>Sí, cocino pizza con amigos.</strong> / <strong>Sí, mis amigos y yo cocinamos pizza.</strong></p>
+                    <p>9. <strong>Sí, las chicas miran el fútbol.</strong></p>
+                    <p>10. <strong>Sí, escuchamos música en el carro.</strong></p>
+                </div>
+                
+                <div class="space-y-4">
+                    <p class="font-bold text-[#FF79AC]">d.</p>
+                    <p>1. <strong>mucha</strong></p>
+                    <p>2. <strong>muchos</strong></p>
+                    <p>3. <strong>poco</strong></p>
+                    <p>4. <strong>pocas</strong></p>
+                    <p>5. <strong>muchas</strong></p>
+                    <p>6. <strong>muchas</strong></p>
+                    <p>7. <strong>pocas</strong></p>
+                </div>
+
+                <div class="space-y-4 md:col-span-1">
+                    <p class="font-bold text-[#FF79AC]">e.</p>
+                    <p>1. <strong>simpático</strong> / <strong>mexicano</strong></p>
+                    <p>2. <strong>activos</strong> / <strong>alemanes</strong></p>
+                    <p>3. <strong>alto</strong> / <strong>españoles</strong></p>
+                    <p>4. <strong>francés</strong> / <strong>estudiante</strong></p>
+                    <p>5. <strong>profesores</strong> / <strong>argentinos</strong></p>
+                    <p>6. <strong>peruanos</strong></p>
+                    <p>7. <strong>dentista</strong> / <strong>paraguaya</strong></p>
+                </div>
+            `;
+            container.innerHTML = answersContent;
+        }
+    </script>
+</body>
+</html>
