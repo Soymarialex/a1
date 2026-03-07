@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los pasatiempos / Hobbies</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .grid-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+        }
+
+        /* Estilo para términos en español */
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-contenido {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Los pasatiempos / Hobbies</h2>
+
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>el ocio</strong> – leisure</div>
+                <div><strong>libre</strong> – free</div>
+                <div><strong>el tiempo libre</strong> – free time</div>
+                <div><strong>la fiesta</strong> – party</div>
+                <div><strong>hacer una fiesta</strong> – to throw a party</div>
+                <div><strong>la celebración</strong> – celebration</div>
+                <div><strong>el regalo</strong> – gift</div>
+                <div><strong>tocar</strong> – to play an instrument, to touch</div>
+                <div><strong>la música</strong> – music</div>
+                <div><strong>el concierto</strong> – concert</div>
+                <div><strong>la orquesta</strong> – orchestra</div>
+                <div><strong>la función</strong> – show</div>
+                <div><strong>el espectáculo</strong> – show</div>
+                <div><strong>la entrada</strong> – admission ticket</div>
+                <div><strong>el boleto</strong> – ticket</div>
+                <div><strong>al aire libre</strong> – outdoors</div>
+                <div><strong>pasear</strong> – to take a walk</div>
+                <div><strong>la película</strong> – movie</div>
+                <div><strong>el film</strong> – film</div>
+                <div><strong>acampar</strong> – to camp</div>
+                <div><strong>la playa</strong> – beach</div>
+                <div><strong>las vacaciones</strong> – vacation</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

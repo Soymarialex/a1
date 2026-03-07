@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los accesorios y los materiales / Accessories and materials</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .grid-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+        }
+
+        /* Estilo para términos en español */
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-contenido {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Los accesorios y los materiales / Accessories and materials</h2>
+
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>la cartera</strong> – wallet</div>
+                <div><strong>la bolsa</strong> – purse</div>
+                
+                <div><strong>los lentes</strong> – glasses</div>
+                <div><strong>los lentes de sol</strong> – sunglasses</div>
+                
+                <div><strong>el anillo</strong> – ring</div>
+                <div><strong>la pulsera</strong> – bracelet</div>
+                
+                <div><strong>los aretes</strong> – earrings</div>
+                <div><strong>el collar</strong> – necklace</div>
+                
+                <div><strong>la joyería</strong> – jewelry</div>
+                <div><strong>el algodón</strong> – cotton</div>
+                
+                <div><strong>la seda</strong> – silk</div>
+                <div><strong>la lana</strong> – wool</div>
+                
+                <div><strong>el cuero</strong> – leather</div>
+                <div><strong>el oro</strong> – gold</div>
+                
+                <div><strong>la plata</strong> – silver</div>
+                <div><strong>la tela</strong> – fabric</div>
+                
+                <div><strong>el material</strong> – material</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

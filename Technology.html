@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La tecnología / Technology</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .grid-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 40px;
+        }
+
+        /* Estilo para términos en español */
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        .nota-genero {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-contenido {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>La tecnología / Technology</h2>
+
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>la tecnología</strong> – technology</div>
+                <div><strong>el sitio web</strong> – website</div>
+                <div><strong>la página web</strong> – web page</div>
+                <div><strong>el blog</strong> – blog</div>
+                <div><strong>el correo electrónico</strong> – e-mail</div>
+                <div><strong>el mensaje de texto</strong> – text message</div>
+                <div><strong>el usuario</strong> – user</div>
+                <div><strong>el enlace</strong> – link</div>
+                <div><strong>la conexión</strong> – connection</div>
+                <div><strong>funcionar</strong> – to work, to function</div>
+                <div><strong>el buscador</strong> – search engine</div>
+                <div><strong>chatear</strong> – to chat online</div>
+                <div><strong>acceder a Internet</strong> – to access the Internet</div>
+                <div><strong>descargar</strong> – to download</div>
+                <div><strong>navegar por la red</strong> – to surf the Internet</div>
+                <div><strong>el nombre de usuario</strong> – username</div>
+                <div><strong>la contraseña</strong> – password</div>
+                <div><strong>el/la Internet</strong> – <span class="nota-genero">Internet (ambos géneros)</span></div>
+                <div><strong>la conexión inalámbrica</strong> – wireless connection</div>
+                <div><strong>el teléfono inalámbrico</strong> – cordless phone</div>
+                <div><strong>el teléfono celular</strong> – cell phone</div>
+                <div><strong>el celular</strong> – cell phone</div>
+                <div><strong>el móvil</strong> – cell phone</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

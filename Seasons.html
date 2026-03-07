@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las estaciones / Seasons</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            /* Fallback según guía: Segoe UI o Roboto */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .grid-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+        }
+
+        /* Estilo para términos en español según instrucción */
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-contenido {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Las estaciones / Seasons</h2>
+
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>la estación</strong> – season</div>
+                <div><strong>la primavera</strong> – spring</div>
+                <div><strong>el verano</strong> – summer</div>
+                <div><strong>el otoño</strong> – autumn</div>
+                <div><strong>el invierno</strong> – winter</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

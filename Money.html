@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El dinero / Money</title>
+    <style>
+        /* Estilo consistente con lecciones anteriores */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .grid-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 40px;
+        }
+
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        .icono {
+            font-size: 1.2rem;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-contenido {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>El dinero / Money</h2>
+
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>el dinero</strong> – money</div>
+                <div><strong>el dinero en efectivo</strong> – cash</div>
+                <div><strong>el dólar</strong> – dollar</div>
+                <div><strong>el cajero automático</strong> – automated teller machine</div>
+                <div><strong>el cheque</strong> – check</div>
+                <div><strong>gratis</strong> – free, at no cost</div>
+                <div><strong>cambiar</strong> – to change, to exchange</div>
+                <div><strong>el préstamo</strong> – loan</div>
+                <div><strong>depositar</strong> – to deposit</div>
+                <div><strong>retirar</strong> – to withdraw</div>
+                <div><strong>la tarjeta de crédito</strong> – credit card</div>
+                <div><strong>la tarjeta de débito</strong> – debit card</div>
+                <div><strong>la transacción bancaria</strong> – bank transaction</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

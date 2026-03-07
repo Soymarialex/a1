@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Saludos / Greetings</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            /* Fallback según guía: Segoe UI o Roboto */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0; /* Ajustado al eliminar el H1 */
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .grid-saludos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+        }
+
+        /* Estilo para términos en español según instrucción */
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-saludos {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Título eliminado según solicitud -->
+        <h2>Los saludos / Greetings</h2>
+
+        <div class="banco-palabras">
+            <div class="grid-saludos">
+                <div><strong>saludar</strong> – to greet</div>
+                <div><strong>hola</strong> – hello</div>
+                <div><strong>¿Qué tal?</strong> – How’s it going?</div>
+                <div><strong>¿Cómo estás?</strong> – How are you? [inf., sing.]</div>
+                <div><strong>¿Cómo está usted?</strong> – How are you? [form., sing.]</div>
+                <div><strong>¿Cómo están ustedes?</strong> – How are you? [form., pl.]</div>
+                <div><strong>Bien, gracias. ¿Y tú?</strong> – Fine, thanks. And you? [inf., sing.]</div>
+                <div><strong>Bien, gracias. ¿Y usted?</strong> – Fine, thanks. And you? [form., sing.]</div>
+                <div><strong>Bien, gracias. ¿Y ustedes?</strong> – Fine, thanks. And you? [form., pl.]</div>
+                <div><strong>bien</strong> – well</div>
+                <div><strong>Estoy bien.</strong> – I’m well.</div>
+                <div><strong>mal</strong> – not well</div>
+                <div><strong>Estoy mal.</strong> – I’m not well.</div>
+                <div><strong>regular</strong> – so-so</div>
+                <div><strong>más o menos</strong> – so-so</div>
+                <div><strong>no muy bien</strong> – not very well</div>
+                <div><strong>buenos días</strong> – good morning</div>
+                <div><strong>buen día</strong> – good morning</div>
+                <div><strong>buenas tardes</strong> – good afternoon</div>
+                <div><strong>buenas noches</strong> – good evening, good night</div>
+                <div><strong>Me llamo….</strong> – My name is….</div>
+                <div><strong>Soy….</strong> – I am….</div>
+                <div><strong>Mi nombre es….</strong> – My name is….</div>
+                <div><strong>¿Cómo te llamas?</strong> – What’s your name? [inf., sing.]</div>
+                <div><strong>¿Cómo se llama usted?</strong> – What’s your name? [form., sing.]</div>
+                <div><strong>mucho gusto</strong> – nice to meet you</div>
+                <div><strong>encantado</strong> – pleased to meet you [speaker masc.]</div>
+                <div><strong>encantada</strong> – pleased to meet you [speaker fem.]</div>
+                <div><strong>Es un placer.</strong> – It’s a pleasure.</div>
+                <div><strong>igualmente</strong> – likewise</div>
+                <div><strong>gracias</strong> – thank you</div>
+                <div><strong>muy bien, gracias</strong> – very well, thank you</div>
+                <div><strong>bastante bien</strong> – just fine</div>
+                <div><strong>bienvenidos</strong> – welcome [pl.]</div>
+                <div><strong>Te presento a….</strong> – Let me introduce you to….[inf., sing.]</div>
+                <div><strong>Le presento a….</strong> – Let me introduce you to…. [form., sing.]</div>
+                <div><strong>Les presento a….</strong> – Let me introduce you to….[pl.]</div>
+                <div><strong>adiós</strong> – good-bye</div>
+                <div><strong>chao</strong> – bye</div>
+                <div><strong>hasta luego</strong> – see you later</div>
+                <div><strong>hasta mañana</strong> – see you tomorrow</div>
+                <div><strong>hasta pronto</strong> – see you soon</div>
+                <div><strong>nos vemos</strong> – see you</div>
+                <div><strong>¿Qué pasa?</strong> – What’s happening?</div>
+                <div><strong>Perdóneme.</strong> – Pardon me. [usted command]</div>
+                <div><strong>Discúlpeme.</strong> – Excuse me. [usted command]</div>
+                <div><strong>enhorabuena</strong> – congratulations</div>
+                <div><strong>felicidades</strong> – congratulations</div>
+                <div><strong>¡Qué elegante!</strong> – How elegant!</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

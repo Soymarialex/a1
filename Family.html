@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La familia / Family</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .grid-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+        }
+
+        /* Clase para ocupar toda la fila y mostrar contenido en línea (usada para variantes como mamá/mami) */
+        .full-row {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 30px;
+        }
+
+        /* Estilo para términos en español */
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        /* Separador sutil entre bloques de familia */
+        .separador {
+            grid-column: 1 / -1;
+            height: 1px;
+            background-color: var(--color-divisor);
+            margin: 10px 0;
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-contenido {
+                grid-template-columns: 1fr;
+            }
+            .full-row {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>La familia / Family</h2>
+
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <!-- Núcleo Familiar -->
+                <div><strong>la familia</strong> – family</div>
+                <div><strong>el pariente</strong> – relative</div>
+                <div class="full-row"><strong>los padres</strong> – parents</div>
+                
+                <div class="full-row">
+                    <div><strong>la madre</strong> – mother</div>
+                    <div><strong>la mamá</strong> – mom</div>
+                    <div><strong>mami</strong> – mommy</div>
+                </div>
+
+                <div class="full-row">
+                    <div><strong>el padre</strong> – father</div>
+                    <div><strong>el papá</strong> – dad</div>
+                    <div><strong>papi</strong> – daddy</div>
+                </div>
+
+                <div><strong>el esposo</strong> – husband</div>
+                <div><strong>la esposa</strong> – wife</div>
+                <div><strong>el hijo</strong> – son</div>
+                <div><strong>la hija</strong> – daughter</div>
+                <div><strong>el hermano</strong> – brother</div>
+                <div><strong>la hermana</strong> – sister</div>
+
+                <div class="separador"></div>
+
+                <!-- Familia Extendida -->
+                <div><strong>el abuelo</strong> – grandfather</div>
+                <div><strong>la abuela</strong> – grandmother</div>
+                <div class="full-row"><strong>la abuelita</strong> – granny</div>
+                
+                <div><strong>el tío</strong> – uncle</div>
+                <div><strong>la tía</strong> – aunt</div>
+                <div><strong>el primo</strong> – male cousin</div>
+                <div><strong>la prima</strong> – female cousin</div>
+                <div><strong>el sobrino</strong> – nephew</div>
+                <div><strong>la sobrina</strong> – niece</div>
+                <div><strong>el nieto</strong> – grandson</div>
+                <div><strong>la nieta</strong> – granddaughter</div>
+
+                <div class="separador"></div>
+
+                <!-- Identidad y Apellidos -->
+                <div><strong>el nombre</strong> – name</div>
+                <div><strong>el apellido</strong> – last name</div>
+                <div><strong>materno</strong> – maternal</div>
+                <div><strong>paterno</strong> – paternal</div>
+
+                <div class="separador"></div>
+
+                <!-- Familia Política y Recompuesta -->
+                <div><strong>la suegra</strong> – mother-in-law</div>
+                <div><strong>el suegro</strong> – father-in-law</div>
+                <div><strong>la cuñada</strong> – sister-in-law</div>
+                <div><strong>el cuñado</strong> – brother-in-law</div>
+                <div><strong>la nuera</strong> – daughter-in-law</div>
+                <div><strong>el yerno</strong> – son-in-law</div>
+                <div><strong>la madrastra</strong> – stepmother</div>
+                <div><strong>el padrastro</strong> – stepfather</div>
+                <div><strong>la hijastra</strong> – stepdaughter</div>
+                <div><strong>el hijastro</strong> – stepson</div>
+                <div><strong>la hermanastra</strong> – stepsister</div>
+                <div><strong>el hermanastro</strong> – stepbrother</div>
+                <div><strong>el medio hermano</strong> – half brother</div>
+                <div><strong>la media hermana</strong> – half sister</div>
+                
+                <div class="separador"></div>
+
+                <!-- Generaciones Distantes y Otros -->
+                <div><strong>el bisabuelo</strong> – great-grandfather</div>
+                <div><strong>la bisabuela</strong> – great-grandmother</div>
+                <div><strong>el bisnieto</strong> – great-grandson</div>
+                <div><strong>la bisnieta</strong> – great-granddaughter</div>
+                <div><strong>el gemelo</strong> – twin</div>
+                <div><strong>casado</strong> – married</div>
+                <div><strong>muerto</strong> – dead</div>
+                <div><strong>único</strong> – only, unique</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

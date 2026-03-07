@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los deportes / Sports</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .grid-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 40px;
+        }
+
+        /* Estilo para términos en español */
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        .nota {
+            font-style: italic;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-contenido {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Los deportes / Sports</h2>
+
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>el deporte</strong> – sport</div>
+                <div><strong>el partido</strong> – game</div>
+                <div><strong>el ejercicio</strong> – exercise</div>
+                <div><strong>hacer ejercicio</strong> – to exercise</div>
+                <div><strong>jugar <span class="nota">(u → ue)</span></strong> – to play</div>
+                <div><strong>el béisbol</strong> – baseball</div>
+                <div><strong>el tenis</strong> – tennis</div>
+                <div><strong>la liga</strong> – league</div>
+                <div><strong>el fútbol</strong> – soccer</div>
+                <div><strong>el fútbol americano</strong> – football</div>
+                <div><strong>el básquetbol</strong> – basketball</div>
+                <div><strong>el boxeo</strong> – boxing</div>
+                <div><strong>el esquí</strong> – skiing</div>
+                <div><strong>el golf</strong> – golf</div>
+                <div><strong>el ciclismo</strong> – cycling</div>
+                <div><strong>el jugador</strong> – player</div>
+                <div><strong>rápido</strong> – fast</div>
+                <div><strong>el aficionado</strong> – fan</div>
+                <div><strong>la raqueta</strong> – racquet</div>
+                <div><strong>el bate</strong> – bat</div>
+                <div><strong>el palo de golf</strong> – golf club</div>
+                <div><strong>la pelota</strong> – ball</div>
+                <div><strong>el balón</strong> – ball</div>
+                <div><strong>el equipo</strong> – team</div>
+                <div><strong>el campeón</strong> – champion</div>
+                <div><strong>ganar</strong> – to win, to earn</div>
+                <div><strong>nadar</strong> – to swim</div>
+                <div><strong>la natación</strong> – swimming</div>
+                <div><strong>la piscina</strong> – swimming pool</div>
+                <div><strong>levantar pesas</strong> – to lift weights</div>
+                <div><strong>entrenar</strong> – to train</div>
+                <div><strong>el entrenador</strong> – coach, trainer</div>
+                <div><strong>la competencia</strong> – competition</div>
+                <div><strong>esquiar</strong> – to ski</div>
+                <div><strong>el esquí acuático</strong> – water skiing</div>
+                <div><strong>el buceo</strong> – scuba diving</div>
+                <div><strong>bucear</strong> – to scuba dive</div>
+                <div><strong>tomar el sol</strong> – to sunbathe</div>
+                <div><strong>montar a caballo</strong> – to ride a horse</div>
+                <div><strong>hacer yoga</strong> – to do yoga</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

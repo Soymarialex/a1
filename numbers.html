@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Números / Numbers</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .grid-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+        }
+
+        /* Estilo para términos en español */
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-contenido {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Sección: Números Ordinales -->
+        <h2>Los números ordinales / Ordinal numbers</h2>
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>el número</strong> – number</div>
+                <div><strong>primero</strong> – first</div>
+                <div><strong>segundo</strong> – second</div>
+                <div><strong>tercero</strong> – third</div>
+                <div><strong>cuarto</strong> – fourth</div>
+                <div><strong>quinto</strong> – fifth</div>
+                <div><strong>sexto</strong> – sixth</div>
+                <div><strong>séptimo</strong> – seventh</div>
+                <div><strong>octavo</strong> – eighth</div>
+                <div><strong>noveno</strong> – ninth</div>
+                <div><strong>décimo</strong> – tenth</div>
+            </div>
+        </div>
+
+        <!-- Sección: Números hasta 33 -->
+        <h2>Los números hasta 33 / Numbers to 33</h2>
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>cero</strong> – zero</div>
+                <div><strong>uno</strong> – one</div>
+                <div><strong>dos</strong> – two</div>
+                <div><strong>tres</strong> – three</div>
+                <div><strong>cuatro</strong> – four</div>
+                <div><strong>cinco</strong> – five</div>
+                <div><strong>seis</strong> – six</div>
+                <div><strong>siete</strong> – seven</div>
+                <div><strong>ocho</strong> – eight</div>
+                <div><strong>nueve</strong> – nine</div>
+                <div><strong>diez</strong> – ten</div>
+                <div><strong>once</strong> – eleven</div>
+                <div><strong>doce</strong> – twelve</div>
+                <div><strong>trece</strong> – thirteen</div>
+                <div><strong>catorce</strong> – fourteen</div>
+                <div><strong>quince</strong> – fifteen</div>
+                <div><strong>dieciséis</strong> – sixteen</div>
+                <div><strong>diecisiete</strong> – seventeen</div>
+                <div><strong>dieciocho</strong> – eighteen</div>
+                <div><strong>diecinueve</strong> – nineteen</div>
+                <div><strong>veinte</strong> – twenty</div>
+                <div><strong>veintiuno</strong> – twenty-one</div>
+                <div><strong>veintidós</strong> – twenty-two</div>
+                <div><strong>veintitrés</strong> – twenty-three</div>
+                <div><strong>veinticuatro</strong> – twenty-four</div>
+                <div><strong>veinticinco</strong> – twenty-five</div>
+                <div><strong>veintiséis</strong> – twenty-six</div>
+                <div><strong>veintisiete</strong> – twenty-seven</div>
+                <div><strong>veintiocho</strong> – twenty-eight</div>
+                <div><strong>veintinueve</strong> – twenty-nine</div>
+                <div><strong>treinta</strong> – thirty</div>
+                <div><strong>treinta y uno</strong> – thirty-one</div>
+                <div><strong>treinta y dos</strong> – thirty-two</div>
+                <div><strong>treinta y tres</strong> – thirty-three</div>
+            </div>
+        </div>
+
+        <!-- Sección: Múltiplos de 10 -->
+        <h2>Múltiplos de 10 hasta 100 / Multiples of 10 to 100</h2>
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>diez</strong> – ten</div>
+                <div><strong>veinte</strong> – twenty</div>
+                <div><strong>treinta</strong> – thirty</div>
+                <div><strong>cuarenta</strong> – forty</div>
+                <div><strong>cincuenta</strong> – fifty</div>
+                <div><strong>sesenta</strong> – sixty</div>
+                <div><strong>setenta</strong> – seventy</div>
+                <div><strong>ochenta</strong> – eighty</div>
+                <div><strong>noventa</strong> – ninety</div>
+                <div><strong>cien</strong> – one hundred</div>
+            </div>
+        </div>
+
+        <!-- Sección: 100 y más -->
+        <h2>100 y más de 100 / 100 and More Than 100</h2>
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>cien</strong> – one hundred</div>
+                <div><strong>doscientos</strong> – two hundred</div>
+                <div><strong>trescientos</strong> – three hundred</div>
+                <div><strong>cuatrocientos</strong> – four hundred</div>
+                <div><strong>quinientos</strong> – five hundred</div>
+                <div><strong>seiscientos</strong> – six hundred</div>
+                <div><strong>setecientos</strong> – seven hundred</div>
+                <div><strong>ochocientos</strong> – eight hundred</div>
+                <div><strong>novecientos</strong> – nine hundred</div>
+                <div><strong>mil</strong> – thousand</div>
+                <div><strong>millón</strong> – million</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

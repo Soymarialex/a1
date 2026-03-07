@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las partes del cuerpo / Parts of the body</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .grid-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+        }
+
+        /* Estilo para términos en español */
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-contenido {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Las partes del cuerpo / Parts of the body</h2>
+
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div><strong>el cuerpo</strong> – body</div>
+                <div><strong>la cabeza</strong> – head</div>
+                
+                <div><strong>el pelo</strong> – hair</div>
+                <div><strong>la cara</strong> – face</div>
+                
+                <div><strong>la frente</strong> – forehead</div>
+                <div><strong>el ojo</strong> – eye</div>
+                
+                <div><strong>la nariz</strong> – nose</div>
+                <div><strong>la mejilla</strong> – cheek</div>
+                
+                <div><strong>la boca</strong> – mouth</div>
+                <div><strong>el labio</strong> – lip</div>
+                
+                <div><strong>el diente</strong> – tooth</div>
+                <div><strong>la lengua</strong> – tongue, language</div>
+                
+                <div><strong>la oreja</strong> – ear</div>
+                <div><strong>el cuello</strong> – neck</div>
+                
+                <div><strong>el hombro</strong> – shoulder</div>
+                <div><strong>el pecho</strong> – chest</div>
+                
+                <div><strong>la espalda</strong> – back</div>
+                <div><strong>el estómago</strong> – stomach</div>
+                
+                <div><strong>el brazo</strong> – arm</div>
+                <div><strong>el codo</strong> – elbow</div>
+                
+                <div><strong>la muñeca</strong> – wrist</div>
+                <div><strong>la mano</strong> – hand</div>
+                
+                <div><strong>el dedo</strong> – finger</div>
+                <div><strong>la cintura</strong> – waist</div>
+                
+                <div><strong>la pierna</strong> – leg</div>
+                <div><strong>la rodilla</strong> – knee</div>
+                
+                <div><strong>el tobillo</strong> – ankle</div>
+                <div><strong>el pie</strong> – foot</div>
+                
+                <div><strong>el dedo del pie</strong> – toe</div>
+                <div><strong>los pulmones</strong> – lungs</div>
+                
+                <div><strong>la garganta</strong> – throat</div>
+                <div><strong>el corazón</strong> – heart</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

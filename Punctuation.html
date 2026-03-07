@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La puntuación / Punctuation</title>
+    <style>
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .grid-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px 40px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .item {
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-start;
+        }
+
+        .simbolo {
+            color: var(--color-primario);
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            background: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+            border: 1px solid var(--color-secundario);
+            min-width: 25px;
+            text-align: center;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .grid-contenido {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>La puntuación / Punctuation</h2>
+
+        <div class="banco-palabras">
+            <div class="grid-contenido">
+                <div class="item">
+                    <span><strong>la puntuación</strong> – punctuation</span>
+                </div>
+                <div class="item">
+                    <span><strong>el signo de puntuación</strong> – punctuation mark</span>
+                </div>
+                <div class="item">
+                    <span class="simbolo">.</span>
+                    <span><strong>el punto</strong> – point, period</span>
+                </div>
+                <div class="item">
+                    <span class="simbolo">:</span>
+                    <span><strong>dos puntos</strong> – colon</span>
+                </div>
+                <div class="item">
+                    <span class="simbolo">,</span>
+                    <span><strong>la coma</strong> – comma</span>
+                </div>
+                <div class="item">
+                    <span class="simbolo">;</span>
+                    <span><strong>el punto y coma</strong> – semicolon</span>
+                </div>
+                <div class="item">
+                    <span class="simbolo">¿ ?</span>
+                    <span><strong>los signos de interrogación</strong> – question marks</span>
+                </div>
+                <div class="item">
+                    <span class="simbolo">¡ !</span>
+                    <span><strong>los signos de exclamación</strong> – exclamation marks</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

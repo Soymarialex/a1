@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las profesiones / Professions</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-divisor: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h2 {
+            color: var(--color-primario);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-primario);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .banco-palabras {
+            background-color: var(--color-banco);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .grid-pares {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+            margin-bottom: 12px;
+        }
+
+        .columna-unica {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Estilo para términos en español */
+        strong {
+            font-weight: bold;
+            color: var(--color-texto);
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 600px) {
+            .grid-pares {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Las profesiones / Professions</h2>
+
+        <div class="banco-palabras">
+            <!-- Sección de Pares (Masculino/Femenino) -->
+            <div class="grid-pares">
+                <div><strong>la profesión</strong> – profession</div>
+                <div><strong>el trabajo</strong> – work, job</div>
+
+                <div><strong>el pianista</strong> – male pianist</div>
+                <div><strong>la pianista</strong> – female pianist</div>
+
+                <div><strong>el dentista</strong> – male dentist</div>
+                <div><strong>la dentista</strong> – female dentist</div>
+
+                <div><strong>el futbolista</strong> – male soccer player</div>
+                <div><strong>la futbolista</strong> – female soccer player</div>
+
+                <div><strong>el profesor</strong> – male professor</div>
+                <div><strong>la profesora</strong> – female professor</div>
+
+                <div><strong>el doctor</strong> – male doctor</div>
+                <div><strong>la doctora</strong> – female doctor</div>
+
+                <div><strong>el hombre de negocios</strong> – businessman</div>
+                <div><strong>la mujer de negocios</strong> – businesswoman</div>
+
+                <div><strong>el cocinero</strong> – male cook</div>
+                <div><strong>la cocinera</strong> – female cook</div>
+
+                <div><strong>el mesero</strong> – waiter</div>
+                <div><strong>la mesera</strong> – waitress</div>
+            </div>
+
+            <!-- Sección de Líneas Individuales (sin separadores visuales) -->
+            <div class="columna-unica">
+                <div><strong>el maestro</strong> – teacher</div>
+                <div><strong>el abogado</strong> – lawyer</div>
+                <div><strong>el arquitecto</strong> – architect</div>
+                <div><strong>el enfermero</strong> – nurse</div>
+                <div><strong>el director de escuela</strong> – school principal</div>
+                <div><strong>el trabajador social</strong> – social worker</div>
+                <div><strong>el policía</strong> – police officer</div>
+                <div><strong>el asistente</strong> – assistant</div>
+                <div><strong>el contador</strong> – accountant</div>
+                <div><strong>el dueño</strong> – owner</div>
+                <div><strong>el gerente</strong> – manager</div>
+                <div><strong>el secretario</strong> – secretary</div>
+                <div><strong>el supervisor</strong> – supervisor</div>
+                <div><strong>el empleado</strong> – employee</div>
+                
+                <div><strong>la entrevista</strong> – interview</div>
+                <div><strong>la entrevista de trabajo</strong> – job interview</div>
+                <div><strong>entrevistar</strong> – to interview</div>
+                <div><strong>emplear</strong> – to employ</div>
+                <div><strong>contratar</strong> – to hire</div>
+                <div><strong>despedir (e &rarr; i)</strong> – to fire</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
