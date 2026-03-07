@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect with the world</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --fondo-pagina: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--fondo-pagina);
+            color: var(--color-texto);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Layout Responsivo */
+        .container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        /* Columna Izquierda (Navegación) */
+        nav {
+            width: 350px;
+            background-color: var(--fondo-pagina);
+            border-right: 1px solid var(--color-secundario);
+            padding: 2rem 1.5rem;
+            flex-shrink: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* Contenido Principal */
+        main {
+            flex-grow: 1;
+            padding: 2rem 3rem;
+            text-align: justify;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Tipografía y Estilos de Texto */
+        .content-header {
+            margin-left: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--color-primario);
+            font-weight: bold;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: var(--color-texto);
+            border-bottom: 2px solid var(--color-primario);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Botones de Navegación */
+        .nav-button {
+            display: block;
+            width: 100%;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.8rem;
+            background-color: var(--color-secundario);
+            color: var(--color-texto);
+            text-decoration: none;
+            text-align: left;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+
+        .nav-button:hover {
+            background-color: var(--color-primario);
+            color: white;
+        }
+
+        /* Footer y Botón Especial */
+        .footer-section {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-secundario);
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #121118;
+            color: #FF79AC;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: transform 0.2s ease, opacity 0.3s ease;
+            border: 2px solid #121118;
+        }
+
+        .cta-button:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: var(--color-texto);
+        }
+
+        /* Adaptabilidad para Móviles */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            nav {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--color-secundario);
+            }
+            main {
+                padding: 1.5rem;
+            }
+            .content-header {
+                margin-left: 0;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Columna Izquierda -->
+        <nav>
+            <a href="https://soymarialex.github.io/a1/lesson1IntroductiontotheSpanishLanguage/paginaprincipal.html" class="nav-button">Lesson 1 Introduction to the Spanish Language</a>
+            <a href="https://soymarialex.github.io/a1/lesson2DefiniteArticlesandNouns/paginaprincipal.html" class="nav-button">Lesson 2 Definite Articles and Nouns</a>
+            <a href="https://soymarialex.github.io/a1/lesson3SubjectPronounsandtheVerbSer/paginaprincipal.html" class="nav-button">Lesson 3 Subject Pronouns and the Verb Ser</a>
+            <a href="https://soymarialex.github.io/a1/lesson4Regular-arVerbsinthePresent/paginaprincipal.html" class="nav-button">Lesson 4 Regular -ar Verbs in the Present</a>
+            <a href="https://soymarialex.github.io/a1/lesson5IndefiniteArticlesandNumbersto100/paginaprincipal.html" class="nav-button">Lesson 5 Indefinite Articles and Numbers to 100</a>
+            <a href="https://soymarialex.github.io/a1/lesson6TheVerbEstarandNumbersover100/paginaprincipal.html" class="nav-button">Lesson 6 The Verb Estar and Numbers over 100</a>
+            <a href="https://soymarialex.github.io/a1/lesson7Regular-erand-ir/paginaprincipal.html" class="nav-button">Lesson 7 Regular -er and -ir Verbs in the Present</a>
+            <a href="https://soymarialex.github.io/a1/lesson8TheVerbIrinthePresent/paginaprincipal.html" class="nav-button">Lesson 8 The Verb Ir in the Present</a>
+            <a href="https://soymarialex.github.io/a1/lesson9ExpressingTimeinSpanish/paginaprincipal.html" class="nav-button">Lesson 9 Expressing Time in Spanish</a>
+            <a href="https://soymarialex.github.io/a1/lesson10ExpressionsUsingtheVerbTener/paginaprincipal.html" class="nav-button">Lesson 10 Expressions Using the Verb Tener</a>
+            <a href="https://soymarialex.github.io/a1/lesson11VerbslikeHacerandInterrogativeWords/paginaprincipal.html" class="nav-button">Lesson 11 Verbs like Hacer and Interrogative Words</a>
+            <a href="https://soymarialex.github.io/a1/lesson12SaberAndConocer/paginaprincipal.html" class="nav-button">Lesson 12 Saber And Conocer</a>
+            <a href="https://soymarialex.github.io/a1/lesson13Stem-ChangingVerbs/paginaprincipal.html" class="nav-button">Lesson 13 Stem-Changing Verbs</a>
+            <a href="https://soymarialex.github.io/a1/lesson14VerDarandOtherIrregularVerbs/paginaprincipal.html" class="nav-button">Lesson 14 Ver Dar and Other Irregular Verbs</a>
+            <a href="https://soymarialex.github.io/a1/lesson15ThePresentProgressive/paginaprincipal.html" class="nav-button">Lesson 15 The Present Progressive</a>
+            <a href="https://soymarialex.github.io/a1/lesson16DirectObjectPronounsandAdverbs/paginaprincipal.html" class="nav-button">Lesson 16 Direct Object Pronouns and Adverbs</a>
+            <a href="https://soymarialex.github.io/a1/lesson17AffirmativesNegativesandDemonstratives/paginaprincipal.html" class="nav-button">Lesson 17 Affirmatives Negatives and Demonstratives</a>
+            <a href="https://soymarialex.github.io/a1/lesson18MoreAffirmativeandNegativeExpressions/paginaprincipal.html" class="nav-button">Lesson 18 More Affirmative and Negative Expressions</a>
+            <a href="https://soymarialex.github.io/a1/lesson19IndirectObjectPronouns/paginaprincipal.html" class="nav-button">Lesson 19 Indirect Object Pronouns</a>
+            <a href="https://soymarialex.github.io/a1/lesson20DoubleObjectPronouns/paginaprincipal.html" class="nav-button">Lesson 20 Double Object Pronouns</a>
+            <a href="https://soymarialex.github.io/a1/lesson21ReflexiveVerbs/paginaprincipal.html" class="nav-button">Lesson 21 Reflexive Verbs</a>
+            <a href="https://soymarialex.github.io/a1/lesson22TalkingaboutthePastAcabarandHace/paginaprincipal.html" class="nav-button">Lesson 22 Talking about the Past Acabar and Hace</a>
+            <a href="https://soymarialex.github.io/a1/lesson23TalkingaboutthePastDesdeCuando/paginaprincipal.html" class="nav-button">Lesson 23 Talking about the Past Desde Cuando</a>
+            <a href="https://soymarialex.github.io/a1/lesson24FormalCommandsandUnequalComparisons/paginaprincipal.html" class="nav-button">Lesson 24 Formal Commands and Unequal Comparisons</a>
+            <a href="https://soymarialex.github.io/a1/Lesson25InformalCommands/paginaprincipal.html" class="nav-button">Lesson 25 Informal Commands</a>
+            <a href="https://soymarialex.github.io/a1/Lesson26SuperlativesandEqualComparisons/paginaprincipal.html" class="nav-button">Lesson 26 Superlatives and Equal Comparisons</a>
+            <a href="https://soymarialex.github.io/a1/lesson27Regular-arVerbsinthePreterite/paginaprincipal.html" class="nav-button">Lesson 27 Regular -ar Verbs in the Preterite</a>
+            <a href="https://soymarialex.github.io/a1/lesson28Regular-erand-irVerbsinthePreterite/paginaprincipal.html" class="nav-button">Lesson 28 Regular -er and -ir Verbs in the Preterite</a>
+            <a href="https://soymarialex.github.io/a1/lesson29IrregularVerbsinthePreterite/paginaprincipal.html" class="nav-button">Lesson 29 Irregular Verbs in the Preterite</a>
+            <a href="https://soymarialex.github.io/a1/lesson30NextStepsinImprovingYourSpanish/paginaprincipal.html" class="nav-button">Lesson 30 Next Steps in Improving Your Spanish</a>
+            <a href="https://soymarialex.github.io/a1/GrammarReference.html" class="nav-button">Grammar Reference</a>
+            <a href="https://soymarialex.github.io/a1/glossaries.html" class="nav-button">Glossaries</a>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <main>
+            <div class="content-header">
+                <h1>Connect with the world</h1>
+                
+                <h2>Unlock Your Spanish Today!</h2>
+                <p>
+                    Ready to speak the language that moves the world? On this platform, you’ll find the <strong>solid foundation</strong> you need to master Spanish in a real and fun way.
+                </p>
+                <p>
+                    This method is designed so you never feel lost:
+                </p>
+                <p>
+                    <strong>Clear Theory:</strong> Key concepts explained simply and directly.<br>
+                    <strong>Active Learning:</strong> Interactive activities that challenge your mind.
+                </p>
+                <p>
+                    ✅ <strong>Instant Feedback:</strong> Thanks to our immediate verification system, you’ll know exactly how you’re doing the moment you finish. Celebrate your wins and correct your mistakes on the spot!
+                </p>
+                <p>
+                    You aren't just learning a language; you’re training your brain and opening doors to 21 countries. Start now and feel the satisfaction of leveling up!
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <p class="copyright">© 2025 Spanish Lessons with María C. All rights reserved.</p>
+                <a href="https://preply.com/en/tutor/5105409?utm_source=friend&utm_medium=ref&utm_campaign=stu_plg_plg_all_0_mul_xx_multiplesub_share-tutor-tutoring_1&utm_content=OTQ2NTAwNQ==" class="cta-button">Find your Spanish class here</a>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
