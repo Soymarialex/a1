@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Reference</title>
+    <style>
+        /* Guía de Estilo Visual Actualizada */
+        :root {
+            --primary-pink: #FF79AC;
+            --secondary-pink: #FFB3D1;
+            --eerie-black: #121118;
+            --white: #FFFFFF;
+            --divider-gray: #E0E0E0;
+        }
+
+        /* Tipografía - Ajuste de peso para contraste */
+        @font-face {
+            font-family: 'Platform Medium';
+            src: local('Platform Medium'), local('Segoe UI'), local('Roboto');
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--eerie-black);
+            font-family: 'Platform Medium', 'Segoe UI', Roboto, sans-serif;
+            /* Se baja el peso a 400 para que la negrita resalte más */
+            font-weight: 400; 
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            color: var(--primary-pink);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        h2 {
+            color: var(--primary-pink);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-pink);
+            padding-bottom: 5px;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            font-weight: bold;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--eerie-black);
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.1rem;
+            text-align: justify;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Negrita con peso 700 para máximo contraste */
+        strong {
+            font-weight: 700;
+        }
+
+        /* Estructuras de Datos */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .table-sim {
+            display: grid;
+            grid-template-columns: 80px 100px 100px;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-family: inherit;
+            font-size: 1.1rem;
+        }
+
+        .verb-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .verb-block {
+            background: #fdfdfd;
+            padding: 10px;
+            border: 1px solid #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .verb-title {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: flex-start;
+            gap: 40px;
+            margin: 10px 0;
+        }
+
+        .pronoun-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .command-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .command-table th {
+            text-align: left;
+            border-bottom: 1px solid var(--divider-gray);
+            padding: 8px;
+            color: var(--primary-pink);
+            font-weight: bold;
+        }
+
+        .command-table td {
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        input:focus {
+            outline: 2px solid var(--secondary-pink);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Grammar Reference</h1>
+
+    <h2>Articles</h2>
+    
+    <div class="grid-container">
+        <div>
+            <strong>Definite Articles</strong><br>
+            <div class="table-sim">
+                <div></div> <strong>masc.</strong> <strong>fem.</strong>
+                <div>sing.</div> <div>el</div> <div>la</div>
+                <div>pl.</div> <div>los</div> <div>las</div>
+            </div>
+        </div>
+        <div>
+            <strong>Indefinite Articles</strong><br>
+            <div class="table-sim">
+                <div></div> <strong>masc.</strong> <strong>fem.</strong>
+                <div>sing.</div> <div>un</div> <div>una</div>
+                <div>pl.</div> <div>unos</div> <div>unas</div>
+            </div>
+        </div>
+    </div>
+
+    <p>The two contractions in Spanish are as follows.</p>
+    <p><strong>a + el = al</strong> &nbsp;&nbsp;&nbsp;&nbsp; <strong>de + el = del</strong></p>
+
+    <p>Feminine nouns beginning with the sound <strong>a</strong> in a stressed syllable use <strong>el</strong> rather than <strong>la</strong> as their definite article and <strong>un</strong> rather than <strong>una</strong> as their indefinite article (e.g., <strong>el águila rápida</strong>, <strong>un águila rápida)</strong>.</p>
+
+    <h2>Nouns</h2>
+    <p>Words ending in <strong>-o</strong> are usually masculine; words ending in the letters <strong>-r</strong> and <strong>-l</strong> are also usually masculine (e.g., <strong>el maestro</strong>, <strong>el televisor</strong>, <strong>el papel</strong>). Words ending in <strong>-a</strong> are usually feminine; words ending in the suffixes <strong>-ión</strong>, <strong>-ad</strong>, and <strong>-tud</strong> are also almost always feminine (e.g., <strong>la mesa</strong>, <strong>la nación</strong>, <strong>la posibilidad</strong>, <strong>la virtud</strong>). Words ending in <strong>-ista</strong> can be either masculine or feminine (e.g., <strong>el dentista</strong>, <strong>la dentista</strong>).</p>
+
+    <p>The rules for making a noun plural are as follows.</p>
+    <p>
+        1. If a noun ends in a vowel, add an <strong>-s</strong>: <strong>la silla</strong> &rarr; <strong>las sillas</strong>.<br>
+        2. If a noun ends in a consonant other than <strong>z</strong>, add <strong>-es</strong>: <strong>el papel</strong> &rarr; <strong>los papeles</strong>.<br>
+        3. If a noun ends in a z, change the <strong>z</strong> to <strong>c</strong> and add <strong>-es</strong>: <strong>el lápiz</strong> &rarr; <strong>los lápices</strong>.
+    </p>
+
+    <h2>Adjectives</h2>
+    <p>Adjectives must agree in number and gender with the noun modified. Adjectives ending in <strong>-o</strong> and <strong>-dor</strong> and adjectives of nationality ending in a consonant have four forms.</p>
+
+    <div class="data-row">
+        <div>
+            <strong>masc.</strong><br>
+            sing. guapo<br>
+            pl. guapos
+        </div>
+        <div>
+            <strong>fem.</strong><br>
+            guapa<br>
+            guapas
+        </div>
+        <div>
+            <strong>masc.</strong><br>
+            hablador<br>
+            habladores
+        </div>
+        <div>
+            <strong>fem.</strong><br>
+            habladora<br>
+            habladoras
+        </div>
+        <div>
+            <strong>masc.</strong><br>
+            inglés<br>
+            ingleses
+        </div>
+        <div>
+            <strong>fem.</strong><br>
+            inglesa<br>
+            inglesas
+        </div>
+    </div>
+
+    <p>Almost all other adjective have two forms.</p>
+    <div class="data-row">
+        <div>
+            <strong>masc. & fem.</strong><br>
+            sing. elegante<br>
+            pl. elegantes
+        </div>
+        <div>
+            <strong>masc. & fem.</strong><br>
+            fenomenal<br>
+            fenomenales
+        </div>
+    </div>
+
+    <p>Adjectives in Spanish typically follow the noun modified (e.g., <strong>Queremos ver la casa grande y los parques bonitos</strong>)</p>
+
+    <h3>Possessive Adjectives</h3>
+    <div class="data-row">
+        <div>
+            mi / mis<br>
+            tu / tus<br>
+            su / sus
+        </div>
+        <div>
+            nuestro / nuestra / nuestros / nuestras<br>
+            vuestro / vuestra / vuestros / vuestras<br>
+            su / sus
+        </div>
+    </div>
+    <p>Possessive adjectives precede the modified noun (e.g., <strong>Tengo mis libros y ella tiene sus papeles</strong>).</p>
+
+    <h3>Demonstrative Adjectives</h3>
+    <div class="data-row">
+        <div>
+            <strong>masc.</strong><br>
+            sing. este<br>
+            pl. estos
+        </div>
+        <div>
+            <strong>fem.</strong><br>
+            esta<br>
+            estas
+        </div>
+        <div>
+            <strong>masc.</strong><br>
+            ese<br>
+            esos
+        </div>
+        <div>
+            <strong>fem.</strong><br>
+            esa<br>
+            esas
+        </div>
+        <div>
+            <strong>masc.</strong><br>
+            aquel<br>
+            aquellos
+        </div>
+        <div>
+            <strong>fem.</strong><br>
+            aquella<br>
+            aquellas
+        </div>
+    </div>
+    <p>Demonstrative adjectives precede the modified noun (e.g., <strong>Me gusta esta computadora aquí</strong>).</p>
+    <p>Demonstrative adjectives, which modify a noun, can also be used as demonstrative pronouns, which take the place of a noun (e.g., <strong>¿Cuál de los restaurantes prefieres, ese o aquel?</strong>).</p>
+
+    <h2>Adverbs</h2>
+    <p>One way to form an adverb is to add the suffix <strong>-mente</strong> to the feminine singular form of an adjective (e.g., <strong>activa</strong> + <strong>mente</strong> &rarr; <strong>activamente</strong>; <strong>general</strong> + <strong>mente</strong> &rarr; <strong>generalmente</strong>). A common way to make an adverbial expression is to use the preposition <strong>con</strong> before a noun (e.g., <strong>con frecuencia</strong>, <strong>con cuidado</strong>).</p>
+
+    <h2>Pronouns</h2>
+    <div class="pronoun-section">
+        <div>
+            <strong>Subject Pronouns</strong>
+            <div class="data-row">
+                <div>yo<br>tú<br>usted<br>Él<br>ella</div>
+                <div>nosotros, nosotras<br>vosotros, vosotras<br>ustedes<br>ellos<br>ellas</div>
+            </div>
+        </div>
+        <div>
+            <strong>Prepositional Pronouns</strong>
+            <div class="data-row">
+                <div>mí<br>ti<br>usted<br>él<br>ella</div>
+                <div>nosotros, nosotras<br>vosotros, vosotras<br>ustedes<br>ellos<br>ellas</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pronoun-section" style="margin-top:20px;">
+        <div>
+            <strong>Reflexive Pronouns</strong>
+            <div class="data-row">
+                <div>me<br>te<br>se</div>
+                <div>nos<br>os<br>se</div>
+            </div>
+        </div>
+        <div>
+            <strong>Direct Object Pronouns</strong>
+            <div class="data-row">
+                <div>me<br>te<br>lo / la</div>
+                <div>nos<br>os<br>los / las</div>
+            </div>
+        </div>
+        <div>
+            <strong>Indirect Object Pronouns</strong>
+            <div class="data-row">
+                <div>me<br>te<br>le</div>
+                <div>nos<br>os<br>les</div>
+            </div>
+        </div>
+    </div>
+
+    <p>Direct object pronouns, indirect object pronouns, and reflexive pronouns go either before a conjugated verb or after and attached to an infinitive or a present participle. Examples include the following.</p>
+    <p><strong>Lo vamos a hacer mañana</strong> or <strong>Vamos a hacerlo mañana</strong>.</p>
+    <p><strong>Les quiero dar todo el dinero</strong> or <strong>Quiero darles todo el dinero</strong>.</p>
+    <p><strong>Me estoy poniendo los zapatos</strong> or <strong>Estoy poniéndome los zapatos</strong>.</p>
+    <p>The indirect object pronoun always precedes the direct object pronoun when both are used in the same sentence (e.g., <strong>Si tengo los papeles, te los puedo mostrar</strong>).</p>
+    <p>Both <strong>le</strong> and <strong>les</strong> become <strong>se</strong> before <strong>lo, la, los, and las</strong> (e.g., <strong>Cuando los estudiantes quieren más tiempo, sus maestros siempre se lo dan</strong>).</p>
+
+    <h2>Verbs</h2>
+    <h3>Present Tense of Regular Verbs</h3>
+    <p>Once you learn the regular <strong>-ar</strong> endings in the present tense, you can learn the <strong>-er</strong> and <strong>-ir</strong> endings by knowing the following.</p>
+    <p>
+        1. The <strong>-er</strong> endings have just one difference from the <strong>-ar</strong> endings: Change <strong>a &rarr; e</strong> for every <strong>-ar</strong> ending, and that gives you the <strong>-er</strong> endings.<br>
+        2. There are only two differences between the <strong>-er</strong> endings and the <strong>-ir</strong> endings: <strong>emos &rarr; imos</strong> and <strong>éis &rarr; ís</strong>.
+    </p>
+
+    <div class="verb-grid">
+        <div class="verb-block">
+            <span class="verb-title">bailar</span>
+            bailo &nbsp;&nbsp; bailamos<br>
+            bailas &nbsp; bailáis<br>
+            baila &nbsp;&nbsp; bailan
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">comer</span>
+            como &nbsp;&nbsp; comemos<br>
+            comes &nbsp; coméis<br>
+            come &nbsp;&nbsp; comen
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">vivir</span>
+            vivo &nbsp;&nbsp; vivimos<br>
+            vives &nbsp; vivís<br>
+            vive &nbsp;&nbsp; viven
+        </div>
+    </div>
+
+    <h3>Present Tense of Commonly Used Irregular Verbs</h3>
+    <div class="verb-grid">
+        <div class="verb-block">
+            <span class="verb-title">ser</span>
+            soy &nbsp;&nbsp;&nbsp; somos<br>
+            eres &nbsp;&nbsp; sois<br>
+            es &nbsp;&nbsp;&nbsp;&nbsp; son
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">estar</span>
+            estoy &nbsp;&nbsp; estamos<br>
+            estás &nbsp;&nbsp; estáis<br>
+            está &nbsp;&nbsp;&nbsp; están
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">ir</span>
+            voy &nbsp;&nbsp;&nbsp; vamos<br>
+            vas &nbsp;&nbsp;&nbsp; vais<br>
+            va &nbsp;&nbsp;&nbsp;&nbsp; van
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">tener</span>
+            tengo &nbsp;&nbsp; tenemos<br>
+            tienes &nbsp; tenéis<br>
+            tiene &nbsp;&nbsp; tienen
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">venir</span>
+            vengo &nbsp;&nbsp; venimos<br>
+            vienes &nbsp; venís<br>
+            viene &nbsp;&nbsp; vienen
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">dar</span>
+            doy &nbsp;&nbsp;&nbsp; damos<br>
+            das &nbsp;&nbsp;&nbsp; dais<br>
+            da &nbsp;&nbsp;&nbsp;&nbsp; dan
+        </div>
+    </div>
+
+    <p>The following verbs have irregular <strong>yo</strong> forms in the present tense: <strong>saber (yo sé)</strong>; <strong>conocer (yo conozco)</strong>; <strong>hacer (yo hago)</strong>; <strong>poner (yo pongo)</strong>; <strong>traer (yo traigo)</strong>; <strong>salir (yo salgo)</strong>; verbs ending in <strong>-ger</strong>, such as <strong>proteger (yo protejo)</strong>; and verbs ending in <strong>-cer</strong> or <strong>-cir</strong>, such as <strong>ofrecer (yo ofrezco)</strong> and <strong>conducir (yo conduzco)</strong>.</p>
+
+    <h3>Present Tense of Stem-Changing Verbs</h3>
+    <p>Verbs that change stem:</p>
+    <p>
+        1. Have one of four stem changes: <strong>e &rarr; ie, e &rarr; i, o &rarr; ue, u &rarr; ue</strong>.<br>
+        2. Have regular endings.<br>
+        3. Change stem in all singular forms and in the third-person plural (in the boot).
+    </p>
+
+    <div class="verb-grid">
+        <div class="verb-block">
+            <span class="verb-title">querer</span>
+            quiero &nbsp;&nbsp; queremos<br>
+            quieres &nbsp; queréis<br>
+            quiere &nbsp;&nbsp; quieren
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">pedir</span>
+            pido &nbsp;&nbsp; pedimos<br>
+            pides &nbsp; pedís<br>
+            pide &nbsp;&nbsp; piden
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">recordar</span>
+            recuerdo &nbsp; recordamos<br>
+            recuerdas &nbsp; recordáis<br>
+            recuerda &nbsp;&nbsp; recuerdan
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">jugar</span>
+            juego &nbsp;&nbsp; jugamos<br>
+            juegas &nbsp; jugáis<br>
+            juega &nbsp;&nbsp; juegan
+        </div>
+    </div>
+
+    <h3>Talking about Something Happening Right Now</h3>
+    <p>The present progressive, used to talk about something happening right now, is formed as follows: <strong>estar</strong> in the present + present participle. To form the present participle, do the following: For an <strong>-ar</strong> verb, drop the <strong>-ar</strong> ending and add <strong>-ando</strong>; for an <strong>-er</strong> or <strong>-ir</strong> verb, drop the <strong>-er</strong> or <strong>-ir</strong> ending and add <strong>-iendo</strong> (e.g., <strong>bailar</strong> &rarr; <strong>bailando</strong>; <strong>aprender</strong> &rarr; <strong>aprendiendo</strong>; <strong>abrir</strong> &rarr; <strong>abriendo</strong>).</p>
+    <p>Verbs ending in <strong>-er</strong> or <strong>-ir</strong> that have stems ending in a vowel have irregular present participles. Instead of ending in <strong>-iendo</strong>, the participle for these verbs ends in <strong>-yendo</strong> with a <strong>y</strong> (e.g., <strong>leer</strong> &rarr; <strong>leyendo</strong>; <strong>oír</strong> &rarr; <strong>oyendo</strong>; <strong>traer</strong> &rarr; <strong>trayendo</strong>).</p>
+    <p>An example of the present progressive being used is <strong>Estamos comiendo ahora</strong>.</p>
+
+    <h3>Talking about the Future</h3>
+    <p>Two ways to talk about the future are as follows.</p>
+    <p>1. Use the present tense (e.g., <strong>Mañana te doy la computadora</strong>).<br>2. Use the construcion <strong>ir + a + infinitive</strong> (e.g., <strong>Esta noche vamos a trabajar mucho</strong>).</p>
+
+    <h3>Talking about the Recent Past</h3>
+    <p><strong>Acabar</strong> in the present + <strong>de</strong> + infinitive is used to express a recent past event (e.g., <strong>La profesora acaba de explicar la lección)</strong>.</p>
+
+    <h3>Expressing How Long Something Has Been Going On</h3>
+    <p>A construction that expresses how long something has been going on is <strong>hace</strong> + time period + <strong>que</strong> + present tense of verb (e.g., <strong>Hace cuatro meses que estudiamos español</strong>).</p>
+    <p>Another way to express how long something has been going on is with the question <strong>¿Desde cuándo</strong> + subject + present tense of verb? (e.g., <strong>¿Desde cuándo trabajas aquí?</strong>).</p>
+    <p>There are three ways that a question like this could be answered. One way is with the construction <strong>Desde que</strong> + subject + present tense of verb (e.g., <strong>Desde que trabajo en la universidad</strong>). A second way to answer the question is with the construction <strong>Desde</strong> + specific point in time (e.g., <strong>Desde el mes pasado</strong>). A third way to answer the question is with the construction <strong>Desde hace</strong> + time period (e.g., <strong>Desde hace tres años</strong>).</p>
+
+    <h3>Usted and ustedes Commands</h3>
+    <p>To form an <strong>usted</strong> command:</p>
+    <p>1. Drop the <strong>-o</strong> ending from the <strong>yo</strong> form of the verb in the present tense.<br>2. For <strong>-ar</strong> verbs, add an <strong>e</strong>, and for <strong>-er</strong> and <strong>-ir</strong> verbs, add an <strong>a</strong>.</p>
+    <p>Examples of <strong>usted</strong> commands include the following: <strong>caminar</strong> &rarr; <strong>camine</strong>; <strong>aprender</strong> &rarr; <strong>aprenda</strong>; <strong>abrir</strong> &rarr; <strong>abra</strong>.</p>
+    <p>Stem-changing verbs follow this same rule to form the <strong>usted</strong> command (e.g., <strong>pensar</strong> &rarr; <strong>piense</strong>; <strong>dormir</strong> &rarr; <strong>duerma</strong>; <strong>servir</strong> &rarr; <strong>sirva</strong>). Many verbs that are irregular in the present tense have regular <strong>usted</strong> command forms, meaning that they follow the same rules as other verbs (e.g., <strong>conocer</strong> &rarr; <strong>conozca</strong>; <strong>oír</strong> &rarr; <strong>oiga</strong>; <strong>venir</strong> &rarr; <strong>venga</strong>).</p>
+    <p>Verbs ending in <strong>-car</strong>, <strong>-gar</strong>, and <strong>-zar</strong> have the following spelling changes in the <strong>usted</strong> command form: For verbs ending in <strong>-car</strong>, the change is <strong>c</strong> &rarr;  <strong>qu</strong>; for verbs ending in <strong>-gar</strong>, the change is <strong>g</strong> &rarr;  <strong>gu</strong>; for verbs ending in <strong>-zar</strong>, the change is <strong>z</strong> &rarr;  <strong>c</strong> (e.g., <strong>tocar</strong> &rarr;  <strong>toque</strong>; <strong>buscar</strong> &rarr;  <strong>busque</strong>; <strong>pagar</strong> &rarr;  <strong>pague</strong>).</p>
+    <p>The irregular <strong>usted</strong> command forms are as follows: <strong>dar</strong> &rarr; <strong>dé</strong>; <strong>estar</strong> &rarr; <strong>esté</strong>; <strong>ser</strong> &rarr; <strong>sea</strong>; <strong>saber</strong> &rarr; <strong>sepa</strong>; <strong>ir</strong> &rarr; <strong>vaya</strong>.</p>
+    <p>Putting a <strong>no</strong> before an <strong>usted</strong> command makes it negative (e.g., <strong>No coma</strong>). Adding an <strong>-n</strong> to the <strong>usted</strong> command makes it an <strong>ustedes</strong> command (e.g., <strong>Amigos, vengan a nuestra casa</strong>). A <strong>no</strong> and an <strong>-n</strong> at the end of the command results in a negative <strong>ustedes</strong> command (e.g., <strong>Por favor, chicos, no vayan ahora</strong>).</p>
+
+    <h3>Affirmative tú Commands</h3>
+    <p>The affirmative <strong>tú</strong> command is the third-person singular form of the verb in the present tense (e.g., <strong>estudiar</strong> &rarr; <strong>estudia</strong>; <strong>comer</strong> &rarr; <strong>come</strong>; <strong>abrir</strong> &rarr; <strong>abre</strong>; <strong>jugar</strong> &rarr; <strong>juega</strong>; <strong>servir</strong> &rarr; <strong>sirve</strong>; <strong>oír</strong> &rarr; <strong>oye</strong>).</p>
+    <p>There are eight irregular <strong>tú</strong> commands: <strong>venir</strong> &rarr; <strong>ven</strong>; <strong>salir</strong> &rarr; <strong>sal</strong>; <strong>poner</strong> &rarr; <strong>pon</strong>; <strong>tener</strong> &rarr; <strong>ten</strong>; <strong>hacer</strong> &rarr; <strong>haz</strong>; <strong>ser</strong> &rarr; <strong>sé</strong>; <strong>decir</strong> &rarr; <strong>di</strong>; <strong>ir</strong> &rarr; <strong>ve</strong>.</p>
+
+    <h3>Negative tú Commands</h3>
+    <p>The negative <strong>tú</strong> command is formed in the following way: <strong>no</strong> + <strong>usted</strong> command + <strong>-s</strong> (e.g., <strong>trabajar &rarr; no trabajes</strong>; <strong>tener &rarr; no tengas</strong>; <strong>vivir &rarr; no vivas</strong>; <strong>ser &rarr; no seas</strong>; <strong>hacer &rarr; no hagas</strong>).</p>
+
+    <h3>Affirmative vosotros Commands</h3>
+    <p>To make a <strong>vosotros</strong> command, drop the <strong>-r</strong> of the infinitive and replace it with a <strong>-d</strong> (e.g., <strong>hablar &rarr; hablad</strong>; <strong>tener &rarr; tened</strong>; <strong>dormir &rarr; dormid</strong>). The <strong>vosotros</strong> command is only used in Spain; a Latin American would use an <strong>ustedes</strong> command rather than a <strong>vosotros</strong> command.</p>
+
+    <h3>Using Pronouns with Commands</h3>
+    <p>Three types of pronouns can be used with commands: direct object pronouns, indirect object pronouns, and reflexive pronouns. These pronouns go after affirmative commands and before negative commands, as shown below. Notice that the first three commands below are <strong>tú</strong> commands, and the final three commands are <strong>usted</strong> commands. </p>
+    
+    <table class="command-table">
+        <thead>
+            <tr>
+                <th>Infinitive</th>
+                <th>Pronoun(s)</th>
+                <th>Affirmative Command</th>
+                <th>Negative Command</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4"><strong>tú commands</strong></td>
+            </tr>
+            <tr>
+                <td>dar</td>
+                <td>me + lo</td>
+                <td>dámelo</td>
+                <td>no me lo des</td>
+            </tr>
+            <tr>
+                <td>despertarse</td>
+                <td>se</td>
+                <td>despiértate</td>
+                <td>no te despiertes</td>
+            </tr>
+            <tr>
+                <td>hacer</td>
+                <td>lo</td>
+                <td>hazlo</td>
+                <td>no lo hagas</td>
+            </tr>
+            <tr>
+                <td colspan="4"><strong>usted commands</strong></td>
+            </tr>
+            <tr>
+                <td>acostarse</td>
+                <td>se</td>
+                <td>acuéstese</td>
+                <td>no se acueste</td>
+            </tr>
+            <tr>
+                <td>comer</td>
+                <td>las</td>
+                <td>cómalas</td>
+                <td>no las coma</td>
+            </tr>
+            <tr>
+                <td>escribir</td>
+                <td>le + la</td>
+                <td>escríbasela</td>
+                <td>no se la escriba</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Preterite Tense</h3>
+    <p>Once you learn the regular <strong>-ar</strong> endings in the preterite tense, you can learn the <strong>-er/-ir</strong> endings and the endings for verbs like <strong>tener</strong> by knowing the following.</p>
+    <p>
+        1. The endings for <strong>-er</strong> and <strong>-ir</strong> verbs are the same, and they all start with the letter <strong>i</strong>. In fact, the <strong>-er</strong> and <strong>-ir</strong> endings for four subjects (<strong>yo, tú, nosotros, vosotros</strong>) can be formed by changing the first letter of the <strong>-ar</strong> ending to <strong>i</strong> (e.g., <strong>é &rarr; í</strong>; <strong>aste &rarr; iste</strong>; <strong>amos &rarr; imos</strong>; <strong>asteis &rarr; isteis</strong>).<br>
+        2. The differences in endings between <strong>-ar</strong> and <strong>-er/-ir</strong> verbs are as follows for the usted and ustedes forms: <strong>ó &rarr; ió; aron &rarr; ieron</strong>.<br>
+        3. The preterite endings for verbs like <strong>tener</strong> are the <strong>-ar</strong> endings without the accent for the <strong>yo</strong> and <strong>usted</strong> forms (e.g., <strong>-e</strong> of <strong>tuve</strong>; <strong>-o</strong> of <strong>tuvo</strong>). The other four endings are the same as the regular <strong>-er/-ir</strong> endings (e.g., <strong>-iste</strong> of <strong>tuviste</strong>; <strong>-imos</strong> of <strong>tuvimos</strong>; <strong>-isteis</strong> of <strong>tuvisteis</strong>; <strong>-ieron</strong> of <strong>tuvieron</strong>).
+    </p>
+
+    <div class="verb-grid">
+        <div class="verb-block">
+            <span class="verb-title">repasar (-ar)</span>
+            repasé &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repasamos<br>
+            repasaste &nbsp; repasasteis<br>
+            repasó &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; repasaron
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">abrir (-er/-ir)</span>
+            abrí &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abrimos<br>
+            abriste &nbsp; abristeis<br>
+            abrió &nbsp;&nbsp;&nbsp;&nbsp; abrieron
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">poder (like tener)</span>
+            pude &nbsp;&nbsp;&nbsp;&nbsp; pudimos<br>
+            pudiste &nbsp; pudisteis<br>
+            pudo &nbsp;&nbsp;&nbsp;&nbsp; pudieron
+        </div>
+    </div>
+
+    <p>Verbs ending in <strong>-car</strong>, <strong>-gar</strong>, and <strong>-zar</strong> have the following spelling change in the <strong>yo</strong> form of the preterite: <strong>c &rarr; qu; g &rarr; gu; z &rarr; c</strong> (e.g., <strong>yo saqué; yo pagué; yo comencé</strong>).</p>
+    <p>Stem-changing verbs ending in <strong>-ir</strong> also change stem in the preterite, but not in the boot (as they do in the present tense). The preterite stem change for <strong>-ir</strong> verbs happens in the third-person singular and plural forms. The specific changes that happen are as follows.</p>
+    <p>
+        1. Verbs that change <strong>e &rarr; ie</strong> or <strong>e &rarr; i</strong> in the present change <strong>e &rarr; i</strong> in the preterite.<br>
+        2. Verbs that change <strong>o &rarr; ue</strong> in the present change <strong>o &rarr; u</strong> in the preterite.
+    </p>
+
+    <div class="verb-grid">
+        <div class="verb-block">
+            <span class="verb-title">servir</span>
+            serví &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; servimos<br>
+            serviste &nbsp; servisteis<br>
+            sirvió &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sirvieron
+        </div>
+        <div class="verb-block">
+            <span class="verb-title">dormir</span>
+            dormí &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dormimos<br>
+            dormiste &nbsp; dormisteis<br>
+            durmió &nbsp;&nbsp;&nbsp;&nbsp; durmieron
+        </div>
+    </div>
+
+    <p>The verbs <strong>ser</strong> and <strong>ir</strong> have the same conjugation in the preterite.</p>
+    <div class="verb-block" style="width: 200px;">
+        <span class="verb-title">ser / ir</span>
+        fui &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fuimos<br>
+        fuiste &nbsp; fuisteis<br>
+        fue &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fueron
+    </div>
+
+    <h2>Comparisons</h2>
+    <h3>Comparisons of Inequality</h3>
+    <p>When making comparisons using an adjective, the construction used is as follows: <strong>más</strong> or <strong>menos</strong> + adjective + <strong>que</strong> (e.g., <strong>Estoy más nervioso que tú</strong>).</p>
+    <p>The construction is the same when making comparisons using an adverb: <strong>más</strong> or <strong>menos</strong> + adverb + <strong>que</strong> (e.g., <strong>Ellos llegan más tarde que nosotros</strong>).</p>
+    <p>When doing a comparison of inequality focused on the verb, the construction used is as follows: <strong>más que</strong> or <strong>menos que</strong> (e.g., <strong>Nuestros abuelos siempre cocinan más que nosotros</strong>).</p>
+    <p>When talking about numbers, the construction used is as follows: <strong>más</strong> or <strong>menos</strong> + <strong>de</strong> + number (e.g., <strong>A veces ella tiene más de dos trabajos</strong>).</p>
+    <p>When comparing more than two things and distinguishing which one exceeds the others, the construction used is as follows: definite article + <strong>más</strong> or <strong>menos</strong> + adjective + <strong>de</strong> (e.g., <strong>Brasil es el más grande de los países en América del Sur</strong>).</p>
+    <p>Irregular comparative forms include <strong>mejor</strong>, <strong>peor</strong>, <strong>mayor</strong>, and <strong>menor</strong>. When using these four adjectives, no <strong>más</strong> or <strong>menos</strong> is needed (e.g., <strong>Anita es mayor que su hermana</strong>; <strong>Carlos y Juan son los mejores de la clase</strong>).</p>
+
+    <h3>Comparisons of Equality</h3>
+    <p>When using an adjective or adverb to compare two things that are equal, the construction used is as follows: <strong>tan</strong> + adjective or adverb + <strong>como</strong> (e.g., <strong>Las doctoras son tan simpáticas como las profesoras</strong>; <strong>Paco corre tan lentamente como yo</strong>).</p>
+    <p>In a comparison of equality with nouns, the construction used is as follows: <strong>tanto/tanta/tantos/tantas</strong> + noun + <strong>como</strong> (e.g., <strong>Isabel practica tantos deportes como su amigo</strong>; <strong>Es cierto que tengo tanta hambre como tú</strong>).</p>
+    <p>In a comparison of equality with verbs, the construction used is as follows: verb + <strong>tanto como</strong> (e.g., <strong>Leemos tanto como las muchachas</strong>).</p>
+</div>
+
+<script>
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const inputs = Array.from(document.querySelectorAll('input, select, textarea'));
+            const index = inputs.indexOf(document.activeElement);
+            if (index > -1 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
