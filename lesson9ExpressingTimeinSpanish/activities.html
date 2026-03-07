@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Definición de colores y fuentes personalizados */
+        :root {
+            --color-pink: #FF79AC; /* Flamingo Pink */
+            --color-black: #121118; /* Eerie Black */
+            /* Simulando 'Platform Medium Font' con una pila de fuentes sans-serif limpia */
+            --font-platform: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+
+        body {
+            font-family: var(--font-platform);
+            color: var(--color-black);
+            background-color: white; /* Fondo de la pagina: blanco */
+        }
+
+        /* Estilo para el texto justificado */
+        .text-justify-custom {
+            text-align: justify;
+            hyphens: auto; /* Ayuda a la justificación en algunos navegadores */
+        }
+        
+        /* Título principal con color rosa */
+        .main-title {
+            color: var(--color-pink);
+            font-weight: 700;
+        }
+
+        /* Estilo base para los inputs de respuesta */
+        .answer-input {
+            border: none; /* Quitamos el borde inicial para que parezca una línea de completación */
+            border-bottom: 2px solid var(--color-black); /* Solo borde inferior */
+            padding: 0.25rem 0.5rem;
+            margin: 0 0.25rem;
+            font-weight: 500;
+            background-color: transparent;
+            transition: background-color 0.3s, border-color 0.3s;
+            max-width: 100%;
+            outline: none; /* Quitar el contorno al enfocar */
+            text-align: left;
+            min-width: 30px; /* Ancho mínimo para la línea */
+        }
+        
+        /* Estilo específico para inputs de Actividad A (más largos) */
+        .input-a {
+            min-width: 100px; /* Aproximadamente 10cm */
+            width: auto; /* Permite que el tamaño se adapte sin exceder el contenedor */
+        }
+
+        /* Estilo para el input en la actividad B (meses) */
+        .input-b {
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* Estilo para los botones de selección */
+        .select-button {
+            background-color: white;
+            color: var(--color-black);
+            border: 2px solid var(--color-pink);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s, transform 0.1s;
+            font-weight: 500;
+            user-select: none; /* Evita la selección de texto al hacer clic */
+        }
+
+        .select-button:hover:not(:disabled) {
+            background-color: var(--color-pink);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .select-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7; /* Suavizamos la opacidad para que se vea que están deshabilitados */
+            /* Asegurar que los botones deshabilitados no tengan efecto hover */
+            background-color: white;
+            color: var(--color-black);
+            border-color: #E5E7EB; /* Gris claro para el borde deshabilitado */
+        }
+        
+        /* [NUEVO] Colores de feedback para el BOTÓN SELECCIONADO */
+        .select-correct-btn {
+            background-color: #10B981 !important; /* Tailwind green-500 */
+            color: white !important;
+            border-color: #059669 !important; /* Tailwind green-600 */
+            transform: none !important;
+        }
+
+        .select-incorrect-btn {
+            background-color: #EF4444 !important; /* Tailwind red-500 */
+            color: white !important;
+            border-color: #DC2626 !important; /* Tailwind red-600 */
+            transform: none !important;
+        }
+
+        /* Colores de feedback para el INPUT (fondo claro) */
+        /* Verde claro */
+        .correct-bg { 
+            background-color: #D1FAE5; /* Tailwind green-100 */
+            border-color: #34D399; /* Tailwind green-400 para el borde */
+        } 
+        /* Rojo claro */
+        .incorrect-bg { 
+            background-color: #FEE2E2; /* Tailwind red-100 */
+            border-color: #F87171; /* Tailwind red-400 para el borde */
+        }
+
+        /* Nota importante: Negritas sin asteriscos */
+        b, strong {
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body class="p-6 md:p-10 lg:p-16 max-w-4xl mx-auto">
+
+    <!-- Título de la pagina: III. Actividades / Activities --><header class="mb-10 text-center">
+        <h1 class="text-4xl md:text-5xl main-title tracking-tight rounded-xl p-3">
+            III. Actividades / Activities
+        </h1>
+    </header>
+
+    <!-- Base de Respuestas Correctas para JS y Lógica de Interacción --><script>
+        // Respuestas correctas normalizadas (minúsculas, sin puntuación, sin acentos)
+        const correctAnswers = {
+            // A: Fechas
+            "a1": ["es el catorce de febrero"],
+            "a2": ["es el diecisiete de marzo"],
+            "a3": ["es el cuatro de julio"],
+            "a4": ["es el dos de enero"],
+            "a5": ["es el veinticuatro de diciembre"],
+            "a6": ["es el cuarto jueves de noviembre"],
+
+            // B: Meses (se acepta solo el nombre del mes)
+            "b1": ["enero"], "b2": ["febrero"], "b3": ["marzo"], "b4": ["abril"], "b5": ["mayo"], "b6": ["junio"],
+            "b7": ["julio"], "b8": ["agosto"], "b9": ["septiembre"], "b10": ["octubre"], "b11": ["noviembre"], "b12": ["diciembre"],
+
+            // C: Horario (doble opción para 'y media'/'y treinta', 'menos cuarto'/'y cuarenta y cinco', etc.)
+            // Se normaliza también eliminando acentos para mayor tolerancia de respuesta.
+            "c1": ["las cinco y media de la tarde", "las cinco y treinta de la tarde", "cinco y media de la tarde", "cinco y treinta de la tarde"],
+            "c2": ["las ocho menos cuarto", "las siete y cuarenta y cinco", "ocho menos cuarto", "siete y cuarenta y cinco"],
+            "c3": ["mediodia"], // normalizado sin acento
+            "c4": ["las cuatro y cuarto de la tarde", "las cuatro y quince de la tarde", "cuatro y cuarto de la tarde", "cuatro y quince de la tarde"],
+            "c5": ["las seis y veinticinco de la tarde", "seis y veinticinco de la tarde"],
+            "c6": ["las ocho de la mañana", "ocho de la mañana"],
+            "c7": ["las diez menos cinco de la mañana", "las nueve y cincuenta y cinco de la mañana", "diez menos cinco de la mañana", "nueve y cincuenta y cinco de la mañana"],
+            "c8": ["la una de la tarde", "una de la tarde"],
+            "c9": ["las ocho menos diez", "las siete y cincuenta", "ocho menos diez", "siete y cincuenta"],
+            
+            // [NUEVO] D: Planes de Pablo y Marisol (las respuestas son los textos de los botones correctos)
+            "d1": ["a la una de la tarde"],
+            "d2": ["al mediodia"], // 'al mediodía' normalized
+            "d3": ["por la mañana"],
+            "d4": ["por la tarde"],
+            "d5": ["a las nueve de la noche"],
+            "d6": ["en un bar popular"]
+        };
+        
+        // Mapeo del orden de los inputs para saltar el foco (solo A, B, C que son de texto libre)
+        const inputOrder = [
+            "a1", "a2", "a3", "a4", "a5", "a6",
+            "b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10", "b11", "b12",
+            "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9"
+        ];
+
+        // Función de normalización: minúsculas, elimina puntuación, trim, elimina acentos
+        const normalize = (text) => {
+            if (typeof text !== 'string') return '';
+            let normalized = text.toLowerCase()
+                .replace(/[\s.,!?'"¿¡]/g, '') // Elimina espacios y puntuación
+                .replace(/[áäàâ]/g, 'a')
+                .replace(/[éëèê]/g, 'e')
+                .replace(/[íïìî]/g, 'i')
+                .replace(/[óöòô]/g, 'o')
+                .replace(/[úüùû]/g, 'u')
+                .replace(/ñ/g, 'n') // No se usa ñ, pero por si acaso.
+                .trim();
+            return normalized;
+        };
+
+        // Función para validar y saltar al siguiente input (Actividades A, B, C)
+        function validateAndFocus(elementId) {
+            const inputElement = document.getElementById(elementId);
+            const userAnswer = normalize(inputElement.value);
+            
+            // Limpia clases de feedback
+            inputElement.classList.remove('correct-bg', 'incorrect-bg');
+            
+            if (inputElement.value.trim() === "") {
+                // Si está vacío, no aplica feedback y se queda en el foco.
+                inputElement.focus();
+                return;
+            }
+
+            // Verifica si la respuesta coincide con alguna de las opciones correctas normalizadas
+            const isCorrect = correctAnswers[elementId] ? 
+                                correctAnswers[elementId].some(correctAnswer => normalize(correctAnswer) === userAnswer) : 
+                                false;
+
+            if (isCorrect) {
+                inputElement.classList.add('correct-bg');
+                inputElement.disabled = true; // Deshabilita si es correcta
+            } else {
+                inputElement.classList.add('incorrect-bg');
+            }
+
+            // Encuentra el índice actual y el siguiente ID en el orden predefinido
+            const currentIndex = inputOrder.indexOf(elementId);
+            
+            // Lógica de salto: buscar el siguiente input no deshabilitado
+            for (let i = currentIndex + 1; i < inputOrder.length; i++) {
+                const nextId = inputOrder[i];
+                const nextElement = document.getElementById(nextId);
+                
+                if (nextElement && !nextElement.disabled) {
+                    nextElement.focus();
+                    return; // Detiene la búsqueda y salta el foco
+                }
+            }
+            
+            // Si no hay más elementos no deshabilitados, desenfocar
+            inputElement.blur();
+        }
+
+        // Manejador de tecla Enter
+        function handleKeypress(event, elementId) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita el envío del formulario
+                validateAndFocus(elementId);
+            }
+        }
+
+        // [CORREGIDO] Función para Actividad D (Selección Múltiple)
+        function selectAnswer(qId, answerText, buttonElement) {
+            const inputElement = document.getElementById(qId);
+            const questionContainer = buttonElement.closest('.question-d-container');
+            
+            // 1. Rellenar el input/espacio
+            inputElement.value = answerText;
+            
+            // Normalizar para verificación
+            const normalizedAnswerText = normalize(answerText);
+            
+            // Verifica si la respuesta del botón es correcta 
+            const isCorrect = correctAnswers[qId] ? 
+                                correctAnswers[qId].some(correctAnswer => normalize(correctAnswer) === normalizedAnswerText) : 
+                                false;
+
+            // Limpia y aplica feedback al INPUT (el espacio de completación)
+            inputElement.classList.remove('correct-bg', 'incorrect-bg');
+            
+            // Limpia estilos de selección previa y deshabilita todos los botones de la pregunta
+            const buttons = questionContainer.querySelectorAll('.select-button');
+            buttons.forEach(btn => {
+                btn.classList.remove('select-correct-btn', 'select-incorrect-btn');
+                btn.disabled = true; // Deshabilita todos los botones de la pregunta
+            });
+
+            // 2. Aplicar feedback y estilos al BOTÓN PRESIONADO y al INPUT
+            if (isCorrect) {
+                // Al botón (verde sólido)
+                buttonElement.classList.add('select-correct-btn');
+                // Al input (fondo verde claro)
+                inputElement.classList.add('correct-bg');
+            } else {
+                // Al botón (rojo sólido)
+                buttonElement.classList.add('select-incorrect-btn');
+                // Al input (fondo rojo claro)
+                inputElement.classList.add('incorrect-bg');
+            }
+
+            inputElement.disabled = true; // Deshabilita el input
+
+            // 3. Lógica de salto: encontrar el primer botón de la siguiente pregunta no contestada
+            const dOrder = ["d1", "d2", "d3", "d4", "d5", "d6"];
+            const currentIndex = dOrder.indexOf(qId);
+            
+            // Iterar sobre las preguntas restantes
+            for (let i = currentIndex + 1; i < dOrder.length; i++) {
+                const nextInputId = dOrder[i]; // e.g., 'd2'
+                const nextContainerId = `q-d-${i + 1}`; // e.g., 'q-d-2'
+                const nextContainer = document.getElementById(nextContainerId);
+                
+                // Verificamos si existe el input de la siguiente pregunta y si NO está deshabilitado
+                const nextInputElement = document.getElementById(nextInputId);
+                
+                if (nextInputElement && !nextInputElement.disabled && nextContainer) {
+                    // El input no está contestado. Enfocamos el primer botón del contenedor.
+                    const nextButton = nextContainer.querySelector('.select-button');
+                    if (nextButton) {
+                        nextButton.focus();
+                        return;
+                    }
+                }
+            }
+        }
+
+        // Función para mostrar/ocultar respuestas correctas
+        function toggleCorrectAnswers() {
+            const answersSection = document.getElementById('correctAnswersSection');
+            const button = document.getElementById('toggleAnswersBtn');
+            
+            if (answersSection.classList.contains('hidden')) {
+                answersSection.classList.remove('hidden');
+                button.textContent = 'Ocultar Respuestas Correctas / Hide Correct Answers';
+                button.classList.remove('bg-gray-100');
+                button.classList.add('bg-pink-500', 'text-white');
+            } else {
+                answersSection.classList.add('hidden');
+                button.textContent = 'Mostrar Respuestas Correctas / Show Correct Answers';
+                button.classList.remove('bg-pink-500', 'text-white');
+                button.classList.add('bg-gray-100');
+            }
+        }
+    </script>
+
+    <!-- Contenido de las Actividades --><main class="space-y-12 mt-10">
+
+        <!-- Actividad A --><section>
+            <h2 class="text-xl font-bold mb-4 text-gray-900">
+                a. Contesta las siguientes preguntas. / Answer the following questions.
+            </h2>
+            <div class="text-justify-custom space-y-4 pl-4">
+                <p>1. ¿Cuál es la fecha del día de San Valentín? 
+                    <input type="text" id="a1" class="answer-input input-a" onkeypress="handleKeypress(event, 'a1')">.
+                </p>
+                <p>2. ¿Cuál es la fecha del día de San Patricio? 
+                    <input type="text" id="a2" class="answer-input input-a" onkeypress="handleKeypress(event, 'a2')">.
+                </p>
+                <p>3. ¿Cuál es la fecha del día de la independencia [independence] de los Estados Unidos? 
+                    <input type="text" id="a3" class="answer-input input-a" onkeypress="handleKeypress(event, 'a3')">.
+                </p>
+                <p>4. ¿Cuál es la fecha del día después del Año Nuevo?
+                    <input type="text" id="a4" class="answer-input input-a" onkeypress="handleKeypress(event, 'a4')">.
+                </p>
+                <p>5. La Noche Buena es la noche antes de la Navidad. ¿Cuál es la fecha de la Noche Buena? 
+                    <input type="text" id="a5" class="answer-input input-a" onkeypress="handleKeypress(event, 'a5')">.
+                </p>
+                <p>6. ¿Cuándo es el Día de Acción de Gracias [Thanksgiving]? 
+                    <input type="text" id="a6" class="answer-input input-a" onkeypress="handleKeypress(event, 'a6')">.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Actividad B (Modificada a 2 columnas fijas) --><section>
+            <h2 class="text-xl font-bold mb-4 text-gray-900">
+                b. Javier le está explicando a su nieta Diana los meses del año. ¿Puedes ayudarle a Javier? / Javier is explaining to his granddaughter Diana the months of the year. Can you help Javier?
+            </h2>
+            <p class="text-justify-custom mb-6">Los meses del año son: / The months of the year are:</p>
+            
+            <!-- CLASE DE GRID MODIFICADA A 'grid-cols-2' para todos los tamaños -->
+            <div class="grid grid-cols-2 gap-4 text-lg pl-4">
+                <p class="flex items-center">1. e
+                    <input type="text" id="b1" class="answer-input input-b" onkeypress="handleKeypress(event, 'b1')" size="8">
+                </p>
+                <p class="flex items-center">7. j
+                    <input type="text" id="b7" class="answer-input input-b" onkeypress="handleKeypress(event, 'b7')" size="8">
+                </p>
+                <p class="flex items-center">2. f
+                    <input type="text" id="b2" class="answer-input input-b" onkeypress="handleKeypress(event, 'b2')" size="8">
+                </p>
+                <p class="flex items-center">8. a
+                    <input type="text" id="b8" class="answer-input input-b" onkeypress="handleKeypress(event, 'b8')" size="8">
+                </p>
+                <p class="flex items-center">3. m
+                    <input type="text" id="b3" class="answer-input input-b" onkeypress="handleKeypress(event, 'b3')" size="8">
+                </p>
+                <p class="flex items-center">9. s
+                    <input type="text" id="b9" class="answer-input input-b" onkeypress="handleKeypress(event, 'b9')" size="8">
+                </p>
+                <p class="flex items-center">4. a
+                    <input type="text" id="b4" class="answer-input input-b" onkeypress="handleKeypress(event, 'b4')" size="8">
+                </p>
+                <p class="flex items-center">10. o
+                    <input type="text" id="b10" class="answer-input input-b" onkeypress="handleKeypress(event, 'b10')" size="8">
+                </p>
+                <p class="flex items-center">5. m
+                    <input type="text" id="b5" class="answer-input input-b" onkeypress="handleKeypress(event, 'b5')" size="8">
+                </p>
+                <p class="flex items-center">11. n
+                    <input type="text" id="b11" class="answer-input input-b" onkeypress="handleKeypress(event, 'b11')" size="8">
+                </p>
+                <p class="flex items-center">6. j
+                    <input type="text" id="b6" class="answer-input input-b" onkeypress="handleKeypress(event, 'b6')" size="8">
+                </p>
+                <p class="flex items-center">12. d
+                    <input type="text" id="b12" class="answer-input input-b" onkeypress="handleKeypress(event, 'b12')" size="8">
+                </p>
+            </div>
+        </section>
+
+        <!-- Actividad C --><section>
+            <h2 class="text-xl font-bold mb-4 text-gray-900">
+                c. Diego es estudiante de maestría en negocios y les está explicando a sus padres Luis y Cecilia su horario para este semestre en la universidad. / Diego is a master’s degree student in business, and he is explaining to his parents Luis and Cecilia his schedule for this semester at the university.
+            </h2>
+            <p class="text-justify-custom mb-6">Completa el diálogo con la información necesaria. / Complete the dialogue with the necessary information.</p>
+
+            <div class="text-justify-custom text-lg pl-4 space-y-3">
+                <p>Diego: Este semestre tengo [I have] clases los lunes [on Mondays] de (5:30 pm) 
+                    <input type="text" id="c1" class="answer-input w-2/3 md:w-64" onkeypress="handleKeypress(event, 'c1')" size="35"> a (7:45 pm) 
+                    <input type="text" id="c2" class="answer-input w-2/3 md:w-64" onkeypress="handleKeypress(event, 'c2')" size="30">. Los martes tengo clases al (12:00 pm) 
+                    <input type="text" id="c3" class="answer-input w-2/3 md:w-48" onkeypress="handleKeypress(event, 'c3')" size="15"> y después a (4:15 pm) 
+                    <input type="text" id="c4" class="answer-input w-2/3 md:w-64" onkeypress="handleKeypress(event, 'c4')" size="35">. Los miércoles no tengo clases, pero siempre [always] hay una reunión a (6:25 pm) 
+                    <input type="text" id="c5" class="answer-input w-2/3 md:w-64" onkeypress="handleKeypress(event, 'c5')" size="35"> en la cafetería [cafeteria]. Los jueves voy a clases a (8:00 am) 
+                    <input type="text" id="c6" class="answer-input w-2/3 md:w-64" onkeypress="handleKeypress(event, 'c6')" size="30"> y a (9:55 am) 
+                    <input type="text" id="c7" class="answer-input w-2/3 md:w-80" onkeypress="handleKeypress(event, 'c7')" size="40">. A (1:00 pm) 
+                    <input type="text" id="c8" class="answer-input w-2/3 md:w-48" onkeypress="handleKeypress(event, 'c8')" size="30"> voy a la biblioteca. Estoy muy contento porque los viernes no voy a la universidad. Bueno [Well], ¿qué hora es?
+                </p>
+                <p>Cecilia: Son 9. (7:50) 
+                    <input type="text" id="c9" class="answer-input w-2/3 md:w-64" onkeypress="handleKeypress(event, 'c9')" size="30">.
+                </p>
+                <p>Diego: ¡Oh no, necesito ir a la universidad! ¡Adiós!</p>
+            </div>
+        </section>
+        
+        <!-- Actividad D --><section>
+            <h2 class="text-xl font-bold mb-4 text-gray-900">
+                d. Pablo es estudiante de la universidad, y Marisol es estudiante de secundaria. Ellos son hermanos, y están hablando sobre sus planes para esta semana. / Pablo is a college student, and Marisol is a high school student. They are siblings, and they are talking about their plans for this week.
+            </h2>
+            <p class="text-justify-custom mb-6">Completa la información con las respuestas más lógicas. / Complete the information with the most logical answers.</p>
+
+            <div class="space-y-6 pl-4">
+                <!-- Pregunta D1 --><div id="q-d-1" class="border-b pb-4 question-d-container">
+                    <p class="mb-2">1. Pablo: Los lunes tengo un examen de español <input type="text" id="d1" class="answer-input w-60 border-b border-gray-500" disabled></p>
+                    <div class="flex flex-wrap gap-2 text-sm mt-2">
+                        <button class="select-button" onclick="selectAnswer('d1', 'a la una de la tarde', this)">a) a la una de la tarde</button>
+                        <button class="select-button" onclick="selectAnswer('d1', 'a media noche', this)">b) a media noche</button>
+                        <button class="select-button" onclick="selectAnswer('d1', 'a las tres de la mañana', this)">c) a las tres de la mañana</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta D2 --><div id="q-d-2" class="border-b pb-4 question-d-container">
+                    <p class="mb-2">2. Marisol: Los lunes voy al gimnasio [gymnasium] <input type="text" id="d2" class="answer-input w-60 border-b border-gray-500" disabled></p>
+                    <div class="flex flex-wrap gap-2 text-sm mt-2">
+                        <button class="select-button" onclick="selectAnswer('d2', 'justo [just] antes de las dos de la mañana', this)">a) justo [just] antes de las dos de la mañana</button>
+                        <button class="select-button" onclick="selectAnswer('d2', 'al mediodía', this)">b) al mediodía</button>
+                        <button class="select-button" onclick="selectAnswer('d2', 'a media noche', this)">c) a media noche</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta D3 --><div id="q-d-3" class="border-b pb-4 question-d-container">
+                    <p class="mb-2">3. Pablo: Yo también [also] voy al gimnasio, pero <input type="text" id="d3" class="answer-input w-60 border-b border-gray-500" disabled></p>
+                    <div class="flex flex-wrap gap-2 text-sm mt-2">
+                        <button class="select-button" onclick="selectAnswer('d3', 'a las tres y media de la mañana', this)">a) a las tres y media de la mañana</button>
+                        <button class="select-button" onclick="selectAnswer('d3', 'por la mañana', this)">b) por la mañana</button>
+                        <button class="select-button" onclick="selectAnswer('d3', 'a las once y media de la noche', this)">c) a las once y media de la noche</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta D4 --><div id="q-d-4" class="border-b pb-4 question-d-container">
+                    <p class="mb-2">4. Marisol: Los jueves tengo mi laboratorio [laboratory] de biología [biology] <input type="text" id="d4" class="answer-input w-60 border-b border-gray-500" disabled></p>
+                    <div class="flex flex-wrap gap-2 text-sm mt-2">
+                        <button class="select-button" onclick="selectAnswer('d4', 'por la tarde', this)">a) por la tarde</button>
+                        <button class="select-button" onclick="selectAnswer('d4', 'a la una de la mañana', this)">b) a la una de la mañana</button>
+                        <button class="select-button" onclick="selectAnswer('d4', 'a las once de la noche', this)">c) a las once de la noche</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta D5 --><div id="q-d-5" class="border-b pb-4 question-d-container">
+                    <p class="mb-2">5. Pablo: Los viernes <input type="text" id="d5" class="answer-input w-60 border-b border-gray-500" disabled> voy con [with] Guillermo al bar [bar].</p>
+                    <div class="flex flex-wrap gap-2 text-sm mt-2">
+                        <button class="select-button" onclick="selectAnswer('d5', 'a las nueve de la noche', this)">a) a las nueve de la noche</button>
+                        <button class="select-button" onclick="selectAnswer('d5', 'a las siete de la mañana', this)">b) a las siete de la mañana</button>
+                        <button class="select-button" onclick="selectAnswer('d5', 'antes de nuestras clases', this)">c) antes de nuestras clases</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta D6 --><div id="q-d-6" class="pb-4 question-d-container">
+                    <p class="mb-2">6. Marisol: Los sábados <input type="text" id="d6" class="answer-input w-60 border-b border-gray-500" disabled> Victoria y yo bailamos y cantamos.</p>
+                    <div class="flex flex-wrap gap-2 text-sm mt-2">
+                        <button class="select-button" onclick="selectAnswer('d6', 'en nuestra clase de biología', this)">a) en nuestra clase de biología</button>
+                        <button class="select-button" onclick="selectAnswer('d6', 'en un bar popular', this)">b) en un bar popular</button>
+                        <button class="select-button" onclick="selectAnswer('d6', 'en el mercado', this)">c) en el mercado</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Botón y Sección de Respuestas Correctas --><div class="mt-10 pt-6 border-t border-gray-200">
+        <button id="toggleAnswersBtn" onclick="toggleCorrectAnswers()" class="select-button w-full md:w-auto bg-gray-100 hover:bg-pink-500 hover:text-white text-lg font-bold transition-all duration-300">
+            Mostrar Respuestas Correctas / Show Correct Answers
+        </button>
+    </div>
+
+    <!-- IV. Respuestas correctas / Correct Answers (INCLUYE SOLO LA INFORMACIÓN PROPORCIONADA) --><section id="correctAnswersSection" class="mt-8 p-6 bg-gray-50 rounded-xl shadow-lg hidden">
+        <h2 class="text-2xl font-bold mb-6 text-gray-900 border-b pb-2 border-gray-300">
+            IV. Respuestas correctas / Correct Answers
+        </h2>
+        
+        <div class="space-y-6">
+            <!-- A --><div>
+                <h3 class="font-bold text-lg mb-2 text-pink-600">a. Contesta las siguientes preguntas.</h3>
+                <ol class="list-decimal list-inside space-y-1 pl-4">
+                    <li>Es el catorce de febrero.</li>
+                    <li>Es el diecisiete de marzo.</li>
+                    <li>Es el cuatro de julio.</li>
+                    <li>Es el dos de enero.</li>
+                    <li>Es el veinticuatro de diciembre.</li>
+                    <li>Es el cuarto [the fourth] jueves de noviembre.</li>
+                </ol>
+            </div>
+            
+            <!-- B (Modificada a 2 columnas fijas) --><div>
+                <h3 class="font-bold text-lg mb-2 text-pink-600">b. Meses del año.</h3>
+                <!-- CLASE DE GRID MODIFICADA A 'grid-cols-2' para todos los tamaños -->
+                <div class="grid grid-cols-2 gap-2 text-base">
+                    <p>1. enero</p><p>7. julio</p>
+                    <p>2. febrero</p><p>8. agosto</p>
+                    <p>3. marzo</p><p>9. septiembre</p>
+                    <p>4. abril</p><p>10. octubre</p>
+                    <p>5. mayo</p><p>11. noviembre</p>
+                    <p>6. junio</p><p>12. diciembre</p>
+                </div>
+            </div>
+            
+            <!-- C --><div>
+                <h3 class="font-bold text-lg mb-2 text-pink-600">c. Horario de Diego.</h3>
+                <ol class="list-decimal list-inside space-y-1 pl-4 text-base">
+                    <li>las cinco y media de la tarde / las cinco y treinta de la tarde</li>
+                    <li>las ocho menos cuarto / las siete y cuarenta y cinco</li>
+                    <li>mediodía</li>
+                    <li>las cuatro y cuarto de la tarde / las cuatro y quince de la tarde</li>
+                    <li>las seis y veinticinco de la tarde</li>
+                    <li>las ocho de la mañana</li>
+                    <li>las diez menos cinco de la mañana / las nueve y cincuenta y cinco de la mañana</li>
+                    <li>la una de la tarde</li>
+                    <li>las ocho menos diez / las siete y cincuenta</li>
+                </ol>
+            </div>
+            
+            <!-- D --><div>
+                <h3 class="font-bold text-lg mb-2 text-pink-600">d. Planes de Pablo y Marisol.</h3>
+                <ul class="list-disc list-inside space-y-1 pl-4 text-base">
+                    <li>1. a) a la una de la tarde</li>
+                    <li>2. b) al mediodía</li>
+                    <li>3. b) por la mañana</li>
+                    <li>4. a) por la tarde</li>
+                    <li>5. a) a las nueve de la noche</li>
+                    <li>6. b) en un bar popular</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
