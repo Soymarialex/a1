@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosario por tema / Glossary by Topic</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --color-primario: #FF79AC;
+            --color-secundario: #FFB3D1;
+            --color-texto: #121118;
+            --color-fondo: #FFFFFF;
+            --color-lineas: #E0E0E0;
+            --color-banco: #F9F9F9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            text-align: center; /* Centrado para el menú de botones */
+        }
+
+        h1 {
+            color: var(--color-primario);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-align: left;
+            border-bottom: 2px solid var(--color-primario);
+            padding-bottom: 10px;
+        }
+
+        /* Estructura de la cuadrícula de botones */
+        .grid-botones {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 15px;
+            justify-items: stretch;
+        }
+
+        /* Botones Estilo Guía */
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-secundario);
+            border: none;
+            border-bottom: 3px solid var(--color-primario);
+            border-radius: 5px;
+            color: #000000;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+            text-align: center;
+            min-height: 50px;
+        }
+
+        .btn-link:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-link:active {
+            transform: translateY(1px);
+            border-bottom-width: 1px;
+        }
+
+        @media (max-width: 600px) {
+            .grid-botones {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Glosario por tema / Glossary by Topic</h1>
+
+        <div class="grid-botones">
+            <a href="greetings.html?v=1.0" class="btn-link">Los saludos / Greetings</a>
+            <a href="CommunicationWords.html?v=1.0" class="btn-link">Palabras de comunicación / Communication Words</a>
+            <a href="Daysoftheweek.html?v=1.0" class="btn-link">Los días de la semana / Days of the week</a>
+            <a href="MonthsoftheYear.html?v=1.0" class="btn-link">Los meses del año / Months of the Year</a>
+            <a href="Seasons.html?v=1.0" class="btn-link">Las estaciones / Seasons</a>
+            <a href="TimePeriods.html?v=1.0" class="btn-link">Los periodos de tiempo / Time Periods</a>
+            <a href="Weatherexpressions.html?v=1.0" class="btn-link">Las expresiones de tiempo / Weather expressions</a>
+            <a href="numbers.html?v=1.0" class="btn-link">Los números / numbers</a>
+            <a href="Colors.html?v=1.0" class="btn-link">Los colores / Colors</a>
+            <a href="Nationalities.html?v=1.0" class="btn-link">Las nacionalidades / Nationalities</a>
+            <a href="People.html?v=1.0" class="btn-link">Las personas / People</a>
+            <a href="Family.html?v=1.0" class="btn-link">La familia / Family</a>
+            <a href="Professions.html?v=1.0" class="btn-link">Las profesiones / Professions</a>
+            <a href="Partsofthebody.html?v=1.0" class="btn-link">Las partes del cuerpo / Parts of the body</a>
+            <a href="Clothing.html?v=1.0" class="btn-link">La ropa / Clothing</a>
+            <a href="Accessoriesandmaterials.html?v=1.0" class="btn-link">Los accesorios y los materiales / Accessories and materials</a>
+            <a href="PublicPlaces.html?v=1.0" class="btn-link">Los lugares públicos / Public Places</a>
+            <a href="IntheClassroom.html?v=1.0" class="btn-link">En el aula / In the Classroom</a>
+            <a href="AtHome.html?v=1.0" class="btn-link">En la casa / At Home</a>
+            <a href="Drinks.html?v=1.0" class="btn-link">Las bebidas / Drinks</a>
+            <a href="Food.html?v=1.0" class="btn-link">La comida / Food</a>
+            <a href="Hobbies.html?v=1.0" class="btn-link">Los pasatiempos / Hobbies</a>
+            <a href="Transportation.html?v=1.0" class="btn-link">El transporte / Transportation</a>
+            <a href="LetsTravel.html?v=1.0" class="btn-link">¡A viajar! / Let’s Travel!</a>
+            <a href="Sports.html?v=1.0" class="btn-link">Los deportes / Sports</a>
+            <a href="Technology.html?v=1.0" class="btn-link">La tecnología / Technology</a>
+            <a href="Money.html?v=1.0" class="btn-link">El dinero / Money</a>
+            <a href="Punctuation.html?v=1.0" class="btn-link">La puntuación / Punctuation</a>
+            <a href="Interrogativewords.html?v=1.0" class="btn-link">Las palabras interrogativas / Interrogative words</a>
+            <a href="AffirmativeandNegativeExpressions.html?v=1.0" class="btn-link">Las expresiones afirmativas y negativas / Affirmative and Negative Expressions</a>
+            <a href="Conjunctions.html?v=1.0" class="btn-link">Las conjunciones / Conjunctions</a>
+            <a href="Prepositions.html?v=1.0" class="btn-link">Las preposiciones / Prepositions</a>
+            <a href="Adverbs.html?v=1.0" class="btn-link">Los adverbios / Adverbs</a>
+            <a href="TenerExpressions.html?v=1.0" class="btn-link">Expresiones con tener / Tener Expressions</a>
+            <a href="ReflexiveVerbs.html?v=1.0" class="btn-link">Verbos reflexivos / Reflexive Verbs</a>
+            <a href="Stem-ChangingVerbs.html?v=1.0" class="btn-link">Verbos con cambio de raíz / Stem-Changing Verbs</a>
+        </div>
+    </div>
+
+</body>
+</html>
