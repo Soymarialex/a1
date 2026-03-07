@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <!-- Carga de Tailwind CSS con control de caché -->
+    <script src="https://cdn.tailwindcss.com?v=2.1"></script>
+    <style>
+        /*
+        El usuario solicitó la fuente "Platform Medium Font". Utilizaremos Inter como un placeholder sans-serif moderno.
+        */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght(300);400);700);800&display=swap');
+
+        /* Definición de la fuente y estilos base */
+        body {
+            background-color: #FFFFFF; /* Fondo blanco */
+            color: #121118; /* Eerie Black para el texto */
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Clase para el texto justificado requerido en la parte informativa y las líneas de ejercicio */
+        .text-justified {
+            text-align: justify;
+            /* Importante para que los inputs fluyan con el texto */
+            word-spacing: -2px; /* Pequeño ajuste para mejorar la justificación */
+        }
+
+        /* Aseguramos que los inputs se alineen verticalmente con el texto circundante */
+        .completion-input {
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: -3px; /* Ajuste fino para la alineación del texto */
+            margin-bottom: -3px;
+        }
+
+        /* Estilos para la interacción */
+        .input-correct {
+            background-color: #D1FAE5 !important; /* Verde claro */
+            border-color: #34D399 !important;
+        }
+        .input-incorrect {
+            background-color: #FEE2E2 !important; /* Rojo claro */
+            border-color: #F87171 !important;
+        }
+    </style>
+    <script>
+        // Configuración de Tailwind para usar los colores específicos y la fuente
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        'correct-green': '#D1FAE5',
+                        'incorrect-red': '#FEE2E2',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="p-6 md:p-12 lg:p-20 font-sans text-eerie-black antialiased">
+
+    <div class="max-w-4xl mx-auto">
+
+        <!-- TÍTULO DE LA PÁGINA: CORREGIDO a text-flamingo-pink -->
+        <h1 class="text-4xl md:text-5xl font-extrabold text-flamingo-pink mb-10 text-center rounded-lg py-2">
+            III. Actividades / Activities
+        </h1>
+
+        <!-- SECCIÓN A: Comandos Formales -->
+        <div class="mt-10 pt-4 border-t border-gray-200">
+            <!-- TÍTULO A: Eliminamos font-extrabold, dejando solo la negrita en la letra 'a.' -->
+            <h2 class="text-xl font-normal text-eerie-black mb-3"><strong class="font-extrabold">a.</strong> María tiene problemas para controlar el colesterol. Ella está poniendo atención a las sugerencias que le da Luisa, su nutricionista. / María has trouble controlling her cholesterol. She is paying attention to the suggestions that Luisa, her nutritionist, is giving her.</h2>
+            <p class="text-justified text-gray-700 italic mb-6">Agrega los mandatos formalmente apropiados con pronombres reflexivos o de objeto directo o indirecto. / Add the appropriate formal commands with reflexive, direct object, or indirect object pronouns.</p>
+
+            <!-- CONTENEDOR DE ACTIVIDAD A -->
+            <div id="activity-a" class="space-y-4 text-justified">
+                <div class="leading-relaxed">
+                    <strong class="font-bold mr-2">1.</strong> No 
+                    <input type="text" id="a-1-1" data-next="a-1-2" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (comer) después de las 6:00 de la tarde y no 
+                    <input type="text" id="a-1-2" data-next="a-2-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (acostarse) tarde.
+                </div>
+                <div class="leading-relaxed">
+                    <strong class="font-bold mr-2">2.</strong> 
+                    <input type="text" id="a-2-1" data-next="a-2-2" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (dormirse) temprano y 
+                    <input type="text" id="a-2-2" data-next="a-3-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (dormir) por lo menos 7 horas.
+                </div>
+                <div class="leading-relaxed">
+                    <strong class="font-bold mr-2">3.</strong> 
+                    <input type="text" id="a-3-1" data-next="a-3-2" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (cambiar) su dieta [diet] y su estilo [style] de vida. 
+                    <input type="text" id="a-3-2" data-next="a-3-3" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (hacer) por lo menos 30 minutos de ejercicio todos los días. 
+                    <input type="text" id="a-3-3" data-next="a-4-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (empezar) los ejercicios lentamente [slowly].
+                </div>
+
+                <div class="leading-relaxed">
+                    <strong class="font-bold mr-2">4.</strong> 
+                    <input type="text" id="a-4-1" data-next="a-4-2" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (tener) paciencia [patience] y
+                    <input type="text" id="a-4-2" data-next="a-5-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (ser) optimista.
+                </div>
+                <div class="leading-relaxed">
+                    <strong class="font-bold mr-2">5.</strong> No 
+                    <input type="text" id="a-5-1" data-next="a-5-2" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (ir) muchas veces a los restaurantes. Si va a un restaurante,
+                    <input type="text" id="a-5-2" data-next="a-6-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (pedir al mesero) al mesero platos sin gluten [gluten] y con menos grasa [fat].
+                </div>
+                <div class="leading-relaxed">
+                    <strong class="font-bold mr-2">6.</strong> 
+                    <input type="text" id="a-6-1" data-next="a-7-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (llevar al doctor) a su doctor otro examen de sangre [blood] más reciente [recent].
+                </div>
+                <div class="leading-relaxed">
+                    <strong class="font-bold mr-2">7.</strong> 
+                    <input type="text" id="a-7-1" data-next="a-7-2" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (leer) la tabla [table] de información de la comida que compra en el supermercado.
+                    <input type="text" id="a-7-2" data-next="a-8-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (enseñar a la familia) a su familia a leer la tabla de información de los alimentos [food].
+                </div>
+                <div class="leading-relaxed">
+                    <strong class="font-bold mr-2">8.</strong> No 
+                    <input type="text" id="a-8-1" data-next="a-9-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (beber) más de una copa de vino tinto al día.
+                </div>
+                <div class="leading-relaxed">
+                    <strong class="font-bold mr-2">9.</strong> 
+                    <input type="text" id="a-9-1" data-next="a-10-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (explicar al doctor) a su doctor si tiene otros problemas de salud [health].
+                </div>
+                <div class="leading-relaxed">
+                    <strong class="font-bold mr-2">10.</strong> 
+                    <input type="text" id="a-10-1" data-next="" data-skip-focus="true" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (decir al esposo) a su esposo que hagan ejercicios juntos.
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN B: Comandos Informales -->
+        <div class="mt-10 pt-4 border-t border-gray-200">
+            <!-- TÍTULO B: Eliminamos font-extrabold, dejando solo la negrita en la letra 'b.' -->
+            <h2 class="text-xl font-normal text-eerie-black mb-3"><strong class="font-extrabold">b.</strong> Erica está preocupada porque no tiene tiempo de hacer ejercicio. Ella está embarazada de nuevo y ya tiene dos hijas: Diana y Mariana. Ella no tiene energía suficiente para hacer ejercicio. Su madre Luisa le da consejos para hacer actividad física con el tiempo que tiene. / Erica is worried because she has no time to exercise. She is pregnant again and already has two daughters: Diana and Mariana. She doesn’t have enough energy to exercise. Her mother Luisa is giving her advice for engaging in physical activity within the time she has.</h2>
+            <p class="text-justified text-gray-700 italic mb-6">Completa las oraciones con un mandato informal. / Complete the sentences with an informal command.</p>
+
+            <div id="activity-b" class="space-y-4">
+                <div class="flex items-center"> <!-- No flex-wrap para asegurar una sola línea -->
+                    <strong class="font-bold mr-2">1.</strong> 
+                    <input type="text" id="b-1-1" data-next="b-2-1" class="completion-input w-28 md:w-36 mr-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (estacionar [park]) tu carro lejos del supermercado o del consultorio [office] médico [medical].
+                </div>
+                <div class="flex items-center"> <!-- No flex-wrap para asegurar una sola línea -->
+                    <strong class="font-bold mr-2">2.</strong> 
+                    <input type="text" id="b-2-1" data-next="b-2-2" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (usar) las escaleras [stairs] y no 
+                    <input type="text" id="b-2-2" data-next="b-3-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (usar) el elevador [elevator].
+                </div>
+                <div class="flex items-center"> <!-- No flex-wrap para asegurar una sola línea -->
+                    <strong class="font-bold mr-2">3.</strong> 
+                    <input type="text" id="b-3-1" data-next="b-4-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (llevar) a las niñas al parque dos veces al día.
+                </div>
+                <div class="flex items-center"> <!-- No flex-wrap para asegurar una sola línea -->
+                    <strong class="font-bold mr-2">4.</strong> 
+                    <input type="text" id="b-4-1" data-next="b-5-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (caminar) por el parque.
+                </div>
+                <div class="flex items-center"> <!-- No flex-wrap para asegurar una sola línea -->
+                    <strong class="font-bold mr-2">5.</strong> No 
+                    <input type="text" id="b-5-1" data-next="b-6-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (ponerse) zapatos incómodos [uncomfortable] para caminar.
+                </div>
+                <div class="flex items-center"> <!-- No flex-wrap para asegurar una sola línea -->
+                    <strong class="font-bold mr-2">6.</strong> 
+                    <input type="text" id="b-6-1" data-next="b-7-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (salir) de casa por lo menos [at least] dos veces al día si hace buen tiempo.
+                </div>
+                <div class="flex items-center"> <!-- No flex-wrap para asegurar una sola línea -->
+                    <strong class="font-bold mr-2">7.</strong> 
+                    <input type="text" id="b-7-1" data-next="b-8-1" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (hacer) ejercicio ligero [light] enfrente del televisor.
+                </div>
+                <div class="flex items-center"> <!-- No flex-wrap para asegurar una sola línea -->
+                    <strong class="font-bold mr-2">8.</strong> 
+                    <input type="text" id="b-8-1" data-next="" data-skip-focus="true" class="completion-input w-28 md:w-36 mx-2 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (ir) a la piscina del vecindario [neighborhood] con las niñas.
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN C: Comandos Informales de Dirección -->
+        <div class="mt-10 pt-4 border-t border-gray-200">
+            <!-- TÍTULO C: Eliminamos font-extrabold, dejando solo la negrita en la letra 'c.' -->
+            <h2 class="text-xl font-normal text-eerie-black mb-3"><strong class="font-extrabold">c.</strong> El mejor amigo de Pablo de su vecindario anterior quiere visitarlo el próximo fin de semana. / Pablo’s best friend from his former neighborhood wants to visit him next weekend.</h2>
+            <p class="text-justified text-gray-700 italic mb-6">Completa las indicaciones de cómo llegar a la nueva ciudad usando mandatos informales. / Complete the instructions on how to get to the new city using informal commands.</p>
+
+            <div id="activity-c" class="space-y-4">
+                <div class="text-justified leading-relaxed">
+                    Desde tu casa, <strong class="font-bold">1.</strong> 
+                    <input type="text" id="c-1-1" data-next="c-2-1" class="completion-input w-24 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (tomar) la calle 32 y <strong class="font-bold">2.</strong> 
+                    <input type="text" id="c-2-1" data-next="c-3-1" class="completion-input w-24 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (manejar) por 30 minutos. Luego, <strong class="font-bold">3.</strong> 
+                    <input type="text" id="c-3-1" data-next="c-4-1" class="completion-input w-24 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (continuar [continue]) hacia la autopista 180 oeste por tres horas. Después, <strong class="font-bold">4.</strong> 
+                    <input type="text" id="c-4-1" data-next="c-5-1" class="completion-input w-24 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (doblar [turn]) a la derecha para tomar la salida 232 hacia la I-20. Esta es una autopista de peaje [turnpike], entonces [so] no <strong class="font-bold">5.</strong> 
+                    <input type="text" id="c-5-1" data-next="c-6-1" class="completion-input w-28 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (olvidarse) de llevar monedas [coins] en el carro. Por favor, <strong class="font-bold">6.</strong> 
+                    <input type="text" id="c-6-1" data-next="c-7-1" class="completion-input w-24 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (tener) paciencia porque siempre hay mucho tráfico [traffic]. Después de otra media hora, <strong class="font-bold">7.</strong>
+                    <input type="text" id="c-7-1" data-next="c-8-1" class="completion-input w-28 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (continuar) en la carretera 69 norte hasta llegar a la autopista 380 oeste. <strong class="font-bold">8.</strong> 
+                    <input type="text" id="c-8-1" data-next="c-9-1" class="completion-input w-24 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (conducir) por 2 horas más. <strong class="font-bold">9.</strong> 
+                    <input type="text" id="c-9-1" data-next="c-10-1" class="completion-input w-24 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (mirar) los rótulos [signs] en la calle. Yo voy a esperarte en la salida 286 A. Como son muchas horas de manejar, <strong class="font-bold">10.</strong> 
+                    <input type="text" id="c-10-1" data-next="c-11-1" class="completion-input w-24 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (poner) música en tu carro, pero no <strong class="font-bold">11.</strong> 
+                    <input type="text" id="c-11-1" data-next="c-12-1" class="completion-input w-24 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (poner) música clásica. Guillermo, ¡no <strong class="font-bold">12.</strong> 
+                    <input type="text" id="c-12-1" data-next="" data-skip-focus="true" class="completion-input w-28 mx-1 p-1 border border-gray-300 rounded-md focus:ring-flamingo-pink focus:border-flamingo-pink" autocomplete="off">
+                    (dormirse) mientras manejas!
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN D: Multiple Choice -->
+        <div class="mt-10 pt-4 border-t border-gray-200">
+            <!-- TÍTULO D: Eliminamos font-extrabold, dejando solo la negrita en la letra 'd.' -->
+            <h2 class="text-xl font-normal text-eerie-black mb-3"><strong class="font-extrabold">d.</strong> Escoge la respuesta correcta. Utiliza mandatos informales con los pronombres apropiados. / Choose the correct answer. Use informal commands with the appropriate pronouns.</h2>
+
+            <div id="activity-d" class="space-y-6">
+                <!-- Pregunta 1 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">1.</strong> 
+                        <span id="d-1-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (lavarse la herida [wound/cut] de la rodilla).
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-1" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) Lávemela</button>
+                        <button data-qid="d-1" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) Lávesele</button>
+                        <button data-qid="d-1" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) Lávatela</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">2.</strong> 
+                        <span id="d-2-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (comprar el regalo a tu madre).
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-2" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) Cómpraselo</button>
+                        <button data-qid="d-2" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) Cómpreselo</button>
+                        <button data-qid="d-2" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) Cómpratelo</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 3 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">3.</strong> 
+                        <span id="d-3-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (llevar chocolates a tu sobrina).
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-3" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) Llévaselo</button>
+                        <button data-qid="d-3" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) Lléveselo</button>
+                        <button data-qid="d-3" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) Llévaselos</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 4 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">4.</strong> 
+                        <span id="d-4-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (acostarse) temprano.
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-4" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) Acuéstese</button>
+                        <button data-qid="d-4" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) Acuéstate</button>
+                        <button data-qid="d-4" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) Acuéstesele</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 5 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">5.</strong> 
+                        <span id="d-5-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (comprar los ingredientes [ingredients]).
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-5" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) Cómpralos</button>
+                        <button data-qid="d-5" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) Cómpralelos</button>
+                        <button data-qid="d-5" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) Cómpralas</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 6 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">6.</strong> No 
+                        <span id="d-6-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (dormirse) en clase.
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-6" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) te duermes</button>
+                        <button data-qid="d-6" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) te duermas</button>
+                        <button data-qid="d-6" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) te duérmese</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 7 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">7.</strong> 
+                        <span id="d-7-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (estirar [stretch] los músculos [muscles]).
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-7" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) Estíremelos</button>
+                        <button data-qid="d-7" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) Estíralos</button>
+                        <button data-qid="d-7" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) Estírenos</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 8 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">8.</strong> 
+                        <span id="d-8-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (dar el juguete [toy] a tu hermana).
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-8" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) Dáselo</button>
+                        <button data-qid="d-8" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) Dásela</button>
+                        <button data-qid="d-8" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) Dámelo</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 9 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">9.</strong> ¡No 
+                        <span id="d-9-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (maquillarse); eres muy joven!
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-9" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) se maquille</button>
+                        <button data-qid="d-9" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) te maquilas</button>
+                        <button data-qid="d-9" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) te maquilles</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 10 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">10.</strong> 
+                        <span id="d-10-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (cepillarse los dientes).
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-10" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) Cepíllatelos</button>
+                        <button data-qid="d-10" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) Cepílleselos</button>
+                        <button data-qid="d-10" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) Cepíllesenos</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 11 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">11.</strong> No 
+                        <span id="d-11-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (tomar el café); está muy caliente.
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-11" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) tómelo</button>
+                        <button data-qid="d-11" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) lo tomes</button>
+                        <button data-qid="d-11" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) la tomes</button>
+                    </div>
+                </div>
+                
+                <!-- Pregunta 12 -->
+                <div class="p-4 border rounded-lg shadow-sm">
+                    <div class="mb-3 flex items-center"><strong class="font-bold mr-2">12.</strong> No 
+                        <span id="d-12-gap" class="inline-block border-b-2 border-gray-300 w-40 text-center font-semibold text-flamingo-pink h-6 mx-2"></span>
+                        (olvidarse) de ir al doctor a las 2:45 de la tarde.
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button data-qid="d-12" data-answer="a" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">a) te olvides</button>
+                        <button data-qid="d-12" data-answer="b" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">b) me olvide</button>
+                        <button data-qid="d-12" data-answer="c" class="choice-button px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md transition duration-150">c) se olviden</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bloque de Respuestas Correctas (Oculto inicialmente, POSICIÓN FINAL) -->
+        <div id="answer-key-section" class="hidden mt-10 p-6 bg-gray-50 rounded-xl shadow-inner border border-line-grey">
+            <h2 class="text-3xl font-bold text-flamingo-pink mb-4 pb-2 border-b-2 border-flamingo-pink">
+                IV. Respuestas correctas / Correct Answers
+            </h2>
+            <div class="space-y-4 text-sm md:text-base">
+                <div>
+                    <h3 class="font-extrabold text-lg mb-2">a.</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div><strong class="font-bold">1.</strong> coma…se acueste</div>
+                        <div><strong class="font-bold">6.</strong> Llévele</div>
+                        <div><strong class="font-bold">2.</strong> Duérmase…duerma</div>
+                        <div><strong class="font-bold">7.</strong> Lea…Enséñele</div>
+                        <div><strong class="font-bold">3.</strong> Cambie…Haga…Empiece</div>
+                        <div><strong class="font-bold">8.</strong> beba</div>
+                        <div><strong class="font-bold">4.</strong> Tenga…sea</div>
+                        <div><strong class="font-bold">9.</strong> Explíquele</div>
+                        <div><strong class="font-bold">5.</strong> vaya…pídale</div>
+                        <div><strong class="font-bold">10.</strong> Dígale</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-extrabold text-lg my-2">b.</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div><strong class="font-bold">1.</strong> Estaciona</div>
+                        <div><strong class="font-bold">5.</strong> te pongas</div>
+                        <div><strong class="font-bold">2.</strong> Usa…no uses</div>
+                        <div><strong class="font-bold">6.</strong> Sal</div>
+                        <div><strong class="font-bold">3.</strong> Lleva</div>
+                        <div><strong class="font-bold">7.</strong> Haz</div>
+                        <div><strong class="font-bold">4.</strong> Camina</div>
+                        <div><strong class="font-bold">8.</strong> Ve</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-extrabold text-lg my-2">c.</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div><strong class="font-bold">1.</strong> toma</div>
+                        <div><strong class="font-bold">7.</strong> continúa</div>
+                        <div><strong class="font-bold">2.</strong> maneja</div>
+                        <div><strong class="font-bold">8.</strong> Conduce</div>
+                        <div><strong class="font-bold">3.</strong> continúa</div>
+                        <div><strong class="font-bold">9.</strong> Mira</div>
+                        <div><strong class="font-bold">4.</strong> dobla</div>
+                        <div><strong class="font-bold">10.</strong> pon</div>
+                        <div><strong class="font-bold">5.</strong> te olvides</div>
+                        <div><strong class="font-bold">11.</strong> pongas</div>
+                        <div><strong class="font-bold">6.</strong> ten</div>
+                        <div><strong class="font-bold">12.</strong> te duermas</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-extrabold text-lg my-2">d.</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div><strong class="font-bold">1.</strong> c) Lávatela</div>
+                        <div><strong class="font-bold">7.</strong> b) Estíralos</div>
+                        <div><strong class="font-bold">2.</strong> a) Cómpraselo</div>
+                        <div><strong class="font-bold">8.</strong> a) Dáselo</div>
+                        <div><strong class="font-bold">3.</strong> c) Llévaselos</div>
+                        <div><strong class="font-bold">9.</strong> c) te maquilles</div>
+                        <div><strong class="font-bold">4.</strong> b) Acuéstate</div>
+                        <div><strong class="font-bold">10.</strong> a) Cepíllatelos</div>
+                        <div><strong class="font-bold">5.</strong> a) Cómpralos</div>
+                        <div><strong class="font-bold">11.</strong> b) lo tomes</div>
+                        <div><strong class="font-bold">6.</strong> b) te duermas</div>
+                        <div><strong class="font-bold">12.</strong> a) te olvides</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón de Respuestas Correctas (al final de la página - POSICIÓN FINAL) -->
+        <button onclick="toggleAnswerKey()" class="w-full mt-10 mb-20 px-6 py-3 font-bold text-white bg-flamingo-pink hover:bg-pink-600 rounded-lg shadow-md transition duration-200">
+            IV. Respuestas correctas / Correct Answers
+        </button>
+
+    </div>
+
+    <script>
+        // --- DATA DE RESPUESTAS CORRECTAS ---
+        const correctAnswers = {
+            'a-1-1': 'coma', 'a-1-2': 'se acueste',
+            'a-2-1': 'Duérmase', 'a-2-2': 'duerma',
+            'a-3-1': 'Cambie', 'a-3-2': 'Haga', 'a-3-3': 'Empiece',
+            'a-4-1': 'Tenga', 'a-4-2': 'sea',
+            'a-5-1': 'vaya', 'a-5-2': 'pídale',
+            'a-6-1': 'Llévele',
+            'a-7-1': 'Lea', 'a-7-2': 'Enséñele',
+            'a-8-1': 'beba',
+            'a-9-1': 'Explíquele',
+            'a-10-1': 'Dígale',
+
+            'b-1-1': 'Estaciona',
+            'b-2-1': 'Usa', 'b-2-2': 'no uses',
+            'b-3-1': 'Lleva',
+            'b-4-1': 'Camina',
+            'b-5-1': 'te pongas',
+            'b-6-1': 'Sal',
+            'b-7-1': 'Haz',
+            'b-8-1': 'Ve',
+
+            'c-1-1': 'toma', 'c-2-1': 'maneja', 'c-3-1': 'continúa', 'c-4-1': 'dobla',
+            'c-5-1': 'te olvides', 'c-6-1': 'ten', 'c-7-1': 'continúa', 'c-8-1': 'Conduce',
+            'c-9-1': 'Mira', 'c-10-1': 'pon', 'c-11-1': 'pongas', 'c-12-1': 'te duermas',
+
+            // Respuestas para selección (solo la letra correcta)
+            'd-1': 'c', 'd-2': 'a', 'd-3': 'c', 'd-4': 'b', 'd-5': 'a', 'd-6': 'b',
+            'd-7': 'b', 'd-8': 'a', 'd-9': 'c', 'd-10': 'a', 'd-11': 'b', 'd-12': 'a',
+        };
+
+        // Textos de respuesta para rellenar el hueco de la Actividad D
+        const dAnswerTexts = {
+            'd-1': 'Lávatela', 'd-2': 'Cómpraselo', 'd-3': 'Llévaselos', 'd-4': 'Acuéstate', 'd-5': 'Cómpralos',
+            'd-6': 'te duermas', 'd-7': 'Estíralos', 'd-8': 'Dáselo', 'd-9': 'te maquilles', 'd-10': 'Cepíllatelos',
+            'd-11': 'lo tomes', 'd-12': 'te olvides',
+        };
+        
+        // --- LÓGICA DE VERIFICACIÓN DE ENTRADAS DE TEXTO ---
+
+        /**
+         * Verifica la respuesta de un input, aplica estilo y mueve el foco.
+         * @param {HTMLElement} inputElement El elemento input que se va a verificar.
+         */
+        function checkAndAdvance(inputElement) {
+            const id = inputElement.id;
+            // Normaliza la respuesta eliminando espacios y signos de puntuación no esenciales
+            const userAnswer = inputElement.value.trim().toLowerCase().replace(/[\s\W]/g, ''); 
+            const correctAnswer = correctAnswers[id] ? correctAnswers[id].toLowerCase().replace(/[\s\W]/g, '') : '';
+            
+            // Limpia clases de estado previas
+            inputElement.classList.remove('input-correct', 'input-incorrect', 'border-gray-300');
+
+            if (userAnswer === correctAnswer) {
+                // Respuesta correcta: color verde
+                inputElement.classList.add('input-correct');
+                inputElement.disabled = true; // Deshabilita el campo correcto
+            } else {
+                // Respuesta incorrecta: color rojo
+                inputElement.classList.add('input-incorrect');
+                // No deshabilita para permitir reintentar
+            }
+
+            // Mueve el foco al siguiente campo, si existe y no es el final de la actividad
+            const nextId = inputElement.getAttribute('data-next');
+            const skipFocus = inputElement.getAttribute('data-skip-focus');
+
+            if (nextId && nextId !== "" && !skipFocus) {
+                const nextInput = document.getElementById(nextId);
+                if (nextInput && !nextInput.disabled) {
+                    nextInput.focus();
+                }
+            }
+        }
+
+        // Añade el event listener para la tecla Enter a todos los inputs de completación
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.completion-input').forEach(input => {
+                input.addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault(); // Previene la acción por defecto del Enter
+                        checkAndAdvance(this);
+                    }
+                });
+            });
+
+            // --- LÓGICA DE VERIFICACIÓN DE OPCIONES MÚLTIPLES (ACTIVIDAD D) ---
+
+            document.querySelectorAll('.choice-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const qid = this.getAttribute('data-qid'); // e.g., 'd-1'
+                    const selectedAnswer = this.getAttribute('data-answer'); // e.g., 'c'
+                    const correctAnswer = correctAnswers[qid]; // e.g., 'c'
+                    const gapElement = document.getElementById(qid + '-gap');
+                    
+                    // Deshabilita todos los botones de la misma pregunta y limpia estilos
+                    document.querySelectorAll(`.choice-button[data-qid="${qid}"]`).forEach(btn => {
+                        btn.classList.remove('input-correct', 'input-incorrect', 'bg-gray-100', 'hover:bg-gray-200');
+                        btn.classList.add('bg-gray-300'); // Estilo de deshabilitado
+                        btn.disabled = true; // Deshabilita después de la primera selección
+                    });
+
+                    if (selectedAnswer === correctAnswer) {
+                        // Respuesta correcta: color verde y rellena el hueco
+                        this.classList.add('input-correct', 'font-bold');
+                        gapElement.textContent = dAnswerTexts[qid];
+                    } else {
+                        // Respuesta incorrecta: color rojo
+                        this.classList.add('input-incorrect', 'font-bold');
+                        
+                        // Muestra la respuesta correcta en verde (opcional, pero útil para estudio)
+                        document.querySelector(`.choice-button[data-qid="${qid}"][data-answer="${correctAnswer}"]`).classList.add('input-correct', 'font-bold');
+                    }
+                });
+            });
+        });
+
+        // --- LÓGICA DEL BOTÓN DE RESPUESTAS CORRECTAS ---
+
+        function toggleAnswerKey() {
+            const keySection = document.getElementById('answer-key-section');
+            keySection.classList.toggle('hidden');
+            
+            // Si el botón está al final, es útil desplazar la vista al inicio de las respuestas
+            if (!keySection.classList.contains('hidden')) {
+                keySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    </script>
+</body>
+</html>

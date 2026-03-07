@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching game</title>
+    <!-- Load Tailwind CSS CDN con control de caché requerido -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    <style>
+        /* Sustituto para Platform Medium Font: Usando Inter, una fuente moderna Sans-Serif */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+        
+        :root {
+            --color-text: #121118; /* Eerie Black */
+            --color-accent: #FF79AC; /* Flamingo Pink */
+            --color-background: #FFFFFF; /* White */
+            --color-light-pink: #FFEBF2; /* Fondo inicial de botón */
+            --color-light-green: #D1FFD1; /* Fondo de botón correcto */
+            --color-light-red: #FFD1D1; /* Fondo de botón incorrecto */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-background);
+        }
+
+        /* Estilo base para el botón del juego */
+        .game-button {
+            /* Colores iniciales: rosa claro con borde inferior rosa flamenco */
+            background-color: var(--color-light-pink);
+            color: var(--color-text);
+            border-bottom: 3px solid var(--color-accent);
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 600; /* semi-bold */
+            transition: all 0.15s ease-in-out;
+            cursor: pointer;
+            width: 100%;
+            height: 45px; /* Altura fija para botones pequeños */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.5rem;
+            text-align: center;
+            font-size: 0.875rem; /* text-sm */
+        }
+
+        /* Estilo para el botón de nivel seleccionado */
+        .level-button.active {
+            background-color: var(--color-accent);
+            color: var(--color-background);
+            border-bottom-color: var(--color-text);
+        }
+
+        /* Estilo para botones ya emparejados */
+        .game-button.matched {
+            background-color: var(--color-light-green) !important;
+            border-bottom-color: #008000; /* Green Darker */
+            cursor: default;
+        }
+
+        /* Contenedor central y layout para evitar scroll innecesario */
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .game-grid-area {
+            flex-grow: 1; /* Permite que la cuadrícula ocupe el espacio restante */
+            display: flex;
+            align-items: center; /* Centrar verticalmente la cuadrícula */
+            justify-content: center;
+            width: 100%;
+            max-width: 700px;
+            margin: 1.5rem 0;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="game-container mx-auto"> 
+
+        <header class="text-center w-full max-w-4xl">
+            <!-- Título: Flamingo Pink y Negrita -->
+            <h1 class="text-4xl font-extrabold text-[var(--color-accent)] mb-1">
+                Matching game
+            </h1>
+            <!-- Subtítulo -->
+            <h2 class="text-xl font-semibold text-[var(--color-text)] mb-6">
+                test your memory
+            </h2>
+            
+            <!-- Botones de navegación de Nivel -->
+            <div id="level-nav" class="flex justify-center space-x-2 sm:space-x-4 mb-8">
+                <!-- Los botones se renderizarán aquí -->
+            </div>
+        </header>
+
+        <!-- Área del juego: donde se renderizan las columnas de botones -->
+        <main id="game-grid-area" class="game-grid-area">
+            <div id="game-grid" class="grid grid-cols-2 gap-3 w-full max-w-md md:max-w-lg">
+                <!-- Los botones del vocabulario se renderizarán aquí -->
+            </div>
+        </main>
+
+        <!-- Mensaje de estado (opcional, para feedback de fin de nivel) -->
+        <div id="status-message" class="text-lg font-bold text-center text-[var(--color-text)] mt-4"></div>
+
+    </div>
+
+    <script>
+        const FLAMINGO_PINK = '#FF79AC';
+        const EERIE_BLACK = '#121118';
+        const LIGHT_PINK = '#FFEBF2';
+        const LIGHT_GREEN = '#D1FFD1';
+        const LIGHT_RED = '#FFD1D1';
+
+        // Estructura de datos del juego (5 niveles, 7/6 pares por nivel)
+        const ALL_LEVEL_WORDS = [
+            // Nivel 1: 7 pares
+            [
+                { es: "el hombro", en: "shoulder" },
+                { es: "la garganta", en: "throat" },
+                { es: "el pecho", en: "chest" },
+                { es: "el corazón", en: "heart" },
+                { es: "la paz", en: "peace" },
+                { es: "la abuelita", en: "granny" },
+                { es: "humano", en: "human" }
+            ],
+            // Nivel 2: 7 pares
+            [
+                { es: "el cuerpo", en: "body" },
+                { es: "la cabeza", en: "head" },
+                { es: "la espalda", en: "back" },
+                { es: "el pelo", en: "hair" },
+                { es: "el estómago", en: "stomach" },
+                { es: "la cara", en: "face" }, // Corregido: se agregó ":" entre 'en' y '"face"'
+                { es: "el brazo", en: "arm" }
+            ],
+            // Nivel 3: 7 pares
+            [
+                { es: "la frente", en: "forehead" },
+                { es: "el codo", en: "elbow" },
+                { es: "el ojo", en: "eye" },
+                { es: "la muñeca", en: "wrist" },
+                { es: "la nariz", en: "nose" },
+                { es: "el dedo", en: "finger" },
+                { es: "la mejilla", en: "cheek" }
+            ],
+            // Nivel 4: 7 pares
+            [
+                { es: "la cintura", en: "waist" },
+                { es: "la boca", en: "mouth" },
+                { es: "la pierna", en: "leg" },
+                { es: "el labio", en: "lip" },
+                { es: "la rodilla", en: "knee" },
+                { es: "el diente", en: "tooth" },
+                { es: "el tobillo", en: "ankle" }
+            ],
+            // Nivel 5: 6 pares (solo se usan las palabras proporcionadas)
+            [
+                { es: "la lengua", en: "tongue, language" },
+                { es: "el pie", en: "foot" },
+                { es: "la oreja", en: "ear" },
+                { es: "el dedo del pie", en: "toe" },
+                { es: "el cuello", en: "neck" },
+                { es: "los pulmones", en: "lungs" }
+            ]
+        ];
+
+        let gameState = {
+            currentLevel: 0, // Índice del nivel actual (0 a 4)
+            selectedButton: null, // El primer botón clickeado
+            selectedWord: null,
+            selectedLanguage: null,
+            matchedCount: 0,
+            requiredMatches: 0
+        };
+
+        const gameGrid = document.getElementById('game-grid');
+        const levelNav = document.getElementById('level-nav');
+        const statusMessage = document.getElementById('status-message');
+
+        /**
+         * Función auxiliar para mezclar un array.
+         * @param {Array} array
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        /**
+         * Inicializa o reinicia el juego para un nivel específico.
+         * @param {number} levelIndex - Índice del nivel (0-4).
+         */
+        function initGame(levelIndex) {
+            gameState.currentLevel = levelIndex;
+            const currentWords = ALL_LEVEL_WORDS[levelIndex];
+            gameState.requiredMatches = currentWords.length;
+            gameState.matchedCount = 0;
+            gameState.selectedButton = null;
+            gameState.selectedWord = null;
+            statusMessage.textContent = '';
+            
+            // 1. Renderizar botones de navegación de nivel
+            renderLevelNavigation();
+
+            // 2. Renderizar la cuadrícula del juego
+            renderGameGrid(currentWords);
+        }
+
+        /**
+         * Renderiza los botones de navegación de nivel.
+         */
+        function renderLevelNavigation() {
+            levelNav.innerHTML = '';
+            for (let i = 0; i < ALL_LEVEL_WORDS.length; i++) {
+                const button = document.createElement('button');
+                button.textContent = `Nivel ${i + 1}`;
+                button.className = `level-button px-3 py-1 text-sm rounded-full font-semibold transition-colors duration-200`;
+                
+                if (i === gameState.currentLevel) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+                }
+
+                button.onclick = () => {
+                    // Si ya estamos en este nivel, no hacemos nada
+                    if (i === gameState.currentLevel) return; 
+                    initGame(i);
+                };
+                levelNav.appendChild(button);
+            }
+        }
+
+        /**
+         * Renderiza la cuadrícula de botones para el juego.
+         * @param {Array<Object>} words - Array de objetos {es, en}.
+         */
+        function renderGameGrid(words) {
+            gameGrid.innerHTML = '';
+            
+            // Preparar listas y mezclarlas
+            let spanishWords = [];
+            let englishWords = [];
+            words.forEach(pair => {
+                spanishWords.push({ word: pair.es, lang: 'es', match: pair.en });
+                englishWords.push({ word: pair.en, lang: 'en', match: pair.es });
+            });
+
+            shuffleArray(spanishWords);
+            shuffleArray(englishWords);
+
+            // Crear columnas de botones
+            const columnES = document.createElement('div');
+            const columnEN = document.createElement('div');
+            columnES.className = 'flex flex-col space-y-3';
+            columnEN.className = 'flex flex-col space-y-3';
+
+            // Columna 1: Español
+            spanishWords.forEach(item => {
+                const button = createButton(item.word, item.lang, item.match);
+                columnES.appendChild(button);
+            });
+
+            // Columna 2: Inglés
+            englishWords.forEach(item => {
+                const button = createButton(item.word, item.lang, item.match);
+                columnEN.appendChild(button);
+            });
+            
+            gameGrid.appendChild(columnES);
+            gameGrid.appendChild(columnEN);
+        }
+
+        /**
+         * Crea un botón del juego.
+         */
+        function createButton(word, lang, match) {
+            const button = document.createElement('button');
+            button.className = 'game-button';
+            button.textContent = word;
+            button.dataset.word = word;
+            button.dataset.lang = lang;
+            button.dataset.match = match;
+            button.onclick = () => handleButtonClick(button);
+            return button;
+        }
+
+        /**
+         * Lógica principal al hacer clic en un botón.
+         * @param {HTMLElement} button - El botón clickeado.
+         */
+        function handleButtonClick(button) {
+            // Ignorar botones ya emparejados o si hay un temporizador activo (error)
+            if (button.classList.contains('matched') || button.disabled) {
+                return;
+            }
+
+            // Deseleccionar el botón previamente seleccionado
+            if (gameState.selectedButton && gameState.selectedButton !== button) {
+                gameState.selectedButton.style.backgroundColor = LIGHT_PINK;
+                gameState.selectedButton.style.borderBottomColor = FLAMINGO_PINK;
+            }
+
+            // Si se hace clic en el mismo botón, deseleccionar
+            if (gameState.selectedButton === button) {
+                button.style.backgroundColor = LIGHT_PINK;
+                button.style.borderBottomColor = FLAMINGO_PINK;
+                gameState.selectedButton = null;
+                gameState.selectedWord = null;
+                gameState.selectedLanguage = null;
+                return;
+            }
+
+            // Seleccionar el botón actual
+            button.style.backgroundColor = FLAMINGO_PINK;
+            button.style.borderBottomColor = EERIE_BLACK;
+
+            // Si es el primer click
+            if (!gameState.selectedButton) {
+                gameState.selectedButton = button;
+                gameState.selectedWord = button.dataset.word;
+                gameState.selectedLanguage = button.dataset.lang;
+            } 
+            // Si es el segundo click y el idioma es diferente
+            else if (gameState.selectedLanguage !== button.dataset.lang) {
+                checkMatch(button);
+            }
+            // Si es el segundo click pero el idioma es el mismo (lo deselecciona implícitamente, pero lo seleccionamos de nuevo para evitar bugs)
+            else {
+                gameState.selectedButton.style.backgroundColor = LIGHT_PINK;
+                gameState.selectedButton.style.borderBottomColor = FLAMINGO_PINK;
+                gameState.selectedButton = button;
+                gameState.selectedWord = button.dataset.word;
+                gameState.selectedLanguage = button.dataset.lang;
+            }
+        }
+
+        /**
+         * Comprueba si los dos botones seleccionados coinciden.
+         * @param {HTMLElement} secondButton - El botón recién clickeado.
+         */
+        function checkMatch(secondButton) {
+            const firstButton = gameState.selectedButton;
+            
+            // Si el match de la primera palabra coincide con el texto de la segunda
+            const isMatch = firstButton.dataset.match.includes(secondButton.dataset.word) || secondButton.dataset.match.includes(firstButton.dataset.word);
+            
+            if (isMatch) {
+                // Éxito: Cambiar a verde y deshabilitar
+                [firstButton, secondButton].forEach(btn => {
+                    btn.classList.add('matched');
+                    btn.disabled = true; // Deshabilitar para evitar clics
+                    btn.style.backgroundColor = LIGHT_GREEN;
+                });
+                
+                gameState.matchedCount++;
+                
+                if (gameState.matchedCount === gameState.requiredMatches) {
+                    statusMessage.textContent = `¡Nivel ${gameState.currentLevel + 1} Completado!`;
+                }
+
+            } else {
+                // Error: Cambiar a rojo y restablecer después de un tiempo
+                [firstButton, secondButton].forEach(btn => {
+                    btn.style.backgroundColor = LIGHT_RED;
+                    btn.disabled = true; // Deshabilitar temporalmente
+                });
+                
+                setTimeout(() => {
+                    [firstButton, secondButton].forEach(btn => {
+                        // Restablecer al estado inicial (rosa claro)
+                        btn.style.backgroundColor = LIGHT_PINK;
+                        btn.style.borderBottomColor = FLAMINGO_PINK;
+                        btn.disabled = false; // Habilitar de nuevo
+                    });
+                }, 750); // 0.75 segundos de error
+
+            }
+
+            // Reiniciar selección para el siguiente intento
+            gameState.selectedButton = null;
+            gameState.selectedWord = null;
+            gameState.selectedLanguage = null;
+        }
+
+        // Iniciar el juego en el Nivel 1 al cargar la página
+        window.onload = () => {
+            initGame(0);
+        };
+    </script>
+</body>
+</html>

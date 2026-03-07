@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Estudio - Español</title>
+    <!-- Carga de Tailwind CSS con control de caché -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    <style>
+        /*
+        El usuario solicitó la fuente "Platform Medium Font". Como esta es una fuente propietaria,
+        utilizaremos una pila de fuentes moderna y robusta (como Inter) configurada en Tailwind,
+        que es una fuente Sans-Serif geométrica con buena presencia, como placeholder.
+        */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        /* Definición de la fuente y estilos base */
+        body {
+            background-color: #FFFFFF; /* Fondo blanco */
+            color: #121118; /* Eerie Black para el texto */
+            font-family: 'Inter', sans-serif; /* Placeholder para Platform Medium */
+        }
+        
+        /* Estilo para la línea divisoria del vocabulario */
+        .vocab-divider {
+            height: 1px;
+            background-color: #E0E0E0; /* Gris claro */
+            margin: 2rem 0;
+            width: 100%;
+        }
+
+        /* Clase para el texto justificado requerido en la parte informativa */
+        .text-justified {
+            text-align: justify;
+        }
+
+        /* Clase para las entradas de vocabulario */
+        .vocab-entry {
+            line-height: 1.8;
+        }
+    </style>
+    <script>
+        // Configuración de Tailwind para usar los colores específicos y la fuente
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                        'line-grey': '#E0E0E0',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="p-6 md:p-12 lg:p-20 font-sans text-eerie-black antialiased">
+
+    <div class="max-w-4xl mx-auto">
+
+        <!-- TÍTULO DE LA PÁGINA -->
+        <!-- Usamos un título descriptivo ya que el usuario dejó el campo en blanco pero pidió un título -->
+        <h1 class="text-4xl md:text-5xl font-extrabold text-eerie-black mb-10 text-center rounded-lg py-2">
+            Informal Commands
+        </h1>
+
+        <!-- SECCIÓN I: VOCABULARIO NUEVO -->
+        <h2 class="text-3xl font-bold text-flamingo-pink mb-6 pb-2 border-b-2 border-flamingo-pink">
+            I. Vocabulario nuevo / New Vocabulary
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+            
+            <!-- Grupo 1 de Vocabulario -->
+            <div class="vocab-entry"><strong class="font-bold">incorporar</strong> – to incorporate</div>
+            <div class="vocab-entry"><strong class="font-bold">Discúlpeme</strong> – Excuse me [usted command]</div>
+            <div class="vocab-entry"><strong class="font-bold">Perdóneme.</strong> – Pardon me [usted command]</div>
+            <div></div> <!-- Espacio para mantener el layout de dos columnas -->
+            
+        </div>
+        
+        <!-- Línea divisoria de color gris claro (#E0E0E0) -->
+        <div class="vocab-divider"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+            
+            <!-- Grupo 2 de Vocabulario -->
+            <div class="vocab-entry"><strong class="font-bold">la casita</strong> – little house</div>
+            <div class="vocab-entry"><strong class="font-bold">la paz</strong> – peace</div>
+            <div class="vocab-entry"><strong class="font-bold">la abuelita</strong> – granny</div>
+            <div class="vocab-entry"><strong class="font-bold">humano</strong> – human</div>
+            <div class="vocab-entry"><strong class="font-bold">el cuerpo</strong> – body</div>
+            <div></div> <!-- Espacio para mantener el layout de dos columnas -->
+            
+        </div>
+        
+        <!-- Línea divisoria de color gris claro (#E0E0E0) -->
+        <div class="vocab-divider"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+
+            <!-- Grupo 3 de Vocabulario (Partes del Cuerpo) -->
+            <div class="vocab-entry"><strong class="font-bold">la cabeza</strong> – head</div>
+            <div class="vocab-entry"><strong class="font-bold">la espalda</strong> – back</div>
+
+            <div class="vocab-entry"><strong class="font-bold">el pelo</strong> – hair</div>
+            <div class="vocab-entry"><strong class="font-bold">el estómago</strong> – stomach</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">la cara</strong> – face</div>
+            <div class="vocab-entry"><strong class="font-bold">el brazo</strong> – arm</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">la frente</strong> – forehead</div>
+            <div class="vocab-entry"><strong class="font-bold">el codo</strong> – elbow</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">el ojo</strong> – eye</div>
+            <div class="vocab-entry"><strong class="font-bold">la muñeca</strong> – wrist</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">la nariz</strong> – nose</div>
+            <div class="vocab-entry"><strong class="font-bold">el dedo</strong> – finger</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">la mejilla</strong> – cheek</div>
+            <div class="vocab-entry"><strong class="font-bold">la cintura</strong> – waist</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">la boca</strong> – mouth</div>
+            <div class="vocab-entry"><strong class="font-bold">la pierna</strong> – leg</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">el labio</strong> – lip</div>
+            <div class="vocab-entry"><strong class="font-bold">la rodilla</strong> – knee</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">el diente</strong> – tooth</div>
+            <div class="vocab-entry"><strong class="font-bold">el tobillo</strong> – ankle</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">la lengua</strong> – tongue, language</div>
+            <div class="vocab-entry"><strong class="font-bold">el pie</strong> – foot</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">la oreja</strong> – ear</div>
+            <div class="vocab-entry"><strong class="font-bold">el dedo del pie</strong> – toe</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">el cuello</strong> – neck</div>
+            <div class="vocab-entry"><strong class="font-bold">los pulmones</strong> – lungs</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">el hombro</strong> – shoulder</div>
+            <div class="vocab-entry"><strong class="font-bold">la garganta</strong> – throat</div>
+            
+            <div class="vocab-entry"><strong class="font-bold">el pecho</strong> – chest</div>
+            <div class="vocab-entry"><strong class="font-bold">el corazón</strong> – heart</div>
+
+        </div>
+        
+        <!-- Línea divisoria de color gris claro (#E0E0E0) -->
+        <div class="vocab-divider"></div>
+
+
+        <!-- SECCIÓN II: REPASO GENERAL -->
+        <h2 class="text-3xl font-bold text-flamingo-pink mt-12 mb-6 pb-2 border-b-2 border-flamingo-pink">
+            II. Repaso general / General Review
+        </h2>
+
+        <div class="space-y-6">
+            
+            <!-- SECCIÓN A: Affirmative tú Commands -->
+            <div>
+                <h3 class="text-xl font-extrabold text-eerie-black mb-3"><strong class="font-extrabold">A. Affirmative tú Commands</strong></h3>
+                <p class="text-justified">
+                    The affirmative command used with someone you address as <strong class="font-bold">tú</strong> is the same as the third-person singular form of the verb in the present tense. Just conjugate the verb in the present as you would if the subject is <strong class="font-bold">él</strong>, <strong class="font-bold">ella</strong>, or <strong class="font-bold">usted</strong>; that same conjugation serves as the <strong class="font-bold">tú</strong> command. Consider the following <strong class="font-bold">tú</strong> commands for the given infinitives: <strong class="font-bold">tocar</strong> → <strong class="font-bold">toca</strong>; <strong class="font-bold">aprender</strong> → <strong class="font-bold">aprende</strong>; <strong class="font-bold">vivir</strong> → <strong class="font-bold">vive</strong>; <strong class="font-bold">jugar</strong> → <strong class="font-bold">juega</strong>; <strong class="font-bold">servir</strong> → <strong class="font-bold">sirve</strong>; <strong class="font-bold">oír</strong> → <strong class="font-bold">oye</strong>.
+                </p>
+            </div>
+
+            <div class="text-justified">
+                There are only eight irregular <strong class="font-bold">tú</strong> commands: <strong class="font-bold">venir</strong> → <strong class="font-bold">ven</strong>; <strong class="font-bold">salir</strong> → <strong class="font-bold">sal</strong>; <strong class="font-bold">poner</strong> → <strong class="font-bold">pon</strong>; <strong class="font-bold">tener</strong> → <strong class="font-bold">ten</strong>; <strong class="font-bold">hacer</strong> → <strong class="font-bold">haz</strong>; <strong class="font-bold">ser</strong> → <strong class="font-bold">sé</strong>; <strong class="font-bold">decir</strong> → <strong class="font-bold">di</strong>; <strong class="font-bold">ir</strong> → <strong class="font-bold">ve</strong>.
+            </div>
+
+            <!-- SECCIÓN B: Negative tú Commands -->
+            <div>
+                <h3 class="text-xl font-extrabold text-eerie-black mb-3"><strong class="font-extrabold">B. Negative tú Commands</strong></h3>
+                <p class="text-justified">
+                    The negative <strong class="font-bold">tú</strong> command is formed in the following way: <strong class="font-bold">no</strong> + <strong class="font-bold">usted</strong> command + <strong class="font-bold">-s</strong>. In other words, you start with <strong class="font-bold">no</strong> and follow it with the <strong class="font-bold">usted</strong> command, with an <strong class="font-bold">-s</strong> added at the end (e.g., <strong class="font-bold">tocar</strong> → <strong class="font-bold">no toques</strong>; <strong class="font-bold">aprender</strong> → <strong class="font-bold">no aprendas</strong>; <strong class="font-bold">vivir</strong> → <strong class="font-bold">no vivas</strong>; <strong class="font-bold">ser</strong> → <strong class="font-bold">no seas</strong>; <strong class="font-bold">hacer</strong> → <strong class="font-bold">no hagas</strong>). This command form offers another reminder of the importance of knowing how to form an <strong class="font-bold">usted</strong> command. Once you know the <strong class="font-bold">usted</strong> command, you are able to use it to form the affirmative and negative <strong class="font-bold">usted</strong> command, the affirmative and negative <strong class="font-bold">ustedes</strong> command, and the negative <strong class="font-bold">tú</strong> command.
+                </p>
+            </div>
+
+            <!-- SECCIÓN C: Affirmative vosotros Commands -->
+            <div>
+                <h3 class="text-xl font-extrabold text-eerie-black mb-3"><strong class="font-extrabold">C. Affirmative vosotros Commands</strong></h3>
+                <p class="text-justified">
+                    The way to make an affirmative command for a group you address as <strong class="font-bold">vosotros</strong> or <strong class="font-bold">vosotras</strong> is the following: Start with the infinitive, drop the <strong class="font-bold">-r</strong> at the end, and replace it with a <strong class="font-bold">-d</strong> (e.g., <strong class="font-bold">hablar</strong> → <strong class="font-bold">hablad</strong>; <strong class="font-bold">tener</strong> → <strong class="font-bold">tened</strong>; <strong class="font-bold">dormir</strong> → <strong class="font-bold">dormid</strong>). The <strong class="font-bold">vosotros</strong> command is only used in Spain; a Latin American would use an <strong class="font-bold">ustedes</strong> command rather than a <strong class="font-bold">vosotros</strong> command.
+                </p>
+            </div>
+
+            <!-- SECCIÓN D: Using Pronouns with Commands (Tabla) -->
+            <div>
+                <h3 class="text-xl font-extrabold text-eerie-black mb-3"><strong class="font-extrabold">D. Using Pronouns with Commands</strong></h3>
+                <p class="text-justified mb-4">
+                    Three types of pronouns can be used with commands: direct object pronouns, indirect object pronouns, and reflexive pronouns. These pronouns go after affirmative commands and before negative commands, as shown below. Notice that the first three commands below are <strong class="font-bold">tú</strong> commands, and the final three commands are <strong class="font-bold">usted</strong> commands.
+                </p>
+
+                <!-- Tabla de Comandos -->
+                <div class="overflow-x-auto shadow-xl rounded-lg border border-line-grey">
+                    <table class="min-w-full divide-y divide-line-grey">
+                        <thead class="bg-flamingo-pink text-white">
+                            <tr>
+                                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell">Tipo</th>
+                                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider">Infinitive</th>
+                                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider">Pronoun(s)</th>
+                                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider">Affirmative Command</th>
+                                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider">Negative Command</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-line-grey text-sm">
+                            <!-- Fila de tú commands (Cabecera oculta en móvil) -->
+                            <tr class="bg-gray-50/50">
+                                <td class="px-3 py-2 whitespace-nowrap font-bold hidden md:table-cell">tú commands</td>
+                                <td class="px-3 py-2 whitespace-nowrap md:hidden" colspan="5"><strong class="text-eerie-black">Tú Commands</strong></td>
+                            </tr>
+                            <!-- Fila 1 (tú) -->
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap hidden md:table-cell"></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">dar</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">me + lo</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">dámelo</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">no me lo des</strong></td>
+                            </tr>
+                            <!-- Fila 2 (tú) -->
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap hidden md:table-cell"></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">despertarse</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">te</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">despiértate</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">no te despiertes</strong></td>
+                            </tr>
+                            <!-- Fila 3 (tú) -->
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap hidden md:table-cell"></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">hacer</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">lo</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">hazlo</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">no lo hagas</strong></td>
+                            </tr>
+
+                            <!-- Fila de usted commands (Cabecera oculta en móvil) -->
+                            <tr class="bg-gray-50/50">
+                                <td class="px-3 py-2 whitespace-nowrap font-bold hidden md:table-cell">usted commands</td>
+                                <td class="px-3 py-2 whitespace-nowrap md:hidden" colspan="5"><strong class="text-eerie-black">Usted Commands</strong></td>
+                            </tr>
+                            <!-- Fila 4 (usted) -->
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap hidden md:table-cell"></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">acostarse</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">se</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">acuéstese</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">no se acueste</strong></td>
+                            </tr>
+                            <!-- Fila 5 (usted) -->
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap hidden md:table-cell"></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">comer</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">las</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">cómalas</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">no las coma</strong></td>
+                            </tr>
+                            <!-- Fila 6 (usted) -->
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap hidden md:table-cell"></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">escribir</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">le + la</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">escríbasela</strong></td>
+                                <td class="px-3 py-2 whitespace-nowrap"><strong class="font-bold">no se la escriba</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- NOTA: El usuario solicitó no añadir información adicional, por lo que el documento termina aquí. -->
+
+    </div>
+
+</body>
+</html>

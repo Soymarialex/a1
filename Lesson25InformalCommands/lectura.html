@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV. Lectura cultural / Cultural Reading</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /*
+        Configuración de fuente: "Platform Medium Font" no está disponible
+        como fuente web estándar. Usaremos 'Inter' (default en Canvas/Tailwind)
+        como fallback. Puedes reemplazar la fuente en el futuro si tienes acceso
+        a la tipografía solicitada.
+        */
+        :root {
+            /* Colores centrales */
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --bg-white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-white);
+            color: var(--eerie-black);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        /* Estilo para el input de completación */
+        .completion-input {
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem; /* rounded-md */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            /* Usar el color Eerie Black como borde inicial */
+            border-color: #d1d5db; /* gray-300 */
+        }
+
+        .completion-input:focus {
+            outline: none;
+            border-color: var(--flamingo-pink);
+            box-shadow: 0 0 0 3px rgba(255, 121, 172, 0.5);
+        }
+
+        .correct-answer {
+            background-color: #E6FFE6; /* Verde claro personalizado */
+            border-color: #4CAF50; /* Verde más oscuro */
+        }
+
+        .incorrect-answer {
+            background-color: #FFE6E6; /* Rojo claro personalizado */
+            border-color: #F44336; /* Rojo más oscuro */
+        }
+
+        /* Ocultar asteriscos en texto en negrita (redundante ya que usamos <b>/<strong>) */
+        /* .font-bold, strong, b { font-weight: 700; } */
+    </style>
+    <!-- Configuración para el uso de los colores personalizados de la paleta -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flamingo-pink': '#FF79AC',
+                        'eerie-black': '#121118',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-eerie-black">
+
+    <div id="app" class="max-w-4xl w-full mx-auto p-6 md:p-10 shadow-xl bg-white rounded-lg">
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-8 text-center" style="color: var(--eerie-black);">
+            V. Lectura cultural / Cultural Reading
+        </h1>
+
+        <!-- Bloque de Lectura en Español -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 border-b-2 pb-2 border-flamingo-pink text-eerie-black">
+                Desiertos de sal en América Latina
+            </h2>
+            <div class="text-eerie-black space-y-4 text-justify text-lg">
+                <p>
+                    Los desiertos de sal forman parte de los maravillosos atributos naturales del planeta Tierra. Estos desiertos son grandes extensiones de tierra de miles de kilómetros cuadrados que parecen ser superficies cubiertas de nieve. Sin embargo, están cubiertas de sal. Estás áreas de temperaturas extremas tienen poca vegetación por su composición de sal. En América Latina se encuentran algunos de los desiertos de sal más grandes del mundo. De los desiertos en <strong>Bolivia, Chile y Argentina</strong>, se extraen varios elementos diferentes además de sal común.
+                </p>
+                <p>
+                    Entre los desiertos de sal más grandes del mundo se encuentra el de <strong>Uyuni en Bolivia</strong>. Este desierto mide 10.582 kilómetros cuadrados y se encuentra a una altitud de 3.656 metros. El desierto de Uyuni es uno de los lugares más visitados de Bolivia. Las personas que viven en el pueblo de <strong>Colchani</strong>, cerca de este desierto, <strong>venden llamas pequeñitas y artesanías hechas de sal</strong>. En ese lugar existe un hotel muy famoso que está construido totalmente de sal. El Hotel Palacio de Sal tiene 16 habitaciones con pisos, paredes, techos, muebles, camas, mesas y sillas todos hechos de sal. También tiene un campo de golf de nueve hoyos con “greens” blancos. Para construir este hotel, se necesitaron alrededor de un millón de bloques de sal de 35 centímetros. Hay una regla muy importante: <strong>No se puede lamer las paredes porque podría dañarlas.</strong>
+                </p>
+                <p>
+                    En Argentina, las Salinas Grandes tienen unos 8.200 kilómetros cuadrados y es también uno de los desiertos de sal más grandes del planeta, al igual que el de <strong>Atacama</strong>, que está en Chile. Este último tiene unos 3.000 kilómetros cuadrados y es una de las mayores reservas del mineral <strong>litio</strong>, que es muy utilizado por la industria de alta tecnología.
+                </p>
+            </div>
+        </section>
+
+        <!-- Bloque de Preguntas de Completación -->
+        <section id="completion-activity" class="mb-10 p-6 bg-gray-50 rounded-lg shadow-inner">
+            <h3 class="text-xl font-bold mb-6 text-eerie-black">Actividad de Completación</h3>
+            <div class="space-y-6">
+                <div class="flex flex-col md:flex-row items-start md:items-center">
+                    <label for="q1" class="font-medium mr-2 whitespace-nowrap mb-1 md:mb-0 text-eerie-black">1. ¿Cuáles son tres países que tienen desiertos de sal en América Latina?</label>
+                    <input type="text" id="q1"
+                        class="completion-input"
+                        data-correct-answers='["Bolivia, Chile y Argentina", "Bolivia, Chile y Argentina.", "Chile, Bolivia y Argentina", "Chile, Bolivia y Argentina.", "Argentina, Chile y Bolivia", "Argentina, Chile y Bolivia."]'
+                        data-next-id="q2"
+                        data-question-number="1">
+                </div>
+
+                <div class="flex flex-col md:flex-row items-start md:items-center">
+                    <label for="q2" class="font-medium mr-2 whitespace-nowrap mb-1 md:mb-0 text-eerie-black">2. ¿Por qué hay poca vegetación en los desiertos de sal?</label>
+                    <input type="text" id="q2"
+                        class="completion-input"
+                        data-correct-answers='["Hay poca vegetación por su composición de sal.", "Porque hay mucha sal.", "por su composicion de sal", "Por su composición de sal", "porque hay mucha sal"]'
+                        data-next-id="q3"
+                        data-question-number="2">
+                </div>
+
+                <div class="flex flex-col md:flex-row items-start md:items-center">
+                    <label for="q3" class="font-medium mr-2 whitespace-nowrap mb-1 md:mb-0 text-eerie-black">3. ¿Qué venden las personas que viven en Colchani?</label>
+                    <input type="text" id="q3"
+                        class="completion-input"
+                        data-correct-answers='["Venden llamas pequeñitas y artesanías hechas de sal.", "llamas pequeñitas y artesanías hechas de sal", "llamas pequeñas y artesanias hechas de sal"]'
+                        data-next-id="q4"
+                        data-question-number="3">
+                </div>
+
+                <div class="flex flex-col md:flex-row items-start md:items-center">
+                    <label for="q4" class="font-medium mr-2 whitespace-nowrap mb-1 md:mb-0 text-eerie-black">4. ¿Cuál es la regla del Hotel Palacio de Sal?</label>
+                    <input type="text" id="q4"
+                        class="completion-input"
+                        data-correct-answers='["La regla es que no se puede lamer las paredes.", "no se puede lamer las paredes", "No se puede lamer las paredes porque podría dañarlas."]'
+                        data-next-id="q5"
+                        data-question-number="4">
+                </div>
+
+                <div class="flex flex-col md:flex-row items-start md:items-center">
+                    <label for="q5" class="font-medium mr-2 whitespace-nowrap mb-1 md:mb-0 text-eerie-black">5. ¿Cuál es el mineral que se encuentra en grandes cantidades en el desierto de Atacama?</label>
+                    <input type="text" id="q5"
+                        class="completion-input"
+                        data-correct-answers='["Se encuentra mucho litio.", "litio", "Litio"]'
+                        data-next-id=""
+                        data-question-number="5">
+                </div>
+            </div>
+        </section>
+
+        <!-- Bloque de Lectura en Inglés (Traducción) -->
+        <section class="mb-10 pt-4 border-t border-gray-200">
+            <h2 class="text-2xl font-bold mb-4 border-b-2 pb-2 border-flamingo-pink text-eerie-black">
+                Salt Deserts in Latin America
+            </h2>
+            <div class="text-eerie-black space-y-4 text-justify text-lg">
+                <p>
+                    Salt deserts form part of the marvelous natural attributes of planet Earth. These deserts are great extensions of land of thousands of square kilometers that seem to be surfaces covered with snow. Nevertheless, they are covered with salt. These areas of extreme temperature have little vegetation because they are composed of salt. In Latin America are found some of the largest salt deserts of the world. From the deserts in <strong>Bolivia, Chile, and Argentina</strong>, various different elements are extracted in addition to common salt.
+                </p>
+                <p>
+                    The <strong>Uyuni</strong> salt flat in Bolivia is among the largest salt deserts in the world. This desert measures 10,582 square kilometers and is at an altitude of 3,656 meters. The desert of Uyuni is one of the most visited places in Bolivia. The people who live in the town of <strong>Colchani</strong>, near this desert, <strong>sell little llamas and crafts made of salt</strong>. In that place, there is a very famous hotel that is entirely made of salt. The Salt Palace Hotel has 16 rooms with floors, walls, ceilings, furniture, beds, tables, and chairs all made of salt. It also has a nine-hole golf course with white greens. About a million 35-centimeter blocks of salt were needed to build this hotel. There is a very important rule: <strong>You can’t lick the walls because it could damage them.</strong>
+                </p>
+                <p>
+                    In Argentina, the Salinas Grandes [Great Salt Flats] are 8,200 square kilometers and are also one of the biggest salt deserts in the planet, as is the salt flat in <strong>Atacama, Chile</strong>. The salt flat in Atacama is 3,000 square kilometers, and it has one of greatest reserves of the mineral <strong>lithium</strong>, which is used extensively in the high-tech industry.
+                </p>
+            </div>
+        </section>
+
+        <!-- Botón de Respuestas Correctas -->
+        <div class="text-center pt-6 border-t border-gray-200">
+            <button id="toggleAnswersBtn" onclick="toggleAnswers()"
+                class="px-6 py-3 font-semibold text-white rounded-full transition duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+                style="background-color: var(--flamingo-pink);">
+                Mostrar Respuestas Correctas
+            </button>
+        </div>
+
+        <!-- Sección de Respuestas Correctas (Oculta por defecto) -->
+        <section id="correctAnswersSection" class="mt-8 p-6 bg-gray-50 rounded-lg hidden shadow-inner border border-gray-200">
+            <h3 class="text-xl font-bold mb-4 text-eerie-black">Respuestas correctas / Correct Answers</h3>
+            <div class="space-y-3">
+                <p><strong>Lectura cultural</strong></p>
+                <ol class="list-decimal list-inside space-y-2 ml-4">
+                    <li>Bolivia, Chile y Argentina.</li>
+                    <li>Hay poca vegetación por su composición de sal. / Porque hay mucha sal.</li>
+                    <li>Venden llamas pequeñitas y artesanías hechas de sal.</li>
+                    <li>La regla es que no se puede lamer las paredes.</li>
+                    <li>Se encuentra mucho litio.</li>
+                </ol>
+            </div>
+        </section>
+
+    </div>
+
+    <script type="module">
+        // Importaciones necesarias de Firebase (obligatorio en el entorno Canvas)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // Desactivar logs de Firebase si no son necesarios, o usar Debug si se requiere
+        setLogLevel('error'); 
+
+        // Global variables provided by the Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth;
+
+        /**
+         * Initializes Firebase and authenticates the user.
+         */
+        async function initializeFirebase() {
+            if (!firebaseConfig) {
+                console.error("Firebase configuration not found.");
+                return;
+            }
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        console.log("User authenticated:", user.uid);
+                    } else {
+                        console.log("No user signed in.");
+                    }
+                });
+
+            } catch (error) {
+                console.error("Firebase initialization or authentication failed:", error);
+            }
+        }
+
+        // Ejecutar inicialización de Firebase
+        initializeFirebase();
+
+        // --- Lógica del Cuestionario ---
+
+        // Array para contener todos los inputs del cuestionario en orden
+        const inputs = Array.from(document.querySelectorAll('.completion-input'));
+
+        /**
+         * Normaliza la respuesta para la comparación.
+         * @param {string} answer - La respuesta a normalizar.
+         * @returns {string} La respuesta normalizada.
+         */
+        function normalizeAnswer(answer) {
+            if (!answer) return "";
+            // Quita espacios al inicio/final, minúsculas, elimina puntuación básica
+            return answer.trim().toLowerCase()
+                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()¿?¡!]/g,"")
+                .replace(/\s{2,}/g," "); // Reemplaza múltiples espacios con uno solo
+        }
+
+        /**
+         * Verifica si la respuesta ingresada es correcta.
+         * @param {string} userAnswer - La respuesta del usuario.
+         * @param {string[]} correctAnswers - Array de posibles respuestas correctas.
+         * @returns {boolean} True si es correcta, False si no.
+         */
+        function isCorrect(userAnswer, correctAnswers) {
+            const normalizedUserAnswer = normalizeAnswer(userAnswer);
+            
+            // Si la respuesta normalizada está vacía, siempre es incorrecta.
+            if (!normalizedUserAnswer) return false;
+
+            return correctAnswers.some(correct => {
+                const normalizedCorrect = normalizeAnswer(correct);
+                // Compara la respuesta normalizada del usuario con cada respuesta correcta normalizada.
+                return normalizedUserAnswer === normalizedCorrect;
+            });
+        }
+
+        /**
+         * Maneja el evento KeyDown para la verificación automática.
+         * @param {Event} event - El evento del teclado.
+         */
+        function handleKeyDown(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita el envío de formularios si estuviera en uno
+                const inputElement = event.target;
+                
+                // Obtener datos del elemento
+                const userAnswer = inputElement.value;
+                const correctAnswersJson = inputElement.getAttribute('data-correct-answers');
+                const nextId = inputElement.getAttribute('data-next-id');
+                
+                let correctAnswers;
+                try {
+                    correctAnswers = JSON.parse(correctAnswersJson);
+                } catch (e) {
+                    console.error("Error al parsear las respuestas correctas:", e);
+                    return;
+                }
+
+                const correct = isCorrect(userAnswer, correctAnswers);
+                
+                // 1. Aplicar estilo de verificación
+                inputElement.classList.remove('correct-answer', 'incorrect-answer');
+                if (correct) {
+                    inputElement.classList.add('correct-answer');
+                    inputElement.disabled = true; // Deshabilita si es correcta
+                } else {
+                    inputElement.classList.add('incorrect-answer');
+                }
+
+                // 2. Saltar al siguiente espacio de completación si la respuesta es correcta
+                if (correct && nextId) {
+                    const nextInput = document.getElementById(nextId);
+                    if (nextInput) {
+                        nextInput.focus();
+                    }
+                }
+            }
+        }
+
+        // 3. Asignar el listener a todos los inputs
+        inputs.forEach(input => {
+            input.addEventListener('keydown', handleKeyDown);
+        });
+
+        // 4. Lógica para el botón de respuestas
+        window.toggleAnswers = function() {
+            const section = document.getElementById('correctAnswersSection');
+            const button = document.getElementById('toggleAnswersBtn');
+            const isHidden = section.classList.contains('hidden');
+
+            if (isHidden) {
+                section.classList.remove('hidden');
+                button.textContent = 'Ocultar Respuestas Correctas';
+            } else {
+                section.classList.add('hidden');
+                button.textContent = 'Mostrar Respuestas Correctas';
+            }
+        }
+
+    </script>
+</body>
+</html>
