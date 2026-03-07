@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV. Lectura cultural / Cultural reading</title>
+    <style>
+        :root {
+            --primary: #FF79AC;
+            --secondary: #FFEBF2;
+            --btn-bg: #FFB3D1;
+            --text: #121118;
+            --bg: #FFFFFF;
+            --success: #D4EDDA;
+            --error: #F8D7DA;
+            --gray-light: #F9F9F9;
+        }
+
+        body {
+            font-family: 'Platform Medium', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            text-align: justify;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Estilo para alinear la imagen con el texto */
+        .intro-image {
+            float: right;
+            width: 320px;
+            margin-left: 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .activity-box {
+            background-color: var(--gray-light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .question-block {
+            margin-bottom: 20px;
+        }
+
+        /* Inputs */
+        .input-line {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            padding: 5px;
+            font-size: 1rem;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 5px 0;
+            transition: background-color 0.3s;
+        }
+
+        .input-line:focus {
+            outline: none;
+            border-bottom-color: var(--primary);
+        }
+
+        /* Feedback Colors */
+        .correct-bg { background-color: var(--success) !important; }
+        .wrong-bg { background-color: var(--error) !important; }
+
+        /* Botones */
+        .answers-toggle {
+            background-color: var(--btn-bg);
+            border: none;
+            border-bottom: 3px solid var(--primary);
+            border-radius: 5px;
+            padding: 10px 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #000;
+            transition: filter 0.3s;
+            font-family: inherit;
+            display: block;
+            margin: 40px auto;
+        }
+
+        .answers-toggle:hover {
+            filter: brightness(0.95);
+        }
+
+        #answersContent {
+            display: none;
+            background-color: var(--gray-light);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+            margin-top: 20px;
+        }
+
+        .translation-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--primary);
+        }
+
+        .translation-title {
+            color: var(--primary);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 600px) {
+            .intro-image {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>IV. Lectura cultural / Cultural reading</h1>
+
+    <h2>El cacao</h2>
+    
+    <div class="clearfix">
+        <img src="https://imgur.com/ayWmwNl.jpg" alt="Planta de cacao" class="intro-image" onerror="this.src='https://via.placeholder.com/320x240?text=Cacao+Image'">
+        <p>
+            El árbol del cacao es originario de América, probablemente de los Andes. La planta del cacao es una planta tropical que requiere un clima caliente y constantes lluvias. La cosecha de esta fruta puede obtenerse durante varios meses del año, y en algunos países ocurre en cualquier momento. Esta fruta es la base para lo que conocemos como chocolate y también para el mole, por ejemplo, una salsa que es una especialidad de Puebla, México. Parece que los productos derivados del cacao se consumían mucho tiempo antes de la llegada de los españoles al Nuevo Mundo, incluyendo bebidas fermentadas. Además de sus usos gastronómicos, antes de 1492 se utilizaba el grano del cacao como moneda en Mesoamérica.
+        </p>
+    </div>
+
+    <p>
+        Hay muchas variedades de la planta de cacao, pero en general, la planta tiene altos niveles de antioxidantes que pueden ayudar a combatir el envejecimiento y ayudar con los problemas cardiovasculares. A pesar de ser un producto originario de América, hoy en día los principales productores del cacao, con 70% de la producción mundial, son los países en África del Oeste, incluyendo Costa de Marfil, Camerún y Ghana. En Asia se cultiva la planta en Indonesia y Malasia, mientras que en las Américas hay cacao en Colombia, Ecuador, Brasil, México y la República Dominicana. Para muchos pequeños agricultores y comerciantes, el cacao representa una fuente de ingresos importante.
+    </p>
+
+    <p>
+        Aunque Nicaragua no es uno de los principales países productores del cacao en el mundo, tiene proyectos de cultivo, comercialización y exportación que han originado grandes beneficios para la población nicaragüense. En Matagalpa se produce uno de los mejores cafés de Nicaragua, pero los pequeños agricultores de la ciudad han encontrado en la producción del cacao otra oportunidad de tener una mejor rentabilidad e ingresos en sus cultivos. Gracias al cacao, algunos nicaragüenses han encontrado respuestas a sus problemas económicos que no habían podido solucionar solo con el cultivo del café.
+    </p>
+
+    <div class="activity-box">
+        <div class="question-block">
+            1. ¿Qué requiere la planta del cacao?<br>
+            <input type="text" class="input-line" data-answer="clima caliente y constantes lluvias">
+        </div>
+        <div class="question-block">
+            2. ¿Cuáles son tres principales países productores de cacao?<br>
+            <input type="text" class="input-line" data-answer="Costa de Marfil, Camerún y Ghana">
+        </div>
+        <div class="question-block">
+            3. ¿Quiénes producen el 70% de la producción mundial del cacao?<br>
+            <input type="text" class="input-line" data-answer="países de África del Oeste">
+        </div>
+        <div class="question-block">
+            4. ¿Dónde se produce uno de los mejores cafés de Nicaragua?<br>
+            <input type="text" class="input-line" data-answer="Matagalpa">
+        </div>
+    </div>
+
+    <button class="answers-toggle" onclick="toggleAnswers()">V. Respuestas correctas / Correct Answers</button>
+
+    <div id="answersContent">
+        <div class="question-block">
+            1. Requiere un clima caliente y constantes lluvias.
+        </div>
+        <div class="question-block">
+            2. Entre otros, Costa de Marfil, Camerún y Ghana son principales países productores de cacao.
+        </div>
+        <div class="question-block">
+            3. Los países de África del Oeste.
+        </div>
+        <div class="question-block">
+            4. En la ciudad de Matagalpa.
+        </div>
+
+        <div class="translation-section">
+            <span class="translation-title">Cocoa (English Translation)</span>
+            <p>
+                The cacao tree is native to the Americas, probably from the Andes. The cocoa plant is a tropical plant that requires a hot climate and constant rains. The harvesting of this fruit can be done during various months of the year, and in some countries it occurs at any time. This fruit is the basis for what we know as chocolate and also for mole, for example, a sauce that is a specialty of Puebla, Mexico. It seems that the products derived from cocoa were being consumed long before the arrival of the Spaniards in the New World, including fermented beverages. In addition to its gastronomic uses, before 1492 the cocoa bean was used as currency in Mesoamerica.
+            </p>
+            <p>
+                There are many varieties of the cocoa plant, but in general the plant has high levels of antioxidants that can help to fight aging and help with cardiovascular problems. Despite being a product originating in America, nowadays the principal producers of cocoa, with 70% of worldwide production, are the countries of West Africa, including Ivory Coast, Cameroon, and Ghana. In Asia, the plant is cultivated in Indonesia and Malaysia, while in the Americas there is cocoa in Colombia, Ecuador, Brazil, Mexico, and the Dominican Republic. For many small farmers and businesspeople, cocoa represents an important source of income.
+            </p>
+            <p>
+                Although Nicaragua is not one of the main cocoa-producing countries in the world, it has projects of cultivation, commercialization, and export that have produced great benefits for the Nicaraguan people. One of Nicaragua’s best coffees is produced in Matagalpa, but the small farmers of the city have found in the production of cocoa another opportunity to have better profitability and revenues in their farming. Thanks to cocoa, some Nicaraguans have found answers to their economic problems that they had not been able to solve by only growing coffee beans.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const current = e.target;
+            if (current.tagName === 'INPUT') {
+                const inputs = Array.from(document.querySelectorAll('.input-line'));
+                const index = inputs.indexOf(current);
+                validateInput(current);
+                if (index > -1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            }
+        }
+    });
+
+    function validateInput(input) {
+        const val = input.value.trim().toLowerCase();
+        const correct = input.dataset.answer.toLowerCase();
+        
+        const keywords = correct.split(',').join(' ').split(' ');
+        const isCorrect = val !== "" && keywords.every(word => word.length < 3 || val.includes(word));
+
+        if (val === "") {
+            input.classList.remove('correct-bg', 'wrong-bg');
+        } else if (isCorrect) {
+            input.classList.add('correct-bg');
+            input.classList.remove('wrong-bg');
+        } else {
+            input.classList.add('wrong-bg');
+            input.classList.remove('correct-bg');
+        }
+    }
+
+    function toggleAnswers() {
+        const content = document.getElementById('answersContent');
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>

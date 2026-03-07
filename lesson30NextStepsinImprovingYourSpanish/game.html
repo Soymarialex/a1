@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <style>
+        :root {
+            --primary: #FF79AC;
+            --secondary: #FFEBF2; /* Color rosa más claro solicitado */
+            --text: #121118;
+            --bg: #FFFFFF;
+            --success: #D4EDDA;
+            --error: #F8D7DA;
+            --gray-light: #F9F9F9;
+            --divider: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Platform Medium', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 30px;
+            text-transform: lowercase;
+        }
+
+        /* Navegación de Niveles */
+        .level-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-level {
+            background-color: var(--secondary);
+            border: none;
+            border-bottom: 3px solid var(--primary);
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text);
+            transition: opacity 0.2s;
+        }
+
+        .btn-level.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Área de Juego */
+        .game-area {
+            background-color: var(--gray-light);
+            border-radius: 8px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .word-btn {
+            background-color: var(--secondary);
+            border: none;
+            border-bottom: 3px solid var(--primary);
+            border-radius: 5px;
+            padding: 12px;
+            font-size: 0.9rem;
+            color: var(--text);
+            cursor: pointer;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .word-btn.selected {
+            filter: brightness(0.95);
+            outline: 2px solid var(--primary);
+        }
+
+        .word-btn.correct {
+            background-color: var(--success) !important;
+            border-bottom-color: #c3e6cb !important;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .word-btn.wrong {
+            background-color: var(--error) !important;
+            border-bottom-color: #f5c6cb !important;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .game-area { grid-template-columns: 1fr; }
+            .column { gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Matching game</h1>
+    <h2>test your memory</h2>
+
+    <div class="level-nav" id="levelNav">
+        <button class="btn-level active" onclick="loadLevel(0)">Nivel 1</button>
+        <button class="btn-level" onclick="loadLevel(1)">Nivel 2</button>
+        <button class="btn-level" onclick="loadLevel(2)">Nivel 3</button>
+        <button class="btn-level" onclick="loadLevel(3)">Nivel 4</button>
+        <button class="btn-level" onclick="loadLevel(4)">Nivel 5</button>
+    </div>
+
+    <div class="game-area" id="gameArea">
+        <div class="column" id="colSpanish"></div>
+        <div class="column" id="colEnglish"></div>
+    </div>
+</div>
+
+<script>
+    const levels = [
+        [
+            { es: "la profesión", en: "profession" },
+            { es: "la tecnología", en: "technology" },
+            { es: "el maestro", en: "teacher" },
+            { es: "el enfermero", en: "nurse" },
+            { es: "el abogado", en: "lawyer" },
+            { es: "el director de escuela", en: "school principal" }
+        ],
+        [
+            { es: "el hombre de negocios", en: "businessman" },
+            { es: "el trabajador social", en: "social worker" },
+            { es: "la mujer de negocios", en: "businesswoman" },
+            { es: "el policía", en: "police officer" },
+            { es: "el arquitecto", en: "architect" },
+            { es: "el sitio web", en: "website" }
+        ],
+        [
+            { es: "el usuario", en: "user" },
+            { es: "la página web", en: "web page" },
+            { es: "el enlace", en: "link" },
+            { es: "el blog", en: "blog" },
+            { es: "la conexión", en: "connection" },
+            { es: "el correo electrónico", en: "e-mail" }
+        ],
+        [
+            { es: "el buscador", en: "search engine" },
+            { es: "el mensaje de texto", en: "text message" },
+            { es: "chatear", en: "to chat online" },
+            { es: "la contraseña", en: "password" },
+            { es: "animar", en: "to encourage" },
+            { es: "acceder a Internet", en: "to access the Internet" },
+            { es: "el/la Internet", en: "Internet" }
+        ],
+        [
+            { es: "descargar", en: "to download" },
+            { es: "la conexión inalámbrica", en: "wireless connection" },
+            { es: "navegar por la red", en: "to surf the Internet" },
+            { es: "el teléfono inalámbrico", en: "cordless phone" },
+            { es: "el nombre de usuario", en: "username" },
+            { es: "el teléfono celular/el celular/el móvil", en: "cell phone" },
+            { es: "Trato de leer mucho", en: "I try to read a lot" }
+        ]
+    ];
+
+    let selectedSpanish = null;
+    let selectedEnglish = null;
+    let currentLevel = 0;
+
+    function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
+    function loadLevel(index) {
+        currentLevel = index;
+        selectedSpanish = null;
+        selectedEnglish = null;
+
+        const navBtns = document.querySelectorAll('.btn-level');
+        navBtns.forEach((btn, i) => {
+            btn.classList.toggle('active', i === index);
+        });
+
+        const colSpanish = document.getElementById('colSpanish');
+        const colEnglish = document.getElementById('colEnglish');
+        
+        colSpanish.innerHTML = '';
+        colEnglish.innerHTML = '';
+
+        const data = levels[index];
+        const spanishWords = shuffle([...data]);
+        const englishWords = shuffle([...data]);
+
+        spanishWords.forEach(pair => {
+            const btn = document.createElement('button');
+            btn.className = 'word-btn';
+            btn.innerText = pair.es;
+            btn.onclick = () => selectWord(btn, 'es', pair.en);
+            colSpanish.appendChild(btn);
+        });
+
+        englishWords.forEach(pair => {
+            const btn = document.createElement('button');
+            btn.className = 'word-btn';
+            btn.innerText = pair.en;
+            btn.onclick = () => selectWord(btn, 'en', pair.en);
+            colEnglish.appendChild(btn);
+        });
+    }
+
+    function selectWord(btn, lang, matchId) {
+        if (btn.classList.contains('correct')) return;
+
+        if (lang === 'es') {
+            document.querySelectorAll('#colSpanish .word-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedSpanish = { btn, matchId };
+        } else {
+            document.querySelectorAll('#colEnglish .word-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedEnglish = { btn, matchId };
+        }
+
+        checkMatch();
+    }
+
+    function checkMatch() {
+        if (selectedSpanish && selectedEnglish) {
+            const sBtn = selectedSpanish.btn;
+            const eBtn = selectedEnglish.btn;
+
+            if (selectedSpanish.matchId === selectedEnglish.matchId) {
+                sBtn.classList.remove('selected');
+                eBtn.classList.remove('selected');
+                sBtn.classList.add('correct');
+                eBtn.classList.add('correct');
+                selectedSpanish = null;
+                selectedEnglish = null;
+            } else {
+                sBtn.classList.add('wrong');
+                eBtn.classList.add('wrong');
+                
+                const tempS = sBtn;
+                const tempE = eBtn;
+
+                setTimeout(() => {
+                    tempS.classList.remove('wrong', 'selected');
+                    tempE.classList.remove('wrong', 'selected');
+                }, 1000);
+
+                selectedSpanish = null;
+                selectedEnglish = null;
+            }
+        }
+    }
+
+    window.onload = () => loadLevel(0);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <style>
+        :root {
+            --primary: #FF79AC;
+            --secondary: #FFEBF2;
+            --text: #121118;
+            --bg: #FFFFFF;
+            --success: #D4EDDA;
+            --error: #F8D7DA;
+            --gray-light: #F9F9F9;
+            --divider: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Platform Medium', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            text-align: justify;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-box {
+            background-color: var(--gray-light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Inputs */
+        .input-line {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            padding: 5px;
+            font-size: 1rem;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            margin: 5px 0;
+            transition: background-color 0.3s;
+        }
+
+        .input-inline {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            padding: 2px 5px;
+            font-size: 1rem;
+            text-align: center;
+            width: 130px;
+            margin: 0 5px;
+        }
+
+        .input-line:focus, .input-inline:focus {
+            outline: none;
+            border-bottom-color: var(--primary);
+        }
+
+        /* Feedback Colors */
+        .correct-bg { background-color: var(--success) !important; }
+        .wrong-bg { background-color: var(--error) !important; }
+
+        /* Botones */
+        .btn-option, .answers-toggle {
+            background-color: var(--secondary);
+            border: none;
+            border-bottom: 3px solid var(--primary);
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text);
+            transition: background-color 0.3s, filter 0.3s;
+            font-family: inherit;
+        }
+
+        .btn-option:hover, .answers-toggle:hover {
+            filter: brightness(0.95);
+        }
+
+        .options-group {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0 25px 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Respuestas */
+        .answers-toggle {
+            font-weight: bold;
+            display: block;
+            margin: 40px auto;
+            font-size: 1rem;
+        }
+
+        #answersContent {
+            display: none;
+            background-color: var(--gray-light);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--divider);
+            margin-top: 20px;
+        }
+
+        .question-block {
+            margin-bottom: 20px;
+        }
+
+        /* Column Layout for Answers */
+        .answer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            line-height: 1.8;
+        }
+
+        .answer-section-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            display: block;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>III. Actividades / Activities</h1>
+
+    <h2>a. Lee el párrafo y contesta las preguntas que siguen.</h2>
+    <p>
+        Luisa está planeando [planning] una reunión de vecinos. Ella quiere hacer la reunión en su casa. Además, quiere ver a sus nietas Diana y Mariana, y por eso también invitó a la reunión a su hija Erica y a su yerno Javier. Ella envió [sent] un correo electrónico la semana pasada, pero no todos enviaron una respuesta. Luisa va a mandarles otro mensaje a sus vecinos. La reunión va a ser mañana a las 6:30 de la tarde. Luisa quiere hablarles mañana sobre la necesidad [need] de tener un servicio de policía privado [private] en el vecindario. Ella también está preocupada porque últimamente [lately] alrededor del vecindario hay mucha basura [trash]. Algunos de los vecinos le dijeron a Luisa que estos son asuntos [issues] importantes de discutir [discuss]. Ella les dijo a todos que pueden llevar sus iPads para tomar notas [notes], y además [moreover] todos pueden usar su conexión inalámbrica. Luisa está enviándole un mensaje de texto a su hija para recordarle sobre la reunión.
+    </p>
+
+    <div class="activity-box">
+        <div class="question-block">
+            1. ¿Cuáles son dos expresiones que hablan de acciones en el futuro?<br>
+            <input type="text" class="input-line" data-answer="va a mandarles / va a ser">
+        </div>
+        <div class="question-block">
+            2. ¿Cuáles son tres verbos conjugados en el pretérito?<br>
+            <input type="text" class="input-line" data-answer="invitó / envió / enviaron / dijeron / dijo">
+        </div>
+        <div class="question-block">
+            3. ¿Cuál es un ejemplo del uso del presente progresivo? (que expresa algo que ocurre ahora mismo)<br>
+            <input type="text" class="input-line" data-answer="está planeando / está enviándole">
+        </div>
+        <div class="question-block">
+            4. ¿Cuáles son tres ejemplos del uso del objeto indirecto?<br>
+            <input type="text" class="input-line" data-answer="va a mandarles / quiere hablarles / le dijeron / les dijo / está enviándole / recordarle">
+        </div>
+        <div class="question-block">
+            5. ¿Cuál es un uso de estar para expresar una emoción?<br>
+            <input type="text" class="input-line" data-answer="está preocupada">
+        </div>
+    </div>
+
+    <h2>b. Completa las oraciones usando el pretérito.</h2>
+    <div class="activity-box">
+        <p>
+            Cuando Diego 1. <input type="text" class="input-inline" data-answer="empezó"> (empezar) su compañía, 
+            2. <input type="text" class="input-inline" data-answer="pidió"> (pedir) un servicio de Internet. Él 
+            3. <input type="text" class="input-inline" data-answer="compró"> (comprar) una computadora. Al principio, 
+            4. <input type="text" class="input-inline" data-answer="tuvo"> (tener) problemas y la conexión no 
+            5. <input type="text" class="input-inline" data-answer="fue"> (ser) la mejor, y por eso 
+            6. <input type="text" class="input-inline" data-answer="llamó"> (llamar) a la compañía. En la compañía, ellos le 
+            7. <input type="text" class="input-inline" data-answer="ayudaron"> (ayudar), y Diego 
+            8. <input type="text" class="input-inline" data-answer="obtuvo"> (obtener) una mejor conexión. Cuando él 
+            9. <input type="text" class="input-inline" data-answer="cerró"> (cerrar) su empresa, 
+            10. <input type="text" class="input-inline" data-answer="vendió"> (vender) todas las cosas.
+        </p>
+    </div>
+
+    <h2>c. Escoge la opción correcta.</h2>
+    <div class="activity-box" id="actC">
+        <div class="question-block">
+            1. Luisa <input type="text" class="input-inline" id="qC1" readonly> un blog para hablar de nutrición desde hace cinco años.
+            <div class="options-group">
+                <button class="btn-option" data-val="tuvo" onclick="checkChoice(this, 'qC1', 'tiene')">a) tuvo</button>
+                <button class="btn-option" data-val="va a tener" onclick="checkChoice(this, 'qC1', 'tiene')">b) va a tener</button>
+                <button class="btn-option" data-val="tiene" onclick="checkChoice(this, 'qC1', 'tiene')">c) tiene</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            2. Luisa y Esteban <input type="text" class="input-inline" id="qC2" readonly> tener una página web con información sobre medicina y nutrición. 
+            <div class="options-group">
+                <button class="btn-option" data-val="quisieron" onclick="checkChoice(this, 'qC2', 'quieren')">a) quisieron</button>
+                <button class="btn-option" data-val="van a querer" onclick="checkChoice(this, 'qC2', 'quieren')">b) van a querer</button>
+                <button class="btn-option" data-val="quieren" onclick="checkChoice(this, 'qC2', 'quieren')">c) quieren</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            3. Luisa <input type="text" class="input-inline" id="qC3" readonly> a todos los vecinos del vecindario, y por eso la reunión va a ser en su casa. 
+            <div class="options-group">
+                <button class="btn-option" data-val="conoció" onclick="checkChoice(this, 'qC3', 'conoce')">a) conoció</button>
+                <button class="btn-option" data-val="va a conocer" onclick="checkChoice(this, 'qC3', 'conoce')">b) va a conocer</button>
+                <button class="btn-option" data-val="conoce" onclick="checkChoice(this, 'qC3', 'conoce')">c) conoce</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            4. Elena y su esposo <input type="text" class="input-inline" id="qC4" readonly> a la reunión de mañana.
+            <div class="options-group">
+                <button class="btn-option" data-val="fueron" onclick="checkChoice(this, 'qC4', ['van a ir', 'van'])">a) fueron</button>
+                <button class="btn-option" data-val="van a ir" onclick="checkChoice(this, 'qC4', ['van a ir', 'van'])">b) van a ir</button>
+                <button class="btn-option" data-val="van" onclick="checkChoice(this, 'qC4', ['van a ir', 'van'])">c) van</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            5. Alejandra <input type="text" class="input-inline" id="qC5" readonly> directora de escuela por unos años, antes de casarse [to get married]. 
+            <div class="options-group">
+                <button class="btn-option" data-val="fue" onclick="checkChoice(this, 'qC5', 'fue')">a) fue</button>
+                <button class="btn-option" data-val="va a ser" onclick="checkChoice(this, 'qC5', 'fue')">b) va a ser</button>
+                <button class="btn-option" data-val="es" onclick="checkChoice(this, 'qC5', 'fue')">c) es</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            6. A Alejandra le gusta mucho su nuevo teléfono celular y todos los días <input type="text" class="input-inline" id="qC6" readonly> mensajes de texto.
+            <div class="options-group">
+                <button class="btn-option" data-val="mandó" onclick="checkChoice(this, 'qC6', 'manda')">a) mandó</button>
+                <button class="btn-option" data-val="va a mandar" onclick="checkChoice(this, 'qC6', 'manda')">b) va a mandar</button>
+                <button class="btn-option" data-val="manda" onclick="checkChoice(this, 'qC6', 'manda')">c) manda</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            7. El primer año de universidad, Pablo <input type="text" class="input-inline" id="qC7a" readonly> en estudiar enfermería, pero ahora no <input type="text" class="input-inline" id="qC7b" readonly> estudiar enfermería.
+            <div class="options-group">
+                <button class="btn-option" data-val="pensó…quiere" onclick="checkChoiceDual(this, ['pensó', 'quiere'], ['qC7a', 'qC7b'], 'pensó…quiere')">a) pensó…quiere</button>
+                <button class="btn-option" data-val="van a pensar…quiso" onclick="checkChoiceDual(this, ['van a pensar', 'quiso'], ['qC7a', 'qC7b'], 'pensó…quiere')">b) van a pensar…quiso</button>
+                <button class="btn-option" data-val="piensa…quiere" onclick="checkChoiceDual(this, ['piensa', 'quiere'], ['qC7a', 'qC7b'], 'pensó…quiere')">c) piensa…quiere</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            8. Ahora tú <input type="text" class="input-inline" id="qC8" readonly> dos correos electrónicos.
+            <div class="options-group">
+                <button class="btn-option" data-val="tuviste" onclick="checkChoice(this, 'qC8', ['vas a tener', 'tienes'])">a) tuviste</button>
+                <button class="btn-option" data-val="vas a tener" onclick="checkChoice(this, 'qC8', ['vas a tener', 'tienes'])">b) vas a tener</button>
+                <button class="btn-option" data-val="tienes" onclick="checkChoice(this, 'qC8', ['vas a tener', 'tienes'])">c) tienes</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            9. Ayer, tú y tus amigos <input type="text" class="input-inline" id="qC9" readonly> en el mejor restaurante de la ciudad. 
+            <div class="options-group">
+                <button class="btn-option" data-val="comieron" onclick="checkChoice(this, 'qC9', 'comieron')">a) comieron</button>
+                <button class="btn-option" data-val="van a comer" onclick="checkChoice(this, 'qC9', 'comieron')">b) van a comer</button>
+                <button class="btn-option" data-val="comen" onclick="checkChoice(this, 'qC9', 'comieron')">c) comen</button>
+            </div>
+        </div>
+
+        <div class="question-block">
+            10. Tus amigos y tú <input type="text" class="input-inline" id="qC10" readonly> muchos correos electrónicos ayer durante el trabajo.
+            <div class="options-group">
+                <button class="btn-option" data-val="enviaron" onclick="checkChoice(this, 'qC10', 'enviaron')">a) enviaron</button>
+                <button class="btn-option" data-val="van a enviar" onclick="checkChoice(this, 'qC10', 'enviaron')">b) van a enviar</button>
+                <button class="btn-option" data-val="envían" onclick="checkChoice(this, 'qC10', 'enviaron')">c) envían</button>
+            </div>
+        </div>
+    </div>
+
+
+    <button class="answers-toggle" onclick="toggleAnswers()">V. Respuestas correctas / Correct Answers</button>
+
+    <div id="answersContent">
+        <span class="answer-section-title">a.</span>
+        <div>
+            1. va a mandarles / va a ser<br>
+            2. invitó / envió / enviaron / dijeron / dijo<br>
+            3. está planeando / está enviándole<br>
+            4. va a mandarles / quiere hablarles / le dijeron / les dijo / está enviándole / recordarle<br>
+            5. está preocupada
+        </div>
+
+        <span class="answer-section-title">b.</span>
+        <div class="answer-grid">
+            <div>1. empezó</div> <div>6. llamó</div>
+            <div>2. pidió</div> <div>7. ayudaron</div>
+            <div>3. compró</div> <div>8. obtuvo</div>
+            <div>4. tuvo</div> <div>9. cerró</div>
+            <div>5. fue</div> <div>10. vendió</div>
+        </div>
+
+        <span class="answer-section-title">c.</span>
+        <div class="answer-grid">
+            <div>1. c) tiene</div> <div>6. c) manda</div>
+            <div>2. c) quieren</div> <div>7. a) pensó…quiere</div>
+            <div>3. c) conoce</div> <div>8. b) vas a tener / c) tienes</div>
+            <div>4. b) van a ir / c) van</div> <div>9. a) comieron</div>
+            <div>5. a) fue</div> <div>10. a) enviaron</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const current = e.target;
+            if (current.tagName === 'INPUT') {
+                const inputs = Array.from(document.querySelectorAll('input:not([readonly])'));
+                const index = inputs.indexOf(current);
+                validateInput(current);
+                if (index > -1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            }
+        }
+    });
+
+    function validateInput(input) {
+        const val = input.value.trim().toLowerCase();
+        const correct = input.dataset.answer.toLowerCase();
+        const options = correct.split('/').map(s => s.trim());
+        const isCorrect = options.some(opt => val !== "" && (opt.includes(val) || val.includes(opt)));
+
+        if (val === "") {
+            input.classList.remove('correct-bg', 'wrong-bg');
+        } else if (isCorrect) {
+            input.classList.add('correct-bg');
+            input.classList.remove('wrong-bg');
+        } else {
+            input.classList.add('wrong-bg');
+            input.classList.remove('correct-bg');
+        }
+    }
+
+    function checkChoice(btn, inputId, correctValue) {
+        const input = document.getElementById(inputId);
+        const choice = btn.getAttribute('data-val');
+        const buttons = btn.parentElement.querySelectorAll('.btn-option');
+        
+        buttons.forEach(b => b.classList.remove('correct-bg', 'wrong-bg'));
+        input.classList.remove('correct-bg', 'wrong-bg');
+        input.value = ""; 
+
+        const isCorrect = Array.isArray(correctValue) ? 
+            correctValue.some(v => choice === v) : 
+            (choice === correctValue);
+
+        if (isCorrect) {
+            btn.classList.add('correct-bg');
+            input.value = choice;
+            input.classList.add('correct-bg');
+        } else {
+            btn.classList.add('wrong-bg');
+            input.classList.add('wrong-bg');
+        }
+    }
+
+    function checkChoiceDual(btn, choices, inputIds, correctString) {
+        const inputs = inputIds.map(id => document.getElementById(id));
+        const buttons = btn.parentElement.querySelectorAll('.btn-option');
+        const choiceString = btn.getAttribute('data-val');
+
+        buttons.forEach(b => b.classList.remove('correct-bg', 'wrong-bg'));
+        inputs.forEach(input => {
+            input.classList.remove('correct-bg', 'wrong-bg');
+            input.value = "";
+        });
+
+        if (choiceString === correctString) {
+            btn.classList.add('correct-bg');
+            inputs.forEach((input, i) => {
+                input.value = choices[i];
+                input.classList.add('correct-bg');
+            });
+        } else {
+            btn.classList.add('wrong-bg');
+            inputs.forEach(input => input.classList.add('wrong-bg'));
+        }
+    }
+
+    function toggleAnswers() {
+        const content = document.getElementById('answersContent');
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>
