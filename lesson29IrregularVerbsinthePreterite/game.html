@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <style>
+        :root {
+            --primary-color: #FF79AC;
+            --secondary-color: #FFB3D1;
+            --text-color: #121118;
+            --bg-color: #FFFFFF;
+            --success-color: #D4EDDA;
+            --error-color: #F8D7DA;
+            --divider-color: #E0E0E0;
+            --panel-bg: #F9F9F9;
+        }
+
+        body {
+            font-family: 'Platform Medium', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            margin-bottom: 25px;
+            text-transform: lowercase;
+            display: inline-block;
+        }
+
+        .nav-levels {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-level {
+            background-color: var(--secondary-color);
+            border: none;
+            border-bottom: 3px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        .btn-level.active {
+            outline: 2px solid var(--text-color);
+            transform: scale(1.05);
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background-color: var(--panel-bg);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item-btn {
+            background-color: var(--secondary-color);
+            border: none;
+            border-bottom: 3px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 12px 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .item-btn.selected {
+            filter: brightness(0.9);
+            outline: 2px solid var(--primary-color);
+        }
+
+        .item-btn.correct {
+            background-color: var(--success-color) !important;
+            border-bottom-color: #28a745 !important;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .item-btn.wrong {
+            background-color: var(--error-color) !important;
+            border-bottom-color: #dc3545 !important;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .game-board { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Matching game</h1>
+        <h2>test your memory</h2>
+
+        <div class="nav-levels" id="levelNav">
+            <!-- Botones de nivel generados por JS -->
+        </div>
+
+        <div class="game-board" id="gameBoard">
+            <div class="column" id="colSpanish"></div>
+            <div class="column" id="colEnglish"></div>
+        </div>
+    </div>
+
+    <script>
+        const vocabulary = [
+            // Nivel 1 (7)
+            { es: "huir", en: "to run away" },
+            { es: "contribuir", en: "to contribute" },
+            { es: "incluir", en: "to include" },
+            { es: "destruir", en: "to destroy" },
+            { es: "influir", en: "to influence" },
+            { es: "caer", en: "to fall" },
+            { es: "construir", en: "to build" },
+            // Nivel 2 (7)
+            { es: "la construcción", en: "construction" },
+            { es: "la destrucción", en: "destruction" },
+            { es: "la contribución", en: "contribution" },
+            { es: "la influencia", en: "influence" },
+            { es: "organizar", en: "to organize" },
+            { es: "el asistente", en: "assistant" },
+            { es: "la entrevista", en: "interview" },
+            // Nivel 3 (7)
+            { es: "el contador", en: "accountant" },
+            { es: "la entrevista de trabajo", en: "job interview" },
+            { es: "el dueño", en: "owner" },
+            { es: "entrevistar", en: "to interview" },
+            { es: "el gerente", en: "manager" },
+            { es: "emplear", en: "to employ" },
+            { es: "el secretario", en: "secretary" },
+            // Nivel 4 (7)
+            { es: "contratar", en: "to hire" },
+            { es: "el supervisor", en: "supervisor" },
+            { es: "despedir", en: "to fire" },
+            { es: "el empleado", en: "employee" },
+            { es: "el cajero automático", en: "automated teller machine" },
+            { es: "retirar", en: "to withdraw" },
+            { es: "el cheque", en: "check" },
+            // Nivel 5 (6)
+            { es: "la tarjeta de crédito", en: "credit card" },
+            { es: "el dinero en efectivo", en: "cash" },
+            { es: "la tarjeta de débito", en: "debit card" },
+            { es: "cambiar", en: "to change, to exchange" },
+            { es: "la transacción bancaria", en: "bank transaction" },
+            { es: "el préstamo", en: "loan" }
+        ];
+
+        let currentLevel = 0;
+        let selectedSpanish = null;
+        let selectedEnglish = null;
+
+        function initLevels() {
+            const nav = document.getElementById('levelNav');
+            for (let i = 0; i < 5; i++) {
+                const btn = document.createElement('button');
+                btn.className = `btn-level ${i === 0 ? 'active' : ''}`;
+                btn.textContent = `Nivel ${i + 1}`;
+                btn.onclick = () => loadLevel(i);
+                nav.appendChild(btn);
+            }
+            loadLevel(0);
+        }
+
+        function loadLevel(levelIndex) {
+            currentLevel = levelIndex;
+            selectedSpanish = null;
+            selectedEnglish = null;
+
+            // Actualizar botones de navegación
+            const navBtns = document.querySelectorAll('.btn-level');
+            navBtns.forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === levelIndex);
+            });
+
+            // Obtener palabras del nivel
+            const start = levelIndex * 7;
+            const end = levelIndex === 4 ? vocabulary.length : start + 7;
+            const levelWords = vocabulary.slice(start, end);
+
+            const colEs = document.getElementById('colSpanish');
+            const colEn = document.getElementById('colEnglish');
+
+            colEs.innerHTML = '';
+            colEn.innerHTML = '';
+
+            // Barajar palabras para cada columna de forma independiente
+            const shuffEs = [...levelWords].sort(() => Math.random() - 0.5);
+            const shuffEn = [...levelWords].sort(() => Math.random() - 0.5);
+
+            shuffEs.forEach(word => {
+                const btn = document.createElement('button');
+                btn.className = 'item-btn';
+                btn.textContent = word.es;
+                btn.dataset.value = word.es;
+                btn.onclick = () => selectItem(btn, 'es');
+                colEs.appendChild(btn);
+            });
+
+            shuffEn.forEach(word => {
+                const btn = document.createElement('button');
+                btn.className = 'item-btn';
+                btn.textContent = word.en;
+                btn.dataset.value = word.es; // Usamos el valor ES para validar el par
+                btn.onclick = () => selectItem(btn, 'en');
+                colEn.appendChild(btn);
+            });
+        }
+
+        function selectItem(btn, lang) {
+            if (btn.classList.contains('correct')) return;
+
+            if (lang === 'es') {
+                // Desmarcar anterior en la misma columna si existe
+                if (selectedSpanish) selectedSpanish.classList.remove('selected');
+                selectedSpanish = btn;
+                btn.classList.add('selected');
+            } else {
+                if (selectedEnglish) selectedEnglish.classList.remove('selected');
+                selectedEnglish = btn;
+                btn.classList.add('selected');
+            }
+
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if (selectedSpanish && selectedEnglish) {
+                const isMatch = selectedSpanish.dataset.value === selectedEnglish.dataset.value;
+                const s = selectedSpanish;
+                const e = selectedEnglish;
+
+                if (isMatch) {
+                    s.classList.replace('selected', 'correct');
+                    e.classList.replace('selected', 'correct');
+                    selectedSpanish = null;
+                    selectedEnglish = null;
+                } else {
+                    s.classList.add('wrong');
+                    e.classList.add('wrong');
+                    
+                    const tempS = s;
+                    const tempE = e;
+                    
+                    setTimeout(() => {
+                        tempS.classList.remove('wrong', 'selected');
+                        tempE.classList.remove('wrong', 'selected');
+                    }, 1500);
+
+                    selectedSpanish = null;
+                    selectedEnglish = null;
+                }
+            }
+        }
+
+        window.onload = initLevels;
+    </script>
+</body>
+</html>
