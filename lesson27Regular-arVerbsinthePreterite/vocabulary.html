@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular -ar Verbs in the Preterite</title>
+    <style>
+        :root {
+            --primary: #FF79AC;
+            --secondary: #FFB3D1;
+            --text-main: #121118;
+            --bg-page: #FFFFFF;
+            --divider: #E0E0E0;
+            --bg-box: #F9F9F9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 500;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            margin: 40px 20px;
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--text-main);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 5px;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            color: var(--text-main);
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400; 
+            color: #444;
+        }
+
+        .vocabulary-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .vocab-group {
+            border-bottom: 1px solid var(--divider);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .vocab-group:last-child {
+            border-bottom: none;
+        }
+
+        .vocab-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 8px;
+        }
+
+        .vocab-item {
+            font-size: 1rem;
+        }
+
+        .term-es {
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .term-en {
+            font-weight: 400;
+            color: #444;
+        }
+
+        .conjugation-table {
+            background-color: var(--bg-box);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            font-weight: 400;
+            color: #444;
+        }
+
+        .table-column h4 {
+            margin-top: 0;
+            color: var(--primary);
+            border-bottom: 1px solid var(--divider);
+            padding-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .grid-forms {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .stem {
+            font-weight: 400;
+        }
+
+        .ending {
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        strong {
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .list-notes {
+            margin-top: 20px;
+            font-weight: 400;
+            color: #444;
+        }
+
+        .list-notes div {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            text-align: center;
+            padding: 5px;
+            font-size: 1rem;
+            width: 120px;
+            outline: none;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Regular -ar Verbs in the Preterite</h1>
+
+    <h2>I. Vocabulario nuevo / New Vocabulary</h2>
+    
+    <div class="vocabulary-section">
+        <div class="vocab-group">
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">ayer</span> <span class="term-en">– yesterday</span></div>
+                <div class="vocab-item"><span class="term-es">el mes pasado</span> <span class="term-en">– last month</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">anteayer</span> <span class="term-en">– the day before yesterday</span></div>
+                <div class="vocab-item"><span class="term-es">el año pasado</span> <span class="term-en">– last year</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">anoche</span> <span class="term-en">– last night</span></div>
+                <div class="vocab-item"><span class="term-es">el lunes pasado</span> <span class="term-en">– last Monday</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">pasado</span> <span class="term-en">– past, last</span></div>
+                <div class="vocab-item"><span class="term-es">el sábado por la mañana</span> <span class="term-en">– Saturday morning</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">la semana pasada</span> <span class="term-en">– last week</span></div>
+                <div class="vocab-item"><span class="term-es">el martes por la noche</span> <span class="term-en">– Tuesday night</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">el fin de semana pasado</span> <span class="term-en">– last weekend</span></div>
+            </div>
+        </div>
+
+        <div class="vocab-group">
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">todo el día</span> <span class="term-en">– all day</span></div>
+                <div class="vocab-item"><span class="term-es">durante una semana</span> <span class="term-en">– during a week</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">toda la noche</span> <span class="term-en">– all night</span></div>
+                <div class="vocab-item"><span class="term-es">entonces</span> <span class="term-en">– then</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">más tarde</span> <span class="term-en">– later</span></div>
+                <div class="vocab-item"><span class="term-es">luego</span> <span class="term-en">– later</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">por tres horas</span> <span class="term-en">– for three hours</span></div>
+            </div>
+        </div>
+
+        <div class="vocab-group">
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">bajar</span> <span class="term-en">– to take down</span></div>
+                <div class="vocab-item"><span class="term-es">criticar</span> <span class="term-en">– to criticize</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">avanzar</span> <span class="term-en">– to progress</span></div>
+                <div class="vocab-item"><span class="term-es">charlar</span> <span class="term-en">– to chat</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">explorar</span> <span class="term-en">– to explore</span></div>
+                <div class="vocab-item"><span class="term-es">afirmar</span> <span class="term-en">– to declare</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">expresar</span> <span class="term-en">– to express</span></div>
+                <div class="vocab-item"><span class="term-es">existir</span> <span class="term-en">– to exist</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">comentar</span> <span class="term-en">– to comment on</span></div>
+                <div class="vocab-item"><span class="term-es">resultar</span> <span class="term-en">– to turn out to be</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">mencionar</span> <span class="term-en">– to mention</span></div>
+                <div class="vocab-item"><span class="term-es">considerar</span> <span class="term-en">– to consider</span></div>
+            </div>
+            <div class="vocab-row">
+                <div class="vocab-item"><span class="term-es">pronunciar</span> <span class="term-en">– to pronounce</span></div>
+                <div class="vocab-item"><span class="term-es">formar</span> <span class="term-en">– to form</span></div>
+            </div>
+        </div>
+    </div>
+
+    <h2>II. Repaso general / General Review</h2>
+    
+    <h3>A. When to Use the Preterite Tense</h3>
+    <p>
+        The preterite tense is a past tense used to talk about a completed past action. It can be used to talk about a completed action that occurred at a specific moment in the past, or it can talk about a number of completed actions that occurred at specific moments in the past. The preterite can also be used to talk about an activity that lasted a specific amount of time in the past. Examples of the preterite in English include the following: <strong>“They arrived”</strong>; <strong>“I watched”</strong>; <strong>“We studied”</strong>; <strong>“They ate.”</strong> [Note: A different past tense—the imperfect tense—is used to describe a repeated past action or a past action in progress. Examples of the Spanish imperfect translated into English include the following: <strong>“We used to walk”</strong>; <strong>“I used to swim”</strong>; <strong>“They were reading”</strong>; <strong>“He was dancing.”</strong>]
+    </p>
+
+    <h3>B. Conjugating Regular -ar Verbs in the Preterite</h3>
+    <p>
+        The preterite tense endings for regular -ar verbs are as follows: <strong>-é, -aste, -ó, -amos, -asteis, -aron.</strong> The following is an example of a regular -ar verb (<strong>cantar</strong> [to sing]) conjugated in both the present and the preterite tense.
+    </p>
+
+    <div class="conjugation-table">
+        <div class="table-column">
+            <h4>Present Tense</h4>
+            <div class="grid-forms">
+                <div><span class="stem">cant</span><span class="ending">o</span></div>
+                <div><span class="stem">cant</span><span class="ending">amos</span></div>
+                <div><span class="stem">cant</span><span class="ending">as</span></div>
+                <div><span class="stem">cant</span><span class="ending">áis</span></div>
+                <div><span class="stem">cant</span><span class="ending">a</span></div>
+                <div><span class="stem">cant</span><span class="ending">an</span></div>
+            </div>
+        </div>
+        <div class="table-column">
+            <h4>Preterite Tense</h4>
+            <div class="grid-forms">
+                <div><span class="stem">cant</span><span class="ending">é</span></div>
+                <div><span class="stem">cant</span><span class="ending">amos</span></div>
+                <div><span class="stem">cant</span><span class="ending">aste</span></div>
+                <div><span class="stem">cant</span><span class="ending">asteis</span></div>
+                <div><span class="stem">cant</span><span class="ending">ó</span></div>
+                <div><span class="stem">cant</span><span class="ending">aron</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="list-notes">
+        <div>1. The <strong>nosotros</strong> form of <strong>cantamos</strong> is the same in the present and the preterite; the context of how it’s used will determine whether <strong>cantamos</strong> means “We sing” or “We sang.”</div>
+        <div>2. The one form in the present that has an accent is the <strong>vosotros</strong> form of <strong>cantáis</strong>; the two forms in the preterite that have accents are <strong>yo canté</strong> and <strong>usted cantó</strong>.</div>
+        <div>3. The present tense ending of the <strong>tú</strong> form (<strong>-as</strong>) is the beginning of the preterite ending of the <strong>tú</strong> form (<strong>-aste</strong>), which is the beginning of the preterite ending of the <strong>vosotros</strong> form (<strong>-asteis</strong>).</div>
+        <div>4. The present tense ending of the <strong>ustedes</strong> form (<strong>-an</strong>) includes the first and last letters of the preterite ending of the <strong>ustedes</strong> form (<strong>-aron</strong>).</div>
+    </div>
+
+    <p>
+        One final note on regular -ar verbs in the preterite is that all -ar stem-changing verbs are entirely regular in the preterite. You’ll remember that <strong>cerrar</strong> [to close] has an <strong>e → ie</strong> stem change in all the singular forms and in the third-person plural form of the present tense. Like all other stem-changing verbs that end in -ar, <strong>cerrar</strong> is regular in the preterite (e.g., <strong>cerré, cerraste, cerró, cerramos, cerrasteis, cerraron</strong>).
+    </p>
+
+    <h3>C. Verbs Ending in -car, -gar, and -zar in the Preterite</h3>
+    <p>
+        Verbs like <strong>sacar</strong> [to take (out)], <strong>pagar</strong> [to pay], and <strong>comenzar</strong> [to begin]—in fact, all verbs with an infinitive form ending in <strong>-car, -gar, or -zar</strong>—have a spelling change in the <strong>yo</strong> form of the preterite, and only in the <strong>yo</strong> form. This change is made to make the consonant sounds made in the <strong>yo</strong> form of the preterite the same as they are in the infinitive form. The needed spelling changes in the <strong>yo</strong> form of the preterite are as follows: <strong>c → qu; g → gu; z → c</strong> (e.g., <strong>yo saqué; yo pagué; yo comencé</strong>).
+    </p>
+</div>
+
+<script>
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const inputs = Array.from(document.querySelectorAll('input[type="text"]'));
+            const index = inputs.indexOf(document.activeElement);
+            if (index > -1 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

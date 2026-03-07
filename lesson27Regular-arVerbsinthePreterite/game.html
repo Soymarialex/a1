@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <!-- Control de Caché mediante parámetro de versión -->
+    <link rel="stylesheet" href="style.css?v=1.0">
+    <style>
+        /* Definición de colores y fuentes */
+        :root {
+            --flamingo-pink: #FF79AC;
+            --eerie-black: #121118;
+            --soft-pink: #FFD1E3;
+            --green-match: #D4EDDA;
+            --red-error: #F8D7DA;
+            --white: #FFFFFF;
+        }
+
+        @font-face {
+            font-family: 'Platform Medium';
+            src: url('fonts/platform-medium.woff2') format('woff2'); /* Ruta relativa */
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Platform Medium', sans-serif;
+            background-color: var(--white);
+            color: var(--eerie-black);
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--flamingo-pink);
+            font-weight: bold;
+            margin: 10px 0 5px 0;
+            font-size: 1.8rem;
+        }
+
+        h2 {
+            font-weight: normal;
+            font-size: 1rem;
+            margin: 0 0 20px 0;
+            text-transform: lowercase;
+        }
+
+        /* Navegación de niveles */
+        .nav-levels {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .level-btn {
+            background-color: var(--white);
+            border: 2px solid var(--soft-pink);
+            border-radius: 5px;
+            padding: 5px 12px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--eerie-black);
+        }
+
+        .level-btn.active {
+            background-color: var(--flamingo-pink);
+            border-color: var(--flamingo-pink);
+            color: var(--white);
+        }
+
+        /* Rejilla del juego */
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Botones de vocabulario */
+        .vocab-btn {
+            background-color: var(--soft-pink);
+            border: none;
+            border-bottom: 3px solid var(--flamingo-pink);
+            border-radius: 5px;
+            padding: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eerie-black);
+            transition: background-color 0.2s;
+        }
+
+        .vocab-btn.selected {
+            background-color: var(--flamingo-pink);
+            color: var(--white);
+        }
+
+        .vocab-btn.matched {
+            background-color: var(--green-match) !important;
+            border-bottom-color: #28a745 !important;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .vocab-btn.error {
+            background-color: var(--red-error) !important;
+            border-bottom-color: #dc3545 !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Matching game</h1>
+    <h2>test your memory</h2>
+
+    <div class="nav-levels">
+        <button class="level-btn active" onclick="loadLevel(0)">nivel 1</button>
+        <button class="level-btn" onclick="loadLevel(1)">nivel 2</button>
+        <button class="level-btn" onclick="loadLevel(2)">nivel 3</button>
+        <button class="level-btn" onclick="loadLevel(3)">nivel 4</button>
+        <button class="level-btn" onclick="loadLevel(4)">nivel 5</button>
+    </div>
+
+    <div class="game-grid">
+        <div class="column" id="col-es"></div>
+        <div class="column" id="col-en"></div>
+    </div>
+</div>
+
+<script>
+    const levelsData = [
+        [
+            {es: "ayer", en: "yesterday"},
+            {es: "el mes pasado", en: "last month"},
+            {es: "anteayer", en: "the day before yesterday"},
+            {es: "el año pasado", en: "last year"},
+            {es: "anoche", en: "last night"},
+            {es: "el lunes pasado", en: "last Monday"}
+        ],
+        [
+            {es: "pasado", en: "past, last"},
+            {es: "el sábado por la mañana", en: "Saturday morning"},
+            {es: "la semana pasada", en: "last week"},
+            {es: "el martes por la noche", en: "Tuesday night"},
+            {es: "el fin de semana pasado", en: "last weekend"},
+            {es: "todo el día", en: "all day"}
+        ],
+        [
+            {es: "durante una semana", en: "during a week"},
+            {es: "toda la noche", en: "all night"},
+            {es: "entonces", en: "then"},
+            {es: "más tarde", en: "later"},
+            {es: "luego", en: "later"},
+            {es: "por tres horas", en: "for three hours"}
+        ],
+        [
+            {es: "bajar", en: "to take down"},
+            {es: "criticar", en: "to criticize"},
+            {es: "avanzar", en: "to progress"},
+            {es: "charlar", en: "to chat"},
+            {es: "explorar", en: "to explore"},
+            {es: "afirmar", en: "to declare"},
+            {es: "pronunciar", en: "to pronounce"}
+        ],
+        [
+            {es: "expresar", en: "to express"},
+            {es: "existir", en: "to exist"},
+            {es: "comentar", en: "to comment on"},
+            {es: "resultar", en: "to turn out to be"},
+            {es: "mencionar", en: "to mention"},
+            {es: "considerar", en: "to consider"},
+            {es: "formar", en: "to form"}
+        ]
+    ];
+
+    let selectedEs = null;
+    let selectedEn = null;
+
+    function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
+    function loadLevel(levelIndex) {
+        // Limpiar estado
+        selectedEs = null;
+        selectedEn = null;
+
+        // Actualizar UI niveles
+        document.querySelectorAll('.level-btn').forEach((btn, idx) => {
+            btn.classList.toggle('active', idx === levelIndex);
+        });
+
+        const colEs = document.getElementById('col-es');
+        const colEn = document.getElementById('col-en');
+        colEs.innerHTML = '';
+        colEn.innerHTML = '';
+
+        const data = levelsData[levelIndex];
+        
+        // Crear botones columna español
+        const shuffledEs = shuffle([...data]);
+        shuffledEs.forEach(item => {
+            const btn = document.createElement('button');
+            btn.className = 'vocab-btn';
+            btn.innerText = item.es;
+            btn.onclick = () => handleSelect(btn, 'es', item.en);
+            colEs.appendChild(btn);
+        });
+
+        // Crear botones columna inglés
+        const shuffledEn = shuffle([...data]);
+        shuffledEn.forEach(item => {
+            const btn = document.createElement('button');
+            btn.className = 'vocab-btn';
+            btn.innerText = item.en;
+            btn.onclick = () => handleSelect(btn, 'en', item.en);
+            colEn.appendChild(btn);
+        });
+    }
+
+    function handleSelect(btn, lang, matchKey) {
+        if (btn.classList.contains('matched') || btn.classList.contains('error')) return;
+
+        if (lang === 'es') {
+            if (selectedEs) selectedEs.classList.remove('selected');
+            selectedEs = btn;
+            selectedEs.matchKey = matchKey;
+            btn.classList.add('selected');
+        } else {
+            if (selectedEn) selectedEn.classList.remove('selected');
+            selectedEn = btn;
+            selectedEn.matchKey = matchKey;
+            btn.classList.add('selected');
+        }
+
+        if (selectedEs && selectedEn) {
+            if (selectedEs.matchKey === selectedEn.matchKey) {
+                // Éxito
+                selectedEs.classList.add('matched');
+                selectedEn.classList.add('matched');
+                selectedEs.classList.remove('selected');
+                selectedEn.classList.remove('selected');
+                selectedEs = null;
+                selectedEn = null;
+            } else {
+                // Error
+                const sEs = selectedEs;
+                const sEn = selectedEn;
+                sEs.classList.add('error');
+                sEn.classList.add('error');
+                sEs.classList.remove('selected');
+                sEn.classList.remove('selected');
+                
+                selectedEs = null;
+                selectedEn = null;
+
+                setTimeout(() => {
+                    sEs.classList.remove('error');
+                    sEn.classList.remove('error');
+                }, 1000);
+            }
+        }
+    }
+
+    // Inicialización inmediata
+    window.onload = () => loadLevel(0);
+</script>
+
+</body>
+</html>

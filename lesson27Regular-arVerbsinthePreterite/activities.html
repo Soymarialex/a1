@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <style>
+        :root {
+            --primary: #FF79AC;
+            --secondary: #FFB3D1;
+            --text-main: #121118;
+            --bg-page: #FFFFFF;
+            --divider: #E0E0E0;
+            --bg-box: #F9F9F9;
+            --correct-bg: #D4EDDA;
+            --incorrect-bg: #F8D7DA;
+            --correct-text: #155724;
+            --incorrect-text: #721c24;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            margin: 40px 20px;
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .instruction {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            color: #444;
+        }
+
+        .instruction strong {
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .reading-box {
+            background-color: var(--bg-box);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            color: #444;
+            border-left: 4px solid var(--primary);
+        }
+
+        .activity-block {
+            margin-bottom: 3rem;
+        }
+
+        .question-item {
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            color: #444;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question-text {
+            display: block;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"] {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            padding: 2px 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: background-color 0.3s, border-color 0.3s;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary);
+        }
+
+        .option-btn {
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 5px 15px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .option-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .option-btn.selected-correct {
+            background-color: var(--correct-bg) !important;
+            border-color: #28a745 !important;
+            color: var(--correct-text);
+            font-weight: bold;
+        }
+
+        .option-btn.selected-incorrect {
+            background-color: var(--incorrect-bg) !important;
+            border-color: #dc3545 !important;
+            color: var(--incorrect-text);
+        }
+
+        .correct {
+            background-color: var(--correct-bg) !important;
+            border-color: #28a745 !important;
+        }
+
+        .incorrect {
+            background-color: var(--incorrect-bg) !important;
+            border-color: #dc3545 !important;
+        }
+
+        .btn-check {
+            background-color: var(--secondary);
+            border: none;
+            border-bottom: 3px solid var(--primary);
+            border-radius: 5px;
+            padding: 10px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.1s;
+            margin-top: 20px;
+        }
+
+        .btn-check:active {
+            transform: translateY(2px);
+        }
+
+        #answers-section {
+            display: none;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            font-weight: 400;
+        }
+
+        .ans-group {
+            margin-bottom: 20px;
+        }
+
+        .ans-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .btn-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Clase para inputs cortos de una palabra */
+        .input-short {
+            width: 120px;
+        }
+        /* Clase para inputs largos */
+        .input-long {
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>III. Actividades / Activities</h1>
+
+    <!-- Actividad A -->
+    <div class="activity-block" id="act-a">
+        <p class="instruction"><strong>a. Esteban Quirós fue a un seminario para médicos la semana pasada y está contándole a su vecino Luis lo que pasó en esa semana. / Esteban Quirós went to a seminar for doctors last week and is telling his neighbor Luis what happened that week.</strong></p>
+        <p class="instruction">Lee el siguiente párrafo y contesta las preguntas. / Read the following paragraph and answer the questions.</p>
+        
+        <div class="reading-box">
+            El lunes empezó el seminario a las 8:00 de la mañana. Nosotros desayunamos huevos revueltos [scrambled], pan tostado, café y jugo de naranja. La sesión [session] del lunes terminó a las 5:00 de la tarde. En la noche, yo cené con unos amigos en un bar deportivo [sports bar] muy grande y moderno [modern]. Miramos un partido de básquetbol y un encuentro [match] de boxeo. El martes empezamos a las 9:00 de la mañana, y yo olvidé que la hora de empezar cambió para el martes y me desperté a las 6:00. Llegué a las 8:00 y por supuesto [of course] desayuné solo. Después de terminar ese día, caminamos alrededor de la ciudad y compramos unas cervezas que tomamos en el balcón [balcony] de la habitación del hotel. El miércoles el seminario empezó otra vez a las 8:00 de la mañana, y yo llegué tarde porque no escuché mi alarma [alarm]. Por la noche, escuchamos un concierto de jazz en la ciudad y luego cantamos en un karaoke [karaoke bar] hasta medianoche. El jueves las sesiones empezaron a las 10:00 de la mañana, y yo preparé una pequeña presentación [presentation] para las 4:00 de la tarde. Después de mi presentación, yo manejé al hotel y me encontré con [I met up with] otros amigos. El viernes terminamos al mediodía, y todos almorzamos juntos en un restaurante de comida brasileña [Brazilian]. En la tarde visitamos lugares turísticos de la zona. A las 5:30 de la tarde, me invitaron a un gimnasio muy famoso y grande. Todos practicamos CrossFit, y yo solo logré [managed] hacer ejercicios por 20 minutos. Por esa razón, hoy no puedo caminar bien, y en el aeropuerto necesité ayuda con el equipaje [luggage], pero voy a caminar mejor mañana.
+        </div>
+
+        <div class="questions">
+            <div class="question-item"><span class="question-text">1. ¿Dónde cenó Esteban el lunes?</span><input type="text" data-answer="El lunes cenó en un bar deportivo." class="input-act-a input-long"></div>
+            <div class="question-item"><span class="question-text">2. ¿A qué hora empezó el seminario el miércoles?</span><input type="text" data-answer="El miércoles el seminario empezó a las 8:00 de la mañana." class="input-act-a input-long"></div>
+            <div class="question-item"><span class="question-text">3. ¿Por qué Esteban llegó tarde el miércoles?</span><input type="text" data-answer="Llegó tarde porque no escuchó su alarma." class="input-act-a input-long"></div>
+            <div class="question-item"><span class="question-text">4. ¿Cuándo cantaron Esteban y sus amigos en un karaoke?</span><input type="text" data-answer="Esteban y sus amigos cantaron en un karaoke el miércoles por la noche." class="input-act-a input-long"></div>
+            <div class="question-item"><span class="question-text">5. ¿Dónde almorzó Esteban el viernes?</span><input type="text" data-answer="El viernes Esteban almorzó en un restaurante de comida brasileña." class="input-act-a input-long"></div>
+            <div class="question-item"><span class="question-text">6. ¿Por cuánto tiempo logró Esteban hacer ejercicios en el gimnasio?</span><input type="text" data-answer="Por veinte minutos." class="input-act-a input-long"></div>
+        </div>
+    </div>
+
+    <!-- Actividad B -->
+    <div class="activity-block" id="act-b">
+        <p class="instruction"><strong>b. Conjuga el verbo en el pretérito. / Conjugate the verb in the preterite tense.</strong></p>
+        <div class="questions">
+            <div class="question-item">1. Esteban <input type="text" data-answer="trabajó" class="input-act-b input-short"> (trabajar) 50 horas por semana el mes pasado.</div>
+            <div class="question-item">2. Esteban y Luisa <input type="text" data-answer="cenaron" class="input-act-b input-short"> (cenar) juntos anoche.</div>
+            <div class="question-item">3. Javier <input type="text" data-answer="cuidó" class="input-act-b input-short"> (cuidar) a Diana y Mariana todo el día de ayer.</div>
+            <div class="question-item">4. Alberto <input type="text" data-answer="miró" class="input-act-b input-short"> (mirar) otras casas toda la semana pasada.</div>
+            <div class="question-item">5. Anoche Cecilia y Luis <input type="text" data-answer="buscaron" class="input-act-b input-short"> (buscar) boletos de avión por Internet.</div>
+            <div class="question-item">6. Alejandra <input type="text" data-answer="practicó" class="input-act-b input-short"> (practicar) tenis por tres horas el jueves.</div>
+            <div class="question-item">7. Tú <input type="text" data-answer="desayunaste" class="input-act-b input-short"> (desayunar) con tu madre esta mañana.</div>
+            <div class="question-item">8. Vosotros <input type="text" data-answer="bailasteis" class="input-act-b input-short"> (bailar) en la discoteca hasta las 2:00.</div>
+            <div class="question-item">9. Diego no <input type="text" data-answer="estudió" class="input-act-b input-short"> (estudiar) anoche para su examen.</div>
+            <div class="question-item">10. Tú no <input type="text" data-answer="escuchaste" class="input-act-b input-short"> (escuchar) las noticias [news] de ayer.</div>
+        </div>
+    </div>
+
+    <!-- Actividad C -->
+    <div class="activity-block" id="act-c">
+        <p class="instruction"><strong>c. Los padres de Carlos van a ir a cenar a su casa a las 6:00. Carlos le ayudó a Alejandra a tener todo listo. / Carlos’s parents are going to his home to eat dinner at 6:00. Carlos helped Alejandra to get everything ready.</strong></p>
+        <p class="instruction">Escoge la respuesta correcta. / Choose the correct answer.</p>
+        <div class="questions">
+            <div class="question-item"><span>1. Carlos y Alejandra (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'se levantaron')">se levantaron</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'se levantaron')">se levantó</button></div><span>) a las 6:00 de la mañana.</span></div>
+            <div class="question-item"><span>2. Carlos y Alejandra (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'desayunaron')">desayunaste</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'desayunaron')">desayunaron</button></div><span>) juntos a las 7:00 de la mañana.</span></div>
+            <div class="question-item"><span>3. Carlos y Alejandra (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'miraron')">miramos</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'miraron')">miraron</button></div><span>) las noticias de la mañana.</span></div>
+            <div class="question-item"><span>4. Carlos y Alejandra (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'limpiaron')">limpiaron</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'limpiaron')">limpiaste</button></div><span>) toda la casa.</span></div>
+            <div class="question-item"><span>5. Alejandra (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'compró')">compraste</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'compró')">compró</button></div><span>) la comida en el supermercado.</span></div>
+            <div class="question-item"><span>6. Carlos (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'lavó')">lavé</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'lavó')">lavó</button></div><span>) el carro.</span></div>
+            <div class="question-item"><span>7. Carlos (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'quitó')">quitaron</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'quitó')">quitó</button></div><span>) el polvo de la sala.</span></div>
+            <div class="question-item"><span>8. Alejandra (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'buscó')">buscó</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'buscó')">busqué</button></div><span>) recetas de cocina [recipes] por Internet.</span></div>
+            <div class="question-item"><span>9. Carlos (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'pasó')">pasar</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'pasó')">pasó</button></div><span>) la aspiradora en los cuartos.</span></div>
+            <div class="question-item"><span>10. Carlos y Alejandra (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'prepararon')">prepararon</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'prepararon')">preparasteis</button></div><span>) la cena juntos.</span></div>
+            <div class="question-item">
+                <span>11. Alejandra (</span>
+                <div class="btn-group">
+                    <button class="option-btn" onclick="checkBtn(this, 'se maquilló')">se maquillaste</button>
+                    <span> / </span>
+                    <button class="option-btn" onclick="checkBtn(this, 'se maquilló')">se maquilló</button>
+                </div>
+                <span>) después de que (</span>
+                <div class="btn-group">
+                    <button class="option-btn" onclick="checkBtn(this, 'se bañó')">te bañaste</button>
+                    <span> / </span>
+                    <button class="option-btn" onclick="checkBtn(this, 'se bañó')">se bañó</button>
+                </div>
+                <span>).</span>
+            </div>
+            <div class="question-item"><span>12. Los padres de Carlos (</span><div class="btn-group"><button class="option-btn" onclick="checkBtn(this, 'llegaron')">llegasteis</button><span> / </span><button class="option-btn" onclick="checkBtn(this, 'llegaron')">llegaron</button></div><span>) a las 5:45 de la tarde.</span></div>
+        </div>
+    </div>
+
+    <!-- Actividad D -->
+    <div class="activity-block" id="act-d">
+        <p class="instruction"><strong>d. Completa las siguientes respuestas. / Complete the following answers.</strong></p>
+        
+        <div class="questions">
+            <div class="question-item">
+                <span class="question-text">1. ¿Pagaste mucho por la computadora?</span>
+                No, <input type="text" data-answer="no pagué" class="input-act-d input-short"> mucho porque el tipo que yo 
+                <input type="text" data-answer="compré" class="input-act-d input-short"> (comprar) solo 
+                <input type="text" data-answer="costó" class="input-act-d input-short"> (costar) 500 dólares.
+            </div>
+            <div class="question-item">
+                <span class="question-text">2. ¿Qué miraste en la televisión anteayer?</span>
+                <input type="text" data-answer="Miré" class="input-act-d input-short"> las noticias y un programa de deportes.
+            </div>
+            <div class="question-item">
+                <span class="question-text">3. ¿Cocinaste anoche?</span>
+                No, <input type="text" data-answer="no cociné" class="input-act-d input-short"> porque mi esposo me 
+                <input type="text" data-answer="preparó" class="input-act-d input-short"> (preparar) la cena.
+            </div>
+            <div class="question-item">
+                <span class="question-text">4. ¿Hablaste con tu mejores amigos la semana pasada?</span>
+                Sí, <input type="text" data-answer="hablé con mis mejores amigos la semana pasada" class="input-act-d input-long">.
+            </div>
+            <div class="question-item">
+                <span class="question-text">5. ¿Ayudaste a tu pareja con los quehaceres de la casa?</span>
+                No, <input type="text" data-answer="no ayudé" class="input-act-d input-short"> ayer, pero sí 
+                <input type="text" data-answer="ayudé" class="input-act-d input-short"> mucho la semana pasada.
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de Respuestas -->
+    <button class="btn-check" onclick="toggleAnswers()">IV. Respuestas correctas / Correct Answers</button>
+
+    <div id="answers-section">
+        <div class="ans-group">
+            <span class="ans-title">a.</span>
+            1. El lunes cenó en un bar deportivo. | 2. El miércoles empezó a las 8:00. | 3. No escuchó su alarma. | 4. El miércoles por la noche. | 5. Restaurante brasileño. | 6. Por 20 minutos.
+        </div>
+        <div class="ans-group">
+            <span class="ans-title">b.</span>
+            1. trabajó | 2. cenaron | 3. cuidó | 4. miró | 5. buscaron | 6. practicó | 7. desayunaste | 8. bailasteis | 9. estudió | 10. escuchaste
+        </div>
+        <div class="ans-group">
+            <span class="ans-title">c.</span>
+            1. se levantaron | 2. desayunaron | 3. miraron | 4. limpiaron | 5. compró | 6. lavó | 7. quitó | 8. buscó | 9. pasó | 10. prepararon | 11. se maquilló...se bañó | 12. llegaron
+        </div>
+        <div class="ans-group">
+            <span class="ans-title">d.</span>
+            1. no pagué...compré...costó <br>
+            2. Miré <br>
+            3. no cociné...preparó <br>
+            4. hablé con mis mejores amigos la semana pasada <br>
+            5. no ayudé...ayudé
+        </div>
+    </div>
+</div>
+
+<script>
+    function verify(el) {
+        const val = el.value.trim().toLowerCase().replace(/[.,?!]/g, "");
+        const ans = el.getAttribute('data-answer').toLowerCase().replace(/[.,?!]/g, "");
+        
+        if (val === "") {
+            el.classList.remove('correct', 'incorrect');
+            return false;
+        }
+
+        if (val === ans) {
+            el.classList.add('correct');
+            el.classList.remove('incorrect');
+            return true;
+        } else {
+            el.classList.add('incorrect');
+            el.classList.remove('correct');
+            return false;
+        }
+    }
+
+    function checkBtn(btn, correctAnswer) {
+        const group = btn.closest('.btn-group');
+        const buttons = group.querySelectorAll('.option-btn');
+        buttons.forEach(b => b.classList.remove('selected-correct', 'selected-incorrect'));
+        if (btn.innerText === correctAnswer) {
+            btn.classList.add('selected-correct');
+        } else {
+            btn.classList.add('selected-incorrect');
+        }
+    }
+
+    document.querySelectorAll('input[type="text"]').forEach(input => {
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                verify(this);
+                const allInputs = Array.from(document.querySelectorAll('input[type="text"]'));
+                const nextIndex = allInputs.indexOf(this) + 1;
+                if (nextIndex < allInputs.length) allInputs[nextIndex].focus();
+            }
+        });
+        input.addEventListener('blur', function() { verify(this); });
+    });
+
+    function toggleAnswers() {
+        const section = document.getElementById('answers-section');
+        section.style.display = (section.style.display === 'block') ? 'none' : 'block';
+        if (section.style.display === 'block') section.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
