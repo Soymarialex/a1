@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>III. Actividades / Activities</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --primary-color: #FF79AC;
+            --secondary-color: #FFB3D1;
+            --text-color: #121118;
+            --bg-color: #FFFFFF;
+            --correct-bg: #D4EDDA;
+            --error-bg: #F8D7DA;
+            --light-grey: #F9F9F9;
+        }
+
+        body {
+            font-family: 'Platform Medium', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            text-align: justify;
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .activity-block {
+            margin-bottom: 3rem;
+        }
+
+        .reading-box {
+            background-color: var(--light-grey);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Inputs */
+        input[type="text"] {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            background: transparent;
+            text-align: center;
+            font-size: 1rem;
+            padding: 2px 5px;
+            width: 180px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-bottom-color: var(--primary-color);
+        }
+
+        input.correct {
+            background-color: var(--correct-bg) !important;
+        }
+
+        input.incorrect {
+            background-color: var(--error-bg) !important;
+        }
+
+        /* Buttons */
+        .btn-option {
+            background-color: var(--secondary-color);
+            border: none;
+            border-bottom: 3px solid var(--primary-color);
+            border-radius: 5px;
+            color: #000;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 0 5px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-option.correct {
+            background-color: var(--correct-bg);
+        }
+
+        .btn-option.incorrect {
+            background-color: var(--error-bg);
+        }
+
+        .ans-toggle-btn {
+            background-color: var(--secondary-color);
+            border: none;
+            border-bottom: 3px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            display: block;
+            width: fit-content;
+        }
+
+        /* Answers Section */
+        #answers-section {
+            display: none;
+            margin-top: 20px;
+            background-color: var(--light-grey);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .question-row {
+            margin-bottom: 15px;
+        }
+
+        .inline-input {
+            width: 120px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>III. Actividades / Activities</h1>
+
+        <!-- Actividad A -->
+        <div class="activity-block">
+            <h2>a. Lee el siguiente párrafo sobre Diego y contesta las preguntas.</h2>
+            <div class="reading-box">
+                <p>Hace cinco años, Diego trató de [tried to] empezar una empresa [business] propia [his own]. Con poco dinero y una pequeña oficina, empezó a trabajar vendiendo artículos [supplies] escolares [school] y de oficina. Él mismo [himself] tuvo funciones [roles] de jefe [boss], secretario [secretary] y recepcionista [receptionist]. Él mismo entregó [delivered] todos los pedidos [orders] y viajó muchos kilómetros para complacer [please] a todos sus clientes [clients]. Todo salió más o menos bien, pero a los dos años, llegó una empresa multinacional [multinational] a la ciudad, y Diego no pudo controlar [control] los pedidos, el inventario [inventory], los gastos [expenses] ni las ganancias [profits]. Nunca entendió cómo negociar [negotiate] con empresas multinacionales y tampoco aprendió cómo equilibrar [balance] las exigencias [demands] de los clientes más grandes con su capacidad [capacity] de pedidos y entregas [deliveries]. Después de cuatro años con su compañía [company], él decidió cerrar su negocio [business]. Ahora está en la universidad y está estudiando para obtener [get] una maestría en administración de empresas [MBA]. Él espera tener su propio negocio de nuevo, aunque [even if] sea [it is] un negocio diferente.</p>
+            </div>
+            
+            <div class="question-row">1. ¿Cuándo empezó Diego su negocio de artículos escolares y de oficina? <input type="text" data-answer="Hace cinco años" oninput="checkInput(this)">.</div>
+            <div class="question-row">2. ¿Quién entregó los pedidos? <input type="text" data-answer="Diego" oninput="checkInput(this)">.</div>
+            <div class="question-row">3. ¿Qué llegó a la ciudad? <input type="text" data-answer="Una empresa multinacional" oninput="checkInput(this)">.</div>
+            <div class="question-row">4. Nombra una cosa que Diego no pudo hacer después de que llegó la empresa multinacional. <input type="text" data-answer="controlar los pedidos" oninput="checkInput(this)">.</div>
+            <div class="question-row">5. ¿Cuándo cerró Diego su compañía? <input type="text" data-answer="después de cuatro años" oninput="checkInput(this)">.</div>
+        </div>
+
+        <!-- Actividad B -->
+        <div class="activity-block">
+            <h2>b. Ayer Diego tuvo un día difícil en la universidad.</h2>
+            <p>Completa las oraciones con la forma correcta del verbo en el pretérito.</p>
+            <div class="reading-box">
+                <p>
+                    Diego es muy inteligente y generalmente no estudia para sus exámenes. Ayer tuvo un día difícil. Diego no 1. <input type="text" class="inline-input" data-answer="escuchó" oninput="checkInput(this)"> (escuchar) su alarma y 2. <input type="text" class="inline-input" data-answer="se despertó" oninput="checkInput(this)"> (despertarse) mucho más tarde. Él no 3. <input type="text" class="inline-input" data-answer="puso" oninput="checkInput(this)"> (poner) atención en clase y no 4. <input type="text" class="inline-input" data-answer="terminó" oninput="checkInput(this)"> (terminar) su tarea. Diego no 5. <input type="text" class="inline-input" data-answer="pudo" oninput="checkInput(this)"> (poder) estacionar su carro en el mismo lugar de siempre, y por eso 6. <input type="text" class="inline-input" data-answer="tuvo" oninput="checkInput(this)"> (tener) que caminar más para llegar a su clase. La estudiante que le gusta en la universidad 7. <input type="text" class="inline-input" data-answer="se puso" oninput="checkInput(this)"> (ponerse) otro color en su pelo. Él la 8. <input type="text" class="inline-input" data-answer="miró" oninput="checkInput(this)"> (mirar) pero no 9. <input type="text" class="inline-input" data-answer="supo" oninput="checkInput(this)"> (saber) que ella 10. <input type="text" class="inline-input" data-answer="se sentó" oninput="checkInput(this)"> (sentarse) cerca de él en la cafetería. Él no 11. <input type="text" class="inline-input" data-answer="revisó" oninput="checkInput(this)"> (revisar) su correo electrónico y no 12. <input type="text" class="inline-input" data-answer="ver" style="display:none;"><input type="text" class="inline-input" data-answer="vio" oninput="checkInput(this)"> (ver) el mensaje del profesor cuando este 13. <input type="text" class="inline-input" data-answer="canceló" oninput="checkInput(this)"> (cancelar) la clase. Diego no 14. <input type="text" class="inline-input" data-answer="quiso" oninput="checkInput(this)"> (querer) estudiar para su examen, pero como él y sus compañeros no 15. <input type="text" class="inline-input" data-answer="tuvieron" oninput="checkInput(this)"> (tener) clases, Diego al final 16. <input type="text" class="inline-input" data-answer="decidió" oninput="checkInput(this)"> (decidir) estudiar un poco para su examen.
+                </p>
+            </div>
+        </div>
+
+        <!-- Actividad C -->
+        <div class="activity-block">
+            <h2>c. Ema, la estudiante que le gusta a Diego, puso más atención en clase.</h2>
+            <p>Escoge la respuesta correcta.</p>
+            <div class="question-row">
+                1. Ema no (
+                <button class="btn-option" data-correct="false" onclick="checkBtn(this)">estoy</button> / 
+                <button class="btn-option" data-correct="true" onclick="checkBtn(this)">estuvo</button> 
+                ) en clase porque ella (
+                <button class="btn-option" data-correct="false" onclick="checkBtn(this)">vieron</button> / 
+                <button class="btn-option" data-correct="true" onclick="checkBtn(this)">vio</button> 
+                ) el mensaje del profesor a tiempo.
+            </div>
+            <div class="question-row">
+                2. Ema (
+                <button class="btn-option" data-correct="false" onclick="checkBtn(this)">hice</button> / 
+                <button class="btn-option" data-correct="true" onclick="checkBtn(this)">hizo</button> 
+                ) la tarea porque ella sí (
+                <button class="btn-option" data-correct="false" onclick="checkBtn(this)">escucho</button> / 
+                <button class="btn-option" data-correct="true" onclick="checkBtn(this)">escuchó</button> 
+                ) al profesor.
+            </div>
+            <div class="question-row">
+                3. Ema (
+                <button class="btn-option" data-correct="false" onclick="checkBtn(this)">estudia</button> / 
+                <button class="btn-option" data-correct="true" onclick="checkBtn(this)">estudió</button> 
+                ) ayer y anteayer para el examen.
+            </div>
+            <div class="question-row">
+                4. Ema (
+                <button class="btn-option" data-correct="false" onclick="checkBtn(this)">quisiste</button> / 
+                <button class="btn-option" data-correct="true" onclick="checkBtn(this)">quiso</button> 
+                ) saludar a Diego, pero él no la (
+                <button class="btn-option" data-correct="true" onclick="checkBtn(this)">reconoció</button> / 
+                <button class="btn-option" data-correct="false" onclick="checkBtn(this)">reconocimos</button> 
+                ) en la cafetería.
+            </div>
+            <div class="question-row">
+                5. Ema le (
+                <button class="btn-option" data-correct="false" onclick="checkBtn(this)">diste</button> / 
+                <button class="btn-option" data-correct="true" onclick="checkBtn(this)">dio</button> 
+                ) la tarea al profesor.
+            </div>
+        </div>
+
+        <!-- Actividad D -->
+        <div class="activity-block">
+            <h2>Presente o pretérito</h2>
+            <h2>d. Escribe el verbo correcto según el contexto.</h2>
+            <div class="reading-box">
+                <p>
+                    Diego 1. <input type="text" class="inline-input" data-answer="conoció" oninput="checkInput(this)"> (conocer) a Ema el semestre pasado. Ellos no 2. <input type="text" class="inline-input" data-answer="hablaron" oninput="checkInput(this)"> (hablar) las primeras semanas del semestre. La primera vez que Diego 3. <input type="text" class="inline-input" data-answer="saludó" oninput="checkInput(this)"> (saludar) a Ema fue en la cafetería. Un amigo de Diego los 4. <input type="text" class="inline-input" data-answer="presentó" oninput="checkInput(this)"> (presentar) en ese lugar. Aquel día, Ema 5. <input type="text" class="inline-input" data-answer="pareció" oninput="checkInput(this)"> (parecer) muy simpática, pero también 6. <input type="text" class="inline-input" data-answer="pareció" oninput="checkInput(this)"> (parecer) tímida. Ahora Diego 7. <input type="text" class="inline-input" data-answer="tiene" oninput="checkInput(this)"> (tener) 30 años y Ema 25, y como Diego ella también 8. <input type="text" class="inline-input" data-answer="estudia" oninput="checkInput(this)"> (estudiar) administración de empresas, y por eso ellos 9. <input type="text" class="inline-input" data-answer="son" oninput="checkInput(this)"> (ser) compañeros en varias clases. Ema 10. <input type="text" class="inline-input" data-answer="vive" oninput="checkInput(this)"> (vivir) a 30 minutos de Diego, pero él no 11. <input type="text" class="inline-input" data-answer="conoce" oninput="checkInput(this)"> (conocer) su casa. Ellos no 12. <input type="text" class="inline-input" data-answer="estudian" oninput="checkInput(this)"> (estudiar) juntos, pero Diego 13. <input type="text" class="inline-input" data-answer="quiere" oninput="checkInput(this)"> (querer) invitarla pronto a salir. Ellos algunas veces 14. <input type="text" class="inline-input" data-answer="hablan" oninput="checkInput(this)"> (hablar) después de clases, pero aunque Diego no 15. <input type="text" class="inline-input" data-answer="tiene" oninput="checkInput(this)"> (tener) su número de teléfono, ellos 16. <input type="text" class="inline-input" data-answer="son" oninput="checkInput(this)"> (ser) amigos en Facebook. Ahora Diego no 17. <input type="text" class="inline-input" data-answer="puede" oninput="checkInput(this)"> (poder) entender cómo él no la 18. <input type="text" class="inline-input" data-answer="reconoció" oninput="checkInput(this)"> (reconocer) el otro día en la cafetería.
+                </p>
+            </div>
+        </div>
+
+        <!-- Respuestas Correctas -->
+        <button class="ans-toggle-btn" onclick="toggleAnswers()">Ver Respuestas Correctas</button>
+        <div id="answers-section">
+            <h2>IV. Respuestas correctas / Correct Answers</h2>
+            <div class="reading-box">
+                <p><strong>a.</strong><br>
+                1. Hace cinco años. / Hace cinco años que empezó su negocio.<br>
+                2. Diego entregó los pedidos. / Diego los entregó.<br>
+                3. Una empresa multinacional llegó.<br>
+                4. Diego no pudo a) controlar los pedidos; b) controlar el inventario; c) controlar las ganancias; d) equilibrar las exigencias de los clientes.<br>
+                5. Diego cerró su compañía después de cuatro años.</p>
+                
+                <p><strong>b.</strong><br>
+                1. escuchó | 9. supo | 2. se despertó | 10. se sentó | 3. puso | 11. revisó | 4. terminó | 12. vio | 5. pudo | 13. canceló | 6. tuvo | 14. quiso | 7. se puso | 15. tuvieron | 8. miró | 16. decidió</p>
+                
+                <p><strong>c.</strong><br>
+                1. estuvo…vio | 2. hizo…escuchó | 3. estudió | 4. quiso…reconoció | 5. dio</p>
+                
+                <p><strong>d.</strong><br>
+                1. conoció | 10. vive | 2. hablaron | 11. conoce | 3. saludó | 12. estudian | 4. presentó | 13. quiere | 5. pareció | 14. hablan | 6. pareció | 15. tiene | 7. tiene | 16. son | 8. estudia | 17. puede | 9. son | 18. reconoció</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Validación de inputs de texto
+        function checkInput(el) {
+            const val = el.value.trim().toLowerCase();
+            const correct = el.getAttribute('data-answer').toLowerCase();
+            
+            // Permitimos variaciones en la actividad A
+            if (correct.includes(val) && val.length > 2) {
+                el.classList.add('correct');
+                el.classList.remove('incorrect');
+            } else if (val === "") {
+                el.classList.remove('correct', 'incorrect');
+            } else {
+                // Solo marcamos rojo si no coincide
+                if (val.length >= correct.length) {
+                    el.classList.add('incorrect');
+                    el.classList.remove('correct');
+                }
+            }
+        }
+
+        // Validación de botones (Actividad C)
+        function checkBtn(btn) {
+            const isCorrect = btn.getAttribute('data-correct') === 'true';
+            
+            // Limpiar otros botones del mismo grupo si fuera necesario (opcional)
+            if (isCorrect) {
+                btn.classList.add('correct');
+                btn.classList.remove('incorrect');
+            } else {
+                btn.classList.add('incorrect');
+                btn.classList.remove('correct');
+            }
+        }
+
+        // Salto automático entre campos con Enter
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const inputs = Array.from(document.querySelectorAll('input[type="text"]'));
+                const index = inputs.indexOf(document.activeElement);
+                if (index > -1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            }
+        });
+
+        // Mostrar/Ocultar respuestas
+        function toggleAnswers() {
+            const section = document.getElementById('answers-section');
+            if (section.style.display === 'block') {
+                section.style.display = 'none';
+            } else {
+                section.style.display = 'block';
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>

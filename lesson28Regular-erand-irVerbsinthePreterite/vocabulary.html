@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular -er and -ir Verbs in the Preterite</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --primary-color: #FF79AC;
+            --secondary-color: #FFB3D1;
+            --text-color: #121118;
+            --bg-color: #FFFFFF;
+            --divider-color: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Platform Medium', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            text-align: justify;
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+
+        /* Vocabulario Layout */
+        .vocab-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .vocab-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 0.5rem 0;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: var(--divider-color);
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+
+        /* Conjugation Tables */
+        .verb-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .verb-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .verb-title {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 0.5rem;
+        }
+
+        .conjugation-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 1rem;
+        }
+
+        /* Stem Table */
+        .stem-table {
+            width: 100%;
+            margin: 1.5rem 0;
+            border-collapse: collapse;
+        }
+
+        .stem-table td {
+            padding: 0.4rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        /* Input styling */
+        input {
+            border: 1px solid var(--divider-color);
+            padding: 0.3rem;
+            font-family: inherit;
+        }
+
+        input:focus {
+            outline: 2px solid var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Regular -er and -ir Verbs in the Preterite</h1>
+
+        <h2>I. Vocabulario nuevo / New Vocabulary</h2>
+        
+        <div class="vocab-section">
+            <div class="vocab-row">
+                <span><strong>Conocí a Juan</strong> – I met Juan</span>
+                <span><strong>caber</strong> – to fit</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>Quise llegar</strong> – I tried to arrive</span>
+                <span><strong>andar</strong> – to walk, to go</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>No quise trabajar</strong> – I refused to work</span>
+                <span><strong>repasar</strong> – to review</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>Supe la respuesta</strong> – I find out the answer</span>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="vocab-row">
+                <span><strong>la terminación</strong> – ending</span>
+                <span><strong>la explicación</strong> – explanation</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>la formación</strong> – formation</span>
+                <span><strong>el aula</strong> – classroom</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="vocab-row">
+                <span><strong>el muchacho</strong> – boy</span>
+                <span><strong>el niño</strong> – boy</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>la muchacha</strong> – girl</span>
+                <span><strong>la niña</strong> – girl</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="vocab-row">
+                <span><strong>general</strong> – general</span>
+                <span><strong>enorme</strong> – enormous</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>por lo general</strong> – generally</span>
+                <span><strong>común</strong> – common</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>capaz</strong> – capable</span>
+                <span><strong>absoluto</strong> – absolute</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>suficiente</strong> – sufficient</span>
+                <span><strong>contrario</strong> – contrary</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="vocab-row">
+                <span><strong>dispuesto</strong> – willing</span>
+                <span><strong>disponible</strong> – available</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>convencido</strong> – convinced</span>
+                <span><strong>resuelto</strong> – resolved</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>satisfecho</strong> – satisfied</span>
+                <span><strong>agotado</strong> – used up</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>acostumbrado</strong> – accustomed</span>
+                <span><strong>escondido</strong> – hidden</span>
+            </div>
+            <div class="vocab-row">
+                <span><strong>sentado</strong> – seated</span>
+            </div>
+        </div>
+
+        <h2>II. Repaso general / General Review</h2>
+        
+        <strong>A. Conjugating Regular -er and -ir Verbs in the Preterite</strong>
+        <p>
+            Regular <strong>-er</strong> and <strong>-ir</strong> verbs use the same endings in the preterite. These endings are as follows: <strong>-í, -iste, -ió, -imos, -isteis,</strong> and <strong>-ieron</strong>. The following is an example of a regular <strong>-ar</strong> verb (<strong>repasar</strong> [to review]) conjugated next to a regular <strong>-er</strong> verb (<strong>comer</strong> [to eat]) and a regular <strong>-ir</strong> verb (<strong>abrir</strong> [to open]).
+        </p>
+
+        <div class="verb-grid">
+            <div class="verb-block">
+                <div class="verb-title">repasar</div>
+                <div class="conjugation-row">
+                    <span>repas<strong>é</strong></span><span>repas<strong>amos</strong></span>
+                    <span>repas<strong>aste</strong></span><span>repas<strong>asteis</strong></span>
+                    <span>repas<strong>ó</strong></span><span>repas<strong>aron</strong></span>
+                </div>
+            </div>
+            <div class="verb-block">
+                <div class="verb-title">comer</div>
+                <div class="conjugation-row">
+                    <span>com<strong>í</strong></span><span>com<strong>imos</strong></span>
+                    <span>com<strong>iste</strong></span><span>com<strong>isteis</strong></span>
+                    <span>com<strong>ió</strong></span><span>com<strong>ieron</strong></span>
+                </div>
+            </div>
+            <div class="verb-block">
+                <div class="verb-title">abrir</div>
+                <div class="conjugation-row">
+                    <span>abr<strong>í</strong></span><span>abr<strong>imos</strong></span>
+                    <span>abr<strong>iste</strong></span><span>abr<strong>isteis</strong></span>
+                    <span>abr<strong>ió</strong></span><span>abr<strong>ieron</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <p>As you look at these three sets of conjugations, you should notice several things.</p>
+        <p>1. The endings for <strong>-er</strong> and <strong>-ir</strong> verbs are the same, and they all start with the letter <strong>i</strong>. In fact, the <strong>-er</strong> and <strong>-ir</strong> endings for four subjects (<strong>yo, tú, nosotros, vosotros</strong>) can be formed by changing the first letter of the <strong>-ar</strong> ending to <strong>i</strong> (e.g., <strong>é</strong> &rarr; <strong>í</strong>; <strong>aste</strong> &rarr; <strong>iste</strong>; <strong>amos</strong> &rarr; <strong>imos</strong>; <strong>asteis</strong> &rarr; <strong>isteis</strong>).</p>
+        <p>2. The differences in endings between <strong>-ar</strong> and <strong>-er/-ir</strong> verbs are as follows for the usted and ustedes forms: <strong>ó</strong> &rarr; <strong>ió</strong>; <strong>aron</strong> &rarr; <strong>ieron</strong>).</p>
+        <p>3. For <strong>-ar</strong> verbs, the two forms in the preterite that have accents are the <strong>yo</strong> and <strong>usted</strong> forms (e.g., <strong>yo repasé; usted repasó</strong>). Likewise, for <strong>-er</strong> and <strong>-ir</strong> verbs, the two forms in the preterite that have accents are the <strong>yo</strong> and <strong>usted</strong> forms (e.g., <strong>yo comí; usted comió; yo abrí; usted abrió</strong>).</p>
+        <p>4. As is the case for all <strong>-ir</strong> verbs, the <strong>nosotros</strong> form of <strong>abrimos</strong> is the same in the present and the preterite; the context of how the verb is used will determine whether <strong>abrimos</strong> means “We open” or “We opened.”</p>
+        
+        <p>Most <strong>-er</strong> stem-changing verbs are entirely regular in the preterite. You’ll remember that <strong>volver</strong> [to return] has an <strong>o</strong> &rarr; <strong>ue</strong> stem change in all the singular forms and in the third-person plural form of the present tense. Like most stem-changing verbs that end in <strong>-er</strong>, <strong>volver</strong> is regular in the preterite (e.g., <strong>volví, volviste, volvió, volvimos, volvisteis, volvieron</strong>).</p>
+
+        <strong>B. Reflexive Verbs in the Preterite</strong>
+        <p>
+            Just as is the case with reflexive verbs in the present tense, conjugated reflexive verbs in the preterite need to be preceded by a reflexive pronoun. The following is the reflexive verb <strong>despertarse</strong> [to wake up] conjugated in the preterite. Note that although <strong>despertarse</strong> is an <strong>e</strong> &rarr; <strong>ie</strong> stem-changing verb in the present, it’s regular in the preterite.
+        </p>
+
+        <div class="reflexive-container">
+            <div class="verb-title">despertarse</div>
+            <table class="reflexive-table">
+                <div class="conjugation-row">
+                    <span>me despert<strong>é</strong></span><span>nos despert<strong>amos</strong></span>
+                    <span>te derpert<strong>aste</strong></span><span>os despert<strong>asteis</strong></span>
+                    <span>se despert<strong>ó</strong></span><span>se depert<strong>aron</strong></span>
+                </div>
+            </div>
+</p>
+
+
+        <strong>C. Ver and dar in the Preterite</strong>
+        <p>
+            The verb <strong>ver</strong> [to see] uses regular <strong>-er</strong> endings in the preterite but has no accents where they typically are (in the <strong>yo</strong> and <strong>usted</strong> forms). Although <strong>dar</strong> [to give] is an <strong>-ar</strong> verb, it has the same endings in the pretertite as <strong>ver</strong> (and, like <strong>ver</strong>, has no accents in the preterite).
+        </p>
+
+        <div class="verb-grid">
+            <div class="verb-block">
+                <div class="verb-title">ver</div>
+                <div class="conjugation-row">
+                    <span>v<strong>i</strong></span><span>v<strong>imos</strong></span>
+                    <span>v<strong>iste</strong></span><span>v<strong>isteis</strong></span>
+                    <span>v<strong>io</strong></span><span>v<strong>ieron</strong></span>
+                </div>
+            </div>
+            <div class="verb-block">
+                <div class="verb-title">dar</div>
+                <div class="conjugation-row">
+                    <span>d<strong>i</strong></span><span>d<strong>imos</strong></span>
+                    <span>d<strong>iste</strong></span><span>d<strong>isteis</strong></span>
+                    <span>d<strong>io</strong></span><span>d<strong>ieron</strong></span>
+                </div>
+            </div>
+        </div>
+
+
+        <strong>D. Verbs like tener in the Preterite</strong>
+        <p>
+            When conjugated in the preterite, the verb <strong>tener</strong> [to have] has an unusual stem (<strong>tuv-</strong>) and an unusual set of endings (<strong>-e, -iste, -o, -imos, -isteis, -ieron</strong>). The endings for <strong>tener</strong> are, in fact, kind of a combination of the regular <strong>-ar</strong> endings with the regular <strong>-er/-ir</strong> endings. The following are the forms of <strong>tener</strong> in the preterite shown after a regular <strong>-ar</strong> and a regular <strong>-er</strong> verb.
+        </p>
+
+        <div class="verb-grid">
+            <div class="verb-block">
+                <div class="verb-title">repasar</div>
+                <div class="conjugation-row">
+                    <span>repas<strong>é</strong></span><span>repas<strong>amos</strong></span>
+                    <span>repas<strong>aste</strong></span><span>repas<strong>asteis</strong></span>
+                    <span>repas<strong>ó</strong></span><span>repas<strong>aron</strong></span>
+                </div>
+            </div>
+            <div class="verb-block">
+                <div class="verb-title">comer</div>
+                <div class="conjugation-row">
+                    <span>com<strong>í</strong></span><span>com<strong>imos</strong></span>
+                    <span>com<strong>iste</strong></span><span>com<strong>isteis</strong></span>
+                    <span>com<strong>ió</strong></span><span>com<strong>ieron</strong></span>
+                </div>
+            </div>
+            <div class="verb-block">
+                <div class="verb-title">tener</div>
+                <div class="conjugation-row">
+                    <span>tuv<strong>e</strong></span><span>tuv<strong>imos</strong></span>
+                    <span>tuv<strong>iste</strong></span><span>tuv<strong>isteis</strong></span>
+                    <span>tuv<strong>o</strong></span><span>tuv<strong>ieron</strong></span>
+                </div>
+            </div>
+        </div>
+
+
+        <p>You’ll notice that the preterite endings for <strong>tener</strong> are the <strong>-ar</strong> endings without the accent for the <strong>yo</strong> and <strong>usted</strong> forms (e.g., <strong>-e</strong> of <strong>tuve</strong>; <strong>-o</strong> of <strong>tuvo</strong>). The other four endings are the same as the regular <strong>-er/-ir</strong> endings (e.g., <strong>-iste</strong> of <strong>tuviste</strong>; <strong>-imos</strong> of <strong>tuvimos</strong>; <strong>-isteis</strong> of <strong>tuvisteis</strong>; <strong>-ieron</strong> of <strong>tuvieron</strong>).</p>
+
+        <p>Verbs that are conjugated like <strong>tener</strong> and their stems in the preterite are as follows.</p>
+
+        <table class="stem-table">
+            <thead>
+                <tr>
+                    <th>Verb</th>
+                    <th>Preterite Stem</th>
+                    <th>Verb</th>
+                    <th>Preterite Stem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>tener</strong> [to have]</td>
+                    <td><strong>tuv-</strong></td>
+                    <td><strong>querer</strong> [to want, to love]</td>
+                    <td><strong>quis-</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>estar</strong> [to be]</td>
+                    <td><strong>estuv-</strong></td>
+                    <td><strong>venir</strong> [to come]</td>
+                    <td><strong>vin-</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>poder</strong> [to be able to]</td>
+                    <td><strong>pud-</strong></td>
+                    <td><strong>hacer</strong> [to make, to do]</td>
+                    <td><strong>hic-</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>poner</strong> [to put]</td>
+                    <td><strong>pus-</strong></td>
+                    <td><strong>andar</strong> [to walk, to go]</td>
+                    <td><strong>anduv-</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>decir</strong> [to say, to tell]</td>
+                    <td><strong>dij-</strong></td>
+                    <td><strong>saber</strong> [to know]</td>
+                    <td><strong>sup-</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>traer</strong> [to bring]</td>
+                    <td><strong>traj-</strong></td>
+                    <td><strong>caber</strong> [to fit]</td>
+                    <td><strong>cup-</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>conducir</strong> [to drive]</td>
+                    <td><strong>conduj-</strong></td>
+                    <td><strong>haber</strong> [there is, there are]</td>
+                    <td><strong>hub-</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <p>The preterite of <strong>haber</strong> is <strong>hubo</strong> (e.g., <strong>Hubo un accidente anoche</strong> is “There was an accident last night”). The usted form of <strong>hacer</strong> in the preterite is <strong>hizo</strong> (with a <strong>z</strong> instead of a <strong>c</strong> to maintain the same sound as the one made in the other forms of <strong>hacer</strong> in the preterite). The third-person plural ending for <strong>decir, traer,</strong> and <strong>conducir</strong> is <strong>-eron</strong> instead of <strong>-ieron</strong> (e.g., <strong>Ellos me dijeron mucho</strong> is “They told me a lot”). To look at the conjugation of just one of these verbs, the following is <strong>venir</strong> in the preterite. Note that it has the same preterite endings as <strong>tener</strong>.</p>
+
+         <div class="centered-verb-container">
+            <div class="verb-title">venir</div>
+                <div class="conjugation-row">
+                    <span>vin<strong>e</strong></span><span>vin<strong>imos</strong></span>
+                    <span>vin<strong>ieron</strong></span><span>vin<strong>isteis</strong></span>
+                    <span>vin<strong>o</strong></span><span>vin<strong>ieron</strong></span>
+                </div>
+            </div>
+</p>
+
+        <strong>E. Verbs That Change Meaning in the Preterite</strong>
+        <p>
+            There are some commonly used verbs that have one meaning in the present and a related but somewhat different meaning in the preterite. Among these verbs are <strong>conocer, saber,</strong> and <strong>querer</strong>. Remember that the preterite talks about something that happened at a specific time in the past. And the three verbs we’re talking about—<strong>conocer</strong> [to know a person, place, or thing], <strong>saber</strong> [to know facts or how to do something], and <strong>querer</strong> [to want or to love]—are all really verbs of state rather than verbs of action. But when we use the preterite with these verbs, we’re talking about something that happened at a specific moment in the past, so these verbs change meaning to express an action rather than a state.
+        </p>
+
+        <p>
+            In the preterite, <strong>conocer</strong> means “to meet,” with the idea of meeting someone for the first time (e.g., <strong>Finalmente conocí a Raúl la semana pasada</strong> is “I finally met Raúl last week”). <strong>Saber</strong> in the preterite means “to find out” (e.g., <strong>No supe la verdad hasta años después</strong> is “I didn’t find out the truth until years later”). When used affirmatively, <strong>querer</strong> in the preterite means “to try,” and when used negatively, it means “to refuse” (e.g., <strong>Quise ganar, pero perdí</strong> is “I tried to win, but I lost; <strong>Las muchachas no quisieron ir a la fiesta</strong> is “The girls refused to go to the party”).
+        </p>
+    </div>
+
+    <script>
+        // Interactividad: Salto de cursor automático entre campos mediante Enter
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && event.target.tagName === 'INPUT') {
+                const form = event.target.form;
+                if (!form) return;
+                const index = Array.prototype.indexOf.call(form, event.target);
+                if (form.elements[index + 1]) {
+                    form.elements[index + 1].focus();
+                    event.preventDefault();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

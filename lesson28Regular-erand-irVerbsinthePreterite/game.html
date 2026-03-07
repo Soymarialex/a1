@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <style>
+        /* Guía de Estilo Visual */
+        :root {
+            --primary-color: #FF79AC;
+            --secondary-color: #FFB3D1;
+            --text-color: #121118;
+            --bg-color: #FFFFFF;
+            --correct-bg: #D4EDDA;
+            --error-bg: #F8D7DA;
+            --light-grey: #F9F9F9;
+        }
+
+        body {
+            font-family: 'Platform Medium', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        h2 {
+            color: var(--text-color);
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            text-transform: lowercase;
+        }
+
+        /* Navegación de Niveles */
+        .level-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .btn-level {
+            background-color: var(--secondary-color);
+            border: none;
+            border-bottom: 3px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #000;
+            transition: transform 0.1s;
+        }
+
+        .btn-level.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Juego Layout */
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background-color: var(--light-grey);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-vocab {
+            background-color: var(--secondary-color);
+            border: none;
+            border-bottom: 3px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #000;
+            transition: background-color 0.3s ease;
+            min-height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-vocab.selected {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-vocab.correct {
+            background-color: var(--correct-bg) !important;
+            border-bottom-color: #28a745;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .btn-vocab.error {
+            background-color: var(--error-bg) !important;
+            border-bottom-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Matching game</h1>
+        <h2>test your memory</h2>
+
+        <div class="level-nav">
+            <button class="btn-level active" onclick="loadLevel(0)">nivel 1</button>
+            <button class="btn-level" onclick="loadLevel(1)">nivel 2</button>
+            <button class="btn-level" onclick="loadLevel(2)">nivel 3</button>
+            <button class="btn-level" onclick="loadLevel(3)">nivel 4</button>
+            <button class="btn-level" onclick="loadLevel(4)">nivel 5</button>
+        </div>
+
+        <div class="game-grid" id="game-container">
+            <div class="column" id="col-left"></div>
+            <div class="column" id="col-right"></div>
+        </div>
+    </div>
+
+    <script>
+        const levels = [
+            [
+                { es: "Conocí a Juan", en: "I met Juan" },
+                { es: "caber", en: "to fit" },
+                { es: "Quise llegar", en: "I tried to arrive" },
+                { es: "andar", en: "to walk, to go" },
+                { es: "No quise trabajar", en: "I refused to work" },
+                { es: "repasar", en: "to review" }
+            ],
+            [
+                { es: "Supe la respuesta", en: "I found out the answer" },
+                { es: "la terminación", en: "ending" },
+                { es: "la explicación", en: "explanation" },
+                { es: "la formación", en: "formation" },
+                { es: "el aula", en: "classroom" },
+                { es: "el muchacho", en: "boy" }
+            ],
+            [
+                { es: "el niño", en: "boy" },
+                { es: "la muchacha", en: "girl" },
+                { es: "la niña", en: "girl" },
+                { es: "general", en: "general" },
+                { es: "enorme", en: "enormous" },
+                { es: "por lo general", en: "generally" }
+            ],
+            [
+                { es: "común", en: "common" },
+                { es: "capaz", en: "capable" },
+                { es: "absoluto", en: "absolute" },
+                { es: "suficiente", en: "sufficient" },
+                { es: "contrario", en: "contrary" },
+                { es: "dispuesto", en: "willing" },
+                { es: "sentado", en: "seated" }
+            ],
+            [
+                { es: "disponible", en: "available" },
+                { es: "convencido", en: "convinced" },
+                { es: "resuelto", en: "resolved" },
+                { es: "satisfecho", en: "satisfied" },
+                { es: "agotado", en: "used up" },
+                { es: "acostumbrado", en: "accustomed" },
+                { es: "escondido", en: "hidden" }
+            ]
+        ];
+
+        let selectedLeft = null;
+        let selectedRight = null;
+        let currentLevel = 0;
+
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function loadLevel(index) {
+            currentLevel = index;
+            selectedLeft = null;
+            selectedRight = null;
+
+            // Actualizar botones de navegación
+            const navButtons = document.querySelectorAll('.btn-level');
+            navButtons.forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+
+            const leftCol = document.getElementById('col-left');
+            const rightCol = document.getElementById('col-right');
+            leftCol.innerHTML = '';
+            rightCol.innerHTML = '';
+
+            const words = levels[index];
+            
+            // Crear botones de español
+            const esWords = shuffle([...words]);
+            esWords.forEach(word => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-vocab';
+                btn.textContent = word.es;
+                btn.onclick = () => selectWord(btn, 'left', word.en);
+                leftCol.appendChild(btn);
+            });
+
+            // Crear botones de inglés
+            const enWords = shuffle([...words]);
+            enWords.forEach(word => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-vocab';
+                btn.textContent = word.en;
+                btn.onclick = () => selectWord(btn, 'right', word.en);
+                rightCol.appendChild(btn);
+            });
+        }
+
+        function selectWord(btn, side, id) {
+            if (btn.classList.contains('correct')) return;
+
+            if (side === 'left') {
+                const allLeft = document.querySelectorAll('#col-left .btn-vocab');
+                allLeft.forEach(b => b.classList.remove('selected', 'error'));
+                btn.classList.add('selected');
+                selectedLeft = { btn, id };
+            } else {
+                const allRight = document.querySelectorAll('#col-right .btn-vocab');
+                allRight.forEach(b => b.classList.remove('selected', 'error'));
+                btn.classList.add('selected');
+                selectedRight = { btn, id };
+            }
+
+            if (selectedLeft && selectedRight) {
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const btnL = selectedLeft.btn;
+            const btnR = selectedRight.btn;
+
+            if (selectedLeft.id === selectedRight.id) {
+                // Acierto
+                btnL.classList.remove('selected');
+                btnR.classList.remove('selected');
+                btnL.classList.add('correct');
+                btnR.classList.add('correct');
+                selectedLeft = null;
+                selectedRight = null;
+            } else {
+                // Error
+                btnL.classList.add('error');
+                btnR.classList.add('error');
+                
+                const tempL = btnL;
+                const tempR = btnR;
+
+                setTimeout(() => {
+                    tempL.classList.remove('error', 'selected');
+                    tempR.classList.remove('error', 'selected');
+                }, 1500);
+
+                selectedLeft = null;
+                selectedRight = null;
+            }
+        }
+
+        // Iniciar primer nivel
+        window.onload = () => loadLevel(0);
+    </script>
+</body>
+</html>
