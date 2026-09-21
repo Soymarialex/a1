@@ -3,336 +3,579 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matching - Vocabulario</title>
-    <!-- Carga de Tailwind CSS para un diseño responsivo y estético -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fuente Inter, utilizada para simular la claridad de "Platform Medium" -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Matching Game - Vocabulario</title>
+    <!-- Fuente Google Inter y Segoe UI fallback -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Definición de colores y fuentes personalizados */
+        /* Guía de Estilo Visual basada en la especificación elegida */
         :root {
-            --color-flamingo-pink: #FF79AC;
-            --color-eerie-black: #121118;
-            --color-light-green: #A7F3D0; /* Verde claro */
-            --color-light-red: #FECACA; /* Rojo claro */
+            --primary-pink: #FF79AC;
+            --secondary-pink: #FFEBF2;
+            --text-main: #121118;
+            --bg-page: #FFFFFF;
+            --success-bg: #D4EDDA;
+            --success-border: #28a745;
+            --error-bg: #F8D7DA;
+            --error-border: #dc3545;
+            --btn-bg: #FFB3D1;
+            --box-bg: #F9F9F9;
+            --shadow-subtle: 0 4px 12px rgba(18, 17, 24, 0.05);
         }
-        
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: white;
-            color: var(--color-eerie-black);
+            margin: 0;
+            padding: 30px 15px;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
         }
 
-        .matching-button {
-            /* Estilo base de los botones: Rosa Flamenco */
-            background-color: var(--color-flamingo-pink);
-            color: white;
-            padding: 0.75rem 1.25rem; /* Botones más pequeños */
-            margin: 0.5rem;
-            border-radius: 0.75rem; /* Esquinas redondeadas */
-            font-weight: 600; /* Semi-bold para simular "Medium" */
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .container {
+            width: 100%;
+            max-width: 850px;
             text-align: center;
-            user-select: none;
-            line-height: 1.25;
-            min-height: 3rem; 
-            font-size: 0.95rem; 
         }
 
-        .matching-button:hover:not(.matched):not(.selected) {
+        h1 {
+            color: var(--primary-pink);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            color: var(--primary-pink);
+            font-size: 1.4rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary-pink);
+            display: inline-block;
+            margin: 0 0 25px 0;
+            padding-bottom: 5px;
+            text-transform: lowercase;
+        }
+
+        /* Navegación de niveles */
+        .level-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .level-btn {
+            background-color: var(--btn-bg);
+            border: none;
+            border-bottom: 3px solid var(--primary-pink);
+            border-radius: 8px;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .level-btn:hover:not(.active) {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .level-btn.active {
+            background-color: var(--primary-pink);
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 121, 172, 0.3);
+        }
+
+        /* Barra de Progreso del Nivel */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 750px;
+            margin: 0 auto 15px auto;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .progress-bar-bg {
+            flex-grow: 1;
+            height: 8px;
+            background-color: #eee;
+            border-radius: 10px;
+            margin: 0 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary-pink);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        /* Área de juego */
+        .game-area {
+            background-color: var(--box-bg);
+            border-radius: 12px;
+            padding: 25px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            min-height: 280px;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid #f0f0f0;
+        }
+
+        .column-header {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .word-btn {
+            width: 100%;
+            max-width: 280px;
+            background-color: var(--btn-bg);
+            border: none;
+            border-bottom: 3px solid #808080; /* Gris según guía */
+            border-radius: 8px;
+            padding: 14px 16px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: center;
+            transition: all 0.2s ease;
+            position: relative;
+            user-select: none;
+            line-height: 1.3;
+        }
+
+        .word-btn:hover:not(.selected):not(.match-success):not(.match-error) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+        }
+
+        /* Estados de los botones */
+        .word-btn.selected {
+            background-color: var(--secondary-pink);
+            border-bottom-color: var(--primary-pink);
+            box-shadow: 0 0 0 2px var(--primary-pink) inset;
+            transform: scale(1.02);
+        }
+
+        .word-btn.match-success {
+            background-color: var(--success-bg) !important;
+            border-bottom-color: var(--success-border) !important;
+            color: #155724 !important;
+            pointer-events: none;
             opacity: 0.85;
         }
 
-        .selected {
-            background-color: var(--color-eerie-black) !important;
-            box-shadow: 0 0 0 3px var(--color-flamingo-pink) inset;
+        .word-btn.match-error {
+            background-color: var(--error-bg) !important;
+            border-bottom-color: var(--error-border) !important;
+            color: #721c24 !important;
+            animation: shake 0.4s ease-in-out;
         }
 
-        .matched {
-            /* Correcto: Verde claro */
-            background-color: var(--color-light-green) !important;
-            color: var(--color-eerie-black) !important;
-            pointer-events: none; /* Deshabilita el click una vez emparejado */
-            box-shadow: none;
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
-        .mismatch {
-            /* Incorrecto: Rojo claro */
-            background-color: var(--color-light-red) !important;
-            color: var(--color-eerie-black) !important;
-            box-shadow: none;
+        /* Modal de nivel completado / felicidades */
+        .completion-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(18, 17, 24, 0.4);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
         }
 
-        /* Contenedor de sección para distribución de dos columnas (y responsividad) */
-        .section-container {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Dos columnas por defecto */
-            gap: 0.5rem;
-            padding: 1rem 0;
-            border-bottom: 2px solid #f0f0f0; /* Separador sutil entre secciones */
+        .completion-modal.show {
+            display: flex;
         }
 
-        @media (max-width: 640px) {
-            /* En móvil, muestra una sola columna para mejor usabilidad */
-            .section-container {
-                grid-template-columns: 1fr;
-            }
+        .modal-card {
+            background-color: var(--bg-page);
+            border-radius: 16px;
+            padding: 30px 25px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-top: 6px solid var(--primary-pink);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-card h3 {
+            color: var(--primary-pink);
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+        }
+
+        .modal-card p {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 25px;
+        }
+
+        .action-btn {
+            background-color: var(--primary-pink);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(255, 121, 172, 0.3);
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsividad básica */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.2rem; }
+            .game-area { grid-template-columns: 1fr; gap: 15px; }
+            .word-btn { max-width: 100%; }
         }
     </style>
 </head>
-<body class="min-h-screen p-4 sm:p-8 bg-white text-[var(--color-eerie-black)]">
+<body>
 
-    <div class="max-w-4xl mx-auto">
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-center mb-10 mt-4 tracking-tight" style="color: var(--color-flamingo-pink);">
-            Matching
-        </h1>
+<div class="container">
+    <h1>Matching game</h1>
+    <h2>test your memory</h2>
 
-        <!-- Contenedor principal de secciones donde se renderizarán los botones -->
-        <div id="game-container" class="space-y-8 pb-16">
-            <!-- Las secciones de botones se generarán aquí -->
+    <!-- Selector dinámico de niveles (6 niveles) -->
+    <div class="level-selector" id="levelSelector"></div>
+
+    <!-- Indicador de progreso del nivel actual -->
+    <div class="progress-container">
+        <span id="progressText">0 / 0</span>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBar"></div>
         </div>
-
-        <!-- Mensaje de felicitación (Modal simple) -->
-        <div id="message-box" class="fixed inset-x-0 bottom-0 p-4 transition-all duration-500 ease-in-out opacity-0 translate-y-full text-center text-lg font-bold bg-white border-t-4 border-[var(--color-flamingo-pink)] shadow-[0_-5px_15px_rgba(0,0,0,0.1)] rounded-t-xl" style="color: var(--color-eerie-black);">
-            ¡Felicidades! Has completado todos los emparejamientos.
-        </div>
+        <span id="levelName">Nivel 1</span>
     </div>
 
-    <script>
-        // Definición de todo el vocabulario estructurado por sección (36 pares en 6 secciones)
-        const initialWords = [
-            // Sección 1: Verbos (8 items) - Mantenidos
-            { es: 'hablar', en: 'to speak, to talk', section: 1 },
-            { es: 'bailar', en: 'to dance', section: 1 },
-            { es: 'tomar', en: 'to take, to drink', section: 1 },
-            { es: 'ayudar', en: 'to help', section: 1 },
-            { es: 'comprar', en: 'to buy', section: 1 },
-            { es: 'preparar', en: 'to prepare', section: 1 },
-            { es: 'escuchar', en: 'to hear', section: 1 },
-            { es: 'viajar', en: 'to travel', section: 1 }, 
+    <!-- Área interactiva de emparejamiento -->
+    <div class="game-area">
+        <div class="column">
+            <div class="column-header">Español</div>
+            <div class="column" id="colSpanish" style="width: 100%;"></div>
+        </div>
+        <div class="column">
+            <div class="column-header">Inglés</div>
+            <div class="column" id="colEnglish" style="width: 100%;"></div>
+        </div>
+    </div>
+</div>
 
-            // Sección 2: Verbos (8 items) - Mantenidos
-            { es: 'trabajar', en: 'to work', section: 2 },
-            { es: 'llegar', en: 'to arrive', section: 2 },
-            { es: 'estudiar', en: 'to study', section: 2 },
-            { es: 'cantar', en: 'to sing', section: 2 },
-            { es: 'cocinar', en: 'to cook', section: 2 },
-            { es: 'indicar', en: 'to indicate', section: 2 },
-            { es: 'ordenar', en: 'to order', section: 2 },
-            { es: 'dedicar', en: 'to dedicate', section: 2 },
+<!-- Modal de Felicitaciones -->
+<div class="completion-modal" id="completionModal">
+    <div class="modal-card">
+        <h3>¡Felicidades! 🎉</h3>
+        <p id="modalMessage">Has completado con éxito este nivel.</p>
+        <button class="action-btn" id="nextLevelBtn" onclick="advanceOrReset()">Siguiente Nivel</button>
+    </div>
+</div>
 
-            // Sección 3: Adjetivos/Quant. 1 (5 items) - Nuevo
-            { es: 'fuerte', en: 'strong', section: 3 },
-            { es: 'egoísta', en: 'selfish', section: 3 },
-            { es: 'trabajador', en: 'hard-working', section: 3 },
-            { es: 'hablador', en: 'talkative', section: 3 },
-            { es: 'ideal', en: 'ideal', section: 3 },
+<script>
+    // Vocabulario original preservado exactamente en 6 niveles correspondientes
+    const levelsData = [
+        // Nivel 1: Verbos 1 (8 pares)
+        [
+            { es: 'hablar', en: 'to speak, to talk' },
+            { es: 'bailar', en: 'to dance' },
+            { es: 'tomar', en: 'to take, to drink' },
+            { es: 'ayudar', en: 'to help' },
+            { es: 'comprar', en: 'to buy' },
+            { es: 'preparar', en: 'to prepare' },
+            { es: 'escuchar', en: 'to hear' },
+            { es: 'viajar', en: 'to travel' }
+        ],
+        // Nivel 2: Verbos 2 (8 pares)
+        [
+            { es: 'trabajar', en: 'to work' },
+            { es: 'llegar', en: 'to arrive' },
+            { es: 'estudiar', en: 'to study' },
+            { es: 'cantar', en: 'to sing' },
+            { es: 'cocinar', en: 'to cook' },
+            { es: 'indicar', en: 'to indicate' },
+            { es: 'ordenar', en: 'to order' },
+            { es: 'dedicar', en: 'to dedicate' }
+        ],
+        // Nivel 3: Adjetivos 1 (5 pares)
+        [
+            { es: 'fuerte', en: 'strong' },
+            { es: 'egoísta', en: 'selfish' },
+            { es: 'trabajador', en: 'hard-working' },
+            { es: 'hablador', en: 'talkative' },
+            { es: 'ideal', en: 'ideal' }
+        ],
+        // Nivel 4: Adjetivos 2 (5 pares)
+        [
+            { es: 'tímido', en: 'timid' },
+            { es: 'terrible', en: 'terrible' },
+            { es: 'fenomenal', en: 'phenomenal' },
+            { es: 'paciente', en: 'patient' },
+            { es: 'impaciente', en: 'impatient' }
+        ],
+        // Nivel 5: Adjetivos 3 (5 pares)
+        [
+            { es: 'contento', en: 'happy' },
+            { es: 'famoso', en: 'famous' },
+            { es: 'formal', en: 'formal' },
+            { es: 'informal', en: 'informal' },
+            { es: 'bueno', en: 'good' }
+        ],
+        // Nivel 6: Adjetivos 4 (5 pares)
+        [
+            { es: 'malo', en: 'bad' },
+            { es: 'mucho', en: 'a lot' },
+            { es: 'muchos', en: 'many' },
+            { es: 'poco', en: 'little' },
+            { es: 'pocos', en: 'few' }
+        ]
+    ];
 
-            // Sección 4: Adjetivos/Quant. 2 (5 items) - Nuevo
-            { es: 'tímido', en: 'timid', section: 4 },
-            { es: 'terrible', en: 'terrible', section: 4 },
-            { es: 'fenomenal', en: 'phenomenal', section: 4 },
-            { es: 'paciente', en: 'patient', section: 4 },
-            { es: 'impaciente', en: 'impatient', section: 4 },
+    let currentLevel = 0;
+    let selectedSpanish = null;
+    let selectedEnglish = null;
+    let isChecking = false;
+    let matchedPairsCount = 0;
 
-            // Sección 5: Adjetivos/Quant. 3 (5 items) - Nuevo
-            { es: 'contento', en: 'happy', section: 5 },
-            { es: 'famoso', en: 'famous', section: 5 },
-            { es: 'formal', en: 'formal', section: 5 },
-            { es: 'informal', en: 'informal', section: 5 },
-            { es: 'bueno', en: 'good', section: 5 },
+    /**
+     * Algoritmo de mezcla Fisher-Yates para asegurar aleatoriedad real
+     */
+    function shuffle(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
 
-            // Sección 6: Adjetivos/Quant. 4 (5 items) - Nuevo
-            { es: 'malo', en: 'bad', section: 6 },
-            { es: 'mucho', en: 'a lot', section: 6 },
-            { es: 'muchos', en: 'many', section: 6 },
-            { es: 'poco', en: 'little', section: 6 },
-            { es: 'pocos', en: 'few', section: 6 },
-            
-            /* Nota: Los pares 'grande' y 'pequeño' fueron eliminados para asegurar
-               que las últimas cuatro secciones tuvieran exactamente 5 pares cada una (20 en total). */
-        ];
+    function renderLevelSelector() {
+        const container = document.getElementById('levelSelector');
+        container.innerHTML = '';
 
-        // Estado global del juego
-        let selectedButton = null;
-        let isLocked = false;
-        let matchedCount = 0;
-        const totalMatches = initialWords.length; // Ahora 36
+        levelsData.forEach((_, idx) => {
+            const btn = document.createElement('button');
+            btn.className = `level-btn ${idx === currentLevel ? 'active' : ''}`;
+            btn.textContent = `Nivel ${idx + 1}`;
+            btn.onclick = () => changeLevel(idx);
+            container.appendChild(btn);
+        });
+    }
+
+    function changeLevel(levelIdx) {
+        if (isChecking) return;
+        currentLevel = levelIdx;
+        renderLevelSelector();
+        resetGame();
+        renderLevel();
+    }
+
+    function resetGame() {
+        selectedSpanish = null;
+        selectedEnglish = null;
+        isChecking = false;
+        matchedPairsCount = 0;
+        document.getElementById('colSpanish').innerHTML = '';
+        document.getElementById('colEnglish').innerHTML = '';
+        document.getElementById('completionModal').classList.remove('show');
+    }
+
+    function renderLevel() {
+        const data = levelsData[currentLevel];
         
-        const gameContainer = document.getElementById('game-container');
-        const messageBox = document.getElementById('message-box');
+        // Actualizar UI del indicador de nivel y progreso
+        document.getElementById('levelName').textContent = `Nivel ${currentLevel + 1}`;
+        updateProgressBar(0, data.length);
 
-        /**
-         * Función de utilidad para mezclar un array (Algoritmo de Fisher-Yates)
-         * @param {Array} array El array a mezclar
-         */
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
+        // Mezclar las listas de palabras en español e inglés por separado
+        const spanishItems = shuffle(data.map(item => ({ text: item.es, id: item.es })));
+        const englishItems = shuffle(data.map(item => ({ text: item.en, id: item.es })));
 
-        /**
-         * Inicializa y renderiza el juego, separando las palabras por sección.
-         */
-        function initializeGame() {
-            // Limpiar el contenedor del juego por si se está reiniciando
-            gameContainer.innerHTML = ''; 
-            matchedCount = 0;
-            selectedButton = null;
-            messageBox.classList.add('opacity-0', 'translate-y-full'); // Ocultar mensaje de finalización
+        const colEs = document.getElementById('colSpanish');
+        const colEn = document.getElementById('colEnglish');
 
-            // Agrupar palabras por sección
-            const sections = initialWords.reduce((acc, word) => {
-                if (!acc[word.section]) {
-                    acc[word.section] = [];
-                }
-                acc[word.section].push(word);
-                return acc;
-            }, {});
+        // Renderizar columna en español
+        spanishItems.forEach(item => {
+            const btn = document.createElement('button');
+            btn.className = 'word-btn';
+            btn.textContent = item.text;
+            btn.dataset.matchId = item.id;
+            btn.onclick = () => selectWord(btn, 'es');
+            colEs.appendChild(btn);
+        });
 
-            // Renderizar cada sección
-            for (const sectionId in sections) {
-                const words = sections[sectionId];
-                
-                // Crear listas separadas para español e inglés dentro de la sección
-                let spanishWords = words.map(w => ({ text: w.es, id: w.es, lang: 'es' }));
-                let englishWords = words.map(w => ({ text: w.en, id: w.es, lang: 'en' }));
-                
-                // Mezclar ambas listas
-                spanishWords = shuffle(spanishWords);
-                englishWords = shuffle(englishWords);
+        // Renderizar columna en inglés
+        englishItems.forEach(item => {
+            const btn = document.createElement('button');
+            btn.className = 'word-btn';
+            btn.textContent = item.text;
+            btn.dataset.matchId = item.id;
+            btn.onclick = () => selectWord(btn, 'en');
+            colEn.appendChild(btn);
+        });
+    }
 
-                // Crear el contenedor de la sección
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'section-container last:border-b-0'; // Quitar borde de la última sección
+    function selectWord(btn, lang) {
+        if (isChecking || btn.classList.contains('match-success')) return;
 
-                // Crear las columnas para español e inglés
-                const spanishColumn = document.createElement('div');
-                spanishColumn.className = 'flex flex-col items-stretch';
-                
-                const englishColumn = document.createElement('div');
-                englishColumn.className = 'flex flex-col items-stretch';
-
-                // Llenar las columnas
-                spanishWords.forEach(word => {
-                    spanishColumn.appendChild(createButton(word));
-                });
-
-                englishWords.forEach(word => {
-                    englishColumn.appendChild(createButton(word));
-                });
-                
-                // Añadir las columnas a la sección
-                sectionDiv.appendChild(spanishColumn);
-                sectionDiv.appendChild(englishColumn);
-                gameContainer.appendChild(sectionDiv);
-            }
-        }
-
-        /**
-         * Crea un elemento de botón.
-         * @param {Object} word Objeto de palabra con text, id (para emparejar) y lang (idioma).
-         */
-        function createButton(word) {
-            const button = document.createElement('button');
-            button.textContent = word.text;
-            button.className = 'matching-button';
-            button.dataset.id = word.id;      // ID para el emparejamiento (la palabra en español)
-            button.dataset.lang = word.lang;  // 'es' o 'en'
-            button.addEventListener('click', handleButtonClick);
-            return button;
-        }
-
-        /**
-         * Lógica al hacer clic en un botón.
-         * @param {Event} event Evento de clic.
-         */
-        function handleButtonClick(event) {
-            if (isLocked) return; // Ignora clics mientras la lógica de error está activa
-
-            const clickedButton = event.target;
-
-            // 1. Si no hay botón seleccionado (primera selección)
-            if (!selectedButton) {
-                selectedButton = clickedButton;
-                selectedButton.classList.add('selected');
+        if (lang === 'es') {
+            if (selectedSpanish) selectedSpanish.classList.remove('selected');
+            if (selectedSpanish === btn) {
+                selectedSpanish = null;
                 return;
             }
-
-            // 2. Si se hace clic en el mismo botón
-            if (selectedButton === clickedButton) {
-                selectedButton.classList.remove('selected');
-                selectedButton = null;
+            selectedSpanish = btn;
+            btn.classList.add('selected');
+        } else {
+            if (selectedEnglish) selectedEnglish.classList.remove('selected');
+            if (selectedEnglish === btn) {
+                selectedEnglish = null;
                 return;
             }
+            selectedEnglish = btn;
+            btn.classList.add('selected');
+        }
 
-            // 3. Evitar emparejar dos palabras del mismo idioma
-            if (selectedButton.dataset.lang === clickedButton.dataset.lang) {
-                // Deselecciona el primero y selecciona el nuevo
-                selectedButton.classList.remove('selected');
-                selectedButton = clickedButton;
-                selectedButton.classList.add('selected');
-                return;
-            }
+        if (selectedSpanish && selectedEnglish) {
+            checkMatch();
+        }
+    }
+
+    function checkMatch() {
+        isChecking = true;
+        const esMatchId = selectedSpanish.dataset.matchId;
+        const enMatchId = selectedEnglish.dataset.matchId;
+
+        const totalInLevel = levelsData[currentLevel].length;
+
+        if (esMatchId === enMatchId) {
+            // ¡Acierto!
+            selectedSpanish.classList.remove('selected');
+            selectedEnglish.classList.remove('selected');
             
-            // 4. Se seleccionan dos botones de diferente idioma: ¡A verificar!
-            isLocked = true;
-            selectedButton.classList.remove('selected');
+            selectedSpanish.classList.add('match-success');
+            selectedEnglish.classList.add('match-success');
 
-            // Comprobar si los IDs de emparejamiento son iguales
-            if (selectedButton.dataset.id === clickedButton.dataset.id) {
-                // ¡Acierto!
-                
-                // Estilo a verde claro
-                selectedButton.classList.add('matched');
-                clickedButton.classList.add('matched');
+            selectedSpanish = null;
+            selectedEnglish = null;
+            isChecking = false;
 
-                // Limpiar estado
-                selectedButton = null;
-                isLocked = false;
-                
-                matchedCount++;
+            matchedPairsCount++;
+            updateProgressBar(matchedPairsCount, totalInLevel);
 
-                // Comprobar si el juego ha terminado
-                if (matchedCount === totalMatches) {
-                    showCompletionMessage();
-                }
-
-            } else {
-                // ¡Error!
-                
-                // Estilo a rojo claro
-                selectedButton.classList.add('mismatch');
-                clickedButton.classList.add('mismatch');
-
-                // Revertir el error después de un breve tiempo para mostrar el feedback
-                setTimeout(() => {
-                    selectedButton.classList.remove('mismatch');
-                    clickedButton.classList.remove('mismatch');
-                    selectedButton = null;
-                    isLocked = false;
-                }, 750); // 750 ms para feedback visual
+            // Comprobar si el nivel se ha completado
+            if (matchedPairsCount === totalInLevel) {
+                setTimeout(showCompletionModal, 400);
             }
+        } else {
+            // ¡Error!
+            selectedSpanish.classList.add('match-error');
+            selectedEnglish.classList.add('match-error');
+
+            setTimeout(() => {
+                if (selectedSpanish) {
+                    selectedSpanish.classList.remove('match-error', 'selected');
+                }
+                if (selectedEnglish) {
+                    selectedEnglish.classList.remove('match-error', 'selected');
+                }
+                selectedSpanish = null;
+                selectedEnglish = null;
+                isChecking = false;
+            }, 800);
+        }
+    }
+
+    function updateProgressBar(current, total) {
+        document.getElementById('progressText').textContent = `${current} / ${total}`;
+        const percentage = (current / total) * 100;
+        document.getElementById('progressBar').style.width = `${percentage}%`;
+    }
+
+    function showCompletionModal() {
+        const modal = document.getElementById('completionModal');
+        const modalMsg = document.getElementById('modalMessage');
+        const nextBtn = document.getElementById('nextLevelBtn');
+
+        if (currentLevel < levelsData.length - 1) {
+            modalMsg.textContent = `Has completado exitosamente el Nivel ${currentLevel + 1}.`;
+            nextBtn.textContent = 'Siguiente Nivel';
+        } else {
+            modalMsg.textContent = '¡Felicidades! Has completado todos los niveles de vocabulario.';
+            nextBtn.textContent = 'Volver a Empezar';
         }
 
-        /**
-         * Muestra el mensaje de felicitación al completar el juego.
-         */
-        function showCompletionMessage() {
-            messageBox.classList.remove('opacity-0', 'translate-y-full');
-            messageBox.classList.add('opacity-100', 'translate-y-0');
+        modal.classList.add('show');
+    }
+
+    function advanceOrReset() {
+        if (currentLevel < levelsData.length - 1) {
+            changeLevel(currentLevel + 1);
+        } else {
+            changeLevel(0);
         }
+    }
 
-        // Exponer la función de reinicio para un futuro botón (si se solicita)
-        window.restartGame = initializeGame;
+    // Inicializar la aplicación al cargar
+    window.onload = () => {
+        renderLevelSelector();
+        renderLevel();
+    };
+</script>
 
-        // Iniciar el juego al cargar la ventana
-        window.onload = initializeGame;
-    </script>
 </body>
 </html>
