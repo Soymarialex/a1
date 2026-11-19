@@ -27,8 +27,11 @@
         }
 
         .container {
-            max-width: 800px;
-        }
+  max-width: 800px;
+  margin: 0 auto; /* Centra el contenedor con márgenes iguales a ambos lados */
+  padding: 0 16px; /* Opcional: da respiro lateral en pantallas pequeñas */
+  box-sizing: border-box;
+}
         
         /* Estilo para justificar el texto informativo */
         .text-justify {
@@ -133,7 +136,7 @@
 </head>
 <body class="flex justify-center">
 
-    <div class="container p-6 sm:p-8">
+    <div class="w-full max-w-3xl mx-auto p-6 sm:p-8">
 
         <!-- Título de la página -->
         <header class="text-center mb-6">
